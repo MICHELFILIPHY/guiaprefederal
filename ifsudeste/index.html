@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Pré-Federal - IF Sudeste MG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet.js for Interactive Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <style>
+        :root {
+            --primary-blue: #5242ea;
+            --primary-lime: #c7ef59;
+            --dark-blue: #3007a0;
+            --teal: #00abb1;
+            --purple: #6408b0;
+            --green: #7bcd47;
+            --dark-green: #005b38;
+            --orange-red: #dd5737;
+            --text-dark: #1a202c;
+            --text-light: #f0f4f8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--text-light);
+            color: var(--text-dark);
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover {
+            color: var(--primary-blue);
+            border-bottom-color: var(--primary-blue);
+        }
+        
+        .hero-title .highlight {
+            background-color: var(--primary-lime);
+            color: var(--dark-blue);
+            padding: 0.25rem 1rem;
+            border-radius: 0.75rem;
+            display: inline-block;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--dark-blue);
+        }
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #4A5568;
+        }
+
+        .cta-section {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-radius: 0.75rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .cta-section h2 {
+            font-size: 2.25rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+        .cta-section p {
+            font-size: 1.125rem;
+            max-width: 48rem;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1.5rem;
+            color: #dbeafe;
+        }
+
+        .cta-button-primary {
+            background-color: var(--primary-lime);
+            color: var(--text-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+        .cta-button-primary:hover {
+            background-color: white;
+            transform: scale(1.05);
+        }
+        .cta-button-secondary {
+            border: 2px solid var(--primary-lime);
+            color: var(--primary-lime);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+        .cta-button-secondary:hover {
+            background-color: var(--primary-lime);
+            color: var(--text-dark);
+            transform: scale(1.05);
+        }
+
+        #map {
+            height: 600px;
+            width: 100%;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .leaflet-popup-content-wrapper {
+            border-radius: 0.5rem;
+        }
+        .leaflet-popup-content h5 {
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+        }
+        .leaflet-popup-content ul {
+            list-style-type: none;
+            padding-left: 0;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .leaflet-popup-content li {
+            font-size: 0.875rem;
+            padding: 0.2rem 0;
+        }
+
+        /* Syllabus Section */
+        .tab-button {
+            padding: 0.75rem 1.25rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background-color: #e2e8f0;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tab-button svg {
+            margin-right: 0.5rem;
+        }
+        .tab-button.active {
+            background-color: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .syllabus-list h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .syllabus-list ul {
+            list-style-position: inside;
+            list-style-type: disc;
+            padding-left: 0.5rem;
+        }
+        .syllabus-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Chart and Calculator adjustments */
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 50vh;
+            width: 100%;
+            max-width: 900px;
+            max-height: 500px;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        .data-table-container {
+            max-width: 900px;
+            margin: auto;
+            overflow-x: auto;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table th, .data-table td {
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #f8f8f8;
+            font-weight: 600;
+        }
+        .campus-result-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .campus-result-box h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+        }
+        .course-result-item {
+            margin-bottom: 0.75rem;
+            padding-left: 0.75rem;
+            border-left: 3px solid var(--primary-blue);
+        }
+        .course-result-item:last-child {
+            margin-bottom: 0;
+        }
+        #calculate-approval {
+            background-color: var(--primary-blue);
+        }
+        #calculate-approval:hover {
+            background-color: var(--dark-blue);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="text-xl font-bold" style="color: var(--dark-blue);">Guia Pré-Federal</div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#instituicao" class="nav-link">A Instituição</a>
+                    <a href="#processo" class="nav-link">Processo Seletivo</a>
+                    <a href="#cotas" class="nav-link">Cotas</a>
+                    <a href="#mapa" class="nav-link">Mapa</a>
+                    <a href="#conteudo" class="nav-link">Conteúdo</a>
+                    <a href="#analise" class="nav-link">Análise</a>
+                    <a href="#calculadora" class="nav-link">Calculadora</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="bg-white py-20">
+            <div class="container mx-auto px-6 text-center">
+                 <h1 class="text-5xl md:text-6xl font-black" style="color: var(--dark-blue);">Guia <span class="px-4 py-1 rounded-md" style="background-color: var(--primary-lime); color: var(--dark-blue);">Pré-Federal</span></h1>
+                <p class="section-subtitle max-w-3xl mx-auto mt-4">Seu Raio-X completo do vestibular do IF Sudeste MG.</p>
+            </div>
+        </section>
+
+        <section class="container mx-auto px-6 cta-section">
+            <h2 class="text-3xl font-black mb-3">Quer Gabaritar o Processo Seletivo do IF Sudeste MG?</h2>
+            <p class="max-w-2xl mx-auto mb-6">Nosso curso preparatório focado no IF Sudeste MG oferece aulas, simulados, material de apoio e tudo que você precisa para conquistar sua vaga. Aumente suas chances de aprovação!</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
+                    Conheça Nosso Preparatório
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    Fale Conosco no WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <section id="instituicao" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Conheça o IF Sudeste MG</h2>
+                    <p class="section-subtitle mt-2">Uma instituição federal de educação pública, gratuita e de alta qualidade.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-5xl mb-4 text-blue-500">🎓</div>
+                        <h3 class="text-2xl font-bold mb-2">Educação de Excelência</h3>
+                        <p>Formação técnica e humana que prepara para o mercado de trabalho e para a vida.</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-5xl mb-4 text-green-500">🏫</div>
+                        <h3 class="text-2xl font-bold mb-2">Diversos Campi</h3>
+                        <p>Presente em cidades estratégicas de Minas Gerais, facilitando o acesso ao ensino.</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-5xl mb-4 text-purple-500">💡</div>
+                        <h3 class="text-2xl font-bold mb-2">Oportunidades</h3>
+                        <p>Cursos alinhados com as demandas regionais, abrindo portas para o futuro profissional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="processo" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">O Processo Seletivo Descomplicado</h2>
+                    <p class="section-subtitle mt-2">Entenda as etapas para garantir sua vaga.</p>
+                </div>
+                <div class="relative">
+                    <div class="hidden md:block border-l-4 border-blue-300 absolute h-full top-0 left-1/2 -ml-2"></div>
+                    <div class="space-y-12 md:space-y-0">
+                        <div class="md:flex items-center">
+                            <div class="md:w-1/2 md:pr-8">
+                                <div class="bg-white rounded-lg shadow-xl p-6 border-l-4 border-blue-500">
+                                    <h3 class="text-xl font-bold mb-2">1. Edital e Inscrição</h3>
+                                    <p>Tudo começa com a leitura atenta do edital. A inscrição é online e requer atenção aos prazos e à taxa ou pedido de isenção.</p>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 md:pl-8"></div>
+                        </div>
+                        <div class="md:flex items-center">
+                             <div class="md:w-1/2 md:pr-8"></div>
+                            <div class="md:w-1/2 md:pl-8">
+                                <div class="bg-white rounded-lg shadow-xl p-6 border-r-4 md:border-l-4 md:border-r-0 border-blue-500">
+                                    <h3 class="text-xl font-bold mb-2">2. A Prova</h3>
+                                    <p>A seleção principal é uma prova objetiva com questões de Português, Matemática, Ciências, Geografia e História. Prepare-se!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:flex items-center">
+                            <div class="md:w-1/2 md:pr-8">
+                                <div class="bg-white rounded-lg shadow-xl p-6 border-l-4 border-blue-500">
+                                    <h3 class="text-xl font-bold mb-2">3. Resultados</h3>
+                                    <p>Após a prova, os resultados são divulgados no site do IF Sudeste MG. Fique atento às listas de classificados e excedentes.</p>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 md:pl-8"></div>
+                        </div>
+                         <div class="md:flex items-center">
+                             <div class="md:w-1/2 md:pr-8"></div>
+                            <div class="md:w-1/2 md:pl-8">
+                                <div class="bg-white rounded-lg shadow-xl p-6 border-r-4 md:border-l-4 md:border-r-0 border-blue-500">
+                                    <h3 class="text-xl font-bold mb-2">4. Matrícula</h3>
+                                    <p>Se você foi classificado, parabéns! Agora é hora de reunir a documentação e realizar a matrícula para garantir sua vaga.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cotas" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">O Poder das Cotas: Entenda Sua Vaga</h2>
+                    <p class="section-subtitle mt-2">Os sistemas de cotas mudam a cada edital. Veja abaixo uma explicação geral para os processos seletivos de 2024 e 2025.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 rounded-lg shadow-xl p-6">
+                        <h3 class="text-2xl font-bold mb-4 text-center">Processo Seletivo 2025</h3>
+                        <p class="mb-4">No edital de 2025, os grupos de concorrência visam garantir vagas para candidatos que se enquadram em perfis socioeconômicos específicos.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Grupo AC:</strong> Ampla Concorrência.</li>
+                            <li><strong>Grupos LB (Renda Baixa):</strong> Para quem cursou o ensino fundamental em escola pública e possui renda familiar per capita igual ou inferior a 1 salário mínimo. Subdivide-se em:
+                                <ul class="list-circle list-inside ml-4">
+                                    <li><strong>LB-PPI:</strong> Autodeclarados pretos, pardos ou indígenas.</li>
+                                    <li><strong>LB-Q:</strong> Autodeclarados quilombolas.</li>
+                                    <li><strong>LB-PCD:</strong> Pessoas com deficiência.</li>
+                                    <li><strong>LB-EP:</strong> Demais candidatos de escola pública.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Grupos LI (Independente de Renda):</strong> Para quem cursou o ensino fundamental em escola pública, sem critério de renda. Subdivide-se em:
+                                <ul class="list-circle list-inside ml-4">
+                                    <li><strong>LI-PPI, LI-Q, LI-PCD, LI-EP</strong> com as mesmas definições acima.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Grupo PCD:</strong> Vaga específica para Pessoas com Deficiência, independente da formação ou renda.</li>
+                            <li><strong>Grupo PRONAF:</strong> Vaga para beneficiários do PRONAF em cursos de Ciências Agrárias.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg shadow-xl p-6">
+                        <h3 class="text-2xl font-bold mb-4 text-center">Processo Seletivo 2024</h3>
+                        <p class="mb-4">No edital de 2024, a nomenclatura e alguns critérios eram diferentes, baseados na Lei de Cotas federal.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Grupo A0:</strong> Ampla Concorrência.</li>
+                            <li><strong>Vagas de Escola Pública (50%):</strong> Divididas em dois subgrupos:
+                                <ul class="list-circle list-inside ml-4">
+                                    <li><strong>Com critério de Renda (até 1,5 salário mínimo per capita):</strong>
+                                        <ul>
+                                            <li><strong>L1:</strong> Escola pública e baixa renda.</li>
+                                            <li><strong>L2:</strong> L1 + autodeclarados PPI.</li>
+                                            <li><strong>L9:</strong> L1 + PCD.</li>
+                                            <li><strong>L10:</strong> L2 + PCD.</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Sem critério de Renda:</strong>
+                                        <ul>
+                                            <li><strong>L5:</strong> Apenas escola pública.</li>
+                                            <li><strong>L6:</strong> L5 + autodeclarados PPI.</li>
+                                            <li><strong>L13:</strong> L5 + PCD.</li>
+                                            <li><strong>L14:</strong> L6 + PCD.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                             <li><strong>Grupo PcD:</strong> Vaga geral para Pessoas com Deficiência.</li>
+                             <li><strong>Grupo V:</strong> Vaga para PRONAF em cursos de Ciências Agrárias.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mapa" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Mapa Interativo dos Campi</h2>
+                    <p class="section-subtitle mt-2">Explore as unidades do IF Sudeste MG e os cursos que cada uma oferece. Use os botões +/- para dar zoom.</p>
+                </div>
+                <div id="map"></div>
+            </div>
+        </section>
+
+        <section id="conteudo" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">O que Estudar? Conteúdo Programático</h2>
+                    <p class="section-subtitle mt-2">Veja os principais tópicos cobrados na prova, com base nos editais.</p>
+                </div>
+                <div class="max-w-5xl mx-auto">
+                    <div id="tabs-container" class="flex flex-wrap justify-center gap-2 md:gap-3 mb-8">
+                        <button class="tab-button active" data-tab="portugues">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            Português
+                        </button>
+                        <button class="tab-button" data-tab="matematica">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            Matemática
+                        </button>
+                        <button class="tab-button" data-tab="biologia">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M12.5 12H12v6h1.5a1.5 1.5 0 0 0 0-3h-1.5"></path><path d="M10.5 15.5c.5-.5.5-1.5 0-2"></path><path d="M9.5 12.5c-.5.5-.5 1.5 0 2"></path></svg>
+                            Biologia
+                        </button>
+                        <button class="tab-button" data-tab="fisica">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><path d="M20.2 20.2c2.04-2.03.02-5.91-2.4-8.35s-6.32-4.44-8.35-2.4c-2.04 2.03-.02 5.91 2.4 8.35 2.43 2.43 6.32 4.44 8.35 2.4z"></path><path d="M3.8 3.8c-2.04 2.03-.02 5.91 2.4 8.35s6.32 4.44 8.35 2.4"></path></svg>
+                            Física
+                        </button>
+                        <button class="tab-button" data-tab="quimica">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            Química
+                        </button>
+                        <button class="tab-button" data-tab="geografia">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            Geografia
+                        </button>
+                        <button class="tab-button" data-tab="historia">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14.29A6.5 6.5 0 0 0 15.71 7"/><path d="M12.5 7.43A4.5 4.5 0 0 0 7.43 12.5"/></svg>
+                            História
+                        </button>
+                    </div>
+                    <div id="tabs-content" class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <div id="portugues-content" class="tab-content active syllabus-list">
+                            <h4>Língua Portuguesa</h4>
+                            <ul>
+                                <li>Leitura e interpretação de textos de diferentes gêneros (literários, jornalísticos, publicitários, etc.).</li>
+                                <li>Identificação da finalidade, tema central e argumentos de um texto.</li>
+                                <li>Relações de sentido: sinonímia, antonímia, polissemia.</li>
+                                <li>Variação linguística: dialetos, registros formal e informal.</li>
+                                <li>Morfologia: classes de palavras (substantivo, adjetivo, verbo, etc.) e seus empregos.</li>
+                                <li>Sintaxe: frase, oração e período; termos da oração; concordância verbal e nominal; regência verbal e nominal; crase.</li>
+                                <li>Pontuação e seus efeitos de sentido.</li>
+                                <li>Figuras de linguagem.</li>
+                            </ul>
+                        </div>
+                        <div id="matematica-content" class="tab-content syllabus-list">
+                            <h4>Matemática</h4>
+                            <ul>
+                                <li>Conjuntos numéricos: naturais, inteiros, racionais e reais (operações e propriedades).</li>
+                                <li>Razões e proporções: regra de três simples e composta.</li>
+                                <li>Porcentagem e juros simples.</li>
+                                <li>Cálculo algébrico: produtos notáveis, fatoração, equações e inequações do 1º e 2º graus, sistemas de equações.</li>
+                                <li>Funções: afim, quadrática, exponencial e logarítmica (análise de gráficos e propriedades).</li>
+                                <li>Geometria Plana: ângulos, polígonos, áreas de figuras planas, Teorema de Pitágoras, relações métricas no triângulo retângulo.</li>
+                                <li>Geometria Espacial: cálculo de áreas e volumes de prismas, pirâmides, cilindros e cones.</li>
+                                <li>Tratamento da Informação: leitura e interpretação de gráficos e tabelas; noções de estatística (média, moda, mediana).</li>
+                            </ul>
+                        </div>
+                        <div id="biologia-content" class="tab-content syllabus-list">
+                            <h4>Biologia</h4>
+                            <ul>
+                                <li>Citologia: tipos de células (procariontes e eucariontes), organelas e suas funções, divisão celular (mitose e meiose).</li>
+                                <li>Seres vivos: classificação (Reinos Monera, Protista, Fungi, Plantae e Animalia) e características gerais.</li>
+                                <li>Fisiologia Humana: sistemas digestório, respiratório, circulatório, excretor, nervoso, endócrino e reprodutor.</li>
+                                <li>Genética: conceitos básicos (genes, alelos), Leis de Mendel, heredogramas.</li>
+                                <li>Ecologia: conceitos de ecossistema, cadeia e teia alimentar, relações ecológicas, ciclos biogeoquímicos.</li>
+                                <li>Saúde: principais doenças (virais, bacterianas, protozooses), noções de saneamento básico e vacinação.</li>
+                            </ul>
+                        </div>
+                         <div id="fisica-content" class="tab-content syllabus-list">
+                            <h4>Física</h4>
+                            <ul>
+                                <li>Mecânica: conceitos de movimento, repouso, velocidade e aceleração; Leis de Newton; energia (cinética, potencial, mecânica).</li>
+                                <li>Termologia: temperatura e calor, escalas termométricas, processos de transmissão de calor (condução, convecção e irradiação).</li>
+                                <li>Óptica: princípios da óptica geométrica, reflexão e refração da luz, espelhos planos e esféricos, lentes.</li>
+                                <li>Ondulatória: conceitos de onda, frequência, período e comprimento de onda.</li>
+                                <li>Eletricidade: carga elétrica, corrente elétrica, tensão, resistência, circuitos elétricos simples.</li>
+                            </ul>
+                        </div>
+                         <div id="quimica-content" class="tab-content syllabus-list">
+                            <h4>Química</h4>
+                            <ul>
+                                <li>Matéria e suas transformações: propriedades da matéria, estados físicos, fenômenos físicos e químicos.</li>
+                                <li>Atomística: modelos atômicos (Dalton, Thomson, Rutherford, Bohr), estrutura do átomo (prótons, nêutrons, elétrons).</li>
+                                <li>Tabela Periódica: organização e propriedades periódicas.</li>
+                                <li>Ligações Químicas: iônica, covalente e metálica.</li>
+                                <li>Funções Inorgânicas: ácidos, bases, sais e óxidos (nomenclatura, propriedades e reações).</li>
+                                <li>Reações Químicas: balanceamento de equações e tipos de reações.</li>
+                                <li>Dispersões: soluções, concentrações de soluções (molaridade, título).</li>
+                            </ul>
+                        </div>
+                        <div id="geografia-content" class="tab-content syllabus-list">
+                            <h4>Geografia</h4>
+                             <ul>
+                                <li>Orientação e Localização: coordenadas geográficas, fusos horários.</li>
+                                <li>Cartografia: leitura e interpretação de mapas, escalas.</li>
+                                <li>Geografia Física do Brasil: relevo, clima, vegetação, hidrografia e domínios morfoclimáticos.</li>
+                                <li>Geografia Humana do Brasil: formação da população, demografia, migrações, urbanização, industrialização e atividades econômicas (agropecuária, indústria, serviços).</li>
+                                <li>Geopolítica Mundial: globalização, blocos econômicos, novas ordens mundiais e principais conflitos.</li>
+                                <li>Questões Ambientais: problemas ambientais urbanos e rurais, desenvolvimento sustentável, fontes de energia.</li>
+                            </ul>
+                        </div>
+                        <div id="historia-content" class="tab-content syllabus-list">
+                            <h4>História</h4>
+                            <ul>
+                                <li>Brasil Colônia: economia açucareira, mineração, escravidão.</li>
+                                <li>Brasil Império: processo de Independência, Primeiro Reinado, Período Regencial e Segundo Reinado; crise do Império e abolição da escravatura.</li>
+                                <li>Brasil República: República Velha (Oligárquica), Era Vargas, Período Democrático, Ditadura Civil-Militar e Nova República.</li>
+                                <li>História Geral: Antiguidade (Egito, Grécia, Roma), Idade Média (Feudalismo), Idade Moderna (Renascimento, Reformas Religiosas, Absolutismo, Iluminismo).</li>
+                                <li>Idade Contemporânea: Revolução Francesa, Revolução Industrial, Imperialismo, Primeira e Segunda Guerra Mundial, Guerra Fria.</li>
+                            </ul>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-4">Atenção: Esta é uma síntese dos principais tópicos. Para a lista completa e detalhada, consulte sempre o edital oficial mais recente do processo seletivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="analise" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Raio-X da Aprovação: Análise Comparativa</h2>
+                    <p class="section-subtitle mt-2">Filtre por ano e campus para analisar as notas mínimas ou a concorrência. Use como seu alvo de estudos!</p>
+                </div>
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <label for="year-select" class="block text-lg font-medium text-gray-700 mb-2">Selecione o Ano:</label>
+                        <select id="year-select" class="block w-full p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-lg">
+                            <option value="2025.1">2025.1</option>
+                            <option value="2024">2024</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="campus-select" class="block text-lg font-medium text-gray-700 mb-2">Selecione um Campus:</label>
+                        <select id="campus-select" class="block w-full p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-lg">
+                            <option value="Barbacena">Barbacena</option>
+                            <option value="Bom Sucesso">Bom Sucesso</option>
+                            <option value="Juiz de Fora">Juiz de Fora</option>
+                            <option value="Muriaé">Muriaé</option>
+                            <option value="Rio Pomba">Rio Pomba</option>
+                            <option value="Santos Dumont">Santos Dumont</option>
+                            <option value="São João del-Rei">São João del-Rei</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center space-x-4 mb-8">
+                    <input type="radio" id="view-notes" name="chart-view" value="notes" class="form-radio" style="color: var(--primary-blue);" checked>
+                    <label for="view-notes" class="text-lg font-medium text-gray-700">Notas Mínimas</label>
+                    <input type="radio" id="view-candidates" name="chart-view" value="candidates_and_vacancies" class="form-radio" style="color: var(--primary-blue);">
+                    <label for="view-candidates" class="text-lg font-medium text-gray-700">Candidatos e Vagas</label>
+                </div>
+                <div class="bg-white rounded-lg shadow-xl p-4 md:p-8">
+                    <div id="campusChartContainer" class="chart-container">
+                        <canvas id="campusChart"></canvas>
+                    </div>
+                    <div id="campusTableContainer" class="data-table-container hidden">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Curso</th>
+                                    <th>Modalidade</th>
+                                    <th>Nota Mínima</th>
+                                    <th>Candidatos</th>
+                                    <th>Vagas</th>
+                                </tr>
+                            </thead>
+                            <tbody id="campusTableBody"></tbody>
+                            <tfoot id="campusTableFoot"></tfoot>
+                        </table>
+                    </div>
+                    <p id="campusChartDescription" class="text-center text-sm text-gray-500 mt-4"></p>
+                    <p id="data-availability-note" class="text-center text-xs text-red-500 mt-2 hidden">
+                        Atenção: Os dados de número de candidatos e/ou vagas para este campus e/ou modalidade podem não estar disponíveis de forma automatizada nos documentos consultados ou podem ser zero. Consulte os editais originais para informações completas.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculadora" class="bg-white py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Calculadora de Aprovação</h2>
+                    <p class="section-subtitle mt-2">Insira suas notas, selecione um ano de referência e descubra em quais cursos você teria sido aprovado(a)!</p>
+                </div>
+                <div class="max-w-4xl mx-auto bg-gray-50 rounded-lg shadow-xl p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+                        <div>
+                            <label for="notaLP" class="block text-lg font-medium text-gray-700 mb-2">Português (Max: 12)</label>
+                            <input type="number" id="notaLP" min="0" max="12" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-lg" placeholder="Ex: 10">
+                        </div>
+                        <div>
+                            <label for="notaMAT" class="block text-lg font-medium text-gray-700 mb-2">Matemática (Max: 11)</label>
+                            <input type="number" id="notaMAT" min="0" max="11" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-lg" placeholder="Ex: 9">
+                        </div>
+                        <div>
+                            <label for="notaCIE" class="block text-lg font-medium text-gray-700 mb-2">Ciências (Max: 12)</label>
+                            <input type="number" id="notaCIE" min="0" max="12" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-lg" placeholder="Ex: 10">
+                        </div>
+                        <div>
+                            <label for="notaGEO" class="block text-lg font-medium text-gray-700 mb-2">Geografia (Max: 5)</label>
+                            <input type="number" id="notaGEO" min="0" max="5" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-lg" placeholder="Ex: 4">
+                        </div>
+                        <div>
+                            <label for="notaHIS" class="block text-lg font-medium text-gray-700 mb-2">História (Max: 5)</label>
+                            <input type="number" id="notaHIS" min="0" max="5" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-lg" placeholder="Ex: 4">
+                        </div>
+                    </div>
+                    
+                    <div id="specific-course-check-section" class="mt-8 pt-8 border-t border-gray-300">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">Verificar Aprovação em Curso Específico:</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div>
+                                <label for="calc-year-select" class="block text-lg font-medium text-gray-700 mb-2">Ano de Referência:</label>
+                                <select id="calc-year-select" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-lg">
+                                    <option value="2025.1">2025.1</option>
+                                    <option value="2024">2024</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="specific-campus-select" class="block text-lg font-medium text-gray-700 mb-2">Campus:</label>
+                                <select id="specific-campus-select" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-lg">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="specific-course-select" class="block text-lg font-medium text-gray-700 mb-2">Curso:</label>
+                                <select id="specific-course-select" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-lg" disabled>
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="calculate-approval" class="w-full text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300 mt-8">Calcular Aprovação</button>
+                    
+                    <div id="approval-results" class="mt-8 p-4 bg-white rounded-md shadow-inner hidden">
+                        <p id="total-score-display" class="text-lg font-semibold text-gray-700 mb-4"></p>
+                        <div id="specific-approval-results" class="mb-4 hidden">
+                            <h4 class="text-xl font-bold mb-2 text-gray-800">Resultado da Verificação para Curso Específico:</h4>
+                            <p id="specific-course-result" class="text-lg text-gray-700"></p>
+                        </div>
+                        <h3 id="general-results-heading" class="text-xl font-bold mb-4 text-gray-800 mt-8 hidden"></h3>
+                        <div id="passed-courses-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        </div>
+                        <p id="no-passed-courses" class="text-md text-gray-500 hidden mt-4"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mx-auto px-6 cta-section">
+            <h2 class="text-3xl font-black mb-3">Pronto para Conquistar sua Vaga no IF Sudeste MG?</h2>
+            <p class="max-w-2xl mx-auto mb-6">Não deixe seu futuro ao acaso. Prepare-se com quem entende do assunto e garanta sua aprovação. Clique abaixo para saber mais!</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
+                    Conheça Nosso Preparatório
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    Fale Conosco no WhatsApp
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Guia Pré-Federal. Todos os direitos reservados.</p>
+            <p class="text-sm text-gray-400 mt-2">Este é um guia não-oficial. As informações oficiais e definitivas devem ser consultadas no <a href="https://www.ifsudestemg.edu.br/" target="_blank" class="text-blue-300 hover:text-blue-200 underline">site do IF Sudeste MG</a> e nos respectivos editais.</p>
+        </div>
+    </footer>
+
+    <script>
+        // DATA OBJECTS (UNCHANGED)
+        const admissionData2025_1 = { "Barbacena": [{ course: "Técnico em Agropecuária", group: "GRUPO AC", score: 56.00, num_candidates: 392 }, { course: "Técnico em Agropecuária", group: "GRUPO LB-EP", score: 56.00, num_candidates: 70 }, { course: "Técnico em Agropecuária", group: "GRUPO LB-PCD", score: 42.00, num_candidates: 4 }, { course: "Técnico em Agropecuária", group: "GRUPO LB-PPI", score: 42.00, num_candidates: 41 }, { course: "Técnico em Agropecuária", group: "GRUPO LB-Q", score: 46.00, num_candidates: 3 }, { course: "Técnico em Agropecuária", group: "GRUPO LI-EP", score: 58.00, num_candidates: 75 }, { course: "Técnico em Agropecuária", group: "GRUPO LI-PCD", score: 42.00, num_candidates: 4 }, { course: "Técnico em Agropecuária", group: "GRUPO LI-PPI", score: 42.00, num_candidates: 29 }, { course: "Técnico em Agropecuária", group: "GRUPO PCD", score: 42.00, num_candidates: 5 }, { course: "Técnico em Agropecuária", group: "GRUPO PRONAF", score: 60.00, num_candidates: 13 }, { course: "Técnico em Alimentos", group: "GRUPO AC", score: 56.00, num_candidates: 125 }, { course: "Técnico em Alimentos", group: "GRUPO LB-EP", score: 58.00, num_candidates: 16 }, { course: "Técnico em Alimentos", group: "GRUPO LB-PCD", score: 26.00, num_candidates: 1 }, { course: "Técnico em Alimentos", group: "GRUPO LB-PPI", score: 40.00, num_candidates: 6 }, { course: "Técnico em Alimentos", group: "GRUPO LB-Q", score: 48.00, num_candidates: 1 }, { course: "Técnico em Alimentos", group: "GRUPO LI-EP", score: 48.00, num_candidates: 23 }, { course: "Técnico em Alimentos", group: "GRUPO LI-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Alimentos", group: "GRUPO LI-PPI", score: 48.00, num_candidates: 11 }, { course: "Técnico em Alimentos", group: "GRUPO PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Alimentos", group: "GRUPO PRONAF", score: 0, num_candidates: 0 }, { course: "Técnico em Hospedagem", group: "GRUPO AC", score: 70.00, num_candidates: 150 }, { course: "Técnico em Hospedagem", group: "GRUPO LB-EP", score: 56.00, num_candidates: 21 }, { course: "Técnico em Hospedagem", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 },  { course: "Técnico em Hospedagem", group: "GRUPO LB-PPI", score: 42.00, num_candidates: 7 }, { course: "Técnico em Hospedagem", group: "GRUPO LI-EP", score: 72.00, num_candidates: 39 }, { course: "Técnico em Hospedagem", group: "GRUPO LI-PCD", score: 28.00, num_candidates: 1 }, { course: "Técnico em Hospedagem", group: "GRUPO LI-PPI", score: 52.00, num_candidates: 13 }, { course: "Técnico em Hospedagem", group: "GRUPO PCD", score: 66.00, num_candidates: 1 }, { course: "Técnico em Hospedagem", group: "GRUPO PRONAF", score: 0, num_candidates: 0 }, { course: "Técnico em Química", group: "GRUPO AC", score: 64.00, num_candidates: 113 }, { course: "Técnico em Química", group: "GRUPO LB-EP", score: 74.00, num_candidates: 11 }, { course: "Técnico em Química", group: "GRUPO LB-PCD", score: 20.00, num_candidates: 1 }, { course: "Técnico em Química", group: "GRUPO LB-PPI", score: 46.00, num_candidates: 9 }, { course: "Técnico em Química", group: "GRUPO LI-EP", score: 78.00, num_candidates: 28 }, { course: "Técnico em Química", group: "GRUPO LI-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Química", group: "GRUPO LI-PPI", score: 52.00, num_candidates: 10 }, { course: "Técnico em Química", group: "GRUPO PCD", score: 20.00, num_candidates: 1 }, ], "Bom Sucesso": [{ course: "Técnico em Administração", group: "GRUPO AC", score: 50.00, num_candidates: 28 }, { course: "Técnico em Administração", group: "GRUPO LB-EP", score: 56.00, num_candidates: 2 }, { course: "Técnico em Administração", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Administração", group: "GRUPO LB-PPI", score: 50.00, num_candidates: 3 }, { course: "Técnico em Administração", group: "GRUPO LI-EP", score: 56.00, num_candidates: 8 }, { course: "Técnico em Administração", group: "GRUPO LI-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Administração", group: "GRUPO LI-PPI", score: 50.00, num_candidates: 6 }, { course: "Técnico em Administração", group: "GRUPO PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Meio Ambiente", group: "GRUPO AC", score: 42.00, num_candidates: 17 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-EP", score: 0, num_candidates: 0 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-PPI", score: 0, num_candidates: 0 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-EP", score: 56.00, num_candidates: 5 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-PPI", score: 56.00, num_candidates: 1 }, { course: "Técnico em Meio Ambiente", group: "GRUPO PCD", score: 0, num_candidates: 0 }, ], "Juiz de Fora": [{ course: "Técnico em Desenvolvimento de Sistemas", group: "GRUPO AC", score: 72.00, num_candidates: 351 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "GRUPO LB-EP", score: 60.00, num_candidates: 29 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "GRUPO LB-PCD", score: 56.00, num_candidates: 1 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "GRUPO LB-PPI", score: 50.00, num_candidates: 22 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "GRUPO LI-EP", score: 78.00, num_candidates: 57 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "GRUPO LI-PCD", score: 74.00, num_candidates: 5 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "GRUPO LI-PPI", score: 58.00, num_candidates: 28 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "GRUPO PCD", score: 74.00, num_candidates: 6 }, { course: "Técnico em Edificações", group: "GRUPO AC", score: 62.00, num_candidates: 153 }, { course: "Técnico em Edificações", group: "GRUPO LB-EP", score: 64.00, num_candidates: 17 }, { course: "Técnico em Edificações", group: "GRUPO LB-PCD", score: 42.00, num_candidates: 2 }, { course: "Técnico em Edificações", group: "GRUPO LB-PPI", score: 48.00, num_candidates: 15 }, { course: "Técnico em Edificações", group: "GRUPO LB-Q", score: 42.00, num_candidates: 1 }, { course: "Técnico em Edificações", group: "GRUPO LI-EP", score: 70.00, num_candidates: 26 }, { course: "Técnico em Edificações", group: "GRUPO LI-PCD", score: 50.00, num_candidates: 2 }, { course: "Técnico em Edificações", group: "GRUPO LI-PPI", score: 52.00, num_candidates: 18 }, { course: "Técnico em Edificações", group: "GRUPO PCD", score: 50.00, num_candidates: 14 }, { course: "Técnico em Eletromecânica", group: "GRUPO AC", score: 64.00, num_candidates: 158 }, { course: "Técnico em Eletromecânica", group: "GRUPO LB-EP", score: 60.00, num_candidates: 13 }, { course: "Técnico em Eletromecânica", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Eletromecânica", group: "GRUPO LB-PPI", score: 38.00, num_candidates: 8 }, { course: "Técnico em Eletromecânica", group: "GRUPO LI-EP", score: 70.00, num_candidates: 19 }, { course: "Técnico em Eletromecânica", group: "GRUPO LI-PCD", score: 58.00, num_candidates: 1 }, { course: "Técnico em Eletromecânica", group: "GRUPO LI-PPI", score: 42.00, num_candidates: 13 }, { course: "Técnico em Eletromecânica", group: "GRUPO PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Eletrotécnica", group: "GRUPO AC", score: 56.00, num_candidates: 91 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LB-EP", score: 48.00, num_candidates: 9 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LB-PPI", score: 34.00, num_candidates: 8 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LI-EP", score: 54.00, num_candidates: 15 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LI-PCD", score: 44.00, num_candidates: 25 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LI-PPI", score: 44.00, num_candidates: 25 }, { course: "Técnico em Eletrotécnica", group: "GRUPO PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Mecânica", group: "GRUPO AC", score: 60.00, num_candidates: 103 }, { course: "Técnico em Mecânica", group: "GRUPO LB-EP", score: 64.00, num_candidates: 17 }, { course: "Técnico em Mecânica", group: "GRUPO LB-PCD", score: 32.00, num_candidates: 32 }, { course: "Técnico em Mecânica", group: "GRUPO LB-PPI", score: 32.00, num_candidates: 32 }, { course: "Técnico em Mecânica", group: "GRUPO LI-EP", score: 60.00, num_candidates: 29 }, { course: "Técnico em Mecânica", group: "GRUPO LI-PCD", score: 30.00, num_candidates: 7 }, { course: "Técnico em Mecânica", group: "GRUPO LI-PPI", score: 28.00, num_candidates: 31 }, { course: "Técnico em Mecânica", group: "GRUPO PCD", score: 42.00, num_candidates: 6 }, { course: "Técnico em Meio Ambiente", group: "GRUPO AC", score: 64.00, num_candidates: 217 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-EP", score: 62.00, num_candidates: 26 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-PCD", score: 46.00, num_candidates: 4 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-PPI", score: 50.00, num_candidates: 21 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-Q", score: 44.00, num_candidates: 1 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-EP", score: 74.00, num_candidates: 36 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-PCD", score: 44.00, num_candidates: 1 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-PPI", score: 52.00, num_candidates: 38 }, { course: "Técnico em Meio Ambiente", group: "GRUPO PCD", score: 50.00, num_candidates: 14 }, { course: "Técnico em Metalurgia", group: "GRUPO AC", score: 58.00, num_candidates: 103 }, { course: "Técnico em Metalurgia", group: "GRUPO LB-EP", score: 52.00, num_candidates: 41 }, { course: "Técnico em Metalurgia", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Metalurgia", group: "GRUPO LB-PPI", score: 40.00, num_candidates: 42 }, { course: "Técnico em Metalurgia", group: "GRUPO LI-EP", score: 74.00, num_candidates: 43 }, { course: "Técnico em Metalurgia", group: "GRUPO LI-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Metalurgia", group: "GRUPO LI-PPI", score: 42.00, num_candidates: 44 }, { course: "Técnico em Metalurgia", group: "GRUPO PCD", score: 0, num_candidates: 0 }, ], "Muriaé": [{ course: "Técnico em Agroecologia", group: "GRUPO AC", score: 58.00, num_candidates: 45 }, { course: "Técnico em Agroecologia", group: "GRUPO LB-EP", score: 60.00, num_candidates: 46 }, { course: "Técnico em Agroecologia", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Agroecologia", group: "GRUPO LB-PPI", score: 48.00, num_candidates: 47 }, { course: "Técnico em Agroecologia", group: "GRUPO LI-EP", score: 62.00, num_candidates: 48 }, { course: "Técnico em Agroecologia", group: "GRUPO LI-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Agroecologia", group: "GRUPO LI-PPI", score: 48.00, num_candidates: 49 }, { course: "Técnico em Agroecologia", group: "GRUPO PRONAF", score: 58.00, num_candidates: 50 }, { course: "Técnico em Agroecologia", group: "GRUPO PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Eletrotécnica", group: "GRUPO AC", score: 64.00, num_candidates: 51 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LB-EP", score: 62.00, num_candidates: 52 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LB-PPI", score: 50.00, num_candidates: 53 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LI-EP", score: 74.00, num_candidates: 54 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LI-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LI-PPI", score: 56.00, num_candidates: 55 }, { course: "Técnico em Eletrotécnica", group: "GRUPO PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Informática", group: "GRUPO AC", score: 68.00, num_candidates: 56 }, { course: "Técnico em Informática", group: "GRUPO LB-EP", score: 74.00, num_candidates: 57 }, { course: "Técnico em Informática", group: "GRUPO LB-PCD", score: 24.00, num_candidates: 58 }, { course: "Técnico em Informática", group: "GRUPO LB-PPI", score: 56.00, num_candidates: 58 }, { course: "Técnico em Informática", group: "GRUPO LI-EP", score: 72.00, num_candidates: 59 }, { course: "Técnico em Informática", group: "GRUPO LI-PCD", score: 44.00, num_candidates: 60 }, { course: "Técnico em Informática", group: "GRUPO LI-PPI", score: 56.00, num_candidates: 60 }, { course: "Técnico em Informática", group: "GRUPO PCD", score: 48.00, num_candidates: 61 }, { course: "Técnico em Mecânica", group: "GRUPO AC", score: 60.00, num_candidates: 62 }, { course: "Técnico em Mecânica", group: "GRUPO LB-EP", score: 58.00, num_candidates: 63 }, { course: "Técnico em Mecânica", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Mecânica", group: "GRUPO LB-PPI", score: 50.00, num_candidates: 64 }, { course: "Técnico em Mecânica", group: "GRUPO LI-EP", score: 60.00, num_candidates: 65 }, { course: "Técnico em Mecânica", group: "GRUPO LI-PCD", score: 50.00, num_candidates: 66 }, { course: "Técnico em Mecânica", group: "GRUPO LI-PPI", score: 54.00, num_candidates: 66 }, { course: "Técnico em Mecânica", group: "GRUPO PCD", score: 36.00, num_candidates: 72 }, { course: "Técnico em Meio Ambiente", group: "GRUPO AC", score: 62.00, num_candidates: 67 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-EP", score: 50.00, num_candidates: 68 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-PPI", score: 50.00, num_candidates: 69 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-EP", score: 64.00, num_candidates: 70 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-PPI", score: 44.00, num_candidates: 71 }, { course: "Técnico em Meio Ambiente", group: "GRUPO PCD", score: 36.00, num_candidates: 72 }, ], "Rio Pomba": [{ course: "Técnico em Agropecuária", group: "GRUPO AC", score: 44.00, num_candidates: 73 }, { course: "Técnico em Agropecuária", group: "GRUPO LB-EP", score: 68.00, num_candidates: 74 }, { course: "Técnico em Agropecuária", group: "GRUPO LB-PCD", score: 56.00, num_candidates: 75 }, { course: "Técnico em Agropecuária", group: "GRUPO LB-PPI", score: 32.00, num_candidates: 76 }, { course: "Técnico em Agropecuária", group: "GRUPO LI-EP", score: 50.00, num_candidates: 75 }, { course: "Técnico em Agropecuária", group: "GRUPO LI-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Agropecuária", group: "GRUPO LI-PPI", score: 32.00, num_candidates: 76 }, { course: "Técnico em Agropecuária", group: "GRUPO PRONAF", score: 52.00, num_candidates: 76 }, { course: "Técnico em Agropecuária", group: "GRUPO PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Alimentos", group: "GRUPO AC", score: 54.00, num_candidates: 77 }, { course: "Técnico em Alimentos", group: "GRUPO LB-EP", score: 54.00, num_candidates: 78 }, { course: "Técnico em Alimentos", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Alimentos", group: "GRUPO LB-PPI", score: 30.00, num_candidates: 79 }, { course: "Técnico em Alimentos", group: "GRUPO LI-EP", score: 54.00, num_candidates: 80 }, { course: "Técnico em Alimentos", group: "GRUPO LI-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Alimentos", group: "GRUPO LI-PPI", score: 30.00, num_candidates: 81 }, { course: "Técnico em Alimentos", group: "GRUPO PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Informática", group: "GRUPO AC", score: 60.00, num_candidates: 81 }, { course: "Técnico em Informática", group: "GRUPO LB-EP", score: 54.00, num_candidates: 82 }, { course: "Técnico em Informática", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Informática", group: "GRUPO LB-PPI", score: 34.00, num_candidates: 83 }, { course: "Técnico em Informática", group: "GRUPO LI-EP", score: 54.00, num_candidates: 83 }, { course: "Técnico em Informática", group: "GRUPO LI-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Informática", group: "GRUPO LI-PPI", score: 42.00, num_candidates: 84 }, { course: "Técnico em Informática", group: "GRUPO PCD", score: 42.00, num_candidates: 85 }, { course: "Técnico em Meio Ambiente", group: "GRUPO AC", score: 44.00, num_candidates: 86 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-EP", score: 44.00, num_candidates: 87 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-PCD", score: 32.00, num_candidates: 88 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-PPI", score: 32.00, num_candidates: 88 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-EP", score: 46.00, num_candidates: 89 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-PCD", score: 32.00, num_candidates: 90 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-PPI", score: 32.00, num_candidates: 90 }, { course: "Técnico em Meio Ambiente", group: "GRUPO PCD", score: 32.00, num_candidates: 91 }, { course: "Técnico em Química", group: "GRUPO AC", score: 56.00, num_candidates: 92 }, { course: "Técnico em Química", group: "GRUPO LB-EP", score: 56.00, num_candidates: 93 }, { course: "Técnico em Química", group: "GRUPO LB-PPI", score: 48.00, num_candidates: 94 }, { course: "Técnico em Química", group: "GRUPO LI-EP", score: 62.00, num_candidates: 94 }, { course: "Técnico em Química", group: "GRUPO LI-PPI", score: 36.00, num_candidates: 95 }, { course: "Técnico em Química", group: "GRUPO PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Zootecnia", group: "GRUPO AC", score: 60.00, num_candidates: 96 }, { course: "Técnico em Zootecnia", group: "GRUPO LB-EP", score: 60.00, num_candidates: 97 }, { course: "Técnico em Zootecnia", group: "GRUPO LB-PPI", score: 30.00, num_candidates: 98 }, { course: "Técnico em Zootecnia", group: "GRUPO LI-EP", score: 60.00, num_candidates: 99 }, { course: "Técnico em Zootecnia", group: "GRUPO LI-PPI", score: 30.00, num_candidates: 100 }, { course: "Técnico em Zootecnia", group: "GRUPO PCD", score: 0, num_candidates: 0 }, ], "Santos Dumont": [{ course: "Técnico em Eletrotécnica", group: "GRUPO AC", score: 50.00, num_candidates: 101 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LB-EP", score: 66.00, num_candidates: 102 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LB-PCD", score: 32.00, num_candidates: 103 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LB-PPI", score: 32.00, num_candidates: 103 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LI-EP", score: 48.00, num_candidates: 104 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LI-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Eletrotécnica", group: "GRUPO LI-PPI", score: 36.00, num_candidates: 104 }, { course: "Técnico em Eletrotécnica", group: "GRUPO PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Guia de Turismo", group: "GRUPO AC", score: 54.00, num_candidates: 105 }, { course: "Técnico em Guia de Turismo", group: "GRUPO LB-EP", score: 56.00, num_candidates: 106 }, { course: "Técnico em Guia de Turismo", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Guia de Turismo", group: "GRUPO LB-PPI", score: 36.00, num_candidates: 107 }, { course: "Técnico em Guia de Turismo", group: "GRUPO LI-EP", score: 48.00, num_candidates: 108 }, { course: "Técnico em Guia de Turismo", group: "GRUPO LI-PCD", score: 28.00, num_candidates: 109 }, { course: "Técnico em Guia de Turismo", group: "GRUPO LI-PPI", score: 28.00, num_candidates: 109 }, { course: "Técnico em Guia de Turismo", group: "GRUPO PCD", score: 44.00, num_candidates: 110 }, { course: "Técnico em Mecânica", group: "GRUPO AC", score: 54.00, num_candidates: 111 }, { course: "Técnico em Mecânica", group: "GRUPO LB-EP", score: 50.00, num_candidates: 112 }, { course: "Técnico em Mecânica", group: "GRUPO LB-PCD", score: 38.00, num_candidates: 113 }, { course: "Técnico em Mecânica", group: "GRUPO LB-PPI", score: 32.00, num_candidates: 113 }, { course: "Técnico em Mecânica", group: "GRUPO LI-EP", score: 60.00, num_candidates: 114 }, { course: "Técnico em Mecânica", group: "GRUPO LI-PCD", score: 38.00, num_candidates: 115 }, { course: "Técnico em Mecânica", group: "GRUPO LI-PPI", score: 42.00, num_candidates: 115 }, { course: "Técnico em Mecânica", group: "GRUPO PCD", score: 38.00, num_candidates: 116 }, ], "São João del-Rei": [{ course: "Técnico em Edificações", group: "GRUPO AC", score: 56.00, num_candidates: 117 }, { course: "Técnico em Edificações", group: "GRUPO LB-EP", score: 60.00, num_candidates: 118 }, { course: "Técnico em Edificações", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Edificações", group: "GRUPO LB-PPI", score: 46.00, num_candidates: 119 }, { course: "Técnico em Edificações", group: "GRUPO LB-Q", score: 48.00, num_candidates: 120 }, { course: "Técnico em Edificações", group: "GRUPO LI-EP", score: 60.00, num_candidates: 120 }, { course: "Técnico em Edificações", group: "GRUPO LI-PCD", score: 58.00, num_candidates: 121 }, { course: "Técnico em Edificações", group: "GRUPO LI-PPI", score: 38.00, num_candidates: 121 }, { course: "Técnico em Edificações", group: "GRUPO PCD", score: 68.00, num_candidates: 121 }, { course: "Técnico em Informática", group: "GRUPO AC", score: 64.00, num_candidates: 121 }, { course: "Técnico em Informática", group: "GRUPO LB-EP", score: 70.00, num_candidates: 122 }, { course: "Técnico em Informática", group: "GRUPO LB-PCD", score: 60.00, num_candidates: 123 }, { course: "Técnico em Informática", group: "GRUPO LB-PPI", score: 18.00, num_candidates: 124 }, { course: "Técnico em Informática", group: "GRUPO LI-EP", score: 62.00, num_candidates: 125 }, { course: "Técnico em Informática", group: "GRUPO LI-PCD", score: 48.00, num_candidates: 126 }, { course: "Técnico em Informática", group: "GRUPO LI-PPI", score: 38.00, num_candidates: 126 }, { course: "Técnico em Informática", group: "GRUPO PCD", score: 60.00, num_candidates: 127 }, { course: "Técnico em Meio Ambiente", group: "GRUPO AC", score: 42.00, num_candidates: 128 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-EP", score: 48.00, num_candidates: 129 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-PCD", score: 0, num_candidates: 0 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LB-PPI", score: 36.00, num_candidates: 130 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-EP", score: 48.00, num_candidates: 131 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-PCD", score: 42.00, num_candidates: 132 }, { course: "Técnico em Meio Ambiente", group: "GRUPO LI-PPI", score: 42.00, num_candidates: 132 }, { course: "Técnico em Meio Ambiente", group: "GRUPO PCD", score: 0, num_candidates: 0 }, ], };
+        const vacancyDataRaw2025_1 = { "Barbacena": { "Técnico em Alimentos": { "AC": 15, "LB-PPI": 6, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 6, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 2, "PCD": 1, "PRONAF": 1 }, "Técnico em Agropecuária": { "AC": 41, "LB-PPI": 14, "LB-Q": 1, "LB-PCD": 2, "LB-EP": 6, "LI-PPI": 13, "LI-Q": 0, "LI-PCD": 2, "LI-EP": 7, "PCD": 2, "PRONAF": 2 }, "Técnico em Hospedagem": { "AC": 16, "LB-PPI": 6, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 6, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 2, "PCD": 1, "PRONAF": 0 }, "Técnico em Química": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 } }, "Bom Sucesso": { "Técnico em Administração": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 }, "Técnico em Meio Ambiente": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 } }, "Juiz de Fora": { "default": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 } }, "Muriaé": { "default": { "AC": 16, "LB-PPI": 6, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 6, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 2, "PCD": 1, "PRONAF": 0 }, "Técnico em Agroecologia": { "PRONAF": 1 } }, "Rio Pomba": { "default": { "AC": 16, "LB-PPI": 6, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 6, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 2, "PCD": 1, "PRONAF": 0 }, "Técnico em Agropecuária": { "PRONAF": 1 }, "Técnico em Alimentos": { "PRONAF": 1 }, "Técnico em Zootecnia": { "PRONAF": 1 } }, "Santos Dumont": { "default": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 } }, "São João del-Rei": { "Técnico em Edificações": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 }, "Técnico em Meio Ambiente": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 }, "Técnico em Informática": { "AC": 16, "LB-PPI": 6, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 6, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 2, "PCD": 1, "PRONAF": 0 } } };
+        const admissionData2024 = { "Barbacena": [{ course: "Técnico em Agroindústria", group: "A0", score: 48 }, { course: "Técnico em Agroindústria", group: "L1", score: 46 }, { course: "Técnico em Agroindústria", group: "L2", score: 48 }, { course: "Técnico em Agroindústria", group: "L5", score: 56 }, { course: "Técnico em Agroindústria", group: "L6", score: 42 }, { course: "Técnico em Agroindústria", group: "L9", score: 44 }, { course: "Técnico em Agroindústria", group: "PCD", score: 12 }, { course: "Técnico em Agroindústria", group: "V", score: 50 }, { course: "Técnico em Agropecuária", group: "A0", score: 58 }, { course: "Técnico em Agropecuária", group: "L1", score: 46 }, { course: "Técnico em Agropecuária", group: "L2", score: 40 }, { course: "Técnico em Agropecuária", group: "L5", score: 48 }, { course: "Técnico em Agropecuária", group: "L6", score: 34 }, { course: "Técnico em Agropecuária", group: "L9", score: 42 }, { course: "Técnico em Agropecuária", group: "L10", score: 16 }, { course: "Técnico em Agropecuária", group: "L13", score: 20 }, { course: "Técnico em Agropecuária", group: "L14", score: 26 }, { course: "Técnico em Agropecuária", group: "PCD", score: 24 }, { course: "Técnico em Hospedagem", group: "A0", score: 50 }, { course: "Técnico em Hospedagem", group: "L1", score: 44 }, { course: "Técnico em Hospedagem", group: "L2", score: 28 }, { course: "Técnico em Hospedagem", group: "L5", score: 54 }, { course: "Técnico em Hospedagem", group: "L6", score: 44 }, { course: "Técnico em Hospedagem", group: "PCD", score: 50 }, { course: "Técnico em Química", group: "A0", score: 32 }, { course: "Técnico em Química", group: "L1", score: 50 }, { course: "Técnico em Química", group: "L5", score: 76 }, { course: "Técnico em Química", group: "L6", score: 56 }, { course: "Técnico em Química", group: "L10", score: 48 }], "Juiz de Fora": [{ course: "Técnico em Desenvolvimento de Sistemas", group: "A0", score: 68 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "L1", score: 54 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "L2", score: 46 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "L5", score: 58 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "L6", score: 62 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "L10", score: 28 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "L13", score: 36 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "PCD", score: 58 }, { course: "Técnico em Edificações", group: "A0", score: 52 }, { course: "Técnico em Edificações", group: "L1", score: 54 }, { course: "Técnico em Edificações", group: "L2", score: 40 }, { course: "Técnico em Edificações", group: "L5", score: 64 }, { course: "Técnico em Edificações", group: "L6", score: 36 }, { course: "Técnico em Edificações", group: "PCD", score: 28 }, { course: "Técnico em Eletromecânica", group: "A0", score: 60 }, { course: "Técnico em Eletromecânica", group: "L1", score: 50 }, { course: "Técnico em Eletromecânica", group: "L2", score: 32 }, { course: "Técnico em Eletromecânica", group: "L5", score: 52 }, { course: "Técnico em Eletromecânica", group: "L6", score: 46 }, { course: "Técnico em Eletromecânica", group: "L9", score: 50 }, { course: "Técnico em Eletrotécnica", group: "A0", score: 56 }, { course: "Técnico em Eletrotécnica", group: "L1", score: 42 }, { course: "Técnico em Eletrotécnica", group: "L2", score: 24 }, { course: "Técnico em Eletrotécnica", group: "L5", score: 42 }, { course: "Técnico em Eletrotécnica", group: "L6", score: 28 }, { course: "Técnico em Eletrotécnica", group: "L10", score: 38 }, { course: "Técnico em Mecânica", group: "A0", score: 60 }, { course: "Técnico em Mecânica", group: "L1", score: 56 }, { course: "Técnico em Mecânica", group: "L2", score: 24 }, { course: "Técnico em Mecânica", group: "L5", score: 50 }, { course: "Técnico em Mecânica", group: "L6", score: 40 }, { course: "Técnico em Mecânica", group: "L10", score: 24 }, { course: "Técnico em Mecânica", group: "L14", score: 24 }, { course: "Técnico em Meio Ambiente", group: "A0", score: 56 }, { course: "Técnico em Meio Ambiente", group: "L1", score: 46 }, { course: "Técnico em Meio Ambiente", group: "L2", score: 44 }, { course: "Técnico em Meio Ambiente", group: "L5", score: 56 }, { course: "Técnico em Meio Ambiente", group: "L6", score: 60 }, { course: "Técnico em Meio Ambiente", group: "L9", score: 28 }, { course: "Técnico em Meio Ambiente", group: "L10", score: 36 }, { course: "Técnico em Meio Ambiente", group: "PCD", score: 28 }, { course: "Técnico em Metalurgia", group: "A0", score: 50 }, { course: "Técnico em Metalurgia", group: "L1", score: 42 }, { course: "Técnico em Metalurgia", group: "L2", score: 36 }, { course: "Técnico em Metalurgia", group: "L5", score: 50 }, { course: "Técnico em Metalurgia", group: "L6", score: 40 }], "Muriaé": [{ course: "Técnico em Agroecologia", group: "A0", score: 48 }, { course: "Técnico em Agroecologia", group: "L1", score: 42 }, { course: "Técnico em Agroecologia", group: "L2", score: 42 }, { course: "Técnico em Agroecologia", group: "L5", score: 50 }, { course: "Técnico em Agroecologia", group: "L6", score: 44 }, { course: "Técnico em Agroecologia", group: "L13", score: 36 }, { course: "Técnico em Agroecologia", group: "PCD", score: 40 }, { course: "Técnico em Agroecologia", group: "V", score: 52 }, { course: "Técnico em Eletrotécnica", group: "A0", score: 64 }, { course: "Técnico em Eletrotécnica", group: "L1", score: 48 }, { course: "Técnico em Eletrotécnica", group: "L2", score: 58 }, { course: "Técnico em Eletrotécnica", group: "L5", score: 58 }, { course: "Técnico em Informática", group: "A0", score: 68 }, { course: "Técnico em Informática", group: "L1", score: 62 }, { course: "Técnico em Informática", group: "L2", score: 60 }, { course: "Técnico em Informática", group: "L5", score: 56 }, { course: "Técnico em Informática", group: "L6", score: 36 }, { course: "Técnico em Informática", group: "L10", score: 42 }, { course: "Técnico em Informática", group: "L13", score: 20 }, { course: "Técnico em Informática", group: "L14", score: 58 }, { course: "Técnico em Informática", group: "PCD", score: 54 }, { course: "Técnico em Mecânica", group: "L1", score: 50 }, { course: "Técnico em Mecânica", group: "L2", score: 24 }, { course: "Técnico em Mecânica", group: "L5", score: 46 }, { course: "Técnico em Mecânica", group: "L6", score: 30 }, { course: "Técnico em Mecânica", group: "L13", score: 46 }, { course: "Técnico em Mecânica", group: "L14", score: 34 }, { course: "Técnico em Meio Ambiente", group: "A0", score: 50 }, { course: "Técnico em Meio Ambiente", group: "L1", score: 42 }, { course: "Técnico em Meio Ambiente", group: "L2", score: 34 }, { course: "Técnico em Meio Ambiente", group: "L5", score: 44 }, { course: "Técnico em Meio Ambiente", group: "L6", score: 36 }, { course: "Técnico em Meio Ambiente", group: "L9", score: 34 }], "Rio Pomba": [{ course: "Técnico em Agropecuária", group: "A0", score: 26 }, { course: "Técnico em Agropecuária", group: "L1", score: 38 }, { course: "Técnico em Agropecuária", group: "L2", score: 42 }, { course: "Técnico em Agropecuária", group: "L5", score: 38 }, { course: "Técnico em Agropecuária", group: "L6", score: 22 }, { course: "Técnico em Agropecuária", group: "L9", score: 18 }, { course: "Técnico em Agropecuária", group: "PCD", score: 14 }, { course: "Técnico em Agropecuária", group: "V", score: 32 }, { course: "Técnico em Alimentos", group: "A0", score: 40 }, { course: "Técnico em Alimentos", group: "L1", score: 40 }, { course: "Técnico em Alimentos", group: "L2", score: 42 }, { course: "Técnico em Alimentos", group: "L5", score: 34 }, { course: "Técnico em Alimentos", group: "L6", score: 28 }, { course: "Técnico em Informática", group: "A0", score: 54 }, { course: "Técnico em Informática", group: "L1", score: 42 }, { course: "Técnico em Informática", group: "L2", score: 36 }, { course: "Técnico em Informática", group: "L5", score: 54 }, { course: "Técnico em Informática", group: "L6", score: 36 }, { course: "Técnico em Informática", group: "L10", score: 42 }, { course: "Técnico em Meio Ambiente", group: "A0", score: 26 }, { course: "Técnico em Meio Ambiente", group: "L1", score: 46 }, { course: "Técnico em Meio Ambiente", group: "L2", score: 34 }, { course: "Técnico em Meio Ambiente", group: "L5", score: 46 }, { course: "Técnico em Meio Ambiente", group: "L6", score: 34 }, { course: "Técnico em Química", group: "A0", score: 24 }, { course: "Técnico em Química", group: "L1", score: 44 }, { course: "Técnico em Química", group: "L2", score: 32 }, { course: "Técnico em Química", group: "L5", score: 48 }, { course: "Técnico em Química", group: "L6", score: 42 }, { course: "Técnico em Zootecnia", group: "A0", score: 44 }, { course: "Técnico em Zootecnia", group: "L1", score: 38 }, { course: "Técnico em Zootecnia", group: "L2", score: 26 }, { course: "Técnico em Zootecnia", group: "L5", score: 40 }, { course: "Técnico em Zootecnia", group: "L6", score: 24 }, { course: "Técnico em Zootecnia", group: "PCD", score: 20 }, { course: "Técnico em Zootecnia", group: "V", score: 22 }], "Santos Dumont": [{ course: "Técnico em Eletrotécnica", group: "A0", score: 38 }, { course: "Técnico em Eletrotécnica", group: "L1", score: 46 }, { course: "Técnico em Eletrotécnica", group: "L2", score: 30 }, { course: "Técnico em Eletrotécnica", group: "L5", score: 50 }, { course: "Técnico em Eletrotécnica", group: "L6", score: 34 }, { course: "Técnico em Eletrotécnica", group: "L9", score: 26 }, { course: "Técnico em Eletrotécnica", group: "L10", score: 22 }, { course: "Técnico em Guia de Turismo", group: "A0", score: 44 }, { course: "Técnico em Guia de Turismo", group: "L1", score: 38 }, { course: "Técnico em Guia de Turismo", group: "L2", score: 30 }, { course: "Técnico em Guia de Turismo", group: "L5", score: 38 }, { course: "Técnico em Guia de Turismo", group: "L6", score: 22 }, { course: "Técnico em Guia de Turismo", group: "L13", score: 34 }, { course: "Técnico em Guia de Turismo", group: "PCD", score: 62 },], "São João del-Rei": [{ course: "Técnico em Edificações", group: "A0", score: 56 }, { course: "Técnico em Edificações", group: "L1", score: 50 }, { course: "Técnico em Edificações", group: "L2", score: 46 }, { course: "Técnico em Edificações", group: "L5", score: 60 }, { course: "Técnico em Edificações", group: "L6", score: 38 }, { course: "Técnico em Edificações", group: "L13", score: 58 }, { course: "Técnico em Edificações", group: "PCD", score: 68 }, { course: "Técnico em Meio Ambiente", group: "A0", score: 42 }, { course: "Técnico em Meio Ambiente", group: "L1", score: 48 }, { course: "Técnico em Meio Ambiente", group: "L2", score: 36 }, { course: "Técnico em Meio Ambiente", group: "L5", score: 48 }, { course: "Técnico em Meio Ambiente", group: "L6", score: 42 }, { course: "Técnico em Meio Ambiente", group: "L13", score: 42 },] };
+        const vacancyDataRaw2024 = { "Barbacena": { "Técnico em Agroindústria": {"A0":13,"L1":2,"L9":1,"L2":4,"L10":1,"L5":2,"L13":1,"L6":3,"L14":1,"PcD":1,"V":1}, "Técnico em Agropecuária": {"A0":36,"L1":8,"L9":1,"L2":10,"L10":2,"L5":8,"L13":1,"L6":10,"L14":1,"PcD":2,"V":2}, "Técnico em Hospedagem": {"A0":16,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":0}, "Técnico em Química": {"A0":14,"L1":2,"L9":1,"L2":4,"L10":1,"L5":2,"L13":1,"L6":3,"L14":1,"PcD":1,"V":0} }, "Juiz de Fora": { "default": {"A0":14,"L1":2,"L9":1,"L2":4,"L10":1,"L5":2,"L13":1,"L6":3,"L14":1,"PcD":1,"V":0} }, "Muriaé": { "Técnico em Agroecologia": {"A0":15,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":1}, "default": {"A0":16,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":0} }, "Rio Pomba": { "Técnico em Agropecuária": {"A0":15,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":1}, "Técnico em Alimentos": {"A0":15,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":1}, "Técnico em Zootecnia": {"A0":15,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":1}, "default": {"A0":16,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":0} }, "Santos Dumont": { "default": {"A0":14,"L1":2,"L9":1,"L2":4,"L10":1,"L5":2,"L13":1,"L6":3,"L14":1,"PcD":1,"V":0} }, "São João del-Rei": { "default": {"A0":14,"L1":2,"L9":1,"L2":4,"L10":1,"L5":2,"L13":1,"L6":3,"L14":1,"PcD":1,"V":0} } };
+        const allAdmissionData = { '2025.1': admissionData2025_1, '2024': admissionData2024 };
+        const allVacancyData = { '2025.1': vacancyDataRaw2025_1, '2024': vacancyDataRaw2024 };
+        const groupInfo = { '2025.1': { orderedGroups: ['GRUPO AC', 'GRUPO LB-EP', 'GRUPO LB-PCD', 'GRUPO LB-PPI', 'GRUPO LB-Q', 'GRUPO LI-EP', 'GRUPO LI-PCD', 'GRUPO LI-PPI', 'GRUPO PCD', 'GRUPO PRONAF'], labels: { 'GRUPO AC': 'Ampla Concorrência (AC)', 'GRUPO LB-EP': 'Renda Baixa (LB-EP)', 'GRUPO LB-PCD': 'Renda Baixa + PCD (LB-PCD)', 'GRUPO LB-PPI': 'Renda Baixa + PPI (LB-PPI)', 'GRUPO LB-Q': 'Renda Baixa + Quilombola (LB-Q)', 'GRUPO LI-EP': 'Escola Pública (LI-EP)', 'GRUPO LI-PCD': 'Escola Pública + PCD (LI-PCD)', 'GRUPO LI-PPI': 'Escola Pública + PPI (LI-PPI)', 'GRUPO PCD': 'PCD (Geral)', 'GRUPO PRONAF': 'PRONAF' }, compactLabels: { 'GRUPO AC': 'AC', 'GRUPO LB-EP': 'LB-EP', 'GRUPO LB-PCD': 'LB-PCD', 'GRUPO LB-PPI': 'LB-PPI', 'GRUPO LB-Q': 'LB-Q', 'GRUPO LI-EP': 'LI-EP', 'GRUPO LI-PCD': 'LI-PCD', 'GRUPO LI-PPI': 'LI-PPI', 'GRUPO PCD': 'PCD', 'GRUPO PRONAF': 'PRONAF' } }, '2024': { orderedGroups: ['A0', 'L1', 'L2', 'L5', 'L6', 'L9', 'L10', 'L13', 'L14', 'PCD', 'V'], labels: { 'A0': 'Ampla Concorrência (A0)', 'L1': 'Renda Baixa (L1)', 'L2': 'Renda Baixa + PPI (L2)', 'L5': 'Escola Pública (L5)', 'L6': 'Escola Pública + PPI (L6)', 'L9': 'Renda Baixa + PCD (L9)', 'L10': 'Renda Baixa + PPI + PCD (L10)', 'L13': 'Escola Pública + PCD (L13)', 'L14': 'Escola Pública + PPI + PCD (L14)', 'PCD': 'PCD (Geral)', 'V': 'PRONAF (V)' }, compactLabels: { 'A0': 'A0', 'L1': 'L1', 'L2': 'L2', 'L5': 'L5', 'L6': 'L6', 'L9': 'L9', 'L10': 'L10', 'L13': 'L13', 'L14': 'L14', 'PCD': 'PCD', 'V': 'V' } } };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add num_candidates and num_vacancies to all data
+            Object.keys(allAdmissionData).forEach(year => {
+                const yearData = allAdmissionData[year];
+                const yearVacancyData = allVacancyData[year];
+                for (const campus in yearData) {
+                    yearData[campus].forEach(entry => {
+                        if (typeof entry.num_candidates === 'undefined') {
+                            entry.num_candidates = null;
+                        }
+                        let vacancies = 0;
+                        const campusVacancyData = yearVacancyData[campus];
+                        if (campusVacancyData) {
+                            const groupKey = year === '2025.1' ? entry.group.replace('GRUPO ', '') : entry.group;
+                            if (campusVacancyData[entry.course] && typeof campusVacancyData[entry.course][groupKey] !== 'undefined') {
+                                vacancies = campusVacancyData[entry.course][groupKey];
+                            } else if (campusVacancyData.default && typeof campusVacancyData.default[groupKey] !== 'undefined') {
+                                vacancies = campusVacancyData.default[groupKey];
+                            }
+                        }
+                        entry.num_vacancies = vacancies;
+                    });
+                }
+            });
+            
+            // --- MAP INITIALIZATION ---
+            const campusLocations = {
+                "Barbacena": { lat: -21.2258, lng: -43.7742 },
+                "Bom Sucesso": { lat: -21.0336, lng: -44.2586 },
+                "Juiz de Fora": { lat: -21.7646, lng: -43.3496 },
+                "Muriaé": { lat: -21.1319, lng: -42.3669 },
+                "Rio Pomba": { lat: -21.2753, lng: -43.1794 },
+                "Santos Dumont": { lat: -21.4561, lng: -43.5517 },
+                "São João del-Rei": { lat: -21.1356, lng: -44.2625 }
+            };
+
+            // Initialize map with scrollWheelZoom set to false
+            const map = L.map('map', {
+                scrollWheelZoom: false
+            }).setView([-21.4, -43.5], 8);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            const yearForMap = '2025.1'; // Use the most recent data for the map
+            const dataForMap = allAdmissionData[yearForMap];
+            
+            for (const campusName in campusLocations) {
+                if (dataForMap[campusName]) {
+                    const courses = [...new Set(dataForMap[campusName].map(d => d.course))];
+                    let popupContent = `<h5>${campusName}</h5>`;
+                    popupContent += '<ul>';
+                    courses.forEach(course => {
+                        popupContent += `<li>${course}</li>`;
+                    });
+                    popupContent += '</ul>';
+                    
+                    L.marker([campusLocations[campusName].lat, campusLocations[campusName].lng])
+                        .addTo(map)
+                        .bindPopup(popupContent);
+                }
+            }
+
+            // --- TABS LOGIC ---
+            const tabs = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(item => item.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const target = tab.getAttribute('data-tab');
+                    tabContents.forEach(content => {
+                        if (content.id === `${target}-content`) {
+                            content.classList.add('active');
+                        } else {
+                            content.classList.remove('active');
+                        }
+                    });
+                });
+            });
+
+            // --- CHART AND CALCULATOR LOGIC ---
+            let campusChartInstance = null;
+            let currentChartMode = 'notes';
+
+            const wrapLabel = (label, maxWidth = 16) => {
+                const words = label.split(' ');
+                let lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + ' ' + word).length > maxWidth && currentLine.length > 0) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = currentLine ? `${currentLine} ${word}` : word;
+                    }
+                }
+                if (currentLine) lines.push(currentLine);
+                return lines;
+            };
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                return Array.isArray(label) ? label.join(' ') : label;
+            };
+
+            function createCampusChart(year, campus) {
+                const campusData = allAdmissionData[year]?.[campus];
+                const currentGroupInfo = groupInfo[year];
+                if (!campusData || !currentGroupInfo) {
+                    if (campusChartInstance) campusChartInstance.destroy();
+                    document.getElementById('campusTableBody').innerHTML = '';
+                    document.getElementById('campusTableFoot').innerHTML = '';
+                    document.getElementById('campusChartDescription').innerText = `Não há dados disponíveis para o ano ${year} e campus ${campus}.`;
+                    return;
+                }
+                let courses = [...new Set(campusData.map(d => d.course))];
+                if (currentChartMode === 'notes') {
+                    const acGroup = year === '2025.1' ? 'GRUPO AC' : 'A0';
+                    courses.sort((a, b) => {
+                        const scoreA = campusData.find(d => d.course === a && d.group === acGroup)?.score || 0;
+                        const scoreB = campusData.find(d => d.course === b && d.group === acGroup)?.score || 0;
+                        return scoreB - scoreA;
+                    });
+                }
+                const datasets = currentGroupInfo.orderedGroups.map(groupKey => {
+                    const dataForGroup = courses.map(course => {
+                        const entry = campusData.find(d => d.course === course && d.group === groupKey);
+                        return entry ? (currentChartMode === 'notes' ? entry.score : entry.num_candidates) : 0;
+                    });
+                     // Using brand colors for the charts
+                    const groupColors = {
+                        'A0': '#5242ea', 'L1': '#6408b0', 'L2': '#3007a0', 'L5': '#7bcd47', 'L6': '#005b38', 'L9': '#ab47bc', 'L10': '#00abb1', 'L13': '#4caf50', 'L14': '#a5d6a7', 'PCD': '#dd5737', 'V': '#c7ef59',
+                        'GRUPO AC': '#5242ea', 'GRUPO LB-EP': '#6408b0', 'GRUPO LB-PCD': '#ab47bc', 'GRUPO LB-PPI': '#3007a0', 'GRUPO LB-Q': '#00abb1', 'GRUPO LI-EP': '#7bcd47', 'GRUPO LI-PCD': '#4caf50', 'GRUPO LI-PPI': '#005b38', 'GRUPO PCD': '#dd5737', 'GRUPO PRONAF': '#c7ef59'
+                    };
+                    return {
+                        label: currentGroupInfo.labels[groupKey],
+                        data: dataForGroup,
+                        backgroundColor: groupColors[groupKey] || '#cccccc',
+                        borderWidth: 1
+                    };
+                }).filter(dataset => dataset.data.some(val => val !== 0 && val !== null));
+                const ctx = document.getElementById('campusChart').getContext('2d');
+                const campusChartContainer = document.getElementById('campusChartContainer');
+                const campusTableContainer = document.getElementById('campusTableContainer');
+                const campusTableBody = document.getElementById('campusTableBody');
+                const campusTableFoot = document.getElementById('campusTableFoot');
+                if (campusChartInstance) campusChartInstance.destroy();
+                const dataAvailabilityNote = document.getElementById('data-availability-note');
+                const hasMissingData = campusData.some(d => d.num_candidates === null || d.num_vacancies === 0);
+                dataAvailabilityNote.classList.toggle('hidden', !(currentChartMode === 'candidates_and_vacancies' && hasMissingData));
+                if (currentChartMode === 'candidates_and_vacancies') {
+                    campusChartContainer.classList.add('hidden');
+                    campusTableContainer.classList.remove('hidden');
+                    campusTableBody.innerHTML = '';
+                    campusTableFoot.innerHTML = '';
+                    let totalCampusCandidates = 0;
+                    let totalCampusVacancies = 0;
+                    const coursesGrouped = campusData.reduce((acc, entry) => {
+                        if (!acc[entry.course]) acc[entry.course] = [];
+                        acc[entry.course].push(entry);
+                        return acc;
+                    }, {});
+                    Object.keys(coursesGrouped).sort().forEach(course => {
+                        coursesGrouped[course].sort((a, b) => currentGroupInfo.orderedGroups.indexOf(a.group) - currentGroupInfo.orderedGroups.indexOf(b.group))
+                        .forEach(entry => {
+                            if (entry.score > 0 || entry.num_candidates > 0 || entry.num_vacancies > 0) {
+                                const row = campusTableBody.insertRow();
+                                row.insertCell().innerText = course;
+                                row.insertCell().innerText = currentGroupInfo.labels[entry.group];
+                                row.insertCell().innerText = entry.score > 0 ? entry.score.toFixed(2) : 'N/A';
+                                row.insertCell().innerText = entry.num_candidates !== null ? entry.num_candidates : 'N/A';
+                                row.insertCell().innerText = entry.num_vacancies > 0 ? entry.num_vacancies : 'N/A';
+                                if (typeof entry.num_candidates === 'number') totalCampusCandidates += entry.num_candidates;
+                                if (typeof entry.num_vacancies === 'number') totalCampusVacancies += entry.num_vacancies;
+                            }
+                        });
+                    });
+                    const footerRow = campusTableFoot.insertRow();
+                    footerRow.className = 'font-bold bg-gray-100';
+                    footerRow.insertCell().innerText = 'Total no Campus';
+                    footerRow.insertCell().colSpan = 2;
+                    footerRow.insertCell().innerText = '—';
+                    footerRow.insertCell().innerText = year === '2024' ? 'N/A' : totalCampusCandidates;
+                    footerRow.insertCell().innerText = totalCampusVacancies;
+                } else {
+                    campusChartContainer.classList.remove('hidden');
+                    campusTableContainer.classList.add('hidden');
+                    campusChartInstance = new Chart(ctx, {
+                        type: 'bar',
+                        data: { labels: courses.map(c => wrapLabel(c)), datasets: datasets },
+                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { title: tooltipTitleCallback } } }, scales: { y: { beginAtZero: true, max: 90, title: { display: true, text: 'Nota Mínima (de 90 pontos)' } } } }
+                    });
+                }
+                document.getElementById('campusChartDescription').innerText = currentChartMode === 'notes' ? `O gráfico compara as notas mínimas na 1ª chamada para o ano de ${year}.` : `A tabela exibe a contagem de candidatos e vagas para o ano de ${year}.`;
+            }
+            
+            function calculateApproval() {
+                const numLP = parseFloat(document.getElementById('notaLP').value) || 0;
+                const numMAT = parseFloat(document.getElementById('notaMAT').value) || 0;
+                const numCIE = parseFloat(document.getElementById('notaCIE').value) || 0;
+                const numGEO = parseFloat(document.getElementById('notaGEO').value) || 0;
+                const numHIS = parseFloat(document.getElementById('notaHIS').value) || 0;
+                const totalScore = (numLP + numMAT + numCIE + numGEO + numHIS) * 2;
+                const resultsDiv = document.getElementById('approval-results');
+                const totalScoreDisplay = document.getElementById('total-score-display');
+                const passedCoursesCards = document.getElementById('passed-courses-cards');
+                const noPassedCourses = document.getElementById('no-passed-courses');
+                const specificApprovalResultsDiv = document.getElementById('specific-approval-results');
+                const specificCourseResultP = document.getElementById('specific-course-result');
+                const generalResultsHeading = document.getElementById('general-results-heading');
+                const selectedCalcYear = document.getElementById('calc-year-select').value;
+                const yearData = allAdmissionData[selectedCalcYear];
+                const currentGroupInfo = groupInfo[selectedCalcYear];
+                passedCoursesCards.innerHTML = ''; 
+                specificCourseResultP.innerHTML = '';
+                specificApprovalResultsDiv.classList.add('hidden');
+                generalResultsHeading.classList.add('hidden');
+                resultsDiv.classList.remove('hidden');
+                totalScoreDisplay.innerText = `Sua nota total (calculada): ${totalScore.toFixed(2)} / 90.00`;
+                const specificCampus = document.getElementById('specific-campus-select').value;
+                const specificCourse = document.getElementById('specific-course-select').value;
+                if (specificCampus && specificCourse) {
+                    specificApprovalResultsDiv.classList.remove('hidden');
+                    const courseEntries = yearData[specificCampus]?.filter(entry => entry.course === specificCourse) || [];
+                    let resultHtml = '';
+                    currentGroupInfo.orderedGroups.forEach(groupKey => {
+                        const entry = courseEntries.find(d => d.group === groupKey);
+                        if (entry && entry.score > 0) {
+                            const needed = entry.score - totalScore;
+                            if (needed <= 0) {
+                                resultHtml += `<li class="text-green-700 font-semibold">${currentGroupInfo.compactLabels[groupKey]}: Aprovado (Corte: ${entry.score.toFixed(2)})</li>`;
+                            } else {
+                                resultHtml += `<li class="text-red-700">${currentGroupInfo.compactLabels[groupKey]}: Faltam ${needed.toFixed(2)} pontos (Corte: ${entry.score.toFixed(2)})</li>`;
+                            }
+                        }
+                    });
+                    specificCourseResultP.innerHTML = courseEntries.length > 0 ? `Resultado para <strong>${specificCourse}</strong> em <strong>${specificCampus}</strong> (Ref. ${selectedCalcYear}):<br><ul class="list-disc list-inside mt-2">${resultHtml}</ul>` : `Não há dados de nota de corte para este curso/campus no ano de ${selectedCalcYear}.`;
+                }
+                let passedCount = 0;
+                let groupedPasses = {};
+                for (const campus in yearData) {
+                    const campusCourses = [...new Set(yearData[campus].map(entry => entry.course))].sort();
+                    campusCourses.forEach(courseName => {
+                        let passedModalitiesForCourse = [];
+                        currentGroupInfo.orderedGroups.forEach(groupKey => {
+                            const entry = yearData[campus].find(d => d.course === courseName && d.group === groupKey);
+                            if (entry && entry.score > 0 && totalScore >= entry.score) {
+                                passedModalitiesForCourse.push({ group: groupKey, score: entry.score });
+                            }
+                        });
+                        if (passedModalitiesForCourse.length > 0) {
+                            if (!groupedPasses[campus]) groupedPasses[campus] = {};
+                            groupedPasses[campus][courseName] = passedModalitiesForCourse;
+                            passedCount++;
+                        }
+                    });
+                }
+                generalResultsHeading.innerText = `Como seria seu resultado nos outros campi (Ref. ${selectedCalcYear}):`;
+                if (passedCount > 0) {
+                    generalResultsHeading.classList.remove('hidden');
+                    passedCoursesCards.classList.remove('hidden');
+                    noPassedCourses.classList.add('hidden');
+                    Object.keys(groupedPasses).sort().forEach(campus => {
+                        const campusBox = document.createElement('div');
+                        campusBox.className = 'campus-result-box';
+                        campusBox.innerHTML = `<h4>Campus: ${campus}</h4>`;
+                        Object.keys(groupedPasses[campus]).sort().forEach(courseName => {
+                            const courseItem = document.createElement('div');
+                            courseItem.className = 'course-result-item';
+                            courseItem.innerHTML = `<p class="font-semibold text-gray-800">${courseName}</p>`;
+                            groupedPasses[campus][courseName].sort((a,b) => currentGroupInfo.orderedGroups.indexOf(a.group) - currentGroupInfo.orderedGroups.indexOf(b.group)).forEach(pass => {
+                                const modalityDetail = document.createElement('p');
+                                modalityDetail.className = 'text-sm text-green-600 ml-2';
+                                modalityDetail.innerHTML = `Aprovado em ${currentGroupInfo.compactLabels[pass.group]} (corte: ${pass.score.toFixed(2)})`;
+                                courseItem.appendChild(modalityDetail);
+                            });
+                            campusBox.appendChild(courseItem);
+                        });
+                        passedCoursesCards.appendChild(campusBox);
+                    });
+                } else {
+                    noPassedCourses.innerText = `Com base em suas notas, você não seria aprovado em nenhum curso na 1ª Chamada do processo seletivo de ${selectedCalcYear}.`;
+                    noPassedCourses.classList.remove('hidden');
+                }
+            }
+
+            function populateCalcFields(selectedYear) {
+                const campusSelect = document.getElementById('specific-campus-select');
+                const courseSelect = document.getElementById('specific-course-select');
+                campusSelect.innerHTML = '<option value="">Selecione um Campus...</option>';
+                courseSelect.innerHTML = '<option value="">Selecione um Curso...</option>';
+                courseSelect.disabled = true;
+                const yearData = allAdmissionData[selectedYear];
+                if (yearData) {
+                    const campuses = Object.keys(yearData).sort();
+                    campuses.forEach(campus => {
+                        const option = document.createElement('option');
+                        option.value = campus;
+                        option.innerText = campus;
+                        campusSelect.appendChild(option);
+                    });
+                }
+            }
+
+            function populateCalcCourses(selectedYear, selectedCampus) {
+                const courseSelect = document.getElementById('specific-course-select');
+                courseSelect.innerHTML = '<option value="">Selecione um Curso...</option>';
+                courseSelect.disabled = true;
+                if (selectedYear && selectedCampus && allAdmissionData[selectedYear]?.[selectedCampus]) {
+                    const courses = [...new Set(allAdmissionData[selectedYear][selectedCampus].map(e => e.course))].sort();
+                    courses.forEach(course => {
+                        const option = document.createElement('option');
+                        option.value = course;
+                        option.innerText = course;
+                        courseSelect.appendChild(option);
+                    });
+                    courseSelect.disabled = false;
+                }
+            }
+
+            const yearSelect = document.getElementById('year-select');
+            const campusSelect = document.getElementById('campus-select');
+            const viewModeRadios = document.querySelectorAll('input[name="chart-view"]');
+            const calculateButton = document.getElementById('calculate-approval');
+            const calcYearSelect = document.getElementById('calc-year-select');
+            const specificCampusSelect = document.getElementById('specific-campus-select');
+
+            function updateChart() {
+                const selectedYear = yearSelect.value;
+                const selectedCampus = campusSelect.value;
+                currentChartMode = document.querySelector('input[name="chart-view"]:checked').value;
+                createCampusChart(selectedYear, selectedCampus);
+            }
+
+            yearSelect.addEventListener('change', updateChart);
+            campusSelect.addEventListener('change', updateChart);
+            viewModeRadios.forEach(radio => radio.addEventListener('change', updateChart));
+            calculateButton.addEventListener('click', calculateApproval);
+            calcYearSelect.addEventListener('change', (e) => populateCalcFields(e.target.value));
+            specificCampusSelect.addEventListener('change', (e) => populateCalcCourses(calcYearSelect.value, e.target.value));
+
+            // Initial calls
+            updateChart();
+            populateCalcFields(calcYearSelect.value);
+        });
+    </script>
+</body>
+</html>
