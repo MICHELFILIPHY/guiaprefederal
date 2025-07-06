@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo de Ingresso - CEFET-MG (2024-2025)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark-blue: #3007a0;
+            --primary-light-blue: #5242ea;
+            --accent-lime: #c7ef59;
+            --accent-teal: #00abb1;
+            --accent-purple: #6408b0;
+            --accent-green: #7bcd47;
+            --accent-dark-green: #005b38;
+            --accent-orange: #dd5737;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 50vh;
+            width: 100%;
+            max-width: 900px;
+            max-height: 500px;
+        }
+        #map-container {
+            position: relative;
+        }
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--primary-dark-blue);
+        }
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #4A5568;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover {
+            color: var(--primary-light-blue);
+            border-bottom-color: var(--primary-light-blue);
+        }
+        .cta-section {
+            background-color: var(--primary-dark-blue);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-radius: 0.75rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .cta-section h2 {
+            font-size: 2.25rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+        .cta-section p {
+            font-size: 1.125rem;
+            max-width: 48rem;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1.5rem;
+            color: #dbeafe;
+        }
+        .cta-button-primary {
+            background-color: var(--accent-lime);
+            color: var(--primary-dark-blue);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button-primary:hover {
+            background-color: #b2d74a;
+        }
+        .cta-button-secondary {
+            border: 2px solid var(--accent-lime);
+            color: var(--accent-lime);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .cta-button-secondary:hover {
+            background-color: var(--accent-lime);
+            color: var(--primary-dark-blue);
+        }
+        .tab-button {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .tab-button.active {
+            background-color: var(--primary-dark-blue);
+            color: white;
+        }
+        .tab-button:not(.active) {
+            background-color: #e5e7eb;
+            color: #374151;
+        }
+        .tab-button:not(.active):hover {
+            background-color: #d1d5db;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .campus-result-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        .course-result-item {
+            margin-bottom: 0.75rem;
+            padding-left: 0.75rem;
+            border-left: 3px solid var(--primary-light-blue);
+        }
+        .course-result-item:last-child {
+            margin-bottom: 0;
+        }
+        .form-type-button {
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-dark-blue);
+        }
+        .form-type-button.active {
+            background-color: var(--primary-dark-blue);
+            color: white;
+        }
+        .form-type-button:not(.active) {
+            background-color: transparent;
+            color: var(--primary-dark-blue);
+        }
+        .form-type-button:not(.active):hover {
+            background-color: rgba(48, 7, 160, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="text-xl font-bold" style="color: var(--primary-dark-blue);">Guia Pré-Federal</div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#instituicao" class="nav-link">A Instituição</a>
+                    <a href="#processo" class="nav-link">Processo Seletivo</a>
+                    <a href="#cotas" class="nav-link">Cotas</a>
+                    <a href="#campus-map" class="nav-link">Campi e Cursos</a>
+                    <a href="#analise" class="nav-link">Análise de Notas</a>
+                    <a href="#calculadora" class="nav-link">Calculadora de Aprovação</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="bg-white py-20">
+            <div class="container mx-auto px-6 text-center">
+                 <h1 class="text-5xl md:text-6xl font-black" style="color: var(--primary-dark-blue);">Guia <span class="text-gray-900 px-4 py-1 rounded-md" style="background-color: var(--accent-lime);">Pré-Federal</span></h1>
+                <p class="section-subtitle max-w-3xl mx-auto mt-4">Seu Raio-X Completo do Vestibular do CEFET-MG.</p>
+            </div>
+        </section>
+
+        
+        <section class="container mx-auto px-6 cta-section">
+            <h2 class="text-3xl font-black mb-3">Quer Gabaritar o Processo Seletivo do CEFET-MG?</h2>
+            <p class="max-w-2xl mx-auto mb-6">Nosso curso preparatório focado no CEFET-MG oferece aulas, simulados, material de apoio e tudo que você precisa para conquistar sua vaga. Aumente suas chances de aprovação!</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                 <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
+                    Conheça Nosso Preparatório
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    Fale Conosco no WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <section id="instituicao" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Conheça o CEFET-MG</h2>
+                    <p class="section-subtitle mt-2">Uma instituição federal de educação pública, gratuita e de alta qualidade, referência em ensino técnico e tecnológico.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="text-5xl mb-4">🎓</div>
+                        <h3 class="text-2xl font-bold mb-2">Tradição e Inovação</h3>
+                        <p>Mais de um século de história na formação de profissionais qualificados, sempre se atualizando com as novas tecnologias.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="text-5xl mb-4">🏫</div>
+                        <h3 class="text-2xl font-bold mb-2">Campi em todo o Estado</h3>
+                        <p>Presente em diversas cidades de Minas Gerais, levando ensino de excelência para diferentes regiões.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="text-5xl mb-4">💡</div>
+                        <h3 class="text-2xl font-bold mb-2">Formação Completa</h3>
+                        <p>Cursos que vão do técnico ao doutorado, com forte incentivo à pesquisa, extensão e inovação.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="processo" class="bg-white py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">O Processo Seletivo Descomplicado</h2>
+                    <p class="section-subtitle mt-2">Entenda as formas de ensino e as etapas para garantir sua vaga.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4" style="color: var(--primary-dark-blue);">Formas de Ensino</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white p-6 rounded-lg shadow-md border-l-4" style="border-color: var(--accent-lime);">
+                                <h4 class="font-bold text-lg">Integrada</h4>
+                                <p class="text-gray-600">Para quem já concluiu o Ensino Fundamental. O aluno cursa o Ensino Médio e o Técnico no CEFET-MG, com duração de 3 anos em período integral.</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-md border-l-4" style="border-color: var(--accent-lime);">
+                                <h4 class="font-bold text-lg">Concomitância Externa</h4>
+                                <p class="text-gray-600">Para quem está cursando o 2º ou 3º ano do Ensino Médio em outra escola. O aluno faz apenas o curso técnico no CEFET-MG, geralmente no período noturno, com duração de 1 a 2 anos.</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-md border-l-4" style="border-color: var(--accent-lime);">
+                                <h4 class="font-bold text-lg">Subsequente</h4>
+                                <p class="text-gray-600">Para quem já concluiu o Ensino Médio. O aluno faz apenas o curso técnico no CEFET-MG, geralmente no período noturno, com duração de 1 a 2 anos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4" style="color: var(--primary-dark-blue);">Etapas da Seleção</h3>
+                        <div class="space-y-4">
+                             <div class="bg-white p-6 rounded-lg shadow-md border-l-4" style="border-color: var(--primary-light-blue);">
+                                <h4 class="font-bold text-lg">1. Edital e Inscrição</h4>
+                                <p class="text-gray-600">A primeira etapa é ler o edital com atenção. As inscrições são online no site da COPEVE, e é crucial não perder os prazos para inscrição e solicitação de isenção da taxa.</p>
+                            </div>
+                             <div class="bg-white p-6 rounded-lg shadow-md border-l-4" style="border-color: var(--primary-light-blue);">
+                                <h4 class="font-bold text-lg">2. A Prova</h4>
+                                <p class="text-gray-600">A seleção é feita por uma <strong>prova objetiva</strong>. Para 2024, a prova valia 60 pontos. Para 2025, a pontuação máxima foi de 50 pontos. As questões abordam Língua Portuguesa, Matemática, Ciências, História e Geografia, e exigem a leitura de uma obra literária.</p>
+                            </div>
+                             <div class="bg-white p-6 rounded-lg shadow-md border-l-4" style="border-color: var(--primary-light-blue);">
+                                <h4 class="font-bold text-lg">3. Resultados e Matrícula</h4>
+                                <p class="text-gray-600">Após a prova, a COPEVE divulga a lista de classificados e a lista de espera. Os candidatos convocados devem ficar atentos aos prazos e à documentação necessária para realizar a matrícula e garantir a vaga.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cotas" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">O Poder das Cotas: Entenda Sua Vaga</h2>
+                    <p class="section-subtitle mt-2">O sistema de cotas (SRV) foi atualizado. Veja abaixo os detalhes dos editais de 2024 e 2025.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg shadow-xl p-6">
+                        <h3 class="text-2xl font-bold mb-4 text-center" style="color: var(--primary-dark-blue);">Processo Seletivo 2025</h3>
+                        <p class="mb-4">Com a atualização da Lei de Cotas, a renda para os grupos de baixa renda (LB) foi reduzida para <strong>1 salário mínimo</strong> per capita e foi incluído o grupo para <strong>Quilombolas (Q)</strong>.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>LB_PPI:</strong> Escola Pública | Baixa Renda | Preto, Pardo ou Indígena.</li>
+                            <li><strong>LB_Q:</strong> Escola Pública | Baixa Renda | Quilombola.</li>
+                            <li><strong>LB_PcD:</strong> Escola Pública | Baixa Renda | Pessoa com Deficiência.</li>
+                            <li><strong>LB_EP:</strong> Escola Pública | Baixa Renda (demais candidatos).</li>
+                            <li><strong>LI_PPI:</strong> Escola Pública | Preto, Pardo ou Indígena (independente de renda).</li>
+                            <li><strong>LI_Q:</strong> Escola Pública | Quilombola (independente de renda).</li>
+                            <li><strong>LI_PcD:</strong> Escola Pública | Pessoa com Deficiência (independente de renda).</li>
+                            <li><strong>LI_EP:</strong> Escola Pública (demais candidatos, independente de renda).</li>
+                             <li><strong>AC:</strong> Ampla Concorrência.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-xl p-6">
+                        <h3 class="text-2xl font-bold mb-4 text-center" style="color: var(--primary-dark-blue);">Processo Seletivo 2024</h3>
+                        <p class="mb-4">O sistema anterior tinha como base de renda <strong>1,5 salário mínimo</strong> per capita e uma nomenclatura diferente para os grupos.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>AC:</strong> Ampla Concorrência.</li>
+                            <li><strong>L01:</strong> Escola Pública, com renda familiar bruta per capita igual ou inferior a 1,5 salário mínimo.</li>
+                            <li><strong>L02:</strong> Escola Pública, com renda familiar bruta per capita igual ou inferior a 1,5 salário mínimo, para autodeclarados pretos, pardos ou indígenas.</li>
+                            <li><strong>L05:</strong> Escola Pública, independentemente da renda.</li>
+                            <li><strong>L06:</strong> Escola Pública, independentemente da renda, para autodeclarados pretos, pardos ou indígenas.</li>
+                            <li><strong>L09:</strong> Reserva para candidatos com deficiência, com renda familiar bruta per capita igual ou inferior a 1,5 salário mínimo.</li>
+                            <li><strong>L10:</strong> Reserva para candidatos com deficiência autodeclarados pretos, pardos ou indígenas, com renda familiar bruta per capita igual ou inferior a 1,5 salário mínimo.</li>
+                            <li><strong>L13:</strong> Reserva para candidatos com deficiência que tenham cursado integralmente o ensino fundamental em escolas públicas, independentemente da renda.</li>
+                            <li><strong>L14:</strong> Reserva para candidatos com deficiência autodeclarados pretos, pardos ou indígenas que tenham cursado integralmente o ensino fundamental em escolas públicas, independentemente da renda.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="campus-map" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Campi e Cursos do CEFET-MG</h2>
+                    <p class="section-subtitle mt-2">Navegue no mapa para explorar os campi da instituição e os cursos técnicos oferecidos em cada um.</p>
+                </div>
+                <div id="map-container">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="conteudo" class="bg-white py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">O que Estudar para a Prova?</h2>
+                    <p class="section-subtitle mt-2">Navegue pelas abas para ver os conteúdos detalhados de cada disciplina (Edital 2025).</p>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex flex-wrap justify-center gap-2 mb-4">
+                        <button class="tab-button active" onclick="openTab(event, 'portugues')">Português</button>
+                        <button class="tab-button" onclick="openTab(event, 'matematica')">Matemática</button>
+                        <button class="tab-button" onclick="openTab(event, 'biologia')">Biologia</button>
+                        <button class="tab-button" onclick="openTab(event, 'fisica')">Física</button>
+                        <button class="tab-button" onclick="openTab(event, 'quimica')">Química</button>
+                        <button class="tab-button" onclick="openTab(event, 'historia')">História</button>
+                        <button class="tab-button" onclick="openTab(event, 'geografia')">Geografia</button>
+                    </div>
+
+                    <div id="portugues" class="tab-content active bg-blue-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--primary-dark-blue);">Língua Portuguesa e Literatura Brasileira</h3>
+                        <p>A prova avalia a capacidade de análise crítica de textos verbais e não verbais, o uso de recursos de coesão e argumentação, e a compreensão das variações linguísticas. É fundamental a leitura da obra literária indicada no edital de cada ano:</p>
+                        <ul class="list-disc list-inside mt-2 mb-4 font-semibold">
+                            <li><strong>Obra Literária 2025:</strong> "Úrsula" de Maria Firmina dos Reis.</li>
+                        </ul>
+                        <p><strong>Principais Tópicos:</strong></p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li><strong>Interpretação de Textos:</strong> Análise de textos de diferentes gêneros (literários, jornalísticos, publicitários, etc.), identificação de ideias principais e secundárias, e reconhecimento de efeitos de sentido.</li>
+                            <li><strong>Literatura:</strong> Elementos da narrativa (enredo, personagens, tempo, espaço, foco narrativo), análise de recursos expressivos em prosa e verso (figuras de linguagem, sonoridade). Contextualização da obra "Úrsula" no Romantismo brasileiro e suas temáticas sociais.</li>
+                            <li><strong>Gramática Aplicada ao Texto:</strong> Relações de coesão e coerência, classes de palavras, sintaxe (período simples e composto), pontuação e ortografia.</li>
+                            <li><strong>Variação Linguística:</strong> Reconhecimento das diferentes variedades da língua portuguesa (regionais, sociais, históricas) e adequação da linguagem à situação comunicativa.</li>
+                        </ul>
+                    </div>
+
+                    <div id="matematica" class="tab-content bg-blue-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--primary-dark-blue);">Matemática</h3>
+                        <p>A prova exige a resolução de problemas envolvendo os diversos conjuntos numéricos e suas operações, além de conhecimentos em álgebra, geometria e noções de estatística.</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li><strong>Números e Operações:</strong> Conjuntos numéricos (N, Z, Q, R), operações, potências, radicais e notação científica.</li>
+                            <li><strong>Álgebra:</strong> Cálculo algébrico (produtos notáveis, fatoração), equações e inequações (1º e 2º graus), sistemas de equações, e funções (afim, quadrática, domínio e imagem).</li>
+                            <li><strong>Grandezas e Medidas:</strong> Razão, proporção, regra de três simples e composta, porcentagem e juros simples.</li>
+                            <li><strong>Geometria Plana:</strong> Propriedades de figuras (triângulos, quadriláteros, polígonos, circunferência), Teorema de Pitágoras, relações métricas no triângulo retângulo, semelhança de figuras, cálculo de perímetro e área.</li>
+                            <li><strong>Estatística e Probabilidade:</strong> Leitura e interpretação de gráficos e tabelas, medidas de tendência central (média, moda, mediana), e cálculo de probabilidade em espaços amostrais equiprováveis.</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="biologia" class="tab-content bg-blue-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--primary-dark-blue);">Biologia</h3>
+                        <p>Abrange o estudo da vida em seus diversos níveis de organização, desde as moléculas até os ecossistemas.</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li><strong>Citologia:</strong> Célula como unidade da vida, principais organelas e suas funções.</li>
+                            <li><strong>Seres Vivos:</strong> Características gerais, classificação dos grandes reinos (Monera, Protista, Fungi, Plantae, Animalia).</li>
+                            <li><strong>Ecologia:</strong> Relações entre seres vivos e o ambiente, cadeias e teias alimentares, ciclos biogeoquímicos (água, carbono, nitrogênio), e problemas ambientais.</li>
+                            <li><strong>Fisiologia Humana:</strong> Noções básicas dos sistemas digestório, respiratório, circulatório, excretor e nervoso.</li>
+                            <li><strong>Saúde e Saneamento:</strong> Principais doenças relacionadas à falta de saneamento básico.</li>
+                        </ul>
+                    </div>
+
+                    <div id="fisica" class="tab-content bg-blue-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--primary-dark-blue);">Física</h3>
+                        <p>Focada na compreensão de fenômenos mecânicos, térmicos e astronômicos.</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li><strong>Mecânica:</strong> Conceitos de movimento, repouso, velocidade e aceleração. Leis de Newton e suas aplicações.</li>
+                            <li><strong>Termologia:</strong> Conceitos de temperatura, calor, escalas termométricas e processos de transmissão de calor (condução, convecção e irradiação).</li>
+                            <li><strong>Energia:</strong> Tipos e fontes de energia, transformações de energia e o princípio da conservação.</li>
+                            <li><strong>Astronomia:</strong> Movimentos da Terra (rotação e translação) e suas consequências (dias, noites, estações do ano). Fases da Lua e eclipses.</li>
+                        </ul>
+                    </div>
+
+                    <div id="quimica" class="tab-content bg-blue-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--primary-dark-blue);">Química</h3>
+                        <p>Estudo da matéria, suas transformações e a energia envolvida nesses processos.</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li><strong>Matéria e suas Propriedades:</strong> Propriedades gerais e específicas da matéria, estados físicos e mudanças de estado.</li>
+                            <li><strong>Misturas:</strong> Classificação de misturas (homogêneas e heterogêneas) e métodos de separação (filtração, decantação, destilação, etc.).</li>
+                            <li><strong>Atomística:</strong> Modelos atômicos, estrutura do átomo (prótons, nêutrons, elétrons).</li>
+                            <li><strong>Tabela Periódica:</strong> Organização e propriedades periódicas.</li>
+                            <li><strong>Transformações Químicas:</strong> Reconhecimento de reações químicas e balanceamento de equações simples.</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="historia" class="tab-content bg-blue-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--primary-dark-blue);">História</h3>
+                        <p>Avalia a compreensão de processos históricos, com ênfase no Brasil e no mundo contemporâneo.</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li><strong>História do Brasil:</strong> Período Colonial (escravidão, economia açucareira), Período Imperial, República Velha, Era Vargas e Período Democrático. Lutas sociais de populações negras e indígenas.</li>
+                            <li><strong>História Geral:</strong> Processos políticos, sociais e econômicos na África, Europa e Américas (séculos XIX a XXI). Neocolonialismo, Primeira e Segunda Guerras Mundiais.</li>
+                            <li><strong>Cidadania e Direitos:</strong> Conquistas de direitos sociais, políticos e civis no Brasil, com destaque para os movimentos de mulheres.</li>
+                            <li><strong>Mundo do Trabalho:</strong> Relações entre ciência, tecnologia e as transformações no mundo do trabalho ao longo da história do capitalismo.</li>
+                        </ul>
+                    </div>
+
+                    <div id="geografia" class="tab-content bg-blue-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--primary-dark-blue);">Geografia</h3>
+                        <p>Análise da organização do espaço geográfico, suas paisagens e as relações entre sociedade e natureza.</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li><strong>Cartografia:</strong> Leitura e interpretação de mapas, escalas e coordenadas geográficas.</li>
+                            <li><strong>Geografia do Brasil:</strong> Grandes domínios morfoclimáticos, urbanização, industrialização, dinâmica demográfica e a organização do espaço rural.</li>
+                            <li><strong>Geografia Geral:</strong> Características geoambientais dos continentes, globalização, blocos econômicos, e as relações entre os países do Norte e do Sul.</li>
+                            <li><strong>Questões Ambientais:</strong> Principais problemas ambientais globais e no Brasil (desmatamento, poluição, aquecimento global).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="analise" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Raio-X da Aprovação: Análise Comparativa</h2>
+                    <p class="section-subtitle mt-2">Filtre por ano, campus e modalidade para analisar as notas mínimas.</p>
+                </div>
+
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <label for="year-select" class="block text-lg font-medium text-gray-700 mb-2">Selecione o Ano:</label>
+                        <select id="year-select" class="block w-full p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-800 focus:border-blue-800 text-lg">
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="campus-select" class="block text-lg font-medium text-gray-700 mb-2">Selecione um Campus:</label>
+                        <select id="campus-select" class="block w-full p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-800 focus:border-blue-800 text-lg">
+                            <!-- Options will be populated by JS -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex justify-center items-center gap-4 mb-8" id="form-type-filter">
+                    <button class="form-type-button active" data-form-type="integrado">Integrado</button>
+                    <button class="form-type-button" data-form-type="subsequente">Subsequente + Concomitante</button>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-xl p-4 md:p-8">
+                    <div id="campusChartContainer" class="chart-container">
+                        <canvas id="campusChart"></canvas>
+                    </div>
+                    <p id="campusChartDescription" class="text-center text-sm text-gray-500 mt-4"></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculadora" class="bg-white py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Calculadora de Aprovação</h2>
+                    <p class="section-subtitle mt-2">Insira seus acertos (base 2025), selecione um ano de referência e descubra suas chances!</p>
+                    <p id="calculator-info" class="text-sm text-gray-600 mt-2"></p>
+                </div>
+                <div class="max-w-4xl mx-auto bg-gray-100 rounded-lg shadow-xl p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+                        <div>
+                            <label for="notaLP" class="block text-lg font-medium text-gray-700 mb-2">Língua Portuguesa</label>
+                            <input type="number" id="notaLP" min="0" max="15" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-800 focus:border-blue-800 text-lg" placeholder="Acertos">
+                        </div>
+                        <div>
+                            <label for="notaMAT" class="block text-lg font-medium text-gray-700 mb-2">Matemática</label>
+                            <input type="number" id="notaMAT" min="0" max="15" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-800 focus:border-blue-800 text-lg" placeholder="Acertos">
+                        </div>
+                        <div>
+                            <label for="notaCIE" class="block text-lg font-medium text-gray-700 mb-2">Ciências</label>
+                            <input type="number" id="notaCIE" min="0" max="8" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-800 focus:border-blue-800 text-lg" placeholder="Acertos">
+                        </div>
+                        <div>
+                            <label for="notaGEO" class="block text-lg font-medium text-gray-700 mb-2">Geografia</label>
+                            <input type="number" id="notaGEO" min="0" max="6" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-800 focus:border-blue-800 text-lg" placeholder="Acertos">
+                        </div>
+                        <div>
+                            <label for="notaHIS" class="block text-lg font-medium text-gray-700 mb-2">História</label>
+                            <input type="number" id="notaHIS" min="0" max="6" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-800 focus:border-blue-800 text-lg" placeholder="Acertos">
+                        </div>
+                    </div>
+                    
+                    <div id="specific-course-check-section" class="mt-8 pt-8 border-t border-gray-300">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">Verificar Aprovação em Curso Específico:</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div>
+                                <label for="calc-year-select" class="block text-lg font-medium text-gray-700 mb-2">Ano de Referência:</label>
+                                <select id="calc-year-select" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-800 focus:border-blue-800 text-lg">
+                                    <option value="2025">2025</option>
+                                    <option value="2024">2024</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="specific-campus-select" class="block text-lg font-medium text-gray-700 mb-2">Campus:</label>
+                                <select id="specific-campus-select" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-800 focus:border-blue-800 text-lg">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="specific-course-select" class="block text-lg font-medium text-gray-700 mb-2">Curso:</label>
+                                <select id="specific-course-select" class="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-800 focus:border-blue-800 text-lg" disabled>
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="calculate-approval" class="w-full text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300 mt-8" style="background-color: var(--primary-dark-blue); color: white;" onmouseover="this.style.backgroundColor='#5242ea'" onmouseout="this.style.backgroundColor='#3007a0'">Calcular Aprovação</button>
+                    
+                    <div id="approval-results" class="mt-8 p-4 bg-white rounded-md shadow-inner hidden">
+                        <p id="total-score-display" class="text-lg font-semibold text-gray-700 mb-4"></p>
+                        <div id="specific-approval-results" class="mb-4 hidden">
+                            <h4 class="text-xl font-bold mb-2 text-gray-800">Resultado da Verificação para Curso Específico:</h4>
+                            <p id="specific-course-result" class="text-lg text-gray-700"></p>
+                        </div>
+                        <h3 id="general-results-heading" class="text-xl font-bold mb-4 text-gray-800 mt-8 hidden"></h3>
+                        <div id="passed-courses-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        </div>
+                        <p id="no-passed-courses" class="text-md text-gray-500 hidden mt-4"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+    <section class="container mx-auto px-6 cta-section">
+        <h2 class="text-3xl font-black mb-3">Pronto para Conquistar sua Vaga no CEFET-MG?</h2>
+        <p class="max-w-2xl mx-auto mb-6">Não deixe seu futuro ao acaso. Prepare-se com quem entende do assunto e garanta sua aprovação. Clique abaixo para saber mais!</p>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
+                Conheça Nosso Preparatório
+            </a>
+             <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                Fale Conosco no WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Guia Interativo CEFET-MG. Todos os direitos reservados.</p>
+            <p class="text-sm text-gray-400 mt-2">Este é um guia não-oficial. As informações oficiais e definitivas devem ser consultadas no <a href="https://www.cefetmg.br/" target="_blank" class="text-blue-300 hover:text-blue-200 underline">site do CEFET-MG</a> e nos respectivos editais.</p>
+        </div>
+    </footer>
+
+    <script>
+        const admissionData2025 = {
+            "Araxá": [
+                { course: "Edificações", form: "Concomitante/Subsequente", group: "AC", score: 13.00 },
+                { course: "Edificações", form: "Integrado", group: "LB_EP", score: 18.00 }, { course: "Edificações", form: "Integrado", group: "LI_PPI", score: 20.00 }, { course: "Edificações", form: "Integrado", group: "LI_PcD", score: 12.00 }, { course: "Edificações", form: "Integrado", group: "LI_EP", score: 28.00 }, { course: "Edificações", form: "Integrado", group: "AC", score: 28.00 },
+                { course: "Eletrônica", form: "Concomitante/Subsequente", group: "AC", score: 11.00 },
+                { course: "Eletrônica", form: "Integrado", group: "LB_PPI", score: 14.00 }, { course: "Eletrônica", form: "Integrado", group: "LB_EP", score: 20.00 }, { course: "Eletrônica", form: "Integrado", group: "LI_PPI", score: 22.00 }, { course: "Eletrônica", form: "Integrado", group: "LI_EP", score: 29.00 }, { course: "Eletrônica", form: "Integrado", group: "AC", score: 31.00 },
+                { course: "Mecânica", form: "Concomitante/Subsequente", group: "AC", score: 12.00 },
+                { course: "Mecânica", form: "Integrado", group: "LB_PPI", score: 13.00 }, { course: "Mecânica", form: "Integrado", group: "LB_EP", score: 27.00 }, { course: "Mecânica", form: "Integrado", group: "LI_PPI", score: 19.00 }, { course: "Mecânica", form: "Integrado", group: "LI_EP", score: 28.00 }, { course: "Mecânica", form: "Integrado", group: "AC", score: 29.00 },
+                { course: "Mineração", form: "Concomitante/Subsequente", group: "AC", score: 12.00 },
+                { course: "Mineração", form: "Integrado", group: "LB_PPI", score: 13.00 }, { course: "Mineração", form: "Integrado", group: "LB_EP", score: 25.00 }, { course: "Mineração", form: "Integrado", group: "LI_PPI", score: 23.00 }, { course: "Mineração", form: "Integrado", group: "LI_PcD", score: 17.00 }, { course: "Mineração", form: "Integrado", group: "LI_EP", score: 29.00 }, { course: "Mineração", form: "Integrado", group: "AC", score: 29.00 }
+            ],
+            "Belo Horizonte": [
+                { course: "Edificações", form: "Integrado", group: "LB_PPI", score: 25.00 }, { course: "Edificações", form: "Integrado", group: "LB_EP", score: 32.00 }, { course: "Edificações", form: "Integrado", group: "LI_PPI", score: 30.00 }, { course: "Edificações", form: "Integrado", group: "LI_PcD", score: 24.00 }, { course: "Edificações", form: "Integrado", group: "LI_EP", score: 35.00 }, { course: "Edificações", form: "Integrado", group: "AC", score: 38.00 },
+                { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "LB_EP", score: 15.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "LI_PPI", score: 10.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "LI_PcD", score: 21.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "LI_EP", score: 26.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "AC", score: 28.00 },
+                { course: "Eletrônica", form: "Concomitante/Subsequente", group: "LB_PPI", score: 16.00 }, { course: "Eletrônica", form: "Concomitante/Subsequente", group: "LB_EP", score: 29.00 }, { course: "Eletrônica", form: "Concomitante/Subsequente", group: "LI_PPI", score: 27.00 }, { course: "Eletrônica", form: "Concomitante/Subsequente", group: "LI_EP", score: 30.00 }, { course: "Eletrônica", form: "Concomitante/Subsequente", group: "AC", score: 31.00 },
+                { course: "Eletrônica", form: "Integrado", group: "LB_PPI", score: 25.00 }, { course: "Eletrônica", form: "Integrado", group: "LB_PcD", score: 19.00 }, { course: "Eletrônica", form: "Integrado", group: "LB_EP", score: 29.00 }, { course: "Eletrônica", form: "Integrado", group: "LI_PPI", score: 30.00 }, { course: "Eletrônica", form: "Integrado", group: "LI_PcD", score: 28.00 }, { course: "Eletrônica", form: "Integrado", group: "LI_EP", score: 36.00 }, { course: "Eletrônica", form: "Integrado", group: "AC", score: 39.00 },
+                { course: "Eletrônica - 2° Semestre", form: "Concomitante/Subsequente", group: "AC", score: 14.00 },
+                { course: "Eletrotécnica", form: "Concomitante/Subsequente", group: "LB_EP", score: 12.00 }, { course: "Eletrotécnica", form: "Concomitante/Subsequente", group: "LI_PPI", score: 11.00 }, { course: "Eletrotécnica", form: "Concomitante/Subsequente", group: "LI_EP", score: 27.00 }, { course: "Eletrotécnica", form: "Concomitante/Subsequente", group: "AC", score: 28.00 },
+                { course: "Eletrotécnica", form: "Integrado", group: "LB_PPI", score: 22.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LB_PcD", score: 20.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LB_EP", score: 29.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LI_PPI", score: 28.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LI_PcD", score: 22.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LI_EP", score: 35.00 }, { course: "Eletrotécnica", form: "Integrado", group: "AC", score: 37.00 },
+                { course: "Equipamentos Biomédicos", form: "Integrado", group: "LB_PPI", score: 23.00 }, { course: "Equipamentos Biomédicos", form: "Integrado", group: "LB_PcD", score: 11.00 }, { course: "Equipamentos Biomédicos", form: "Integrado", group: "LB_EP", score: 31.00 }, { course: "Equipamentos Biomédicos", form: "Integrado", group: "LI_PPI", score: 29.00 }, { course: "Equipamentos Biomédicos", form: "Integrado", group: "LI_PcD", score: 20.00 }, { course: "Equipamentos Biomédicos", form: "Integrado", group: "LI_EP", score: 34.00 }, { course: "Equipamentos Biomédicos", form: "Integrado", group: "AC", score: 36.00 },
+                { course: "Estradas", form: "Integrado", group: "LB_PPI", score: 20.00 }, { course: "Estradas", form: "Integrado", group: "LB_EP", score: 33.00 }, { course: "Estradas", form: "Integrado", group: "LI_PPI", score: 29.00 }, { course: "Estradas", form: "Integrado", group: "LI_EP", score: 34.00 }, { course: "Estradas", form: "Integrado", group: "AC", score: 37.00 },
+                { course: "Hospedagem", form: "Concomitante/Subsequente", group: "LB_EP", score: 12.00 }, { course: "Hospedagem", form: "Concomitante/Subsequente", group: "LI_PPI", score: 15.00 }, { course: "Hospedagem", form: "Concomitante/Subsequente", group: "LI_EP", score: 22.00 }, { course: "Hospedagem", form: "Concomitante/Subsequente", group: "AC", score: 27.00 },
+                { course: "Hospedagem", form: "Integrado", group: "LB_PPI", score: 26.00 }, { course: "Hospedagem", form: "Integrado", group: "LB_EP", score: 32.00 }, { course: "Hospedagem", form: "Integrado", group: "LI_PPI", score: 29.00 }, { course: "Hospedagem", form: "Integrado", group: "LI_PcD", score: 32.00 }, { course: "Hospedagem", form: "Integrado", group: "LI_EP", score: 34.00 }, { course: "Hospedagem", form: "Integrado", group: "AC", score: 37.00 },
+                { course: "Informática", form: "Integrado", group: "LB_PPI", score: 30.00 }, { course: "Informática", form: "Integrado", group: "LB_PcD", score: 25.00 }, { course: "Informática", form: "Integrado", group: "LB_EP", score: 33.00 }, { course: "Informática", form: "Integrado", group: "LI_PPI", score: 34.00 }, { course: "Informática", form: "Integrado", group: "LI_PcD", score: 35.00 }, { course: "Informática", form: "Integrado", group: "LI_EP", score: 40.00 }, { course: "Informática", form: "Integrado", group: "AC", score: 42.00 },
+                { course: "Mecânica", form: "Concomitante/Subsequente", group: "LI_PPI", score: 11.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "LI_EP", score: 21.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "AC", score: 26.00 },
+                { course: "Mecânica", form: "Integrado", group: "LB_PPI", score: 25.00 }, { course: "Mecânica", form: "Integrado", group: "LB_EP", score: 31.00 }, { course: "Mecânica", form: "Integrado", group: "LI_PPI", score: 31.00 }, { course: "Mecânica", form: "Integrado", group: "LI_PcD", score: 15.00 }, { course: "Mecânica", form: "Integrado", group: "LI_EP", score: 34.00 }, { course: "Mecânica", form: "Integrado", group: "AC", score: 37.00 },
+                { course: "Mecatrônica", form: "Integrado", group: "LB_PPI", score: 25.00 }, { course: "Mecatrônica", form: "Integrado", group: "LB_EP", score: 36.00 }, { course: "Mecatrônica", form: "Integrado", group: "LI_PPI", score: 32.00 }, { course: "Mecatrônica", form: "Integrado", group: "LI_PcD", score: 32.00 }, { course: "Mecatrônica", form: "Integrado", group: "LI_EP", score: 37.00 }, { course: "Mecatrônica", form: "Integrado", group: "AC", score: 41.00 },
+                { course: "Meio Ambiente", form: "Concomitante/Subsequente", group: "LI_PPI", score: 13.00 }, { course: "Meio Ambiente", form: "Concomitante/Subsequente", group: "LI_EP", score: 23.00 }, { course: "Meio Ambiente", form: "Concomitante/Subsequente", group: "AC", score: 25.00 },
+                { course: "Meio Ambiente", form: "Integrado", group: "LB_PPI", score: 25.00 }, { course: "Meio Ambiente", form: "Integrado", group: "LB_EP", score: 35.00 }, { course: "Meio Ambiente", form: "Integrado", group: "LI_PPI", score: 31.00 }, { course: "Meio Ambiente", form: "Integrado", group: "LI_PcD", score: 23.00 }, { course: "Meio Ambiente", form: "Integrado", group: "LI_EP", score: 35.00 }, { course: "Meio Ambiente", form: "Integrado", group: "AC", score: 38.00 },
+                { course: "Química", form: "Concomitante/Subsequente", group: "LB_PPI", score: 17.00 }, { course: "Química", form: "Concomitante/Subsequente", group: "LB_EP", score: 21.00 }, { course: "Química", form: "Concomitante/Subsequente", group: "LI_PPI", score: 25.00 }, { course: "Química", form: "Concomitante/Subsequente", group: "LI_EP", score: 31.00 }, { course: "Química", form: "Concomitante/Subsequente", group: "AC", score: 32.00 },
+                { course: "Química", form: "Integrado", group: "LB_PPI", score: 28.00 }, { course: "Química", form: "Integrado", group: "LB_PcD", score: 26.00 }, { course: "Química", form: "Integrado", group: "LB_EP", score: 33.00 }, { course: "Química", form: "Integrado", group: "LI_PPI", score: 33.00 }, { course: "Química", form: "Integrado", group: "LI_PcD", score: 33.00 }, { course: "Química", form: "Integrado", group: "LI_EP", score: 39.00 }, { course: "Química", form: "Integrado", group: "AC", score: 41.00 },
+                { course: "Química - 2° Semestre", form: "Concomitante/Subsequente", group: "LB_PPI", score: 17.00 },
+                { course: "Redes de Computadores", form: "Integrado", group: "LB_PPI", score: 26.00 }, { course: "Redes de Computadores", form: "Integrado", group: "LB_PcD", score: 20.00 }, { course: "Redes de Computadores", form: "Integrado", group: "LB_EP", score: 32.00 }, { course: "Redes de Computadores", form: "Integrado", group: "LI_PPI", score: 29.00 }, { course: "Redes de Computadores", form: "Integrado", group: "LI_PcD", score: 29.00 }, { course: "Redes de Computadores", form: "Integrado", group: "LI_EP", score: 35.00 }, { course: "Redes de Computadores", form: "Integrado", group: "AC", score: 39.00 },
+                { course: "Trânsito", form: "Integrado", group: "LB_PPI", score: 22.00 }, { course: "Trânsito", form: "Integrado", group: "LB_EP", score: 28.00 }, { course: "Trânsito", form: "Integrado", group: "LI_PPI", score: 30.00 }, { course: "Trânsito", form: "Integrado", group: "LI_PcD", score: 17.00 }, { course: "Trânsito", form: "Integrado", group: "LI_EP", score: 32.00 }, { course: "Trânsito", form: "Integrado", group: "AC", score: 37.00 }
+            ],
+            "Contagem": [
+                { course: "Controle Ambiental", form: "Integrado", group: "LB_PPI", score: 21.00 }, { course: "Controle Ambiental", form: "Integrado", group: "LB_PcD", score: 19.00 }, { course: "Controle Ambiental", form: "Integrado", group: "LB_EP", score: 27.00 }, { course: "Controle Ambiental", form: "Integrado", group: "LI_PPI", score: 25.00 }, { course: "Controle Ambiental", form: "Integrado", group: "LI_PcD", score: 24.00 }, { course: "Controle Ambiental", form: "Integrado", group: "LI_EP", score: 31.00 }, { course: "Controle Ambiental", form: "Integrado", group: "AC", score: 33.00 },
+                { course: "Eletroeletrônica", form: "Integrado", group: "LB_PPI", score: 19.00 }, { course: "Eletroeletrônica", form: "Integrado", group: "LB_Q", score: 26.00 }, { course: "Eletroeletrônica", form: "Integrado", group: "LB_EP", score: 30.00 }, { course: "Eletroeletrônica", form: "Integrado", group: "LI_PPI", score: 26.00 }, { course: "Eletroeletrônica", form: "Integrado", group: "LI_PcD", score: 22.00 }, { course: "Eletroeletrônica", form: "Integrado", group: "LI_EP", score: 31.00 }, { course: "Eletroeletrônica", form: "Integrado", group: "AC", score: 33.00 },
+                { course: "Informática", form: "Integrado", group: "LB_PPI", score: 24.00 }, { course: "Informática", form: "Integrado", group: "LB_EP", score: 30.00 }, { course: "Informática", form: "Integrado", group: "LI_PPI", score: 30.00 }, { course: "Informática", form: "Integrado", group: "LI_PcD", score: 32.00 }, { course: "Informática", form: "Integrado", group: "LI_EP", score: 34.00 }, { course: "Informática", form: "Integrado", group: "AC", score: 35.00 }
+            ],
+            "Curvelo": [
+                { course: "Edificações", form: "Integrado", group: "LB_PPI", score: 14.00 }, { course: "Edificações", form: "Integrado", group: "LB_EP", score: 17.00 }, { course: "Edificações", form: "Integrado", group: "LI_PPI", score: 21.00 }, { course: "Edificações", form: "Integrado", group: "LI_EP", score: 24.00 }, { course: "Edificações", form: "Integrado", group: "AC", score: 27.00 },
+                { course: "Eletrotécnica", form: "Integrado", group: "LB_PPI", score: 15.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LB_EP", score: 16.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LI_PPI", score: 22.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LI_EP", score: 25.00 }, { course: "Eletrotécnica", form: "Integrado", group: "AC", score: 27.00 },
+                { course: "Meio Ambiente", form: "Integrado", group: "LB_PPI", score: 15.00 }, { course: "Meio Ambiente", form: "Integrado", group: "LB_EP", score: 17.00 }, { course: "Meio Ambiente", form: "Integrado", group: "LI_PPI", score: 21.00 }, { course: "Meio Ambiente", form: "Integrado", group: "LI_EP", score: 26.00 }, { course: "Meio Ambiente", form: "Integrado", group: "AC", score: 27.00 }
+            ],
+            "Divinópolis": [
+                { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "AC", score: 14.00 },
+                { course: "Informática", form: "Integrado", group: "LB_PPI", score: 18.00 }, { course: "Informática", form: "Integrado", group: "LB_PcD", score: 19.00 }, { course: "Informática", form: "Integrado", group: "LB_EP", score: 33.00 }, { course: "Informática", form: "Integrado", group: "LI_PPI", score: 28.00 }, { course: "Informática", form: "Integrado", group: "LI_PcD", score: 23.00 }, { course: "Informática", form: "Integrado", group: "LI_EP", score: 37.00 }, { course: "Informática", form: "Integrado", group: "AC", score: 38.00 },
+                { course: "Informática para Internet", form: "Concomitante/Subsequente", group: "AC", score: 15.00 },
+                { course: "Mecatrônica", form: "Integrado", group: "LB_PPI", score: 19.00 }, { course: "Mecatrônica", form: "Integrado", group: "LB_PcD", score: 13.00 }, { course: "Mecatrônica", form: "Integrado", group: "LB_EP", score: 33.00 }, { course: "Mecatrônica", form: "Integrado", group: "LI_PPI", score: 29.00 }, { course: "Mecatrônica", form: "Integrado", group: "LI_PcD", score: 25.00 }, { course: "Mecatrônica", form: "Integrado", group: "LI_EP", score: 35.00 }, { course: "Mecatrônica", form: "Integrado", group: "AC", score: 36.00 },
+                { course: "Produção de Moda", form: "Integrado", group: "LB_PPI", score: 16.00 }, { course: "Produção de Moda", form: "Integrado", group: "LB_EP", score: 33.00 }, { course: "Produção de Moda", form: "Integrado", group: "LI_PPI", score: 27.00 }, { course: "Produção de Moda", form: "Integrado", group: "LI_PcD", score: 22.00 }, { course: "Produção de Moda", form: "Integrado", group: "LI_EP", score: 34.00 }, { course: "Produção de Moda", form: "Integrado", group: "AC", score: 35.00 }
+            ],
+            "Leopoldina": [
+                { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "LB_PPI", score: 12.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "LB_EP", score: 23.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "LI_PPI", score: 20.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "LI_EP", score: 25.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "AC", score: 26.00 },
+                { course: "Eletrotécnica", form: "Integrado", group: "LB_PPI", score: 15.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LB_EP", score: 28.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LI_PPI", score: 23.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LI_PcD", score: 14.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LI_EP", score: 31.00 }, { course: "Eletrotécnica", form: "Integrado", group: "AC", score: 34.00 },
+                { course: "Informática", form: "Integrado", group: "LB_PPI", score: 20.00 }, { course: "Informática", form: "Integrado", group: "LB_PcD", score: 16.00 }, { course: "Informática", form: "Integrado", group: "LB_EP", score: 31.00 }, { course: "Informática", form: "Integrado", group: "LI_PPI", score: 25.00 }, { course: "Informática", form: "Integrado", group: "LI_PcD", score: 16.00 }, { course: "Informática", form: "Integrado", group: "LI_EP", score: 32.00 }, { course: "Informática", form: "Integrado", group: "AC", score: 37.00 },
+                { course: "Mecânica", form: "Concomitante/Subsequente", group: "LB_PPI", score: 12.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "LB_EP", score: 23.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "LI_PPI", score: 18.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "LI_PcD", score: 20.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "LI_EP", score: 23.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "AC", score: 24.00 },
+                { course: "Mecânica", form: "Integrado", group: "LB_PPI", score: 16.00 }, { course: "Mecânica", form: "Integrado", group: "LB_EP", score: 29.00 }, { course: "Mecânica", form: "Integrado", group: "LI_PPI", score: 25.00 }, { course: "Mecânica", form: "Integrado", group: "LI_PcD", score: 16.00 }, { course: "Mecânica", form: "Integrado", group: "LI_EP", score: 32.00 }, { course: "Mecânica", form: "Integrado", group: "AC", score: 33.00 }
+            ],
+            "Nepomuceno": [
+                { course: "Eletrotécnica", form: "Concomitante/Subsequente", group: "AC", score: 10.00 },
+                { course: "Eletrotécnica", form: "Integrado", group: "LB_EP", score: 11.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LI_PPI", score: 12.00 }, { course: "Eletrotécnica", form: "Integrado", group: "LI_EP", score: 23.00 }, { course: "Eletrotécnica", form: "Integrado", group: "AC", score: 23.00 },
+                { course: "Mecatrônica", form: "Concomitante/Subsequente", group: "AC", score: 13.00 },
+                { course: "Mecatrônica", form: "Integrado", group: "LB_PPI", score: 12.00 }, { course: "Mecatrônica", form: "Integrado", group: "LB_EP", score: 15.00 }, { course: "Mecatrônica", form: "Integrado", group: "LI_PPI", score: 16.00 }, { course: "Mecatrônica", form: "Integrado", group: "LI_EP", score: 23.00 }, { course: "Mecatrônica", form: "Integrado", group: "AC", score: 25.00 },
+                { course: "Redes de Computadores", form: "Integrado", group: "LB_EP", score: 10.00 }, { course: "Redes de Computadores", form: "Integrado", group: "LI_PPI", score: 17.00 }, { course: "Redes de Computadores", form: "Integrado", group: "LI_EP", score: 26.00 }, { course: "Redes de Computadores", form: "Integrado", group: "AC", score: 26.00 }
+            ],
+            "Timóteo": [
+                { course: "Desenvolvimento de Sistemas", form: "Integrado", group: "LB_PPI", score: 24.00 }, { course: "Desenvolvimento de Sistemas", form: "Integrado", group: "LB_PcD", score: 23.00 }, { course: "Desenvolvimento de Sistemas", form: "Integrado", group: "LB_EP", score: 33.00 }, { course: "Desenvolvimento de Sistemas", form: "Integrado", group: "LI_PPI", score: 29.00 }, { course: "Desenvolvimento de Sistemas", form: "Integrado", group: "LI_PcD", score: 34.00 }, { course: "Desenvolvimento de Sistemas", form: "Integrado", group: "LI_EP", score: 35.00 }, { course: "Desenvolvimento de Sistemas", form: "Integrado", group: "AC", score: 36.00 },
+                { course: "Edificações", form: "Integrado", group: "LB_PPI", score: 22.00 }, { course: "Edificações", form: "Integrado", group: "LB_PcD", score: 18.00 }, { course: "Edificações", form: "Integrado", group: "LB_EP", score: 29.00 }, { course: "Edificações", form: "Integrado", group: "LI_PPI", score: 28.00 }, { course: "Edificações", form: "Integrado", group: "LI_PcD", score: 23.00 }, { course: "Edificações", form: "Integrado", group: "LI_EP", score: 33.00 }, { course: "Edificações", form: "Integrado", group: "AC", score: 34.00 },
+                { course: "Metalurgia", form: "Concomitante/Subsequente", group: "LB_EP", score: 13.00 }, { course: "Metalurgia", form: "Concomitante/Subsequente", group: "LI_PPI", score: 12.00 }, { course: "Metalurgia", form: "Concomitante/Subsequente", group: "LI_EP", score: 20.00 }, { course: "Metalurgia", form: "Concomitante/Subsequente", group: "AC", score: 23.00 },
+                { course: "Química", form: "Integrado", group: "LB_PPI", score: 24.00 }, { course: "Química", form: "Integrado", group: "LB_PcD", score: 18.00 }, { course: "Química", form: "Integrado", group: "LB_EP", score: 30.00 }, { course: "Química", form: "Integrado", group: "LI_PPI", score: 30.00 }, { course: "Química", form: "Integrado", group: "LI_PcD", score: 32.00 }, { course: "Química", form: "Integrado", group: "LI_EP", score: 35.00 }, { course: "Química", form: "Integrado", group: "AC", score: 36.00 }
+            ],
+            "Varginha": [
+                { course: "Edificações", form: "Integrado", group: "LB_PPI", score: 13.00 }, { course: "Edificações", form: "Integrado", group: "LB_EP", score: 29.00 }, { course: "Edificações", form: "Integrado", group: "LI_PPI", score: 23.00 }, { course: "Edificações", form: "Integrado", group: "LI_PcD", score: 16.00 }, { course: "Edificações", form: "Integrado", group: "LI_EP", score: 29.00 }, { course: "Edificações", form: "Integrado", group: "AC", score: 31.00 },
+                { course: "Informática", form: "Integrado", group: "LB_PPI", score: 20.00 }, { course: "Informática", form: "Integrado", group: "LB_PcD", score: 18.00 }, { course: "Informática", form: "Integrado", group: "LB_EP", score: 30.00 }, { course: "Informática", form: "Integrado", group: "LI_PPI", score: 27.00 }, { course: "Informática", form: "Integrado", group: "LI_PcD", score: 22.00 }, { course: "Informática", form: "Integrado", group: "LI_EP", score: 30.00 }, { course: "Informática", form: "Integrado", group: "AC", score: 32.00 },
+                { course: "Mecatrônica", form: "Integrado", group: "LB_PPI", score: 15.00 }, { course: "Mecatrônica", form: "Integrado", group: "LB_EP", score: 30.00 }, { course: "Mecatrônica", form: "Integrado", group: "LI_PPI", score: 23.00 }, { course: "Mecatrônica", form: "Integrado", group: "LI_PcD", score: 20.00 }, { course: "Mecatrônica", form: "Integrado", group: "LI_EP", score: 30.00 }, { course: "Mecatrônica", form: "Integrado", group: "AC", score: 32.00 },
+                { course: "Mecatrônica", form: "Concomitante/Subsequente", group: "AC", score: 14.00 }
+            ]
+        };
+
+        const admissionData2024 = {
+            "Araxá": [
+                { course: "Edificações", form: "Concomitante/Subsequente", group: "L05", score: 19.00 }, { course: "Edificações", form: "Concomitante/Subsequente", group: "AC", score: 21.00 },
+                { course: "Edificações", form: "Integrado", group: "L02", score: 21.00 }, { course: "Edificações", form: "Integrado", group: "L01", score: 25.00 }, { course: "Edificações", form: "Integrado", group: "L06", score: 24.00 }, { course: "Edificações", form: "Integrado", group: "L05", score: 30.00 }, { course: "Edificações", form: "Integrado", group: "AC", score: 31.00 },
+                { course: "Eletrônica", form: "Concomitante/Subsequente", group: "L02", score: 19.00 }, { course: "Eletrônica", form: "Concomitante/Subsequente", group: "L01", score: 21.00 }, { course: "Eletrônica", form: "Concomitante/Subsequente", group: "L06", score: 26.00 },
+                { course: "Eletrônica", form: "Integrado", group: "L02", score: 18.00 }, { course: "Eletrônica", form: "Integrado", group: "L01", score: 24.00 }, { course: "Eletrônica", form: "Integrado", group: "L06", score: 22.00 }, { course: "Eletrônica", form: "Integrado", group: "L05", score: 32.00 }, { course: "Eletrônica", form: "Integrado", group: "AC", score: 30.00 },
+                { course: "Mecânica", form: "Concomitante/Subsequente", group: "L02", score: 21.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "L01", score: 20.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "L06", score: 16.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "AC", score: 25.00 },
+                { course: "Mecânica", form: "Integrado", group: "L02", score: 19.00 }, { course: "Mecânica", form: "Integrado", group: "L01", score: 23.00 }, { course: "Mecânica", form: "Integrado", group: "L06", score: 22.00 }, { course: "Mecânica", form: "Integrado", group: "L05", score: 30.00 }, { course: "Mecânica", form: "Integrado", group: "AC", score: 30.00 },
+                { course: "Mineração", form: "Concomitante/Subsequente", group: "L02", score: 14.00 }, { course: "Mineração", form: "Concomitante/Subsequente", group: "L01", score: 21.00 }, { course: "Mineração", form: "Concomitante/Subsequente", group: "L06", score: 18.00 }, { course: "Mineração", form: "Concomitante/Subsequente", group: "L05", score: 19.00 }, { course: "Mineração", form: "Concomitante/Subsequente", group: "AC", score: 22.00 },
+                { course: "Mineração", form: "Integrado", group: "L02", score: 22.00 }, { course: "Mineração", form: "Integrado", group: "L01", score: 22.00 }, { course: "Mineração", form: "Integrado", group: "L06", score: 24.00 }, { course: "Mineração", form: "Integrado", group: "L05", score: 30.00 }, { course: "Mineração", form: "Integrado", group: "AC", score: 31.00 }
+            ],
+            "Belo Horizonte": [
+                { course: "Edificações", form: "Integrado", group: "L10", score: 19.00 }, { course: "Edificações", form: "Integrado", group: "L02", score: 28.00 }, { course: "Edificações", form: "Integrado", group: "L09", score: 20.00 }, { course: "Edificações", form: "Integrado", group: "L01", score: 32.00 }, { course: "Edificações", form: "Integrado", group: "L14", score: 22.00 }, { course: "Edificações", form: "Integrado", group: "L06", score: 33.00 }, { course: "Edificações", form: "Integrado", group: "L13", score: 25.00 }, { course: "Edificações", form: "Integrado", group: "L05", score: 38.00 }, { course: "Edificações", form: "Integrado", group: "AC", score: 42.00 },
+                { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "L02", score: 16.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "L06", score: 19.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "AC", score: 34.00 },
+                { course: "Eletrônica", form: "Concomitante/Subsequente", group: "L02", score: 28.00 }, { course: "Eletrônica", form: "Concomitante/Subsequente", group: "L01", score: 28.00 }, { course: "Eletrônica", form: "Concomitante/Subsequente", group: "L06", score: 20.00 }, { course: "Eletrônica", form: "Concomitante/Subsequente", group: "L05", score: 33.00 }, { course: "Eletrônica", form: "Concomitante/Subsequente", group: "AC", score: 35.00 },
+                { course: "Eletrônica", form: "Integrado", group: "L10", score: 25.00 }, { course: "Eletrônica", form: "Integrado", group: "L02", score: 26.00 }, { course: "Eletrônica", form: "Integrado", group: "L01", score: 30.00 }, { course: "Eletrônica", form: "Integrado", group: "L06", score: 32.00 }, { course: "Eletrônica", form: "Integrado", group: "L13", score: 30.00 }, { course: "Eletrônica", form: "Integrado", group: "L05", score: 37.00 }, { course: "Eletrônica", form: "Integrado", group: "AC", score: 42.00 },
+                { course: "Eletrotécnica", form: "Concomitante/Subsequente", group: "L02", score: 21.00 }, { course: "Eletrotécnica", form: "Concomitante/Subsequente", group: "L01", score: 25.00 }, { course: "Eletrotécnica", form: "Concomitante/Subsequente", group: "L06", score: 24.00 }, { course: "Eletrotécnica", form: "Concomitante/Subsequente", group: "L05", score: 35.00 }, { course: "Eletrotécnica", form: "Concomitante/Subsequente", group: "AC", score: 33.00 },
+                { course: "Eletrotécnica", form: "Integrado", group: "L10", score: 24.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L02", score: 27.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L01", score: 30.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L14", score: 15.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L06", score: 31.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L13", score: 32.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L05", score: 36.00 }, { course: "Eletrotécnica", form: "Integrado", group: "AC", score: 41.00 },
+                { course: "Equipamentos Biomédicos", form: "Integrado", group: "L02", score: 30.00 }, { course: "Equipamentos Biomédicos", form: "Integrado", group: "L01", score: 32.00 }, { course: "Equipamentos Biomédicos", form: "Integrado", group: "L06", score: 31.00 }, { course: "Equipamentos Biomédicos", form: "Integrado", group: "L05", score: 40.00 }, { course: "Equipamentos Biomédicos", form: "Integrado", group: "AC", score: 42.00 },
+                { course: "Estradas", form: "Integrado", group: "L02", score: 32.00 }, { course: "Estradas", form: "Integrado", group: "L01", score: 30.00 }, { course: "Estradas", form: "Integrado", group: "L06", score: 30.00 }, { course: "Estradas", form: "Integrado", group: "L05", score: 36.00 }, { course: "Estradas", form: "Integrado", group: "AC", score: 40.00 },
+                { course: "Hospedagem", form: "Concomitante/Subsequente", group: "L01", score: 15.00 }, { course: "Hospedagem", form: "Concomitante/Subsequente", group: "L06", score: 29.00 }, { course: "Hospedagem", form: "Concomitante/Subsequente", group: "AC", score: 32.00 },
+                { course: "Hospedagem", form: "Integrado", group: "L02", score: 33.00 }, { course: "Hospedagem", form: "Integrado", group: "L01", score: 34.00 }, { course: "Hospedagem", form: "Integrado", group: "L06", score: 32.00 }, { course: "Hospedagem", form: "Integrado", group: "L05", score: 38.00 }, { course: "Hospedagem", form: "Integrado", group: "AC", score: 41.00 },
+                { course: "Informática", form: "Integrado", group: "L02", score: 36.00 }, { course: "Informática", form: "Integrado", group: "L01", score: 40.00 }, { course: "Informática", form: "Integrado", group: "L06", score: 42.00 }, { course: "Informática", form: "Integrado", group: "L05", score: 46.00 }, { course: "Informática", form: "Integrado", group: "AC", score: 48.00 },
+                { course: "Mecânica", form: "Concomitante/Subsequente", group: "L02", score: 15.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "L01", score: 14.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "L06", score: 25.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "L05", score: 29.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "AC", score: 29.00 },
+                { course: "Mecânica", form: "Integrado", group: "L02", score: 27.00 }, { course: "Mecânica", form: "Integrado", group: "L01", score: 31.00 }, { course: "Mecânica", form: "Integrado", group: "L06", score: 31.00 }, { course: "Mecânica", form: "Integrado", group: "L13", score: 13.00 }, { course: "Mecânica", form: "Integrado", group: "L05", score: 39.00 }, { course: "Mecânica", form: "Integrado", group: "AC", score: 42.00 },
+                { course: "Mecatrônica", form: "Integrado", group: "L02", score: 31.00 }, { course: "Mecatrônica", form: "Integrado", group: "L01", score: 34.00 }, { course: "Mecatrônica", form: "Integrado", group: "L06", score: 35.00 }, { course: "Mecatrônica", form: "Integrado", group: "L05", score: 45.00 }, { course: "Mecatrônica", form: "Integrado", group: "AC", score: 46.00 },
+                { course: "Meio Ambiente", form: "Integrado", group: "L02", score: 34.00 }, { course: "Meio Ambiente", form: "Integrado", group: "L01", score: 33.00 }, { course: "Meio Ambiente", form: "Integrado", group: "L06", score: 34.00 }, { course: "Meio Ambiente", form: "Integrado", group: "L05", score: 38.00 }, { course: "Meio Ambiente", form: "Integrado", group: "AC", score: 43.00 },
+                { course: "Química", form: "Concomitante/Subsequente", group: "L02", score: 27.00 }, { course: "Química", form: "Concomitante/Subsequente", group: "L01", score: 27.00 }, { course: "Química", form: "Concomitante/Subsequente", group: "L06", score: 23.00 }, { course: "Química", form: "Concomitante/Subsequente", group: "AC", score: 36.00 },
+                { course: "Química", form: "Integrado", group: "L02", score: 34.00 }, { course: "Química", form: "Integrado", group: "L01", score: 39.00 }, { course: "Química", form: "Integrado", group: "L06", score: 36.00 }, { course: "Química", form: "Integrado", group: "L05", score: 41.00 }, { course: "Química", form: "Integrado", group: "AC", score: 45.00 },
+                { course: "Redes de Computadores", form: "Integrado", group: "L02", score: 31.00 }, { course: "Redes de Computadores", form: "Integrado", group: "L01", score: 36.00 }, { course: "Redes de Computadores", form: "Integrado", group: "L06", score: 35.00 }, { course: "Redes de Computadores", form: "Integrado", group: "L05", score: 40.00 }, { course: "Redes de Computadores", form: "Integrado", group: "AC", score: 45.00 },
+                { course: "Trânsito", form: "Integrado", group: "L02", score: 26.00 }, { course: "Trânsito", form: "Integrado", group: "L01", score: 31.00 }, { course: "Trânsito", form: "Integrado", group: "L06", score: 30.00 }, { course: "Trânsito", form: "Integrado", group: "L05", score: 37.00 }, { course: "Trânsito", form: "Integrado", group: "AC", score: 38.00 }
+            ],
+            "Contagem": [
+                { course: "Controle Ambiental", form: "Integrado", group: "L02", score: 25.00 }, { course: "Controle Ambiental", form: "Integrado", group: "L01", score: 29.00 }, { course: "Controle Ambiental", form: "Integrado", group: "L06", score: 31.00 }, { course: "Controle Ambiental", form: "Integrado", group: "L05", score: 34.00 }, { course: "Controle Ambiental", form: "Integrado", group: "AC", score: 39.00 },
+                { course: "Eletroeletrônica", form: "Integrado", group: "L02", score: 28.00 }, { course: "Eletroeletrônica", form: "Integrado", group: "L01", score: 31.00 }, { course: "Eletroeletrônica", form: "Integrado", group: "L06", score: 29.00 }, { course: "Eletroeletrônica", form: "Integrado", group: "L05", score: 37.00 }, { course: "Eletroeletrônica", form: "Integrado", group: "AC", score: 39.00 },
+                { course: "Informática", form: "Integrado", group: "L02", score: 29.00 }, { course: "Informática", form: "Integrado", group: "L01", score: 32.00 }, { course: "Informática", form: "Integrado", group: "L06", score: 32.00 }, { course: "Informática", form: "Integrado", group: "L05", score: 40.00 }, { course: "Informática", form: "Integrado", group: "AC", score: 42.00 }
+            ],
+            "Curvelo": [
+                { course: "Edificações", form: "Integrado", group: "L02", score: 27.00 }, { course: "Edificações", form: "Integrado", group: "L01", score: 29.00 }, { course: "Edificações", form: "Integrado", group: "L06", score: 26.00 }, { course: "Edificações", form: "Integrado", group: "L05", score: 32.00 }, { course: "Edificações", form: "Integrado", group: "AC", score: 32.00 },
+                { course: "Eletrotécnica", form: "Integrado", group: "L02", score: 23.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L01", score: 31.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L06", score: 27.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L05", score: 31.00 }, { course: "Eletrotécnica", form: "Integrado", group: "AC", score: 31.00 },
+                { course: "Meio Ambiente", form: "Integrado", group: "L02", score: 23.00 }, { course: "Meio Ambiente", form: "Integrado", group: "L01", score: 28.00 }, { course: "Meio Ambiente", form: "Integrado", group: "L06", score: 25.00 }, { course: "Meio Ambiente", form: "Integrado", group: "L05", score: 29.00 }, { course: "Meio Ambiente", form: "Integrado", group: "AC", score: 30.00 }
+            ],
+            "Divinópolis": [
+                { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "L02", score: 16.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "L06", score: 18.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "AC", score: 30.00 },
+                { course: "Informática", form: "Integrado", group: "L02", score: 24.00 }, { course: "Informática", form: "Integrado", group: "L01", score: 34.00 }, { course: "Informática", form: "Integrado", group: "L06", score: 30.00 }, { course: "Informática", form: "Integrado", group: "L05", score: 39.00 }, { course: "Informática", form: "Integrado", group: "AC", score: 38.00 },
+                { course: "Informática para Internet", form: "Concomitante/Subsequente", group: "L01", score: 20.00 }, { course: "Informática para Internet", form: "Concomitante/Subsequente", group: "L06", score: 20.00 }, { course: "Informática para Internet", form: "Concomitante/Subsequente", group: "L05", score: 39.00 }, { course: "Informática para Internet", form: "Concomitante/Subsequente", group: "AC", score: 31.00 },
+                { course: "Mecatrônica", form: "Integrado", group: "L02", score: 22.00 }, { course: "Mecatrônica", form: "Integrado", group: "L01", score: 35.00 }, { course: "Mecatrônica", form: "Integrado", group: "L06", score: 29.00 }, { course: "Mecatrônica", form: "Integrado", group: "L05", score: 39.00 }, { course: "Mecatrônica", form: "Integrado", group: "AC", score: 40.00 },
+                { course: "Produção de Moda", form: "Integrado", group: "L02", score: 24.00 }, { course: "Produção de Moda", form: "Integrado", group: "L01", score: 32.00 }, { course: "Produção de Moda", form: "Integrado", group: "L06", score: 29.00 }, { course: "Produção de Moda", form: "Integrado", group: "L05", score: 38.00 }, { course: "Produção de Moda", form: "Integrado", group: "AC", score: 39.00 }
+            ],
+            "Leopoldina": [
+                { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "L02", score: 29.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "L01", score: 31.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "L06", score: 15.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "L05", score: 20.00 }, { course: "Eletromecânica", form: "Concomitante/Subsequente", group: "AC", score: 27.00 },
+                { course: "Eletrotécnica", form: "Integrado", group: "L02", score: 24.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L01", score: 35.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L06", score: 24.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L05", score: 34.00 }, { course: "Eletrotécnica", form: "Integrado", group: "AC", score: 39.00 },
+                { course: "Informática", form: "Integrado", group: "L02", score: 26.00 }, { course: "Informática", form: "Integrado", group: "L01", score: 38.00 }, { course: "Informática", form: "Integrado", group: "L06", score: 28.00 }, { course: "Informática", form: "Integrado", group: "L05", score: 43.00 }, { course: "Informática", form: "Integrado", group: "AC", score: 42.00 },
+                { course: "Mecânica", form: "Concomitante/Subsequente", group: "L02", score: 22.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "L01", score: 30.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "L05", score: 19.00 }, { course: "Mecânica", form: "Concomitante/Subsequente", group: "AC", score: 26.00 },
+                { course: "Mecânica", form: "Integrado", group: "L02", score: 24.00 }, { course: "Mecânica", form: "Integrado", group: "L01", score: 30.00 }, { course: "Mecânica", form: "Integrado", group: "L06", score: 25.00 }, { course: "Mecânica", form: "Integrado", group: "L05", score: 34.00 }, { course: "Mecânica", form: "Integrado", group: "AC", score: 38.00 }
+            ],
+            "Nepomuceno": [
+                { course: "Eletrotécnica", form: "Concomitante/Subsequente", group: "AC", score: 24.00 },
+                { course: "Eletrotécnica", form: "Integrado", group: "L02", score: 23.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L01", score: 22.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L06", score: 20.00 }, { course: "Eletrotécnica", form: "Integrado", group: "L05", score: 23.00 }, { course: "Eletrotécnica", form: "Integrado", group: "AC", score: 24.00 },
+                { course: "Mecatrônica", form: "Concomitante/Subsequente", group: "AC", score: 17.00 },
+                { course: "Mecatrônica", form: "Integrado", group: "L02", score: 19.00 }, { course: "Mecatrônica", form: "Integrado", group: "L01", score: 23.00 }, { course: "Mecatrônica", form: "Integrado", group: "L06", score: 24.00 }, { course: "Mecatrônica", form: "Integrado", group: "L05", score: 24.00 }, { course: "Mecatrônica", form: "Integrado", group: "AC", score: 27.00 },
+                { course: "Redes de Computadores", form: "Integrado", group: "L02", score: 19.00 }, { course: "Redes de Computadores", form: "Integrado", group: "L01", score: 23.00 }, { course: "Redes de Computadores", form: "Integrado", group: "L06", score: 23.00 }, { course: "Redes de Computadores", form: "Integrado", group: "L05", score: 27.00 }, { course: "Redes de Computadores", form: "Integrado", group: "AC", score: 28.00 }
+            ],
+            "Timóteo": [
+                { course: "Desenvolvimento de Sistemas", form: "Integrado", group: "L02", score: 31.00 }, { course: "Desenvolvimento de Sistemas", form: "Integrado", group: "L01", score: 35.00 }, { course: "Desenvolvimento de Sistemas", form: "Integrado", group: "L06", score: 33.00 }, { course: "Desenvolvimento de Sistemas", form: "Integrado", group: "L05", score: 42.00 }, { course: "Desenvolvimento de Sistemas", form: "Integrado", group: "AC", score: 41.00 },
+                { course: "Edificações", form: "Integrado", group: "L02", score: 26.00 }, { course: "Edificações", form: "Integrado", group: "L01", score: 28.00 }, { course: "Edificações", form: "Integrado", group: "L06", score: 32.00 }, { course: "Edificações", form: "Integrado", group: "L05", score: 37.00 }, { course: "Edificações", form: "Integrado", group: "AC", score: 38.00 },
+                { course: "Metalurgia", form: "Concomitante/Subsequente", group: "L02", score: 15.00 }, { course: "Metalurgia", form: "Concomitante/Subsequente", group: "L01", score: 28.00 }, { course: "Metalurgia", form: "Concomitante/Subsequente", group: "L06", score: 27.00 }, { course: "Metalurgia", form: "Concomitante/Subsequente", group: "L05", score: 17.00 }, { course: "Metalurgia", form: "Concomitante/Subsequente", group: "AC", score: 21.00 },
+                { course: "Química", form: "Integrado", group: "L02", score: 27.00 }, { course: "Química", form: "Integrado", group: "L01", score: 29.00 }, { course: "Química", form: "Integrado", group: "L06", score: 35.00 }, { course: "Química", form: "Integrado", group: "L05", score: 39.00 }, { course: "Química", form: "Integrado", group: "AC", score: 38.00 }
+            ],
+            "Varginha": [
+                { course: "Edificações", form: "Integrado", group: "L02", score: 22.00 }, { course: "Edificações", form: "Integrado", group: "L01", score: 30.00 }, { course: "Edificações", form: "Integrado", group: "L06", score: 25.00 }, { course: "Edificações", form: "Integrado", group: "L05", score: 32.00 }, { course: "Edificações", form: "Integrado", group: "AC", score: 35.00 },
+                { course: "Informática", form: "Integrado", group: "L02", score: 24.00 }, { course: "Informática", form: "Integrado", group: "L01", score: 31.00 }, { course: "Informática", form: "Integrado", group: "L06", score: 25.00 }, { course: "Informática", form: "Integrado", group: "L05", score: 34.00 }, { course: "Informática", form: "Integrado", group: "AC", score: 36.00 },
+                { course: "Mecatrônica", form: "Integrado", group: "L02", score: 23.00 }, { course: "Mecatrônica", form: "Integrado", group: "L01", score: 29.00 }, { course: "Mecatrônica", form: "Integrado", group: "L06", score: 28.00 }, { course: "Mecatrônica", form: "Integrado", group: "L05", score: 36.00 }, { course: "Mecatrônica", form: "Integrado", group: "AC", score: 36.00 },
+                { course: "Mecatrônica", form: "Concomitante/Subsequente", group: "L02", score: 16.00 }, { course: "Mecatrônica", form: "Concomitante/Subsequente", group: "L06", score: 22.00 }, { course: "Mecatrônica", form: "Concomitante/Subsequente", group: "L05", score: 18.00 }, { course: "Mecatrônica", form: "Concomitante/Subsequente", group: "AC", score: 16.00 }
+            ]
+        };
+
+
+        const allAdmissionData = {
+            '2025': admissionData2025,
+            '2024': admissionData2024
+        };
+
+        const examConfig = {
+            '2025': {
+                totalScore: 50,
+                questions: { LP: 15, MAT: 15, CIE: 8, GEO: 6, HIS: 6 } 
+            },
+            '2024': {
+                totalScore: 60,
+                questions: { LP: 16, MAT: 16, CIE: 14, GEO: 7, HIS: 7 }
+            }
+        };
+
+        const groupInfo = {
+            '2025': {
+                orderedGroups: ['AC', 'LI_EP', 'LI_PPI', 'LI_Q', 'LI_PcD', 'LB_EP', 'LB_PPI', 'LB_Q', 'LB_PcD'],
+                labels: { 'AC': 'Ampla Concorrência', 'LI_EP': 'Escola Pública (Indep. Renda)', 'LI_PPI': 'LI - PPI', 'LI_Q': 'LI - Quilombola', 'LI_PcD': 'LI - PcD', 'LB_EP': 'Baixa Renda + Escola Pública', 'LB_PPI': 'LB - PPI', 'LB_Q': 'LB - Quilombola', 'LB_PcD': 'LB - PcD' },
+                compactLabels: { 'AC': 'AC', 'LI_EP': 'LI-EP', 'LI_PPI': 'LI-PPI', 'LI_Q': 'LI-Q', 'LI_PcD': 'LI-PcD', 'LB_EP': 'LB-EP', 'LB_PPI': 'LB-PPI', 'LB_Q': 'LB-Q', 'LB_PcD': 'LB-PcD' }
+            },
+            '2024': {
+                orderedGroups: ['AC', 'L05', 'L06', 'L13', 'L14', 'L01', 'L02', 'L09', 'L10'],
+                labels: { 'AC': 'Ampla Concorrência', 'L05': 'Escola Pública (L05)', 'L06': 'L05 + PPI', 'L13': 'L05 + PcD', 'L14': 'L05 + PPI + PcD', 'L01': 'Baixa Renda (L01)', 'L02': 'L01 + PPI', 'L09': 'L01 + PcD', 'L10': 'L01 + PPI + PcD' },
+                compactLabels: { 'AC': 'AC', 'L05': 'L05', 'L06': 'L06', 'L13': 'L13', 'L14': 'L14', 'L01': 'L01', 'L02': 'L02', 'L09': 'L09', 'L10': 'L10' }
+            }
+        };
+
+        const campusLocations = {
+            "Araxá": { lat: -19.593, lon: -46.941 },
+            "Belo Horizonte": { lat: -19.922, lon: -43.96 },
+            "Contagem": { lat: -19.932, lon: -44.053 },
+            "Curvelo": { lat: -18.756, lon: -44.430 },
+            "Divinópolis": { lat: -20.139, lon: -44.884 },
+            "Leopoldina": { lat: -21.531, lon: -42.643 },
+            "Nepomuceno": { lat: -21.233, lon: -45.236 },
+            "Timóteo": { lat: -19.582, lon: -42.645 },
+            "Varginha": { lat: -21.555, lon: -45.433 }
+        };
+
+        let campusChartInstance = null;
+        
+        const wrapLabel = (label, maxWidth = 20) => {
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine = currentLine ? `${currentLine} ${word}` : word;
+                }
+            }
+            if (currentLine) lines.push(currentLine);
+            return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            return Array.isArray(label) ? label.join(' ') : label;
+        };
+
+        function createCampusChart(year, campus, formType) {
+            const campusData = allAdmissionData[year]?.[campus];
+            const currentGroupInfo = groupInfo[year];
+            const currentExamConfig = examConfig[year];
+
+            if (!campusData || !currentGroupInfo) {
+                if (campusChartInstance) campusChartInstance.destroy();
+                document.getElementById('campusChartDescription').innerText = `Não há dados disponíveis para ${campus} no ano de ${year}.`;
+                return;
+            }
+
+            const filteredData = campusData.filter(item => {
+                if (formType === 'integrado') {
+                    return item.form === 'Integrado';
+                } else { // subsequente
+                    return item.form.includes('Concomitante') || item.form.includes('Subsequente');
+                }
+            });
+
+            if (filteredData.length === 0) {
+                if (campusChartInstance) campusChartInstance.destroy();
+                document.getElementById('campusChartDescription').innerText = `Não há cursos na modalidade ${formType} para ${campus} no ano de ${year}.`;
+                 const ctx = document.getElementById('campusChart').getContext('2d');
+                 ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                return;
+            }
+            
+            const acGroup = year === '2025' ? 'AC' : 'AC';
+            
+            const uniqueCourses = filteredData.reduce((acc, item) => {
+                const key = `${item.course}|${item.form}`;
+                if (!acc[key]) {
+                    acc[key] = {
+                        course: item.course,
+                        form: item.form,
+                        score: filteredData.find(d => d.course === item.course && d.form === item.form && d.group === acGroup)?.score || 0
+                    };
+                }
+                return acc;
+            }, {});
+
+            let courses = Object.values(uniqueCourses).sort((a, b) => b.score - a.score);
+
+            const datasets = currentGroupInfo.orderedGroups.map(groupKey => {
+                const dataForGroup = courses.map(courseInfo => {
+                    const entry = filteredData.find(d => d.course === courseInfo.course && d.form === courseInfo.form && d.group === groupKey);
+                    return entry ? entry.score : null;
+                });
+                const groupColors = { 'AC': '#3007a0', 'LI_EP': '#5242ea', 'LI_PPI': '#6408b0', 'LI_Q': '#00abb1', 'LI_PcD': '#005b38', 'LB_EP': '#c7ef59', 'LB_PPI': '#7bcd47', 'LB_Q': '#dd5737', 'LB_PcD': '#fde047', 'L05': '#5242ea', 'L06': '#6408b0', 'L13': '#00abb1', 'L14': '#005b38', 'L01': '#c7ef59', 'L02': '#7bcd47', 'L09': '#dd5737', 'L10': '#fde047' };
+                return {
+                    label: currentGroupInfo.labels[groupKey],
+                    data: dataForGroup,
+                    backgroundColor: groupColors[groupKey] || '#cccccc',
+                    borderWidth: 1,
+                    skipNull: true
+                };
+            }).filter(dataset => dataset.data.some(val => val !== null));
+
+            const ctx = document.getElementById('campusChart').getContext('2d');
+            if (campusChartInstance) campusChartInstance.destroy();
+
+            campusChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: { labels: courses.map(c => wrapLabel(`${c.course} (${c.form.substring(0,4)}.)`)), datasets: datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { tooltip: { callbacks: { title: tooltipTitleCallback } }, legend: { position: 'top' } },
+                    scales: { y: { beginAtZero: true, max: currentExamConfig.totalScore, title: { display: true, text: `Nota Mínima (de ${currentExamConfig.totalScore} pontos)` } } }
+                }
+            });
+
+            document.getElementById('campusChartDescription').innerText = `O gráfico compara as notas mínimas na 1ª chamada para o ano de ${year}.`;
+        }
+        
+        function updateCalculatorUI() {
+            const config = examConfig['2025']; // Base is always 2025
+            document.getElementById('calculator-info').innerText = `Insira seus acertos com base na prova de 2025 (50 questões). Se selecionar 2024 como referência, sua nota será convertida para a escala de 60 pontos.`;
+            
+            document.querySelector('label[for="notaLP"]').innerText = `Língua Portuguesa (Max: ${config.questions.LP})`;
+            document.querySelector('label[for="notaMAT"]').innerText = `Matemática (Max: ${config.questions.MAT})`;
+            document.querySelector('label[for="notaCIE"]').innerText = `Ciências (Max: ${config.questions.CIE})`;
+            document.querySelector('label[for="notaGEO"]').innerText = `Geografia (Max: ${config.questions.GEO})`;
+            document.querySelector('label[for="notaHIS"]').innerText = `História (Max: ${config.questions.HIS})`;
+        }
+
+        function calculateApproval() {
+            const selectedCalcYear = document.getElementById('calc-year-select').value;
+            const yearData = allAdmissionData[selectedCalcYear];
+            const currentGroupInfo = groupInfo[selectedCalcYear];
+            const baseConfig = examConfig['2025'];
+            const targetConfig = examConfig[selectedCalcYear];
+
+            const numLP = Math.min(parseFloat(document.getElementById('notaLP').value) || 0, baseConfig.questions.LP);
+            const numMAT = Math.min(parseFloat(document.getElementById('notaMAT').value) || 0, baseConfig.questions.MAT);
+            const numCIE = Math.min(parseFloat(document.getElementById('notaCIE').value) || 0, baseConfig.questions.CIE);
+            const numGEO = Math.min(parseFloat(document.getElementById('notaGEO').value) || 0, baseConfig.questions.GEO);
+            const numHIS = Math.min(parseFloat(document.getElementById('notaHIS').value) || 0, baseConfig.questions.HIS);
+            
+            document.getElementById('notaLP').value = numLP;
+            document.getElementById('notaMAT').value = numMAT;
+            document.getElementById('notaCIE').value = numCIE;
+            document.getElementById('notaGEO').value = numGEO;
+            document.getElementById('notaHIS').value = numHIS;
+
+            const baseScore = numLP + numMAT + numCIE + numGEO + numHIS;
+            let finalScore = baseScore;
+
+            if (selectedCalcYear === '2024') {
+                finalScore = (baseScore / baseConfig.totalScore) * targetConfig.totalScore;
+            }
+
+            const resultsDiv = document.getElementById('approval-results');
+            resultsDiv.classList.remove('hidden');
+            document.getElementById('total-score-display').innerText = `Sua nota simulada para ${selectedCalcYear}: ${finalScore.toFixed(2)} / ${targetConfig.totalScore}.00`;
+
+            const specificCampus = document.getElementById('specific-campus-select').value;
+            const specificCourseKey = document.getElementById('specific-course-select').value;
+            const [specificCourse, specificForm] = specificCourseKey.split('|');
+            
+            const specificApprovalResultsDiv = document.getElementById('specific-approval-results');
+            const specificCourseResultP = document.getElementById('specific-course-result');
+            
+            specificApprovalResultsDiv.classList.add('hidden');
+            if (specificCampus && specificCourse && specificForm) {
+                specificApprovalResultsDiv.classList.remove('hidden');
+                const courseEntries = yearData[specificCampus]?.filter(entry => entry.course === specificCourse && entry.form === specificForm) || [];
+                let resultHtml = '';
+                currentGroupInfo.orderedGroups.forEach(groupKey => {
+                    const entry = courseEntries.find(d => d.group === groupKey);
+                    if (entry && entry.score > 0) {
+                        const needed = entry.score - finalScore;
+                        if (needed <= 0) {
+                            resultHtml += `<li class="text-green-700 font-semibold">${currentGroupInfo.compactLabels[groupKey]}: Aprovado (Corte: ${entry.score.toFixed(2)})</li>`;
+                        } else {
+                            resultHtml += `<li class="text-red-700">${currentGroupInfo.compactLabels[groupKey]}: Faltam ${needed.toFixed(2)} pontos (Corte: ${entry.score.toFixed(2)})</li>`;
+                        }
+                    }
+                });
+                specificCourseResultP.innerHTML = courseEntries.length > 0 ? `Resultado para <strong>${specificCourse} (${specificForm})</strong> em <strong>${specificCampus}</strong> (Ref. ${selectedCalcYear}):<br><ul class="list-disc list-inside mt-2">${resultHtml}</ul>` : `Não há dados de nota de corte para este curso/campus no ano de ${selectedCalcYear}.`;
+            }
+
+            let passedCount = 0;
+            let groupedPasses = {};
+            for (const campus in yearData) {
+                const uniqueCoursesInCampus = [...new Map(yearData[campus].map(item => [`${item.course}|${item.form}`, item])).values()];
+
+                uniqueCoursesInCampus.forEach(courseInfo => {
+                    let passedModalitiesForCourse = [];
+                    currentGroupInfo.orderedGroups.forEach(groupKey => {
+                        const entry = yearData[campus].find(d => d.course === courseInfo.course && d.form === courseInfo.form && d.group === groupKey);
+                        if (entry && entry.score > 0 && finalScore >= entry.score) {
+                            passedModalitiesForCourse.push({ group: groupKey, score: entry.score });
+                        }
+                    });
+                     if (passedModalitiesForCourse.length > 0) {
+                        if (!groupedPasses[campus]) groupedPasses[campus] = {};
+                        const courseKey = `${courseInfo.course} (${courseInfo.form})`;
+                        groupedPasses[campus][courseKey] = passedModalitiesForCourse;
+                        passedCount++;
+                    }
+                });
+            }
+            
+            const generalResultsHeading = document.getElementById('general-results-heading');
+            const passedCoursesCards = document.getElementById('passed-courses-cards');
+            const noPassedCourses = document.getElementById('no-passed-courses');
+            
+            generalResultsHeading.innerText = `Como seria seu resultado nos outros campi (Ref. ${selectedCalcYear}):`;
+            passedCoursesCards.innerHTML = '';
+            
+            if (passedCount > 0) {
+                generalResultsHeading.classList.remove('hidden');
+                passedCoursesCards.classList.remove('hidden');
+                noPassedCourses.classList.add('hidden');
+                Object.keys(groupedPasses).sort().forEach(campus => {
+                    const campusBox = document.createElement('div');
+                    campusBox.className = 'campus-result-box';
+                    campusBox.innerHTML = `<h4 class="text-xl font-black text-white p-3" style="background-color: var(--primary-dark-blue);">${campus}</h4>`;
+                    const coursesList = document.createElement('div');
+                    coursesList.className = 'p-4 space-y-3';
+                    
+                    Object.keys(groupedPasses[campus]).sort().forEach(courseKey => {
+                        const courseItem = document.createElement('div');
+                        courseItem.className = 'course-result-item';
+                        courseItem.innerHTML = `<p class="font-semibold text-lg text-gray-800">${courseKey}</p>`;
+                        groupedPasses[campus][courseKey].sort((a,b) => currentGroupInfo.orderedGroups.indexOf(a.group) - currentGroupInfo.orderedGroups.indexOf(b.group)).forEach(pass => {
+                            const modalityDetail = document.createElement('p');
+                            modalityDetail.className = 'text-sm text-green-600 ml-2';
+                            modalityDetail.innerHTML = `Aprovado em ${currentGroupInfo.compactLabels[pass.group]} (corte: ${pass.score.toFixed(2)})`;
+                            courseItem.appendChild(modalityDetail);
+                        });
+                        coursesList.appendChild(courseItem);
+                    });
+                    campusBox.appendChild(coursesList);
+                    passedCoursesCards.appendChild(campusBox);
+                });
+            } else {
+                generalResultsHeading.classList.add('hidden');
+                passedCoursesCards.classList.add('hidden');
+                noPassedCourses.innerText = `Com base em sua nota simulada, você não seria aprovado em nenhum curso na 1ª Chamada do processo seletivo de ${selectedCalcYear}.`;
+                noPassedCourses.classList.remove('hidden');
+            }
+        }
+        
+        function populateCampusSelects() {
+            const year = document.getElementById('year-select').value;
+            const data = allAdmissionData[year];
+            const campusSelect = document.getElementById('campus-select');
+            
+            const currentCampus = campusSelect.value;
+            campusSelect.innerHTML = '';
+            
+            if (data) {
+                const campuses = Object.keys(data).sort();
+                let campusExists = false;
+                campuses.forEach(campus => {
+                    const option = document.createElement('option');
+                    option.value = campus;
+                    option.innerText = campus;
+                    campusSelect.appendChild(option);
+                    if (campus === currentCampus) {
+                        campusExists = true;
+                    }
+                });
+
+                if (campusExists) {
+                    campusSelect.value = currentCampus;
+                }
+            }
+        }
+
+        function populateCalcFields(selectedYear) {
+            const campusSelect = document.getElementById('specific-campus-select');
+            const courseSelect = document.getElementById('specific-course-select');
+            campusSelect.innerHTML = '<option value="">Selecione um Campus...</option>';
+            courseSelect.innerHTML = '<option value="">Selecione um Curso...</option>';
+            courseSelect.disabled = true;
+
+            const yearData = allAdmissionData[selectedYear];
+            if (yearData) {
+                const campuses = Object.keys(yearData).sort();
+                campuses.forEach(campus => {
+                    const option = document.createElement('option');
+                    option.value = campus;
+                    option.innerText = campus;
+                    campusSelect.appendChild(option);
+                });
+            }
+            updateCalculatorUI();
+        }
+
+        function populateCalcCourses(selectedYear, selectedCampus) {
+            const courseSelect = document.getElementById('specific-course-select');
+            courseSelect.innerHTML = '<option value="">Selecione um Curso...</option>';
+            courseSelect.disabled = true;
+
+            if (selectedYear && selectedCampus && allAdmissionData[selectedYear]?.[selectedCampus]) {
+                 const uniqueCourses = [...new Map(allAdmissionData[selectedYear][selectedCampus].map(item => [`${item.course}|${item.form}`, item])).values()];
+                 uniqueCourses.sort((a, b) => a.course.localeCompare(b.course) || a.form.localeCompare(b.form));
+
+                uniqueCourses.forEach(course => {
+                    const option = document.createElement('option');
+                    option.value = `${course.course}|${course.form}`;
+                    option.innerText = `${course.course} (${course.form})`;
+                    courseSelect.appendChild(option);
+                });
+                courseSelect.disabled = false;
+            }
+        }
+        
+        function initMap() {
+            const map = L.map('map', {
+                scrollWheelZoom: false, 
+            }).setView([-19.92, -44.5], 6);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            for (const campusName in campusLocations) {
+                let popupContent = `<b>${campusName}</b><br><ul class="list-disc list-inside mt-2">`;
+                
+                const coursesForCampus2025 = allAdmissionData['2025'][campusName] ? [...new Set(allAdmissionData['2025'][campusName].map(c => c.course))] : [];
+                const coursesForCampus2024 = allAdmissionData['2024'][campusName] ? [...new Set(allAdmissionData['2024'][campusName].map(c => c.course))] : [];
+                const allCourses = [...new Set([...coursesForCampus2025, ...coursesForCampus2024])].sort();
+
+                allCourses.forEach(course => {
+                    popupContent += `<li>${course}</li>`;
+                });
+                popupContent += "</ul>";
+                
+                L.marker([campusLocations[campusName].lat, campusLocations[campusName].lon]).addTo(map)
+                    .bindPopup(popupContent);
+            }
+        }
+
+        function openTab(event, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            event.currentTarget.className += " active";
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearSelect = document.getElementById('year-select');
+            const campusSelect = document.getElementById('campus-select');
+            const calculateButton = document.getElementById('calculate-approval');
+            const calcYearSelect = document.getElementById('calc-year-select');
+            const specificCampusSelect = document.getElementById('specific-campus-select');
+            const formTypeButtons = document.querySelectorAll('.form-type-button');
+
+            function updateChart() {
+                const selectedYear = yearSelect.value;
+                const selectedCampus = campusSelect.value;
+                const selectedFormType = document.querySelector('.form-type-button.active').dataset.formType;
+                createCampusChart(selectedYear, selectedCampus, selectedFormType);
+            }
+
+            function handleFormTypeChange(event) {
+                formTypeButtons.forEach(button => button.classList.remove('active'));
+                event.currentTarget.classList.add('active');
+                updateChart();
+            }
+
+            yearSelect.addEventListener('change', () => {
+                populateCampusSelects();
+                updateChart();
+            });
+            campusSelect.addEventListener('change', updateChart);
+            formTypeButtons.forEach(button => button.addEventListener('click', handleFormTypeChange));
+
+            calculateButton.addEventListener('click', calculateApproval);
+            
+            calcYearSelect.addEventListener('change', (e) => populateCalcFields(e.target.value));
+            specificCampusSelect.addEventListener('change', (e) => populateCalcCourses(calcYearSelect.value, e.target.value));
+
+            // Initial calls
+            initMap();
+            populateCampusSelects();
+            updateChart();
+            populateCalcFields(calcYearSelect.value);
+            updateCalculatorUI();
+        });
+    </script>
+</body>
+</html>
