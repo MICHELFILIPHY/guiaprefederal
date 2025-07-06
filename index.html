@@ -1,673 +1,530 @@
-
-<html lang="pt-br" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análise e Simulador do Vestibular Coluni-UFV | Guia Pré-Federal</title>
+    <title>Guia - Pré Federal: Seu Caminho para as Melhores Escolas Federais</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Leaflet CSS for Interactive Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <style>
-        :root {
-            --brand-purple: #310099;
-            --brand-lime: #D4FF70;
-            --soft-gray: #f7f7f7;
-            --dark-text: #1f2937;
-        }
+        /* Cores da Paleta:
+           - Roxo Principal: #6408b0
+           - Azul/Índigo: #5242ea
+           - Verde Limão: #c7ef59
+           - Verde: #7bcd47
+           - Laranja: #dd5737
+           - Azul Petróleo: #00abb1
+        */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--soft-gray);
+            background-color: #f8fafc; /* Tailwind: bg-slate-50 */
+            color: #1e293b; /* Tailwind: text-slate-800 */
         }
-        .section-card {
-            background-color: white;
-            border-radius: 1.5rem;
-            padding: 2rem;
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            margin-bottom: 2.5rem;
+        .hero-gradient {
+            background-image: linear-gradient(to right, #5242ea, #6408b0);
         }
-        .tab-button-hist.active {
-            background-color: var(--brand-purple);
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 50px;
+            height: 4px;
+            background-color: #5242ea; /* Cor principal da paleta */
+            border-radius: 9999px;
+        }
+        /* Style for the map container */
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        /* Custom Leaflet popup style */
+        .leaflet-popup-content-wrapper {
+            border-radius: 0.5rem;
+        }
+        .leaflet-popup-content {
+            font-family: 'Inter', sans-serif;
+        }
+        .leaflet-popup-content h4 {
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #1e293b;
+        }
+        .leaflet-popup-content p {
+            margin: 0;
+            color: #475569;
+        }
+        .leaflet-popup-content a {
+            color: #5242ea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .leaflet-popup-content a:hover {
+            text-decoration: underline;
+        }
+        /* Inactive course style */
+        .inactive-course {
+            filter: grayscale(80%);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        /* Active course badge */
+        .active-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #7bcd47; /* Verde da paleta */
             color: white;
-            box-shadow: 0 4px 14px 0 rgba(49, 0, 153, 0.39);
+            padding: 4px 8px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            animation: pulse 2s infinite;
         }
-        .tab-button-hist {
-            transition: all 0.3s ease;
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .8;
+            }
         }
-        .main-button {
-            background-color: var(--brand-purple);
-            color: white;
-            transition: all 0.3s ease;
-            transform: scale(1);
-        }
-        .main-button:hover {
-            background-color: #25007a;
-            transform: scale(1.05);
-        }
-        .subject-icon {
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-        .subject-icon.active {
-            background-color: var(--brand-lime);
-            color: var(--dark-text);
-            border-color: var(--brand-purple);
-            transform: translateY(-5px);
-        }
-        .cta-button-primary {
-             background-color: var(--brand-lime);
-             color: var(--brand-purple);
-             transition: all 0.3s ease;
-        }
-        .cta-button-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(212, 255, 112, 0.3);
-        }
-
     </style>
 </head>
-<body class="text-gray-800">
+<body class="antialiased">
 
-    <!-- Container Principal -->
-    <div class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <!-- LOGO ATUALIZADO AQUI -->
+                <img src="./logo.png" alt="Guia - Pré Federal Logo" class="rounded-full w-10 h-10">
+                <span class="text-xl font-bold text-[#5242ea]">Guia - Pré Federal</span>
+            </a>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#quem-somos" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Quem Somos</a></li>
+                    <li><a href="#vestibulinho-escola" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Vestibulinhos</a></li>
+                    <li><a href="#o-que-oferecemos" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Cursos</a></li>
+                    <li><a href="#contato" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Contato</a></li>
+                </ul>
+            </nav>
+            <button class="md:hidden text-slate-700 focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 shadow-md">
+            <ul class="flex flex-col items-center space-y-4">
+                 <li><a href="#quem-somos" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Quem Somos</a></li>
+                <li><a href="#vestibulinho-escola" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Vestibulinhos</a></li>
+                <li><a href="#o-que-oferecemos" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Cursos</a></li>
+                <li><a href="#contato" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Contato</a></li>
+            </ul>
+        </div>
+    </header>
 
-        <!-- Cabeçalho -->
-        <header class="text-center mb-12 bg-white rounded-2xl p-8 shadow-lg">
-            <img src="logo1.png" alt="Logo Guia Pré-Federal" class="mx-auto mb-6" style="width: 150px;">
-             <h1 class="text-5xl md:text-6xl font-black" style="color: var(--brand-purple);">
-                Guia
-                <span class="px-4 py-1 rounded-lg" style="background-color: var(--brand-lime); color: var(--brand-purple);">
-                Pré-Federal
-                </span>
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white pt-20 pb-24 md:pt-32 md:pb-36 rounded-b-3xl shadow-lg">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
+                Guia - Pré Federal: Seu Caminho para as Melhores Escolas Federais
             </h1>
-            <p class="mt-4 text-xl font-bold text-gray-600">
-                Seu Raio-X Completo do Vestibular CAP-COLUNI UFV
+            <p class="text-lg md:text-xl mb-8 opacity-90">
+                Preparação 100% online, especializada e focada no ingresso de estudantes nas melhores escolas do país.
             </p>
-        </header>
-        
-        <!-- Seção CTA (Call-to-Action) - Início -->
-        <section class="section-card text-center text-white" style="background: var(--brand-purple);">
-            <h2 class="text-3xl font-black mb-3">Quer Gabaritar o Vestibular do Coluni?</h2>
-            <p class="max-w-2xl mx-auto mb-6 text-purple-200">Nosso curso preparatório completo oferece aulas ao vivo que ficam gravadas, simulados, correção de redações, material de apoio, plataforma completa e tudo que você precisa para conquistar sua vaga. Aumente suas chances de aprovação com o Guia Pré-Federal!</p>
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="cta-button-primary flex items-center justify-center font-bold py-3 px-6 rounded-lg w-full sm:w-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
-                    Conheça o Curso Completo
-                </a>
-                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="flex items-center justify-center font-bold py-3 px-6 rounded-lg border-2 border-purple-300 text-purple-200 hover:bg-purple-300 hover:text-white transition-colors w-full sm:w-auto">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                    Fale com a gente no WhatsApp
-                </a>
-            </div>
-        </section>
-
-        <!-- Seção: Simulador de Notas por Questões -->
-        <section id="simulador" class="section-card">
-            <h3 class="text-2xl font-bold text-center mb-2" style="color: var(--brand-purple);">Simulador de Desempenho</h3>
-            <p class="text-center text-gray-500 mb-8">Insira seus acertos e veja como você se sairia nos vestibulares passados.</p>
+            <a href="#o-que-oferecemos" class="bg-[#c7ef59] text-slate-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105 inline-block">
+                Conheça Nossos Cursos <i class="fas fa-arrow-right ml-2"></i>
+            </a>
             
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mb-6 text-sm">
-                <div>
-                    <label for="q-port" class="font-semibold text-gray-600">Português (0-10)</label>
-                    <input type="number" id="q-port" min="0" max="10" class="w-full mt-1 p-2 border rounded-md focus:ring-purple-500 focus:border-purple-500" placeholder="Acertos">
-                </div>
-                <div>
-                    <label for="q-mat" class="font-semibold text-gray-600">Matemática (0-10)</label>
-                    <input type="number" id="q-mat" min="0" max="10" class="w-full mt-1 p-2 border rounded-md focus:ring-purple-500 focus:border-purple-500" placeholder="Acertos">
-                </div>
-                <div>
-                    <label for="q-ciencia" class="font-semibold text-gray-600">Ciências (0-8)</label>
-                    <input type="number" id="q-ciencia" min="0" max="8" class="w-full mt-1 p-2 border rounded-md focus:ring-purple-500 focus:border-purple-500" placeholder="Acertos">
-                </div>
-                 <div>
-                    <label for="q-geo" class="font-semibold text-gray-600">Geografia (0-4)</label>
-                    <input type="number" id="q-geo" min="0" max="4" class="w-full mt-1 p-2 border rounded-md focus:ring-purple-500 focus:border-purple-500" placeholder="Acertos">
-                </div>
-                <div>
-                    <label for="q-hist" class="font-semibold text-gray-600">História (0-4)</label>
-                    <input type="number" id="q-hist" min="0" max="4" class="w-full mt-1 p-2 border rounded-md focus:ring-purple-500 focus:border-purple-500" placeholder="Acertos">
-                </div>
-                <div>
-                    <label for="q-eng" class="font-semibold text-gray-600">Inglês (0-2)</label>
-                    <input type="number" id="q-eng" min="0" max="2" class="w-full mt-1 p-2 border rounded-md focus:ring-purple-500 focus:border-purple-500" placeholder="Acertos">
+            <!-- Explicação sobre as páginas dos vestibulares -->
+            <div class="max-w-4xl mx-auto mt-12">
+                 <p class="text-white/90 mb-6">
+                    Em cada página, você terá acesso a ferramentas exclusivas como a <strong>calculadora de aprovação</strong> e poderá analisar <strong>dados estatísticos</strong> detalhados dos últimos vestibulares para planejar sua preparação da melhor forma.
+                </p>
+                <h3 class="text-lg font-semibold mb-4 text-white/90">Acesse a página de cada vestibulinho:</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+                    <a href="https://guiaprefederal.com.br/coluni" target="_blank" class="bg-[#5242ea] hover:opacity-90 text-white font-semibold py-3 px-2 rounded-lg transition-opacity duration-300 flex items-center justify-center text-center shadow-lg">COLUNI</a>
+                    <a href="https://guiaprefederal.com.br/ifmg" target="_blank" class="bg-[#6408b0] hover:opacity-90 text-white font-semibold py-3 px-2 rounded-lg transition-opacity duration-300 flex items-center justify-center text-center shadow-lg">IFMG</a>
+                    <a href="https://guiaprefederal.com.br/ifsudeste" target="_blank" class="bg-[#00abb1] hover:opacity-90 text-white font-semibold py-3 px-2 rounded-lg transition-opacity duration-300 flex items-center justify-center text-center shadow-lg">IF Sudeste</a>
+                    <a href="https://guiaprefederal.com.br/cefetmg" target="_blank" class="bg-[#7bcd47] hover:opacity-90 text-white font-semibold py-3 px-2 rounded-lg transition-opacity duration-300 flex items-center justify-center text-center shadow-lg">CEFET-MG</a>
+                    <a href="https://guiaprefederal.com.br/ifnmg" target="_blank" class="bg-[#dd5737] hover:opacity-90 text-white font-semibold py-3 px-2 rounded-lg transition-opacity duration-300 flex items-center justify-center text-center shadow-lg">IFNMG</a>
+                    <a href="https://guiaprefederal.com.br/iftm" target="_blank" class="bg-[#db2777] hover:opacity-90 text-white font-semibold py-3 px-2 rounded-lg transition-opacity duration-300 flex items-center justify-center text-center shadow-lg">IFTM</a>
                 </div>
             </div>
-             <div class="mb-6">
-                <label for="nota-redacao" class="font-semibold text-sm text-gray-600">Nota da Redação (0-15)</label>
-                <input type="number" id="nota-redacao" min="0" max="15" class="w-full mt-1 p-2 border rounded-md focus:ring-purple-500 focus:border-purple-500" placeholder="Ex: 12">
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-4 mb-8">
-                <div>
-                    <label for="sim-modalidade" class="font-semibold text-sm text-gray-600">Sua Modalidade de Vaga:</label>
-                    <select id="sim-modalidade" class="w-full mt-1 p-2 border rounded-md focus:ring-purple-500 focus:border-purple-500">
-                        <option value="AC">Ampla Concorrência (AC)</option>
-                        <option value="LI_EP">Escola Pública (LI_EP)</option>
-                        <option value="LB_EP">Escola Pública + Baixa Renda (LB_EP)</option>
-                        <option value="LI_PPI">Escola Pública + PPI (LI_PPI)</option>
-                        <option value="LB_PPI">Escola Pública + Baixa Renda + PPI (LB_PPI)</option>
-                    </select>
-                </div>
-                <div class="flex items-end">
-                    <div class="flex items-center h-full">
-                        <input id="bonus-2021" type="checkbox" class="h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                        <label for="bonus-2021" class="ml-2 text-sm font-semibold text-gray-600">Sou de Escola Pública (para bônus de 2021)</label>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </section>
 
-            <div class="text-center">
-                <button onclick="simularNota()" class="main-button font-bold py-3 px-8 rounded-lg">
-                    Simular meu Desempenho
-                </button>
-            </div>
-            <div id="resultado-simulador" class="mt-8 hidden"></div>
-        </section>
-
-        <!-- Histórico e Dados Detalhados -->
-        <section id="historico" class="section-card">
-            <h3 class="text-2xl font-bold text-center mb-8" style="color: var(--brand-purple);">Histórico de Dados do Vestibular</h3>
-            <div id="tabs-container-hist">
-                <div class="flex flex-wrap justify-center gap-2 mb-8">
-                    <button class="tab-button-hist px-4 py-2 font-semibold rounded-lg bg-slate-200 text-slate-700 active" onclick="changeHistTab('2025')">Ingresso 2025</button>
-                    <button class="tab-button-hist px-4 py-2 font-semibold rounded-lg bg-slate-200 text-slate-700" onclick="changeHistTab('2024')">Ingresso 2024</button>
-                    <button class="tab-button-hist px-4 py-2 font-semibold rounded-lg bg-slate-200 text-slate-700" onclick="changeHistTab('2023')">Ingresso 2023</button>
-                    <button class="tab-button-hist px-4 py-2 font-semibold rounded-lg bg-slate-200 text-slate-700" onclick="changeHistTab('2022')">Ingresso 2022</button>
-                    <button class="tab-button-hist px-4 py-2 font-semibold rounded-lg bg-slate-200 text-slate-700" onclick="changeHistTab('2021')">Ingresso 2021</button>
+    <!-- Quem Somos Section -->
+    <section id="quem-somos" class="py-16 md:py-24 bg-slate-50">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title mx-auto">Quem Somos</h2>
+            <div class="flex flex-col md:flex-row items-center md:space-x-10">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <img src="https://placehold.co/500x300/e0e7ff/4f46e5?text=Nossa+Equipe" alt="Imagem da Equipe" class="rounded-xl shadow-lg w-full h-auto object-cover">
                 </div>
-                <div id="tab-content-hist" class="overflow-x-auto">
-                     <!-- Conteúdo 2025 -->
-                    <div id="content-hist-2025" class="tab-pane-hist active">
-                        <h4 class="font-bold text-lg text-center mb-4">Notas de Corte - Ingresso 2025</h4>
-                        <p class="text-center text-sm text-gray-500 mb-1">Total de Inscritos: 2.016</p>
-                        <p class="text-center text-sm text-gray-500 mb-4">Nota Objetiva para Correção da Redação: <strong>34,00 / 58,00</strong></p>
-                        <table class="min-w-full divide-y divide-gray-200">
-                             <thead class="bg-slate-50">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modalidade</th>
-                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte 1ª Chamada</th>
-                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte Última Chamada</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200 text-center">
-                                <tr class="font-semibold"><td class="px-6 py-4 text-left">Ampla Concorrência (AC)</td><td class="px-6 py-4">54,60</td><td class="px-6 py-4">Aguardando</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública (LI_EP)</td><td class="px-6 py-4">51,40</td><td class="px-6 py-4">Aguardando</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública + PPI (LI_PPI)</td><td class="px-6 py-4">43,80</td><td class="px-6 py-4">Aguardando</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda (LB_EP)</td><td class="px-6 py-4">45,40</td><td class="px-6 py-4">Aguardando</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda + PPI (LB_PPI)</td><td class="px-6 py-4">42,00</td><td class="px-6 py-4">Aguardando</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                     <!-- Conteúdo 2024 -->
-                    <div id="content-hist-2024" class="tab-pane-hist hidden">
-                        <h4 class="font-bold text-lg text-center mb-4">Notas de Corte - Ingresso 2024</h4>
-                        <p class="text-center text-sm text-gray-500 mb-1">Total de Inscritos: 2.172</p>
-                        <p class="text-center text-sm text-gray-500 mb-4">Nota Objetiva para Correção da Redação: <strong>29,00 / 58,00</strong></p>
-                        <table class="min-w-full divide-y divide-gray-200">
-                             <thead class="bg-slate-50">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modalidade</th>
-                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte 1ª Chamada</th>
-                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte Última Chamada</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200 text-center">
-                                <tr class="font-semibold"><td class="px-6 py-4 text-left">Ampla Concorrência (AC)</td><td class="px-6 py-4">48,20</td><td class="px-6 py-4">48,20</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública (LI_EP)</td><td class="px-6 py-4">44,20</td><td class="px-6 py-4">40,40</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública + PPI (LI_PPI)</td><td class="px-6 py-4">35,60</td><td class="px-6 py-4">40,60*</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda (LB_EP)</td><td class="px-6 py-4">40,20</td><td class="px-6 py-4">38,00</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda + PPI (LB_PPI)</td><td class="px-6 py-4">33,80</td><td class="px-6 py-4">36,20*</td></tr>
-                            </tbody>
-                        </table>
-                         <p class="text-xs text-center mt-2 text-gray-500">* Nota subiu devido à realocação de vagas não preenchidas em subcotas (PCD, Quilombola).</p>
-                    </div>
-                    <!-- Conteúdo 2023 -->
-                    <div id="content-hist-2023" class="tab-pane-hist hidden">
-                        <h4 class="font-bold text-lg text-center mb-4">Notas de Corte - Ingresso 2023</h4>
-                        <p class="text-center text-sm text-gray-500 mb-1">Total de Inscritos: 2.071</p>
-                         <p class="text-center text-sm text-gray-500 mb-4">Nota Objetiva para Correção da Redação: <strong>35,00 / 58,00</strong></p>
-                        <table class="min-w-full divide-y divide-gray-200">
-                             <thead class="bg-slate-50">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modalidade</th>
-                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte 1ª Chamada</th>
-                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte Última Chamada</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200 text-center">
-                                <tr class="font-semibold"><td class="px-6 py-4 text-left">Ampla Concorrência (AC)</td><td class="px-6 py-4">55,80</td><td class="px-6 py-4">55,00</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública (LI_EP)</td><td class="px-6 py-4">50,00</td><td class="px-6 py-4">46,20</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública + PPI (LI_PPI)</td><td class="px-6 py-4">46,20</td><td class="px-6 py-4">45,60</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda (LB_EP)</td><td class="px-6 py-4">49,00</td><td class="px-6 py-4">41,20</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda + PPI (LB_PPI)</td><td class="px-6 py-4">45,40</td><td class="px-6 py-4">39,40</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- Conteúdo 2022 -->
-                    <div id="content-hist-2022" class="tab-pane-hist hidden">
-                        <h4 class="font-bold text-lg text-center mb-4">Notas de Corte - Ingresso 2022</h4>
-                        <p class="text-center text-sm text-gray-500 mb-1">Total de Inscritos: 1.862</p>
-                        <p class="text-center text-sm text-gray-500 mb-4">Nota Objetiva para Correção da Redação: <strong>33,00 / 58,00</strong></p>
-                         <table class="min-w-full divide-y divide-gray-200">
-                             <thead class="bg-slate-50">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modalidade</th>
-                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte 1ª Chamada</th>
-                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte Última Chamada</th>
-                                </tr>
-                            </thead>
-                           <tbody class="bg-white divide-y divide-gray-200 text-center">
-                                <tr class="font-semibold"><td class="px-6 py-4 text-left">Ampla Concorrência (AC)</td><td class="px-6 py-4">57,40</td><td class="px-6 py-4">56,60</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública (LI_EP)</td><td class="px-6 py-4">50,20</td><td class="px-6 py-4">47,80</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública + PPI (LI_PPI)</td><td class="px-6 py-4">43,80</td><td class="px-6 py-4">47,20*</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda (LB_EP)</td><td class="px-6 py-4">48,00</td><td class="px-6 py-4">44,40</td></tr>
-                                <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda + PPI (LB_PPI)</td><td class="px-6 py-4">43,00</td><td class="px-6 py-4">44,60*</td></tr>
-                            </tbody>
-                        </table>
-                        <p class="text-xs text-center mt-2 text-gray-500">* Nota subiu devido à realocação de vagas não preenchidas em subcotas (PCD, Quilombola).</p>
-                    </div>
-                    <!-- Conteúdo 2021 -->
-                    <div id="content-hist-2021" class="tab-pane-hist hidden">
-                        <h4 class="font-bold text-lg text-center mb-4">Dados de 2021 (Sistema de Bônus)</h4>
-                        <p class="text-center text-sm text-gray-500 mb-1">Total de Inscritos: 2.321 (recorde)</p>
-                        <p class="text-center text-sm text-gray-500 mb-4">Nota Objetiva para Correção da Redação: <strong>40,80 / 58,00</strong></p>
-                        <div class="text-center bg-slate-50 p-4 rounded-lg">
-                            <p>Neste ano, vigorava o sistema de bônus de 20% na nota da prova objetiva para alunos de escola pública. Não havia cotas.</p>
-                             <p class="mt-2">A nota de corte final do último classificado (posição 150) na 1ª chamada foi <strong>57,12</strong>. Não houve chamadas subsequentes com notas inferiores a esta.</p>
-                        </div>
-                    </div>
+                <div class="md:w-1/2 text-lg text-slate-700 leading-relaxed">
+                    <p class="mb-4">O Guia - Pré Federal é um curso preparatório 100% online, especializado na formação de estudantes que desejam ingressar em escolas federais de ensino médio, como o COLUNI (UFV), o IFMG, o IF Sudeste, CEFET-MG e outras.</p>
+                    <p>Com uma metodologia dinâmica, conteúdos atualizados e acompanhamento pedagógico constante, o Guia oferece uma jornada completa de estudos que alia excelência acadêmica à proximidade com o aluno e sua família.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Seção Conteúdo Programático -->
-        <section id="conteudo" class="section-card">
-            <h3 class="text-2xl font-bold text-center mb-8" style="color: var(--brand-purple);">O que Estudar? Conteúdo Programático</h3>
-            <div class="grid grid-cols-4 md:grid-cols-9 gap-4 text-center mb-8">
-                <!-- Ícones das Disciplinas -->
-                <div onclick="showContent('portugues')" class="subject-icon active p-3 rounded-lg cursor-pointer bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M15 2v20"/><path d="M15 7h5"/><path d="M15 12h5"/><path d="M15 17h5"/></svg>
-                    <span class="text-xs font-bold">Português</span>
+    <!-- Nossos Pilares Section -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title mx-auto">Nossos Pilares</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Missão Card -->
+                <div class="bg-white p-8 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-[#5242ea] text-5xl mb-4"><i class="fas fa-bullseye"></i></div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Missão</h3>
+                    <p class="text-slate-700 leading-relaxed">Transformar o sonho do ensino federal em realidade por meio de uma preparação acessível, acolhedora e eficiente, focada no desenvolvimento acadêmico e emocional dos nossos alunos.</p>
                 </div>
-                 <div onclick="showContent('matematica')" class="subject-icon p-3 rounded-lg cursor-pointer bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="4" y2="20"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="17.66" x2="6.34" y1="6.34" y2="17.66"/><line x1="17.66" x2="6.34" y1="17.66" y2="6.34"/></svg>
-                    <span class="text-xs font-bold">Matemática</span>
+                <!-- Visão Card -->
+                <div class="bg-white p-8 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-[#6408b0] text-5xl mb-4"><i class="fas fa-eye"></i></div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Visão</h3>
+                    <p class="text-slate-700 leading-relaxed">Ser o curso online de referência nacional na preparação de estudantes para escolas federais de ensino médio, unindo excelência pedagógica, inovação e acolhimento.</p>
                 </div>
-                 <div onclick="showContent('biologia')" class="subject-icon p-3 rounded-lg cursor-pointer bg-gray-100">
-                   <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22a8 8 0 1 1 16 0h-4a4 4 0 1 0-8 0H2Z"/><path d="M6 18V8"/><path d="M6 12h4a2 2 0 0 1 2 2v4H6Z"/></svg>
-                   <span class="text-xs font-bold">Biologia</span>
-                </div>
-                 <div onclick="showContent('quimica')" class="subject-icon p-3 rounded-lg cursor-pointer bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.2 3.8a2.1 2.1 0 0 1 3 2.2l-2 7.5c-.2.7-.9 1.2-1.7 1.1l-6-1.5c-.8-.2-1.4-1-1.2-1.8l2-7.5a2.1 2.1 0 0 1 3-2.2Z"/><path d="m5.2 9.2-1.5 6.1C3.5 16.2 4 17 5 17h.5"/><path d="m14 13 1.8 2.2a2.1 2.1 0 0 1-1 3.6l-6.2-1.6c-.8-.2-1.4-.9-1.2-1.7l1.6-6.2a2.1 2.1 0 0 1 3.6-1L14 13Z"/><path d="M3 21h12"/><path d="M7 17v4"/></svg>
-                    <span class="text-xs font-bold">Química</span>
-                </div>
-                 <div onclick="showContent('fisica')" class="subject-icon p-3 rounded-lg cursor-pointer bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/><circle cx="12" cy="12" r="4"/><path d="M12 18a6 6 0 0 0 6-6h-6Z"/></svg>
-                    <span class="text-xs font-bold">Física</span>
-                </div>
-                 <div onclick="showContent('historia')" class="subject-icon p-3 rounded-lg cursor-pointer bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7h-4a3 3 0 0 1-3-3V5a3 3 0 0 0-3-3a7 7 0 0 0-7 7h4a3 3 0 0 1 3 3v7a3 3 0 0 0 3 3Z"/><path d="M20.7 7.5a1 1 0 0 0-1.2-1.2l-3.6 3.6a1 1 0 0 0 1.2 1.2z"/></svg>
-                    <span class="text-xs font-bold">História</span>
-                </div>
-                <div onclick="showContent('geografia')" class="subject-icon p-3 rounded-lg cursor-pointer bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                    <span class="text-xs font-bold">Geografia</span>
-                </div>
-                <div onclick="showContent('ingles')" class="subject-icon p-3 rounded-lg cursor-pointer bg-gray-100">
-                   <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0Z"/><path d="M12 3v2"/><path d="m6.6 5.2.9.9"/><path d="M3 11.5h2"/><path d="m6.6 17.8.9-.9"/><path d="M12 21v-2"/><path d="m17.4 17.8-.9-.9"/><path d="M21 11.5h-2"/><path d="m17.4 5.2-.9.9"/></svg>
-                   <span class="text-xs font-bold">Inglês</span>
-                </div>
-                 <div onclick="showContent('redacao')" class="subject-icon p-3 rounded-lg cursor-pointer bg-gray-100">
-                   <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22h6a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v8"/><path d="M18 18h-5"/><path d="M18 14h-3"/><path d="M18 10h-1"/><path d="M12 18H7a2 2 0 0 1-2-2v-2c0-1.1.9-2 2-2h1"/></svg>
-                   <span class="text-xs font-bold">Redação</span>
+                <!-- Valores Card -->
+                <div class="bg-white p-8 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-[#00abb1] text-5xl mb-4"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Valores</h3>
+                    <ul class="text-slate-700 leading-relaxed list-disc list-inside text-left">
+                        <li>Compromisso com o aluno</li>
+                        <li>Excelência com simplicidade</li>
+                        <li>Acolhimento e empatia</li>
+                        <li>Transparência com as famílias</li>
+                        <li>Inovação pedagógica</li>
+                    </ul>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div id="content-display" class="bg-slate-50 p-6 rounded-lg">
-                <!-- Conteúdo das disciplinas será injetado aqui -->
-            </div>
-        </section>
-
-        <!-- Seção de Dicas -->
-        <section id="dicas" class="section-card">
-            <h3 class="text-2xl font-bold text-center mb-8" style="color: var(--brand-purple);">Dicas de Ouro para o Vestibular</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="flex items-start">
-                     <div class="p-2 rounded-full mr-4" style="background-color: var(--brand-lime);">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="color: var(--brand-purple);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1"/></svg>
-                    </div>
+    <!-- Nossos Diferenciais Section -->
+    <section class="py-16 md:py-24 bg-slate-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 section-title mx-auto">Nossos Diferenciais</h2>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-[#5242ea]/10 text-[#5242ea] rounded-full flex items-center justify-center"><i class="fas fa-book-reader text-2xl"></i></div>
                     <div>
-                        <h4 class="font-bold">Crie um Cronograma Realista</h4>
-                        <p class="text-gray-600">Organize seu tempo de estudo, alternando entre as matérias para não sobrecarregar. Inclua pausas e momentos de lazer.</p>
+                        <h3 class="text-lg font-semibold">Abordagem Completa</h3>
+                        <p class="text-slate-600">Cobrimos TODAS as matérias do edital para garantir sua preparação total.</p>
                     </div>
                 </div>
-                <div class="flex items-start">
-                    <div class="p-2 rounded-full mr-4" style="background-color: var(--brand-lime);">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="color: var(--brand-purple);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.25 1.94c.88.76 1.25 1.9.96 3.06L20.91 11.7Z"/></svg>
-                    </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-[#5242ea]/10 text-[#5242ea] rounded-full flex items-center justify-center"><i class="fas fa-video text-2xl"></i></div>
                     <div>
-                        <h4 class="font-bold">Resolva Provas Anteriores</h4>
-                        <p class="text-gray-600">Esta é a melhor forma de entender o estilo da prova, o nível das questões e gerenciar seu tempo de resposta.</p>
+                        <h3 class="text-lg font-semibold">Aulas Ao Vivo e Gravadas</h3>
+                        <p class="text-slate-600">Participe ao vivo ou assista quando e onde quiser, no seu ritmo.</p>
                     </div>
                 </div>
-                <div class="flex items-start">
-                    <div class="p-2 rounded-full mr-4" style="background-color: var(--brand-lime);">
-                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="color: var(--brand-purple);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-[#5242ea]/10 text-[#5242ea] rounded-full flex items-center justify-center"><i class="fab fa-whatsapp text-2xl"></i></div>
                     <div>
-                        <h4 class="font-bold">Atenção à Redação</h4>
-                        <p class="text-gray-600">Pratique a escrita toda semana, leia bastante sobre atualidades e entenda os critérios de correção. Uma boa redação faz toda a diferença!</p>
+                        <h3 class="text-lg font-semibold">Suporte via WhatsApp</h3>
+                        <p class="text-slate-600">Contato direto e único com os professores para tirar todas as suas dúvidas.</p>
                     </div>
                 </div>
-                <div class="flex items-start">
-                    <div class="p-2 rounded-full mr-4" style="background-color: var(--brand-lime);">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="color: var(--brand-purple);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
-                    </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-[#5242ea]/10 text-[#5242ea] rounded-full flex items-center justify-center"><i class="fas fa-laptop-code text-2xl"></i></div>
                     <div>
-                        <h4 class="font-bold">Cuide da Saúde Mental e Física</h4>
-                        <p class="text-gray-600">Durma bem, alimente-se de forma saudável e faça atividades físicas. Um corpo e mente sãos aprendem melhor.</p>
+                        <h3 class="text-lg font-semibold">Plataforma Exclusiva</h3>
+                        <p class="text-slate-600">Ambiente de estudos organizado e intuitivo para otimizar seu aprendizado.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-[#5242ea]/10 text-[#5242ea] rounded-full flex items-center justify-center"><i class="fas fa-file-alt text-2xl"></i></div>
+                    <div>
+                        <h3 class="text-lg font-semibold">Apostilas Próprias</h3>
+                        <p class="text-slate-600">Material didático exclusivo e direcionado para os vestibulares.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-[#5242ea]/10 text-[#5242ea] rounded-full flex items-center justify-center"><i class="fas fa-pencil-ruler text-2xl"></i></div>
+                    <div>
+                        <h3 class="text-lg font-semibold">Simulados e Redação</h3>
+                        <p class="text-slate-600">Simulados mensais e correção de redação para treinar para o dia da prova.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-         <!-- Seção CTA (Call-to-Action) - Final -->
-        <section id="cta-final" class="section-card text-center" style="background: linear-gradient(45deg, var(--brand-purple), #4c1d95);">
-            <h3 class="text-3xl font-black text-white mb-3">Está Pronto para Começar?</h3>
-            <p class="max-w-2xl mx-auto mb-6 text-purple-200">Não deixe sua aprovação para depois. Garanta sua vaga no Coluni com a melhor preparação. Fale conosco e descubra o plano de estudos ideal para você!</p>
-             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                 <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="cta-button-primary flex items-center justify-center font-bold py-3 px-6 rounded-lg w-full sm:w-auto">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
-                    Conheça o Curso Completo
+    <!-- Interactive Map Section -->
+    <section id="mapa" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4 section-title mx-auto">Mapa das Escolas Federais em MG</h2>
+            <p class="text-center text-slate-600 max-w-3xl mx-auto mb-10">Navegue pelo mapa para encontrar o campus mais próximo de você. Clique nos marcadores para ver mais detalhes sobre cada instituição.</p>
+            <div id="map"></div>
+            <div id="map-legend" class="flex flex-wrap justify-center gap-4 mt-6"></div>
+        </div>
+    </section>
+
+    <!-- Vestibulinho por Escola Section -->
+    <section id="vestibulinho-escola" class="py-16 md:py-24 bg-slate-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title mx-auto">Vestibulinho por Escola</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card COLUNI (UFV) -->
+                <a href="https://guiaprefederal.com.br/coluni" target="_blank" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-200">
+                    <h3 class="text-xl font-semibold text-[#5242ea] mb-2">COLUNI (UFV)</h3>
+                    <p class="text-slate-600">Colégio de Aplicação da Universidade Federal de Viçosa.</p>
+                    <span class="text-[#6408b0] mt-3 block">Acessar página <i class="fas fa-external-link-alt ml-1 text-sm"></i></span>
                 </a>
-                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="flex items-center justify-center font-bold py-3 px-6 rounded-lg border-2 border-purple-300 text-purple-200 hover:bg-purple-300 hover:text-white transition-colors w-full sm:w-auto">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                    Fale com a gente no WhatsApp
+                <!-- Card IF Sudeste MG -->
+                <a href="https://guiaprefederal.com.br/ifsudeste" target="_blank" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-200">
+                    <h3 class="text-xl font-semibold text-[#5242ea] mb-2">IF Sudeste MG</h3>
+                    <p class="text-slate-600">Instituto Federal de Educação, Ciência e Tecnologia do Sudeste de Minas Gerais.</p>
+                    <span class="text-[#6408b0] mt-3 block">Acessar página <i class="fas fa-external-link-alt ml-1 text-sm"></i></span>
+                </a>
+                <!-- Card IFMG -->
+                <a href="https://guiaprefederal.com.br/ifmg" target="_blank" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-200">
+                    <h3 class="text-xl font-semibold text-[#5242ea] mb-2">IFMG</h3>
+                    <p class="text-slate-600">Instituto Federal de Minas Gerais.</p>
+                    <span class="text-[#6408b0] mt-3 block">Acessar página <i class="fas fa-external-link-alt ml-1 text-sm"></i></span>
+                </a>
+                <!-- Card CEFET-MG -->
+                <a href="https://guiaprefederal.com.br/cefetmg" target="_blank" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-200">
+                    <h3 class="text-xl font-semibold text-[#5242ea] mb-2">CEFET-MG</h3>
+                    <p class="text-slate-600">Centro Federal de Educação Tecnológica de Minas Gerais.</p>
+                    <span class="text-[#6408b0] mt-3 block">Acessar página <i class="fas fa-external-link-alt ml-1 text-sm"></i></span>
+                </a>
+                <!-- Card IFNMG -->
+                <a href="https://guiaprefederal.com.br/ifnmg" target="_blank" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-200">
+                    <h3 class="text-xl font-semibold text-[#5242ea] mb-2">IFNMG</h3>
+                    <p class="text-slate-600">Instituto Federal do Norte de Minas Gerais.</p>
+                    <span class="text-[#6408b0] mt-3 block">Acessar página <i class="fas fa-external-link-alt ml-1 text-sm"></i></span>
+                </a>
+                <!-- Card IFTM -->
+                <a href="https://guiaprefederal.com.br/iftm" target="_blank" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-200">
+                    <h3 class="text-xl font-semibold text-[#5242ea] mb-2">IFTM</h3>
+                    <p class="text-slate-600">Instituto Federal do Triângulo Mineiro.</p>
+                    <span class="text-[#6408b0] mt-3 block">Acessar página <i class="fas fa-external-link-alt ml-1 text-sm"></i></span>
                 </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer class="text-center mt-12 pt-8 border-t border-slate-200">
-            <p class="text-sm text-gray-500">Desenvolvido com ♥ por <strong>Guia Pré-Federal</strong>. Análise baseada em dados públicos do CAP-Coluni UFV.</p>
-            <p class="text-xs text-gray-400 mt-2">Verifique sempre as fontes oficiais.</p>
-        </footer>
-    </div>
+    <!-- O Que Oferecemos Section -->
+    <section id="o-que-oferecemos" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 section-title mx-auto">Nossos Cursos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+                <!-- Service Card 2: Intensivo (ACTIVE) -->
+                <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="relative block bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 border-2 border-[#5242ea]">
+                    <div class="active-badge">ATIVO</div>
+                    <div class="text-[#5242ea] text-4xl mb-4 text-center"><i class="fas fa-hourglass-half"></i></div>
+                    <h3 class="text-xl font-semibold text-slate-800 mb-3 text-center">Curso Intensivo</h3>
+                    <p class="text-slate-600 text-center">Agosto a novembro: Foco na reta final, com revisão dos conteúdos mais cobrados e treinos direcionados.</p>
+                    <span class="mt-4 block text-center text-[#5242ea] font-bold">Inscreva-se Já!</span>
+                </a>
+                <!-- Service Card 1: Extensivo (INACTIVE) -->
+                <div class="bg-white p-6 rounded-xl shadow-md inactive-course">
+                    <div class="text-gray-400 text-4xl mb-4 text-center"><i class="fas fa-book-open"></i></div>
+                    <h3 class="text-xl font-semibold text-slate-800 mb-3 text-center">Curso Extensivo</h3>
+                    <p class="text-slate-600 text-center">Março a novembro: Aulas gravadas, materiais digitais, listas, simulados e correção de redação. (Inscrições encerradas)</p>
+                </div>
+                <!-- Service Card 3: Reforço (INACTIVE) -->
+                <div class="bg-white p-6 rounded-xl shadow-md inactive-course">
+                    <div class="text-gray-400 text-4xl mb-4 text-center"><i class="fas fa-life-ring"></i></div>
+                    <h3 class="text-xl font-semibold text-slate-800 mb-3 text-center">Curso de Reforço</h3>
+                    <p class="text-slate-600 text-center">Suporte adicional para estudantes com dificuldades específicas. (Inscrições encerradas)</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer id="contato" class="bg-slate-800 text-white py-12 rounded-t-3xl shadow-inner">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-6">Entre em Contato</h3>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-10 mb-8">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-envelope text-[#00abb1] text-xl"></i>
+                    <a href="mailto:professormichelfiliphy@gmail.com" class="text-slate-300 hover:text-white transition duration-300">professormichelfiliphy@gmail.com</a>
+                </div>
+                <div class="flex flex-col space-y-2 text-center">
+                     <div class="flex items-center space-x-3">
+                        <i class="fab fa-whatsapp text-[#00abb1] text-xl"></i>
+                        <span>Coord. (Michel): <a href="https://wa.me/5537999927364" target="_blank" class="text-slate-300 hover:text-white transition duration-300">37 99992-7364</a></span>
+                    </div>
+                     <div class="flex items-center space-x-3">
+                        <i class="fab fa-whatsapp text-[#00abb1] text-xl"></i>
+                        <span>Secretaria: <a href="https://wa.me/5537991797474" target="_blank" class="text-slate-300 hover:text-white transition duration-300">37 99179-7474</a></span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <i class="fab fa-instagram text-[#00abb1] text-xl"></i>
+                    <a href="https://instagram.com/professormichelf" target="_blank" class="text-slate-300 hover:text-white transition duration-300">@professormichelf</a>
+                </div>
+            </div>
+            <p class="text-slate-400 text-sm">&copy; 2025 Guia - Pré Federal. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Leaflet JS for Interactive Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
-    const syllabusData = {
-        portugues: `
-            <h4 class="font-bold text-lg mb-4">Língua Portuguesa e Literatura</h4>
-            <div class="space-y-3">
-                <div>
-                    <h5 class="font-semibold">Leitura de Textos</h5>
-                    <ul class="list-disc list-inside text-gray-700 ml-4">
-                        <li>Identificar tema central e subtemas; construir sentido global.</li>
-                        <li>Interpretar e relacionar ideias.</li>
-                        <li>Relacionar ideias com a realidade vivida.</li>
-                        <li>Identificar relações intertextuais.</li>
-                        <li>Posicionar-se criticamente.</li>
-                        <li>Reconhecer significações e efeitos de sentido das palavras.</li>
-                        <li>Distinguir fato de opinião.</li>
-                        <li>Interpretar linguagem verbal e não verbal.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-semibold">Análise Linguística</h5>
-                     <ul class="list-disc list-inside text-gray-700 ml-4">
-                        <li>Elementos de textualização: coesão e coerência.</li>
-                        <li>Relações morfossintáticas, semânticas e argumentativas.</li>
-                        <li>Variedades linguísticas e registros (formal e informal).</li>
-                    </ul>
-                </div>
-                 <div>
-                    <h5 class="font-semibold">Leitura da Obra Literária</h5>
-                     <ul class="list-disc list-inside text-gray-700 ml-4">
-                        <li>Identificar gênero e função social.</li>
-                        <li>Elementos do texto narrativo, dramático e poético.</li>
-                        <li>Relação entre texto, contexto e produção sócio-histórica.</li>
-                        <li>Análise de recursos de estilo: figuras de linguagem (metáfora, ironia, etc.).</li>
-                    </ul>
-                </div>
-            </div>`,
-        redacao: `
-            <h4 class="font-bold text-lg mb-4">Produção de Texto (Redação)</h4>
-            <div>
-                <h5 class="font-semibold">Competências Avaliadas</h5>
-                <ul class="list-disc list-inside space-y-2 text-gray-700 ml-4">
-                    <li><b>Clareza e Adequação:</b> Redigir com precisão, adequando a linguagem ao tema e à proposta.</li>
-                    <li><b>Domínio do Tema e Gênero:</b> Demonstrar compreensão do conteúdo proposto e adequação aos diferentes tipos e gêneros textuais.</li>
-                    <li><b>Argumentação:</b> Construir argumentação pertinente e bem fundamentada, especialmente em textos dissertativo-argumentativos.</li>
-                    <li><b>Norma Padrão:</b> Apresentar domínio dos fenômenos morfológicos, sintáticos e semânticos da língua.</li>
-                    <li><b>Coesão e Coerência:</b> Utilizar corretamente os mecanismos que garantem a ligação e o sentido do texto.</li>
-                </ul>
-            </div>
-            <div class="mt-4">
-                <h5 class="font-semibold">Gêneros Textuais a Dominar</h5>
-                 <ul class="list-disc list-inside text-gray-700 ml-4">
-                    <li><b>Narrativos:</b> Contos, lendas, fábulas, crônicas, romances.</li>
-                    <li><b>Descritivos:</b> Descrição de pessoas, lugares, objetos.</li>
-                    <li><b>Argumentativos:</b> Artigos de opinião, cartas de leitor, debates.</li>
-                    <li><b>Instrucionais:</b> Receitas, manuais, instruções.</li>
-                    <li><b>Expositivos:</b> Notícias, reportagens, artigos informativos.</li>
-                    <li><b>Poéticos:</b> Poemas, cordéis, músicas.</li>
-                    <li><b>Jornalísticos:</b> Notícias, reportagens, entrevistas.</li>
-                    <li><b>Outros:</b> Cartas, e-mails, resenhas, avisos, convites.</li>
-                </ul>
-            </div>`,
-        matematica: `
-            <h4 class="font-bold text-lg mb-4">Matemática</h4>
-             <div class="space-y-3">
-                <div>
-                    <h5 class="font-semibold">Conjuntos e Números</h5>
-                    <ul class="list-disc list-inside text-gray-700 ml-4">
-                        <li>Operações com conjuntos.</li>
-                        <li>Números naturais, inteiros, racionais, irracionais e reais: operações, propriedades, divisibilidade, MMC, MDC, potenciação, radicais e racionalização.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-semibold">Álgebra e Funções</h5>
-                     <ul class="list-disc list-inside text-gray-700 ml-4">
-                        <li>Expressões algébricas, produtos notáveis, fatoração.</li>
-                        <li>Equações e inequações de 1º e 2º graus; sistemas de equações.</li>
-                        <li>Funções de 1º e 2º graus: conceito, domínio, imagem, gráficos e variação de sinal.</li>
-                    </ul>
-                </div>
-                 <div>
-                    <h5 class="font-semibold">Geometria</h5>
-                     <ul class="list-disc list-inside text-gray-700 ml-4">
-                        <li>Círculo e circunferência, Teorema de Tales, congruência e semelhança de triângulos.</li>
-                        <li>Relações métricas e trigonométricas no triângulo.</li>
-                        <li>Área de figuras planas e polígonos regulares.</li>
-                         <li>Cálculo de volume e capacidade.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-semibold">Matemática Aplicada</h5>
-                     <ul class="list-disc list-inside text-gray-700 ml-4">
-                        <li>Razões, proporções, escalas, regra de três, porcentagem e juros simples.</li>
-                        <li>Estatística: leitura e interpretação de tabelas e gráficos, cálculo de Média Aritmética.</li>
-                    </ul>
-                </div>
-            </div>`,
-        biologia: `
-            <h4 class="font-bold text-lg mb-4">Biologia</h4>
-            <ul class="list-disc list-inside space-y-2 text-gray-700">
-                <li><b>Fundamentos da Vida:</b> Características dos seres vivos, origem da vida e evolução biológica.</li>
-                <li><b>Citologia:</b> Estruturas e funções da célula animal e vegetal (membrana, organelas, núcleo). Respiração celular e fermentação. Divisão celular (mitose e meiose).</li>
-                <li><b>Seres Vivos:</b> Classificação e características de vírus, bactérias, protozoários, algas, fungos, plantas e animais. Reprodução assexuada e sexuada.</li>
-                <li><b>Botânica:</b> Órgãos vegetativos e reprodutivos. Processos de absorção, transporte, transpiração, respiração e fotossíntese.</li>
-                <li><b>Fisiologia Humana:</b> Tecidos e sistemas (digestório, respiratório, cardiovascular, urinário, locomotor, nervoso, hormonal, reprodutor).</li>
-                <li><b>Genética:</b> DNA, cromossomos, 1ª Lei de Mendel, determinação do sexo, herança ligada ao sexo, grupos sanguíneos (ABO e Rh).</li>
-                <li><b>Ecologia e Saúde:</b> Ecossistemas brasileiros, cadeias e teias alimentares, relações ecológicas, principais problemas ambientais. Principais doenças carenciais, infecto-contagiosas, parasitárias e DSTs.</li>
-                <li><b>Biotecnologia:</b> Engenharia genética, OGM, clonagem e células-tronco.</li>
-            </ul>`,
-        quimica: `
-            <h4 class="font-bold text-lg mb-4">Química</h4>
-             <ul class="list-disc list-inside space-y-2 text-gray-700">
-                <li><b>Matéria e Propriedades:</b> Identificação de conhecimentos químicos no cotidiano. Propriedades gerais e específicas. Separação de misturas. Misturas, substâncias e fases. Fenômenos químicos e físicos.</li>
-                <li><b>Reações Químicas:</b> Ocorrência, identificação e representação. Reações de combustão e de neutralização ácido-base.</li>
-                <li><b>Estrutura da Matéria:</b> Modelo cinético molecular (estados físicos, forças intermoleculares). Comportamento elétrico da matéria (prótons e elétrons). Modelos atômicos (Dalton, Thomson, Rutherford-Bohr). Partículas constituintes do átomo. Elementos químicos (símbolos, nomes, número atômico via Tabela Periódica).</li>
-            </ul>`,
-        fisica: `
-             <h4 class="font-bold text-lg mb-4">Física</h4>
-            <ul class="list-disc list-inside space-y-2 text-gray-700">
-                <li><b>Mecânica:</b> Movimento (trajetória, velocidade, aceleração). Leis de Newton, massa e peso, força de atrito, máquinas simples. Trabalho, potência e energia (cinética e potencial).</li>
-                <li><b>Termologia:</b> Calor, propagação, temperatura, termômetros, dilatação térmica, mudanças de fase, evaporação.</li>
-                <li><b>Fluidos:</b> Densidade, pressão (atmosférica, em líquidos), vasos comunicantes, prensa hidráulica, empuxo.</li>
-                <li><b>Ondulatória:</b> Características de ondas, propagação de ondas mecânicas e eletromagnéticas, som, reflexão e eco.</li>
-                <li><b>Óptica:</b> Propagação da luz, reflexão (espelhos planos e esféricos), refração (lentes), dispersão luminosa.</li>
-                <li><b>Eletromagnetismo:</b> Cargas elétricas, eletrização. Condutores e isolantes. Corrente elétrica, circuito elétrico simples (série, paralelo, misto). Consumo de energia elétrica. Ímãs, magnetismo terrestre, bússola e eletroímãs.</li>
-            </ul>`,
-        historia: `
-            <h4 class="font-bold text-lg mb-4">História</h4>
-            <ul class="list-disc list-inside space-y-2 text-gray-700">
-                <li><b>Crise da Ordem Burguesa:</b> Expansão imperialista e Primeira Guerra Mundial. Revolução Russa. Crise de 1929. Regimes totalitários e nazifascistas. Segunda Guerra Mundial e a ordem mundial pós-1945. Guerra Fria. Descolonização afro-asiática. América Latina nos séculos XX e XXI e atualidades.</li>
-                <li><b>Formação do Brasil no Século XX:</b> Consolidação e crise da República Oligárquica. Revolução de 1930. O Estado Novo (1937-1945). Ascensão e crise dos Governos Populistas. Os governos militares e a redemocratização do Brasil. Da Nova República aos dias atuais. Aspectos socioculturais.</li>
-            </ul>`,
-        geografia: `
-            <h4 class="font-bold text-lg mb-4">Geografia</h4>
-            <ul class="list-disc list-inside space-y-2 text-gray-700">
-                <li><b>Cartografia e Terra:</b> Pontos e meios de orientação, análise e interpretação de mapas, movimentos do planeta Terra e suas consequências.</li>
-                <li><b>Dinâmicas da Natureza:</b> Formas do relevo (agentes formadores e modificadores), hidrografia e bacias hidrográficas, clima e dinâmica atmosférica, paisagens naturais e impactos socioambientais.</li>
-                <li><b>Espaço Geográfico Mundial:</b> Formação e diversidade dos continentes (América, Ásia, África, Europa, Oceania e Antártida). Características econômicas, socioculturais, políticas e ambientais do espaço mundial.</li>
-                <li><b>Espaço Geográfico Brasileiro:</b> O Brasil no contexto regional e mundial, atividades econômicas, urbanização, espaço agrário, estrutura e dinâmica populacional, diversidades regionais.</li>
-            </ul>`,
-        ingles: `
-            <h4 class="font-bold text-lg mb-4">Inglês</h4>
-            <ul class="list-disc list-inside space-y-2 text-gray-700">
-                <li><b>Leitura e Estratégias:</b> Compreensão de diferentes gêneros textuais, antecipação de sentido, inferência, identificação de informações-chave (skimming e scanning), percepção da intenção do autor, interpretação de linguagem verbal e não verbal, e recursos de persuasão.</li>
-                <li><b>Conhecimentos Linguísticos e Gramaticais:</b> Presente Simples e Contínuo, Passado Simples e Contínuo, Imperativo, Futuro (going to e will). Pronomes (sujeito, objeto, possessivos, relativos). Conectores, verbo modal 'can' (habilidades), sufixos e prefixos, comparativos e superlativos, e quantificadores (some, any, many, much).</li>
-            </ul>`
-    };
-
-    function showContent(subject) {
-        document.getElementById('content-display').innerHTML = syllabusData[subject];
-        document.querySelectorAll('.subject-icon').forEach(icon => {
-            icon.classList.remove('active');
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Smooth scroll for internal links
+                const href = link.getAttribute('href');
+                if (href.startsWith('#')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
         });
-        document.querySelector(`[onclick="showContent('${subject}')"]`).classList.add('active');
-    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        showContent('portugues');
-    });
+        // Interactive Map Logic
+        document.addEventListener('DOMContentLoaded', function () {
+            // 1. Initialize Map with scrollWheelZoom disabled
+            const map = L.map('map', { scrollWheelZoom: false }).setView([-18.5122, -44.5550], 7); // Centered on Minas Gerais
 
-    function changeHistTab(tabId) {
-        const tabsContainer = document.getElementById('tabs-container-hist');
-        const tabButtons = tabsContainer.querySelectorAll('.tab-button-hist');
-        const tabPanes = tabsContainer.querySelectorAll('.tab-pane-hist');
+            // 2. Add Tile Layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
 
-        tabButtons.forEach(button => {
-            button.classList.remove('active');
-            if (button.getAttribute('onclick').includes(tabId)) {
-                button.classList.add('active');
-            }
-        });
-        tabPanes.forEach(pane => {
-            pane.classList.add('hidden');
-            if (pane.id === `content-hist-${tabId}`) {
-                pane.classList.remove('hidden');
-            }
-        });
-    }
-
-    function simularNota() {
-            const dadosHistoricos = {
-                '2025': { corteObjetiva: 34.00, cortes: { '1a': { AC: 54.60, LI_EP: 51.40, LI_PPI: 43.80, LB_EP: 45.40, LB_PPI: 42.00 }, 'ultima': { AC: 54.60, LI_EP: 51.40, LI_PPI: 43.80, LB_EP: 45.40, LB_PPI: 42.00 } } },
-                '2024': { corteObjetiva: 29.00, cortes: { '1a': { AC: 48.20, LI_EP: 44.20, LI_PPI: 35.60, LB_EP: 40.20, LB_PPI: 33.80 }, 'ultima': { AC: 48.20, LI_EP: 40.40, LI_PPI: 40.60, LB_EP: 38.00, LB_PPI: 36.20 } } },
-                '2023': { corteObjetiva: 35.00, cortes: { '1a': { AC: 55.80, LI_EP: 50.00, LI_PPI: 46.20, LB_EP: 49.00, LB_PPI: 45.40 }, 'ultima': { AC: 55.00, LI_EP: 46.20, LI_PPI: 45.60, LB_EP: 41.20, LB_PPI: 39.40 } } },
-                '2022': { corteObjetiva: 33.00, cortes: { '1a': { AC: 57.40, LI_EP: 50.20, LI_PPI: 43.80, LB_EP: 48.00, LB_PPI: 43.00 }, 'ultima': { AC: 56.60, LI_EP: 47.80, LI_PPI: 47.20, LB_EP: 44.40, LB_PPI: 44.60 } } },
-                '2021': { corteObjetiva: 40.80, cortes: { '1a': { All: 57.12 }, 'ultima': { All: 57.12 } } }
+            // 3. Define School Data and Colors
+            const institutions = {
+                'IFMG': { color: '#4f46e5', name: 'IFMG' }, // Indigo
+                'IF Sudeste MG': { color: '#db2777', name: 'IF Sudeste' }, // Pink
+                'IFNMG': { color: '#16a34a', name: 'IFNMG' }, // Green
+                'IFTM': { color: '#d97706', name: 'IFTM' }, // Amber
+                'CEFET-MG': { color: '#0ea5e9', name: 'CEFET-MG' }, // Sky
+                'Coluni (UFV)': { color: '#6d28d9', name: 'Coluni (UFV)' }, // Violet
+                'IF Sul de Minas': { color: '#dc2626', name: 'IF Sul de Minas' } // Red
             };
 
-            const acertos = {
-                port: parseInt(document.getElementById('q-port').value) || 0,
-                mat: parseInt(document.getElementById('q-mat').value) || 0,
-                ciencia: parseInt(document.getElementById('q-ciencia').value) || 0,
-                geo: parseInt(document.getElementById('q-geo').value) || 0,
-                hist: parseInt(document.getElementById('q-hist').value) || 0,
-                eng: parseInt(document.getElementById('q-eng').value) || 0
-            };
+            const schools = [
+                { city: 'Almenara', institution: 'IFNMG', coords: [-16.173, -40.696], info: 'Campus Almenara' },
+                { city: 'Araçuaí', institution: 'IFNMG', coords: [-16.852, -42.067], info: 'Campus Araçuaí' },
+                { city: 'Arcos', institution: 'IFMG', coords: [-20.289, -45.539], info: 'Campus Arcos' },
+                { city: 'Arinos', institution: 'IFNMG', coords: [-15.918, -46.105], info: 'Campus Arinos' },
+                { city: 'Araxá', institution: 'CEFET-MG', coords: [-19.593, -46.941], info: 'Unidade Araxá' },
+                { city: 'Bambuí', institution: 'IFMG', coords: [-20.006, -45.977], info: 'Campus Bambuí' },
+                { city: 'Barbacena', institution: 'IF Sudeste MG', coords: [-21.225, -43.774], info: 'Campus Barbacena' },
+                { city: 'Belo Horizonte', institution: 'CEFET-MG', coords: [-19.920, -43.937], info: 'Campus I / II' },
+                { city: 'Belo Horizonte', institution: 'IFMG', coords: [-19.924, -43.994], info: 'Campus Belo Horizonte' },
+                { city: 'Betim', institution: 'IFMG', coords: [-19.967, -44.197], info: 'Campus Betim' },
+                { city: 'Bom Sucesso', institution: 'IF Sudeste MG', coords: [-21.035, -44.258], info: 'Campus Bom Sucesso' },
+                { city: 'Campina Verde', institution: 'IFTM', coords: [-19.537, -49.485], info: 'Campus Campina Verde' },
+                { city: 'Carmo de Minas', institution: 'IF Sul de Minas', coords: [-22.119, -45.131], info: 'Campus Avançado Carmo de Minas' },
+                { city: 'Cataguases', institution: 'IF Sudeste MG', coords: [-21.389, -42.697], info: 'Campus Cataguases' },
+                { city: 'Congonhas', institution: 'IFMG', coords: [-20.500, -43.856], info: 'Campus Congonhas' },
+                { city: 'Conselheiro Lafaiete', institution: 'IFMG', coords: [-20.661, -43.786], info: 'Campus Conselheiro Lafaiete' },
+                { city: 'Contagem', institution: 'CEFET-MG', coords: [-19.932, -44.054], info: 'Unidade Contagem' },
+                { city: 'Curvelo', institution: 'CEFET-MG', coords: [-18.756, -44.428], info: 'Unidade Curvelo' },
+                { city: 'Diamantina', institution: 'IFNMG', coords: [-18.248, -43.600], info: 'Campus Diamantina' },
+                { city: 'Divinópolis', institution: 'CEFET-MG', coords: [-20.139, -44.885], info: 'Unidade Divinópolis' },
+                { city: 'Formiga', institution: 'IFMG', coords: [-20.465, -45.426], info: 'Campus Formiga' },
+                { city: 'Governador Valadares', institution: 'IFMG', coords: [-18.851, -41.949], info: 'Campus Governador Valadares' },
+                { city: 'Ibirité', institution: 'IFMG', coords: [-20.021, -44.058], info: 'Campus Ibirité' },
+                { city: 'Inconfidentes', institution: 'IF Sul de Minas', coords: [-22.316, -46.326], info: 'Campus Inconfidentes' },
+                { city: 'Ipatinga', institution: 'IFMG', coords: [-19.479, -42.531], info: 'Campus Ipatinga' },
+                { city: 'Itabirito', institution: 'IFMG', coords: [-20.253, -43.801], info: 'Campus Itabirito' },
+                { city: 'Ituiutaba', institution: 'IFTM', coords: [-18.972, -49.465], info: 'Campus Ituiutaba' },
+                { city: 'Janaúba', institution: 'IFNMG', coords: [-15.803, -43.309], info: 'Campus Janaúba' },
+                { city: 'Januária', institution: 'IFNMG', coords: [-15.485, -44.363], info: 'Campus Januária' },
+                { city: 'Juiz de Fora', institution: 'IF Sudeste MG', coords: [-21.764, -43.349], info: 'Campus Juiz de Fora' },
+                { city: 'Leopoldina', institution: 'CEFET-MG', coords: [-21.531, -42.643], info: 'Unidade Leopoldina' },
+                { city: 'Machado', institution: 'IF Sul de Minas', coords: [-21.674, -45.920], info: 'Campus Machado' },
+                { city: 'Manhuaçu', institution: 'IF Sudeste MG', coords: [-20.258, -42.033], info: 'Campus Manhuaçu' },
+                { city: 'Montes Claros', institution: 'IFNMG', coords: [-16.735, -43.861], info: 'Campus Montes Claros' },
+                { city: 'Muriaé', institution: 'IF Sudeste MG', coords: [-21.131, -42.367], info: 'Campus Muriaé' },
+                { city: 'Muzambinho', institution: 'IF Sul de Minas', coords: [-21.375, -46.529], info: 'Campus Muzambinho' },
+                { city: 'Nepomuceno', institution: 'CEFET-MG', coords: [-21.233, -45.236], info: 'Unidade Nepomuceno' },
+                { city: 'Ouro Branco', institution: 'IFMG', coords: [-20.523, -43.694], info: 'Campus Ouro Branco' },
+                { city: 'Ouro Preto', institution: 'IFMG', coords: [-20.385, -43.504], info: 'Campus Ouro Preto' },
+                { city: 'Paracatu', institution: 'IFTM', coords: [-17.221, -46.875], info: 'Campus Paracatu' },
+                { city: 'Passos', institution: 'IF Sul de Minas', coords: [-20.719, -46.609], info: 'Campus Passos' },
+                { city: 'Patos de Minas', institution: 'IFTM', coords: [-18.578, -46.516], info: 'Campus Patos de Minas' },
+                { city: 'Patrocínio', institution: 'IFTM', coords: [-18.943, -46.994], info: 'Campus Patrocínio' },
+                { city: 'Pirapora', institution: 'IFNMG', coords: [-17.346, -44.942], info: 'Campus Pirapora' },
+                { city: 'Piumhi', institution: 'IFMG', coords: [-20.465, -45.958], info: 'Campus Piumhi' },
+                { city: 'Poços de Caldas', institution: 'IF Sul de Minas', coords: [-21.787, -46.561], info: 'Campus Poços de Caldas' },
+                { city: 'Ponte Nova', institution: 'IFMG', coords: [-20.411, -42.903], info: 'Campus Ponte Nova' },
+                { city: 'Porteirinha', institution: 'IFNMG', coords: [-15.742, -43.026], info: 'Campus Porteirinha' },
+                { city: 'Pouso Alegre', institution: 'IF Sul de Minas', coords: [-22.230, -45.935], info: 'Campus Pouso Alegre' },
+                { city: 'Ribeirão das Neves', institution: 'IFMG', coords: [-19.767, -44.087], info: 'Campus Ribeirão das Neves' },
+                { city: 'Rio Pomba', institution: 'IF Sudeste MG', coords: [-21.276, -43.179], info: 'Campus Rio Pomba' },
+                { city: 'Sabará', institution: 'IFMG', coords: [-19.888, -43.807], info: 'Campus Sabará' },
+                { city: 'Salinas', institution: 'IFNMG', coords: [-16.169, -42.290], info: 'Campus Salinas' },
+                { city: 'Santa Luzia', institution: 'IFMG', coords: [-19.769, -43.851], info: 'Campus Santa Luzia' },
+                { city: 'Santos Dumont', institution: 'IF Sudeste MG', coords: [-21.455, -43.551], info: 'Campus Santos Dumont' },
+                { city: 'São João del-Rei', institution: 'IF Sudeste MG', coords: [-21.135, -44.262], info: 'Campus São João del-Rei' },
+                { city: 'São João Evangelista', institution: 'IFMG', coords: [-18.550, -42.766], info: 'Campus São João Evangelista' },
+                { city: 'Teófilo Otoni', institution: 'IFNMG', coords: [-17.858, -41.505], info: 'Campus Teófilo Otoni' },
+                { city: 'Timóteo', institution: 'CEFET-MG', coords: [-19.582, -42.645], info: 'Unidade Timóteo' },
+                { city: 'Três Corações', institution: 'IF Sul de Minas', coords: [-21.696, -45.253], info: 'Campus Três Corações' },
+                { city: 'Ubá', institution: 'IF Sudeste MG', coords: [-21.121, -42.942], info: 'Campus Ubá' },
+                { city: 'Uberaba', institution: 'IFTM', coords: [-19.748, -47.931], info: 'Campus Uberaba' },
+                { city: 'Uberlândia', institution: 'IFTM', coords: [-18.918, -48.277], info: 'Campus Uberlândia' },
+                { city: 'Varginha', institution: 'CEFET-MG', coords: [-21.551, -45.432], info: 'Unidade Varginha' },
+                { city: 'Viçosa', institution: 'Coluni (UFV)', coords: [-20.754, -42.879], info: 'Colégio de Aplicação da UFV' }
+            ];
+
+            // 4. Create Custom Icons and Add Markers
+            schools.forEach(school => {
+                const inst = institutions[school.institution];
+                if (!inst) return;
+
+                const iconHtml = `<div style="background-color: ${inst.color};" class="w-6 h-6 rounded-full flex items-center justify-center text-white font-bold shadow-lg ring-2 ring-white">
+                                    <i class="fas fa-school text-xs"></i>
+                                  </div>`;
+
+                const customIcon = L.divIcon({
+                    html: iconHtml,
+                    className: 'custom-map-icon',
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 12],
+                    popupAnchor: [0, -14]
+                });
+
+                const popupContent = `
+                    <h4>${school.institution}</h4>
+                    <p>${school.info} - ${school.city}</p>
+                    <a href="https://www.google.com/search?q=${school.institution}+${school.city}" target="_blank">Saiba mais &rarr;</a>
+                `;
+
+                L.marker(school.coords, { icon: customIcon })
+                    .addTo(map)
+                    .bindPopup(popupContent);
+            });
             
-            const notaRedacao = parseFloat(document.getElementById('nota-redacao').value) || 0;
-            const modalidade = document.getElementById('sim-modalidade').value;
-            const temBonus2021 = document.getElementById('bonus-2021').checked;
-
-            const notaObjetiva = (acertos.port * 2) + (acertos.mat * 2) + acertos.ciencia + acertos.geo + acertos.hist + acertos.eng;
-            
-            let resultadoHtml = `
-                <h4 class="text-xl font-bold text-center mb-4 text-gray-800">Seu Desempenho Simulado</h4>
-                <p class="text-center font-semibold mb-6">Sua nota na prova objetiva: <span class="text-2xl" style="color: var(--brand-purple);">${notaObjetiva.toFixed(2)}</span> / 58,00</p>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-slate-50">
-                            <tr>
-                                <th class="px-4 py-2 text-left text-xs font-bold text-gray-500 uppercase">Ano</th>
-                                <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Redação Corrigida?</th>
-                                <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Sua Nota Final</th>
-                                <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Corte (Última Chamada)</th>
-                                <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Pontos Faltantes*</th>
-                                <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Situação Final</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">`;
-
-            for (const ano of ['2025', '2024', '2023', '2022', '2021']) {
-                const dadosAno = dadosHistoricos[ano];
-                let statusRedacao = 'Não';
-                let corStatusRedacao = 'text-red-600';
-                let notaFinal = '--';
-                let pontosFaltantes = '--';
-                let situacao = '<span class="font-semibold text-gray-500">Reprovado na Objetiva</span>';
-                let notaCorteModalidade = '--';
-
-                let notaObjetivaFinal = notaObjetiva;
-                if (ano === '2021' && temBonus2021) {
-                     notaObjetivaFinal *= 1.2;
-                }
-
-                if (notaObjetiva >= dadosAno.corteObjetiva) {
-                    statusRedacao = 'Sim';
-                    corStatusRedacao = 'text-green-600';
-                    
-                    const suaNotaFinalNum = notaObjetivaFinal + notaRedacao;
-                    notaFinal = suaNotaFinalNum.toFixed(2);
-                    
-                    const corte1a = (ano === '2021') ? dadosAno.cortes['1a'].All : dadosAno.cortes['1a'][modalidade];
-                    const corteUltima = (ano === '2021') ? dadosAno.cortes['ultima'].All : dadosAno.cortes['ultima'][modalidade];
-                    notaCorteModalidade = corteUltima.toFixed(2);
-
-                    if (suaNotaFinalNum >= corte1a) {
-                        situacao = '<span class="font-bold" style="color: var(--brand-purple);">Aprovado(a) 1ª Chamada</span>';
-                    } else if (suaNotaFinalNum >= corteUltima) {
-                        situacao = '<span class="font-bold" style="color: #2563eb;">Aprovado(a) Outras Chamadas</span>';
-                    } else {
-                        situacao = `<span class="font-semibold text-red-600">Na Lista de Espera</span>`;
-                        pontosFaltantes = (corteUltima - suaNotaFinalNum).toFixed(2);
-                    }
-                } else {
-                    pontosFaltantes = (dadosAno.corteObjetiva - notaObjetiva).toFixed(2);
-                    notaCorteModalidade = (ano === '2021') ? dadosAno.cortes['ultima'].All.toFixed(2) : dadosAno.cortes['ultima'][modalidade].toFixed(2);
-                }
-                
-                resultadoHtml += `
-                    <tr class="text-center">
-                        <td class="px-4 py-3 font-bold text-left">${ano}</td>
-                        <td class="px-4 py-3 font-semibold ${corStatusRedacao}">${statusRedacao}</td>
-                        <td class="px-4 py-3 font-bold">${notaFinal}</td>
-                        <td class="px-4 py-3 font-bold text-gray-600">${notaCorteModalidade}</td>
-                        <td class="px-4 py-3 font-semibold text-red-500">${pontosFaltantes}</td>
-                        <td class="px-4 py-3">${situacao}</td>
-                    </tr>`;
+            // 5. Create Map Legend
+            const legend = document.getElementById('map-legend');
+            for (const key in institutions) {
+                const inst = institutions[key];
+                const legendItem = document.createElement('div');
+                legendItem.className = 'flex items-center space-x-2';
+                legendItem.innerHTML = `<div style="background-color: ${inst.color};" class="w-4 h-4 rounded-full border-2 border-white shadow"></div><span class="text-sm font-medium text-slate-700">${inst.name}</span>`;
+                legend.appendChild(legendItem);
             }
-
-            resultadoHtml += `</tbody></table></div>
-            <p class="text-xs text-gray-500 mt-4">* <strong>Pontos Faltantes:</strong> Indica quantos pontos faltaram para atingir a nota de corte da última chamada (se a redação foi corrigida) ou para ter a redação corrigida (se reprovado na objetiva).</p>`;
-            
-            const resultadoDiv = document.getElementById('resultado-simulador');
-            resultadoDiv.innerHTML = resultadoHtml;
-            resultadoDiv.classList.remove('hidden');
-        }
+        });
     </script>
 </body>
 </html>
