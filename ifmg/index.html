@@ -1,45 +1,1077 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Em Construção - Guia</title>
+    <title>Guia Pré-Federal - IFMG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lexend:wght@600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet.js for Interactive Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <style>
+        :root {
+            --primary-purple: #5242ea;
+            --lime-green: #c7ef59;
+            --dark-purple: #3007a0;
+            --teal: #00abb1;
+            --secondary-purple: #6408b0;
+            --secondary-green: #7bcd47;
+            --dark-green: #005b38;
+            --orange-red: #dd5737;
+            --text-dark: #1a202c;
+            --background-light: #f8f9fa;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Lexend', sans-serif;
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            font-weight: 600;
+        }
+        .nav-link:hover {
+            color: var(--primary-purple);
+            border-bottom-color: var(--lime-green);
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--dark-purple);
+        }
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 3.5rem;
+            }
+        }
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #4A5568;
+            font-weight: 500;
+        }
+
+        .cta-section {
+            background-color: var(--primary-purple);
+            color: white;
+            padding: 4rem 1.5rem;
             text-align: center;
-            color: #ffffff;
-            background-color: #3007a0;
-            margin: 0;
-            padding: 0;
+            border-radius: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(82, 66, 234, 0.2), 0 4px 6px -2px rgba(82, 66, 234, 0.1);
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .cta-section p {
+            font-size: 1.125rem;
+            max-width: 48rem;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2rem;
+            color: #e0e7ff;
+        }
+
+        .cta-button-primary {
+            background-color: var(--lime-green);
+            color: var(--text-dark);
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            font-family: 'Lexend', sans-serif;
+            transition: all 0.3s ease;
+            transform: scale(1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .cta-button-primary:hover {
+            background-color: white;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+        .cta-button-secondary {
+            background-color: transparent;
+            border: 2px solid var(--lime-green);
+            color: var(--lime-green);
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            font-family: 'Lexend', sans-serif;
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+        .cta-button-secondary:hover {
+            background-color: var(--lime-green);
+            color: var(--text-dark);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        #map {
+            height: 600px;
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .leaflet-popup-content-wrapper {
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .leaflet-popup-content h5 {
+            font-family: 'Lexend', sans-serif;
+            font-weight: 700;
+            color: var(--dark-purple);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .leaflet-popup-content ul {
+            list-style-type: none;
+            padding-left: 0;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .leaflet-popup-content li {
+            font-size: 0.9rem;
+            padding: 0.25rem 0;
+            color: #4A5568;
+        }
+
+        /* Syllabus Section */
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            font-family: 'Lexend', sans-serif;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #e9ecef;
+            color: #495057;
+        }
+        .tab-button.active {
+            background-color: var(--primary-purple);
+            color: white;
+            box-shadow: 0 4px 10px rgba(82, 66, 234, 0.2);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .syllabus-list h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .syllabus-list ul {
+            list-style-position: inside;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .syllabus-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .syllabus-list li::before {
+            content: '✓';
+            color: var(--lime-green);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* Chart and Calculator adjustments */
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 60vh;
+            width: 100%;
+            max-width: 1000px;
+            max-height: 550px;
+        }
+        input[type="number"], select {
+            border-radius: 0.75rem !important;
+            border: 2px solid #dee2e6 !important;
+            transition: all 0.3s ease;
+        }
+        input[type="number"]:focus, select:focus {
+            border-color: var(--primary-purple) !important;
+            box-shadow: 0 0 0 3px rgba(82, 66, 234, 0.15);
+            outline: none;
+        }
+
+        .campus-result-box {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        .campus-result-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07), 0 4px 6px -2px rgba(0,0,0,0.04);
+        }
+        .campus-result-box h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-purple);
+            margin-bottom: 1rem;
+        }
+        .course-result-item {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--primary-purple);
+        }
+        #calculate-approval {
+            background-color: var(--primary-purple);
+            font-family: 'Lexend', sans-serif;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        #calculate-approval:hover {
+            background-color: var(--dark-purple);
+            transform: translateY(-2px);
+        }
+
+        /* Floating Action Button */
+        #fab-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+        }
+        #fab {
+            background-color: var(--primary-purple);
+            color: white;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .container {
-            padding: 20px;
-            background-color: #005b38;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        #fab:hover {
+            background-color: var(--dark-purple);
+            transform: scale(1.1);
         }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+        #fab-menu {
+            position: absolute;
+            bottom: 5rem;
+            right: 0;
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+            width: 250px;
+            transition: all 0.3s ease-in-out;
+            transform-origin: bottom right;
         }
-        p {
-            font-size: 1.2rem;
+        #fab-menu.hidden {
+            transform: scale(0);
+            opacity: 0;
         }
-        .highlight {
-            color: #c7ef59;
+        .fab-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .fab-menu-item:hover {
+            background-color: #f1f3f5;
+        }
+        .fab-menu-item svg {
+            margin-right: 1rem;
+            color: var(--primary-purple);
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Estamos construindo este site <span class="highlight">com carinho</span> para você!</h1>
-        <p>Em breve ele estará completamente disponível. Enquanto isso, acompanhe nossas novidades!</p>
+<body class="bg-background-light">
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#hero" class="text-2xl font-black" style="color: var(--dark-purple); font-family: 'Lexend', sans-serif;">
+                    Guia Pré-Federal
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#instituicao" class="nav-link">A Instituição</a>
+                    <a href="#processo" class="nav-link">Processo Seletivo</a>
+                    <a href="#cotas" class="nav-link">Cotas</a>
+                    <a href="#mapa" class="nav-link">Mapa</a>
+                    <a href="#conteudo" class="nav-link">Conteúdo</a>
+                    <a href="#analise" class="nav-link">Análise</a>
+                    <a href="#calculadora" class="nav-link">Calculadora</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="bg-white py-20 md:py-28">
+            <div class="container mx-auto px-6 text-center">
+                 <h1 class="text-5xl md:text-7xl font-black" style="color: var(--dark-purple);">
+                    Guia <span class="px-4 py-2 rounded-xl" style="background-color: var(--lime-green); color: var(--dark-purple);">Pré-Federal</span>
+                </h1>
+                <p class="section-subtitle max-w-3xl mx-auto mt-6">Seu Raio-X completo do vestibular do IFMG.</p>
+            </div>
+        </section>
+        
+        <section class="container mx-auto px-6 cta-section">
+            <h2 class="text-3xl md:text-4xl font-black mb-3">Quer Gabaritar o Processo Seletivo do IFMG?</h2>
+            <p class="max-w-3xl mx-auto mb-8">Nosso curso preparatório focado no IFMG oferece aulas, simulados, material de apoio e tudo que você precisa para conquistar sua vaga. Aumente suas chances de aprovação!</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
+                    Conheça Nosso Preparatório
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
+                    Fale Conosco no WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <section id="instituicao" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Conheça o IFMG</h2>
+                    <p class="section-subtitle mt-2">Uma instituição federal de educação pública, gratuita e de alta qualidade.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white rounded-xl shadow-lg p-8 transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="mb-4">
+                            <svg class="h-16 w-16 mx-auto text-primary-purple" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Educação de Excelência</h3>
+                        <p>Formação técnica e humana que prepara para o mercado de trabalho e para a vida.</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-8 transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="mb-4">
+                            <svg class="h-16 w-16 mx-auto" style="color: var(--teal);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Z"/><path d="M15 2v20"/><path d="M4 12H2"/><path d="M4 18H2"/><path d="M4 6H2"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Diversos Campi</h3>
+                        <p>Presente em 18 cidades estratégicas de Minas Gerais, facilitando o acesso ao ensino.</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-8 transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="mb-4">
+                            <svg class="h-16 w-16 mx-auto" style="color: var(--secondary-green);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 2H8.6c-.4 0-.8.2-1.1.5-.3.3-.5.7-.5 1.1v12.8c0 .4.2.8.5 1.1.3.3.7.5 1.1.5h9.8c.4 0 .8-.2 1.1-.5.3-.3.5-.7.5-1.1V6.5L15.5 2z"/><path d="M3 7.6v12.8c0 .4.2.8.5 1.1.3.3.7.5 1.1.5h9.8"/><path d="M15 2v5h5"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Oportunidades</h3>
+                        <p>Cursos alinhados com as demandas regionais, abrindo portas para o futuro profissional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="processo" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">O Processo Seletivo Descomplicado</h2>
+                    <p class="section-subtitle mt-2">Entenda as etapas para garantir sua vaga.</p>
+                </div>
+                <div class="relative">
+                    <div class="hidden md:block border-l-4 absolute h-full top-0 left-1/2 -ml-2" style="border-color: var(--lime-green);"></div>
+                    <div class="space-y-12 md:space-y-0">
+                        <div class="md:flex items-center">
+                            <div class="md:w-1/2 md:pr-8">
+                                <div class="bg-gray-50 rounded-xl shadow-xl p-6 border-l-4" style="border-color: var(--primary-purple);">
+                                    <h3 class="text-2xl font-bold mb-2">1. Edital e Inscrição</h3>
+                                    <p>Tudo começa com a leitura atenta do edital. A inscrição é online, permite escolher até 3 cursos no mesmo campus e requer atenção aos prazos e à taxa (ou pedido de isenção).</p>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 md:pl-8"></div>
+                        </div>
+                        <div class="md:flex items-center">
+                             <div class="md:w-1/2 md:pr-8"></div>
+                            <div class="md:w-1/2 md:pl-8">
+                                <div class="bg-gray-50 rounded-xl shadow-xl p-6 border-r-4 md:border-l-4 md:border-r-0" style="border-color: var(--primary-purple);">
+                                    <h3 class="text-2xl font-bold mb-2">2. A Prova</h3>
+                                    <p>A seleção é uma prova objetiva com 50 questões: 15 de Português, 15 de Matemática, 10 de Ciências da Natureza e 10 de Ciências Humanas. Prepare-se!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:flex items-center">
+                            <div class="md:w-1/2 md:pr-8">
+                                <div class="bg-gray-50 rounded-xl shadow-xl p-6 border-l-4" style="border-color: var(--primary-purple);">
+                                    <h3 class="text-2xl font-bold mb-2">3. Resultados e Chamadas</h3>
+                                    <p>Após a prova, os resultados são divulgados no site do IFMG. Fique atento às listas de classificados e excedentes, que podem ser chamados posteriormente.</p>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 md:pl-8"></div>
+                        </div>
+                         <div class="md:flex items-center">
+                             <div class="md:w-1/2 md:pr-8"></div>
+                            <div class="md:w-1/2 md:pl-8">
+                                <div class="bg-gray-50 rounded-xl shadow-xl p-6 border-r-4 md:border-l-4 md:border-r-0" style="border-color: var(--primary-purple);">
+                                    <h3 class="text-2xl font-bold mb-2">4. Matrícula</h3>
+                                    <p>Se você foi classificado, parabéns! Agora é hora de reunir a documentação (incluindo a comprovação de cotas) e realizar a matrícula online para garantir sua vaga.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cotas" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">O Poder das Cotas: Entenda Sua Vaga</h2>
+                    <p class="section-subtitle mt-2">O sistema de cotas mudou. Veja abaixo uma explicação geral para os processos seletivos de 2024 e 2025.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-xl shadow-xl p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-center">Processo Seletivo 2025</h3>
+                        <p class="mb-4">Com a nova Lei de Cotas, os grupos visam garantir vagas para candidatos de escola pública, com subdivisões de renda, etnia e deficiência.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>AC:</strong> Ampla Concorrência.</li>
+                            <li><strong>Grupos LB (Renda Baixa):</strong> Para quem cursou o ensino fundamental em escola pública e possui renda familiar per capita igual ou inferior a 1 salário mínimo (comprovação via CadÚnico). Subdivide-se em:
+                                <ul class="list-circle list-inside ml-4 mt-2">
+                                    <li><strong>LB-PPI:</strong> Autodeclarados pretos, pardos ou indígenas.</li>
+                                    <li><strong>LB-Q:</strong> Autodeclarados quilombolas.</li>
+                                    <li><strong>LB-PCD:</strong> Pessoas com deficiência.</li>
+                                    <li><strong>LB-EP:</strong> Demais candidatos de escola pública.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Grupos LI (Independente de Renda):</strong> Para quem cursou o ensino fundamental em escola pública, sem critério de renda. Subdivide-se em:
+                                <ul class="list-circle list-inside ml-4 mt-2">
+                                    <li><strong>LI-PPI, LI-Q, LI-PCD, LI-EP</strong> com as mesmas definições acima.</li>
+                                </ul>
+                            </li>
+                             <p class="mt-4 text-sm bg-purple-100 p-3 rounded-lg border-l-4 border-purple-500"><strong>Importante:</strong> Ao se inscrever em uma cota (ex: LB-PPI), você concorre automaticamente também nas cotas menos restritivas (LB-EP, LI-PPI, LI-EP) e na Ampla Concorrência (AC).</p>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-xl p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-center">Processo Seletivo 2024</h3>
+                        <p class="mb-4">No edital de 2024, a nomenclatura e alguns critérios eram diferentes, com mais subdivisões.</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>A0:</strong> Ampla Concorrência.</li>
+                            <li><strong>Vagas de Escola Pública (50%):</strong> Divididas em dois subgrupos:
+                                <ul class="list-circle list-inside ml-4 mt-2">
+                                    <li><strong>Com critério de Renda (até 1,5 salário mínimo per capita):</strong>
+                                        <ul class="list-disc list-inside ml-4">
+                                            <li><strong>L1:</strong> Escola pública e baixa renda.</li>
+                                            <li><strong>L2:</strong> L1 + autodeclarados PPI.</li>
+                                            <li><strong>L9 (extinto):</strong> L1 + PCD.</li>
+                                            <li><strong>L10 (extinto):</strong> L2 + PCD.</li>
+                                        </ul>
+                                    </li>
+                                    <li class="mt-2"><strong>Sem critério de Renda:</strong>
+                                         <ul class="list-disc list-inside ml-4">
+                                            <li><strong>L5:</strong> Apenas escola pública.</li>
+                                            <li><strong>L6:</strong> L5 + autodeclarados PPI.</li>
+                                            <li><strong>L13 (extinto):</strong> L5 + PCD.</li>
+                                            <li><strong>L14 (extinto):</strong> L6 + PCD.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                             <li><strong>V3985:</strong> Vaga específica para Pessoas com Deficiência (PCD).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mapa" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Mapa Interativo dos Campi</h2>
+                    <p class="section-subtitle mt-2">Explore as 18 unidades do IFMG e os cursos que cada uma oferece. Use os botões +/- para dar zoom.</p>
+                </div>
+                <div id="map"></div>
+            </div>
+        </section>
+
+        <section id="conteudo" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">O que Estudar?</h2>
+                    <p class="section-subtitle mt-2">Veja os principais tópicos cobrados na prova, com base no edital de 2025.</p>
+                </div>
+                <div class="max-w-5xl mx-auto">
+                    <div id="tabs-container" class="flex flex-wrap justify-center gap-3 md:gap-4 mb-8">
+                        <button class="tab-button active" data-tab="portugues">
+                            Português
+                        </button>
+                        <button class="tab-button" data-tab="matematica">
+                            Matemática
+                        </button>
+                        <button class="tab-button" data-tab="ciencias_natureza">
+                            Ciências da Natureza
+                        </button>
+                        <button class="tab-button" data-tab="ciencias_humanas">
+                            Ciências Humanas
+                        </button>
+                    </div>
+                    <div id="tabs-content" class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                        <div id="portugues-content" class="tab-content active syllabus-list">
+                            <h4>Língua Portuguesa</h4>
+                            <ul>
+                                <li>Análise de gêneros textuais variados (notícia, charge, editorial, artigo de opinião, crônica, conto, poesia, etc.).</li>
+                                <li>Interpretação de textos: identificação de fato central, tema, argumentos, ironia e humor.</li>
+                                <li>Relações de intertextualidade e interdiscursividade (paráfrase, paródia, citação).</li>
+                                <li>Variação linguística (regional, histórica, social, situacional).</li>
+                                <li>Coesão e coerência: pronomes, conjunções, pontuação.</li>
+                                <li>Figuras de linguagem (metáfora, metonímia, eufemismo, etc.).</li>
+                                <li>Vozes do verbo (ativa e passiva) e orações subordinadas adjetivas.</li>
+                            </ul>
+                        </div>
+                        <div id="matematica-content" class="tab-content syllabus-list">
+                            <h4>Matemática</h4>
+                            <ul>
+                                <li>Operações com números naturais, múltiplos e divisores (MMC, MDC).</li>
+                                <li>Porcentagens, acréscimos e decréscimos.</li>
+                                <li>Números racionais (operações, dízimas periódicas).</li>
+                                <li>Potenciação, radiciação e expressões algébricas.</li>
+                                <li>Equações de 1º e 2º grau, sistemas de equações.</li>
+                                <li>Relações de proporcionalidade (regra de três simples e composta).</li>
+                                <li>Geometria: polígonos, ângulos, áreas, volume de prismas, Teorema de Pitágoras e Tales.</li>
+                                <li>Plano cartesiano: distância entre pontos.</li>
+                                <li>Estatística e Probabilidade: média, moda, mediana, gráficos e princípio multiplicativo.</li>
+                            </ul>
+                        </div>
+                        <div id="ciencias_natureza-content" class="tab-content syllabus-list">
+                            <h4>Ciências da Natureza (Física, Química e Biologia)</h4>
+                            <ul>
+                                <li><b>Química:</b> Propriedades da matéria, modelos atômicos, Tabela Periódica, ligações químicas (iônica, covalente, metálica), funções inorgânicas (ácidos, bases, sais, óxidos).</li>
+                                <li><b>Biologia:</b> Classificação dos seres vivos (5 reinos), organização celular (célula, tecidos), fotossíntese, respiração, ecologia (cadeias alimentares, ciclos), saúde (doenças, métodos contraceptivos), genética (mitose, meiose).</li>
+                                <li><b>Física:</b> Movimento, Leis de Newton, energia, calor e temperatura (propagação, equilíbrio), eletricidade (fontes, circuitos, consumo), astronomia (Sistema Solar, fases da Lua, eclipses).</li>
+                            </ul>
+                        </div>
+                        <div id="ciencias_humanas-content" class="tab-content syllabus-list">
+                            <h4>Ciências Humanas (História e Geografia)</h4>
+                             <ul>
+                                <li><b>História:</b> Periodização histórica, sociedades antigas e medievais, expansão marítima, monarquias europeias, conquista da América, escravidão, Iluminismo, Revolução Francesa e Industrial, Brasil Colônia, Império e República (até os dias atuais), conflitos mundiais, Guerra Fria, ditadura militar no Brasil e redemocratização.</li>
+                                <li><b>Geografia:</b> Formação do território brasileiro, dinâmica populacional, urbanização, industrialização, cartografia (mapas, escalas), domínios morfoclimáticos do Brasil, globalização, blocos econômicos, fontes de energia, questões ambientais.</li>
+                            </ul>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-6">Atenção: Esta é uma síntese dos principais tópicos. Para a lista completa e detalhada, consulte sempre o edital oficial mais recente do processo seletivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="analise" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Raio-X da Aprovação</h2>
+                    <p class="section-subtitle mt-2">Filtre por ano e campus para analisar as notas mínimas. Use como seu alvo de estudos!</p>
+                </div>
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <label for="year-select" class="block text-lg font-medium text-gray-700 mb-2">Selecione o Ano:</label>
+                        <select id="year-select" class="block w-full p-3 bg-white rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50 text-lg">
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="campus-select" class="block text-lg font-medium text-gray-700 mb-2">Selecione um Campus:</label>
+                        <select id="campus-select" class="block w-full p-3 bg-white rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50 text-lg">
+                            <!-- Options will be populated by JS -->
+                        </select>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl shadow-lg p-4 md:p-8">
+                    <div id="campusChartContainer" class="chart-container">
+                        <canvas id="campusChart"></canvas>
+                    </div>
+                    <p id="campusChartDescription" class="text-center text-sm text-gray-500 mt-6"></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculadora" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Calculadora de Aprovação</h2>
+                    <p class="section-subtitle mt-2">Insira seus acertos, selecione um ano de referência e descubra em quais cursos você teria sido aprovado(a)!</p>
+                </div>
+                <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div>
+                            <label for="notaLP" class="block text-lg font-medium text-gray-700 mb-2">Português (Max: 15)</label>
+                            <input type="number" id="notaLP" min="0" max="15" class="block w-full p-3 rounded-xl shadow-sm text-lg" placeholder="Ex: 12">
+                        </div>
+                        <div>
+                            <label for="notaMAT" class="block text-lg font-medium text-gray-700 mb-2">Matemática (Max: 15)</label>
+                            <input type="number" id="notaMAT" min="0" max="15" class="block w-full p-3 rounded-xl shadow-sm text-lg" placeholder="Ex: 11">
+                        </div>
+                        <div>
+                            <label for="notaCIE_NAT" class="block text-lg font-medium text-gray-700 mb-2">Ciên. Natureza (Max: 10)</label>
+                            <input type="number" id="notaCIE_NAT" min="0" max="10" class="block w-full p-3 rounded-xl shadow-sm text-lg" placeholder="Ex: 8">
+                        </div>
+                        <div>
+                            <label for="notaCIE_HUM" class="block text-lg font-medium text-gray-700 mb-2">Ciên. Humanas (Max: 10)</label>
+                            <input type="number" id="notaCIE_HUM" min="0" max="10" class="block w-full p-3 rounded-xl shadow-sm text-lg" placeholder="Ex: 7">
+                        </div>
+                    </div>
+                    
+                    <div id="specific-course-check-section" class="mt-8 pt-8 border-t border-gray-300">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">Verificar Aprovação em Curso Específico:</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div>
+                                <label for="calc-year-select" class="block text-lg font-medium text-gray-700 mb-2">Ano de Referência:</label>
+                                <select id="calc-year-select" class="block w-full p-3 bg-white rounded-xl shadow-sm text-lg">
+                                    <option value="2025">2025</option>
+                                    <option value="2024">2024</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="specific-campus-select" class="block text-lg font-medium text-gray-700 mb-2">Campus:</label>
+                                <select id="specific-campus-select" class="block w-full p-3 bg-white rounded-xl shadow-sm text-lg">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="specific-course-select" class="block text-lg font-medium text-gray-700 mb-2">Curso:</label>
+                                <select id="specific-course-select" class="block w-full p-3 bg-white rounded-xl shadow-sm text-lg" disabled>
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="calculate-approval" class="w-full text-white font-bold py-4 px-6 rounded-xl shadow-md transition-all duration-300 mt-8 text-lg">Calcular Aprovação</button>
+                    
+                    <div id="approval-results" class="mt-8 p-6 bg-gray-50 rounded-xl shadow-inner hidden">
+                        <p id="total-score-display" class="text-xl font-semibold text-gray-800 mb-6 text-center"></p>
+                        <div id="specific-approval-results" class="mb-6 hidden">
+                            <h4 class="text-xl font-bold mb-3 text-gray-800">Resultado para Curso Específico:</h4>
+                            <div id="specific-course-result" class="text-lg text-gray-700 bg-white p-4 rounded-lg"></div>
+                        </div>
+                        <h3 id="general-results-heading" class="text-xl font-bold mb-4 text-gray-800 mt-8 hidden"></h3>
+                        <div id="passed-courses-cards" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        </div>
+                        <p id="no-passed-courses" class="text-md text-gray-600 hidden mt-4 text-center bg-yellow-100 p-4 rounded-lg border border-yellow-300"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mx-auto px-6 cta-section">
+            <h2 class="text-3xl md:text-4xl font-black mb-3">Pronto para Conquistar sua Vaga no IFMG?</h2>
+            <p class="max-w-3xl mx-auto mb-8">Não deixe seu futuro ao acaso. Prepare-se com quem entende do assunto e garanta sua aprovação. Clique abaixo para saber mais!</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                 <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
+                    Conheça Nosso Preparatório
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
+                    Fale Conosco no WhatsApp
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-300">&copy; 2025 Guia Pré-Federal. Todos os direitos reservados.</p>
+            <p class="text-sm text-gray-500 mt-2">Este é um guia não-oficial. As informações oficiais e definitivas devem ser consultadas no <a href="https://www.ifmg.edu.br/" target="_blank" class="text-lime-green hover:underline">site do IFMG</a> e nos respectivos editais.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div id="fab-container">
+        <div id="fab-menu" class="hidden">
+            <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="fab-menu-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
+                <span>Preparatório</span>
+            </a>
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-menu-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span>WhatsApp</span>
+            </a>
+        </div>
+        <button id="fab">
+            <svg id="fab-icon-open" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            <svg id="fab-icon-close" class="hidden" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
     </div>
+
+    <script>
+        // DATA OBJECTS
+        const admissionData2025 = { "Arcos": [{ course: "Técnico em Administração", group: "AC", score: 30.00 }, { course: "Técnico em Administração", group: "LB-PPI", score: 19.00 }, { course: "Técnico em Administração", group: "LI-EP", score: 25.00 }, { course: "Técnico em Administração", group: "LI-PPI", score: 14.00 }, { course: "Técnico em Mecânica", group: "AC", score: 0 }, { course: "Técnico em Mecânica", group: "LI-PPI", score: 0 }, { course: "Técnico em Mecânica", group: "LI-EP", score: 0 }, ], "Bambuí": [{ course: "Técnico em Administração", group: "AC", score: 27.00 }, { course: "Técnico em Administração", group: "LI-EP", score: 18.00 }, { course: "Técnico em Administração", group: "LB-PPI", score: 22.00 }, { course: "Técnico em Administração", group: "LI-PPI", score: 22.00 }, { course: "Técnico em Administração", group: "LB-EP", score: 19.00 }, { course: "Técnico em Informática", group: "AC", score: 27.00 }, { course: "Técnico em Informática", group: "LI-EP", score: 22.00 }, { course: "Técnico em Informática", group: "LB-PPI", score: 25.00 }, { course: "Técnico em Informática", group: "LI-PPI", score: 22.00 }, { course: "Técnico em Eletromecânica", group: "AC", score: 15.00 }, { course: "Técnico em Eletromecânica", group: "LI-PPI", score: 0 }, { course: "Técnico em Eletromecânica", group: "LB-EP", score: 0 }, { course: "Técnico em Eletromecânica", group: "LI-EP", score: 0 }, { course: "Técnico em Meio Ambiente", group: "AC", score: 0 }, { course: "Técnico em Meio Ambiente", group: "LI-EP", score: 0 }, ], "Betim": [{ course: "Técnico em Automação Industrial", group: "AC", score: 44.00 }, { course: "Técnico em Automação Industrial", group: "LB-EP", score: 35.00 }, { course: "Técnico em Automação Industrial", group: "LB-PPI", score: 31.00 }, { course: "Técnico em Automação Industrial", group: "LB-PCD", score: 23.00 }, { course: "Técnico em Mecânica", group: "LB-EP", score: 34.00 }, ], "Congonhas": [{ course: "Técnico em Edificações", group: "LI-EP", score: 35.00 }, { course: "Técnico em Edificações", group: "AC", score: 33.00 }, { course: "Técnico em Edificações", group: "LB-EP", score: 29.00 }, { course: "Técnico em Edificações", group: "LB-PPI", score: 24.00 }, { course: "Técnico em Edificações", group: "LI-PPI", score: 28.00 }, { course: "Técnico em Edificações", group: "LI-PCD", score: 27.00 }, { course: "Técnico em Edificações", group: "LB-PCD", score: 17.00 }, { course: "Técnico em Mecânica", group: "LB-EP", score: 30.00 }, { course: "Técnico em Mecânica", group: "LB-PPI", score: 25.00 }, { course: "Técnico em Mecânica", group: "LI-PCD", score: 15.00 }, { course: "Técnico em Mineração", group: "AC", score: 31.00 }, { course: "Técnico em Mineração", group: "LI-EP", score: 31.00 }, { course: "Técnico em Mineração", group: "LB-PPI", score: 24.00 }, { course: "Técnico em Mineração", group: "LI-PPI", score: 30.00 }, { course: "Técnico em Mineração", group: "LB-EP", score: 30.00 }, { course: "Técnico em Mineração", group: "LI-PCD", score: 24.00 }, ], "Conselheiro Lafaiete": [{ course: "Técnico em Eletrotécnica", group: "AC", score: 46.00 }, { course: "Técnico em Eletrotécnica", group: "LI-EP", score: 32.00 }, ], "Formiga": [{ course: "Técnico em Administração", group: "AC", score: 30.00 }, { course: "Técnico em Administração", group: "LI-EP", score: 29.00 }, { course: "Técnico em Administração", group: "LB-EP", score: 24.00 }, { course: "Técnico em Administração", group: "LI-PPI", score: 23.00 }, { course: "Técnico em Eletrotécnica", group: "LI-PCD", score: 0 }, { course: "Técnico em Informática", group: "AC", score: 33.00 }, { course: "Técnico em Informática", group: "LI-EP", score: 35.00 }, { course: "Técnico em Informática", group: "LI-PPI", score: 23.00 }, { course: "Técnico em Informática", group: "LB-EP", score: 23.00 }, ], "Governador Valadares": [{ course: "Técnico em Edificações", group: "AC", score: 33.00 }, { course: "Técnico em Edificações", group: "LI-EP", score: 31.00 }, { course: "Técnico em Edificações", group: "LI-PPI", score: 27.00 }, { course: "Técnico em Edificações", group: "LB-PPI", score: 25.00 }, { course: "Técnico em Meio Ambiente", group: "AC", score: 40.00 }, { course: "Técnico em Meio Ambiente", group: "LB-PPI", score: 25.00 }, { course: "Técnico em Meio Ambiente", group: "LB-EP", score: 30.00 }, { course: "Técnico em Segurança do Trabalho", group: "AC", score: 32.00 }, { course: "Técnico em Segurança do Trabalho", group: "LI-EP", score: 31.00 }, { course: "Técnico em Segurança do Trabalho", group: "LI-PPI", score: 36.00 }, { course: "Técnico em Segurança do Trabalho", group: "LB-PPI", score: 24.00 }, ], "Ibirité": [{ course: "Técnico em Automação Industrial", group: "AC", score: 35.00 }, { course: "Técnico em Mecatrônica", group: "LI-EP", score: 43.00 }, { course: "Técnico em Mecatrônica", group: "AC", score: 39.00 }, { course: "Técnico em Mecatrônica", group: "LB-PPI", score: 29.00 }, { course: "Técnico em Mecatrônica", group: "LB-Q", score: 24.00 }, ], "Ipatinga": [{ course: "Técnico em Automação Industrial", group: "LI-EP", score: 42.00 }, { course: "Técnico em Automação Industrial", group: "LI-PPI", score: 33.00 }, { course: "Técnico em Automação Industrial", group: "LI-PCD", score: 32.00 }, ], "Itabirito": [{ course: "Técnico em Automação Industrial", group: "LI-PPI", score: 43.00 }, { course: "Técnico em Automação Industrial", group: "LI-EP", score: 31.00 }, ], "Ouro Branco": [{ course: "Técnico em Administração", group: "LI-EP", score: 32.00 }, { course: "Técnico em Administração", group: "AC", score: 33.00 }, { course: "Técnico em Administração", group: "LI-PPI", score: 16.00 }, { course: "Técnico em Administração", group: "LB-EP", score: 23.00 }, { course: "Técnico em Administração", group: "LB-PPI", score: 16.00 }, { course: "Técnico em Administração", group: "LI-PCD", score: 26.00 }, { course: "Técnico em Administração", group: "LB-PCD", score: 22.00 }, { course: "Técnico em Metalurgia", group: "AC", score: 33.00 }, { course: "Técnico em Metalurgia", group: "LI-EP", score: 32.00 }, { course: "Técnico em Metalurgia", group: "LB-EP", score: 25.00 }, { course: "Técnico em Metalurgia", group: "LI-PPI", score: 29.00 }, { course: "Técnico em Metalurgia", group: "LI-PCD", score: 24.00 }, { course: "Técnico em Metalurgia", group: "LB-PPI", score: 23.00 }, { course: "Técnico em Informática", group: "AC", score: 35.00 }, { course: "Técnico em Informática", group: "LI-EP", score: 34.00 }, { course: "Técnico em Informática", group: "LB-EP", score: 32.00 }, { course: "Técnico em Informática", group: "LI-PPI", score: 31.00 }, { course: "Técnico em Informática", group: "LB-PPI", score: 25.00 }, { course: "Técnico em Informática", group: "LB-PCD", score: 14.00 }, ], "Ouro Preto": [{ course: "Técnico em Administração", group: "AC", score: 33.00 }, { course: "Técnico em Administração", group: "LI-EP", score: 32.00 }, { course: "Técnico em Administração", group: "LI-PPI", score: 30.00 }, { course: "Técnico em Administração", group: "LB-EP", score: 29.00 }, { course: "Técnico em Administração", group: "LB-PPI", score: 23.00 }, { course: "Técnico em Administração", group: "LI-PCD", score: 30.00 }, { course: "Técnico em Automação Industrial", group: "AC", score: 33.00 }, { course: "Técnico em Automação Industrial", group: "LI-EP", score: 32.00 }, { course: "Técnico em Automação Industrial", group: "LB-EP", score: 33.00 }, { course: "Técnico em Automação Industrial", group: "LB-PPI", score: 16.00 }, { course: "Técnico em Edificações", group: "AC", score: 32.00 }, { course: "Técnico em Edificações", group: "LI-EP", score: 31.00 }, { course: "Técnico em Edificações", group: "LB-EP", score: 25.00 }, { course: "Técnico em Edificações", group: "LI-PPI", score: 26.00 }, { course: "Técnico em Edificações", group: "LB-PPI", score: 12.00 }, { course: "Técnico em Edificações", group: "LI-PCD", score: 29.00 }, { course: "Técnico em Metalurgia", group: "AC", score: 0 }, { course: "Técnico em Metalurgia", group: "LB-PPI", score: 0 }, { course: "Técnico em Metalurgia", group: "LI-EP", score: 0 }, { course: "Técnico em Metalurgia", group: "LI-PPI", score: 0 }, { course: "Técnico em Metalurgia", group: "LB-EP", score: 0 }, { course: "Técnico em Mineração", group: "AC", score: 32.00 }, { course: "Técnico em Mineração", group: "LI-EP", score: 30.00 }, { course: "Técnico em Mineração", group: "LB-PPI", score: 32.00 }, { course: "Técnico em Mineração", group: "LI-PPI", score: 27.00 }, { course: "Técnico em Mineração", group: "LB-EP", score: 27.00 }, ], "Piumhi": [{ course: "Técnico em Edificações", group: "AC", score: 24.00 }, { course: "Técnico em Edificações", group: "LI-EP", score: 19.00 }, { course: "Técnico em Edificações", group: "LB-EP", score: 24.00 }, ], "Ponte Nova": [{ course: "Técnico em Administração", group: "AC", score: 33.00 }, { course: "Técnico em Administração", group: "LI-EP", score: 32.00 }, { course: "Técnico em Administração", group: "LI-PPI", score: 30.00 }, { course: "Técnico em Administração", group: "LB-PPI", score: 29.00 }, { course: "Técnico em Administração", group: "LB-EP", score: 29.00 }, { course: "Técnico em Informática", group: "AC", score: 34.00 }, { course: "Técnico em Informática", group: "LI-EP", score: 32.00 }, { course: "Técnico em Informática", group: "LB-PPI", score: 34.00 }, { course: "Técnico em Informática", group: "LI-PPI", score: 29.00 }, { course: "Técnico em Informática", group: "LB-EP", score: 29.00 }, ], "Ribeirão das Neves": [{ course: "Técnico em Administração", group: "AC", score: 34.00 }, { course: "Técnico em Administração", group: "LB-PPI", score: 29.00 }, { course: "Técnico em Administração", group: "LI-EP", score: 32.00 }, { course: "Técnico em Administração", group: "LI-PPI", score: 29.00 }, { course: "Técnico em Administração", group: "LB-EP", score: 31.00 }, { course: "Técnico em Informática", group: "AC", score: 39.00 }, { course: "Técnico em Informática", group: "LB-PPI", score: 29.00 }, { course: "Técnico em Eletroeletrônica", group: "AC", score: 35.00 }, { course: "Técnico em Eletroeletrônica", group: "LB-PCD", score: 18.00 }, ], "Sabará": [{ course: "Técnico em Administração", group: "LI-EP", score: 46.00 }, { course: "Técnico em Administração", group: "LB-PPI", score: 31.00 }, { course: "Técnico em Administração", group: "LI-PPI", score: 31.00 }, { course: "Técnico em Eletrônica", group: "AC", score: 41.00 }, { course: "Técnico em Eletrônica", group: "LB-PPI", score: 31.00 }, { course: "Técnico em Eletrônica", group: "LI-PPI", score: 30.00 }, { course: "Técnico em Informática", group: "LB-EP", score: 33.00 }, { course: "Técnico em Informática", group: "LI-PPI", score: 31.00 }, { course: "Técnico em Informática", group: "LB-PPI", score: 32.00 }, ], "Santa Luzia": [{ course: "Técnico em Edificações", group: "AC", score: 35.00 }, { course: "Técnico em Edificações", group: "LI-EP", score: 35.00 }, { course: "Técnico em Edificações", group: "LB-PPI", score: 27.00 }, { course: "Técnico em Segurança do Trabalho", group: "AC", score: 39.00 }, { course: "Técnico em Segurança do Trabalho", group: "LI-EP", score: 34.00 }, { course: "Técnico em Segurança do Trabalho", group: "LI-PPI", score: 33.00 }, ], "São João Evangelista": [{ course: "Técnico em Agropecuária", group: "LI-EP", score: 31.00 }, { course: "Técnico em Agropecuária", group: "LB-EP", score: 31.00 }, { course: "Técnico em Agropecuária", group: "LI-PPI", score: 31.00 }, { course: "Técnico em Informática", group: "LI-PPI", score: 30.00 }, { course: "Técnico em Informática", group: "LB-EP", score: 30.00 }, { course: "Técnico em Informática", group: "LB-PPI", score: 24.00 }, { course: "Técnico em Informática", group: "LB-Q", score: 20.00 }, { course: "Técnico em Informática", group: "LI-PCD", score: 12.00 }, { course: "Técnico em Nutrição e Dietética", group: "LI-PCD", score: 16.00 }, { course: "Técnico em Agrimensura", group: "LB-PPI", score: 0 }, { course: "Técnico em Agrimensura", group: "LI-EP", score: 0 }, { course: "Técnico em Agrimensura", group: "LB-EP", score: 0 }, { course: "Técnico em Agrimensura", group: "LI-PPI", score: 0 }, ], };
+        const admissionData2024 = { "Arcos": [{ course: "Técnico em Mecânica", group: "A0", score: 15.00 }, ], "Bambuí": [{ course: "Técnico em Administração", group: "A0", score: 34.00 }, { course: "Técnico em Administração", group: "L1", score: 17.00 }, { course: "Técnico em Administração", group: "L6", score: 22.00 }, { course: "Técnico em Agropecuária", group: "A0", score: 29.00 }, { course: "Técnico em Agropecuária", group: "L5", score: 21.00 }, { course: "Técnico em Biotecnologia", group: "L2", score: 21.00 }, { course: "Técnico em Informática", group: "A0", score: 26.00 }, ], "Betim": [{ course: "Técnico em Automação Industrial", group: "L6", score: 31.00 }, { course: "Técnico em Automação Industrial", group: "L10", score: 32.00 }, { course: "Técnico em Mecânica", group: "L6", score: 31.00 }, ], "Congonhas": [{ course: "Técnico em Edificações", group: "A0", score: 43.00 }, { course: "Técnico em Edificações", group: "L1", score: 27.00 }, { course: "Técnico em Mecânica", group: "A0", score: 32.00 }, { course: "Técnico em Mecânica", group: "L6", score: 28.00 }, { course: "Técnico em Mineração", group: "A0", score: 39.00 }, { course: "Técnico em Mineração", group: "L2", score: 21.00 }, ], "Conselheiro Lafaiete": [{ course: "Técnico em Eletrotécnica", group: "A0", score: 40.00 }, { course: "Técnico em Mecânica", group: "L5", score: 27.00 }, ], "Formiga": [{ course: "Técnico em Administração", group: "A0", score: 40.00 }, { course: "Técnico em Administração", group: "L5", score: 26.00 }, { course: "Técnico em Informática", group: "A0", score: 34.00 }, { course: "Técnico em Informática", group: "L1", score: 28.00 }, ], "Governador Valadares": [{ course: "Técnico em Edificações", group: "A0", score: 36.00 }, { course: "Técnico em Meio Ambiente", group: "L1", score: 25.00 }, { course: "Técnico em Meio Ambiente", group: "L2", score: 26.00 }, ], "Ibirité": [{ course: "Técnico em Automação Industrial", group: "A0", score: 36.00 }, { course: "Técnico em Mecatrônica", group: "A0", score: 38.00 }, { course: "Técnico em Mecatrônica", group: "L2", score: 24.00 }, { course: "Técnico em Sistemas de Energia Renovável", group: "A0", score: 36.00 }, { course: "Técnico em Sistemas de Energia Renovável", group: "L6", score: 34.00 }, { course: "Técnico em Sistemas de Energia Renovável", group: "L14", score: 28.00 }, ], "Ipatinga": [{ course: "Técnico em Automação Industrial", group: "A0", score: 40.00 }, { course: "Técnico em Eletrotécnica", group: "A0", score: 36.00 }, ], "Itabirito": [{ course: "Técnico em Automação Industrial", group: "A0", score: 41.00 }, { course: "Técnico em Automação Industrial", group: "L1", score: 26.00 }, { course: "Técnico em Automação Industrial", group: "L2", score: 26.00 }, { course: "Técnico em Automação Industrial", group: "L5", score: 31.00 }, ], "Ouro Branco": [{ course: "Técnico em Administração", group: "A0", score: 43.00 }, { course: "Técnico em Administração", group: "L2", score: 25.00 }, { course: "Técnico em Administração", group: "L5", score: 35.00 }, { course: "Técnico em Administração", group: "V3985", score: 21.00 }, { course: "Técnico em Informática", group: "L1", score: 34.00 }, { course: "Técnico em Informática", group: "L2", score: 30.00 }, { course: "Técnico em Metalurgia", group: "A0", score: 30.00 }, ], "Ouro Preto": [{ course: "Técnico em Administração", group: "A0", score: 34.00 }, { course: "Técnico em Administração", group: "L2", score: 30.00 }, { course: "Técnico em Automação Industrial", group: "A0", score: 34.00 }, { course: "Técnico em Automação Industrial", group: "L1", score: 20.00 }, { course: "Técnico em Automação Industrial", group: "L6", score: 26.00 }, { course: "Técnico em Automação Industrial", group: "L10", score: 31.00 }, { course: "Técnico em Edificações", group: "A0", score: 33.00 }, { course: "Técnico em Edificações", group: "L6", score: 22.00 }, { course: "Técnico em Mineração", group: "A0", score: 29.00 }, { course: "Técnico em Mineração", group: "L5", score: 26.00 }, { course: "Técnico em Mineração", group: "L6", score: 23.00 }, ], "Piumhi": [{ course: "Técnico em Edificações", group: "A0", score: 24.00 }, { course: "Técnico em Edificações", group: "L1", score: 20.00 }, { course: "Técnico em Edificações", group: "L5", score: 22.00 }, ], "Ponte Nova": [{ course: "Técnico em Administração", group: "L6", score: 29.00 }, { course: "Técnico em Informática", group: "A0", score: 36.00 }, ], "Ribeirão das Neves": [{ course: "Técnico em Administração", group: "A0", score: 43.00 }, ], "Sabará": [{ course: "Técnico em Administração", group: "A0", score: 40.00 }, { course: "Técnico em Eletrônica", group: "A0", score: 41.00 }, { course: "Técnico em Eletrônica", group: "L1", score: 26.00 }, ], "Santa Luzia": [{ course: "Técnico em Edificações", group: "A0", score: 37.00 }, { course: "Técnico em Edificações", group: "L1", score: 30.00 }, { course: "Técnico em Edificações", group: "L2", score: 28.00 }, { course: "Técnico em Edificações", group: "L5", score: 32.00 }, { course: "Técnico em Edificações", group: "L13", score: 21.00 }, ], "São João Evangelista": [{ course: "Técnico em Agropecuária", group: "L2", score: 26.00 }, { course: "Técnico em Informática", group: "A0", score: 33.00 }, { course: "Técnico em Informática", group: "L2", score: 30.00 }, ], };
+        const allAdmissionData = { '2025': admissionData2025, '2024': admissionData2024 };
+        const groupInfo = { '2025': { orderedGroups: ['AC', 'LB-EP', 'LB-PCD', 'LB-PPI', 'LB-Q', 'LI-EP', 'LI-PCD', 'LI-PPI'], labels: { 'AC': 'Ampla Concorrência (AC)', 'LB-EP': 'Renda Baixa (LB-EP)', 'LB-PCD': 'Renda Baixa + PCD (LB-PCD)', 'LB-PPI': 'Renda Baixa + PPI (LB-PPI)', 'LB-Q': 'Renda Baixa + Quilombola (LB-Q)', 'LI-EP': 'Escola Pública (LI-EP)', 'LI-PCD': 'Escola Pública + PCD (LI-PCD)', 'LI-PPI': 'Escola Pública + PPI (LI-PPI)'}, compactLabels: { 'AC': 'AC', 'LB-EP': 'LB-EP', 'LB-PCD': 'LB-PCD', 'LB-PPI': 'LB-PPI', 'LB-Q': 'LB-Q', 'LI-EP': 'LI-EP', 'LI-PCD': 'LI-PCD', 'LI-PPI': 'LI-PPI' } }, '2024': { orderedGroups: ['A0', 'L1', 'L2', 'L5', 'L6', 'L9', 'L10', 'L13', 'L14', 'V3985'], labels: { 'A0': 'Ampla Concorrência (A0)', 'L1': 'Renda Baixa (L1)', 'L2': 'Renda Baixa + PPI (L2)', 'L5': 'Escola Pública (L5)', 'L6': 'Escola Pública + PPI (L6)', 'L9': 'Renda Baixa + PCD (L9)', 'L10': 'Renda Baixa + PPI + PCD (L10)', 'L13': 'Escola Pública + PCD (L13)', 'L14': 'Escola Pública + PPI + PCD (L14)', 'V3985': 'PCD (Ação Afirmativa)'}, compactLabels: { 'A0': 'A0', 'L1': 'L1', 'L2': 'L2', 'L5': 'L5', 'L6': 'L6', 'L9': 'L9', 'L10': 'L10', 'L13': 'L13', 'L14': 'L14', 'V3985': 'PCD' } } };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- MAP INITIALIZATION ---
+            const campusLocations = {
+                "Arcos": { lat: -20.2936, lng: -45.5385 },
+                "Bambuí": { lat: -20.0058, lng: -45.9772 },
+                "Betim": { lat: -19.9675, lng: -44.1953 },
+                "Congonhas": { lat: -20.5003, lng: -43.8569 },
+                "Conselheiro Lafaiete": { lat: -20.6617, lng: -43.7861 },
+                "Formiga": { lat: -20.4658, lng: -45.4267 },
+                "Governador Valadares": { lat: -18.8517, lng: -41.9492 },
+                "Ibirité": { lat: -20.0211, lng: -44.0583 },
+                "Ipatinga": { lat: -19.4711, lng: -42.5342 },
+                "Itabirito": { lat: -20.2531, lng: -43.8017 },
+                "Ouro Branco": { lat: -20.5208, lng: -43.6942 },
+                "Ouro Preto": { lat: -20.3853, lng: -43.5042 },
+                "Piumhi": { lat: -20.465, lng: -45.9589 },
+                "Ponte Nova": { lat: -20.4122, lng: -42.9011 },
+                "Ribeirão das Neves": { lat: -19.7669, lng: -44.0872 },
+                "Sabará": { lat: -19.8869, lng: -43.8067 },
+                "Santa Luzia": { lat: -19.7694, lng: -43.8514 },
+                "São João Evangelista": { lat: -18.5511, lng: -42.7667 }
+            };
+
+            const map = L.map('map', {
+                scrollWheelZoom: false
+            }).setView([-20.3, -44.0], 7.5);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            const yearForMap = '2025'; // Use the most recent data for the map
+            const dataForMap = allAdmissionData[yearForMap];
+            
+            for (const campusName in campusLocations) {
+                if (dataForMap[campusName]) {
+                    const courses = [...new Set(dataForMap[campusName].map(d => d.course))];
+                    let popupContent = `<h5>${campusName}</h5>`;
+                    popupContent += '<ul>';
+                    courses.forEach(course => {
+                        popupContent += `<li>${course}</li>`;
+                    });
+                    popupContent += '</ul>';
+                    
+                    L.marker([campusLocations[campusName].lat, campusLocations[campusName].lng])
+                        .addTo(map)
+                        .bindPopup(popupContent);
+                }
+            }
+
+            // --- TABS LOGIC ---
+            const tabs = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(item => item.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const target = tab.getAttribute('data-tab');
+                    tabContents.forEach(content => {
+                        if (content.id === `${target}-content`) {
+                            content.classList.add('active');
+                        } else {
+                            content.classList.remove('active');
+                        }
+                    });
+                });
+            });
+
+            // --- CHART AND CALCULATOR LOGIC ---
+            let campusChartInstance = null;
+            
+            const wrapLabel = (label, maxWidth = 16) => {
+                const words = label.split(' ');
+                let lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + ' ' + word).length > maxWidth && currentLine.length > 0) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = currentLine ? `${currentLine} ${word}` : word;
+                    }
+                }
+                if (currentLine) lines.push(currentLine);
+                return lines;
+            };
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                return Array.isArray(label) ? label.join(' ') : label;
+            };
+
+            function createCampusChart(year, campus) {
+                const campusData = allAdmissionData[year]?.[campus];
+                const currentGroupInfo = groupInfo[year];
+                if (!campusData || !currentGroupInfo) {
+                    if (campusChartInstance) campusChartInstance.destroy();
+                    document.getElementById('campusChartDescription').innerText = `Não há dados disponíveis para o ano ${year} e campus ${campus}.`;
+                    return;
+                }
+                
+                const acGroup = year === '2025' ? 'AC' : 'A0';
+                let courses = [...new Set(campusData.map(d => d.course))];
+                courses.sort((a, b) => {
+                    const scoreA = campusData.find(d => d.course === a && d.group === acGroup)?.score || 0;
+                    const scoreB = campusData.find(d => d.course === b && d.group === acGroup)?.score || 0;
+                    return scoreB - scoreA;
+                });
+
+                const datasets = currentGroupInfo.orderedGroups.map(groupKey => {
+                    const dataForGroup = courses.map(course => {
+                        const entry = campusData.find(d => d.course === course && d.group === groupKey);
+                        return entry ? entry.score : 0;
+                    });
+
+                    const groupColors = {
+                        'A0': '#5242ea', 'L1': '#6408b0', 'L2': '#3007a0', 'L5': '#7bcd47', 'L6': '#005b38', 'L9': '#dd5737', 'L10': '#00abb1', 'L13': '#4caf50', 'L14': '#a5d6a7', 'V3985': '#ab47bc',
+                        'AC': '#5242ea', 'LB-EP': '#6408b0', 'LB-PCD': '#ab47bc', 'LB-PPI': '#3007a0', 'LB-Q': '#00abb1', 'LI-EP': '#7bcd47', 'LI-PCD': '#4caf50', 'LI-PPI': '#005b38'
+                    };
+                    return {
+                        label: currentGroupInfo.labels[groupKey],
+                        data: dataForGroup,
+                        backgroundColor: groupColors[groupKey] || '#cccccc',
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    };
+                }).filter(dataset => dataset.data.some(val => val !== 0 && val !== null));
+
+                const ctx = document.getElementById('campusChart').getContext('2d');
+                if (campusChartInstance) campusChartInstance.destroy();
+                
+                campusChartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: { labels: courses.map(c => wrapLabel(c)), datasets: datasets },
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false, 
+                        plugins: { 
+                            legend: { 
+                                position: 'bottom',
+                                labels: {
+                                    font: { family: 'Inter' }
+                                }
+                            }, 
+                            tooltip: { 
+                                callbacks: { title: tooltipTitleCallback },
+                                bodyFont: { family: 'Inter' },
+                                titleFont: { family: 'Lexend' }
+                            } 
+                        }, 
+                        scales: { 
+                            y: { 
+                                beginAtZero: true, 
+                                max: 50, 
+                                title: { 
+                                    display: true, 
+                                    text: 'Nota Mínima (de 50 pontos)',
+                                    font: { family: 'Lexend', size: 14 }
+                                },
+                                ticks: {
+                                    font: { family: 'Inter' }
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    font: { family: 'Inter' }
+                                }
+                            }
+                        } 
+                    }
+                });
+                
+                document.getElementById('campusChartDescription').innerText = `O gráfico compara as notas mínimas na 1ª chamada para o ano de ${year}.`;
+            }
+            
+            function calculateApproval() {
+                const numLP = parseFloat(document.getElementById('notaLP').value) || 0;
+                const numMAT = parseFloat(document.getElementById('notaMAT').value) || 0;
+                const numCIE_NAT = parseFloat(document.getElementById('notaCIE_NAT').value) || 0;
+                const numCIE_HUM = parseFloat(document.getElementById('notaCIE_HUM').value) || 0;
+                
+                const totalScore = numLP + numMAT + numCIE_NAT + numCIE_HUM;
+
+                const resultsDiv = document.getElementById('approval-results');
+                const totalScoreDisplay = document.getElementById('total-score-display');
+                const passedCoursesCards = document.getElementById('passed-courses-cards');
+                const noPassedCourses = document.getElementById('no-passed-courses');
+                const specificApprovalResultsDiv = document.getElementById('specific-approval-results');
+                const specificCourseResultP = document.getElementById('specific-course-result');
+                const generalResultsHeading = document.getElementById('general-results-heading');
+                
+                const selectedCalcYear = document.getElementById('calc-year-select').value;
+                const yearData = allAdmissionData[selectedCalcYear];
+                const currentGroupInfo = groupInfo[selectedCalcYear];
+
+                passedCoursesCards.innerHTML = ''; 
+                specificCourseResultP.innerHTML = '';
+                specificApprovalResultsDiv.classList.add('hidden');
+                generalResultsHeading.classList.add('hidden');
+                noPassedCourses.classList.add('hidden');
+                resultsDiv.classList.remove('hidden');
+                totalScoreDisplay.innerHTML = `Sua nota total (calculada): <span class="font-bold text-2xl" style="color: var(--primary-purple);">${totalScore.toFixed(2)}</span> / 50.00`;
+                
+                const specificCampus = document.getElementById('specific-campus-select').value;
+                const specificCourse = document.getElementById('specific-course-select').value;
+
+                if (specificCampus && specificCourse) {
+                    specificApprovalResultsDiv.classList.remove('hidden');
+                    const courseEntries = yearData[specificCampus]?.filter(entry => entry.course === specificCourse) || [];
+                    let resultHtml = '';
+                    currentGroupInfo.orderedGroups.forEach(groupKey => {
+                        const entry = courseEntries.find(d => d.group === groupKey);
+                        if (entry && entry.score > 0) {
+                            const needed = entry.score - totalScore;
+                            if (needed <= 0) {
+                                resultHtml += `<li class="text-green-700 font-semibold">${currentGroupInfo.compactLabels[groupKey]}: Aprovado (Corte: ${entry.score.toFixed(2)})</li>`;
+                            } else {
+                                resultHtml += `<li class="text-red-700">${currentGroupInfo.compactLabels[groupKey]}: Faltam ${needed.toFixed(2)} pontos (Corte: ${entry.score.toFixed(2)})</li>`;
+                            }
+                        }
+                    });
+                    specificCourseResultP.innerHTML = courseEntries.length > 0 ? `<p class="font-semibold text-gray-800">${specificCourse} em ${specificCampus} (Ref. ${selectedCalcYear}):</p><ul class="list-disc list-inside mt-2 space-y-1">${resultHtml}</ul>` : `Não há dados de nota de corte para este curso/campus no ano de ${selectedCalcYear}.`;
+                }
+
+                let passedCount = 0;
+                let groupedPasses = {};
+                for (const campus in yearData) {
+                    const campusCourses = [...new Set(yearData[campus].map(entry => entry.course))].sort();
+                    campusCourses.forEach(courseName => {
+                        let passedModalitiesForCourse = [];
+                        currentGroupInfo.orderedGroups.forEach(groupKey => {
+                            const entry = yearData[campus].find(d => d.course === courseName && d.group === groupKey);
+                            if (entry && entry.score > 0 && totalScore >= entry.score) {
+                                passedModalitiesForCourse.push({ group: groupKey, score: entry.score });
+                            }
+                        });
+                        if (passedModalitiesForCourse.length > 0) {
+                            if (!groupedPasses[campus]) groupedPasses[campus] = {};
+                            groupedPasses[campus][courseName] = passedModalitiesForCourse;
+                            passedCount++;
+                        }
+                    });
+                }
+                generalResultsHeading.innerText = `Como seria seu resultado nos outros campi (Ref. ${selectedCalcYear}):`;
+                if (passedCount > 0) {
+                    generalResultsHeading.classList.remove('hidden');
+                    passedCoursesCards.classList.remove('hidden');
+                    noPassedCourses.classList.add('hidden');
+                    Object.keys(groupedPasses).sort().forEach(campus => {
+                        const campusBox = document.createElement('div');
+                        campusBox.className = 'campus-result-box';
+                        campusBox.innerHTML = `<h4>${campus}</h4>`;
+                        Object.keys(groupedPasses[campus]).sort().forEach(courseName => {
+                            const courseItem = document.createElement('div');
+                            courseItem.className = 'course-result-item';
+                            courseItem.innerHTML = `<p class="font-semibold text-gray-800">${courseName}</p>`;
+                            groupedPasses[campus][courseName].sort((a,b) => currentGroupInfo.orderedGroups.indexOf(a.group) - currentGroupInfo.orderedGroups.indexOf(b.group)).forEach(pass => {
+                                const modalityDetail = document.createElement('p');
+                                modalityDetail.className = 'text-sm text-green-600 ml-2';
+                                modalityDetail.innerHTML = `Aprovado em <span class="font-bold">${currentGroupInfo.compactLabels[pass.group]}</span> (corte: ${pass.score.toFixed(2)})`;
+                                courseItem.appendChild(modalityDetail);
+                            });
+                            campusBox.appendChild(courseItem);
+                        });
+                        passedCoursesCards.appendChild(campusBox);
+                    });
+                } else {
+                    noPassedCourses.innerText = `Com base em sua nota, você não seria aprovado em nenhum curso na 1ª Chamada do processo seletivo de ${selectedCalcYear}. Continue estudando!`;
+                    noPassedCourses.classList.remove('hidden');
+                }
+            }
+
+            function populateSelectWithOptions(selectElement, options, placeholder = null) {
+                selectElement.innerHTML = '';
+                if (placeholder) {
+                    const placeholderOption = document.createElement('option');
+                    placeholderOption.value = "";
+                    placeholderOption.innerText = placeholder;
+                    selectElement.appendChild(placeholderOption);
+                }
+                options.forEach(optionValue => {
+                    const option = document.createElement('option');
+                    option.value = optionValue;
+                    option.innerText = optionValue;
+                    selectElement.appendChild(option);
+                });
+            }
+
+            function populateCalcFields(selectedYear) {
+                const campusSelect = document.getElementById('specific-campus-select');
+                const courseSelect = document.getElementById('specific-course-select');
+                courseSelect.innerHTML = '<option value="">Selecione um Curso...</option>';
+                courseSelect.disabled = true;
+                const yearData = allAdmissionData[selectedYear];
+                if (yearData) {
+                    const campuses = Object.keys(yearData).sort();
+                    populateSelectWithOptions(campusSelect, campuses, "Selecione um Campus...");
+                }
+            }
+
+            function populateCalcCourses(selectedYear, selectedCampus) {
+                const courseSelect = document.getElementById('specific-course-select');
+                courseSelect.innerHTML = '<option value="">Selecione um Curso...</option>';
+                courseSelect.disabled = true;
+                if (selectedYear && selectedCampus && allAdmissionData[selectedYear]?.[selectedCampus]) {
+                    const courses = [...new Set(allAdmissionData[selectedYear][selectedCampus].map(e => e.course))].sort();
+                    populateSelectWithOptions(courseSelect, courses, "Selecione um Curso...");
+                    courseSelect.disabled = false;
+                }
+            }
+
+            // --- EVENT LISTENERS ---
+            const yearSelect = document.getElementById('year-select');
+            const campusSelect = document.getElementById('campus-select');
+            const calculateButton = document.getElementById('calculate-approval');
+            const calcYearSelect = document.getElementById('calc-year-select');
+            const specificCampusSelect = document.getElementById('specific-campus-select');
+            const fab = document.getElementById('fab');
+            const fabMenu = document.getElementById('fab-menu');
+            const fabIconOpen = document.getElementById('fab-icon-open');
+            const fabIconClose = document.getElementById('fab-icon-close');
+
+            function updateChart() {
+                const selectedYear = yearSelect.value;
+                const selectedCampus = campusSelect.value;
+                createCampusChart(selectedYear, selectedCampus);
+            }
+
+            yearSelect.addEventListener('change', updateChart);
+            campusSelect.addEventListener('change', updateChart);
+            calculateButton.addEventListener('click', calculateApproval);
+            calcYearSelect.addEventListener('change', (e) => populateCalcFields(e.target.value));
+            specificCampusSelect.addEventListener('change', (e) => populateCalcCourses(calcYearSelect.value, e.target.value));
+
+            fab.addEventListener('click', () => {
+                fabMenu.classList.toggle('hidden');
+                fabIconOpen.classList.toggle('hidden');
+                fabIconClose.classList.toggle('hidden');
+            });
+
+            // Initial calls
+            const allCampuses = Object.keys(campusLocations).sort();
+            populateSelectWithOptions(campusSelect, allCampuses);
+            updateChart();
+            populateCalcFields(calcYearSelect.value);
+        });
+    </script>
 </body>
 </html>
