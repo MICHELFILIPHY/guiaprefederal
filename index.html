@@ -127,14 +127,20 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             font-size: 24px;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 15px;
         }
-        .fab-main i {
-            transition: transform 0.3s ease;
+        .fab-main .icon-open,
+        .fab-main .icon-close {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            position: absolute;
+        }
+        .fab-main .icon-close {
+            transform: rotate(-45deg) scale(0);
+            opacity: 0;
         }
         .fab-options {
             display: flex;
@@ -142,16 +148,24 @@
             align-items: flex-end;
             visibility: hidden;
             opacity: 0;
-            transform: translateY(10px);
             transition: all 0.3s ease;
+            transform: translateY(10px);
         }
-        .fab-container:hover .fab-options {
+        .fab-container.active .fab-options {
             visibility: visible;
             opacity: 1;
             transform: translateY(0);
         }
-        .fab-container:hover .fab-main i {
-            transform: rotate(45deg);
+        .fab-container.active .fab-main {
+            background-color: #dd5737; /* Laranja ao ativar */
+        }
+        .fab-container.active .fab-main .icon-open {
+            transform: rotate(45deg) scale(0);
+            opacity: 0;
+        }
+        .fab-container.active .fab-main .icon-close {
+            transform: rotate(0deg) scale(1);
+            opacity: 1;
         }
         .fab-option {
             display: flex;
@@ -446,11 +460,11 @@
                 <div class="flex flex-col space-y-2 text-center">
                      <div class="flex items-center space-x-3">
                         <i class="fab fa-whatsapp text-[#00abb1] text-xl"></i>
-                        <span>Coord. (Michel): <a href="https://wa.me/5537999927364" target="_blank" class="text-slate-300 hover:text-white transition duration-300">37 99992-7364</a></span>
+                        <span>Coord. (Michel): <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="text-slate-300 hover:text-white transition duration-300">37 99992-7364</a></span>
                     </div>
                      <div class="flex items-center space-x-3">
                         <i class="fab fa-whatsapp text-[#00abb1] text-xl"></i>
-                        <span>Secretaria: <a href="https://wa.me/5537991797474" target="_blank" class="text-slate-300 hover:text-white transition duration-300">37 99179-7474</a></span>
+                        <span>Secretaria: <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="text-slate-300 hover:text-white transition duration-300">37 99179-7474</a></span>
                     </div>
                 </div>
                 <div class="flex items-center space-x-3">
@@ -474,15 +488,16 @@
                     <i class="fas fa-rocket"></i>
                 </div>
             </a>
-            <a href="https://wa.me/5537999927364" target="_blank" class="fab-option">
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
                 <span class="fab-label">Contato WhatsApp</span>
                 <div class="fab-icon" style="background-color: #25D366;">
                     <i class="fab fa-whatsapp"></i>
                 </div>
             </a>
         </div>
-        <button class="fab-main">
-            <i class="fas fa-plus"></i>
+        <button class="fab-main" id="fab-main-button">
+            <i class="fas fa-comment-dots icon-open"></i>
+            <i class="fas fa-times icon-close"></i>
         </button>
     </div>
 
@@ -502,6 +517,23 @@
                 }
             });
         });
+
+        // Floating Action Button (FAB) Logic
+        const fabContainer = document.querySelector('.fab-container');
+        const fabMainButton = document.getElementById('fab-main-button');
+
+        fabMainButton.addEventListener('click', (event) => {
+            event.stopPropagation(); // Impede que o clique se propague para o document
+            fabContainer.classList.toggle('active');
+        });
+
+        // Fecha o FAB se clicar fora dele
+        document.addEventListener('click', (event) => {
+            if (!fabContainer.contains(event.target)) {
+                fabContainer.classList.remove('active');
+            }
+        });
+
 
         // Interactive Map Logic
         document.addEventListener('DOMContentLoaded', function () {
@@ -632,4 +664,4 @@
         });
     </script>
 </body>
-</html>
+</ht
