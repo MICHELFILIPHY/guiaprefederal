@@ -231,6 +231,25 @@
         #calculate-approval:hover {
             background-color: var(--dark-blue); /* Usando a cor do novo design para o hover */
         }
+
+        /* Estilos para a nova seção de Detalhes das Cotas */
+        .quota-detail-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--brand-purple);
+        }
+        .quota-detail-card h4 {
+            font-weight: 700;
+            color: var(--brand-purple);
+            margin-bottom: 0.5rem;
+        }
+        .quota-detail-card p {
+            font-size: 0.95rem;
+            color: #4A5568;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -244,6 +263,8 @@
                     <a href="#simulador" class="nav-link">Simulador de Desempenho</a>
                     <a href="#historico" class="nav-link">Histórico de Notas</a>
                     <a href="#conteudo" class="nav-link">Conteúdo Programático</a>
+                    <a href="#detalhes-cotas" class="nav-link">Detalhes das Cotas</a>
+                    <a href="#dicas" class="nav-link">Dicas</a>
                 </div>
             </div>
         </nav>
@@ -314,21 +335,18 @@
                 </div>
                 
                 <div class="grid md:grid-cols-2 gap-4 mb-8">
+                    <!-- Ano de Referência removido conforme solicitação -->
                     <div>
                         <label for="sim-modalidade" class="font-semibold text-sm text-gray-600">Sua Modalidade de Vaga:</label>
                         <select id="sim-modalidade" class="w-full mt-1 p-2 border rounded-md focus:ring-purple-500 focus:border-purple-500">
-                            <option value="AC">Ampla Concorrência (AC)</option>
-                            <option value="LI_EP">Escola Pública (LI_EP)</option>
-                            <option value="LB_EP">Escola Pública + Baixa Renda (LB_EP)</option>
-                            <option value="LI_PPI">Escola Pública + PPI (LI_PPI)</option>
-                            <option value="LB_PPI">Escola Pública + Baixa Renda + PPI (LB_PPI)</option>
+                            <!-- Options will be populated by JavaScript, default to 2025 options -->
                         </select>
                     </div>
-                    <div class="flex items-end">
-                        <div class="flex items-center h-full">
-                            <input id="bonus-2021" type="checkbox" class="h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                            <label for="bonus-2021" class="ml-2 text-sm font-semibold text-gray-600">Sou de Escola Pública (para bônus de 2021)</label>
-                        </div>
+                </div>
+                <div class="flex items-end mb-8">
+                    <div class="flex items-center h-full">
+                        <input id="bonus-2021" type="checkbox" class="h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
+                        <label for="bonus-2021" class="ml-2 text-sm font-semibold text-gray-600">Sou de Escola Pública (para bônus de 2021)</label>
                     </div>
                 </div>
 
@@ -361,16 +379,15 @@
                                  <thead class="bg-slate-50">
                                     <tr>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modalidade</th>
-                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte 1ª Chamada</th>
-                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte Última Chamada</th>
+                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte (Último Convocado)</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 text-center">
-                                    <tr class="font-semibold"><td class="px-6 py-4 text-left">Ampla Concorrência (AC)</td><td class="px-6 py-4">54,60</td><td class="px-6 py-4">Aguardando</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública (LI_EP)</td><td class="px-6 py-4">51,40</td><td class="px-6 py-4">Aguardando</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública + PPI (LI_PPI)</td><td class="px-6 py-4">43,80</td><td class="px-6 py-4">Aguardando</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda (LB_EP)</td><td class="px-6 py-4">45,40</td><td class="px-6 py-4">Aguardando</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda + PPI (LB_PPI)</td><td class="px-6 py-4">42,00</td><td class="px-6 py-4">Aguardando</td></tr>
+                                    <tr class="font-semibold"><td class="px-6 py-4 text-left">Ampla Concorrência (AC)</td><td class="px-6 py-4">54,0</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">LB_EP</td><td class="px-6 py-4">40,6</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">LI_EP</td><td class="px-6 py-4">39,8</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">LI_PCD</td><td class="px-6 py-4">46,6</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">LI_PPI</td><td class="px-6 py-4">40,4</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -383,19 +400,21 @@
                                  <thead class="bg-slate-50">
                                     <tr>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modalidade</th>
-                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte 1ª Chamada</th>
-                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte Última Chamada</th>
+                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte (Último Convocado)</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 text-center">
-                                    <tr class="font-semibold"><td class="px-6 py-4 text-left">Ampla Concorrência (AC)</td><td class="px-6 py-4">48,20</td><td class="px-6 py-4">48,20</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública (LI_EP)</td><td class="px-6 py-4">44,20</td><td class="px-6 py-4">40,40</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública + PPI (LI_PPI)</td><td class="px-6 py-4">35,60</td><td class="px-6 py-4">40,60*</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda (LB_EP)</td><td class="px-6 py-4">40,20</td><td class="px-6 py-4">38,00</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda + PPI (LB_PPI)</td><td class="px-6 py-4">33,80</td><td class="px-6 py-4">36,20*</td></tr>
+                                    <tr class="font-semibold"><td class="px-6 py-4 text-left">Ampla Concorrência (9)</td><td class="px-6 py-4">48,6</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 1</td><td class="px-6 py-4">33,8</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 2</td><td class="px-6 py-4">33,4</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 3</td><td class="px-6 py-4">39,2</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 4</td><td class="px-6 py-4">38,8</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 5</td><td class="px-6 py-4">34,2</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 6</td><td class="px-6 py-4">41,4</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 7</td><td class="px-6 py-4">43,4</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 8</td><td class="px-6 py-4">41,2</td></tr>
                                 </tbody>
                             </table>
-                             <p class="text-xs text-center mt-2 text-gray-500">* Nota subiu devido à realocação de vagas não preenchidas em subcotas (PCD, Quilombola).</p>
                         </div>
                         <!-- Conteúdo 2023 -->
                         <div id="content-hist-2023" class="tab-pane-hist hidden">
@@ -406,16 +425,19 @@
                                  <thead class="bg-slate-50">
                                     <tr>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modalidade</th>
-                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte 1ª Chamada</th>
-                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte Última Chamada</th>
+                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte (Último Convocado)</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 text-center">
-                                    <tr class="font-semibold"><td class="px-6 py-4 text-left">Ampla Concorrência (AC)</td><td class="px-6 py-4">55,80</td><td class="px-6 py-4">55,00</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública (LI_EP)</td><td class="px-6 py-4">50,00</td><td class="px-6 py-4">46,20</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública + PPI (LI_PPI)</td><td class="px-6 py-4">46,20</td><td class="px-6 py-4">45,60</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda (LB_EP)</td><td class="px-6 py-4">49,00</td><td class="px-6 py-4">41,20</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda + PPI (LB_PPI)</td><td class="px-6 py-4">45,40</td><td class="px-6 py-4">39,40</td></tr>
+                                    <tr class="font-semibold"><td class="px-6 py-4 text-left">Ampla Concorrência (9)</td><td class="px-6 py-4">57,4</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 1</td><td class="px-6 py-4">43,4</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 2</td><td class="px-6 py-4">44,8</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 3</td><td class="px-6 py-4">48,8</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 4</td><td class="px-6 py-4">44,8</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 5</td><td class="px-6 py-4">41,4</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 6</td><td class="px-6 py-4">46,4</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 7</td><td class="px-6 py-4">49,2</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 8</td><td class="px-6 py-4">56,6</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -428,29 +450,38 @@
                                  <thead class="bg-slate-50">
                                     <tr>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modalidade</th>
-                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte 1ª Chamada</th>
-                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte Última Chamada</th>
+                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte (Último Convocado)</th>
                                     </tr>
                                 </thead>
                                <tbody class="bg-white divide-y divide-gray-200 text-center">
-                                    <tr class="font-semibold"><td class="px-6 py-4 text-left">Ampla Concorrência (AC)</td><td class="px-6 py-4">57,40</td><td class="px-6 py-4">56,60</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública (LI_EP)</td><td class="px-6 py-4">50,20</td><td class="px-6 py-4">47,80</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública + PPI (LI_PPI)</td><td class="px-6 py-4">43,80</td><td class="px-6 py-4">47,20*</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda (LB_EP)</td><td class="px-6 py-4">48,00</td><td class="px-6 py-4">44,40</td></tr>
-                                    <tr><td class="px-6 py-4 text-left">Escola Pública + Baixa Renda + PPI (LB_PPI)</td><td class="px-6 py-4">43,00</td><td class="px-6 py-4">44,60*</td></tr>
+                                    <tr class="font-semibold"><td class="px-6 py-4 text-left">Ampla Concorrência (9)</td><td class="px-6 py-4">57,4</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 1</td><td class="px-6 py-4">42,8</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 2</td><td class="px-6 py-4">N/A</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 3</td><td class="px-6 py-4">48,8</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 4</td><td class="px-6 py-4">45,4</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 5</td><td class="px-6 py-4">43,8</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 6</td><td class="px-6 py-4">48,0</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 7</td><td class="px-6 py-4">49,4</td></tr>
+                                    <tr><td class="px-6 py-4 text-left">Cota 8</td><td class="px-6 py-4">48,0</td></tr>
                                 </tbody>
                             </table>
-                            <p class="text-xs text-center mt-2 text-gray-500">* Nota subiu devido à realocação de vagas não preenchidas em subcotas (PCD, Quilombola).</p>
                         </div>
                         <!-- Conteúdo 2021 -->
                         <div id="content-hist-2021" class="tab-pane-hist hidden">
                             <h4 class="font-bold text-lg text-center mb-4">Dados de 2021 (Sistema de Bônus)</h4>
                             <p class="text-center text-sm text-gray-500 mb-1">Total de Inscritos: 2.321 (recorde)</p>
                             <p class="text-center text-sm text-gray-500 mb-4">Nota Objetiva para Correção da Redação: <strong>40,80 / 58,00</strong></p>
-                            <div class="text-center bg-slate-50 p-4 rounded-lg">
-                                <p>Neste ano, vigorava o sistema de bônus de 20% na nota da prova objetiva para alunos de escola pública. Não havia cotas.</p>
-                                 <p class="mt-2">A nota de corte final do último classificado (posição 150) na 1ª chamada foi <strong>57,12</strong>. Não houve chamadas subsequentes com notas inferiores a esta.</p>
-                            </div>
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-slate-50">
+                                   <tr>
+                                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modalidade</th>
+                                       <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Corte (Último Convocado)</th>
+                                   </tr>
+                               </thead>
+                               <tbody class="bg-white divide-y divide-gray-200 text-center">
+                                   <tr class="font-semibold"><td class="px-6 py-4 text-left">Menor Nota de Corte Geral</td><td class="px-6 py-4">57,12</td></tr>
+                               </tbody>
+                           </table>
                         </div>
                     </div>
                 </div>
@@ -501,6 +532,26 @@
 
                 <div id="content-display" class="bg-slate-50 p-6 rounded-lg">
                     <!-- Conteúdo das disciplinas será injetado aqui -->
+                </div>
+            </section>
+
+            <!-- Nova Seção: Detalhes das Cotas -->
+            <section id="detalhes-cotas" class="section-card">
+                <h3 class="text-2xl font-bold text-center mb-8" style="color: var(--brand-purple);">Detalhes das Modalidades de Cotas</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label for="cotas-ano-select" class="font-semibold text-sm text-gray-600">Selecione o Ano:</label>
+                        <select id="cotas-ano-select" class="w-full mt-1 p-2 border rounded-md focus:ring-purple-500 focus:border-purple-500" onchange="displayQuotaDetails()">
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="quota-details-display" class="mt-4">
+                    <!-- Detalhes das cotas serão exibidos aqui -->
                 </div>
             </section>
 
@@ -571,6 +622,233 @@
     </main>
 
     <script>
+    // DADOS HISTÓRICOS ATUALIZADOS COM BASE NA SUA SOLICITAÇÃO
+    const dadosHistoricos = {
+        '2025': {
+            corteObjetiva: 34.00,
+            cortes: {
+                '1a': {
+                    'AC': 54.0,
+                    'LB_EP': 40.6,
+                    'LI_EP': 39.8,
+                    'LI_PCD': 46.6,
+                    'LI_PPI': 40.4,
+                },
+                'ultima': {
+                    'AC': 54.0,
+                    'LB_EP': 40.6,
+                    'LI_EP': 39.8,
+                    'LI_PCD': 46.6,
+                    'LI_PPI': 40.4,
+                }
+            }
+        },
+        '2024': {
+            corteObjetiva: 29.00,
+            cortes: {
+                '1a': {
+                    '9': 48.6, // AC
+                    '1': 33.8,
+                    '2': 33.4,
+                    '3': 39.2,
+                    '4': 38.8,
+                    '5': 34.2,
+                    '6': 41.4,
+                    '7': 43.4,
+                    '8': 41.2,
+                },
+                'ultima': {
+                    '9': 48.6, // AC
+                    '1': 33.8,
+                    '2': 33.4,
+                    '3': 39.2,
+                    '4': 38.8,
+                    '5': 34.2,
+                    '6': 41.4,
+                    '7': 43.4,
+                    '8': 41.2,
+                }
+            }
+        },
+        '2023': {
+            corteObjetiva: 35.00,
+            cortes: {
+                '1a': {
+                    '9': 57.4, // AC
+                    '1': 43.4,
+                    '2': 44.8,
+                    '3': 48.8,
+                    '4': 44.8,
+                    '5': 41.4,
+                    '6': 46.4,
+                    '7': 49.2,
+                    '8': 56.6,
+                },
+                'ultima': {
+                    '9': 57.4, // AC
+                    '1': 43.4,
+                    '2': 44.8,
+                    '3': 48.8,
+                    '4': 44.8,
+                    '5': 41.4,
+                    '6': 46.4,
+                    '7': 49.2,
+                    '8': 56.6,
+                }
+            }
+        },
+        '2022': {
+            corteObjetiva: 33.00,
+            cortes: {
+                '1a': {
+                    '9': 57.4, // AC
+                    '1': 42.8,
+                    '2': null, // No info
+                    '3': 48.8,
+                    '4': 45.4,
+                    '5': 43.8,
+                    '6': 48.0,
+                    '7': 49.4,
+                    '8': 48.0,
+                },
+                'ultima': {
+                    '9': 57.4, // AC
+                    '1': 42.8,
+                    '2': null, // No info
+                    '3': 48.8,
+                    '4': 45.4,
+                    '5': 43.8,
+                    '6': 48.0,
+                    '7': 49.4,
+                    '8': 48.0,
+                }
+            }
+        },
+        '2021': {
+            corteObjetiva: 40.80,
+            cortes: {
+                '1a': { 'All': 57.12, 'NoBonus': 57.2 }, // Alunos de escola pública com bônus e sem bônus
+                'ultima': { 'All': 57.12, 'NoBonus': 57.2 } // Mesmos valores para 1a e última chamada em 2021
+            }
+        }
+    };
+
+    // Mapeamento das opções de modalidade para o select dinâmico
+    const modalityOptions = {
+        '2025': [
+            { value: 'AC', text: 'Ampla Concorrência (AC)' },
+            { value: 'LB_EP', text: 'LB_EP (Renda <= 1 SM, Esc. Pública)' },
+            { value: 'LI_EP', text: 'LI_EP (Indep. Renda, Esc. Pública)' },
+            { value: 'LI_PCD', text: 'LI_PCD (PCD, Indep. Renda, Esc. Pública)' },
+            { value: 'LI_PPI', text: 'LI_PPI (PPI, Indep. Renda, Esc. Pública)' },
+            // As modalidades sem dados de corte para 2025 (LB_PCD, LB_PPI, LB_Q, LI_Q) não serão listadas aqui para evitar confusão,
+            // mas podem ser adicionadas com um status "Sem dados" se necessário.
+        ],
+        '2024': [
+            { value: '9', text: 'Ampla Concorrência (9)' },
+            { value: '1', text: 'Cota 1 (LB, PPI, sem Def.)' },
+            { value: '2', text: 'Cota 2 (LB, PPI, com Def.)' },
+            { value: '3', text: 'Cota 3 (LB, Indep. Raça, sem Def.)' },
+            { value: '4', text: 'Cota 4 (LB, Indep. Raça, com Def.)' },
+            { value: '5', text: 'Cota 5 (LI, PPI, sem Def.)' },
+            { value: '6', text: 'Cota 6 (LI, PPI, com Def.)' },
+            { value: '7', text: 'Cota 7 (LI, Indep. Raça, sem Def.)' },
+            { value: '8', text: 'Cota 8 (LI, Indep. Raça, com Def.)' },
+        ],
+        '2023': [
+            { value: '9', text: 'Ampla Concorrência (9)' },
+            { value: '1', text: 'Cota 1 (LB, PPI, sem Def.)' },
+            { value: '2', text: 'Cota 2 (LB, PPI, com Def.)' },
+            { value: '3', text: 'Cota 3 (LB, Indep. Raça, sem Def.)' },
+            { value: '4', text: 'Cota 4 (LB, Indep. Raça, com Def.)' },
+            { value: '5', text: 'Cota 5 (LI, PPI, sem Def.)' },
+            { value: '6', text: 'Cota 6 (LI, PPI, com Def.)' },
+            { value: '7', text: 'Cota 7 (LI, Indep. Raça, sem Def.)' },
+            { value: '8', text: 'Cota 8 (LI, Indep. Raça, com Def.)' },
+        ],
+        '2022': [
+            { value: '9', text: 'Ampla Concorrência (9)' },
+            { value: '1', text: 'Cota 1 (LB, PPI, sem Def.)' },
+            { value: '2', text: 'Cota 2 (LB, PPI, com Def.) - N/A' }, // Explicitamente marcado como N/A
+            { value: '3', text: 'Cota 3 (LB, Indep. Raça, sem Def.)' },
+            { value: '4', text: 'Cota 4 (LB, Indep. Raça, com Def.)' },
+            { value: '5', text: 'Cota 5 (LI, PPI, sem Def.)' },
+            { value: '6', text: 'Cota 6 (LI, PPI, com Def.)' },
+            { value: '7', text: 'Cota 7 (LI, Indep. Raça, sem Def.)' },
+            { value: '8', text: 'Cota 8 (LI, Indep. Raça, com Def.)' },
+        ],
+        '2021': [
+            { value: 'All', text: 'Alunos de Escola Pública com Bônus' },
+            { value: 'NoBonus', text: 'Alunos sem Bônus (Ampla Concorrência)' }
+        ]
+    };
+
+    // Mapeamento universal de cotas para facilitar a comparação entre anos
+    // Chave: Modalidade de 2025 (ou universal) -> Valor: Objeto com mapeamento para chaves de outros anos
+    const universalQuotaMapping = {
+        'AC': { '2025': 'AC', '2024': '9', '2023': '9', '2022': '9', '2021': 'NoBonus' },
+        'LB_EP': { '2025': 'LB_EP', '2024': '3', '2023': '3', '2022': '3' },
+        'LI_EP': { '2025': 'LI_EP', '2024': '7', '2023': '7', '2022': '7' },
+        'LI_PCD': { '2025': 'LI_PCD', '2024': '8', '2023': '8', '2022': '8' },
+        'LI_PPI': { '2025': 'LI_PPI', '2024': '5', '2023': '5', '2022': '5' },
+        // Adicionar outras cotas de 2025 aqui se houver dados para anos anteriores
+        // 'LB_PCD': { '2025': 'LB_PCD', '2024': '4', '2023': '4', '2022': '4' }, // Exemplo, se houver dados
+        // 'LB_PPI': { '2025': 'LB_PPI', '2024': '1', '2023': '1', '2022': '1' }, // Exemplo, se houver dados
+    };
+
+    // Descrições detalhadas das cotas por ano e modalidade
+    const quotaDescriptions = {
+        '2025': {
+            'AC': 'Ampla Concorrência: Vagas destinadas a todos os candidatos, sem reserva de vagas.',
+            'LB_EP': 'Candidatos com renda familiar bruta per capita igual ou inferior a 1 salário mínimo que tenham cursado integralmente o ensino médio em escolas públicas.',
+            'LI_EP': 'Candidatos que, independentemente da renda, tenham cursado integralmente o ensino médio em escolas públicas.',
+            'LI_PCD': 'Candidatos com deficiência que, independentemente da renda, tenham cursado integralmente o ensino médio em escolas públicas.',
+            'LI_PPI': 'Candidatos autodeclarados pretos, pardos ou indígenas, independentemente da renda, que tenham cursado integralmente o ensino médio em escolas públicas.',
+            'LB_PCD': 'Candidatos com deficiência e renda familiar bruta per capita igual ou inferior a 1 salário mínimo que tenham cursado integralmente o ensino médio em escolas públicas. (Sem informação de nota de corte para 2025)',
+            'LB_PPI': 'Candidatos autodeclarados pretos, pardos ou indígenas e renda familiar bruta per capita igual ou inferior a 1 salário mínimo que tenham cursado integralmente o ensino médio em escolas públicas. (Sem informação de nota de corte para 2025)',
+            'LB_Q': 'Candidatos autodeclarados quilombolas e renda familiar bruta per capita igual ou inferior a 1 salário mínimo que tenham cursado integralmente o ensino médio em escolas públicas. (Sem informação de nota de corte para 2025)',
+            'LI_Q': 'Candidatos autodeclarados quilombolas, independentemente da renda, que tenham cursado integralmente o ensino médio em escolas públicas. (Sem informação de nota de corte para 2025)',
+        },
+        '2024': {
+            '9': 'Ampla Concorrência (AC): Vagas destinadas a todos os candidatos, sem reserva de vagas.',
+            '1': 'Cota 1: Estudantes de escola pública, com renda mensal bruta menor ou igual a 1,5 salário mínimo (por pessoa da família), Etnia: Pretos, Pardos e Indígenas sem Deficiência.',
+            '2': 'Cota 2: Estudantes de escola pública, com renda mensal bruta menor ou igual a 1,5 salário mínimo (por pessoa da família), Etnia: Pretos, Pardos e Indígenas com Deficiência.',
+            '3': 'Cota 3: Estudantes de escola pública, com renda mensal bruta menor ou igual a 1,5 salário mínimo (por pessoa da família), Etnia: Independente de raça sem Deficiência.',
+            '4': 'Cota 4: Estudantes de escola pública, com renda mensal bruta menor ou igual a 1,5 salário mínimo (por pessoa da família), Etnia: Independente de raça com Deficiência.',
+            '5': 'Cota 5: Estudantes de escola pública, com renda mensal bruta maior a 1,5 salário mínimo (por pessoa da família), Etnia: Pretos, Pardos e Indígenas sem Deficiência.',
+            '6': 'Cota 6: Estudantes de escola pública, com renda mensal bruta maior a 1,5 salário mínimo (por pessoa da família), Etnia: Pretos, Pardos e Indígenas com Deficiência.',
+            '7': 'Cota 7: Estudantes de escola pública, com renda mensal bruta maior a 1,5 salário mínimo (por pessoa da família), Etnia: Independente de raça sem Deficiência.',
+            '8': 'Cota 8: Estudantes de escola pública, com renda mensal bruta maior a 1,5 salário mínimo (por pessoa da família), Etnia: Independente de raça com Deficiência.',
+        },
+        '2023': {
+            '9': 'Ampla Concorrência (AC): Vagas destinadas a todos os candidatos, sem reserva de vagas.',
+            '1': 'Cota 1: Estudantes de escola pública, com renda mensal bruta menor ou igual a 1,5 salário mínimo (por pessoa da família), Etnia: Pretos, Pardos e Indígenas sem Deficiência.',
+            '2': 'Cota 2: Estudantes de escola pública, com renda mensal bruta menor ou igual a 1,5 salário mínimo (por pessoa da família), Etnia: Pretos, Pardos e Indígenas com Deficiência.',
+            '3': 'Cota 3: Estudantes de escola pública, com renda mensal bruta menor ou igual a 1,5 salário mínimo (por pessoa da família), Etnia: Independente de raça sem Deficiência.',
+            '4': 'Cota 4: Estudantes de escola pública, com renda mensal bruta menor ou igual a 1,5 salário mínimo (por pessoa da família), Etnia: Independente de raça com Deficiência.',
+            '5': 'Cota 5: Estudantes de escola pública, com renda mensal bruta maior a 1,5 salário mínimo (por pessoa da família), Etnia: Pretos, Pardos e Indígenas sem Deficiência.',
+            '6': 'Cota 6: Estudantes de escola pública, com renda mensal bruta maior a 1,5 salário mínimo (por pessoa da família), Etnia: Pretos, Pardos e Indígenas com Deficiência.',
+            '7': 'Cota 7: Estudantes de escola pública, com renda mensal bruta maior a 1,5 salário mínimo (por pessoa da família), Etnia: Independente de raça sem Deficiência.',
+            '8': 'Cota 8: Estudantes de escola pública, com renda mensal bruta maior a 1,5 salário mínimo (por pessoa da família), Etnia: Independente de raça com Deficiência.',
+        },
+        '2022': {
+            '9': 'Ampla Concorrência (AC): Vagas destinadas a todos os candidatos, sem reserva de vagas.',
+            '1': 'Cota 1: Estudantes de escola pública, com renda mensal bruta menor ou igual a 1,5 salário mínimo (por pessoa da família), Etnia: Pretos, Pardos e Indígenas sem Deficiência.',
+            '2': 'Cota 2: Estudantes de escola pública, com renda mensal bruta menor ou igual a 1,5 salário mínimo (por pessoa da família), Etnia: Pretos, Pardos e Indígenas com Deficiência. (Não há informações disponíveis para esta modalidade no ano de 2022).',
+            '3': 'Cota 3: Estudantes de escola pública, com renda mensal bruta menor ou igual a 1,5 salário mínimo (por pessoa da família), Etnia: Independente de raça sem Deficiência.',
+            '4': 'Cota 4: Estudantes de escola pública, com renda mensal bruta menor ou igual a 1,5 salário mínimo (por pessoa da família), Etnia: Independente de raça com Deficiência.',
+            '5': 'Cota 5: Estudantes de escola pública, com renda mensal bruta maior a 1,5 salário mínimo (por pessoa da família), Etnia: Pretos, Pardos e Indígenas sem Deficiência.',
+            '6': 'Cota 6: Estudantes de escola pública, com renda mensal bruta maior a 1,5 salário mínimo (por pessoa da família), Etnia: Pretos, Pardos e Indígenas com Deficiência.',
+            '7': 'Cota 7: Estudantes de escola pública, com renda mensal bruta maior a 1,5 salário mínimo (por pessoa da família), Etnia: Independente de raça sem Deficiência.',
+            '8': 'Cota 8: Estudantes de escola pública, com renda mensal bruta maior a 1,5 salário mínimo (por pessoa da família), Etnia: Independente de raça com Deficiência.',
+        },
+        '2021': {
+            'All': 'Alunos de Escola Pública com Bônus: Em 2021, o sistema de cotas não existia. No entanto, todo aluno de escola pública recebia 20% acrescido em sua nota.',
+            'NoBonus': 'Alunos sem Bônus (equivalente à Ampla Concorrência): Não se enquadravam no bônus de escola pública.'
+        }
+    };
+
+
     const syllabusData = {
         portugues: `
             <h4 class="font-bold text-lg mb-4">Língua Portuguesa e Literatura</h4>
@@ -627,7 +905,7 @@
                     <li><b>Instrucionais:</b> Receitas, manuais, instruções.</li>
                     <li><b>Expositivos:</b> Notícias, reportagens, artigos informativos.</li>
                     <li><b>Poéticos:</b> Poemas, cordéis, músicas.</li>
-                    <li><b>Jornalísticos:</b> Notícias, reportagens, entrevistas.</li>
+                    <li><b>Jornalísticos:</b> Notícias, reportagens, artigos informativos.</li>
                     <li><b>Outros:</b> Cartas, e-mails, resenhas, avisos, convites.</li>
                 </ul>
             </div>`,
@@ -726,7 +1004,10 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        showContent('portugues');
+        showContent('portugues'); // Exibe o conteúdo de Português por padrão
+        changeHistTab('2025'); // Exibe a aba de histórico de 2025 por padrão
+        updateModalidadeOptions(); // Popula as opções de modalidade ao carregar
+        displayQuotaDetails(); // Exibe os detalhes das cotas ao carregar
     });
 
     function changeHistTab(tabId) {
@@ -748,108 +1029,187 @@
         });
     }
 
+    function updateModalidadeOptions() {
+        // A seleção de ano de referência foi removida, então sempre usamos 2025 como base para as opções
+        const selectedYearForOptions = '2025'; 
+        const modalidadeSelect = document.getElementById('sim-modalidade');
+
+        modalidadeSelect.innerHTML = ''; // Limpa as opções existentes
+
+        const options = modalityOptions[selectedYearForOptions];
+        if (options) {
+            options.forEach(optionData => {
+                const option = document.createElement('option');
+                option.value = optionData.value; // This is the key (e.g., 'AC', 'LB_EP')
+                option.textContent = optionData.text; // This is the display text
+                modalidadeSelect.appendChild(option);
+            });
+        }
+        // O checkbox de bônus para 2021 está sempre habilitado agora.
+        // Sua lógica de aplicação é tratada dentro da função simularNota().
+    }
+
     function simularNota() {
-            const dadosHistoricos = {
-                '2025': { corteObjetiva: 34.00, cortes: { '1a': { AC: 54.60, LI_EP: 51.40, LI_PPI: 43.80, LB_EP: 45.40, LB_PPI: 42.00 }, 'ultima': { AC: 54.60, LI_EP: 51.40, LI_PPI: 43.80, LB_EP: 45.40, LB_PPI: 42.00 } } },
-                '2024': { corteObjetiva: 29.00, cortes: { '1a': { AC: 48.20, LI_EP: 44.20, LI_PPI: 35.60, LB_EP: 40.20, LB_PPI: 33.80 }, 'ultima': { AC: 48.20, LI_EP: 40.40, LI_PPI: 40.60, LB_EP: 38.00, LB_PPI: 36.20 } } },
-                '2023': { corteObjetiva: 35.00, cortes: { '1a': { AC: 55.80, LI_EP: 50.00, LI_PPI: 46.20, LB_EP: 49.00, LB_PPI: 45.40 }, 'ultima': { AC: 55.00, LI_EP: 46.20, LI_PPI: 45.60, LB_EP: 41.20, LB_PPI: 39.40 } } },
-                '2022': { corteObjetiva: 33.00, cortes: { '1a': { AC: 57.40, LI_EP: 50.20, LI_PPI: 43.80, LB_EP: 48.00, LB_PPI: 43.00 }, 'ultima': { AC: 56.60, LI_EP: 47.80, LI_PPI: 47.20, LB_EP: 44.40, LB_PPI: 44.60 } } },
-                '2021': { corteObjetiva: 40.80, cortes: { '1a': { All: 57.12 }, 'ultima': { All: 57.12 } } }
-            };
+        const acertos = {
+            port: parseInt(document.getElementById('q-port').value) || 0,
+            mat: parseInt(document.getElementById('q-mat').value) || 0,
+            ciencia: parseInt(document.getElementById('q-ciencia').value) || 0,
+            geo: parseInt(document.getElementById('q-geo').value) || 0,
+            hist: parseInt(document.getElementById('q-hist').value) || 0,
+            eng: parseInt(document.getElementById('q-eng').value) || 0
+        };
+        
+        const notaRedacao = parseFloat(document.getElementById('nota-redacao').value) || 0;
+        // A modalidade selecionada é sempre do padrão 2025, pois o select agora só tem essas opções.
+        const modalidadeSelecionadaNaCalculadora = document.getElementById('sim-modalidade').value; 
+        const temBonus2021 = document.getElementById('bonus-2021').checked;
 
-            const acertos = {
-                port: parseInt(document.getElementById('q-port').value) || 0,
-                mat: parseInt(document.getElementById('q-mat').value) || 0,
-                ciencia: parseInt(document.getElementById('q-ciencia').value) || 0,
-                geo: parseInt(document.getElementById('q-geo').value) || 0,
-                hist: parseInt(document.getElementById('q-hist').value) || 0,
-                eng: parseInt(document.getElementById('q-eng').value) || 0
-            };
-            
-            const notaRedacao = parseFloat(document.getElementById('nota-redacao').value) || 0;
-            const modalidade = document.getElementById('sim-modalidade').value;
-            const temBonus2021 = document.getElementById('bonus-2021').checked;
+        const notaObjetiva = (acertos.port * 2) + (acertos.mat * 2) + acertos.ciencia + acertos.geo + acertos.hist + acertos.eng;
+        
+        let resultadoHtml = `
+            <h4 class="text-xl font-bold text-center mb-4 text-gray-800">Seu Desempenho Simulado</h4>
+            <p class="text-center font-semibold mb-6">Sua nota na prova objetiva: <span class="text-2xl" style="color: var(--brand-purple);">${notaObjetiva.toFixed(2)}</span> / 58,00</p>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-slate-50">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-xs font-bold text-gray-500 uppercase">Ano</th>
+                            <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Redação Corrigida?</th>
+                            <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Sua Nota Final</th>
+                            <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Corte (Último Convocado)</th>
+                            <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Pontos Faltantes*</th>
+                            <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Situação Final</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">`;
 
-            const notaObjetiva = (acertos.port * 2) + (acertos.mat * 2) + acertos.ciencia + acertos.geo + acertos.hist + acertos.eng;
-            
-            let resultadoHtml = `
-                <h4 class="text-xl font-bold text-center mb-4 text-gray-800">Seu Desempenho Simulado</h4>
-                <p class="text-center font-semibold mb-6">Sua nota na prova objetiva: <span class="text-2xl" style="color: var(--brand-purple);">${notaObjetiva.toFixed(2)}</span> / 58,00</p>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-slate-50">
-                            <tr>
-                                <th class="px-4 py-2 text-left text-xs font-bold text-gray-500 uppercase">Ano</th>
-                                <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Redação Corrigida?</th>
-                                <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Sua Nota Final</th>
-                                <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Corte (Última Chamada)</th>
-                                <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Pontos Faltantes*</th>
-                                <th class="px-4 py-2 text-center text-xs font-bold text-gray-500 uppercase">Situação Final</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">`;
+        // Loop para mostrar o desempenho em todos os anos
+        const anosDisponiveis = Object.keys(dadosHistoricos).sort((a, b) => parseInt(b) - parseInt(a)); // Ordena do mais recente para o mais antigo
 
-            for (const ano of ['2025', '2024', '2023', '2022', '2021']) {
-                const dadosAno = dadosHistoricos[ano];
-                let statusRedacao = 'Não';
-                let corStatusRedacao = 'text-red-600';
-                let notaFinal = '--';
-                let pontosFaltantes = '--';
-                let situacao = '<span class="font-semibold text-gray-500">Reprovado na Objetiva</span>';
-                let notaCorteModalidade = '--';
+        for (const ano of anosDisponiveis) {
+            const dadosAno = dadosHistoricos[ano];
+            let statusRedacao = 'Não';
+            let corStatusRedacao = 'text-red-600';
+            let notaFinal = '--';
+            let pontosFaltantes = '--';
+            let situacao = '<span class="font-semibold text-gray-500">Reprovado na Objetiva</span>';
+            let notaCorteModalidade = '--';
 
-                let notaObjetivaFinal = notaObjetiva;
-                if (ano === '2021' && temBonus2021) {
-                     notaObjetivaFinal *= 1.2;
-                }
-
-                if (notaObjetiva >= dadosAno.corteObjetiva) {
-                    statusRedacao = 'Sim';
-                    corStatusRedacao = 'text-green-600';
-                    
-                    const suaNotaFinalNum = notaObjetivaFinal + notaRedacao;
-                    notaFinal = suaNotaFinalNum.toFixed(2);
-                    
-                    const corte1a = (ano === '2021') ? dadosAno.cortes['1a'].All : dadosAno.cortes['1a'][modalidade];
-                    const corteUltima = (ano === '2021') ? dadosAno.cortes['ultima'].All : dadosAno.cortes['ultima'][modalidade];
-                    notaCorteModalidade = corteUltima.toFixed(2);
-
-                    if (suaNotaFinalNum >= corte1a) {
-                        situacao = '<span class="font-bold" style="color: var(--brand-purple);">Aprovado(a) 1ª Chamada</span>';
-                    } else if (suaNotaFinalNum >= corteUltima) {
-                        situacao = '<span class="font-bold" style="color: #2563eb;">Aprovado(a) Outras Chamadas</span>';
-                    } else {
-                        situacao = `<span class="font-semibold text-red-600">Na Lista de Espera</span>`;
-                        pontosFaltantes = (corteUltima - suaNotaFinalNum).toFixed(2);
-                    }
-                } else {
-                    pontosFaltantes = (dadosAno.corteObjetiva - notaObjetiva).toFixed(2);
-                    notaCorteModalidade = (ano === '2021') ? dadosAno.cortes['ultima'].All.toFixed(2) : dadosAno.cortes['ultima'][modalidade].toFixed(2);
-                }
-                
-                resultadoHtml += `
-                    <tr class="text-center">
-                        <td class="px-4 py-3 font-bold text-left">${ano}</td>
-                        <td class="px-4 py-3 font-semibold ${corStatusRedacao}">${statusRedacao}</td>
-                        <td class="px-4 py-3 font-bold">${notaFinal}</td>
-                        <td class="px-4 py-3 font-bold text-gray-600">${notaCorteModalidade}</td>
-                        <td class="px-4 py-3 font-semibold text-red-500">${pontosFaltantes}</td>
-                        <td class="px-4 py-3">${situacao}</td>
-                    </tr>`;
+            let notaObjetivaCalculadaParaAno = notaObjetiva;
+            if (ano === '2021' && temBonus2021) { // Aplica o bônus de 20% apenas se for 2021 E o checkbox estiver marcado
+                 notaObjetivaCalculadaParaAno *= 1.2;
             }
 
-            resultadoHtml += `</tbody></table></div>
-            <p class="text-xs text-gray-500 mt-4">* <strong>Pontos Faltantes:</strong> Indica quantos pontos faltaram para atingir a nota de corte da última chamada (se a redação foi corrigida) ou para ter a redação corrigida (se reprovado na objetiva).</p>`;
+            if (notaObjetiva >= dadosAno.corteObjetiva) {
+                statusRedacao = 'Sim';
+                corStatusRedacao = 'text-green-600';
+                
+                const suaNotaFinalNum = notaObjetivaCalculadaParaAno + notaRedacao;
+                notaFinal = suaNotaFinalNum.toFixed(2);
+                
+                let corteUltimaParaAno;
+                let resolvedModalidadeKeyForLookup;
+
+                if (ano === '2021') {
+                    // Para 2021, a modalidade de comparação depende do checkbox de bônus
+                    resolvedModalidadeKeyForLookup = temBonus2021 ? 'All' : 'NoBonus';
+                    corteUltimaParaAno = dadosAno.cortes['ultima'][resolvedModalidadeKeyForLookup];
+                } else if (ano === '2025') {
+                    // Para 2025, a modalidade já é a correta
+                    resolvedModalidadeKeyForLookup = modalidadeSelecionadaNaCalculadora;
+                    corteUltimaParaAno = dadosAno.cortes['ultima'][resolvedModalidadeKeyForLookup];
+                } else { // Anos 2022, 2023, 2024
+                    // Tenta encontrar a equivalência da modalidade de 2025 para os códigos antigos
+                    resolvedModalidadeKeyForLookup = universalQuotaMapping[modalidadeSelecionadaNaCalculadora]?.[ano];
+                    
+                    if (resolvedModalidadeKeyForLookup) { // Verifica se há um mapeamento para o ano
+                        corteUltimaParaAno = dadosAno.cortes['ultima'][resolvedModalidadeKeyForLookup];
+                    } else {
+                        corteUltimaParaAno = null; // Indica que não há dados ou equivalência clara
+                    }
+                }
+                
+                if (corteUltimaParaAno === null || typeof corteUltimaParaAno === 'undefined') {
+                    notaCorteModalidade = 'N/A';
+                    situacao = `<span class="font-semibold text-gray-500">Dados de corte indisponíveis para esta modalidade/ano.</span>`;
+                } else {
+                    notaCorteModalidade = corteUltimaParaAno.toFixed(2);
+
+                    if (suaNotaFinalNum >= corteUltimaParaAno) {
+                        situacao = '<span class="font-bold" style="color: var(--brand-purple);">Aprovado(a)!</span>';
+                        pontosFaltantes = '0.00'; // Se aprovado, 0 pontos faltantes
+                    } else {
+                        situacao = `<span class="font-semibold text-red-600">Faltou</span>`;
+                        pontosFaltantes = (corteUltimaParaAno - suaNotaFinalNum).toFixed(2);
+                    }
+                }
+            } else {
+                // Se reprovado na objetiva, calcular pontos faltantes para o corte da objetiva
+                pontosFaltantes = (dadosAno.corteObjetiva - notaObjetiva).toFixed(2);
+                situacao = '<span class="font-semibold text-gray-500">Reprovado na Objetiva</span>';
+
+                // Ainda tentar exibir a nota de corte para a modalidade, se disponível
+                let corteModalidadeExibicao;
+                let resolvedModalidadeKeyForLookup;
+
+                if (ano === '2021') {
+                    resolvedModalidadeKeyForLookup = temBonus2021 ? 'All' : 'NoBonus';
+                    corteModalidadeExibicao = dadosAno.cortes['ultima'][resolvedModalidadeKeyForLookup];
+                } else if (ano === '2025') {
+                    corteModalidadeExibicao = dadosAno.cortes['ultima'][modalidadeSelecionadaNaCalculadora];
+                } else {
+                    resolvedModalidadeKeyForLookup = universalQuotaMapping[modalidadeSelecionadaNaCalculadora]?.[ano];
+                    if (resolvedModalidadeKeyForLookup) {
+                        corteModalidadeExibicao = dadosAno.cortes['ultima'][resolvedModalidadeKeyForLookup];
+                    } else {
+                        corteModalidadeExibicao = null;
+                    }
+                }
+
+                if (corteModalidadeExibicao !== null && typeof corteModalidadeExibicao !== 'undefined') {
+                    notaCorteModalidade = corteModalidadeExibicao.toFixed(2);
+                } else {
+                    notaCorteModalidade = 'N/A';
+                }
+            }
             
-            const resultadoDiv = document.getElementById('resultado-simulador');
-            resultadoDiv.innerHTML = resultadoHtml;
-            resultadoDiv.classList.remove('hidden');
+            resultadoHtml += `
+                <tr class="text-center">
+                    <td class="px-4 py-3 font-bold text-left">${ano}</td>
+                    <td class="px-4 py-3 font-semibold ${corStatusRedacao}">${statusRedacao}</td>
+                    <td class="px-4 py-3 font-bold">${notaFinal}</td>
+                    <td class="px-4 py-3 font-bold text-gray-600">${notaCorteModalidade}</td>
+                    <td class="px-4 py-3 font-semibold ${parseFloat(pontosFaltantes) > 0 ? 'text-red-500' : 'text-green-600'}">${pontosFaltantes}</td>
+                    <td class="px-4 py-3">${situacao}</td>
+                </tr>`;
         }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        showContent('portugues'); // Exibe o conteúdo de Português por padrão
-        changeHistTab('2025'); // Exibe a aba de histórico de 2025 por padrão
-    });
+        resultadoHtml += `</tbody></table></div>
+        <p class="text-xs text-gray-500 mt-4">* <strong>Pontos Faltantes:</strong> Indica quantos pontos faltaram para atingir a nota de corte da última chamada (se a redação foi corrigida) ou para ter a redação corrigida (se reprovado na objetiva).</p>`;
+        
+        const resultadoDiv = document.getElementById('resultado-simulador');
+        resultadoDiv.innerHTML = resultadoHtml;
+        resultadoDiv.classList.remove('hidden');
+    }
+
+    function displayQuotaDetails() {
+        const selectedYear = document.getElementById('cotas-ano-select').value;
+        const detailsDisplay = document.getElementById('quota-details-display');
+        detailsDisplay.innerHTML = ''; // Clear previous details
+
+        const details = quotaDescriptions[selectedYear];
+        if (details) {
+            for (const key in details) {
+                const detailCard = document.createElement('div');
+                detailCard.className = 'quota-detail-card';
+                detailCard.innerHTML = `<h4>${key}</h4><p>${details[key]}</p>`;
+                detailsDisplay.appendChild(detailCard);
+            }
+        } else {
+            detailsDisplay.innerHTML = '<p class="text-center text-gray-500">Nenhum detalhe de cota disponível para este ano.</p>';
+        }
+    }
+
     </script>
 </body>
 </html>
