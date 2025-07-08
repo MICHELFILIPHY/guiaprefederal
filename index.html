@@ -7,7 +7,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Leaflet CSS for Interactive Map -->
@@ -21,6 +21,9 @@
            - Laranja: #dd5737
            - Azul Petróleo: #00abb1
         */
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc; /* Tailwind: bg-slate-50 */
@@ -104,6 +107,83 @@
                 opacity: .8;
             }
         }
+        /* Floating Action Button (FAB) Styles */
+        .fab-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+        }
+        .fab-main {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #5242ea;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .fab-main i {
+            transition: transform 0.3s ease;
+        }
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        .fab-container:hover .fab-options {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab-container:hover .fab-main i {
+            transform: rotate(45deg);
+        }
+        .fab-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            text-decoration: none;
+        }
+        .fab-label {
+            background-color: white;
+            color: #1e293b;
+            padding: 5px 12px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin-right: 15px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .fab-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-size: 20px;
+            transition: transform 0.2s ease;
+        }
+        .fab-option:hover .fab-icon {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -139,8 +219,9 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-gradient text-white pt-20 pb-24 md:pt-32 md:pb-36 rounded-b-3xl shadow-lg">
+    <section class="hero-gradient text-white pt-20 pb-24 md:pt-28 md:pb-36 rounded-b-3xl shadow-lg">
         <div class="container mx-auto px-4 text-center">
+            <img src="./logo1.png" alt="Logo Guia Pré-Federal em destaque" class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 rounded-full shadow-lg border-4 border-white/50">
             <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
                 Guia - Pré Federal: Seu Caminho para as Melhores Escolas Federais
             </h1>
@@ -159,7 +240,7 @@
                 <h3 class="text-lg font-semibold mb-4 text-white/90">Acesse a página de cada vestibulinho:</h3>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
                     <a href="https://guiaprefederal.com.br/coluni" target="_blank" class="bg-[#5242ea] hover:opacity-90 text-white font-semibold py-3 px-2 rounded-lg transition-opacity duration-300 flex items-center justify-center text-center shadow-lg">COLUNI</a>
-                    <a href="ifmg.html" target="_blank" class="bg-[#6408b0] hover:opacity-90 text-white font-semibold py-3 px-2 rounded-lg transition-opacity duration-300 flex items-center justify-center text-center shadow-lg">IFMG</a>
+                    <a href="https://guiaprefederal.com.br/ifmg" target="_blank" class="bg-[#6408b0] hover:opacity-90 text-white font-semibold py-3 px-2 rounded-lg transition-opacity duration-300 flex items-center justify-center text-center shadow-lg">IFMG</a>
                     <a href="https://guiaprefederal.com.br/ifsudeste" target="_blank" class="bg-[#00abb1] hover:opacity-90 text-white font-semibold py-3 px-2 rounded-lg transition-opacity duration-300 flex items-center justify-center text-center shadow-lg">IF Sudeste</a>
                     <a href="https://guiaprefederal.com.br/cefetmg" target="_blank" class="bg-[#7bcd47] hover:opacity-90 text-white font-semibold py-3 px-2 rounded-lg transition-opacity duration-300 flex items-center justify-center text-center shadow-lg">CEFET-MG</a>
                     <a href="https://guiaprefederal.com.br/ifnmg" target="_blank" class="bg-[#dd5737] hover:opacity-90 text-white font-semibold py-3 px-2 rounded-lg transition-opacity duration-300 flex items-center justify-center text-center shadow-lg">IFNMG</a>
@@ -174,10 +255,10 @@
         <div class="container mx-auto px-4 max-w-4xl">
             <h2 class="text-3xl font-bold text-center mb-10 section-title mx-auto">Quem Somos</h2>
             <div class="flex flex-col md:flex-row items-center md:space-x-10">
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <img src="https://placehold.co/500x300/e0e7ff/4f46e5?text=Nossa+Equipe" alt="Imagem da Equipe" class="rounded-xl shadow-lg w-full h-auto object-cover">
+                <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
+                    <img src="./logo.png" alt="Logo Guia Pré-Federal" class="w-48 h-48 rounded-full shadow-lg">
                 </div>
-                <div class="md:w-1/2 text-lg text-slate-700 leading-relaxed">
+                <div class="md:w-2/3 text-lg text-slate-700 leading-relaxed">
                     <p class="mb-4">O Guia - Pré Federal é um curso preparatório 100% online, especializado na formação de estudantes que desejam ingressar em escolas federais de ensino médio, como o COLUNI (UFV), o IFMG, o IF Sudeste, CEFET-MG e outras.</p>
                     <p>Com uma metodologia dinâmica, conteúdos atualizados e acompanhamento pedagógico constante, o Guia oferece uma jornada completa de estudos que alia excelência acadêmica à proximidade com o aluno e sua família.</p>
                 </div>
@@ -377,9 +458,33 @@
                     <a href="https://instagram.com/professormichelf" target="_blank" class="text-slate-300 hover:text-white transition duration-300">@professormichelf</a>
                 </div>
             </div>
+            <div class="flex justify-center items-center mt-8 mb-4">
+                <img src="./logo.png" alt="Logo Guia Pré-Federal" class="h-12 w-12 rounded-full">
+            </div>
             <p class="text-slate-400 text-sm">&copy; 2025 Guia - Pré Federal. Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <!-- Botão Flutuante de Ação (FAB) -->
+    <div class="fab-container">
+        <div class="fab-options">
+            <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="fab-option">
+                <span class="fab-label">Nosso Intensivo</span>
+                <div class="fab-icon" style="background-color: #6408b0;">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </a>
+            <a href="https://wa.me/5537999927364" target="_blank" class="fab-option">
+                <span class="fab-label">Contato WhatsApp</span>
+                <div class="fab-icon" style="background-color: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </a>
+        </div>
+        <button class="fab-main">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
 
     <!-- Leaflet JS for Interactive Map -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -527,4 +632,4 @@
         });
     </script>
 </body>
-</html>
+<
