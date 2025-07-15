@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Definição das variáveis de cor da paleta - Novas cores para o cabeçalho/CTA */
         :root {
@@ -250,30 +252,144 @@
             font-size: 0.95rem;
             color: #4A5568;
         }
+        
+        /* Floating Action Button (FAB) Styles */
+        .fab-container {
+            position: fixed;
+            bottom: 1rem; /* 16px */
+            right: 1rem; /* 16px */
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+        }
+        @media (min-width: 768px) {
+            .fab-container {
+                bottom: 1.5rem; /* 24px */
+                right: 1.5rem; /* 24px */
+            }
+        }
+        .fab-main {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #5242ea;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .fab-main .icon-open,
+        .fab-main .icon-close {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            position: absolute;
+        }
+        .fab-main .icon-close {
+            transform: rotate(-45deg) scale(0);
+            opacity: 0;
+        }
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+            transform: translateY(10px);
+        }
+        .fab-container.active .fab-options {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab-container.active .fab-main {
+            background-color: #dd5737; /* Laranja ao ativar */
+        }
+        .fab-container.active .fab-main .icon-open {
+            transform: rotate(45deg) scale(0);
+            opacity: 0;
+        }
+        .fab-container.active .fab-main .icon-close {
+            transform: rotate(0deg) scale(1);
+            opacity: 1;
+        }
+        .fab-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            text-decoration: none;
+        }
+        .fab-label {
+            background-color: white;
+            color: #1e293b;
+            padding: 5px 12px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin-right: 15px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .fab-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-size: 20px;
+            transition: transform 0.2s ease;
+        }
+        .fab-option:hover .fab-icon {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body class="text-gray-800">
 
-    <!-- Cabeçalho (Nova Roupagem) -->
-    <header class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-3">
-            <div class="flex items-center justify-between">
-                <div class="text-xl font-bold" style="color: var(--dark-blue);">Guia Pré-Federal</div>
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="#simulador" class="nav-link">Simulador de Desempenho</a>
-                    <a href="#historico" class="nav-link">Histórico de Notas</a>
-                    <a href="#conteudo" class="nav-link">Conteúdo Programático</a>
-                    <a href="#detalhes-cotas" class="nav-link">Detalhes das Cotas</a>
-                    <a href="#dicas" class="nav-link">Dicas</a>
-                </div>
-            </div>
-        </nav>
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <img src="./logo.png" alt="Guia - Pré Federal Logo" class="rounded-full w-10 h-10" style="background-color: #7bcd47;">
+                <span class="text-xl font-bold" style="color: #5242ea;">Guia Pré-Federal</span>
+            </a>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#simulador" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Simulador</a></li>
+                    <li><a href="#historico" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Histórico</a></li>
+                    <li><a href="#conteudo" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Conteúdo</a></li>
+                    <li><a href="#detalhes-cotas" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Cotas</a></li>
+                    <li><a href="#dicas" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Dicas</a></li>
+                </ul>
+            </nav>
+            <button class="md:hidden text-slate-700 focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 shadow-md">
+            <ul class="flex flex-col items-center space-y-4">
+                <li><a href="#simulador" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Simulador</a></li>
+                <li><a href="#historico" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Histórico</a></li>
+                <li><a href="#conteudo" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Conteúdo</a></li>
+                <li><a href="#detalhes-cotas" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Cotas</a></li>
+                <li><a href="#dicas" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Dicas</a></li>
+            </ul>
+        </div>
     </header>
 
     <main>
         <!-- Hero Section (Nova Roupagem) -->
         <section id="hero" class="bg-white py-20">
             <div class="container mx-auto px-6 text-center">
+                 <img src="./logo1.png" alt="Logo Guia Pré-Federal em destaque" class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 rounded-full shadow-lg border-4 border-gray-200" style="background-color: var(--orange-red);">
                  <h1 class="text-5xl md:text-6xl font-black" style="color: var(--dark-blue);">Guia <span class="px-4 py-1 rounded-md" style="background-color: var(--primary-lime); color: var(--dark-blue);">Pré-Federal</span></h1>
                 <p class="section-subtitle max-w-3xl mx-auto mt-4">Seu Raio-X completo do vestibular do Coluni.</p>
             </div>
@@ -621,7 +737,56 @@
         </div>
     </main>
 
+    <!-- Botão Flutuante de Ação (FAB) -->
+    <div class="fab-container">
+        <div class="fab-options">
+            <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="fab-option">
+                <span class="fab-label">Nosso Intensivo</span>
+                <div class="fab-icon" style="background-color: #6408b0;">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </a>
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
+                <span class="fab-label">Contato WhatsApp</span>
+                <div class="fab-icon" style="background-color: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </a>
+        </div>
+        <button class="fab-main" id="fab-main-button">
+            <i class="fas fa-comment-dots icon-open"></i>
+            <i class="fas fa-times icon-close"></i>
+        </button>
+    </div>
+
     <script>
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('#')) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    });
+
+    // Floating Action Button (FAB) Logic
+    const fabContainer = document.querySelector('.fab-container');
+    const fabMainButton = document.getElementById('fab-main-button');
+    fabMainButton.addEventListener('click', (event) => {
+        event.stopPropagation(); // Impede que o clique se propague para o document
+        fabContainer.classList.toggle('active');
+    });
+    document.addEventListener('click', (event) => {
+        if (!fabContainer.contains(event.target)) {
+            fabContainer.classList.remove('active');
+        }
+    });
+
+
     // DADOS HISTÓRICOS ATUALIZADOS COM BASE NA SUA SOLICITAÇÃO
     const dadosHistoricos = {
         '2025': {
@@ -995,6 +1160,13 @@
             </ul>`
     };
 
+    document.addEventListener('DOMContentLoaded', () => {
+        showContent('portugues'); // Exibe o conteúdo de Português por padrão
+        changeHistTab('2025'); // Exibe a aba de histórico de 2025 por padrão
+        updateModalidadeOptions(); // Popula as opções de modalidade ao carregar
+        displayQuotaDetails(); // Exibe os detalhes das cotas ao carregar
+    });
+
     function showContent(subject) {
         document.getElementById('content-display').innerHTML = syllabusData[subject];
         document.querySelectorAll('.subject-icon').forEach(icon => {
@@ -1002,13 +1174,6 @@
         });
         document.querySelector(`[onclick="showContent('${subject}')"]`).classList.add('active');
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        showContent('portugues'); // Exibe o conteúdo de Português por padrão
-        changeHistTab('2025'); // Exibe a aba de histórico de 2025 por padrão
-        updateModalidadeOptions(); // Popula as opções de modalidade ao carregar
-        displayQuotaDetails(); // Exibe os detalhes das cotas ao carregar
-    });
 
     function changeHistTab(tabId) {
         const tabsContainer = document.getElementById('tabs-container-hist');
