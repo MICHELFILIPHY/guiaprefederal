@@ -377,6 +377,22 @@
                     <a href="#analise" class="nav-link">Análise</a>
                     <a href="#calculadora" class="nav-link">Calculadora</a>
                 </div>
+                <button class="md:hidden text-slate-700 focus:outline-none" id="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+             <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white py-2 shadow-md">
+                <ul class="flex flex-col items-center space-y-4">
+                    <li><a href="#instituicao" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">A Instituição</a></li>
+                    <li><a href="#processo" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Processo Seletivo</a></li>
+                    <li><a href="#cotas" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Cotas</a></li>
+                    <li><a href="#mapa" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Mapa</a></li>
+                    <li><a href="#conteudo" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Conteúdo</a></li>
+                    <li><a href="#concorrencia" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Concorrência</a></li>
+                    <li><a href="#analise" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Análise</a></li>
+                    <li><a href="#calculadora" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Calculadora</a></li>
+                </ul>
             </div>
         </nav>
     </header>
@@ -890,7 +906,7 @@
     </footer>
 
     <script>
-        // UPDATED DATA FOR 2025.1 from CSV
+        // DATA FOR 2025.1
         const admissionData2025_1 = {
             "Barbacena": [
                 { course: "Técnico em Agropecuária", group: "GRUPO AC", score: 56, num_candidates: 392 }, { course: "Técnico em Agropecuária", group: "GRUPO LB-EP", score: 56, num_candidates: 70 }, { course: "Técnico em Agropecuária", group: "GRUPO LB-PCD", score: 42, num_candidates: 4 }, { course: "Técnico em Agropecuária", group: "GRUPO LB-PPI", score: 42, num_candidates: 41 }, { course: "Técnico em Agropecuária", group: "GRUPO LB-Q", score: 46, num_candidates: 3 }, { course: "Técnico em Agropecuária", group: "GRUPO LI-EP", score: 58, num_candidates: 75 }, { course: "Técnico em Agropecuária", group: "GRUPO LI-PCD", score: 42, num_candidates: 4 }, { course: "Técnico em Agropecuária", group: "GRUPO LI-PPI", score: 42, num_candidates: 29 }, { course: "Técnico em Agropecuária", group: "GRUPO PCD", score: 42, num_candidates: 5 }, { course: "Técnico em Agropecuária", group: "GRUPO PRONAF", score: 60, num_candidates: 13 },
@@ -939,11 +955,11 @@
         };
         const vacancyDataRaw2025_1 = { "Barbacena": { "Técnico em Alimentos": { "AC": 15, "LB-PPI": 6, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 6, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 2, "PCD": 1, "PRONAF": 1 }, "Técnico em Agropecuária": { "AC": 41, "LB-PPI": 14, "LB-Q": 1, "LB-PCD": 2, "LB-EP": 6, "LI-PPI": 13, "LI-Q": 0, "LI-PCD": 2, "LI-EP": 7, "PCD": 2, "PRONAF": 2 }, "Técnico em Hospedagem": { "AC": 16, "LB-PPI": 6, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 6, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 2, "PCD": 1, "PRONAF": 0 }, "Técnico em Química": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 } }, "Bom Sucesso": { "Técnico em Administração": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 }, "Técnico em Meio Ambiente": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 } }, "Juiz de Fora": { "default": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 } }, "Muriaé": { "default": { "AC": 16, "LB-PPI": 6, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 6, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 2, "PCD": 1, "PRONAF": 0 }, "Técnico em Agroecologia": { "PRONAF": 1 } }, "Rio Pomba": { "default": { "AC": 16, "LB-PPI": 6, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 6, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 2, "PCD": 1, "PRONAF": 0 }, "Técnico em Agropecuária": { "PRONAF": 1 }, "Técnico em Alimentos": { "PRONAF": 1 }, "Técnico em Zootecnia": { "PRONAF": 1 } }, "Santos Dumont": { "default": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 } }, "São João del-Rei": { "Técnico em Edificações": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 }, "Técnico em Meio Ambiente": { "AC": 14, "LB-PPI": 5, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 5, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 1, "PCD": 1, "PRONAF": 0 }, "Técnico em Informática": { "AC": 16, "LB-PPI": 6, "LB-Q": 1, "LB-PCD": 1, "LB-EP": 1, "LI-PPI": 6, "LI-Q": 0, "LI-PCD": 1, "LI-EP": 2, "PCD": 1, "PRONAF": 0 } } };
         
-        // DATA FOR 2024 (Unchanged)
+        // DATA FOR 2024
         const admissionData2024 = { "Barbacena": [{ course: "Técnico em Agroindústria", group: "A0", score: 48 }, { course: "Técnico em Agroindústria", group: "L1", score: 46 }, { course: "Técnico em Agroindústria", group: "L2", score: 48 }, { course: "Técnico em Agroindústria", group: "L5", score: 56 }, { course: "Técnico em Agroindústria", group: "L6", score: 42 }, { course: "Técnico em Agroindústria", group: "L9", score: 44 }, { course: "Técnico em Agroindústria", group: "PCD", score: 12 }, { course: "Técnico em Agroindústria", group: "V", score: 50 }, { course: "Técnico em Agropecuária", group: "A0", score: 58 }, { course: "Técnico em Agropecuária", group: "L1", score: 46 }, { course: "Técnico em Agropecuária", group: "L2", score: 40 }, { course: "Técnico em Agropecuária", group: "L5", score: 48 }, { course: "Técnico em Agropecuária", group: "L6", score: 34 }, { course: "Técnico em Agropecuária", group: "L9", score: 42 }, { course: "Técnico em Agropecuária", group: "L10", score: 16 }, { course: "Técnico em Agropecuária", group: "L13", score: 20 }, { course: "Técnico em Agropecuária", group: "L14", score: 26 }, { course: "Técnico em Agropecuária", group: "PCD", score: 24 }, { course: "Técnico em Hospedagem", group: "A0", score: 50 }, { course: "Técnico em Hospedagem", group: "L1", score: 44 }, { course: "Técnico em Hospedagem", group: "L2", score: 28 }, { course: "Técnico em Hospedagem", group: "L5", score: 54 }, { course: "Técnico em Hospedagem", group: "L6", score: 44 }, { course: "Técnico em Hospedagem", group: "PCD", score: 50 }, { course: "Técnico em Química", group: "A0", score: 32 }, { course: "Técnico em Química", group: "L1", score: 50 }, { course: "Técnico em Química", group: "L5", score: 76 }, { course: "Técnico em Química", group: "L6", score: 56 }, { course: "Técnico em Química", group: "L10", score: 48 }], "Juiz de Fora": [{ course: "Técnico em Desenvolvimento de Sistemas", group: "A0", score: 68 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "L1", score: 54 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "L2", score: 46 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "L5", score: 58 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "L6", score: 62 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "L10", score: 28 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "L13", score: 36 }, { course: "Técnico em Desenvolvimento de Sistemas", group: "PCD", score: 58 }, { course: "Técnico em Edificações", group: "A0", score: 52 }, { course: "Técnico em Edificações", group: "L1", score: 54 }, { course: "Técnico em Edificações", group: "L2", score: 40 }, { course: "Técnico em Edificações", group: "L5", score: 64 }, { course: "Técnico em Edificações", group: "L6", score: 36 }, { course: "Técnico em Edificações", group: "PCD", score: 28 }, { course: "Técnico em Eletromecânica", group: "A0", score: 60 }, { course: "Técnico em Eletromecânica", group: "L1", score: 50 }, { course: "Técnico em Eletromecânica", group: "L2", score: 32 }, { course: "Técnico em Eletromecânica", group: "L5", score: 52 }, { course: "Técnico em Eletromecânica", group: "L6", score: 46 }, { course: "Técnico em Eletromecânica", group: "L9", score: 50 }, { course: "Técnico em Eletrotécnica", group: "A0", score: 56 }, { course: "Técnico em Eletrotécnica", group: "L1", score: 42 }, { course: "Técnico em Eletrotécnica", group: "L2", score: 24 }, { course: "Técnico em Eletrotécnica", group: "L5", score: 42 }, { course: "Técnico em Eletrotécnica", group: "L6", score: 28 }, { course: "Técnico em Eletrotécnica", group: "L10", score: 38 }, { course: "Técnico em Mecânica", group: "A0", score: 60 }, { course: "Técnico em Mecânica", group: "L1", score: 56 }, { course: "Técnico em Mecânica", group: "L2", score: 24 }, { course: "Técnico em Mecânica", group: "L5", score: 50 }, { course: "Técnico em Mecânica", group: "L6", score: 40 }, { course: "Técnico em Mecânica", group: "L10", score: 24 }, { course: "Técnico em Mecânica", group: "L14", score: 24 }, { course: "Técnico em Meio Ambiente", group: "A0", score: 56 }, { course: "Técnico em Meio Ambiente", group: "L1", score: 46 }, { course: "Técnico em Meio Ambiente", group: "L2", score: 44 }, { course: "Técnico em Meio Ambiente", group: "L5", score: 56 }, { course: "Técnico em Meio Ambiente", group: "L6", score: 60 }, { course: "Técnico em Meio Ambiente", group: "L9", score: 28 }, { course: "Técnico em Meio Ambiente", group: "L10", score: 36 }, { course: "Técnico em Meio Ambiente", group: "PCD", score: 28 }, { course: "Técnico em Metalurgia", group: "A0", score: 50 }, { course: "Técnico em Metalurgia", group: "L1", score: 42 }, { course: "Técnico em Metalurgia", group: "L2", score: 36 }, { course: "Técnico em Metalurgia", group: "L5", score: 50 }, { course: "Técnico em Metalurgia", group: "L6", score: 40 }], "Muriaé": [{ course: "Técnico em Agroecologia", group: "A0", score: 48 }, { course: "Técnico em Agroecologia", group: "L1", score: 42 }, { course: "Técnico em Agroecologia", group: "L2", score: 42 }, { course: "Técnico em Agroecologia", group: "L5", score: 50 }, { course: "Técnico em Agroecologia", group: "L6", score: 44 }, { course: "Técnico em Agroecologia", group: "L13", score: 36 }, { course: "Técnico em Agroecologia", group: "PCD", score: 40 }, { course: "Técnico em Agroecologia", group: "V", score: 52 }, { course: "Técnico em Eletrotécnica", group: "A0", score: 64 }, { course: "Técnico em Eletrotécnica", group: "L1", score: 48 }, { course: "Técnico em Eletrotécnica", group: "L2", score: 58 }, { course: "Técnico em Eletrotécnica", group: "L5", score: 58 }, { course: "Técnico em Informática", group: "A0", score: 68 }, { course: "Técnico em Informática", group: "L1", score: 62 }, { course: "Técnico em Informática", group: "L2", score: 60 }, { course: "Técnico em Informática", group: "L5", score: 56 }, { course: "Técnico em Informática", group: "L6", score: 36 }, { course: "Técnico em Informática", group: "L10", score: 42 }, { course: "Técnico em Informática", group: "L13", score: 20 }, { course: "Técnico em Informática", group: "L14", score: 58 }, { course: "Técnico em Informática", group: "PCD", score: 54 }, { course: "Técnico em Mecânica", group: "L1", score: 50 }, { course: "Técnico em Mecânica", group: "L2", score: 24 }, { course: "Técnico em Mecânica", group: "L5", score: 46 }, { course: "Técnico em Mecânica", group: "L6", score: 30 }, { course: "Técnico em Mecânica", group: "L13", score: 46 }, { course: "Técnico em Mecânica", group: "L14", score: 34 }, { course: "Técnico em Meio Ambiente", group: "A0", score: 50 }, { course: "Técnico em Meio Ambiente", group: "L1", score: 42 }, { course: "Técnico em Meio Ambiente", group: "L2", score: 34 }, { course: "Técnico em Meio Ambiente", group: "L5", score: 44 }, { course: "Técnico em Meio Ambiente", group: "L6", score: 36 }, { course: "Técnico em Meio Ambiente", group: "L9", score: 34 }], "Rio Pomba": [{ course: "Técnico em Agropecuária", group: "A0", score: 26 }, { course: "Técnico em Agropecuária", group: "L1", score: 38 }, { course: "Técnico em Agropecuária", group: "L2", score: 42 }, { course: "Técnico em Agropecuária", group: "L5", score: 38 }, { course: "Técnico em Agropecuária", group: "L6", score: 22 }, { course: "Técnico em Agropecuária", group: "L9", score: 18 }, { course: "Técnico em Agropecuária", group: "PCD", score: 14 }, { course: "Técnico em Agropecuária", group: "V", score: 32 }, { course: "Técnico em Alimentos", group: "A0", score: 40 }, { course: "Técnico em Alimentos", group: "L1", score: 40 }, { course: "Técnico em Alimentos", group: "L2", score: 42 }, { course: "Técnico em Alimentos", group: "L5", score: 34 }, { course: "Técnico em Alimentos", group: "L6", score: 28 }, { course: "Técnico em Informática", group: "A0", score: 54 }, { course: "Técnico em Informática", group: "L1", score: 42 }, { course: "Técnico em Informática", group: "L2", score: 36 }, { course: "Técnico em Informática", group: "L5", score: 54 }, { course: "Técnico em Informática", group: "L6", score: 36 }, { course: "Técnico em Informática", group: "L10", score: 42 }, { course: "Técnico em Meio Ambiente", group: "A0", score: 26 }, { course: "Técnico em Meio Ambiente", group: "L1", score: 46 }, { course: "Técnico em Meio Ambiente", group: "L2", score: 34 }, { course: "Técnico em Meio Ambiente", group: "L5", score: 46 }, { course: "Técnico em Meio Ambiente", group: "L6", score: 34 }, { course: "Técnico em Química", group: "A0", score: 24 }, { course: "Técnico em Química", group: "L1", score: 44 }, { course: "Técnico em Química", group: "L2", score: 32 }, { course: "Técnico em Química", group: "L5", score: 48 }, { course: "Técnico em Química", group: "L6", score: 42 }, { course: "Técnico em Zootecnia", group: "A0", score: 44 }, { course: "Técnico em Zootecnia", group: "L1", score: 38 }, { course: "Técnico em Zootecnia", group: "L2", score: 26 }, { course: "Técnico em Zootecnia", group: "L5", score: 40 }, { course: "Técnico em Zootecnia", group: "L6", score: 24 }, { course: "Técnico em Zootecnia", group: "PCD", score: 20 }, { course: "Técnico em Zootecnia", group: "V", score: 22 }], "Santos Dumont": [{ course: "Técnico em Eletrotécnica", group: "A0", score: 38 }, { course: "Técnico em Eletrotécnica", group: "L1", score: 46 }, { course: "Técnico em Eletrotécnica", group: "L2", score: 30 }, { course: "Técnico em Eletrotécnica", group: "L5", score: 50 }, { course: "Técnico em Eletrotécnica", group: "L6", score: 34 }, { course: "Técnico em Eletrotécnica", group: "L9", score: 26 }, { course: "Técnico em Eletrotécnica", group: "L10", score: 22 }, { course: "Técnico em Guia de Turismo", group: "A0", score: 44 }, { course: "Técnico em Guia de Turismo", group: "L1", score: 38 }, { course: "Técnico em Guia de Turismo", group: "L2", score: 30 }, { course: "Técnico em Guia de Turismo", group: "L5", score: 38 }, { course: "Técnico em Guia de Turismo", group: "L6", score: 22 }, { course: "Técnico em Guia de Turismo", group: "L13", score: 34 }, { course: "Técnico em Guia de Turismo", group: "PCD", score: 62 },], "São João del-Rei": [{ course: "Técnico em Edificações", group: "A0", score: 56 }, { course: "Técnico em Edificações", group: "L1", score: 50 }, { course: "Técnico em Edificações", group: "L2", score: 46 }, { course: "Técnico em Edificações", group: "L5", score: 60 }, { course: "Técnico em Edificações", group: "L6", score: 38 }, { course: "Técnico em Edificações", group: "L13", score: 58 }, { course: "Técnico em Edificações", group: "PCD", score: 68 }, { course: "Técnico em Meio Ambiente", group: "A0", score: 42 }, { course: "Técnico em Meio Ambiente", group: "L1", score: 48 }, { course: "Técnico em Meio Ambiente", group: "L2", score: 36 }, { course: "Técnico em Meio Ambiente", group: "L5", score: 48 }, { course: "Técnico em Meio Ambiente", group: "L6", score: 42 }, { course: "Técnico em Meio Ambiente", group: "L13", score: 42 },] };
         const vacancyDataRaw2024 = { "Barbacena": { "Técnico em Agroindústria": {"A0":13,"L1":2,"L9":1,"L2":4,"L10":1,"L5":2,"L13":1,"L6":3,"L14":1,"PcD":1,"V":1}, "Técnico em Agropecuária": {"A0":36,"L1":8,"L9":1,"L2":10,"L10":2,"L5":8,"L13":1,"L6":10,"L14":1,"PcD":2,"V":2}, "Técnico em Hospedagem": {"A0":16,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":0}, "Técnico em Química": {"A0":14,"L1":2,"L9":1,"L2":4,"L10":1,"L5":2,"L13":1,"L6":3,"L14":1,"PcD":1,"V":0} }, "Juiz de Fora": { "default": {"A0":14,"L1":2,"L9":1,"L2":4,"L10":1,"L5":2,"L13":1,"L6":3,"L14":1,"PcD":1,"V":0} }, "Muriaé": { "Técnico em Agroecologia": {"A0":15,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":1}, "default": {"A0":16,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":0} }, "Rio Pomba": { "Técnico em Agropecuária": {"A0":15,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":1}, "Técnico em Alimentos": {"A0":15,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":1}, "Técnico em Zootecnia": {"A0":15,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":1}, "default": {"A0":16,"L1":3,"L9":1,"L2":4,"L10":1,"L5":3,"L13":1,"L6":4,"L14":1,"PcD":1,"V":0} }, "Santos Dumont": { "default": {"A0":14,"L1":2,"L9":1,"L2":4,"L10":1,"L5":2,"L13":1,"L6":3,"L14":1,"PcD":1,"V":0} }, "São João del-Rei": { "default": {"A0":14,"L1":2,"L9":1,"L2":4,"L10":1,"L5":2,"L13":1,"L6":3,"L14":1,"PcD":1,"V":0} } };
         
-        // NEW DATA FOR COMPETITION PANEL 2025.1
+        // DATA FOR COMPETITION PANEL 2025.1
         const competitionData = {
             "Barbacena": [
                 { course: "Técnico em Agropecuária", modality: "GRUPO AC", vacancies: 41, candidates: 392 }, { course: "Técnico em Agropecuária", modality: "GRUPO LB-PPI", vacancies: 14, candidates: 41 }, { course: "Técnico em Agropecuária", modality: "GRUPO LB-Q", vacancies: 1, candidates: 3 }, { course: "Técnico em Agropecuária", modality: "GRUPO LB-PCD", vacancies: 2, candidates: 4 }, { course: "Técnico em Agropecuária", modality: "GRUPO LB-EP", vacancies: 6, candidates: 70 }, { course: "Técnico em Agropecuária", modality: "GRUPO LI-PPI", vacancies: 13, candidates: 29 }, { course: "Técnico em Agropecuária", modality: "GRUPO LI-PCD", vacancies: 2, candidates: 4 }, { course: "Técnico em Agropecuária", modality: "GRUPO LI-EP", vacancies: 7, candidates: 75 }, { course: "Técnico em Agropecuária", modality: "GRUPO PCD", vacancies: 2, candidates: 5 }, { course: "Técnico em Agropecuária", modality: "GRUPO PRONAF", vacancies: 2, candidates: 13 },
@@ -996,11 +1012,21 @@
         const groupInfo = { '2025.1': { orderedGroups: ['GRUPO AC', 'GRUPO LB-EP', 'GRUPO LB-PCD', 'GRUPO LB-PPI', 'GRUPO LB-Q', 'GRUPO LI-EP', 'GRUPO LI-PCD', 'GRUPO LI-PPI', 'GRUPO PCD', 'GRUPO PRONAF'], labels: { 'GRUPO AC': 'Ampla Concorrência (AC)', 'GRUPO LB-EP': 'Renda Baixa (LB-EP)', 'GRUPO LB-PCD': 'Renda Baixa + PCD (LB-PCD)', 'GRUPO LB-PPI': 'Renda Baixa + PPI (LB-PPI)', 'GRUPO LB-Q': 'Renda Baixa + Quilombola (LB-Q)', 'GRUPO LI-EP': 'Escola Pública (LI-EP)', 'GRUPO LI-PCD': 'Escola Pública + PCD (LI-PCD)', 'GRUPO LI-PPI': 'Escola Pública + PPI (LI-PPI)', 'GRUPO PCD': 'PCD (Geral)', 'GRUPO PRONAF': 'PRONAF' }, compactLabels: { 'GRUPO AC': 'AC', 'GRUPO LB-EP': 'LB-EP', 'GRUPO LB-PCD': 'LB-PCD', 'GRUPO LB-PPI': 'LB-PPI', 'GRUPO LB-Q': 'LB-Q', 'GRUPO LI-EP': 'LI-EP', 'GRUPO LI-PCD': 'LI-PCD', 'GRUPO LI-PPI': 'LI-PPI', 'GRUPO PCD': 'PCD', 'GRUPO PRONAF': 'PRONAF' } }, '2024': { orderedGroups: ['A0', 'L1', 'L2', 'L5', 'L6', 'L9', 'L10', 'L13', 'L14', 'PCD', 'V'], labels: { 'A0': 'Ampla Concorrência (A0)', 'L1': 'Renda Baixa (L1)', 'L2': 'Renda Baixa + PPI (L2)', 'L5': 'Escola Pública (L5)', 'L6': 'Escola Pública + PPI (L6)', 'L9': 'Renda Baixa + PCD (L9)', 'L10': 'Renda Baixa + PPI + PCD (L10)', 'L13': 'Escola Pública + PCD (L13)', 'L14': 'Escola Pública + PPI + PCD (L14)', 'PCD': 'PCD (Geral)', 'V': 'PRONAF (V)' }, compactLabels: { 'A0': 'A0', 'L1': 'L1', 'L2': 'L2', 'L5': 'L5', 'L6': 'L6', 'L9': 'L9', 'L10': 'L10', 'L13': 'L13', 'L14': 'L14', 'PCD': 'PCD', 'V': 'V' } } };
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
              // Floating Action Button (FAB) Logic
             const fabContainer = document.querySelector('.fab-container');
             const fabMainButton = document.getElementById('fab-main-button');
             fabMainButton.addEventListener('click', (event) => {
-                event.stopPropagation(); // Impede que o clique se propague para o document
+                event.stopPropagation(); // Prevents the click from propagating to the document
                 fabContainer.classList.toggle('active');
             });
             document.addEventListener('click', (event) => {
@@ -1094,6 +1120,31 @@
             // --- COMPETITION PANEL LOGIC ---
             const concorrenciaCampusSelect = document.getElementById('concorrencia-campus-select');
             const concorrenciaTableContainer = document.getElementById('concorrencia-table-container');
+            const competitionData = {}; // This will be populated from admission and vacancy data
+            const yearForCompetition = '2025.1';
+            const admissionDataForCompetition = allAdmissionData[yearForCompetition];
+            const vacancyDataForCompetition = allVacancyData[yearForCompetition];
+
+            for (const campus in admissionDataForCompetition) {
+                competitionData[campus] = admissionDataForCompetition[campus].map(entry => {
+                    const groupKey = entry.group.replace('GRUPO ', '');
+                    let vacancies = 0;
+                    if (vacancyDataForCompetition[campus]) {
+                        if (vacancyDataForCompetition[campus][entry.course] && typeof vacancyDataForCompetition[campus][entry.course][groupKey] !== 'undefined') {
+                            vacancies = vacancyDataForCompetition[campus][entry.course][groupKey];
+                        } else if (vacancyDataForCompetition[campus].default && typeof vacancyDataForCompetition[campus].default[groupKey] !== 'undefined') {
+                            vacancies = vacancyDataForCompetition[campus].default[groupKey];
+                        }
+                    }
+                    return {
+                        course: entry.course,
+                        modality: entry.group,
+                        vacancies: vacancies,
+                        candidates: entry.num_candidates || 0
+                    };
+                });
+            }
+            
             const campuses = Object.keys(competitionData).sort();
 
             campuses.forEach(campus => {
@@ -1116,12 +1167,14 @@
 
                 courses.forEach(course => {
                     const courseData = campusCompetitionData.filter(item => item.course === course);
+                    courseData.sort((a,b) => groupInfo[yearForCompetition].orderedGroups.indexOf(a.modality) - groupInfo[yearForCompetition].orderedGroups.indexOf(b.modality));
+                    
                     courseData.forEach((entry, index) => {
                         const competition = entry.vacancies > 0 ? (entry.candidates / entry.vacancies).toFixed(2) : 'N/A';
                         tableHTML += `
                             <tr>
                                 ${index === 0 ? `<td rowspan="${courseData.length}" class="align-top font-semibold">${course}</td>` : ''}
-                                <td>${groupInfo['2025.1'].labels[entry.modality] || entry.modality}</td>
+                                <td>${groupInfo[yearForCompetition].labels[entry.modality] || entry.modality}</td>
                                 <td>${entry.vacancies}</td>
                                 <td>${entry.candidates}</td>
                                 <td>${competition}</td>
@@ -1278,8 +1331,7 @@
                 specificApprovalResultsDiv.classList.add('hidden');
                 generalResultsHeading.classList.add('hidden');
                 resultsDiv.classList.remove('hidden');
-                calculatorCta.classList.remove('hidden');
-
+                
                 totalScoreDisplay.innerText = `Sua nota total (calculada): ${totalScore.toFixed(2)} / 90.00`;
                 const specificCampus = document.getElementById('specific-campus-select').value;
                 const specificCourse = document.getElementById('specific-course-select').value;
@@ -1324,6 +1376,7 @@
                     generalResultsHeading.classList.remove('hidden');
                     passedCoursesCards.classList.remove('hidden');
                     noPassedCourses.classList.add('hidden');
+                    calculatorCta.classList.remove('hidden');
                     Object.keys(groupedPasses).sort().forEach(campus => {
                         const campusBox = document.createElement('div');
                         campusBox.className = 'campus-result-box';
@@ -1345,6 +1398,7 @@
                 } else {
                     noPassedCourses.innerText = `Com base em suas notas, você não seria aprovado em nenhum curso na 1ª Chamada do processo seletivo de ${selectedCalcYear}.`;
                     noPassedCourses.classList.remove('hidden');
+                    calculatorCta.classList.remove('hidden'); // Show CTA even if not passed to encourage them
                 }
             }
 
@@ -1409,3 +1463,4 @@
         });
     </script>
 </body>
+</html>
