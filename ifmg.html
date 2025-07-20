@@ -46,13 +46,24 @@
             border-bottom-color: var(--primary-blue);
         }
         
+        .hero-title {
+            font-size: 3.75rem; /* 60px */
+            line-height: 1;
+        }
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 4.5rem; /* 72px */
+            }
+        }
         .hero-title .highlight {
             background-color: var(--primary-lime);
             color: var(--dark-blue);
             padding: 0.25rem 1rem;
             border-radius: 0.75rem;
             display: inline-block;
+            margin-left: 0.5rem;
         }
+
         .section-title {
             font-size: 2.5rem;
             font-weight: 900;
@@ -340,7 +351,7 @@
                          class="rounded-full w-10 h-10" 
                          style="background-color: #7bcd47;"
                          onerror="this.onerror=null;this.src='https://placehold.co/40x40/7BCD47/FFFFFF?text=GPF';">
-                    <span class="text-xl font-bold" style="color: var(--primary-blue);">Guia Pré-Federal IFMG</span>
+                    <span class="text-xl font-bold" style="color: var(--primary-blue);">Guia Pré-Federal</span>
                 </a>
                 <div class="hidden md:flex items-center space-x-6">
                     <a href="#instituicao" class="nav-link">A Instituição</a>
@@ -378,14 +389,14 @@
                       class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 rounded-full shadow-lg border-4 border-gray-200" 
                       style="background-color: var(--orange-red);"
                       onerror="this.onerror=null;this.src='https://placehold.co/128x128/DD5737/FFFFFF?text=GPF';">
-                 <h1 class="text-5xl md:text-6xl font-black hero-title" style="color: var(--dark-blue);">Guia <span class="highlight">Pré-Federal</span></h1>
-                <p class="section-subtitle max-w-3xl mx-auto mt-4">Seu Raio-X completo do vestibular do IFMG.</p>
+                 <h1 class="font-black hero-title" style="color: var(--dark-blue);">Guia<span class="highlight">Pré-Federal</span></h1>
+                <p class="section-subtitle max-w-3xl mx-auto mt-6">Seu Raio-X completo do vestibular para Institutos Federais.</p>
             </div>
         </section>
 
         <section class="container mx-auto px-6 cta-section">
-            <h2 class="text-3xl font-black mb-3">Quer Gabaritar o Processo Seletivo do IFMG?</h2>
-            <p class="max-w-2xl mx-auto mb-6">Nosso curso preparatório focado no IFMG oferece aulas, simulados, material de apoio e tudo que você precisa para conquistar sua vaga. Aumente suas chances de aprovação!</p>
+            <h2 class="text-3xl font-black mb-3">Quer Gabaritar o Processo Seletivo?</h2>
+            <p class="max-w-2xl mx-auto mb-6">Nosso curso preparatório focado nos Institutos Federais oferece aulas, simulados, material de apoio e tudo que você precisa para conquistar sua vaga. Aumente suas chances de aprovação!</p>
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
                 <a href="#" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
                     <i class="fas fa-graduation-cap mr-2"></i>
@@ -401,24 +412,24 @@
         <section id="instituicao" class="py-16 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                    <h2 class="section-title">Conheça o IFMG</h2>
-                    <p class="section-subtitle mt-2">Uma instituição federal de educação pública, gratuita e de alta qualidade em Minas Gerais.</p>
+                    <h2 class="section-title">Conheça a Instituição</h2>
+                    <p class="section-subtitle mt-2">Uma instituição federal de educação pública, gratuita e de alta qualidade.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     <div class="bg-gray-50 rounded-lg shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
                         <div class="text-5xl mb-4" style="color: var(--primary-blue);">🎓</div>
                         <h3 class="text-2xl font-bold mb-2">Educação de Excelência</h3>
-                        <p>Formação técnica e humana que prepara para o mercado de trabalho, para a vida e para a continuação dos estudos.</p>
+                        <p>Os Institutos Federais oferecem cursos técnicos integrados ao ensino médio, preparando os alunos tanto para o mercado de trabalho quanto para a continuação dos estudos em nível superior.</p>
                     </div>
                     <div class="bg-gray-50 rounded-lg shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
                         <div class="text-5xl mb-4" style="color: var(--green);">🏫</div>
-                        <h3 class="text-2xl font-bold mb-2">18 Campi e 1 Polo</h3>
-                        <p>Presente em diversas regiões de Minas Gerais, levando educação de qualidade para todo o estado.</p>
+                        <h3 class="text-2xl font-bold mb-2">Estrutura Completa</h3>
+                        <p>Com múltiplos campi espalhados por diversas regiões, os Institutos levam educação de qualidade para todo o estado, com laboratórios, bibliotecas e espaços para práticas esportivas e culturais.</p>
                     </div>
                     <div class="bg-gray-50 rounded-lg shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
                         <div class="text-5xl mb-4" style="color: var(--purple);">💡</div>
                         <h3 class="text-2xl font-bold mb-2">Inovação e Oportunidades</h3>
-                        <p>Cursos alinhados com as demandas regionais, abrindo portas para o futuro profissional e acadêmico.</p>
+                        <p>Os cursos são alinhados com as demandas regionais e as tendências do mercado, focando em inovação, pesquisa e extensão, o que abre portas para o futuro profissional e acadêmico dos estudantes.</p>
                     </div>
                 </div>
             </div>
@@ -428,7 +439,7 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="section-title">O Processo Seletivo Descomplicado</h2>
-                    <p class="section-subtitle mt-2">Entenda as etapas para garantir sua vaga no IFMG (Edital 2025).</p>
+                    <p class="section-subtitle mt-2">Entenda as etapas para garantir sua vaga.</p>
                 </div>
                 <div class="relative">
                     <div class="hidden md:block border-l-4 border-blue-300 absolute h-full top-0 left-1/2 -ml-2"></div>
@@ -436,8 +447,8 @@
                         <div class="md:flex items-center">
                             <div class="md:w-1/2 md:pr-8">
                                 <div class="bg-white rounded-lg shadow-xl p-6 border-l-4" style="border-color: var(--primary-blue);">
-                                    <h3 class="text-xl font-bold mb-2">1. Edital e Inscrição (26/08 a 07/10)</h3>
-                                    <p>Tudo começa com a leitura atenta do edital. A inscrição é online, com taxa de R$60 (ou R$50 com desconto até 09/09). É possível pedir isenção até 13/09.</p>
+                                    <h3 class="text-xl font-bold mb-2">1. Edital e Inscrição</h3>
+                                    <p>Tudo começa com a leitura atenta do edital. A inscrição é online, com uma taxa que pode ter isenção para candidatos que se enquadrem nos critérios socioeconômicos. É fundamental ter CPF e documento de identidade em mãos.</p>
                                 </div>
                             </div>
                             <div class="md:w-1/2 md:pl-8"></div>
@@ -446,16 +457,16 @@
                              <div class="md:w-1/2 md:pr-8"></div>
                             <div class="md:w-1/2 md:pl-8">
                                 <div class="bg-white rounded-lg shadow-xl p-6 border-r-4 md:border-l-4 md:border-r-0" style="border-color: var(--primary-blue);">
-                                    <h3 class="text-xl font-bold mb-2">2. A Prova (17/11)</h3>
-                                    <p>A seleção é uma prova objetiva presencial com 50 questões: 15 de Português, 15 de Matemática, 10 de Ciências da Natureza e 10 de Ciências Humanas. Prepare-se!</p>
+                                    <h3 class="text-xl font-bold mb-2">2. A Prova</h3>
+                                    <p>A seleção consiste em uma prova objetiva presencial com 50 questões de múltipla escolha, abrangendo Língua Portuguesa, Matemática, Ciências da Natureza e Ciências Humanas. A duração é de aproximadamente 4 horas.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="md:flex items-center">
                             <div class="md:w-1/2 md:pr-8">
                                 <div class="bg-white rounded-lg shadow-xl p-6 border-l-4" style="border-color: var(--primary-blue);">
-                                    <h3 class="text-xl font-bold mb-2">3. Resultados (A partir de 09/12)</h3>
-                                    <p>Após a prova, os resultados são divulgados no site do IFMG. Fique atento às listas de classificados e excedentes. O resultado final sai em 13/12.</p>
+                                    <h3 class="text-xl font-bold mb-2">3. Resultados e Classificação</h3>
+                                    <p>Após a prova, os resultados são divulgados no site da instituição. A classificação é feita por ordem decrescente de nota, e os candidatos são alocados nas vagas conforme a opção de curso e modalidade de concorrência (ampla ou cotas).</p>
                                 </div>
                             </div>
                             <div class="md:w-1/2 md:pl-8"></div>
@@ -465,7 +476,7 @@
                             <div class="md:w-1/2 md:pl-8">
                                 <div class="bg-white rounded-lg shadow-xl p-6 border-r-4 md:border-l-4 md:border-r-0" style="border-color: var(--primary-blue);">
                                     <h3 class="text-xl font-bold mb-2">4. Matrícula</h3>
-                                    <p>Se você foi classificado, parabéns! Agora é hora de reunir a documentação (incluindo a comprovação de cota, se for o caso) e realizar a matrícula para garantir sua vaga.</p>
+                                    <p>Os candidatos classificados devem realizar a matrícula online, enviando a documentação exigida no edital. Para cotistas, é necessário apresentar documentos que comprovem a condição declarada (escola pública, renda, etnia, etc.).</p>
                                 </div>
                             </div>
                         </div>
@@ -478,55 +489,40 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="section-title">O Poder das Cotas: Entenda Sua Vaga</h2>
-                    <p class="section-subtitle mt-2">O sistema de cotas mudou. Veja abaixo a explicação para os processos seletivos de 2024 e 2025.</p>
+                    <p class="section-subtitle mt-2">O sistema de cotas visa garantir o acesso de estudantes de escolas públicas, de baixa renda, pretos, pardos, indígenas, quilombolas e pessoas com deficiência.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="bg-gray-50 rounded-lg shadow-xl p-6">
                         <h3 class="text-2xl font-bold mb-4 text-center" style="color: var(--dark-blue);">Processo Seletivo 2025 (Novas Regras)</h3>
-                        <p class="mb-4">No edital de 2025, os grupos de concorrência visam garantir vagas para candidatos que se enquadram em perfis socioeconômicos específicos, com novas nomenclaturas.</p>
+                        <p class="mb-4">Com a atualização da Lei de Cotas, a nomenclatura e a distribuição das vagas foram alteradas. Todos os candidatos inscritos em cotas concorrem simultaneamente na Ampla Concorrência (AC).</p>
                         <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li><strong>AC:</strong> Ampla Concorrência.</li>
-                            <li><strong>Grupos LB (Renda Baixa):</strong> Para quem cursou o ensino fundamental em escola pública e possui renda familiar per capita igual ou inferior a 1 salário mínimo (comprovação via CadÚnico). Subdivide-se em:
-                                <ul class="list-circle list-inside ml-4">
-                                    <li><strong>LB-PPI:</strong> Autodeclarados pretos, pardos ou indígenas.</li>
-                                    <li><strong>LB-Q:</strong> Autodeclarados quilombolas.</li>
-                                    <li><strong>LB-PCD:</strong> Pessoas com deficiência.</li>
-                                    <li><strong>LB-EP:</strong> Demais candidatos de escola pública.</li>
-                                </ul>
-                            </li>
-                            <li><strong>Grupos LI (Independente de Renda):</strong> Para quem cursou o ensino fundamental em escola pública, sem critério de renda. Subdivide-se em:
-                                <ul class="list-circle list-inside ml-4">
-                                    <li><strong>LI-PPI, LI-Q, LI-PCD, LI-EP</strong> com as mesmas definições acima.</li>
-                                </ul>
-                            </li>
-                            <li class="mt-2"><strong>Importante:</strong> Todos os candidatos inscritos em cotas concorrem também nas vagas de Ampla Concorrência (AC).</li>
+                            <li><strong>AC:</strong> Ampla Concorrência - Para todos os candidatos.</li>
+                            <li class="font-semibold mt-2">Grupos para quem cursou todo o Ensino Fundamental em Escola Pública:</li>
+                            <li><strong>LI_EP:</strong> Independentemente de renda.</li>
+                            <li><strong>LI_PCD:</strong> Independentemente de renda, para Pessoas com Deficiência.</li>
+                            <li><strong>LI_PPI:</strong> Independentemente de renda, para autodeclarados Pretos, Pardos ou Indígenas.</li>
+                            <li><strong>LI_Q:</strong> Independentemente de renda, para autodeclarados Quilombolas.</li>
+                            <li><strong>LB_EP:</strong> Com renda familiar bruta igual ou inferior a 1 salário mínimo per capita.</li>
+                            <li><strong>LB_PCD:</strong> Com renda de até 1 salário mínimo, para Pessoas com Deficiência.</li>
+                            <li><strong>LB_PPI:</strong> Com renda de até 1 salário mínimo, para autodeclarados Pretos, Pardos ou Indígenas.</li>
+                            <li><strong>LB_Q:</strong> Com renda de até 1 salário mínimo, para autodeclarados Quilombolas.</li>
                         </ul>
                     </div>
                     <div class="bg-gray-50 rounded-lg shadow-xl p-6">
                         <h3 class="text-2xl font-bold mb-4 text-center" style="color: var(--dark-blue);">Processo Seletivo 2024 (Regras Antigas)</h3>
-                        <p class="mb-4">No edital de 2024, a nomenclatura e alguns critérios eram diferentes, baseados na antiga Lei de Cotas federal.</p>
+                        <p class="mb-4">As vagas eram divididas em Ampla Concorrência (A0) e 50% para estudantes de escolas públicas. Estas 50% eram subdivididas por critérios de renda e etnia/deficiência.</p>
                         <ul class="list-disc list-inside text-gray-700 space-y-2">
                             <li><strong>A0:</strong> Ampla Concorrência.</li>
-                            <li><strong>Vagas de Escola Pública (50%):</strong> Divididas em dois subgrupos:
-                                <ul class="list-circle list-inside ml-4">
-                                    <li><strong>Com critério de Renda (até 1,5 salário mínimo per capita):</strong>
-                                        <ul class="list-decimal list-inside ml-4">
-                                            <li><strong>L1:</strong> Escola pública e baixa renda.</li>
-                                            <li><strong>L2:</strong> L1 + autodeclarados PPI.</li>
-                                            <li><strong>L9:</strong> L1 + PCD.</li>
-                                            <li><strong>L10:</strong> L2 + PCD.</li>
-                                        </ul>
-                                    </li>
-                                    <li class="mt-2"><strong>Sem critério de Renda:</strong>
-                                        <ul class="list-decimal list-inside ml-4">
-                                            <li><strong>L5:</strong> Apenas escola pública.</li>
-                                            <li><strong>L6:</strong> L5 + autodeclarados PPI.</li>
-                                            <li><strong>L13:</strong> L5 + PCD.</li>
-                                            <li><strong>L14:</strong> L6 + PCD.</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
+                            <li class="font-semibold mt-2">Com Renda até 1,5 Salário Mínimo e de Escola Pública:</li>
+                            <li><strong>L1:</strong> Apenas os critérios de renda e escola pública.</li>
+                            <li><strong>L2:</strong> L1 + autodeclarados Pretos, Pardos ou Indígenas (PPI).</li>
+                            <li><strong>L9:</strong> L1 + Pessoas com Deficiência (PCD).</li>
+                            <li><strong>L10:</strong> L2 + PCD.</li>
+                            <li class="font-semibold mt-2">Independentemente de Renda, mas de Escola Pública:</li>
+                            <li><strong>L5:</strong> Apenas o critério de escola pública.</li>
+                            <li><strong>L6:</strong> L5 + autodeclarados PPI.</li>
+                            <li><strong>L13:</strong> L5 + PCD.</li>
+                            <li><strong>L14:</strong> L6 + PCD.</li>
                         </ul>
                     </div>
                 </div>
@@ -537,7 +533,7 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="section-title">Mapa Interativo dos Campi</h2>
-                    <p class="section-subtitle mt-2">Explore as unidades do IFMG e os cursos que cada uma oferece. Use os botões +/- para dar zoom.</p>
+                    <p class="section-subtitle mt-2">Explore as unidades e os cursos que cada uma oferece. Use os botões +/- para dar zoom.</p>
                 </div>
                 <div id="map"></div>
             </div>
@@ -547,7 +543,7 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="section-title">O que Estudar? Conteúdo Programático</h2>
-                    <p class="section-subtitle mt-2">Veja os principais tópicos cobrados na prova, com base no edital de 2025.</p>
+                    <p class="section-subtitle mt-2">Veja os principais tópicos cobrados na prova, com base nos editais mais recentes.</p>
                 </div>
                 <div class="max-w-5xl mx-auto">
                     <div id="tabs-container" class="flex flex-wrap justify-center gap-2 md:gap-3 mb-8">
@@ -568,58 +564,57 @@
                         <div id="portugues-content" class="tab-content active syllabus-list">
                             <h4>Língua Portuguesa (15 questões)</h4>
                             <ul>
-                                <li>Leitura e interpretação de textos de diferentes gêneros.</li>
-                                <li>Relações de sentido: sinonímia, antonímia, polissemia.</li>
-                                <li>Variação linguística.</li>
-                                <li>Morfologia: classes de palavras e seus empregos.</li>
-                                <li>Sintaxe: termos da oração, concordância, regência, crase.</li>
-                                <li>Pontuação e seus efeitos de sentido.</li>
-                                <li>Figuras de linguagem e recursos expressivos.</li>
-                                <li>Intertextualidade (paráfrase, citação, paródia).</li>
+                                <li><b>Leitura e Interpretação:</b> Análise de textos verbais e não verbais, identificação de informações explícitas e implícitas, e reconhecimento de gêneros textuais (notícias, artigos de opinião, charges, poemas, contos, etc.).</li>
+                                <li><b>Relações entre Textos:</b> Comparação de textos com o mesmo tema, análise de intertextualidade (paráfrase, paródia, citação).</li>
+                                <li><b>Coesão e Coerência:</b> Identificação de tese e argumentos, uso de conectivos, pronomes, pontuação e concordância para a construção de sentido.</li>
+                                <li><b>Recursos Expressivos:</b> Análise de figuras de linguagem (metáfora, ironia, eufemismo), efeitos de humor e sentido de palavras em diferentes contextos.</li>
+                                <li><b>Variação Linguística:</b> Reconhecimento das diferentes variedades da língua (regional, social, histórica) e adequação da linguagem à situação de comunicação.</li>
                             </ul>
                         </div>
                         <div id="matematica-content" class="tab-content syllabus-list">
                             <h4>Matemática (15 questões)</h4>
                             <ul>
-                                <li>Conjuntos numéricos (naturais, inteiros, racionais, reais).</li>
-                                <li>Razão, proporção, porcentagem e juros.</li>
-                                <li>Cálculo algébrico: produtos notáveis, fatoração, equações de 1º e 2º graus.</li>
-                                <li>Funções: afim, quadrática, exponencial, logarítmica.</li>
-                                <li>Geometria Plana e Espacial: áreas, volumes, Teorema de Pitágoras.</li>
-                                <li>Tratamento da Informação: leitura de gráficos e tabelas, média, moda, mediana.</li>
-                                <li>Princípio fundamental da contagem e probabilidade.</li>
+                                <li><b>Números e Operações:</b> Operações com números naturais, inteiros, racionais e reais. Múltiplos, divisores, MMC, MDC, potenciação, radiciação e notação científica.</li>
+                                <li><b>Matemática Comercial:</b> Razão, proporção, regra de três simples e composta, porcentagem, juros simples.</li>
+                                <li><b>Álgebra:</b> Expressões algébricas, produtos notáveis, fatoração, equações e sistemas de 1º e 2º graus.</li>
+                                <li><b>Funções:</b> Plano cartesiano, função afim (1º grau) e função quadrática (2º grau), análise de gráficos.</li>
+                                <li><b>Geometria:</b> Ângulos, polígonos, semelhança de triângulos, Teorema de Tales e Pitágoras, cálculo de perímetros, áreas (figuras planas) e volumes (prismas).</li>
+                                <li><b>Tratamento da Informação:</b> Leitura e interpretação de tabelas e gráficos, cálculo de médias, noções de probabilidade e contagem.</li>
                             </ul>
                         </div>
                         <div id="ciencias-natureza-content" class="tab-content syllabus-list">
                             <h4>Ciências da Natureza (10 questões)</h4>
                             <h4>Biologia</h4>
                             <ul>
-                                <li>Citologia (célula, organelas, divisão celular).</li>
-                                <li>Classificação dos seres vivos (Reinos).</li>
-                                <li>Fisiologia Humana e Ecologia.</li>
+                                <li><b>Seres Vivos:</b> Características, classificação (5 Reinos), ciclos de vida e relações ecológicas.</li>
+                                <li><b>Citologia e Fisiologia:</b> Célula (animal e vegetal), funções das organelas, fotossíntese, respiração, hereditariedade (Leis de Mendel, grupos sanguíneos) e saúde (doenças, saneamento).</li>
+                                <li><b>Ecologia:</b> Ecossistemas brasileiros, cadeias alimentares, problemas ambientais (efeito estufa, poluição, desmatamento).</li>
                             </ul>
                             <h4>Física</h4>
                              <ul>
-                                <li>Mecânica (movimento, Leis de Newton, energia).</li>
-                                <li>Termologia, Óptica, Ondulatória e Eletricidade básica.</li>
+                                <li><b>Mecânica:</b> Movimento, velocidade, aceleração, Leis de Newton, força, trabalho, potência e energia.</li>
+                                <li><b>Termologia, Óptica e Ondulatória:</b> Temperatura, calor, dilatação, transmissão de calor, reflexão e refração da luz, lentes, espelhos e características das ondas.</li>
+                                <li><b>Eletricidade:</b> Cargas elétricas, corrente, circuitos elétricos simples e magnetismo.</li>
                             </ul>
                             <h4>Química</h4>
                             <ul>
-                                <li>Matéria, atomística, Tabela Periódica.</li>
-                                <li>Ligações químicas, funções inorgânicas e reações.</li>
+                                <li><b>Matéria e Átomos:</b> Propriedades da matéria, separação de misturas, modelos atômicos, Tabela Periódica.</li>
+                                <li><b>Ligações e Reações:</b> Ligações iônicas e covalentes, funções inorgânicas (ácidos, bases, sais e óxidos) e reações químicas.</li>
                             </ul>
                         </div>
                         <div id="ciencias-humanas-content" class="tab-content syllabus-list">
                             <h4>Ciências Humanas (10 questões)</h4>
                             <h4>Geografia</h4>
                              <ul>
-                                <li>Cartografia, Geografia Física e Humana do Brasil.</li>
-                                <li>Geopolítica, globalização e questões ambientais.</li>
+                                <li><b>Cartografia e Conceitos:</b> Coordenadas geográficas, fusos horários, mapas, espaço, território e paisagem.</li>
+                                <li><b>Geografia Física:</b> Relevo, clima, vegetação e hidrografia do Brasil e do mundo.</li>
+                                <li><b>Geografia Humana e Econômica:</b> População (crescimento, migrações), urbanização, industrialização, fontes de energia, globalização e conflitos geopolíticos.</li>
                             </ul>
                             <h4>História</h4>
                             <ul>
-                                <li>Brasil Colônia, Império e República.</li>
-                                <li>História Geral: da Antiguidade à Idade Contemporânea (Guerras Mundiais, Guerra Fria).</li>
+                                <li><b>Antiguidade e Idade Média:</b> Povos da antiguidade, Grécia, Roma e sistema feudal.</li>
+                                <li><b>Idade Moderna:</b> Renascimento, Grandes Navegações, colonização do Brasil (economia, sociedade, escravidão).</li>
+                                <li><b>Idade Contemporânea:</b> Iluminismo, Revoluções (Inglesa, Francesa, Industrial), Independência do Brasil, Império, República Velha, Era Vargas, Ditadura Militar e redemocratização. Guerras Mundiais e Guerra Fria.</li>
                             </ul>
                         </div>
                         <p class="text-xs text-gray-500 mt-4">Atenção: Esta é uma síntese dos principais tópicos. Para a lista completa e detalhada, consulte sempre o Anexo X do edital oficial mais recente.</p>
@@ -721,8 +716,38 @@
                         <div id="passed-courses-cards" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         </div>
                         <p id="no-passed-courses" class="text-md text-gray-500 hidden mt-4"></p>
+                        
+                        <div id="calculator-cta" class="mt-8 pt-6 border-t border-gray-300 text-center hidden">
+                            <h3 class="text-2xl font-bold text-gray-800">E aí, preparado para conquistar sua vaga?</h3>
+                            <p class="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">Seja qual for o resultado, a preparação é a chave para o sucesso. Nosso curso é o caminho mais curto para a sua aprovação!</p>
+                            <div class="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
+                                <a href="#" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto" style="background-color: var(--green); color: white;">
+                                    <i class="fas fa-graduation-cap mr-2"></i>
+                                    Quero Ser Aprovado!
+                                </a>
+                                <a href="https://wa.me/SEUNUMERO" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto" style="border-color: var(--green); color: var(--green);">
+                                    <i class="fab fa-whatsapp mr-2"></i>
+                                    Tirar Dúvidas
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="container mx-auto px-6 cta-section">
+            <h2 class="text-3xl font-black mb-3">Não Deixe Seu Futuro para Depois!</h2>
+            <p class="max-w-2xl mx-auto mb-6">A preparação faz toda a diferença. Com nosso curso preparatório, você terá todo o suporte necessário para alcançar a nota que precisa e garantir sua vaga no Instituto Federal.</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
+                    <i class="fas fa-graduation-cap mr-2"></i>
+                    Conheça Nosso Preparatório
+                </a>
+                <a href="https://wa.me/SEUNUMERO" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
+                    <i class="fab fa-whatsapp mr-2"></i>
+                    Fale Conosco no WhatsApp
+                </a>
             </div>
         </section>
 
@@ -753,7 +778,7 @@
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-6 text-center">
             <p>&copy; 2025 Guia Pré-Federal. Todos os direitos reservados.</p>
-            <p class="text-sm text-gray-400 mt-2">Este é um guia não-oficial. As informações oficiais e definitivas devem ser consultadas no <a href="https://www.ifmg.edu.br/" target="_blank" class="text-blue-300 hover:text-blue-200 underline">site do IFMG</a> e nos respectivos editais.</p>
+            <p class="text-sm text-gray-400 mt-2">Este é um guia não-oficial. As informações oficiais e definitivas devem ser consultadas nos sites e editais das respectivas instituições.</p>
         </div>
     </footer>
 
@@ -1045,6 +1070,7 @@
                 const specificApprovalResultsDiv = document.getElementById('specific-approval-results');
                 const specificCourseResultP = document.getElementById('specific-course-result');
                 const generalResultsHeading = document.getElementById('general-results-heading');
+                const calculatorCta = document.getElementById('calculator-cta');
                 
                 const selectedCalcYear = document.getElementById('calc-year-select').value;
                 const yearData = allAdmissionData[selectedCalcYear];
@@ -1055,6 +1081,7 @@
                 specificApprovalResultsDiv.classList.add('hidden');
                 generalResultsHeading.classList.add('hidden');
                 resultsDiv.classList.remove('hidden');
+                calculatorCta.classList.remove('hidden');
                 
                 totalScoreDisplay.innerText = `Seu total de acertos (calculado): ${totalScore} / 50`;
 
