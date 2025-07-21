@@ -47,8 +47,9 @@
         }
         
         .hero-title {
-            font-size: 3.75rem; /* 60px */
-            line-height: 1;
+            font-size: 3rem; /* 48px */
+            line-height: 1.1;
+            font-weight: 900;
         }
         @media (min-width: 768px) {
             .hero-title {
@@ -65,20 +66,31 @@
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-size: 2.25rem; /* 36px */
             font-weight: 900;
             line-height: 1.2;
             color: var(--dark-blue);
         }
+         @media (min-width: 768px) {
+            .section-title {
+                font-size: 3rem; /* 48px */
+            }
+        }
+
         .section-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.125rem; /* 18px */
             color: #4A5568;
+        }
+        @media (min-width: 768px) {
+            .section-subtitle {
+                font-size: 1.25rem; /* 20px */
+            }
         }
 
         .cta-section {
             background-color: var(--purple);
             color: white;
-            padding: 3rem 1.5rem;
+            padding: 4rem 1.5rem;
             text-align: center;
             border-radius: 0.75rem;
             margin-top: 2rem;
@@ -87,12 +99,18 @@
         }
         
         .cta-section h2 {
-            font-size: 2.25rem;
+            font-size: 1.875rem; /* 30px */
             font-weight: 900;
             margin-bottom: 1rem;
         }
+        @media (min-width: 768px) {
+            .cta-section h2 {
+                font-size: 2.25rem; /* 36px */
+            }
+        }
+
         .cta-section p {
-            font-size: 1.125rem;
+            font-size: 1.125rem; /* 18px */
             max-width: 48rem;
             margin-left: auto;
             margin-right: auto;
@@ -382,27 +400,27 @@
     </header>
 
     <main>
-        <section id="hero" class="bg-white py-20">
+        <section id="hero" class="bg-white py-24">
             <div class="container mx-auto px-6 text-center">
                  <img src="https://guiaprefederal.com.br/logo1.png" 
                       alt="Logo Guia Pré-Federal em destaque" 
                       class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 rounded-full shadow-lg border-4 border-gray-200" 
                       style="background-color: var(--orange-red);"
                       onerror="this.onerror=null;this.src='https://placehold.co/128x128/DD5737/FFFFFF?text=GPF';">
-                 <h1 class="font-black hero-title" style="color: var(--dark-blue);">Guia<span class="highlight">Pré-Federal</span></h1>
+                 <h1 class="hero-title" style="color: var(--dark-blue);">Guia<span class="highlight">Pré-Federal</span></h1>
                 <p class="section-subtitle max-w-3xl mx-auto mt-6">Seu Raio-X completo do vestibular para Institutos Federais.</p>
             </div>
         </section>
 
         <section class="container mx-auto px-6 cta-section">
-            <h2 class="text-3xl font-black mb-3">Quer Gabaritar o Processo Seletivo?</h2>
-            <p class="max-w-2xl mx-auto mb-6">Nosso curso preparatório focado nos Institutos Federais oferece aulas, simulados, material de apoio e tudo que você precisa para conquistar sua vaga. Aumente suas chances de aprovação!</p>
+            <h2>Quer Gabaritar o Processo Seletivo?</h2>
+            <p>Nosso curso preparatório focado nos Institutos Federais oferece aulas, simulados, material de apoio e tudo que você precisa para conquistar sua vaga. Aumente suas chances de aprovação!</p>
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="#" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
+                <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
                     <i class="fas fa-graduation-cap mr-2"></i>
                     Conheça Nosso Preparatório
                 </a>
-                <a href="https://wa.me/SEUNUMERO" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
                     <i class="fab fa-whatsapp mr-2"></i>
                     Fale Conosco no WhatsApp
                 </a>
@@ -413,7 +431,7 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="section-title">Conheça a Instituição</h2>
-                    <p class="section-subtitle mt-2">Uma instituição federal de educação pública, gratuita e de alta qualidade.</p>
+                    <p class="section-subtitle mt-4">Uma instituição federal de educação pública, gratuita e de alta qualidade.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     <div class="bg-gray-50 rounded-lg shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
@@ -439,7 +457,7 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="section-title">O Processo Seletivo Descomplicado</h2>
-                    <p class="section-subtitle mt-2">Entenda as etapas para garantir sua vaga.</p>
+                    <p class="section-subtitle mt-4">Entenda as etapas para garantir sua vaga.</p>
                 </div>
                 <div class="relative">
                     <div class="hidden md:block border-l-4 border-blue-300 absolute h-full top-0 left-1/2 -ml-2"></div>
@@ -489,7 +507,7 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="section-title">O Poder das Cotas: Entenda Sua Vaga</h2>
-                    <p class="section-subtitle mt-2">O sistema de cotas visa garantir o acesso de estudantes de escolas públicas, de baixa renda, pretos, pardos, indígenas, quilombolas e pessoas com deficiência.</p>
+                    <p class="section-subtitle mt-4">O sistema de cotas visa garantir o acesso de estudantes de escolas públicas, de baixa renda, pretos, pardos, indígenas, quilombolas e pessoas com deficiência.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="bg-gray-50 rounded-lg shadow-xl p-6">
@@ -717,18 +735,22 @@
                         </div>
                         <p id="no-passed-courses" class="text-md text-gray-500 hidden mt-4"></p>
                         
-                        <div id="calculator-cta" class="mt-8 pt-6 border-t border-gray-300 text-center hidden">
-                            <h3 class="text-2xl font-bold text-gray-800">E aí, preparado para conquistar sua vaga?</h3>
-                            <p class="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">Seja qual for o resultado, a preparação é a chave para o sucesso. Nosso curso é o caminho mais curto para a sua aprovação!</p>
-                            <div class="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
-                                <a href="#" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto" style="background-color: var(--green); color: white;">
-                                    <i class="fas fa-graduation-cap mr-2"></i>
-                                    Quero Ser Aprovado!
-                                </a>
-                                <a href="https://wa.me/SEUNUMERO" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto" style="border-color: var(--green); color: var(--green);">
-                                    <i class="fab fa-whatsapp mr-2"></i>
-                                    Tirar Dúvidas
-                                </a>
+                        <div id="calculator-cta" class="mt-8 pt-6 border-t border-gray-300 hidden">
+                            <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                                <div class="text-center md:text-left">
+                                    <h3 class="text-2xl font-bold text-gray-800">E aí, preparado para conquistar sua vaga?</h3>
+                                    <p class="text-lg text-gray-600 mt-2">Seja qual for o resultado, a preparação é a chave para o sucesso. Nosso curso é o caminho mais curto para a sua aprovação!</p>
+                                </div>
+                                <div class="flex flex-col gap-4">
+                                    <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="cta-button-primary flex items-center justify-center w-full" style="background-color: var(--green); color: white;">
+                                        <i class="fas fa-graduation-cap mr-2"></i>
+                                        Quero Ser Aprovado!
+                                    </a>
+                                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-button-secondary flex items-center justify-center w-full" style="border-color: var(--green); color: var(--green);">
+                                        <i class="fab fa-whatsapp mr-2"></i>
+                                        Tirar Dúvidas
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -740,11 +762,11 @@
             <h2 class="text-3xl font-black mb-3">Não Deixe Seu Futuro para Depois!</h2>
             <p class="max-w-2xl mx-auto mb-6">A preparação faz toda a diferença. Com nosso curso preparatório, você terá todo o suporte necessário para alcançar a nota que precisa e garantir sua vaga no Instituto Federal.</p>
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="#" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
+                <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
                     <i class="fas fa-graduation-cap mr-2"></i>
                     Conheça Nosso Preparatório
                 </a>
-                <a href="https://wa.me/SEUNUMERO" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
                     <i class="fab fa-whatsapp mr-2"></i>
                     Fale Conosco no WhatsApp
                 </a>
@@ -756,13 +778,13 @@
     <!-- Floating Action Button (FAB) -->
     <div class="fab-container">
         <div class="fab-options">
-            <a href="#" target="_blank" class="fab-option">
+            <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="fab-option">
                 <span class="fab-label">Nosso Intensivo</span>
                 <div class="fab-icon" style="background-color: var(--purple);">
                     <i class="fas fa-rocket"></i>
                 </div>
             </a>
-            <a href="https://wa.me/SEUNUMERO" target="_blank" class="fab-option">
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
                 <span class="fab-label">Contato WhatsApp</span>
                 <div class="fab-icon" style="background-color: var(--green);">
                     <i class="fab fa-whatsapp"></i>
