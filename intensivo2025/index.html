@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intensivo Guia - Pré Federal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Swiper.js for Carousel -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+        /* Cores da Paleta:
+           - Roxo Principal: #6408b0
+           - Azul/Índigo: #5242ea
+           - Verde Limão: #c7ef59
+           - Verde: #7bcd47
+           - Laranja: #dd5737
+           - Azul Petróleo: #00abb1
+        */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind: bg-slate-50 */
+            color: #1e293b; /* Tailwind: text-slate-800 */
+        }
+        .hero-gradient {
+            background-image: linear-gradient(to right, #5242ea, #6408b0);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 50px;
+            height: 4px;
+            background-color: #5242ea; /* Cor principal da paleta */
+            border-radius: 9999px;
+        }
+        /* Swiper Carousel Styles */
+        .swiper-container {
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 50px;
+        }
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 280px;
+            height: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: #5242ea;
+        }
+        .swiper-pagination-bullet-active {
+            background: #5242ea;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Video Hero Section -->
+    <section class="bg-slate-900 pt-12 md:pt-16 pb-12">
+        <div class="container mx-auto px-4 text-center text-white">
+            <img src="./logo1.png" alt="Logo Guia Pré-Federal" class="w-24 h-24 mx-auto mb-6 rounded-full shadow-lg" style="background-color: #dd5737;">
+            <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-8 uppercase">
+                Seja aprovado com o melhor Pré IF / COLUNI / CEFET do país
+            </h1>
+            
+            <!-- Video Player -->
+            <div class="w-full mx-auto aspect-video rounded-xl shadow-2xl overflow-hidden border-4 border-white/20">
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/Set_5djvE2o?autoplay=1&mute=1&loop=1&playlist=Set_5djvE2o&controls=0&showinfo=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <a href="#investimento" class="mt-12 bg-[#c7ef59] text-slate-900 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105 inline-block text-lg">
+                Quero ser aprovado!
+            </a>
+        </div>
+    </section>
+
+    <!-- Depoimentos Carousel -->
+    <section class="py-16 md:py-24 bg-slate-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 section-title mx-auto">Nossos Aprovados Falam Por Nós</h2>
+            <!-- Swiper -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="./depoimento1.png" alt="Depoimento de aluno(a) aprovado(a) no Guia Pré-Federal"></div>
+                    <div class="swiper-slide"><img src="./depoimento2.png" alt="Depoimento de aluno(a) aprovado(a) no Guia Pré-Federal"></div>
+                    <div class="swiper-slide"><img src="./depoimento3.png" alt="Depoimento de aluno(a) aprovado(a) no Guia Pré-Federal"></div>
+                    <div class="swiper-slide"><img src="./depoimento4.png" alt="Depoimento de aluno(a) aprovado(a) no Guia Pré-Federal"></div>
+                    <div class="swiper-slide"><img src="./depoimento5.png" alt="Depoimento de aluno(a) aprovado(a) no Guia Pré-Federal"></div>
+                    <div class="swiper-slide"><img src="./depoimento6.png" alt="Depoimento de aluno(a) aprovado(a) no Guia Pré-Federal"></div>
+                    <div class="swiper-slide"><img src="./depoimento7.png" alt="Depoimento de aluno(a) aprovado(a) no Guia Pré-Federal"></div>
+                    <div class="swiper-slide"><img src="./depoimento8.png" alt="Depoimento de aluno(a) aprovado(a) no Guia Pré-Federal"></div>
+                    <div class="swiper-slide"><img src="./depoimento9.png" alt="Depoimento de aluno(a) aprovado(a) no Guia Pré-Federal"></div>
+                    <div class="swiper-slide"><img src="./depoimento10.png" alt="Depoimento de aluno(a) aprovado(a) no Guia Pré-Federal"></div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estrutura do Curso -->
+    <section id="estrutura" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 section-title mx-auto">Um Curso Feito Para Você</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+                <div class="p-6">
+                    <div class="text-[#5242ea] text-5xl mb-4"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Equipe Especialista</h3>
+                    <p class="text-slate-600">Nossos professores são selecionados rigorosamente e possuem vasta experiência nas provas do COLUNI, IFs e CEFETs, com passagem pelos melhores colégios do país.</p>
+                </div>
+                <div class="p-6">
+                    <div class="text-[#6408b0] text-5xl mb-4"><i class="fas fa-laptop-code"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Plataforma Customizada</h3>
+                    <p class="text-slate-600">Tenha acesso a um ambiente de estudos pensado para o seu ritmo, com aulas gravadas, banco de questões exclusivo e ferramentas para organizar sua rotina.</p>
+                </div>
+                <div class="p-6">
+                    <div class="text-[#00abb1] text-5xl mb-4"><i class="fas fa-user-friends"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Acompanhamento Individual</h3>
+                    <p class="text-slate-600">Aqui, cada aluno é único. Oferecemos orientação nos estudos, tira-dúvidas e estratégias personalizadas para garantir que você estude da forma certa.</p>
+                </div>
+            </div>
+            <div class="max-w-6xl mx-auto mt-12 bg-slate-50 p-8 rounded-lg shadow-inner flex flex-col lg:flex-row gap-8 items-center">
+                <div class="lg:w-1/2">
+                    <h3 class="text-2xl font-bold text-center lg:text-left mb-6">Tudo o que você precisa para ser aprovado:</h3>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-lg">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3"></i>Aulas de todas as matérias</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3"></i>Aulas ao vivo e gravadas</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3"></i>Turma interativa e contato direto</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3"></i>Suporte total via WhatsApp</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3"></i>Simulados completos</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3"></i>Correção de redação</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3"></i>Listas de exercícios direcionadas</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3"></i>Apostilas e material de apoio</li>
+                    </ul>
+                </div>
+                <div class="lg:w-1/2 w-full mt-8 lg:mt-0">
+                     <h3 class="text-2xl font-bold text-center mb-4">Horário das Aulas ao Vivo</h3>
+                     <p class="text-center text-slate-600 mb-4">O curso começa em <strong>28 de julho de 2025</strong> e vai até a última semana de novembro.</p>
+                     <img src="./horariointensivo.png" alt="Grade de horários das aulas do curso intensivo" class="rounded-xl shadow-lg w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investimento -->
+    <section id="investimento" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-center mb-4 section-title mx-auto">Um Investimento no Seu Sonho</h2>
+            <p class="max-w-3xl mx-auto text-lg text-slate-600 mb-10">Nosso compromisso vai além do conteúdo: é com você, com a sua história e com o seu sonho. Por isso, oferecemos uma preparação completa por um valor acessível e justo.</p>
+            <div class="bg-slate-800 text-white p-10 rounded-xl shadow-lg max-w-md mx-auto">
+                <img src="./logo1.png" alt="Logo Guia Pré-Federal" class="w-20 h-20 mx-auto mb-4 rounded-full" style="background-color: #dd5737;">
+                <p class="text-2xl font-semibold mb-2">Curso Completo com Especialistas</p>
+                <p class="text-6xl font-extrabold my-4">4x <span class="text-[#c7ef59]">R$ 200</span></p>
+                <p class="text-slate-300 mb-6">Acompanhamento próximo, plataforma exclusiva, aulas gravadas, banco de questões e muito mais!</p>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-[#c7ef59] text-slate-900 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105 inline-block text-lg w-full">
+                    Garantir minha vaga!
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato" class="bg-slate-800 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center items-center mb-4">
+                <img src="./logo1.png" alt="Logo Guia Pré-Federal" class="h-12 w-12 rounded-full" style="background-color: #dd5737;">
+            </div>
+            <p class="text-slate-400 text-sm">&copy; 2025 Guia - Pré Federal. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Botão Flutuante de Inscrição -->
+    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white font-bold py-4 px-5 rounded-full shadow-lg hover:bg-green-600 transition duration-300 transform hover:scale-105 z-50 flex items-center">
+        <i class="fab fa-whatsapp text-2xl"></i>
+        <span class="ml-3 hidden sm:inline">Garanta sua Vaga</span>
+    </a>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // Swiper Carousel Initialization
+        var swiper = new Swiper('.swiper-container', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+        });
+    </script>
+</body>
+</html>
