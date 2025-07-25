@@ -97,8 +97,20 @@
         </div>
     </section>
 
-    <!-- Depoimentos Carousel -->
+    <!-- Aprovados Section -->
     <section class="py-16 md:py-24 bg-slate-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800">O SEU FUTURO COMEÇA AQUI!</h2>
+            <p class="text-5xl md:text-7xl font-extrabold text-[#5242ea] my-4">APROVAMOS + DE 90 ALUNOS</p>
+            <p class="text-2xl md:text-3xl font-bold text-slate-600 mb-10">EM 2025!</p>
+            <div class="max-w-5xl mx-auto rounded-xl shadow-2xl overflow-hidden">
+                <img src="./aprovados.png" alt="Mosaico com fotos de alunos aprovados no Guia Pré-Federal">
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos Carousel -->
+    <section class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 section-title mx-auto">Nossos Aprovados Falam Por Nós</h2>
             <!-- Swiper -->
@@ -132,7 +144,7 @@
     </section>
 
     <!-- Estrutura do Curso -->
-    <section id="estrutura" class="py-16 md:py-24 bg-white">
+    <section id="estrutura" class="py-16 md:py-24 bg-slate-50">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 section-title mx-auto">Um Curso Feito Para Você</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
@@ -152,7 +164,7 @@
                     <p class="text-slate-600">Aqui, cada aluno é único. Oferecemos orientação nos estudos, tira-dúvidas e estratégias personalizadas para garantir que você estude da forma certa.</p>
                 </div>
             </div>
-            <div class="max-w-6xl mx-auto mt-12 bg-slate-50 p-8 rounded-lg shadow-inner flex flex-col lg:flex-row gap-8 items-center">
+            <div class="max-w-6xl mx-auto mt-12 bg-white p-8 rounded-lg shadow-lg flex flex-col lg:flex-row gap-8 items-center">
                 <div class="lg:w-1/2">
                     <h3 class="text-2xl font-bold text-center lg:text-left mb-6">Tudo o que você precisa para ser aprovado:</h3>
                     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-lg">
@@ -233,10 +245,21 @@
             },
             loop: true,
             autoplay: {
-                delay: 10000,
+                delay: 3000,
                 disableOnInteraction: false,
             },
         });
+
+        // Pausa o autoplay no hover/touch
+        const swiperContainer = document.querySelector('.swiper-container');
+        if (swiperContainer) {
+            swiperContainer.addEventListener('mouseenter', () => {
+                swiper.autoplay.stop();
+            });
+            swiperContainer.addEventListener('mouseleave', () => {
+                swiper.autoplay.start();
+            });
+        }
     </script>
 </body>
 </html>
