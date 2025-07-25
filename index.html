@@ -540,7 +540,7 @@
             <h2 class="text-3xl font-bold text-center mb-12 section-title mx-auto">Nossos Cursos</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
                 <!-- Service Card 2: Intensivo (ACTIVE) -->
-                <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="relative block bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 border-2 border-[#5242ea]">
+                <a href="https://guiaprefederal.com.br/intensivo2025" target="_blank" class="relative block bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 border-2 border-[#5242ea]">
                     <div class="active-badge">ATIVO</div>
                     <div class="text-[#5242ea] text-4xl mb-4 text-center"><i class="fas fa-hourglass-half"></i></div>
                     <h3 class="text-xl font-semibold text-slate-800 mb-3 text-center">Curso Intensivo</h3>
@@ -574,12 +574,12 @@
                 </div>
                 <div class="flex flex-col space-y-2 text-center">
                      <div class="flex items-center space-x-3">
-                        <i class="fab fa-whatsapp text-[#00abb1] text-xl"></i>
-                        <span>Coord. (Michel): <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="text-slate-300 hover:text-white transition duration-300">37 99992-7364</a></span>
+                         <i class="fab fa-whatsapp text-[#00abb1] text-xl"></i>
+                         <span>Coord. (Michel): <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="text-slate-300 hover:text-white transition duration-300">37 99992-7364</a></span>
                     </div>
                      <div class="flex items-center space-x-3">
-                        <i class="fab fa-whatsapp text-[#00abb1] text-xl"></i>
-                        <span>Secretaria: <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="text-slate-300 hover:text-white transition duration-300">37 99179-7474</a></span>
+                         <i class="fab fa-whatsapp text-[#00abb1] text-xl"></i>
+                         <span>Secretaria: <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="text-slate-300 hover:text-white transition duration-300">37 99179-7474</a></span>
                     </div>
                 </div>
                 <div class="flex items-center space-x-3">
@@ -597,7 +597,7 @@
     <!-- Botão Flutuante de Ação (FAB) -->
     <div class="fab-container">
         <div class="fab-options">
-            <a href="https://imperioaulas.online/?fbclid=PAQ0xDSwK2VtVleHRuA2FlbQIxMQABp4ahcb14iDSFf2DeewkyWYMxb9B-GNzOouE9UAhqMapySb6SsHFIueHCbdLD_aem_LVZ8G4rY6Cs7zsvM1K1sHw" target="_blank" class="fab-option">
+            <a href="https://guiaprefederal.com.br/intensivo2025" target="_blank" class="fab-option">
                 <span class="fab-label">Nosso Intensivo</span>
                 <div class="fab-icon" style="background-color: #6408b0;">
                     <i class="fas fa-rocket"></i>
@@ -619,17 +619,38 @@
     <!-- Leaflet JS for Interactive Map -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
+        // --- INÍCIO DA CORREÇÃO DE ROLAGEM ---
+        // Adiciona um listener para todos os links âncora para garantir a rolagem suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Previne o comportamento padrão de pular para a âncora
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                // Ignora links que são apenas '#'
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+
+                // Se o elemento de destino existir, rola suavemente até ele
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        // --- FIM DA CORREÇÃO DE ROLAGEM ---
+
         // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        
+        // Esconde o menu mobile ao clicar em um link
         mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                // Smooth scroll for internal links
-                const href = link.getAttribute('href');
-                if (href.startsWith('#')) {
-                    mobileMenu.classList.add('hidden');
-                }
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
             });
         });
 
@@ -745,8 +766,8 @@
                 if (!inst) return;
 
                 const iconHtml = `<div style="background-color: ${inst.color};" class="w-6 h-6 rounded-full flex items-center justify-center text-white font-bold shadow-lg ring-2 ring-white">
-                                    <i class="fas fa-school text-xs"></i>
-                                  </div>`;
+                                        <i class="fas fa-school text-xs"></i>
+                                      </div>`;
 
                 const customIcon = L.divIcon({
                     html: iconHtml,
