@@ -28,9 +28,6 @@
             color: #1e293b; /* Tailwind: text-slate-800 */
             overflow-x: hidden;
         }
-        .hero-gradient {
-            background-image: linear-gradient(to right, #5242ea, #6408b0);
-        }
         .section-title {
             position: relative;
             display: inline-block;
@@ -48,12 +45,10 @@
             background-color: #5242ea;
             border-radius: 9999px;
         }
-        /* Custom styles for the calculator */
         .calculator-card {
             background-color: white;
             border-radius: 1rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .result-card {
             border-left-width: 6px;
@@ -72,7 +67,7 @@
         }
         .error-message {
             display: none;
-            color: #dd5737; /* Laranja da paleta */
+            color: #dd5737;
             font-size: 0.875rem;
             margin-top: 0.25rem;
         }
@@ -107,37 +102,32 @@
                 <form id="conversion-form">
                     <h2 class="text-2xl font-bold text-center mb-8 text-[#5242ea]">Insira seus acertos no IF Sudeste</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- Português -->
+                        <!-- Inputs for subjects -->
                         <div>
                             <label for="portugues" class="block text-sm font-medium text-slate-700 mb-1">Português (12 questões)</label>
                             <input type="number" id="portugues" name="portugues" min="0" max="12" class="w-full p-3 border border-slate-300 rounded-lg input-field" placeholder="Ex: 10" required>
                             <p id="error-portugues" class="error-message">Valor inválido. Máximo: 12</p>
                         </div>
-                        <!-- Matemática -->
                         <div>
                             <label for="matematica" class="block text-sm font-medium text-slate-700 mb-1">Matemática (11 questões)</label>
                             <input type="number" id="matematica" name="matematica" min="0" max="11" class="w-full p-3 border border-slate-300 rounded-lg input-field" placeholder="Ex: 9" required>
                              <p id="error-matematica" class="error-message">Valor inválido. Máximo: 11</p>
                         </div>
-                        <!-- Ciências -->
                         <div>
                             <label for="ciencias" class="block text-sm font-medium text-slate-700 mb-1">Ciências (12 questões)</label>
                             <input type="number" id="ciencias" name="ciencias" min="0" max="12" class="w-full p-3 border border-slate-300 rounded-lg input-field" placeholder="Ex: 11" required>
                             <p id="error-ciencias" class="error-message">Valor inválido. Máximo: 12</p>
                         </div>
-                        <!-- Geografia -->
                         <div>
                             <label for="geografia" class="block text-sm font-medium text-slate-700 mb-1">Geografia (5 questões)</label>
                             <input type="number" id="geografia" name="geografia" min="0" max="5" class="w-full p-3 border border-slate-300 rounded-lg input-field" placeholder="Ex: 4" required>
                              <p id="error-geografia" class="error-message">Valor inválido. Máximo: 5</p>
                         </div>
-                        <!-- História -->
                         <div>
                             <label for="historia" class="block text-sm font-medium text-slate-700 mb-1">História (5 questões)</label>
                             <input type="number" id="historia" name="historia" min="0" max="5" class="w-full p-3 border border-slate-300 rounded-lg input-field" placeholder="Ex: 3" required>
                             <p id="error-historia" class="error-message">Valor inválido. Máximo: 5</p>
                         </div>
-                        <!-- Botão -->
                         <div class="sm:col-span-2 lg:col-span-1 flex items-end">
                              <button type="submit" class="w-full bg-[#c7ef59] text-slate-900 font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105 text-lg">
                                 Calcular
@@ -152,39 +142,74 @@
                 <h2 class="text-3xl font-bold text-center mb-10 section-title mx-auto">Sua Nota Estimada</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     <!-- IF Sudeste Card -->
-                     <div class="bg-white p-6 rounded-lg shadow-lg result-card border-l-[#dd5737]">
-                        <h3 class="text-2xl font-bold mb-2">IF Sudeste</h3>
-                        <p class="text-slate-600 mb-4">Sua pontuação na prova base.</p>
-                        <p class="text-5xl font-extrabold text-[#dd5737]" id="result-if-sudeste">0</p>
-                        <p class="text-slate-500">de 90 pontos</p>
+                    <div class="bg-white p-6 rounded-lg shadow-lg result-card border-l-[#dd5737]">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-1">IF Sudeste</h3>
+                                <p class="text-slate-500">de 90 pontos</p>
+                            </div>
+                            <p class="text-5xl font-extrabold text-[#dd5737]" id="result-if-sudeste-total">0</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-200">
+                            <h4 class="font-semibold text-slate-700 mb-2">Pontuação por matéria:</h4>
+                            <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-slate-600" id="breakdown-if-sudeste"></div>
+                        </div>
                     </div>
                     <!-- IFMG Card -->
                     <div class="bg-white p-6 rounded-lg shadow-lg result-card border-l-[#5242ea]">
-                        <h3 class="text-2xl font-bold mb-2">IFMG</h3>
-                        <p class="text-slate-600 mb-4">Estimativa de nota.</p>
-                        <p class="text-5xl font-extrabold text-[#5242ea]" id="result-ifmg">0</p>
-                        <p class="text-slate-500">de 50 pontos</p>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-1">IFMG</h3>
+                                <p class="text-slate-500">de 50 pontos</p>
+                            </div>
+                            <p class="text-5xl font-extrabold text-[#5242ea]" id="result-ifmg-total">0</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-200">
+                            <h4 class="font-semibold text-slate-700 mb-2">Pontuação por matéria:</h4>
+                            <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-slate-600" id="breakdown-ifmg"></div>
+                        </div>
                     </div>
                     <!-- CEFET Card -->
                     <div class="bg-white p-6 rounded-lg shadow-lg result-card border-l-[#6408b0]">
-                        <h3 class="text-2xl font-bold mb-2">CEFET</h3>
-                        <p class="text-slate-600 mb-4">Estimativa de nota.</p>
-                        <p class="text-5xl font-extrabold text-[#6408b0]" id="result-cefet">0</p>
-                        <p class="text-slate-500">de 50 pontos</p>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-1">CEFET</h3>
+                                <p class="text-slate-500">de 50 pontos</p>
+                            </div>
+                            <p class="text-5xl font-extrabold text-[#6408b0]" id="result-cefet-total">0</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-200">
+                            <h4 class="font-semibold text-slate-700 mb-2">Pontuação por matéria:</h4>
+                            <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-slate-600" id="breakdown-cefet"></div>
+                        </div>
                     </div>
                     <!-- IFNMG Card -->
                     <div class="bg-white p-6 rounded-lg shadow-lg result-card border-l-[#00abb1]">
-                        <h3 class="text-2xl font-bold mb-2">IFNMG</h3>
-                        <p class="text-slate-600 mb-4">Estimativa de nota.</p>
-                        <p class="text-5xl font-extrabold text-[#00abb1]" id="result-ifnmg">0</p>
-                        <p class="text-slate-500">de 30 pontos</p>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-1">IFNMG</h3>
+                                <p class="text-slate-500">de 30 pontos</p>
+                            </div>
+                            <p class="text-5xl font-extrabold text-[#00abb1]" id="result-ifnmg-total">0</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-200">
+                            <h4 class="font-semibold text-slate-700 mb-2">Pontuação por matéria:</h4>
+                            <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-slate-600" id="breakdown-ifnmg"></div>
+                        </div>
                     </div>
                     <!-- IFTM Card -->
                     <div class="bg-white p-6 rounded-lg shadow-lg result-card border-l-[#7bcd47]">
-                        <h3 class="text-2xl font-bold mb-2">IFTM</h3>
-                        <p class="text-slate-600 mb-4">Estimativa de nota.</p>
-                        <p class="text-5xl font-extrabold text-[#7bcd47]" id="result-iftm">0</p>
-                        <p class="text-slate-500">de 30 pontos</p>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-1">IFTM</h3>
+                                <p class="text-slate-500">de 30 pontos</p>
+                            </div>
+                            <p class="text-5xl font-extrabold text-[#7bcd47]" id="result-iftm-total">0</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-200">
+                            <h4 class="font-semibold text-slate-700 mb-2">Pontuação por matéria:</h4>
+                            <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-slate-600" id="breakdown-iftm"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -206,53 +231,58 @@
         // --- Data Structures for Exams ---
         const exams = {
             ifSudeste: {
+                id: 'if-sudeste',
                 name: 'IF Sudeste',
                 subjects: {
-                    portugues: { questions: 12, pointsPerQuestion: 2 },
-                    matematica: { questions: 11, pointsPerQuestion: 2 },
-                    ciencias: { questions: 12, pointsPerQuestion: 2 },
-                    geografia: { questions: 5, pointsPerQuestion: 2 },
-                    historia: { questions: 5, pointsPerQuestion: 2 }
+                    portugues: { name: 'Português', questions: 12, pointsPerQuestion: 2 },
+                    matematica: { name: 'Matemática', questions: 11, pointsPerQuestion: 2 },
+                    ciencias: { name: 'Ciências', questions: 12, pointsPerQuestion: 2 },
+                    geografia: { name: 'Geografia', questions: 5, pointsPerQuestion: 2 },
+                    historia: { name: 'História', questions: 5, pointsPerQuestion: 2 }
                 }
             },
             ifmg: {
+                id: 'ifmg',
                 name: 'IFMG',
                 subjects: {
-                    portugues: { questions: 15, pointsPerQuestion: 1 },
-                    matematica: { questions: 15, pointsPerQuestion: 1 },
-                    ciencias: { questions: 10, pointsPerQuestion: 1 },
-                    geografia: { questions: 5, pointsPerQuestion: 1 },
-                    historia: { questions: 5, pointsPerQuestion: 1 }
+                    portugues: { name: 'Português', questions: 15, pointsPerQuestion: 1 },
+                    matematica: { name: 'Matemática', questions: 15, pointsPerQuestion: 1 },
+                    ciencias: { name: 'Ciências', questions: 10, pointsPerQuestion: 1 },
+                    geografia: { name: 'Geografia', questions: 5, pointsPerQuestion: 1 },
+                    historia: { name: 'História', questions: 5, pointsPerQuestion: 1 }
                 }
             },
             cefet: {
+                id: 'cefet',
                 name: 'CEFET',
                 subjects: {
-                    portugues: { questions: 15, pointsPerQuestion: 1 },
-                    matematica: { questions: 15, pointsPerQuestion: 1 },
-                    ciencias: { questions: 8, pointsPerQuestion: 1 },
-                    geografia: { questions: 6, pointsPerQuestion: 1 },
-                    historia: { questions: 6, pointsPerQuestion: 1 }
+                    portugues: { name: 'Português', questions: 15, pointsPerQuestion: 1 },
+                    matematica: { name: 'Matemática', questions: 15, pointsPerQuestion: 1 },
+                    ciencias: { name: 'Ciências', questions: 8, pointsPerQuestion: 1 },
+                    geografia: { name: 'Geografia', questions: 6, pointsPerQuestion: 1 },
+                    historia: { name: 'História', questions: 6, pointsPerQuestion: 1 }
                 }
             },
             ifnmg: {
+                id: 'ifnmg',
                 name: 'IFNMG',
                 subjects: {
-                    portugues: { questions: 8, pointsPerQuestion: 1 },
-                    matematica: { questions: 8, pointsPerQuestion: 1 },
-                    ciencias: { questions: 8, pointsPerQuestion: 1 },
-                    geografia: { questions: 3, pointsPerQuestion: 1 },
-                    historia: { questions: 3, pointsPerQuestion: 1 }
+                    portugues: { name: 'Português', questions: 8, pointsPerQuestion: 1 },
+                    matematica: { name: 'Matemática', questions: 8, pointsPerQuestion: 1 },
+                    ciencias: { name: 'Ciências', questions: 8, pointsPerQuestion: 1 },
+                    geografia: { name: 'Geografia', questions: 3, pointsPerQuestion: 1 },
+                    historia: { name: 'História', questions: 3, pointsPerQuestion: 1 }
                 }
             },
             iftm: {
+                id: 'iftm',
                 name: 'IFTM',
                 subjects: {
-                    portugues: { questions: 9, pointsPerQuestion: 1 },
-                    matematica: { questions: 9, pointsPerQuestion: 1 },
-                    ciencias: { questions: 4, pointsPerQuestion: 1 },
-                    geografia: { questions: 4, pointsPerQuestion: 1 },
-                    historia: { questions: 4, pointsPerQuestion: 1 }
+                    portugues: { name: 'Português', questions: 9, pointsPerQuestion: 1 },
+                    matematica: { name: 'Matemática', questions: 9, pointsPerQuestion: 1 },
+                    ciencias: { name: 'Ciências', questions: 4, pointsPerQuestion: 1 },
+                    geografia: { name: 'Geografia', questions: 4, pointsPerQuestion: 1 },
+                    historia: { name: 'História', questions: 4, pointsPerQuestion: 1 }
                 }
             }
         };
@@ -266,13 +296,6 @@
             ciencias: document.getElementById('ciencias'),
             geografia: document.getElementById('geografia'),
             historia: document.getElementById('historia')
-        };
-        const resultDisplays = {
-            ifSudeste: document.getElementById('result-if-sudeste'),
-            ifmg: document.getElementById('result-ifmg'),
-            cefet: document.getElementById('result-cefet'),
-            ifnmg: document.getElementById('result-ifnmg'),
-            iftm: document.getElementById('result-iftm')
         };
 
         // --- Validation Logic ---
@@ -293,14 +316,13 @@
             }
         }
         
-        // Add event listeners for real-time validation
         Object.keys(inputs).forEach(subject => {
             inputs[subject].addEventListener('input', () => validateInput(subject));
         });
 
         // --- Calculation Logic ---
         form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form from submitting the traditional way
+            event.preventDefault();
 
             let isFormValid = true;
             Object.keys(inputs).forEach(subject => {
@@ -310,45 +332,60 @@
             });
 
             if (!isFormValid) {
-                // If any input is invalid, scroll to the form and do not proceed
                 form.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
 
-            // Get correct answers from the form
             const correctAnswers = {};
             for (const subject in inputs) {
                 correctAnswers[subject] = parseInt(inputs[subject].value, 10);
             }
 
-            // Calculate percentage of correct answers for each subject based on IF Sudeste
             const percentages = {};
             for (const subject in correctAnswers) {
                 const totalQuestions = exams.ifSudeste.subjects[subject].questions;
-                percentages[subject] = correctAnswers[subject] / totalQuestions;
+                // Avoid division by zero if a subject has 0 questions
+                percentages[subject] = totalQuestions > 0 ? (correctAnswers[subject] / totalQuestions) : 0;
             }
 
-            // Calculate estimated scores for all exams
             const estimatedScores = {};
             for (const examKey in exams) {
                 let totalScore = 0;
+                const subjectScores = {};
                 const currentExam = exams[examKey];
                 for (const subjectKey in currentExam.subjects) {
                     const subjectData = currentExam.subjects[subjectKey];
                     const estimatedCorrect = percentages[subjectKey] * subjectData.questions;
-                    totalScore += Math.round(estimatedCorrect) * subjectData.pointsPerQuestion;
+                    const subjectScore = Math.round(estimatedCorrect) * subjectData.pointsPerQuestion;
+                    subjectScores[subjectKey] = subjectScore;
+                    totalScore += subjectScore;
                 }
-                estimatedScores[examKey] = totalScore;
+                estimatedScores[examKey] = {
+                    total: totalScore,
+                    subjects: subjectScores
+                };
             }
 
             // --- Display Results ---
-            resultDisplays.ifSudeste.textContent = estimatedScores.ifSudeste;
-            resultDisplays.ifmg.textContent = estimatedScores.ifmg;
-            resultDisplays.cefet.textContent = estimatedScores.cefet;
-            resultDisplays.ifnmg.textContent = estimatedScores.ifnmg;
-            resultDisplays.iftm.textContent = estimatedScores.iftm;
+            for (const examKey in estimatedScores) {
+                const examData = estimatedScores[examKey];
+                const examId = exams[examKey].id;
 
-            // Show the results section and scroll to it
+                // Update total score
+                document.getElementById(`result-${examId}-total`).textContent = examData.total;
+
+                // Update subject breakdown
+                const breakdownContainer = document.getElementById(`breakdown-${examId}`);
+                breakdownContainer.innerHTML = ''; // Clear previous results
+                for (const subjectKey in examData.subjects) {
+                    const subjectName = exams[examKey].subjects[subjectKey].name;
+                    const subjectScore = examData.subjects[subjectKey];
+                    const p = document.createElement('p');
+                    p.innerHTML = `${subjectName}: <span class="font-bold">${subjectScore}</span>`;
+                    breakdownContainer.appendChild(p);
+                }
+            }
+
             resultsSection.style.display = 'block';
             resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
