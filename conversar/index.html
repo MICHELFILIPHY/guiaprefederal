@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Conversão de Notas - Guia Pré-Federal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Cores da Paleta:
+           - Roxo Principal: #6408b0
+           - Azul/Índigo: #5242ea
+           - Verde Limão: #c7ef59
+           - Verde: #7bcd47
+           - Laranja: #dd5737
+           - Azul Petróleo: #00abb1
+        */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind: bg-slate-50 */
+            color: #1e293b; /* Tailwind: text-slate-800 */
+            overflow-x: hidden;
+        }
+        .hero-gradient {
+            background-image: linear-gradient(to right, #5242ea, #6408b0);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 50px;
+            height: 4px;
+            background-color: #5242ea;
+            border-radius: 9999px;
+        }
+        /* Custom styles for the calculator */
+        .calculator-card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .result-card {
+            border-left-width: 6px;
+            transition: all 0.3s ease;
+        }
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        .input-field {
+            transition: all 0.2s ease-in-out;
+        }
+        .input-field:focus {
+            border-color: #5242ea;
+            box-shadow: 0 0 0 3px rgba(82, 66, 234, 0.2);
+        }
+        .error-message {
+            display: none;
+            color: #dd5737; /* Laranja da paleta */
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+             <div class="flex items-center space-x-4">
+                <img src="https://placehold.co/60x60/dd5737/FFFFFF?text=G" alt="Logo Guia Pré-Federal" class="h-12 w-12 rounded-full">
+                <span class="text-xl font-bold">Guia Pré-Federal</span>
+            </div>
+            <a href="#calculadora" class="bg-[#c7ef59] text-slate-900 font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition duration-300 transform hover:scale-105">
+                Calculadora
+            </a>
+        </div>
+    </header>
+
+    <!-- Calculator Section -->
+    <main id="calculadora" class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-800 section-title mx-auto">Calculadora de Conversão de Notas</h1>
+                <p class="max-w-3xl mx-auto text-lg text-slate-600 mt-4">
+                    Insira seus acertos na prova do <strong>IF Sudeste</strong> para estimar sua nota em outras instituições. A conversão é baseada na porcentagem de acertos por matéria.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto calculator-card p-6 md:p-10">
+                <form id="conversion-form">
+                    <h2 class="text-2xl font-bold text-center mb-8 text-[#5242ea]">Insira seus acertos no IF Sudeste</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Português -->
+                        <div>
+                            <label for="portugues" class="block text-sm font-medium text-slate-700 mb-1">Português (12 questões)</label>
+                            <input type="number" id="portugues" name="portugues" min="0" max="12" class="w-full p-3 border border-slate-300 rounded-lg input-field" placeholder="Ex: 10" required>
+                            <p id="error-portugues" class="error-message">Valor inválido. Máximo: 12</p>
+                        </div>
+                        <!-- Matemática -->
+                        <div>
+                            <label for="matematica" class="block text-sm font-medium text-slate-700 mb-1">Matemática (11 questões)</label>
+                            <input type="number" id="matematica" name="matematica" min="0" max="11" class="w-full p-3 border border-slate-300 rounded-lg input-field" placeholder="Ex: 9" required>
+                             <p id="error-matematica" class="error-message">Valor inválido. Máximo: 11</p>
+                        </div>
+                        <!-- Ciências -->
+                        <div>
+                            <label for="ciencias" class="block text-sm font-medium text-slate-700 mb-1">Ciências (12 questões)</label>
+                            <input type="number" id="ciencias" name="ciencias" min="0" max="12" class="w-full p-3 border border-slate-300 rounded-lg input-field" placeholder="Ex: 11" required>
+                            <p id="error-ciencias" class="error-message">Valor inválido. Máximo: 12</p>
+                        </div>
+                        <!-- Geografia -->
+                        <div>
+                            <label for="geografia" class="block text-sm font-medium text-slate-700 mb-1">Geografia (5 questões)</label>
+                            <input type="number" id="geografia" name="geografia" min="0" max="5" class="w-full p-3 border border-slate-300 rounded-lg input-field" placeholder="Ex: 4" required>
+                             <p id="error-geografia" class="error-message">Valor inválido. Máximo: 5</p>
+                        </div>
+                        <!-- História -->
+                        <div>
+                            <label for="historia" class="block text-sm font-medium text-slate-700 mb-1">História (5 questões)</label>
+                            <input type="number" id="historia" name="historia" min="0" max="5" class="w-full p-3 border border-slate-300 rounded-lg input-field" placeholder="Ex: 3" required>
+                            <p id="error-historia" class="error-message">Valor inválido. Máximo: 5</p>
+                        </div>
+                        <!-- Botão -->
+                        <div class="sm:col-span-2 lg:col-span-1 flex items-end">
+                             <button type="submit" class="w-full bg-[#c7ef59] text-slate-900 font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105 text-lg">
+                                Calcular
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" class="mt-16" style="display: none;">
+                <h2 class="text-3xl font-bold text-center mb-10 section-title mx-auto">Sua Nota Estimada</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- IF Sudeste Card -->
+                     <div class="bg-white p-6 rounded-lg shadow-lg result-card border-l-[#dd5737]">
+                        <h3 class="text-2xl font-bold mb-2">IF Sudeste</h3>
+                        <p class="text-slate-600 mb-4">Sua pontuação na prova base.</p>
+                        <p class="text-5xl font-extrabold text-[#dd5737]" id="result-if-sudeste">0</p>
+                        <p class="text-slate-500">de 90 pontos</p>
+                    </div>
+                    <!-- IFMG Card -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg result-card border-l-[#5242ea]">
+                        <h3 class="text-2xl font-bold mb-2">IFMG</h3>
+                        <p class="text-slate-600 mb-4">Estimativa de nota.</p>
+                        <p class="text-5xl font-extrabold text-[#5242ea]" id="result-ifmg">0</p>
+                        <p class="text-slate-500">de 50 pontos</p>
+                    </div>
+                    <!-- CEFET Card -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg result-card border-l-[#6408b0]">
+                        <h3 class="text-2xl font-bold mb-2">CEFET</h3>
+                        <p class="text-slate-600 mb-4">Estimativa de nota.</p>
+                        <p class="text-5xl font-extrabold text-[#6408b0]" id="result-cefet">0</p>
+                        <p class="text-slate-500">de 50 pontos</p>
+                    </div>
+                    <!-- IFNMG Card -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg result-card border-l-[#00abb1]">
+                        <h3 class="text-2xl font-bold mb-2">IFNMG</h3>
+                        <p class="text-slate-600 mb-4">Estimativa de nota.</p>
+                        <p class="text-5xl font-extrabold text-[#00abb1]" id="result-ifnmg">0</p>
+                        <p class="text-slate-500">de 30 pontos</p>
+                    </div>
+                    <!-- IFTM Card -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg result-card border-l-[#7bcd47]">
+                        <h3 class="text-2xl font-bold mb-2">IFTM</h3>
+                        <p class="text-slate-600 mb-4">Estimativa de nota.</p>
+                        <p class="text-5xl font-extrabold text-[#7bcd47]" id="result-iftm">0</p>
+                        <p class="text-slate-500">de 30 pontos</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white py-12 mt-16">
+        <div class="container mx-auto px-4 text-center">
+             <div class="flex justify-center items-center mb-4 space-x-4">
+                <img src="https://placehold.co/60x60/dd5737/FFFFFF?text=G" alt="Logo Guia Pré-Federal" class="h-12 w-12 rounded-full">
+            </div>
+            <p class="text-slate-400 text-sm">&copy; 2025 Guia - Pré Federal. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data Structures for Exams ---
+        const exams = {
+            ifSudeste: {
+                name: 'IF Sudeste',
+                subjects: {
+                    portugues: { questions: 12, pointsPerQuestion: 2 },
+                    matematica: { questions: 11, pointsPerQuestion: 2 },
+                    ciencias: { questions: 12, pointsPerQuestion: 2 },
+                    geografia: { questions: 5, pointsPerQuestion: 2 },
+                    historia: { questions: 5, pointsPerQuestion: 2 }
+                }
+            },
+            ifmg: {
+                name: 'IFMG',
+                subjects: {
+                    portugues: { questions: 15, pointsPerQuestion: 1 },
+                    matematica: { questions: 15, pointsPerQuestion: 1 },
+                    ciencias: { questions: 10, pointsPerQuestion: 1 },
+                    geografia: { questions: 5, pointsPerQuestion: 1 },
+                    historia: { questions: 5, pointsPerQuestion: 1 }
+                }
+            },
+            cefet: {
+                name: 'CEFET',
+                subjects: {
+                    portugues: { questions: 15, pointsPerQuestion: 1 },
+                    matematica: { questions: 15, pointsPerQuestion: 1 },
+                    ciencias: { questions: 8, pointsPerQuestion: 1 },
+                    geografia: { questions: 6, pointsPerQuestion: 1 },
+                    historia: { questions: 6, pointsPerQuestion: 1 }
+                }
+            },
+            ifnmg: {
+                name: 'IFNMG',
+                subjects: {
+                    portugues: { questions: 8, pointsPerQuestion: 1 },
+                    matematica: { questions: 8, pointsPerQuestion: 1 },
+                    ciencias: { questions: 8, pointsPerQuestion: 1 },
+                    geografia: { questions: 3, pointsPerQuestion: 1 },
+                    historia: { questions: 3, pointsPerQuestion: 1 }
+                }
+            },
+            iftm: {
+                name: 'IFTM',
+                subjects: {
+                    portugues: { questions: 9, pointsPerQuestion: 1 },
+                    matematica: { questions: 9, pointsPerQuestion: 1 },
+                    ciencias: { questions: 4, pointsPerQuestion: 1 },
+                    geografia: { questions: 4, pointsPerQuestion: 1 },
+                    historia: { questions: 4, pointsPerQuestion: 1 }
+                }
+            }
+        };
+
+        // --- DOM Elements ---
+        const form = document.getElementById('conversion-form');
+        const resultsSection = document.getElementById('results-section');
+        const inputs = {
+            portugues: document.getElementById('portugues'),
+            matematica: document.getElementById('matematica'),
+            ciencias: document.getElementById('ciencias'),
+            geografia: document.getElementById('geografia'),
+            historia: document.getElementById('historia')
+        };
+        const resultDisplays = {
+            ifSudeste: document.getElementById('result-if-sudeste'),
+            ifmg: document.getElementById('result-ifmg'),
+            cefet: document.getElementById('result-cefet'),
+            ifnmg: document.getElementById('result-ifnmg'),
+            iftm: document.getElementById('result-iftm')
+        };
+
+        // --- Validation Logic ---
+        function validateInput(subject) {
+            const input = inputs[subject];
+            const errorElement = document.getElementById(`error-${subject}`);
+            const max = exams.ifSudeste.subjects[subject].questions;
+            const value = parseInt(input.value, 10);
+
+            if (isNaN(value) || value < 0 || value > max) {
+                input.classList.add('border-red-500');
+                errorElement.style.display = 'block';
+                return false;
+            } else {
+                input.classList.remove('border-red-500');
+                errorElement.style.display = 'none';
+                return true;
+            }
+        }
+        
+        // Add event listeners for real-time validation
+        Object.keys(inputs).forEach(subject => {
+            inputs[subject].addEventListener('input', () => validateInput(subject));
+        });
+
+        // --- Calculation Logic ---
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+
+            let isFormValid = true;
+            Object.keys(inputs).forEach(subject => {
+                if (!validateInput(subject)) {
+                    isFormValid = false;
+                }
+            });
+
+            if (!isFormValid) {
+                // If any input is invalid, scroll to the form and do not proceed
+                form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            // Get correct answers from the form
+            const correctAnswers = {};
+            for (const subject in inputs) {
+                correctAnswers[subject] = parseInt(inputs[subject].value, 10);
+            }
+
+            // Calculate percentage of correct answers for each subject based on IF Sudeste
+            const percentages = {};
+            for (const subject in correctAnswers) {
+                const totalQuestions = exams.ifSudeste.subjects[subject].questions;
+                percentages[subject] = correctAnswers[subject] / totalQuestions;
+            }
+
+            // Calculate estimated scores for all exams
+            const estimatedScores = {};
+            for (const examKey in exams) {
+                let totalScore = 0;
+                const currentExam = exams[examKey];
+                for (const subjectKey in currentExam.subjects) {
+                    const subjectData = currentExam.subjects[subjectKey];
+                    const estimatedCorrect = percentages[subjectKey] * subjectData.questions;
+                    totalScore += Math.round(estimatedCorrect) * subjectData.pointsPerQuestion;
+                }
+                estimatedScores[examKey] = totalScore;
+            }
+
+            // --- Display Results ---
+            resultDisplays.ifSudeste.textContent = estimatedScores.ifSudeste;
+            resultDisplays.ifmg.textContent = estimatedScores.ifmg;
+            resultDisplays.cefet.textContent = estimatedScores.cefet;
+            resultDisplays.ifnmg.textContent = estimatedScores.ifnmg;
+            resultDisplays.iftm.textContent = estimatedScores.iftm;
+
+            // Show the results section and scroll to it
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    </script>
+</body>
+</html>
