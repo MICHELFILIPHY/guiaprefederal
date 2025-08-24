@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checklist de Conteúdos PASES</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body {
@@ -25,10 +26,64 @@
         .checklist-checkbox {
             margin-top: 2px;
             margin-right: 1rem;
-            accent-color: #1f2937;
+            accent-color: #F84C32; /* Cor de destaque similar ao Instagram */
             height: 1.25rem;
             width: 1.25rem;
             cursor: pointer;
+        }
+        /* Nova lógica: o texto é riscado quando o checkbox está marcado (conteúdo estudado) */
+        .peer:checked ~ span {
+            text-decoration: line-through;
+            color: #9ca3af;
+        }
+        .pilllar {
+            font-size: 1.5rem;
+            line-height: 1.25;
+            display: inline-block;
+            transform: scaleX(0.7) translateY(4px);
+            opacity: 0.8;
+            color: #F84C32; /* Cor de destaque */
+        }
+        .pilllar-sm {
+            font-size: 1rem;
+            line-height: 1.25;
+            display: inline-block;
+            transform: scaleX(0.7) translateY(2px);
+            opacity: 0.8;
+            color: #F84C32;
+        }
+        .roteiro-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+        .roteiro-subtitle {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+        .roteiro-section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        .roteiro-subsection-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #4b5563;
+            margin-left: 10px;
+            margin-top: 5px;
+            margin-bottom: 3px;
+        }
+        .roteiro-item {
+            font-size: 10px;
+            color: #1f2937;
+            margin-left: 20px;
+            margin-bottom: 2px;
         }
     </style>
 </head>
@@ -36,10 +91,35 @@
 
     <!-- Main Container -->
     <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-6 sm:p-10">
-        <header class="text-center mb-10">
-            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Checklist de Conteúdos</h1>
+        <header class="text-center mb-6">
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 flex justify-center items-center space-x-2">
+                <span class="pilllar">||||</span>
+                <span>MARCO do PASES</span>
+                <span class="pilllar">||||</span>
+                <a href="https://www.instagram.com/marcodopases/" target="_blank" class="ml-2">
+                    <!-- Icone do Instagram com a cor do tema -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram text-gray-600 hover:text-[#F84C32] transition-colors duration-300">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                    </svg>
+                </a>
+            </h1>
             <p class="text-lg text-gray-600">PASES 2/UFV – Triênio 2024-2026</p>
         </header>
+
+        <!-- Informações de uso -->
+        <div class="text-center mb-8 p-4 bg-gray-200 rounded-lg">
+            <h3 class="font-bold text-gray-800 mb-2">Como usar este Checklist?</h3>
+            <p class="text-sm text-gray-700">Este checklist foi criado para te ajudar a organizar seu roteiro de estudos. Por padrão, todos os conteúdos já estão marcados para te dar uma visão geral. Você deve **desmarcar** os conteúdos que você **JÁ** dominou. Ao clicar no botão, um PDF será gerado apenas com os itens que **NÃO** estão marcados, facilitando a visualização dos conteúdos que ainda precisam de sua atenção!</p>
+        </div>
+        
+        <!-- Botão para gerar PDF no topo -->
+        <div class="text-center mb-8">
+            <button id="generate-pdf-btn-top" class="bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-700 transition-colors duration-300">
+                Gerar e Baixar Roteiro em PDF
+            </button>
+        </div>
 
         <!-- Section: Linguagens, Códigos e suas Tecnologias -->
         <section class="mb-8 p-6 bg-gray-50 rounded-lg shadow-inner">
@@ -50,103 +130,103 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Características estruturais de textos escritos e orais (gênero e tipologia)</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Estrutura do texto dissertativo-argumentativo</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Estratégias argumentativas: argumentação e contra-argumentação; ponto de vista</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Diálogo entre textos: paráfrase, paródia, entre outros</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Elementos de organização: coerência e coesão textual; modalizadores gramaticais</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Estratégias linguísticas conforme o gênero e o tipo</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Contextos de produção, circulação e recepção de textos</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Efeitos de sentido decorrentes do uso de imagens e elementos multissemióticos</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Sintaxe: período simples e período composto</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Uso padrão e não padrão dos pronomes</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Predomínio da norma padrão na escola</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Concordância verbo-nominal</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Regência verbo-nominal e uso da crase</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Uso e efeitos de sentido dos sinais de pontuação</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Variedades linguísticas e estilísticas</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Seleção lexical e recursos expressivos</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Elaboração de perfis para diferentes contextos</span>
                         </label>
                     </li>
@@ -158,61 +238,61 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Noções básicas de teoria literária</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Crítica literária (estilo, estrutura, aspectos discursivos)</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Contextualização da obra literária</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Literatura comparada</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Análise de obras que mostram o autor e seu fazer literário</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Análise de obras em poesia ou prosa com foco nos efeitos de sentido</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Relações entre a obra e o contexto (Romantismo, Realismo e Naturalismo)</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Vida cultural por meio de obras literárias</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Compreensão da identidade nacional e multiculturalidade</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Os negros e os indígenas na literatura brasileira</span>
                         </label>
                     </li>
@@ -224,43 +304,43 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Identificação de argumentos, pontos de vista e propósitos comunicativos</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Análise da coesão e da coerência textual</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Inferência de significados</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Compreensão crítica de textos multimodais</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Reconhecimento de marcas linguísticas que expressam posicionamento e ideologias</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Utilização da língua inglesa em práticas comunicativas (orais e escritas)</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Relação entre a língua e questões sociais, culturais e políticas</span>
                         </label>
                     </li>
@@ -272,37 +352,37 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Identificação de informações específicas</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Compreensão leitora crítica</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Inferência lexical</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Conteúdos gramaticais para leitura e interpretação</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Conteúdos lexicais para leitura e interpretação</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Variação linguística e adequação do uso da língua em diferentes situações</span>
                         </label>
                     </li>
@@ -314,97 +394,97 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">História da arte moderna e contemporânea</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Expressionismo, Fauvismo, Cubismo, Futurismo, Dadaísmo, Surrealismo</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Body art, Grafite, Instalação</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">História da arte no Brasil</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Barroco, Semana de Arte Moderna</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Arte urbana, Arte afro-brasileira</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Xilogravura Nordestina</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Música e Dança</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Música brasileira contemporânea: Música Popular Brasileira, Hip hop</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Dança moderna e contemporânea</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Teatro e Performance</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Movimentos teatrais no Brasil</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Arte performática</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Interdisciplinaridade</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Correlações entre arte e tecnologias (arte digital)</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Integração entre linguagens (teatro, música, dança, circo)</span>
                         </label>
                     </li>
@@ -416,157 +496,157 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Práticas Corporais e Cultura</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Manifestações corporais tradicionais, populares e culturais (capoeira, dança, lutas indígenas e afro-brasileiras)</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Relação com identidades culturais e preservação da memória</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Reconhecimento do corpo como elemento de resistência e expressão social</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Esporte e Sociedade</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Esporte como fenômeno social (educacional, rendimento)</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Impactos da esportivização e profissionalização no esporte escolar</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Importância do esporte na formação de valores</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Ginástica e Consciência Corporal</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Diferentes ginásticas: artística, rítmica, funcional e postural</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Desenvolvimento de consciência corporal, coordenação motora, flexibilidade, força e resistência</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Jogos, Brincadeiras e Lazer</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Jogos e brincadeiras tradicionais e contemporâneos</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">A ludicidade no desenvolvimento social e cognitivo</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Inclusão e adaptação de jogos</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Saúde e Qualidade de Vida</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Relação entre atividade física, saúde física e mental</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Prevenção de doenças relacionadas ao sedentarismo</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Educação para hábitos saudáveis e autocuidado</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Diversidade e Inclusão</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Inclusão de pessoas com deficiências</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Valorização das diferenças e diversidades</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Tecnologia e Educação Física</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Utilização de tecnologias digitais</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Impactos de jogos eletrônicos e simuladores</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Uso da tecnologia como ferramenta de avaliação</span>
                         </label>
                     </li>
@@ -583,199 +663,199 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">A Modernidade em Cena</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Formação dos estados europeus</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Santa Inquisição</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Reforma Protestante</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Renascimento Cultural e Barroco nas Américas</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Séculos XIX e XX</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Partilha da África e Ásia no século XIX</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">O sistema capitalista</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Independência do Haiti</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Era das revoluções (Revolução Francesa, Independências da América Latina)</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Revoltas no Brasil do século XIX</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Processo de extinção da escravidão no Brasil</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Etapas das revoluções industriais</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Descolonização da África</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Socialismo e Comunismo (Rússia, Cuba e China)</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Autoritarismo</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">República Velha no Brasil</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Período de Vargas (1930-1945)</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Ditadura civil-militar no Brasil (1964-1985)</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Conflitos Mundiais e Polaridade</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Origens da Primeira Guerra Mundial</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Polaridade entre bloco comunista e capitalista</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Fim da URSS</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Guerras étnicas, religiosas e civis no século XX</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">O apartheid</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Democracia e Questões Sociais</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Crise de 1929 e o New Deal</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Criação da ONU e os direitos humanos</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">O Estado da Palestina e Israel</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Períodos democráticos brasileiros (1945-1964 e 1988-atualmente)</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Direitos e deveres da CF/88</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Ascensão dos movimentos negros, indígenas e LGBTQIA+</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">O mundo pós-COVID-19</span>
                         </label>
                     </li>
@@ -787,145 +867,145 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Transição de Pensamento</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Ruptura com o pensamento Antigo e estabelecimento do Cristianismo</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Modernidade</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Humanismo, Renascimento, Revolução Científica e Iluminismo</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Conceitos e Perspectivas</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Reflexão sobre a multiplicidade: diferenças conceituais e visões de mundo</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Trabalho como instrumento de mudança da realidade</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Filosofia da diferença</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Novas tecnologias e desemprego estrutural</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Filosofia do ócio: tempo e lazer</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Trabalho e alienação na era da tecnocracia</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Impactos da técnica no mundo do trabalho</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Perspectivas profissionais e moralidade na mecanização do trabalho</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Sociedade e Cultura</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Democracia, direitos humanos e fluxos da sociedade global</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Busca pelo sentido da existência</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Experiência estética e diferentes contextos sociais</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Expressão artística e juventude</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Indústria cultural e cultura de massa</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Ética e Tecnologia</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Ética e Ciência: consciência ecológica e responsabilidade</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Mídias sociais, consumismo e ética ambiental</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Ideologia, alienação e fetichismo na sociedade em rede</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Cidadania digital e a nova ágora</span>
                         </label>
                     </li>
@@ -937,79 +1017,79 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Trabalho e Estratificação Social</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">O papel do trabalho na organização das sociedades</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Evolução histórica do trabalho</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Estrutura de classes sociais e mobilidade social</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Desigualdades Sociais</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Desigualdade econômica, étnico-racial e de gênero no Brasil</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Racismo estrutural, sexismo e exclusão social</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Mecanismos de exclusão e vulnerabilidade social</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Política, Estado e Movimentos Sociais</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Conceitos de poder, política e Estado</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">A cidadania como conquista</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Movimentos sociais como formas de ação coletiva</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Mídia, redes sociais e participação política</span>
                         </label>
                     </li>
@@ -1021,175 +1101,175 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">População e Dinâmicas</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Crescimento, distribuição e estrutura da população mundial e brasileira</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Indicadores econômicos e qualidade de vida</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Migrações internas e internacionais</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Teorias demográficas e transição demográfica</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Globalização e Reorganização do Espaço</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Processo de globalização</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Blocos econômicos e acordos comerciais</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Desigualdades espaciais (países centrais e periféricos)</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Urbanização</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Urbanização mundial e brasileira</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Hierarquia urbana, cidades globais e periferias</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Problemas urbanos e planejamento urbano</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Espaço Agrário e Indústria</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Organização do espaço agrário brasileiro</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Revoluções agrícolas</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Impactos ambientais do agronegócio</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Processos industriais</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Infraestrutura: transportes, energia e logística</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Meio Ambiente e Sustentabilidade</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Relações entre sociedade e natureza</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Problemas ambientais urbanos e rurais</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Políticas públicas, conferências e legislações ambientais</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Desenvolvimento sustentável e conservação ambiental</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Geopolítica e Conflitos</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Conflitos territoriais e disputas geopolíticas</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Nacionalismo, xenofobia, migrações forçadas e refugiados</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">A nova ordem mundial pós-Guerra Fria</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Questões energéticas</span>
                         </label>
                     </li>
@@ -1206,91 +1286,91 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Álgebra e Números</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Matrizes: definição, tipos, igualdade, operações, transposta</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Determinantes: cálculo e propriedades</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Sistemas de equações lineares</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Matemática financeira: juros, porcentagem, taxas socioeconômicas</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Geometria</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Cálculo de perímetro e área de polígonos</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Polígonos regulares</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Reconfiguração de superfícies</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Probabilidade e Estatística</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Princípios de contagem</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Análise combinatória: permutações, arranjos, combinações</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Probabilidade: espaço amostral, eventos aleatórios, cálculo de probabilidades</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Probabilidade condicional</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Eventos sucessivos</span>
                         </label>
                     </li>
@@ -1307,115 +1387,115 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Organização dos Seres Vivos</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Níveis de organização biológica</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Elementos químicos e biomoléculas</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Célula: estrutura e tipos</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Composição e funções de tecidos, órgãos e sistemas</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Origem da Vida</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Teorias sobre a origem da vida (Biogênese, Abiogênese, Criacionismo)</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Hipótese de Oparin-Haldane</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Experimento de Miller e Urey</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Evolução dos primeiros seres vivos</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Ecossistemas</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Fluxo de matéria e energia</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Cadeias e teias alimentares</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Eficiência energética e impacto ambiental</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Saúde e Medicamentos</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Automedicação e riscos</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Uso de antibióticos e resistência bacteriana</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Impactos sociais e ambientais do uso excessivo de medicamentos</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Educação em saúde</span>
                         </label>
                     </li>
@@ -1427,109 +1507,109 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Dinâmica e Leis de Newton</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Forças resultantes e equilíbrio</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Atrito, força normal, tração</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Leis da dinâmica aplicadas ao cotidiano e tecnologias</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Energia</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Energia cinética e potencial</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Trabalho e potência</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Conservação de energia mecânica</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Fontes e usos da energia</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Termologia e Calorimetria</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Temperatura e calor</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Equilíbrio térmico e capacidade térmica</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Mudanças de estado físico</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Calor específico, energia térmica e sustentabilidade</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Óptica Geométrica</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Propagação da luz</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Leis da reflexão e refração</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Aplicações tecnológicas</span>
                         </label>
                     </li>
@@ -1541,151 +1621,151 @@
                 <ul class="space-y-2 text-gray-800">
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Transformações Químicas</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Representação simbólica das reações</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Tipos de reações químicas</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Fatores que influenciam a velocidade</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Energia nas reações (endotérmicas e exotérmicas)</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Estequiometria</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Proporcionalidade entre reagentes e produtos</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Cálculos envolvendo massa, mol, volume e número de partículas</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Rendimento e reagente limitante</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Funções Inorgânicas</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Ácidos, bases, sais e óxidos</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Reações de neutralização e indicadores</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Soluções</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Conceito, componentes, cálculos e unidades de concentração</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Solubilidade e curvas de solubilidade</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Diluição e mistura</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Gases e Leis dos Gases</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Gases ideais e reais</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Leis dos gases</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Equação de Clapeyron</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Aplicações cotidianas e ambientais</span>
                         </label>
                     </li>
                     <li class="checklist-item">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Química e Sociedade</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Aplicações das reações químicas no cotidiano</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Interações com o meio ambiente</span>
                         </label>
                     </li>
                     <li class="checklist-item pl-8">
                         <label class="flex items-start w-full cursor-pointer">
-                            <input type="checkbox" class="checklist-checkbox peer">
+                            <input type="checkbox" class="checklist-checkbox peer" checked>
                             <span class="text-base peer-checked:line-through peer-checked:text-gray-500 transition-all duration-300">Uso consciente de produtos químicos</span>
                         </label>
                     </li>
@@ -1694,6 +1774,120 @@
         </section>
 
     </div>
+    
+    <!-- Botão para gerar PDF no final -->
+    <div class="text-center mt-8 mb-4">
+        <button id="generate-pdf-btn-bottom" class="bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-700 transition-colors duration-300">
+            Gerar e Baixar Roteiro em PDF
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function generatePDF() {
+                const selectedContent = {};
+                const sections = document.querySelectorAll('section');
+
+                sections.forEach(section => {
+                    const sectionTitleElement = section.querySelector('h2');
+                    if (!sectionTitleElement) return;
+
+                    const sectionTitle = sectionTitleElement.innerText;
+                    const subSections = section.querySelectorAll('.mb-6');
+                    
+                    const sectionItems = {};
+                    subSections.forEach(subSection => {
+                        const subSectionTitleElement = subSection.querySelector('h3');
+                        if (!subSectionTitleElement) return;
+
+                        const subSectionTitle = subSectionTitleElement.innerText;
+                        // Agora a lógica é pegar os itens que NÃO estão marcados
+                        const uncheckedItems = subSection.querySelectorAll('input[type="checkbox"]:not(:checked)');
+                        
+                        if (uncheckedItems.length > 0) {
+                            const itemsList = [];
+                            uncheckedItems.forEach(item => {
+                                const text = item.closest('label').querySelector('span').innerText;
+                                itemsList.push(text);
+                            });
+                            sectionItems[subSectionTitle] = itemsList;
+                        }
+                    });
+
+                    if (Object.keys(sectionItems).length > 0) {
+                        selectedContent[sectionTitle] = sectionItems;
+                    }
+                });
+
+                if (Object.keys(selectedContent).length === 0) {
+                    alert("Por favor, desmarque os conteúdos que já estudou para gerar o roteiro.");
+                    return;
+                }
+
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                let yPos = 20;
+                const margin = 20;
+
+                doc.setFontSize(22);
+                doc.text("Roteiro de Estudos", doc.internal.pageSize.width / 2, yPos, { align: "center" });
+                yPos += 15;
+
+                doc.setFontSize(12);
+                doc.text("Aqui está o seu roteiro de estudos personalizado com base nos conte\u00FAdos selecionados:", margin, yPos);
+                yPos += 20;
+
+                doc.setFontSize(16);
+                doc.setTextColor(31, 41, 55);
+
+                for (const section in selectedContent) {
+                    if (yPos > 280) { // Check for new page
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    doc.setFont('Helvetica', 'bold');
+                    doc.text(section, margin, yPos);
+                    yPos += 10;
+                    doc.setFont('Helvetica', 'normal');
+                    
+                    for (const subSection in selectedContent[section]) {
+                        if (yPos > 280) { // Check for new page
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        doc.setFont('Helvetica', 'bold');
+                        doc.text(subSection, margin + 5, yPos);
+                        yPos += 8;
+                        doc.setFont('Helvetica', 'normal');
+                        
+                        selectedContent[section][subSection].forEach(item => {
+                            if (yPos > 280) { // Check for new page
+                                doc.addPage();
+                                yPos = 20;
+                            }
+                            doc.setFontSize(10);
+                            const textLines = doc.splitTextToSize(`- ${item}`, doc.internal.pageSize.width - margin * 2);
+                            doc.text(textLines, margin + 10, yPos);
+                            yPos += (textLines.length * 5) + 3;
+                        });
+                        yPos += 5;
+                    }
+                    yPos += 10;
+                }
+                doc.save("roteiro_estudos_PASES.pdf");
+            }
+            
+            // Adicionando os event listeners após o carregamento do DOM
+            const btnTop = document.getElementById('generate-pdf-btn-top');
+            const btnBottom = document.getElementById('generate-pdf-btn-bottom');
+            if (btnTop) {
+                btnTop.addEventListener('click', generatePDF);
+            }
+            if (btnBottom) {
+                btnBottom.addEventListener('click', generatePDF);
+            }
+        });
+    </script>
 
 </body>
 </html>
