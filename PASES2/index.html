@@ -115,6 +115,13 @@
             <p class="text-lg text-gray-600">PASES 2/UFV – Triênio 2024-2026</p>
         </header>
 
+        <!-- Botão para gerar PDF no topo -->
+        <div class="text-center mb-8 mt-4">
+            <button id="generate-pdf-btn-top" class="bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-700 transition-colors duration-300">
+                Gerar Roteiro Completo em PDF
+            </button>
+        </div>
+
         <!-- Informações de uso -->
         <div class="text-center mb-8 p-4 bg-gray-200 rounded-lg">
             <h3 class="font-bold text-gray-800 mb-2">Como usar este Checklist?</h3>
@@ -1793,10 +1800,10 @@
 
     </div>
     
-    <!-- Botão para gerar PDF no final -->
+    <!-- Botão para gerar PDF personalizado no final -->
     <div class="text-center mt-8 mb-4">
         <button id="generate-pdf-btn-bottom" class="bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-700 transition-colors duration-300">
-            Gerar e Baixar Roteiro em PDF
+            Gerar Roteiro Personalizado em PDF
         </button>
     </div>
 
@@ -1821,13 +1828,7 @@
     </div>
 
     <script>
-        // Remove a lógica de riscar o texto quando o checkbox está desmarcado, pois a nova lógica é o contrário
-        // e os estilos do Tailwind já gerenciam isso corretamente.
-        document.querySelectorAll('span').forEach(span => {
-            span.classList.remove('peer-checked:line-through', 'peer-checked:text-gray-500');
-        });
-
-        // Seleciona todos os checkboxes para inicializá-los como não marcados
+        // Inicializa o estado dos checkboxes
         document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
             checkbox.checked = false;
         });
@@ -1901,7 +1902,12 @@
         }
 
 
-        // Adiciona um listener ao botão para gerar o PDF
+        // Adiciona listener para o botão de "Gerar Roteiro Completo"
+        document.getElementById('generate-pdf-btn-top').addEventListener('click', () => {
+            generatePDF(true); // Sempre gera o PDF com todos os itens
+        });
+
+        // Adiciona listener para o botão de "Gerar Roteiro Personalizado"
         document.getElementById('generate-pdf-btn-bottom').addEventListener('click', () => {
             const checkedItems = document.querySelectorAll('.item-checkbox:checked');
             if (checkedItems.length === 0) {
@@ -1913,7 +1919,7 @@
 
         document.getElementById('confirm-btn').addEventListener('click', () => {
             document.getElementById('confirmation-dialog').classList.add('hidden');
-            generatePDF(true); // Gera o PDF com todos os itens
+            generatePDF(true); // Gera o PDF com todos os itens, após a confirmação
         });
 
         document.getElementById('cancel-btn').addEventListener('click', () => {
@@ -1924,15 +1930,14 @@
         function generatePDF(allContent = false) {
             const contentToStudy = {};
             const sections = document.querySelectorAll('section');
+            const allItems = document.querySelectorAll('.item-checkbox');
 
             sections.forEach(section => {
-                // Obtém o título da seção usando o seletor de h2
                 const sectionTitle = section.querySelector('h2').innerText;
                 const subSections = section.querySelectorAll('.mb-6');
                 
                 const sectionItems = {};
                 subSections.forEach(subSection => {
-                    // Obtém o título da subseção usando o seletor de h3
                     const subSectionTitle = subSection.querySelector('h3').innerText;
                     
                     let itemsToInclude;
@@ -1957,23 +1962,25 @@
                 }
             });
 
-            if (Object.keys(contentToStudy).length === 0) {
-                // Caso o usuário cancele a geração de todos os itens e não tenha selecionado nenhum, nada acontece.
+            if (Object.keys(contentToStudy).length === 0 && !allContent) {
                 return;
             }
-
+            
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             let yPos = 20;
             const margin = 20;
             const pageWidth = doc.internal.pageSize.width;
 
-            // Título do PDF
+            // Adiciona o logotipo ao PDF
             doc.setFontSize(22);
-            doc.text("Roteiro de Estudos", pageWidth / 2, yPos, { align: "center" });
-            yPos += 15;
+            doc.text("MARCO do PASES", pageWidth / 2, yPos, { align: "center" });
+            yPos += 8;
+            doc.setFontSize(12);
+            doc.text("PASES 2/UFV – Triênio 2024-2026", pageWidth / 2, yPos, { align: "center" });
+            yPos += 20;
 
-            // Subtítulo do PDF
+
             doc.setFontSize(12);
             doc.text("Aqui está o seu roteiro de estudos personalizado com base nos conteúdos selecionados:", margin, yPos);
             yPos += 20;
