@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Bibliotecas para Gerar PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- O html2canvas foi removido, pois queremos um PDF de texto. -->
     <style>
         /* Fonte Inter (padrão do Tailwind) */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -75,7 +75,7 @@
         <!-- Cabeçalho -->
         <header class="text-center mb-8">
             <h1 class="text-3xl sm:text-4xl font-bold text-blue-700">Checklist Personalizado de Biologia - Mago do PISM</h1>
-            <p class="text-lg text-gray-600 mt-2">Avalie seu nível de conhecimento nas matérias do ENEM para gerar um plano de estudos.</p>
+            <p class="text-lg text-gray-600 mt-2">Avalie seu nível de conhecimento no ENEM para gerar um plano de estudos.</p>
         </header>
 
         <!-- Seção do Checklist -->
@@ -298,9 +298,10 @@
         }
 
         /**
-         * Calcula e popula o plano de estudos no modal (sem exibi-lo).
+         * Coleta os dados do checklist.
+         * @returns {{pouco: string[], medio: string[], dominado: string[]}}
          */
-        function calcularEPopularPlano() {
+        function getChecklistData() {
             const poucoDominio = [];
             const medioDominio = [];
             const dominado = [];
@@ -322,18 +323,28 @@
                     dominado.push(topicName);
                 }
             });
+            return { pouco: poucoDominio, medio: medioDominio, dominado: dominado };
+        }
+
+
+        /**
+         * Calcula e popula o plano de estudos no modal (sem exibi-lo).
+         */
+        function calcularEPopularPlano() {
+            // A lógica de coleta de dados foi movida para getChecklistData()
+            const { pouco, medio, dominado } = getChecklistData();
 
             // Popula as seções do modal
             populatePlanList(
                 document.getElementById('plan-pouco'), 
                 '🎯 Foco Total: Rever Aulas', 
-                poucoDominio,
+                pouco,
                 'Nenhum tópico marcado com baixa compreensão. Muito bem!'
             );
             populatePlanList(
                 document.getElementById('plan-medio'), 
                 '✍️ Prática: Fazer Exercícios', 
-                medioDominio,
+                medio,
                 'Nenhum tópico marcado para revisão. Continue assim!'
             );
             populatePlanList(
@@ -342,9 +353,6 @@
                 dominado,
                 'Nenhum tópico marcado como dominado ainda. Continue estudando!'
             );
-
-            // Exibe o modal
-            // document.getElementById('plan-modal').style.display = 'flex'; // Removido daqui
         }
 
         /**
@@ -401,91 +409,148 @@
         }
 
         /**
-         * Gera e baixa um PDF do plano de estudos.
-         * @param {HTMLElement} btn - O botão que acionou o evento.
+         * Gera e baixa um PDF em formato de TEXTO com o plano de estudos.
+         * Esta função usa jsPDF para construir o documento dinamicamente.
          */
-        function gerarPDF(btn) {
-            const { jsPDF } = window.jspdf;
-            const modalContent = document.getElementById('modal-content-to-print');
-            const originalBtnText = btn.innerHTML;
-            
-            // --- CORREÇÃO ---
-            // Pega o botão *dentro* do modal para escondê-lo
-            const modalBtnToHide = document.getElementById('modal-download-pdf-btn');
-            // --- FIM CORREÇÃO ---
-
-            // Mostrar estado de loading
-            btn.innerHTML = 'Gerando...';
-            btn.disabled = true;
-
-            // --- CORREÇÃO ---
-            // Esconde o botão de download do modal ANTES de capturar a tela
-            if (modalBtnToHide) {
-                modalBtnToHide.style.display = 'none';
-            }
-            // --- FIM CORREÇÃO ---
-
-            html2canvas(modalContent, {
-                scale: 2 // Melhorar a resolução da imagem
-            }).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
+        function gerarPDFTexto() {
+            try {
+                const { jsPDF } = window.jspdf;
                 const pdf = new jsPDF('p', 'pt', 'a4'); // Retrato, pontos, A4
-                const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = pdf.internal.pageSize.getHeight();
                 
-                const imgProps = pdf.getImageProperties(imgData);
-                const imgWidth = imgProps.width;
-                const imgHeight = imgProps.height;
-                
-                // Calcular a proporção para caber na largura do PDF com alguma margem
-                const margin = 40; // 20 pontos de cada lado
-                const usableWidth = pdfWidth - (margin * 2);
-                const ratio = usableWidth / imgWidth;
-                const scaledHeight = imgHeight * ratio;
-                
-                let heightLeft = scaledHeight;
-                let position = margin; // Posição Y inicial
+                // 1. Obter os dados
+                const data = getChecklistData();
 
-                // Adiciona a imagem, lidando com quebra de página se necessário
-                // (Para este conteúdo, é provável que caiba em uma página, mas a lógica está aqui)
-                pdf.addImage(imgData, 'PNG', margin, position, usableWidth, scaledHeight);
-                heightLeft -= (pdfHeight - (margin * 2));
+                // 2. Configurações do Documento
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const margin = 40;
+                const maxLineWidth = pageWidth - margin * 2;
+                let y = margin; // Posição Y atual
 
-                while (heightLeft > 0) {
-                    pdf.addPage();
-                    position = margin - scaledHeight + heightLeft; // Posição Y negativa
-                    pdf.addImage(imgData, 'PNG', margin, position, usableWidth, scaledHeight);
-                    heightLeft -= (pdfHeight - (margin * 2));
-                }
-                
-                pdf.save('Plano_Estudos_Biologia_Mago_do_PISM_ENEM.pdf');
-                
-                // --- CORREÇÃO ---
-                // Restaura o botão clicado
-                btn.innerHTML = originalBtnText;
-                btn.disabled = false;
-                
-                // Mostra o botão de download do modal novamente
-                if (modalBtnToHide) {
-                    modalBtnToHide.style.display = 'block';
-                }
-                // --- FIM CORREÇÃO ---
+                // 3. Função auxiliar para adicionar texto e quebrar página
+                const addText = (text, options) => {
+                    const { size = 10, style = 'normal', color = '#000000', spaceAfter = 12 } = options;
+                    pdf.setFontSize(size);
+                    pdf.setFont('helvetica', style); // Usar fontes base do PDF (Helvetica)
+                    pdf.setTextColor(color);
+                    
+                    // Divide o texto em linhas que cabem na largura
+                    const lines = pdf.splitTextToSize(text, maxLineWidth);
+                    
+                    lines.forEach(line => {
+                        // Verifica se precisa de uma nova página
+                        if (y + size > pageHeight - margin) {
+                            pdf.addPage();
+                            y = margin; // Reseta Y para o topo
+                        }
+                        pdf.text(line, margin, y);
+                        y += (size * 1.2); // Avança Y (espaçamento 1.2)
+                    });
+                    
+                    // Adiciona o espaço extra após o bloco de texto
+                    y += (spaceAfter - (size * 1.2)); 
+                };
 
-            }).catch(err => {
-                console.error("Erro ao gerar PDF:", err);
-                alert("Ocorreu um erro ao gerar o PDF."); // Use um modal customizado se preferir
-                
-                // --- CORREÇÃO ---
-                // Restaura o botão clicado (em caso de erro)
-                btn.innerHTML = originalBtnText;
-                btn.disabled = false;
+                // --- Início do Conteúdo do PDF ---
 
-                // Mostra o botão de download do modal novamente (em caso de erro)
-                if (modalBtnToHide) {
-                    modalBtnToHide.style.display = 'block';
-                }
-                // --- FIM CORREÇÃO ---
-            });
+                // Título Principal
+                y += 10; 
+                addText('Plano de estudos - Mago do PISM', { 
+                    size: 18, 
+                    style: 'bold', 
+                    color: '#2563eb', // Azul
+                    spaceAfter: 25 
+                });
+
+                // Bloco de Introdução
+                addText('Este plano foi gerado com base na sua autoavaliação. A estratégia é focar sua energia onde ela é mais necessária.', { 
+                    size: 10, 
+                    color: '#374151', // Cinza escuro
+                    spaceAfter: 14 
+                });
+                addText('• Baixa Compreensão: Foco total. Dedique tempo para rever as aulas e os conceitos fundamentais sobre estes temas.', { 
+                    size: 10, 
+                    style: 'bold', 
+                    color: '#dc2626', // Vermelho
+                    spaceAfter: 14 
+                });
+                addText('• Preciso Revisar: Foco em prática. Você já entendeu a base, agora é hora de fixar com exercícios.', { 
+                    size: 10, 
+                    style: 'bold', 
+                    color: '#d97706', // Amarelo/Laranja
+                    spaceAfter: 14 
+                });
+                addText('• Dominei o Conteúdo: Ótimo trabalho! Estes tópicos não exigem revisão imediata. Siga em frente!', { 
+                    size: 10, 
+                    style: 'bold', 
+                    color: '#16a34a', // Verde
+                    spaceAfter: 14 
+                });
+                y += 20; // Espaço extra após a intro
+
+                // Função auxiliar para adicionar seções de lista
+                const addListSection = (title, color, items, emptyMsg) => {
+                    if (y + 40 > pageHeight - margin) { 
+                        pdf.addPage();
+                        y = margin;
+                    }
+                    addText(title, { 
+                        size: 14, 
+                        style: 'bold', 
+                        color: color, 
+                        spaceAfter: 16 
+                    });
+                    
+                    if (items.length > 0) {
+                        items.forEach(item => {
+                            addText(`• ${item}`, { 
+                                size: 10, 
+                                color: '#374151', 
+                                spaceAfter: 14 
+                            });
+                        });
+                    } else {
+                        addText(emptyMsg, { 
+                            size: 10, 
+                            style: 'italic', 
+                            color: '#6b7280', 
+                            spaceAfter: 14 
+                        });
+                    }
+                    y += 15; // Espaço entre seções
+                };
+
+                // --- Seção 1: Foco Total ---
+                addListSection(
+                    '🎯 Foco Total: Rever Aulas', 
+                    '#dc2626', // Vermelho
+                    data.pouco, 
+                    'Nenhum tópico marcado com baixa compreensão. Muito bem!'
+                );
+                
+                // --- Seção 2: Prática ---
+                addListSection(
+                    '✍️ Prática: Fazer Exercícios', 
+                    '#d97706', // Amarelo/Laranja
+                    data.medio, 
+                    'Nenhum tópico marcado para revisão. Continue assim!'
+                );
+                
+                // --- Seção 3: Dominado ---
+                addListSection(
+                    '🎉 Dominado: Revisão Opcional', 
+                    '#16a34a', // Verde
+                    data.dominado, 
+                    'Nenhum tópico marcado como dominado ainda. Continue estudando!'
+                );
+
+                // --- Salvar o PDF ---
+                pdf.save('Plano_Estudos_Biologia_Mago_do_PISM.pdf');
+
+            } catch (err) {
+                console.error("Erro ao gerar PDF de texto:", err);
+                // Não usamos alert() aqui
+            }
         }
 
 
@@ -497,13 +562,42 @@
         // Ação dos novos botões
         document.getElementById('view-plan-btn').addEventListener('click', verPlano);
         
+        // Botão de Download Externo (corrigido)
+        /* CORREÇÃO: Removido 'async' e '.then()' e usando try/catch síncrono */
         document.getElementById('download-pdf-btn').addEventListener('click', function() {
-            calcularEPopularPlano(); // Popula o conteúdo primeiro
-            gerarPDF(this); // 'this' é o botão que foi clicado
+            const btn = this;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Gerando...';
+            btn.disabled = true;
+
+            try {
+                // Chama a nova função síncrona de geração de texto
+                gerarPDFTexto();
+            } catch (err) {
+                console.error("Erro ao gerar PDF:", err);
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
         });
 
+        // Botão de Download Interno (no modal) (corrigido)
+        /* CORREÇÃO: Removido 'async' e '.then()' e usando try/catch síncrono */
         document.getElementById('modal-download-pdf-btn').addEventListener('click', function() {
-            gerarPDF(this); // 'this' é o botão que foi clicado
+            const btn = this;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Gerando...';
+            btn.disabled = true;
+            
+            try {
+                // Chama a mesma função de geração de PDF
+                gerarPDFTexto();
+            } catch (err) {
+                console.error("Erro ao gerar PDF:", err);
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
         });
 
 
