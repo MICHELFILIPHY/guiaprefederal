@@ -1,1 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Personalizado de Biologia</title>
+    <!-- Carrega o Tailwind CSS para estilização -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bibliotecas para Gerar PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* Fonte Inter (padrão do Tailwind) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Estilização customizada para os botões de rádio */
+        /* Esconde o input de rádio padrão */
+        input[type="radio"] {
+            display: none;
+        }
 
+        /* Estilo base do label */
+        input[type="radio"] + label {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 0.75rem; /* Ajustado para economizar espaço */
+            border: 2px solid #e2e8f0; /* cinza-300 */
+            border-radius: 9999px; /* full */
+            transition: all 0.2s ease-in-out;
+            font-weight: 500;
+        }
+
+        /* Estilo do label quando o rádio está checado */
+        /* Nível Baixo */
+        input[value="pouco"]:checked + label {
+            background-color: #fee2e2; /* red-100 */
+            border-color: #f87171; /* red-400 */
+            color: #b91c1c; /* red-700 */
+            font-weight: 600;
+        }
+        /* Nível Médio */
+        input[value="medio"]:checked + label {
+            background-color: #fef9c3; /* yellow-100 */
+            border-color: #facc15; /* yellow-400 */
+            color: #a16207; /* yellow-700 */
+            font-weight: 600;
+        }
+        /* Nível Dominado */
+        input[value="dominado"]:checked + label {
+            background-color: #dcfce7; /* green-100 */
+            border-color: #4ade80; /* green-400 */
+            color: #15803d; /* green-700 */
+            font-weight: 600;
+        }
+
+        /* Animação de fade-in para o modal */
+        #plan-modal {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Container Principal -->
+    <div class="container max-w-5xl mx-auto p-4 sm:p-8">
+        
+        <!-- Cabeçalho -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-blue-700">Checklist Personalizado de Biologia - Mago do PISM</h1>
+            <p class="text-lg text-gray-600 mt-2">Avalie seu nível de conhecimento nas matérias do ENEM para gerar um plano de estudos.</p>
+        </header>
+
+        <!-- Seção do Checklist -->
+        <div id="checklist-section" class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl">
+            <!-- O conteúdo do checklist será injetado aqui pelo JavaScript -->
+            <div id="checklist-container">
+                <p class="text-center text-gray-500">Carregando tópicos...</p>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="flex flex-col sm:flex-row gap-4 mt-10">
+                <button id="view-plan-btn" class="w-full sm:w-1/2 bg-blue-600 text-white py-4 px-6 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
+                    Ver Plano de Estudos
+                </button>
+                <button id="download-pdf-btn" class="w-full sm:w-1/2 bg-green-600 text-white py-4 px-6 rounded-lg text-lg font-semibold hover:bg-green-700 transition-all duration-300 shadow-lg focus:outline-none focus:ring-4 focus:ring-green-300">
+                    Gerar PDF do Plano
+                </button>
+            </div>
+        </div>
+    </div> <!-- Fim do Container Principal -->
+
+    <!-- Modal do Plano de Estudos (escondido por padrão) -->
+    <!-- ESTA SEÇÃO FOI MOVIDA PARA CÁ (PARA FORA DO SCRIPT) -->
+    <div id="plan-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50" style="display: none;">
+        
+        <!-- Conteúdo do Modal -->
+        <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+            
+            <!-- Cabeçalho do Modal -->
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h2 class="text-2xl font-bold text-blue-700">Plano de estudos - Magos da UERJ</h2>
+                <button id="close-modal-btn" class="text-gray-400 hover:text-gray-700 text-3xl font-bold">&times;</button>
+            </div>
+
+            <!-- Corpo do Modal (com scroll) -->
+            <div id="modal-content-to-print" class="p-6 sm:p-8 overflow-y-auto">
+                <!-- Introdução do Plano -->
+                <div class="mb-8 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="text-gray-700">
+                        Este plano foi gerado com base na sua autoavaliação. A estratégia é focar sua energia onde ela é mais necessária.
+                    </p>
+                    <ul class="list-disc list-inside mt-2 space-y-1 text-gray-600">
+                        <li><strong>Baixa Compreensão:</strong> Foco total. Dedique tempo para rever as aulas e os conceitos fundamentais sobre estes temas.</li>
+                        <li><strong>Preciso Revisar:</strong> Foco em prática. Você já entendeu a base, agora é hora de fixar com exercícios.</li>
+                        <li><strong>Dominei o Conteúdo:</strong> Ótimo trabalho! Estes tópicos não exigem revisão imediata. Siga em frente!</li>
+                    </ul>
+                </div>
+
+                <!-- Seções do Plano -->
+                <div class="space-y-6">
+                    <!-- Nível 1: Rever Aulas -->
+                    <section id="plan-pouco" class="plan-section">
+                        <!-- Conteúdo injetado pelo JS -->
+                    </section>
+                    
+                    <!-- Nível 2: Fazer Exercícios -->
+                    <section id="plan-medio" class="plan-section">
+                        <!-- Conteúdo injetado pelo JS -->
+                    </section>
+
+                    <!-- Nível 3: Dominado -->
+                    <section id="plan-dominado" class="plan-section">
+                        <!-- Conteúdo injetado pelo JS -->
+                    </section>
+                </div>
+
+                <!-- Botão de PDF dentro do Modal -->
+                <button id="modal-download-pdf-btn" class="w-full mt-8 bg-green-600 text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-green-700 transition-all duration-300 shadow-lg focus:outline-none focus:ring-4 focus:ring-green-300">
+                    Baixar este Plano em PDF
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- FIM DA SEÇÃO MOVIDA -->
+
+
+    <script>
+        // --- Definição dos Tópicos de Biologia ---
+        // (Baseado no conteúdo programático fornecido anteriormente)
+        const topicosBiologia = [
+            {
+                categoria: "Seres vivos",
+                itens: [
+                    "Classificação dos seres vivos: sistemática filogenética",
+                    "Classificação dos seres vivos: reinos e domínios",
+                    "Evolução: origens da vida e transformações dos seres vivos ao longo do tempo",
+                    "Evolução: estratégias adaptativas",
+                    "Evolução: mecanismos e teorias evolutivas e de seleção",
+                    "Evolução: biodiversidade",
+                    "Bases da ecologia: ecossistemas e biomas",
+                    "Bases da ecologia: fluxo de energia e de matéria na biosfera",
+                    "Bases da ecologia: cadeias e teias alimentares",
+                    "Bases da ecologia: relações ecológicas",
+                    "Bases da ecologia: ciclos biogeoquímicos",
+                    "Bases da ecologia: poluição e desequilíbrio ecológico"
+                ]
+            },
+            {
+                categoria: "Vírus, células e tecidos",
+                itens: [
+                    "Vírus: estrutura; tipos; reprodução",
+                    "Células procariotas e eucariotas: características morfológicas e funcionais",
+                    "Células: principais componentes químicos",
+                    "Células: mecanismos e fases da divisão celular",
+                    "Células: sistema de biomembranas e mecanismos de transporte",
+                    "Células: organelas",
+                    "Bioenergética: respiração celular",
+                    "Bioenergética: fermentação",
+                    "Bioenergética: fotossíntese",
+                    "Bioenergética: quimiossíntese",
+                    "Multicelularidade: classificação, estrutura e funções dos tecidos animais e vegetais",
+                    "Multicelularidade: desenvolvimento embrionário dos animais",
+                    "Multicelularidade: germinação e dormência"
+                ]
+            },
+            {
+                categoria: "Bases da genética",
+                itens: [
+                    "Os ácidos nucleicos DNA e RNA: estrutura; funções",
+                    "Cromossomos e genes: código genético",
+                    "Cromossomos e genes: síntese de proteínas",
+                    "Cromossomos e genes: mutação e recombinação gênica",
+                    "Engenharia genética: tecnologia do DNA recombinante",
+                    "Engenharia genética: células-tronco",
+                    "Hereditariedade: mendelismo e neomendelismo",
+                    "Hereditariedade: doenças hereditárias",
+                    "Hereditariedade: alterações no patrimônio genético"
+                ]
+            },
+            {
+                categoria: "Bioquímica e fisiologia de animais e vegetais",
+                itens: [
+                    "Metabolismo: estrutura e cinética de enzimas",
+                    "Metabolismo: anabolismo e catabolismo de carboidratos, lipídios e proteínas",
+                    "Metabolismo: tipos e funções dos hormônios",
+                    "Metabolismo: vitaminas",
+                    "Processamento dos alimentos: digestão; absorção e transporte de nutrientes nos animais",
+                    "Processamento dos alimentos: captação de macro e micronutrientes pelos vegetais",
+                    "Respiração: mecanismos; órgãos e tecidos envolvidos; captação e transporte de gases",
+                    "Circulação: mecanismos; órgãos e tecidos envolvidos; transporte da seiva nas plantas",
+                    "Excreção nos animais: mechanisms; órgãos e tecidos envolvidos",
+                    "Homeostasia: mecanismos termorregulatórios; manutenção do pH; osmorregulação",
+                    "Homeostasia: equilíbrio hidrossalino e equilíbrio ácido-básico",
+                    "Sistema nervoso: estrutura; transmissão do impulso nervoso",
+                    "Reprodução: tipos de ciclos de vida; gametas e fecundação em animais e vegetais",
+                    "O sistema imune animal: anticorpos; processos imunológicos"
+                ]
+            },
+            {
+                categoria: "Saúde e bem-estar do homem",
+                itens: [
+                    "Doenças infecciosas: agentes causadores; endemias, epidemias e pandemias; profilaxia",
+                    "Infecções sexualmente transmissíveis (IST): agentes causadores e profilaxia",
+                    "Doenças parasitárias e carenciais no Brasil: agentes causadores; profilaxia",
+                    "Medidas preventivas em saúde pública: higiene; vacinação"
+                ]
+            }
+        ];
+
+        // --- Funções do Aplicativo ---
+
+        /**
+         * Renderiza o checklist na página quando ela carrega.
+         */
+        function renderChecklist() {
+            const container = document.getElementById('checklist-container');
+            container.innerHTML = ''; // Limpa o "Carregando..."
+            let topicIndex = 0;
+
+            topicosBiologia.forEach((categoria, catIndex) => {
+                // Cria o título da categoria
+                const categoryTitle = document.createElement('h2');
+                categoryTitle.className = 'text-2xl font-bold text-gray-800 mt-8 mb-4 border-b-2 border-blue-200 pb-2';
+                categoryTitle.textContent = categoria.categoria;
+                container.appendChild(categoryTitle);
+
+                // Cria os itens da categoria
+                const itemsContainer = document.createElement('div');
+                itemsContainer.className = 'space-y-4';
+
+                categoria.itens.forEach((item) => {
+                    const uniqueName = `topic_${topicIndex}`;
+                    
+                    const itemRow = document.createElement('div');
+                    itemRow.className = 'topic-row flex flex-col sm:flex-row justify-between sm:items-center py-4 border-b border-gray-100';
+                    // Armazena o nome do tópico para fácil acesso ao gerar o plano
+                    itemRow.setAttribute('data-topic-name', item);
+
+                    // Nome do tópico
+                    const topicName = document.createElement('span');
+                    topicName.className = 'text-md text-gray-700 mb-3 sm:mb-0 sm:w-2/5';
+                    topicName.textContent = item;
+                    itemRow.appendChild(topicName);
+
+                    // Grupo de botões de rádio
+                    const radioGroup = document.createElement('div');
+                    radioGroup.className = 'flex flex-wrap gap-2 sm:gap-4 justify-start sm:justify-end sm:w-3/5';
+                    
+                    // ESTA SEÇÃO FOI CORRIGIDA. O HTML do modal e o innerHTML duplicado foram removidos.
+                    radioGroup.innerHTML = `
+                        <div>
+                            <input type="radio" id="${uniqueName}_pouco" name="${uniqueName}" value="pouco">
+                            <label for="${uniqueName}_pouco">😥 Baixa</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="${uniqueName}_medio" name="${uniqueName}" value="medio">
+                            <label for="${uniqueName}_medio">🤔 Revisar</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="${uniqueName}_dominado" name="${uniqueName}" value="dominado">
+                            <label for="${uniqueName}_dominado">🥰 Dominei</label>
+                        </div>
+                    `;
+                    itemRow.appendChild(radioGroup);
+                    itemsContainer.appendChild(itemRow);
+                    topicIndex++;
+                });
+                container.appendChild(itemsContainer);
+            });
+        }
+
+        /**
+         * Calcula e popula o plano de estudos no modal (sem exibi-lo).
+         */
+        function calcularEPopularPlano() {
+            const poucoDominio = [];
+            const medioDominio = [];
+            const dominado = [];
+
+            // Seleciona todos os botões de rádio que foram marcados
+            const radiosSelecionados = document.querySelectorAll('input[type="radio"]:checked');
+
+            radiosSelecionados.forEach(radio => {
+                // Encontra a 'linha' (div.topic-row) pai para pegar o nome do tópico
+                const topicRow = radio.closest('.topic-row');
+                const topicName = topicRow.dataset.topicName;
+                const level = radio.value;
+
+                if (level === 'pouco') {
+                    poucoDominio.push(topicName);
+                } else if (level === 'medio') {
+                    medioDominio.push(topicName);
+                } else if (level === 'dominado') {
+                    dominado.push(topicName);
+                }
+            });
+
+            // Popula as seções do modal
+            populatePlanList(
+                document.getElementById('plan-pouco'), 
+                '🎯 Foco Total: Rever Aulas', 
+                poucoDominio,
+                'Nenhum tópico marcado com baixa compreensão. Muito bem!'
+            );
+            populatePlanList(
+                document.getElementById('plan-medio'), 
+                '✍️ Prática: Fazer Exercícios', 
+                medioDominio,
+                'Nenhum tópico marcado para revisão. Continue assim!'
+            );
+            populatePlanList(
+                document.getElementById('plan-dominado'), 
+                '🎉 Dominado: Revisão Opcional', 
+                dominado,
+                'Nenhum tópico marcado como dominado ainda. Continue estudando!'
+            );
+
+            // Exibe o modal
+            // document.getElementById('plan-modal').style.display = 'flex'; // Removido daqui
+        }
+
+        /**
+         * Função auxiliar para popular as listas no modal.
+         * @param {HTMLElement} container - O elemento da seção (ex: #plan-pouco).
+         * @param {string} title - O título da seção (ex: 'Rever Aulas').
+         * @param {string[]} items - Um array de nomes de tópicos.
+         * @param {string} emptyMessage - Mensagem para exibir se a lista estiver vazia.
+         */
+        function populatePlanList(container, title, items, emptyMessage) {
+            container.innerHTML = ''; // Limpa a seção
+
+            // Adiciona o título da seção
+            const h3 = document.createElement('h3');
+            let titleClasses = 'text-xl font-semibold mb-3 ';
+            if (title.includes('Foco Total')) titleClasses += 'text-red-600';
+            if (title.includes('Prática')) titleClasses += 'text-yellow-600';
+            if (title.includes('Dominado')) titleClasses += 'text-green-600';
+            h3.className = titleClasses;
+            h3.textContent = title;
+            container.appendChild(h3);
+
+            if (items.length > 0) {
+                const ul = document.createElement('ul');
+                ul.className = 'list-disc list-inside space-y-2 text-gray-700 pl-2';
+                items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    ul.appendChild(li);
+                });
+                container.appendChild(ul);
+            } else {
+                // Exibe a mensagem de lista vazia
+                const p = document.createElement('p');
+                p.className = 'text-gray-500 italic';
+                p.textContent = emptyMessage;
+                container.appendChild(p);
+            }
+        }
+
+        /**
+         * Fecha o modal do plano de estudos.
+         */
+        function fecharModal() {
+            document.getElementById('plan-modal').style.display = 'none';
+        }
+
+        /**
+         * Abre o modal do plano de estudos.
+         */
+        function verPlano() {
+            calcularEPopularPlano(); // Popula o conteúdo
+            document.getElementById('plan-modal').style.display = 'flex'; // Mostra o modal
+        }
+
+        /**
+         * Gera e baixa um PDF do plano de estudos.
+         * @param {HTMLElement} btn - O botão que acionou o evento.
+         */
+        function gerarPDF(btn) {
+            const { jsPDF } = window.jspdf;
+            const modalContent = document.getElementById('modal-content-to-print');
+            const originalBtnText = btn.innerHTML;
+            
+            // --- CORREÇÃO ---
+            // Pega o botão *dentro* do modal para escondê-lo
+            const modalBtnToHide = document.getElementById('modal-download-pdf-btn');
+            // --- FIM CORREÇÃO ---
+
+            // Mostrar estado de loading
+            btn.innerHTML = 'Gerando...';
+            btn.disabled = true;
+
+            // --- CORREÇÃO ---
+            // Esconde o botão de download do modal ANTES de capturar a tela
+            if (modalBtnToHide) {
+                modalBtnToHide.style.display = 'none';
+            }
+            // --- FIM CORREÇÃO ---
+
+            html2canvas(modalContent, {
+                scale: 2 // Melhorar a resolução da imagem
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'pt', 'a4'); // Retrato, pontos, A4
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                
+                const imgProps = pdf.getImageProperties(imgData);
+                const imgWidth = imgProps.width;
+                const imgHeight = imgProps.height;
+                
+                // Calcular a proporção para caber na largura do PDF com alguma margem
+                const margin = 40; // 20 pontos de cada lado
+                const usableWidth = pdfWidth - (margin * 2);
+                const ratio = usableWidth / imgWidth;
+                const scaledHeight = imgHeight * ratio;
+                
+                let heightLeft = scaledHeight;
+                let position = margin; // Posição Y inicial
+
+                // Adiciona a imagem, lidando com quebra de página se necessário
+                // (Para este conteúdo, é provável que caiba em uma página, mas a lógica está aqui)
+                pdf.addImage(imgData, 'PNG', margin, position, usableWidth, scaledHeight);
+                heightLeft -= (pdfHeight - (margin * 2));
+
+                while (heightLeft > 0) {
+                    pdf.addPage();
+                    position = margin - scaledHeight + heightLeft; // Posição Y negativa
+                    pdf.addImage(imgData, 'PNG', margin, position, usableWidth, scaledHeight);
+                    heightLeft -= (pdfHeight - (margin * 2));
+                }
+                
+                pdf.save('Plano_Estudos_Biologia_Magos_UERJ.pdf');
+                
+                // --- CORREÇÃO ---
+                // Restaura o botão clicado
+                btn.innerHTML = originalBtnText;
+                btn.disabled = false;
+                
+                // Mostra o botão de download do modal novamente
+                if (modalBtnToHide) {
+                    modalBtnToHide.style.display = 'block';
+                }
+                // --- FIM CORREÇÃO ---
+
+            }).catch(err => {
+                console.error("Erro ao gerar PDF:", err);
+                alert("Ocorreu um erro ao gerar o PDF."); // Use um modal customizado se preferir
+                
+                // --- CORREÇÃO ---
+                // Restaura o botão clicado (em caso de erro)
+                btn.innerHTML = originalBtnText;
+                btn.disabled = false;
+
+                // Mostra o botão de download do modal novamente (em caso de erro)
+                if (modalBtnToHide) {
+                    modalBtnToHide.style.display = 'block';
+                }
+                // --- FIM CORREÇÃO ---
+            });
+        }
+
+
+        // --- Event Listeners ---
+
+        // Renderiza o checklist assim que o DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', renderChecklist);
+
+        // Ação dos novos botões
+        document.getElementById('view-plan-btn').addEventListener('click', verPlano);
+        
+        document.getElementById('download-pdf-btn').addEventListener('click', function() {
+            calcularEPopularPlano(); // Popula o conteúdo primeiro
+            gerarPDF(this); // 'this' é o botão que foi clicado
+        });
+
+        document.getElementById('modal-download-pdf-btn').addEventListener('click', function() {
+            gerarPDF(this); // 'this' é o botão que foi clicado
+        });
+
+
+        // Ações para fechar o modal
+        document.getElementById('close-modal-btn').addEventListener('click', fecharModal);
+        document.getElementById('plan-modal').addEventListener('click', (event) => {
+            // Fecha o modal se o usuário clicar fora do conteúdo (no overlay)
+            if (event.target === event.currentTarget) {
+                fecharModal();
+            }
+        });
+    </script>
+</body>
+</html>
