@@ -252,7 +252,7 @@
         </div>
       </div>
 
-   <!-- Cronograma + Horários -->
+ <!-- Cronograma + Horários -->
 <div class="max-w-5xl mx-auto mt-16 bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-slate-100">
   <div class="w-full">
 
@@ -302,7 +302,7 @@
 
 
       <!-- Qual a sua prova de interesse? -->
-<h3 class="text-xl md:text-2xl font-extrabold text-center text-slate-800 mb-4">
+<h3 class="text-xl md:text-2xl font-extrabold text-center text-slate-800 mt-20 mb-4">
   Qual a sua prova de interesse?
 </h3>
 
@@ -313,53 +313,53 @@
 <div class="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
 
   <!-- opções (multi-seleção) -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-   <!-- opções (multi-seleção) -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+<div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 max-w-4xl mx-auto items-stretch">
 
-  <!-- Grupo que força COLUNI/IF -->
-  <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+  <!-- COLUNI -->
+  <label class="flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition lg:col-span-2 h-full">
     <input type="checkbox" class="h-5 w-5" value="COLUNI" data-group="coluni_if">
     <span class="font-semibold text-slate-800">COLUNI</span>
   </label>
 
-  <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+  <!-- COLTEC -->
+  <label class="flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition lg:col-span-2 h-full">
     <input type="checkbox" class="h-5 w-5" value="COLTEC" data-group="coluni_if">
     <span class="font-semibold text-slate-800">COLTEC</span>
   </label>
 
-  <!-- IF Sudeste (ambos, conflito → Coluni/IF) -->
-  <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+  <!-- IF Sudeste -->
+  <label class="flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition lg:col-span-2 h-full">
     <input type="checkbox" class="h-5 w-5" value="IF Sudeste" data-group="ambos">
     <span class="font-semibold text-slate-800">IF Sudeste</span>
   </label>
 
-  <!-- Grupão IFs + CEDAF + IFNMG -->
-  <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+  <!-- Grupão -->
+  <label class="flex items-start gap-3 rounded-xl border-2 border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition lg:col-span-4 h-full">
     <input
       type="checkbox"
-      class="h-5 w-5"
+      class="h-5 w-5 mt-1"
       value="IFMG / IFTM / IFF / IFES / IFNMG / CEDAF"
       data-group="if_cefet"
     >
-    <span class="font-semibold text-slate-800">
-      IFMG · IFTM · IFF · IFES · IFNMG · CEDAF
-    </span>
+    <div>
+      <span class="font-semibold text-slate-800 block"> IFMG · IFTM · IFF · IFES · IFNMG · CEDAF</span>
+      </span>
+    </div>
   </label>
 
   <!-- CEFET -->
-  <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+  <label class="flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition lg:col-span-1 h-full">
     <input type="checkbox" class="h-5 w-5" value="CEFET" data-group="if_cefet">
     <span class="font-semibold text-slate-800">CEFET</span>
   </label>
 
   <!-- Outros -->
-  <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+  <label class="flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition lg:col-span-1 h-full">
     <input type="checkbox" class="h-5 w-5" value="Outros vestibulinhos" data-group="if_cefet">
     <span class="font-semibold text-slate-800">Outros</span>
   </label>
 
-</div>
+	</div>
 
   </div>
 
