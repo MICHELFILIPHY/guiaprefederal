@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -251,39 +252,175 @@
         </div>
       </div>
 
-      <!-- Cronograma e Horário -->
-      <div class="max-w-4xl mx-auto mt-16 bg-white p-8 rounded-lg shadow-lg flex flex-col items-center border border-slate-100">
-        <div class="w-full">
-          <h3 class="text-2xl font-bold text-center mb-6 text-[#5242ea]">Cronograma 2026</h3>
+   <!-- Cronograma + Horários -->
+<div class="max-w-5xl mx-auto mt-16 bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-slate-100">
+  <div class="w-full">
 
-          <div class="flex flex-col md:flex-row justify-between items-center bg-slate-50 p-6 rounded-xl border border-slate-200 mb-8">
-            <div class="text-center md:text-left mb-4 md:mb-0">
-              <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Início das Aulas</p>
-              <p class="text-3xl font-extrabold text-[#dd5737]">02 de Março</p>
-            </div>
+    <!-- Cronograma -->
+    <h3 class="text-2xl font-bold text-center mb-6 text-[#5242ea]">Cronograma 2026</h3>
 
-            <div class="hidden md:block h-12 w-px bg-slate-300"></div>
+    <div class="flex flex-col md:flex-row justify-between items-center bg-slate-50 p-6 rounded-xl border border-slate-200 mb-8">
+      <div class="text-center md:text-left mb-4 md:mb-0">
+        <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Início das aulas</p>
+        <p class="text-3xl font-extrabold text-[#dd5737]">02 de março</p>
+      </div>
 
-            <div class="text-center md:text-right">
-              <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Término</p>
-              <p class="text-3xl font-extrabold text-[#5242ea]">Novembro</p>
-            </div>
-          </div>
+      <div class="hidden md:block h-12 w-px bg-slate-300"></div>
 
-          <p class="text-center text-slate-600 mb-6">
-            Aulas ao vivo e gravadas até a última semana de novembro.
-          </p>
-
-          <!-- Imagem (nome e caminho corrigidos) -->
-          <img
-            src="/extensivo2026/horarioextensivoconjugado.png"
-            alt="Grade de horários das aulas"
-            class="rounded-xl shadow-lg w-full"
-          >
-        </div>
+      <div class="text-center md:text-right">
+        <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Término</p>
+        <p class="text-3xl font-extrabold text-[#5242ea]">Novembro</p>
       </div>
     </div>
-  </section>
+
+    <p class="text-center text-slate-600 mb-10">
+      Aulas ao vivo e gravadas até a última semana de novembro.
+    </p>
+
+    <!-- Turnos (o mais importante) -->
+    <h3 class="text-xl md:text-2xl font-extrabold text-center text-slate-800 mb-4">
+      Turnos disponíveis (segunda a quinta)
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+      <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
+        <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Turma da tarde</p>
+        <p class="text-4xl font-extrabold text-slate-900 mt-2">14h – 18h</p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
+        <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Turma da noite</p>
+        <p class="text-4xl font-extrabold text-slate-900 mt-2">18h – 20h</p>
+      </div>
+    </div>
+
+    <p class="text-center text-sm text-slate-500 mb-10">
+      *Mesmas matérias nos dois turnos. Você escolhe o melhor horário pra sua rotina.
+    </p>
+    </div>
+</div> 
+
+<!-- Qual a sua prova de interesse? -->
+<h3 class="text-xl md:text-2xl font-extrabold text-center text-slate-800 mb-4">
+  Qual a sua prova de interesse?
+</h3>
+
+<p class="text-center text-slate-600 mb-6">
+  Marque uma ou mais opções e a gente te indica a trilha ideal.
+</p>
+
+<div class="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+
+  <!-- opções (multi-seleção) -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+    <!-- Grupo que força COLUNI/IF -->
+    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+      <input type="checkbox" class="h-5 w-5" value="COLUNI" data-group="coluni_if">
+      <span class="font-semibold text-slate-800">COLUNI</span>
+    </label>
+
+    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+      <input type="checkbox" class="h-5 w-5" value="COLTEC" data-group="coluni_if">
+      <span class="font-semibold text-slate-800">COLTEC</span>
+    </label>
+
+    <!-- IF Sudeste (pode ser qualquer um dos dois, mas regra final: se houver conflito -> Coluni/IF) -->
+    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+      <input type="checkbox" class="h-5 w-5" value="IF Sudeste" data-group="ambos">
+      <span class="font-semibold text-slate-800">IF Sudeste</span>
+    </label>
+
+    <!-- Grupo que força IF/CEFET -->
+    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+      <input type="checkbox" class="h-5 w-5" value="IFMG" data-group="if_cefet">
+      <span class="font-semibold text-slate-800">IFMG</span>
+    </label>
+
+    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+      <input type="checkbox" class="h-5 w-5" value="IFF" data-group="if_cefet">
+      <span class="font-semibold text-slate-800">IFF</span>
+    </label>
+
+    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+      <input type="checkbox" class="h-5 w-5" value="IFES" data-group="if_cefet">
+      <span class="font-semibold text-slate-800">IFES</span>
+    </label>
+
+    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+      <input type="checkbox" class="h-5 w-5" value="IFTM" data-group="if_cefet">
+      <span class="font-semibold text-slate-800">IFTM</span>
+    </label>
+
+    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+      <input type="checkbox" class="h-5 w-5" value="IFNMG" data-group="if_cefet">
+      <span class="font-semibold text-slate-800">IFNMG</span>
+    </label>
+
+    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+      <input type="checkbox" class="h-5 w-5" value="CEFET" data-group="if_cefet">
+      <span class="font-semibold text-slate-800">CEFET</span>
+    </label>
+  </div>
+
+  <!-- botões -->
+  <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+    <button type="button" onclick="recomendarTrilha()"
+      class="bg-[#5242ea] text-white font-bold py-3 px-6 rounded-full shadow hover:bg-opacity-95 transition">
+      Ver recomendação
+    </button>
+
+    <button type="button" onclick="limparSelecaoProvas()"
+      class="bg-white text-slate-700 font-bold py-3 px-6 rounded-full border border-slate-200 hover:bg-slate-50 transition">
+      Limpar seleção
+    </button>
+  </div>
+
+  <!-- resultado -->
+  <div id="resultadoProvas" class="hidden mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+    <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Recomendação</p>
+
+    <div class="mt-3 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <p class="text-2xl font-extrabold text-slate-900" id="resultadoTitulo">Trilha:</p>
+        <p class="text-slate-700 mt-2" id="resultadoResumo"></p>
+
+        <div class="flex flex-wrap gap-2 mt-3" id="resultadoTags"></div>
+
+        <!-- seleção do usuário (opcional, mas ajuda a dar sensação de "personalizado") -->
+        <p class="text-xs text-slate-500 mt-3">
+          Selecionadas: <span id="selecionadasLista" class="font-semibold text-slate-600"></span>
+        </p>
+      </div>
+
+      <!-- lembrete de turnos (sem redundância grande) -->
+      <div class="rounded-xl bg-white border border-slate-200 p-4 text-center min-w-[240px]">
+        <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Turnos</p>
+        <p class="text-slate-900 font-extrabold mt-2">Seg a qui</p>
+        <p class="text-slate-700 mt-1">🌤️ 14h–18h • 🌙 18h–20h</p>
+        <p class="text-xs text-slate-500 mt-2">Mesmas matérias nos dois turnos.</p>
+      </div>
+    </div>
+
+    <div class="mt-5 text-center">
+      <a href="#investimento"
+        class="bg-[#c7ef59] text-slate-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 inline-flex items-center justify-center">
+        Ver investimento e garantir vaga
+      </a>
+    </div>
+  </div>
+
+  <!-- CTA final (centralizado) -->
+  <div class="mt-8 text-center flex flex-col items-center justify-center">
+    <p class="text-slate-600 mb-4 max-w-xl">
+      Ficou em dúvida? Fala com a equipe no WhatsApp e a gente te orienta rapidinho.
+    </p>
+    <a href="#" onclick="return trackLeadAndGo('https://wa.me/message/CNC5OQFPKLE7K1')"
+      class="bg-[#c7ef59] text-slate-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 inline-flex items-center justify-center">
+      Falar com a equipe
+    </a>
+  </div>
+
+</div>
 
   <!-- Investimento -->
 <section id="investimento" class="py-16 md:py-24 bg-white">
@@ -422,6 +559,104 @@
       return false;
     }
   </script>
+
+<script>
+  function getSelectedProvas() {
+    const checks = Array.from(document.querySelectorAll('input[type="checkbox"][data-group]'));
+    return checks.filter(c => c.checked).map(c => ({
+      value: c.value,
+      group: c.dataset.group
+    }));
+  }
+
+  function recomendarTrilha() {
+    const selected = getSelectedProvas();
+    const box = document.getElementById('resultadoProvas');
+    const titulo = document.getElementById('resultadoTitulo');
+    const resumo = document.getElementById('resultadoResumo');
+    const tags = document.getElementById('resultadoTags');
+    const lista = document.getElementById('selecionadasLista');
+
+    if (selected.length === 0) {
+      box.classList.remove('hidden');
+      titulo.textContent = "Trilha:";
+      resumo.textContent = "Selecione pelo menos uma prova para receber a recomendação.";
+      tags.innerHTML = "";
+      lista.textContent = "—";
+      box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // montar lista de selecionadas
+    lista.textContent = selected.map(s => s.value).join(", ");
+
+    // regra:
+    // - COLUNI ou COLTEC => Coluni/IF (força)
+    // - IF Sudeste => "ambos" (pode ser qualquer, mas se houver conflito -> Coluni/IF)
+    // - IFMG/IFF/IFES/IFTM/IFNMG/CEFET => IF/CEFET (força)
+    // - Se marcou coisas que apontam para dois cursos => Coluni/IF
+    // - Se marcou só "ambos" (IF Sudeste) => mostrar "pode escolher qualquer" (mas sem deixar confuso: sugerir Coluni/IF como padrão)
+    const hasColuniIF = selected.some(s => s.group === 'coluni_if');
+    const hasIFCEFET = selected.some(s => s.group === 'if_cefet');
+    const hasAmbos = selected.some(s => s.group === 'ambos');
+
+    let final = null;
+
+    if (hasColuniIF) {
+      final = 'coluni_if';
+    } else if (hasIFCEFET && !hasColuniIF) {
+      final = 'if_cefet';
+    } else if (hasAmbos && !hasColuniIF && !hasIFCEFET) {
+      // só IF Sudeste marcado
+      final = 'ambos';
+    }
+
+    // conflito (marcou algo que leva a coluni_if e if_cefet) -> coluni_if
+    if (hasColuniIF && hasIFCEFET) final = 'coluni_if';
+    // marcou IF Sudeste junto com IF/CEFET -> conflito potencial -> coluni_if? (sua regra: se marcar opções que encaminhem para os dois cursos => Coluni/IF)
+    if (hasAmbos && hasIFCEFET) final = 'coluni_if';
+    // marcou IF Sudeste junto com Coluni/IF -> já cai em coluni_if
+
+    // render
+    tags.innerHTML = "";
+
+    box.classList.remove('hidden');
+
+    if (final === 'coluni_if') {
+      titulo.innerHTML = 'Trilha recomendada: <span class="text-[#5242ea]">Coluni / IF</span>';
+      resumo.textContent = "Melhor opção para cobrir sua(s) prova(s). Inclui Inglês e Redação.";
+      tags.innerHTML = `
+        <span class="px-4 py-2 rounded-full bg-[#c7ef59] text-slate-900 font-extrabold">Inclui Inglês</span>
+        <span class="px-4 py-2 rounded-full bg-[#c7ef59] text-slate-900 font-extrabold">Inclui Redação</span>
+      `;
+    } else if (final === 'if_cefet') {
+      titulo.innerHTML = 'Trilha recomendada: <span class="text-[#dd5737]">IFs / CEFETs</span>';
+      resumo.textContent = "Grade enxuta e direta para IFs/CEFETs (sem Inglês e sem Redação).";
+      tags.innerHTML = `
+        <span class="px-4 py-2 rounded-full bg-slate-200 text-slate-900 font-bold">Sem Inglês</span>
+        <span class="px-4 py-2 rounded-full bg-slate-200 text-slate-900 font-bold">Sem Redação</span>
+      `;
+    } else {
+      // ambos
+      titulo.innerHTML = 'Trilha recomendada: <span class="text-slate-900">Qualquer uma das duas</span>';
+      resumo.textContent = "Para IF Sudeste, você pode escolher qualquer uma das trilhas. Se quiser a grade mais completa, vá de Coluni/IF.";
+      tags.innerHTML = `
+        <span class="px-4 py-2 rounded-full bg-[#c7ef59] text-slate-900 font-extrabold">Coluni/IF (mais completo)</span>
+        <span class="px-4 py-2 rounded-full bg-slate-200 text-slate-900 font-bold">IF/CEFET (mais enxuto)</span>
+      `;
+    }
+
+    box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function limparSelecaoProvas() {
+    const checks = Array.from(document.querySelectorAll('input[type="checkbox"][data-group]'));
+    checks.forEach(c => c.checked = false);
+
+    const box = document.getElementById('resultadoProvas');
+    if (box) box.classList.add('hidden');
+  }
+</script>
 
 </body>
 </html>
