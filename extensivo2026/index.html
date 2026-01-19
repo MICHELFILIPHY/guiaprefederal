@@ -313,53 +313,53 @@
 
   <!-- opções (multi-seleção) -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-    <!-- Grupo que força COLUNI/IF -->
-    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
-      <input type="checkbox" class="h-5 w-5" value="COLUNI" data-group="coluni_if">
-      <span class="font-semibold text-slate-800">COLUNI</span>
-    </label>
+   <!-- opções (multi-seleção) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
 
-    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
-      <input type="checkbox" class="h-5 w-5" value="COLTEC" data-group="coluni_if">
-      <span class="font-semibold text-slate-800">COLTEC</span>
-    </label>
+  <!-- Grupo que força COLUNI/IF -->
+  <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+    <input type="checkbox" class="h-5 w-5" value="COLUNI" data-group="coluni_if">
+    <span class="font-semibold text-slate-800">COLUNI</span>
+  </label>
 
-    <!-- IF Sudeste (pode ser qualquer um dos dois, mas regra final: se houver conflito -> Coluni/IF) -->
-    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
-      <input type="checkbox" class="h-5 w-5" value="IF Sudeste" data-group="ambos">
-      <span class="font-semibold text-slate-800">IF Sudeste</span>
-    </label>
+  <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+    <input type="checkbox" class="h-5 w-5" value="COLTEC" data-group="coluni_if">
+    <span class="font-semibold text-slate-800">COLTEC</span>
+  </label>
 
-    <!-- Grupo que força IF/CEFET -->
-    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
-      <input type="checkbox" class="h-5 w-5" value="IFMG" data-group="if_cefet">
-      <span class="font-semibold text-slate-800">IFMG</span>
-    </label>
+  <!-- IF Sudeste (ambos, conflito → Coluni/IF) -->
+  <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+    <input type="checkbox" class="h-5 w-5" value="IF Sudeste" data-group="ambos">
+    <span class="font-semibold text-slate-800">IF Sudeste</span>
+  </label>
 
-    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
-      <input type="checkbox" class="h-5 w-5" value="IFF" data-group="if_cefet">
-      <span class="font-semibold text-slate-800">IFF</span>
-    </label>
+  <!-- Grupão IFs + CEDAF + IFNMG -->
+  <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+    <input
+      type="checkbox"
+      class="h-5 w-5"
+      value="IFMG / IFTM / IFF / IFES / IFNMG / CEDAF"
+      data-group="if_cefet"
+    >
+    <span class="font-semibold text-slate-800">
+      IFMG · IFTM · IFF · IFES · IFNMG · CEDAF
+    </span>
+  </label>
 
-    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
-      <input type="checkbox" class="h-5 w-5" value="IFES" data-group="if_cefet">
-      <span class="font-semibold text-slate-800">IFES</span>
-    </label>
+  <!-- CEFET -->
+  <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+    <input type="checkbox" class="h-5 w-5" value="CEFET" data-group="if_cefet">
+    <span class="font-semibold text-slate-800">CEFET</span>
+  </label>
 
-    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
-      <input type="checkbox" class="h-5 w-5" value="IFTM" data-group="if_cefet">
-      <span class="font-semibold text-slate-800">IFTM</span>
-    </label>
+  <!-- Outros -->
+  <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
+    <input type="checkbox" class="h-5 w-5" value="Outros vestibulinhos" data-group="if_cefet">
+    <span class="font-semibold text-slate-800">Outros</span>
+  </label>
 
-    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
-      <input type="checkbox" class="h-5 w-5" value="IFNMG" data-group="if_cefet">
-      <span class="font-semibold text-slate-800">IFNMG</span>
-    </label>
+</div>
 
-    <label class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition">
-      <input type="checkbox" class="h-5 w-5" value="CEFET" data-group="if_cefet">
-      <span class="font-semibold text-slate-800">CEFET</span>
-    </label>
   </div>
 
   <!-- botões -->
