@@ -224,6 +224,11 @@
         }
       } catch(e) { console.warn('Erro Analytics:', e); }
 
+        // 🔥 CHAMADA DA CONVERSIONS API (SERVIDOR)
+  fetch('/api/meta', {
+    method: 'POST'
+  });
+
       // Redirecionamento após curto delay
       setTimeout(function () {
         window.open(url, '_blank');
