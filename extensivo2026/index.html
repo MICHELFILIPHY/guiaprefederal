@@ -92,6 +92,11 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1751512082238465');
     fbq('track', 'PageView');
+	fbq('init', '1751512082238465', {
+  em: 'email@email.com',   // Values will be hashed automatically by the pixel using SHA-256
+  ph: '1234567890',
+  ...
+});
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
