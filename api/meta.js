@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   }
 
   const pixelId = '1277565054245508'; // seu Pixel
-  const accessToken = 'SEU_TOKEN_AQUI';
+  const accessToken = process.env.META_ACCESS_TOKEN;
 
   const eventData = {
     data: [
