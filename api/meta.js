@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   }
 
   const pixelId = '1277565054245508'; // seu Pixel
-  const accessToken = 'EAAJdWpadBYwBQyQ532ljy0eV6pkHd6DGn7famAmj9q1XZBZBtLPXtYZBjY9TxJsgeeZBOhX8Lg2ZA6CKAjfAsg3ZANQx0G4EUPgBvqttsBdBAYSB8CWT8OyoZC86X0JyYHnW3hF8YcubWPkJ6kp3UrnJGtzvhlQA8MswVGC1xYRToZCXAXjXfjT6wmYCGj6o4QZDZD';
+  const accessToken = 'SEU_TOKEN_AQUI';
 
   const eventData = {
     data: [
