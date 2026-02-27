@@ -101,7 +101,7 @@
       <div class="mb-10">
         <a href="https://chat.whatsapp.com/KQeH0PXcNk60hn6lMAXtKK" 
            target="_blank"
-           onclick="return trackLeadAndGo(event, this.href)"
+          onclick="trackWhatsAppLead('hero_cta')"
            class="btn-pulse bg-[#25D366] text-white font-black py-4 px-10 rounded-full shadow-2xl hover:bg-green-600 transition duration-300 transform inline-flex items-center justify-center text-lg uppercase border-2 border-white/20">
           <i class="fab fa-whatsapp mr-3 text-2xl"></i>
           Quero entrar no Grupo VIP agora!
@@ -178,7 +178,7 @@
           
           <a href="https://chat.whatsapp.com/KQeH0PXcNk60hn6lMAXtKK" 
              target="_blank"
-             onclick="return trackLeadAndGo(event, this.href)"
+             onclick="trackWhatsAppLead('final_cta')"
              class="btn-pulse w-full md:w-auto bg-[#25D366] text-white font-black py-5 px-12 rounded-full shadow-2xl hover:bg-green-600 transition duration-300 transform inline-flex items-center justify-center text-xl uppercase">
             <i class="fab fa-whatsapp mr-3 text-3xl"></i>
             Entrar no Grupo VIP
@@ -201,40 +201,30 @@
   </footer>
 
   <script>
-    function trackLeadAndGo(event, url) {
-      // Prevenir comportamento padrão para processar rastreio
-      event.preventDefault();
+    function trackWhatsAppLead(source) {
+      const url = 'https://chat.whatsapp.com/KQeH0PXcNk60hn6lMAXtKK';
+      const eventSource = source || 'whatsapp_cta';
 
-      // Disparar Lead no Meta Pixel (ID Novo: 1277565054245508)
+      // Disparar clique no WhatsApp no Meta Pixel
       try {
         if (typeof fbq === 'function') {
-          fbq('track', 'Lead', {
-            content_name: 'Semana Gratuita WhatsApp Group'
+          fbq('trackCustom', 'WhatsAppClick', {
+            source: eventSource,
+            destination: url
           });
         }
       } catch(e) { console.warn('Erro Pixel:', e); }
 
-      // Disparar Lead no Google Analytics
+      // Disparar clique no WhatsApp no Google Analytics
       try {
         if (typeof gtag === 'function') {
-          gtag('event', 'generate_lead', {
-            'event_category': 'WhatsApp',
-            'event_label': 'Conversão Grupo VIP'
+          gtag('event', 'click_whatsapp', {
+            event_category: 'whatsapp',
+            event_label: eventSource,
+            link_url: url
           });
         }
       } catch(e) { console.warn('Erro Analytics:', e); }
-
-        // 🔥 CHAMADA DA CONVERSIONS API (SERVIDOR)
-  fetch('/api/meta', {
-    method: 'POST'
-  });
-
-      // Redirecionamento após curto delay
-      setTimeout(function () {
-        window.open(url, '_blank');
-      }, 300);
-
-      return false;
     }
   </script>
 
