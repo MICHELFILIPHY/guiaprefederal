@@ -1,242 +1,367 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RTR3DF7GK"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-2RTR3DF7GK');
-  </script>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-2RTR3DF7GK"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-2RTR3DF7GK");
+    </script>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Semana Gratuita - Guia Pré-Federal</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semana Gratuita - Guia Pré-Federal</title>
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts - Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
 
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f8fafc;
-      color: #1e293b;
-    }
-    .hero-gradient {
-      background-image: linear-gradient(to bottom right, #5242ea, #6408b0);
-    }
-    .btn-pulse {
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-      70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-    }
-    .section-divider {
-      height: 4px;
-      width: 60px;
-      background-color: #5242ea;
-      margin: 1.5rem auto;
-      border-radius: 99px;
-    }
-  </style>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8fafc;
+        color: #1e293b;
+      }
+      .hero-gradient {
+        background-image: linear-gradient(to bottom right, #5242ea, #6408b0);
+      }
+      .btn-pulse {
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        }
+        70% {
+          transform: scale(1.05);
+          box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+      }
+      .section-divider {
+        height: 4px;
+        width: 60px;
+        background-color: #5242ea;
+        margin: 1.5rem auto;
+        border-radius: 99px;
+      }
+    </style>
 
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1277565054245508');
-  fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1277565054245508&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Meta Pixel Code -->
-</head>
+    <!-- Meta Pixel Code -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+      fbq("init", "1277565054245508");
+      fbq("track", "PageView");
+    </script>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=1277565054245508&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+  </head>
 
-<body class="antialiased">
+  <body class="antialiased">
+    <!-- Header / Hero -->
+    <header
+      class="hero-gradient py-12 md:py-20 text-white relative overflow-hidden text-center"
+    >
+      <div class="container mx-auto px-4 relative z-10">
+        <!-- Logo -->
+        <img
+          src="https://guiaprefederal.com.br/extensivo2026/logo1.png"
+          alt="Logo Guia Pré-Federal"
+          class="w-24 h-24 mx-auto rounded-full shadow-2xl border-4 border-white/20 mb-6"
+          style="background-color: #dd5737"
+        />
 
-  <!-- Header / Hero -->
-  <header class="hero-gradient py-12 md:py-20 text-white relative overflow-hidden text-center">
-    <div class="container mx-auto px-4 relative z-10">
-      
-      <!-- Logo -->
-      <img src="https://guiaprefederal.com.br/extensivo2026/logo1.png" alt="Logo Guia Pré-Federal" 
-           class="w-24 h-24 mx-auto rounded-full shadow-2xl border-4 border-white/20 mb-6" style="background-color: #dd5737;">
-      
-      <!-- Título Principal (Sem Itálico) -->
-      <h1 class="text-4xl md:text-7xl font-black mb-4 tracking-tighter text-[#c7ef59] uppercase">
-        Semana Gratuita
-      </h1>
-      
-      <!-- Frase de Impacto -->
-      <h2 class="text-2xl md:text-4xl font-extrabold mb-6 leading-tight uppercase max-w-4xl mx-auto">
-        Sua Aprovação em uma Escola Federal Começa Aqui
-      </h2>
+        <!-- Título Principal (Sem Itálico) -->
+        <h1
+          class="text-4xl md:text-7xl font-black mb-4 tracking-tighter text-[#c7ef59] uppercase"
+        >
+          Semana Gratuita
+        </h1>
 
-      <!-- Escolas de Foco -->
-      <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-10">
-        <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 text-xs md:text-sm font-bold tracking-widest uppercase">CAP-COLUNI</span>
-        <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 text-xs md:text-sm font-bold tracking-widest uppercase">IFs</span>
-        <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 text-xs md:text-sm font-bold tracking-widest uppercase">CEFETs</span>
-        <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 text-xs md:text-sm font-bold tracking-widest uppercase">COLTEC</span>
-        <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 text-xs md:text-sm font-bold tracking-widest uppercase">CEDAF</span>
-      </div>
+        <!-- Frase de Impacto -->
+        <h2
+          class="text-2xl md:text-4xl font-extrabold mb-6 leading-tight uppercase max-w-4xl mx-auto"
+        >
+          Sua Aprovação em uma Escola Federal Começa Aqui
+        </h2>
 
-      <!-- CTA Button Topo -->
-      <div class="mb-10">
-        <a href="https://chat.whatsapp.com/KQeH0PXcNk60hn6lMAXtKK" 
-           target="_blank"
-           onclick="return trackLeadAndGo(event, this.href)"
-           class="btn-pulse bg-[#25D366] text-white font-black py-4 px-10 rounded-full shadow-2xl hover:bg-green-600 transition duration-300 transform inline-flex items-center justify-center text-lg uppercase border-2 border-white/20">
-          <i class="fab fa-whatsapp mr-3 text-2xl"></i>
-          Quero entrar no Grupo VIP agora!
-        </a>
-      </div>
-
-      <!-- Informações Rápidas -->
-      <div class="flex flex-col md:flex-row justify-center items-center gap-4 text-sm font-semibold uppercase tracking-wide">
-        <span class="bg-[#dd5737] text-white px-6 py-3 rounded-lg shadow-lg">📅 02/03 a 09/03</span>
-        <span class="bg-white text-slate-900 px-6 py-3 rounded-lg shadow-lg">📍 Online & Gratuito</span>
-      </div>
-    </div>
-  </header>
-
-  <main class="py-12 md:py-20">
-    <div class="container mx-auto px-4">
-      
-      <!-- Section: What is Guia -->
-      <section class="max-w-4xl mx-auto text-center mb-20">
-        <h2 class="text-3xl font-extrabold text-slate-900 mb-4 uppercase">O que é o Guia Pré-Federal?</h2>
-        <div class="section-divider"></div>
-        <p class="text-xl text-slate-600 leading-relaxed">
-          Somos o curso preparatório que mais cresce no Brasil, focado exclusivamente em colocar alunos dentro das melhores instituições federais do país. Com <strong>mais de 120 aprovados somente em 2026</strong>, nosso método não foca apenas em despejar conteúdo, mas em ensinar a <strong>estratégia real de prova</strong> e garantir o acompanhamento que o aluno precisa do início até a lista de aprovados.
-        </p>
-      </section>
-
-      <!-- Section: The Proposal -->
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto mb-20">
-        <div class="bg-white p-8 rounded-3xl shadow-xl border-l-8 border-[#5242ea]">
-          <h3 class="text-2xl font-extrabold text-[#5242ea] mb-6 uppercase tracking-tight">Qual o objetivo desta semana?</h3>
-          <ul class="space-y-6">
-            <li class="flex items-start">
-              <div class="bg-[#5242ea]/10 p-2 rounded-lg mr-4 text-[#5242ea]">
-                <i class="fas fa-play-circle text-2xl"></i>
-              </div>
-              <p class="text-slate-700 leading-snug"><strong>Acesso à primeira semana oficial:</strong> Você vai assistir exatamente às mesmas aulas que nossos alunos matriculados estarão assistindo no início do curso.</p>
-            </li>
-            <li class="flex items-start">
-              <div class="bg-[#5242ea]/10 p-2 rounded-lg mr-4 text-[#5242ea]">
-                <i class="fas fa-users text-2xl"></i>
-              </div>
-              <p class="text-slate-700 leading-snug"><strong>Conheça a Metodologia:</strong> Tenha o seu <strong>pontapé inicial</strong> conhecendo a didática do Professor Michel e da equipe, sentindo como é ser um aluno do Guia.</p>
-            </li>
-            <li class="flex items-start">
-              <div class="bg-[#5242ea]/10 p-2 rounded-lg mr-4 text-[#5242ea]">
-                <i class="fas fa-rocket text-2xl"></i>
-              </div>
-              <p class="text-slate-700 leading-snug"><strong>Filtro de Qualidade:</strong> Queremos alunos comprometidos. Esta semana serve para você entender o nível de exigência das federais e se preparar com o melhor suporte.</p>
-            </li>
-          </ul>
+        <!-- Escolas de Foco -->
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-10">
+          <span
+            class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 text-xs md:text-sm font-bold tracking-widest uppercase"
+            >CAP-COLUNI</span
+          >
+          <span
+            class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 text-xs md:text-sm font-bold tracking-widest uppercase"
+            >IFs</span
+          >
+          <span
+            class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 text-xs md:text-sm font-bold tracking-widest uppercase"
+            >CEFETs</span
+          >
+          <span
+            class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 text-xs md:text-sm font-bold tracking-widest uppercase"
+            >COLTEC</span
+          >
+          <span
+            class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 text-xs md:text-sm font-bold tracking-widest uppercase"
+            >CEDAF</span
+          >
         </div>
-        <div class="text-center md:text-left space-y-6">
-          <h3 class="text-3xl font-extrabold text-slate-900 leading-tight uppercase">
-            Não é uma aula de dicas. <br>É o começo da sua jornada.
-          </h3>
-          <p class="text-lg text-slate-600">
-            A proposta da Semana Gratuita é que você já comece a assistir essa primeira semana de aulas para ter um pontapé inicial e para conhecer o nosso curso e nossos professores por dentro. É a oportunidade perfeita para você ter clareza sobre o caminho para a sua aprovação.
-          </p>
-          <div class="p-6 bg-slate-100 rounded-2xl border border-slate-200 italic text-slate-700 font-medium">
-            "Aproveite esta semana para organizar sua rotina e descobrir como é possível ser aprovado com o método certo."
-          </div>
-        </div>
-      </section>
 
-      <!-- CTA Card Final -->
-      <section class="max-w-3xl mx-auto" id="join">
-        <div class="bg-slate-900 rounded-[2.5rem] p-8 md:p-16 text-center text-white shadow-2xl relative overflow-hidden">
-          <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#5242ea] rounded-full blur-3xl opacity-20"></div>
-          
-          <h2 class="text-3xl md:text-4xl font-extrabold mb-6 uppercase tracking-tighter text-[#c7ef59]">Garanta seu Acesso Gratuito</h2>
-          <p class="text-slate-300 text-lg mb-10 leading-relaxed">
-            As instruções, os horários das aulas e o acesso aos materiais serão enviados exclusivamente através do nosso <strong>Grupo VIP de WhatsApp</strong>.
-          </p>
-          
-          <a href="https://chat.whatsapp.com/KQeH0PXcNk60hn6lMAXtKK" 
-             target="_blank"
-             onclick="return trackLeadAndGo(event, this.href)"
-             class="btn-pulse w-full md:w-auto bg-[#25D366] text-white font-black py-5 px-12 rounded-full shadow-2xl hover:bg-green-600 transition duration-300 transform inline-flex items-center justify-center text-xl uppercase">
-            <i class="fab fa-whatsapp mr-3 text-3xl"></i>
-            Entrar no Grupo VIP
+        <!-- CTA Button Topo -->
+        <div class="mb-10">
+          <a
+            href="https://chat.whatsapp.com/KQeH0PXcNk60hn6lMAXtKK"
+            target="_blank"
+            onclick="trackWhatsAppLead('hero_cta')"
+            class="btn-pulse bg-[#25D366] text-white font-black py-4 px-10 rounded-full shadow-2xl hover:bg-green-600 transition duration-300 transform inline-flex items-center justify-center text-lg uppercase border-2 border-white/20"
+          >
+            <i class="fab fa-whatsapp mr-3 text-2xl"></i>
+            Quero entrar no Grupo VIP agora!
           </a>
-
-          <p class="mt-8 text-xs text-slate-400 uppercase tracking-widest font-bold">
-            Junte-se a mais de 120 alunos aprovados em 2026!
-          </p>
         </div>
-      </section>
 
-    </div>
-  </main>
+        <!-- Informações Rápidas -->
+        <div
+          class="flex flex-col md:flex-row justify-center items-center gap-4 text-sm font-semibold uppercase tracking-wide"
+        >
+          <span class="bg-[#dd5737] text-white px-6 py-3 rounded-lg shadow-lg"
+            >📅 02/03 a 09/03</span
+          >
+          <span class="bg-white text-slate-900 px-6 py-3 rounded-lg shadow-lg"
+            >📍 Online & Gratuito</span
+          >
+        </div>
+      </div>
+    </header>
 
-  <footer class="py-12 bg-white text-center text-slate-400 text-sm">
-    <div class="container mx-auto px-4 border-t border-slate-100 pt-8 flex flex-col items-center">
-      <img src="https://guiaprefederal.com.br/extensivo2026/logo1.png" alt="Logo Guia" class="h-10 opacity-50 mb-4">
-      <p>&copy; 2026 Guia Pré-Federal. Todos os direitos reservados.</p>
-    </div>
-  </footer>
+    <main class="py-12 md:py-20">
+      <div class="container mx-auto px-4">
+        <!-- Section: What is Guia -->
+        <section class="max-w-4xl mx-auto text-center mb-20">
+          <h2 class="text-3xl font-extrabold text-slate-900 mb-4 uppercase">
+            O que é o Guia Pré-Federal?
+          </h2>
+          <div class="section-divider"></div>
+          <p class="text-xl text-slate-600 leading-relaxed">
+            Somos o curso preparatório que mais cresce no Brasil, focado
+            exclusivamente em colocar alunos dentro das melhores instituições
+            federais do país. Com
+            <strong>mais de 120 aprovados somente em 2026</strong>, nosso método
+            não foca apenas em despejar conteúdo, mas em ensinar a
+            <strong>estratégia real de prova</strong> e garantir o
+            acompanhamento que o aluno precisa do início até a lista de
+            aprovados.
+          </p>
+        </section>
 
-  <script>
-    function trackLeadAndGo(event, url) {
-      // Prevenir comportamento padrão para processar rastreio
-      event.preventDefault();
+        <!-- Section: The Proposal -->
+        <section
+          class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto mb-20"
+        >
+          <div
+            class="bg-white p-8 rounded-3xl shadow-xl border-l-8 border-[#5242ea]"
+          >
+            <h3
+              class="text-2xl font-extrabold text-[#5242ea] mb-6 uppercase tracking-tight"
+            >
+              Qual o objetivo desta semana?
+            </h3>
+            <ul class="space-y-6">
+              <li class="flex items-start">
+                <div class="bg-[#5242ea]/10 p-2 rounded-lg mr-4 text-[#5242ea]">
+                  <i class="fas fa-play-circle text-2xl"></i>
+                </div>
+                <p class="text-slate-700 leading-snug">
+                  <strong>Acesso à primeira semana oficial:</strong> Você vai
+                  assistir exatamente às mesmas aulas que nossos alunos
+                  matriculados estarão assistindo no início do curso.
+                </p>
+              </li>
+              <li class="flex items-start">
+                <div class="bg-[#5242ea]/10 p-2 rounded-lg mr-4 text-[#5242ea]">
+                  <i class="fas fa-users text-2xl"></i>
+                </div>
+                <p class="text-slate-700 leading-snug">
+                  <strong>Conheça a Metodologia:</strong> Tenha o seu
+                  <strong>pontapé inicial</strong> conhecendo a didática do
+                  Professor Michel e da equipe, sentindo como é ser um aluno do
+                  Guia.
+                </p>
+              </li>
+              <li class="flex items-start">
+                <div class="bg-[#5242ea]/10 p-2 rounded-lg mr-4 text-[#5242ea]">
+                  <i class="fas fa-rocket text-2xl"></i>
+                </div>
+                <p class="text-slate-700 leading-snug">
+                  <strong>Filtro de Qualidade:</strong> Queremos alunos
+                  comprometidos. Esta semana serve para você entender o nível de
+                  exigência das federais e se preparar com o melhor suporte.
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="text-center md:text-left space-y-6">
+            <h3
+              class="text-3xl font-extrabold text-slate-900 leading-tight uppercase"
+            >
+              Não é uma aula de dicas. <br />É o começo da sua jornada.
+            </h3>
+            <p class="text-lg text-slate-600">
+              A proposta da Semana Gratuita é que você já comece a assistir essa
+              primeira semana de aulas para ter um pontapé inicial e para
+              conhecer o nosso curso e nossos professores por dentro. É a
+              oportunidade perfeita para você ter clareza sobre o caminho para a
+              sua aprovação.
+            </p>
+            <div
+              class="p-6 bg-slate-100 rounded-2xl border border-slate-200 italic text-slate-700 font-medium"
+            >
+              "Aproveite esta semana para organizar sua rotina e descobrir como
+              é possível ser aprovado com o método certo."
+            </div>
+          </div>
+        </section>
 
-      // Disparar Lead no Meta Pixel (ID Novo: 1277565054245508)
-      try {
-        if (typeof fbq === 'function') {
-          fbq('track', 'Lead', {
-            content_name: 'Semana Gratuita WhatsApp Group'
-          });
+        <!-- CTA Card Final -->
+        <section class="max-w-3xl mx-auto" id="join">
+          <div
+            class="bg-slate-900 rounded-[2.5rem] p-8 md:p-16 text-center text-white shadow-2xl relative overflow-hidden"
+          >
+            <div
+              class="absolute -top-10 -right-10 w-40 h-40 bg-[#5242ea] rounded-full blur-3xl opacity-20"
+            ></div>
+
+            <h2
+              class="text-3xl md:text-4xl font-extrabold mb-6 uppercase tracking-tighter text-[#c7ef59]"
+            >
+              Garanta seu Acesso Gratuito
+            </h2>
+            <p class="text-slate-300 text-lg mb-10 leading-relaxed">
+              As instruções, os horários das aulas e o acesso aos materiais
+              serão enviados exclusivamente através do nosso
+              <strong>Grupo VIP de WhatsApp</strong>.
+            </p>
+
+            <a
+              href="https://chat.whatsapp.com/KQeH0PXcNk60hn6lMAXtKK"
+              target="_blank"
+              onclick="trackWhatsAppLead('final_cta')"
+              class="btn-pulse w-full md:w-auto bg-[#25D366] text-white font-black py-5 px-12 rounded-full shadow-2xl hover:bg-green-600 transition duration-300 transform inline-flex items-center justify-center text-xl uppercase"
+            >
+              <i class="fab fa-whatsapp mr-3 text-3xl"></i>
+              Entrar no Grupo VIP
+            </a>
+
+            <p
+              class="mt-8 text-xs text-slate-400 uppercase tracking-widest font-bold"
+            >
+              Junte-se a mais de 120 alunos aprovados em 2026!
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="py-12 bg-white text-center text-slate-400 text-sm">
+      <div
+        class="container mx-auto px-4 border-t border-slate-100 pt-8 flex flex-col items-center"
+      >
+        <img
+          src="https://guiaprefederal.com.br/extensivo2026/logo1.png"
+          alt="Logo Guia"
+          class="h-10 opacity-50 mb-4"
+        />
+        <p>&copy; 2026 Guia Pré-Federal. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <script>
+      function trackWhatsAppLead(source) {
+        const url = "https://chat.whatsapp.com/KQeH0PXcNk60hn6lMAXtKK";
+        const eventSource = source || "whatsapp_cta";
+
+        // Disparar clique no WhatsApp no Meta Pixel
+        try {
+          if (typeof fbq === "function") {
+            fbq("track", "Lead", {
+              content_name: eventSource,
+              content_category: "whatsapp",
+              destination: url,
+            });
+            fbq("trackCustom", "WhatsAppClick", {
+              source: eventSource,
+              destination: url,
+            });
+          }
+        } catch (e) {
+          console.warn("Erro Pixel:", e);
         }
-      } catch(e) { console.warn('Erro Pixel:', e); }
 
-      // Disparar Lead no Google Analytics
-      try {
-        if (typeof gtag === 'function') {
-          gtag('event', 'generate_lead', {
-            'event_category': 'WhatsApp',
-            'event_label': 'Conversão Grupo VIP'
-          });
+        // Disparar clique no WhatsApp no Google Analytics
+        try {
+          if (typeof gtag === "function") {
+            gtag("event", "click_whatsapp", {
+              event_category: "whatsapp",
+              event_label: eventSource,
+              link_url: url,
+            });
+          }
+        } catch (e) {
+          console.warn("Erro Analytics:", e);
         }
-      } catch(e) { console.warn('Erro Analytics:', e); }
-
-        // 🔥 CHAMADA DA CONVERSIONS API (SERVIDOR)
-  fetch('/api/meta', {
-    method: 'POST'
-  });
-
-      // Redirecionamento após curto delay
-      setTimeout(function () {
-        window.open(url, '_blank');
-      }, 300);
-
-      return false;
-    }
-  </script>
-
-</body>
+      }
+    </script>
+  </body>
 </html>
