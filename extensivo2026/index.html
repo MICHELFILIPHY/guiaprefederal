@@ -92,21 +92,17 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1751512082238465');
     fbq('track', 'PageView');
-	fbq('init', '1751512082238465', {
-  em: 'email@email.com',   // Values will be hashed automatically by the pixel using SHA-256
-  ph: '1234567890',
-  ...
-});
   </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1751512082238465&ev=PageView&noscript=1"
-    />
-  </noscript>
   <!-- End Meta Pixel Code -->
 </head>
 
 <body class="antialiased">
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1751512082238465&ev=PageView&noscript=1"
+      alt=""
+    />
+  </noscript>
 
   <!-- Video Hero Section -->
   <section class="bg-slate-900 pt-12 md:pt-16 pb-12">
@@ -145,7 +141,7 @@
 		</iframe>
       </div>
 
-      <a href="#" onclick="return trackLeadAndGo('https://wa.me/message/CNC5OQFPKLE7K1')"
+      <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" rel="noopener noreferrer" onclick="trackWhatsAppLead('hero_cta')"
         class="mt-12 bg-[#c7ef59] text-slate-900 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105 inline-block text-lg">
         Quero Garantir Minha Vaga!
       </a>
@@ -259,7 +255,7 @@
       </div>
 
       <div class="text-center mt-8">
-        <a href="#" onclick="return trackLeadAndGo('https://wa.me/message/CNC5OQFPKLE7K1')"
+        <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" rel="noopener noreferrer" onclick="trackWhatsAppLead('depoimentos_cta')"
           class="bg-[#c7ef59] text-slate-900 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105 inline-block text-lg">
           Quero aumentar minhas chances de aprovação!
         </a>
@@ -537,7 +533,7 @@
     <p class="text-slate-600 mb-4 max-w-xl">
       Ficou em dúvida? Fala com a equipe no WhatsApp e a gente te orienta rapidinho.
     </p>
-    <a href="#" onclick="return trackLeadAndGo('https://wa.me/message/CNC5OQFPKLE7K1')"
+    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" rel="noopener noreferrer" onclick="trackWhatsAppLead('duvidas_cta')"
       class="bg-[#c7ef59] text-slate-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 inline-flex items-center justify-center">
       Falar com a equipe
     </a>
@@ -593,7 +589,7 @@
       </div>
 
       <!-- CTA -->
-      <a href="#" onclick="return trackLeadAndGo('https://wa.me/message/CNC5OQFPKLE7K1')"
+      <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" rel="noopener noreferrer" onclick="trackWhatsAppLead('investimento_cta')"
         class="bg-[#c7ef59] text-slate-900 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 block w-full">
         Garantir minha vaga no Extensivo 2026
       </a>
@@ -623,7 +619,7 @@
   </footer>
 
   <!-- Botão Flutuante -->
-  <a href="#" onclick="return trackLeadAndGo('https://wa.me/message/CNC5OQFPKLE7K1')"
+  <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" rel="noopener noreferrer" onclick="trackWhatsAppLead('botao_flutuante')"
     class="fixed bottom-6 right-6 bg-[#25D366] text-white font-bold py-4 px-5 rounded-full shadow-lg hover:bg-green-600 transition duration-300 transform hover:scale-105 z-50 flex items-center">
     <i class="fab fa-whatsapp text-2xl"></i>
     <span class="ml-3 hidden sm:inline">Quero garantir minha vaga!</span>
@@ -666,20 +662,38 @@
   </script>
 
   <script>
-    function trackLeadAndGo(url) {
-      try { fbq('track', 'Lead'); } catch(e) {}
+    function trackWhatsAppLead(source) {
+      const url = 'https://wa.me/message/CNC5OQFPKLE7K1';
+      const eventSource = source || 'whatsapp_cta';
 
-      // Se você NÃO usa Google Ads, pode remover esse bloco sem medo.
       try {
-        // gtag('event', 'conversion', {'send_to': 'AW-CONVERSION_ID/LABEL'});
-        gtag('event', 'generate_lead');
-      } catch(e) {}
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', {
+            content_name: eventSource,
+            content_category: 'whatsapp',
+            destination: url
+          });
+          fbq('trackCustom', 'WhatsAppClick', {
+            source: eventSource,
+            destination: url
+          });
+        }
+      } catch (e) {}
 
-      setTimeout(function () {
-        window.open(url, '_blank');
-      }, 250);
-
-      return false;
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', {
+            event_category: 'whatsapp',
+            event_label: eventSource,
+            link_url: url
+          });
+          gtag('event', 'click_whatsapp', {
+            event_category: 'whatsapp',
+            event_label: eventSource,
+            link_url: url
+          });
+        }
+      } catch (e) {}
     }
   </script>
 
