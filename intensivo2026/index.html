@@ -12,7 +12,7 @@
   </script>
 
   <meta charset="UTF-8">
-  <base href="/intensivo2026/">
+  <base href="/extensivo2026/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Intensivo 2026 Guia - Pré Federal</title>
 
@@ -34,3 +34,797 @@
       font-family: 'Inter', sans-serif;
       background-color: #f8fafc;
       color: #1e293b;
+      overflow-x: hidden;
+    }
+    .hero-gradient {
+      background-image: linear-gradient(to right, #5242ea, #6408b0);
+    }
+    .section-title {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 8px;
+      margin-bottom: 2rem;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      width: 50px;
+      height: 4px;
+      background-color: #5242ea;
+      border-radius: 9999px;
+    }
+
+    /* Swiper */
+    .swiper {
+      width: 100%;
+      padding-top: 20px;
+      padding-bottom: 50px;
+    }
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 280px;
+      height: auto;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+    }
+    .swiper-button-next, .swiper-button-prev { color: #5242ea; }
+    .swiper-pagination-bullet-active { background: #5242ea; }
+  </style>
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1751512082238465');
+    fbq('track', 'PageView');
+  </script>
+  <!-- End Meta Pixel Code -->
+</head>
+
+<body class="antialiased">
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1751512082238465&ev=PageView&noscript=1"
+      alt=""
+    />
+  </noscript>
+
+  <!-- Video Hero Section -->
+  <section class="bg-slate-900 pt-12 md:pt-16 pb-12">
+    <div class="container mx-auto px-4 text-center text-white">
+      <!-- Imagem Logo 1 -->
+      <img src="/intensivo2026/logo1.png" alt="Logo Guia Pré-Federal"
+        class="w-24 h-24 mx-auto mb-6 rounded-full shadow-lg" style="background-color: #dd5737;">
+
+      <div class="mb-4 inline-block bg-[#5242ea] px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide text-white">
+        Turma Intensivo 2026
+      </div>
+
+      <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-4 uppercase">
+        Seja aprovado com o melhor Pré-Federal do país
+      </h1>
+
+     <p class="text-lg md:text-xl text-slate-300 mb-6 max-w-4xl mx-auto">
+ 	 Preparação completa para <span class="text-[#c7ef59] font-bold">CAP-COLUNI, IFs, CEFETs,  e CEDAF</span>,
+ 	 com acompanhamento real do aluno do início até a aprovação.
+	</p>
+
+	<p class="text-sm md:text-base text-slate-400 mb-8">
+	  Mais de <span class="font-bold text-white">130 aprovados em 2026</span>. Método, estratégia e constância.
+	</p>
+
+      <!-- Video Player -->
+      <div class="w-full mx-auto aspect-video rounded-xl shadow-2xl overflow-hidden border-4 border-white/20">
+     	<iframe
+ 		 id="heroVideo"
+		  class="w-full h-full"
+		  src="https://www.youtube.com/embed/wKfMo-IUlbs?enablejsapi=1&mute=1&loop=1&playlist=wKfMo-IUlbs&playsinline=1&rel=0"
+ 		 title="YouTube video player"
+		  frameborder="0"
+		  allow="autoplay; encrypted-media"
+		  allowfullscreen>
+		</iframe>
+      </div>
+
+      <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" rel="noopener noreferrer" onclick="trackWhatsAppLead('hero_cta')"
+        class="mt-12 bg-[#c7ef59] text-slate-900 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105 inline-block text-lg">
+        Quero Garantir Minha Vaga!
+      </a>
+    </div>
+  </section>
+
+  <!-- Target Schools Badge Section -->
+  <section class="bg-[#5242ea] py-6 overflow-hidden">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-white font-bold text-sm md:text-lg opacity-90">
+        <span class="flex items-center"><i class="fas fa-check mr-2"></i> CAP-COLUNI</span>
+        <span class="flex items-center"><i class="fas fa-check mr-2"></i> IFMG / IF sudeste / IFNMG / IFES / IFF / IF sul de Minas / IFTM / IFRJ / IFBA</span>
+        <span class="flex items-center"><i class="fas fa-check mr-2"></i> CEFETs</span>
+        <span class="flex items-center"><i class="fas fa-check mr-2"></i> COLTEC</span>
+        <span class="flex items-center"><i class="fas fa-check mr-2"></i> CEDAF</span>
+      </div>
+    </div>
+  </section>
+
+<!-- Seção Institucional - Texto Enumerado -->
+<section class="py-16 md:py-20 bg-white">
+  <div class="container mx-auto px-4">
+
+    <div class="max-w-4xl mx-auto">
+
+      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 text-center mb-12">
+        Por que tantos alunos confiam no Guia Pré-Federal?
+      </h2>
+
+      <div class="space-y-8 text-slate-700 text-lg leading-relaxed border-l-4 border-[#5242ea] pl-6">
+
+        <p class="reveal">
+          <span class="font-extrabold text-[#5242ea]">1.</span>
+          Em <span class="font-bold">2026</span>, o Guia Pré-Federal ultrapassou a marca de
+          <span class="font-bold">130 alunos aprovados</span>, com destaque para
+          <span class="font-bold">52 aprovações no IFMG, 13 NO COLUNI</span> e resultados consistentes no
+          COLUNI, IFs, CEFET, COLTEC e CEDAF.
+        </p>
+
+        <p class="reveal">
+          <span class="font-extrabold text-[#5242ea]">2.</span>
+          Aqui, aprovação não é sorte.
+          É <span class="font-bold">método</span>, <span class="font-bold">estratégia</span> e
+          <span class="font-bold">acompanhamento real</span> do aluno durante todo o ano letivo.
+        </p>
+
+        <p class="reveal">
+          <span class="font-extrabold text-[#5242ea]">3.</span>
+          As turmas são <span class="font-bold">limitadas de propósito</span>.
+          Isso permite acompanhamento próximo, monitorias ativas e mentorias que realmente fazem diferença.
+        </p>
+
+        <p class="reveal">
+          <span class="font-extrabold text-[#5242ea]">4.</span>
+          O curso é coordenado por
+          <span class="font-bold">Michel Filiphy</span>, com uma equipe de professores
+          experientes em provas de escolas federais, focados exatamente no que cai.
+        </p>
+
+        <p class="reveal">
+          <span class="font-extrabold text-[#5242ea]">5.</span>
+          Se preparar com o Guia Pré-Federal é investir em
+          <span class="font-bold">oportunidades que mudam trajetórias</span>,
+          indo muito além de apenas passar em uma prova.
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+	
+  <!-- Aprovados Section -->
+  <section class="py-16 md:py-24 bg-slate-50">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800">O SEU FUTURO COMEÇA AQUI!</h2>
+      <p class="text-5xl md:text-7xl font-extrabold text-[#5242ea] my-4">APROVAMOS MAIS DE 130 ALUNOS ATÉ O MOMENTO</p>
+      <p class="text-2xl md:text-3xl font-bold text-slate-600 mb-10">em 2026!</p>
+		<p class="text-slate-600 max-w-3xl mx-auto mb-6">
+  Cada rosto abaixo representa uma história transformada por uma oportunidade real
+  em uma escola federal.
+	</p>
+      <div class="max-w-5xl mx-auto rounded-xl shadow-2xl overflow-hidden">
+        <img src="/extensivo2026/aprovados.webp" alt="Mosaico com fotos de alunos aprovados no Guia Pré-Federal" class="w-full h-auto">
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos Carousel -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-4 overflow-hidden">
+      <h2 class="text-3xl font-bold text-center mb-12 section-title mx-auto">Nossos Aprovados Falam Por Nós</h2>
+
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="/extensivo2026/depoimento1.png" alt="Depoimento 1"></div>
+          <div class="swiper-slide"><img src="/extensivo2026/depoimento2.png" alt="Depoimento 2"></div>
+          <div class="swiper-slide"><img src="/extensivo2026/depoimento3.png" alt="Depoimento 3"></div>
+          <div class="swiper-slide"><img src="/extensivo2026/depoimento4.png" alt="Depoimento 4"></div>
+          <div class="swiper-slide"><img src="/extensivo2026/depoimento5.png" alt="Depoimento 5"></div>
+          <div class="swiper-slide"><img src="/extensivo2026/depoimento6.png" alt="Depoimento 6"></div>
+          <div class="swiper-slide"><img src="/extensivo2026/depoimento7.png" alt="Depoimento 7"></div>
+          <div class="swiper-slide"><img src="/extensivo2026/depoimento8.png" alt="Depoimento 8"></div>
+          <div class="swiper-slide"><img src="/extensivo2026/depoimento9.png" alt="Depoimento 9"></div>
+          <div class="swiper-slide"><img src="/extensivo2026/depoimento10.png" alt="Depoimento 10"></div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" rel="noopener noreferrer" onclick="trackWhatsAppLead('depoimentos_cta')"
+          class="bg-[#c7ef59] text-slate-900 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105 inline-block text-lg">
+          Quero aumentar minhas chances de aprovação!
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Motivational Section 1 -->
+  <section class="bg-[#00abb1] text-white py-12">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-2xl md:text-3xl font-bold max-w-3xl mx-auto">
+        "Você está prestes a começar uma jornada completa e nós estamos prontos para te acompanhar de verdade o ano todo."
+      </p>
+    </div>
+  </section>
+
+  <!-- Estrutura do Curso -->
+  <section id="estrutura" class="py-16 md:py-24 bg-slate-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12 section-title mx-auto">Um Curso Intensivo Feito Para Você</h2>
+
+      <div class="max-w-6xl mx-auto mb-16">
+        <div class="bg-white p-8 rounded-2xl shadow-xl border-l-8 border-[#5242ea]">
+          <h3 class="text-2xl font-bold mb-6 text-center md:text-left text-slate-800">O Que Oferecemos?</h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+            <div class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3 text-xl"></i><span class="text-slate-700 font-medium">Aulas de TODOS os conteúdos</span></div>
+            <div class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3 text-xl"></i><span class="text-slate-700 font-medium">Monitoras de matérias específicas</span></div>
+            <div class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3 text-xl"></i><span class="text-slate-700 font-medium">Mentorias individualizadas</span></div>
+            <div class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3 text-xl"></i><span class="text-slate-700 font-medium">Aulas ao vivo e gravadas (Plataforma Própria)</span></div>
+            <div class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3 text-xl"></i><span class="text-slate-700 font-medium">Turma interativa com contato direto</span></div>
+            <div class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3 text-xl"></i><span class="text-slate-700 font-medium">Suporte total via WhatsApp</span></div>
+            <div class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3 text-xl"></i><span class="text-slate-700 font-medium">Simulados mensais e correção de redação</span></div>
+            <div class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3 text-xl"></i><span class="text-slate-700 font-medium">Banco de questões completo</span></div>
+            <div class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3 text-xl"></i><span class="text-slate-700 font-medium">Flashcards personalizados</span></div>
+            <div class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3 text-xl"></i><span class="text-slate-700 font-medium">Apostilas com IA integrada</span></div>
+            <div class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3 text-xl"></i><span class="text-slate-700 font-medium">Acompanhamento de Editais</span></div>
+            <div class="flex items-start"><i class="fas fa-check-circle text-[#7bcd47] mt-1 mr-3 text-xl"></i><span class="text-slate-700 font-medium">Listas de exercícios direcionadas</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+        <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300">
+          <div class="text-[#5242ea] text-5xl mb-4"><i class="fas fa-chalkboard-teacher"></i></div>
+          <h3 class="text-xl font-bold mb-2">Equipe Especialista</h3>
+          <p class="text-slate-600">Professores com vasta experiência em provas de CAP-COLUNI, IFs, CEFETs, COLTEC e CEDAF.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300">
+          <div class="text-[#6408b0] text-5xl mb-4"><i class="fas fa-laptop-code"></i></div>
+          <h3 class="text-xl font-bold mb-2">Plataforma Inteligente</h3>
+          <p class="text-slate-600">Acesse aulas gravadas, sistema de IA, flashcards e banco de questões em um ambiente personalizado.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300">
+          <div class="text-[#00abb1] text-5xl mb-4"><i class="fas fa-user-friends"></i></div>
+          <h3 class="text-xl font-bold mb-2">Acompanhamento Total</h3>
+          <p class="text-slate-600">Monitorias específicas, mentorias individualizadas e acompanhamento detalhado de editais.</p>
+        </div>
+      </div>
+
+ <!-- Cronograma + Horários -->
+<div class="max-w-5xl mx-auto mt-16 bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-slate-100">
+  <div class="w-full">
+
+    <!-- Cronograma -->
+    <h3 class="text-2xl font-bold text-center mb-6 text-[#5242ea]">Cronograma 2026</h3>
+
+    <div class="flex flex-col md:flex-row justify-between items-center bg-slate-50 p-6 rounded-xl border border-slate-200 mb-8">
+      <div class="text-center md:text-left mb-4 md:mb-0">
+        <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Início das aulas</p>
+        <p class="text-3xl font-extrabold text-[#dd5737]">02 de março</p>
+      </div>
+
+      <div class="hidden md:block h-12 w-px bg-slate-300"></div>
+
+      <div class="text-center md:text-right">
+        <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Término</p>
+        <p class="text-3xl font-extrabold text-[#5242ea]">Novembro</p>
+      </div>
+    </div>
+
+    <p class="text-center text-slate-600 mb-10">
+      Aulas ao vivo e gravadas até a última semana de novembro.
+    </p>
+
+    <!-- Turnos (o mais importante) -->
+    <h3 class="text-xl md:text-2xl font-extrabold text-center text-slate-800 mb-4">
+      Turnos disponíveis (segunda a quinta)
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+      <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
+        <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Turma da tarde</p>
+        <p class="text-4xl font-extrabold text-slate-900 mt-2">16h – 19h</p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
+        <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Turma da noite</p>
+        <p class="text-4xl font-extrabold text-slate-900 mt-2">18h – 21h</p>
+      </div>
+    </div>
+
+    <p class="text-center text-sm text-slate-500 mb-10">
+      *Mesmas matérias nos dois turnos. Você escolhe o melhor horário pra sua rotina.
+    </p>
+    </div>
+</div> 
+
+<!-- Modalidades de Preparação -->
+<div class="max-w-5xl mx-auto mt-14">
+  <h3 class="text-2xl font-extrabold text-center text-slate-800 mb-6">
+    Modalidades de preparação disponíveis
+  </h3>
+
+  <p class="text-center text-slate-600 max-w-3xl mx-auto mb-8">
+    A grade é ajustada de acordo com o tipo de prova que você pretende fazer.
+    Veja como funcionam as modalidades do Guia Pré-Federal.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- Opção Coluni / IF -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+      <p class="text-sm uppercase tracking-wide text-[#5242ea] font-bold mb-2">
+        Opção Coluni / IF
+      </p>
+
+      <p class="text-slate-800 font-semibold mb-3">
+        Preparação mais completa
+      </p>
+
+      <ul class="space-y-2 text-slate-600 text-sm">
+        <li>✔ Conteúdos cobrados no COLUNI e IFs</li>
+        <li>✔ Prepara para qualquer vestibulinho</li>
+        <li>✔ Inclui Inglês e Redação</li>
+        <li>✔ Ideal para quem busca mais abrangência</li>
+      </ul>
+    </div>
+
+    <!-- Opção IFs / CEFETs -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+      <p class="text-sm uppercase tracking-wide text-[#dd5737] font-bold mb-2">
+        Opção IFs / CEFETs
+      </p>
+
+      <p class="text-slate-800 font-semibold mb-3">
+        Preparação direta e objetiva
+      </p>
+
+      <ul class="space-y-2 text-slate-600 text-sm">
+        <li>✔ Conteúdos cobrados em IFs e CEFETs</li>
+        <li>✔ Grade mais focada</li>
+        <li>✔ Não inclui Inglês nem Redação</li>
+        <li>✔ Ideal para foco específico</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+		
+
+      <!-- Qual a sua prova de interesse? -->
+<h3 class="text-xl md:text-2xl font-extrabold text-center text-slate-800 mt-20 mb-4">
+  Qual a sua prova de interesse?
+</h3>
+
+<p class="text-center text-slate-600 mb-6">
+  Marque uma ou mais opções e a gente te indica a trilha ideal.
+</p>
+
+<div class="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+
+  <!-- opções (multi-seleção) -->
+<div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 max-w-4xl mx-auto items-stretch">
+
+  <!-- COLUNI -->
+  <label class="flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition lg:col-span-2 h-full">
+    <input type="checkbox" class="h-5 w-5" value="COLUNI" data-group="coluni_if">
+    <span class="font-semibold text-slate-800">COLUNI</span>
+  </label>
+
+  <!-- COLTEC -->
+  <label class="flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition lg:col-span-2 h-full">
+    <input type="checkbox" class="h-5 w-5" value="COLTEC" data-group="coluni_if">
+    <span class="font-semibold text-slate-800">COLTEC</span>
+  </label>
+
+  <!-- IF Sudeste -->
+  <label class="flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition lg:col-span-2 h-full">
+    <input type="checkbox" class="h-5 w-5" value="IF Sudeste" data-group="ambos">
+    <span class="font-semibold text-slate-800">IF Sudeste</span>
+  </label>
+
+  <!-- Grupão -->
+  <label class="flex items-start gap-3 rounded-xl border-2 border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition lg:col-span-4 h-full">
+    <input
+      type="checkbox"
+      class="h-5 w-5 mt-1"
+      value="IFMG / IFTM / IFF / IFES / IFNMG / CEDAF"
+      data-group="if_cefet"
+    >
+    <div>
+      <span class="font-semibold text-slate-800 block"> IFMG · IFTM · IFF · IFES · IFNMG · CEDAF</span>
+      </span>
+    </div>
+  </label>
+
+  <!-- CEFET -->
+  <label class="flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition lg:col-span-1 h-full">
+    <input type="checkbox" class="h-5 w-5" value="CEFET" data-group="if_cefet">
+    <span class="font-semibold text-slate-800">CEFET</span>
+  </label>
+
+  <!-- Outros -->
+  <label class="flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition lg:col-span-1 h-full">
+    <input type="checkbox" class="h-5 w-5" value="Outros vestibulinhos" data-group="if_cefet">
+    <span class="font-semibold text-slate-800">Outros</span>
+  </label>
+
+	</div>
+
+  </div>
+
+  <!-- botões -->
+  <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+    <button type="button" onclick="recomendarTrilha()"
+      class="bg-[#5242ea] text-white font-bold py-3 px-6 rounded-full shadow hover:bg-opacity-95 transition">
+      Ver recomendação
+    </button>
+
+    <button type="button" onclick="limparSelecaoProvas()"
+      class="bg-white text-slate-700 font-bold py-3 px-6 rounded-full border border-slate-200 hover:bg-slate-50 transition">
+      Limpar seleção
+    </button>
+  </div>
+
+  <!-- resultado -->
+  <div id="resultadoProvas" class="hidden mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+    <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Recomendação</p>
+
+    <div class="mt-3 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <p class="text-2xl font-extrabold text-slate-900" id="resultadoTitulo">Trilha:</p>
+        <p class="text-slate-700 mt-2" id="resultadoResumo"></p>
+
+        <div class="flex flex-wrap gap-2 mt-3" id="resultadoTags"></div>
+
+        <!-- seleção do usuário (opcional, mas ajuda a dar sensação de "personalizado") -->
+        <p class="text-xs text-slate-500 mt-3">
+          Selecionadas: <span id="selecionadasLista" class="font-semibold text-slate-600"></span>
+        </p>
+      </div>
+
+      <!-- lembrete de turnos (sem redundância grande) -->
+      <div class="rounded-xl bg-white border border-slate-200 p-4 text-center min-w-[240px]">
+        <p class="text-sm uppercase tracking-wide text-slate-500 font-semibold">Turnos</p>
+        <p class="text-slate-900 font-extrabold mt-2">Seg a qui</p>
+        <p class="text-slate-700 mt-1">🌤️ 16h–19h • 🌙 18h–21h</p>
+        <p class="text-xs text-slate-500 mt-2">Mesmas matérias nos dois turnos.</p>
+      </div>
+    </div>
+
+    <div class="mt-5 text-center">
+      <a href="#investimento"
+        class="bg-[#c7ef59] text-slate-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 inline-flex items-center justify-center">
+        Ver investimento e garantir vaga
+      </a>
+    </div>
+  </div>
+
+  <!-- CTA final (centralizado) -->
+  <div class="mt-8 text-center flex flex-col items-center justify-center">
+    <p class="text-slate-600 mb-4 max-w-xl">
+      Ficou em dúvida? Fala com a equipe no WhatsApp e a gente te orienta rapidinho.
+    </p>
+    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" rel="noopener noreferrer" onclick="trackWhatsAppLead('duvidas_cta')"
+      class="bg-[#c7ef59] text-slate-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 inline-flex items-center justify-center">
+      Falar com a equipe
+    </a>
+  </div>
+
+</div>
+
+  <!-- Investimento -->
+<section id="investimento" class="py-16 md:py-24 bg-white">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-center mb-4 section-title mx-auto">Um investimento no seu sonho</h2>
+    <p class="max-w-3xl mx-auto text-lg text-slate-600 mb-10">
+      Nosso compromisso vai além do conteúdo: é com você, com a sua história e com o seu sonho. Garanta sua vaga com condições especiais.
+    </p>
+
+    <div
+      class="bg-slate-800 text-white p-10 rounded-xl shadow-lg max-w-md mx-auto relative overflow-hidden group hover:scale-105 transition duration-300">
+
+      <!-- Selo -->
+      <div class="absolute top-0 right-0 bg-[#dd5737] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+        15% OFF À VISTA
+      </div>
+
+      <img src="/extensivo2026/logo1.png" alt="Logo Guia Pré-Federal"
+        class="w-20 h-20 mx-auto mb-4 rounded-full" style="background-color: #dd5737;">
+
+      <p class="text-2xl font-semibold mb-2">Intensivo 2026 Completo</p>
+
+      <!-- Preço -->
+      <div class="my-6 leading-none">
+        <p class="text-slate-300 text-sm mb-2">Em até</p>
+
+        <p class="text-5xl font-extrabold">
+          <span class="text-white">9x</span>
+          <span class="text-[#c7ef59]">R$ 200,00</span>
+        </p>
+
+        <p class="text-xs text-slate-400 mt-3">
+          Total parcelado: <span class="text-slate-200 font-semibold">R$ 1.800,00</span>
+        </p>
+
+        <p class="text-sm text-slate-200 mt-2">
+          À vista: <span class="font-extrabold text-white">R$ 1.530,00</span>
+          <span class="text-slate-400 text-xs">(economize R$ 270)</span>
+        </p>
+      </div>
+
+      <!-- Benefícios -->
+      <div class="space-y-2 mb-8 text-slate-200 text-sm text-left mx-auto max-w-xs">
+        <p><i class="fas fa-check text-[#7bcd47] mr-2"></i>Acesso completo até o dia da prova</p>
+        <p><i class="fas fa-check text-[#7bcd47] mr-2"></i>Monitorias semanais + mentorias estratégicas</p>
+        <p><i class="fas fa-check text-[#7bcd47] mr-2"></i>Material com IA + flashcards prontos</p>
+      </div>
+
+      <!-- CTA -->
+      <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" rel="noopener noreferrer" onclick="trackWhatsAppLead('investimento_cta')"
+        class="bg-[#c7ef59] text-slate-900 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 block w-full">
+        Garantir minha vaga no Intensivo 2026
+      </a>
+
+      <!-- Microcopy -->
+      <div class="mt-4 space-y-2">
+        <p class="text-xs text-slate-400">
+          *Desconto válido para pagamento à vista (15%).
+        </p>
+        <p class="text-xs text-slate-300">
+          ✅ Pagamento seguro • 💬 Suporte pelo WhatsApp
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer id="contato" class="bg-slate-800 text-white py-12">
+    <div class="container mx-auto px-4 text-center">
+      <div class="flex justify-center items-center mb-4">
+        <img src="/extensivo2026/logo1.png" alt="Logo Guia Pré-Federal" class="h-12 w-12 rounded-full" style="background-color: #dd5737;">
+      </div>
+      <p class="text-slate-400 text-sm">&copy; 2026 Guia - Pré Federal. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Botão Flutuante -->
+  <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" rel="noopener noreferrer" onclick="trackWhatsAppLead('botao_flutuante')"
+    class="fixed bottom-6 right-6 bg-[#25D366] text-white font-bold py-4 px-5 rounded-full shadow-lg hover:bg-green-600 transition duration-300 transform hover:scale-105 z-50 flex items-center">
+    <i class="fab fa-whatsapp text-2xl"></i>
+    <span class="ml-3 hidden sm:inline">Quero garantir minha vaga!</span>
+  </a>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper('.swiper', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+    });
+
+    const swiperContainer = document.querySelector('.swiper');
+    if (swiperContainer) {
+      swiperContainer.addEventListener('mouseenter', () => swiper.autoplay.stop());
+      swiperContainer.addEventListener('mouseleave', () => swiper.autoplay.start());
+    }
+  </script>
+
+  <script>
+    function trackWhatsAppLead(source) {
+      const url = 'https://wa.me/message/CNC5OQFPKLE7K1';
+      const eventSource = source || 'whatsapp_cta';
+
+      try {
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', {
+            content_name: eventSource,
+            content_category: 'whatsapp',
+            destination: url
+          });
+          fbq('trackCustom', 'WhatsAppClick', {
+            source: eventSource,
+            destination: url
+          });
+        }
+      } catch (e) {}
+
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', {
+            event_category: 'whatsapp',
+            event_label: eventSource,
+            link_url: url
+          });
+          gtag('event', 'click_whatsapp', {
+            event_category: 'whatsapp',
+            event_label: eventSource,
+            link_url: url
+          });
+        }
+      } catch (e) {}
+    }
+  </script>
+
+<script>
+  function getSelectedProvas() {
+    const checks = Array.from(document.querySelectorAll('input[type="checkbox"][data-group]'));
+    return checks.filter(c => c.checked).map(c => ({
+      value: c.value,
+      group: c.dataset.group
+    }));
+  }
+
+  function recomendarTrilha() {
+    const selected = getSelectedProvas();
+    const box = document.getElementById('resultadoProvas');
+    const titulo = document.getElementById('resultadoTitulo');
+    const resumo = document.getElementById('resultadoResumo');
+    const tags = document.getElementById('resultadoTags');
+    const lista = document.getElementById('selecionadasLista');
+
+    if (selected.length === 0) {
+      box.classList.remove('hidden');
+      titulo.textContent = "Trilha:";
+      resumo.textContent = "Selecione pelo menos uma prova para receber a recomendação.";
+      tags.innerHTML = "";
+      lista.textContent = "—";
+      box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // montar lista de selecionadas
+    lista.textContent = selected.map(s => s.value).join(", ");
+
+    // regra:
+    // - COLUNI ou COLTEC => Coluni/IF (força)
+    // - IF Sudeste => "ambos" (pode ser qualquer, mas se houver conflito -> Coluni/IF)
+    // - IFMG/IFF/IFES/IFTM/IFNMG/CEFET => IF/CEFET (força)
+    // - Se marcou coisas que apontam para dois cursos => Coluni/IF
+    // - Se marcou só "ambos" (IF Sudeste) => mostrar "pode escolher qualquer" (mas sem deixar confuso: sugerir Coluni/IF como padrão)
+    const hasColuniIF = selected.some(s => s.group === 'coluni_if');
+    const hasIFCEFET = selected.some(s => s.group === 'if_cefet');
+    const hasAmbos = selected.some(s => s.group === 'ambos');
+
+    let final = null;
+
+    if (hasColuniIF) {
+      final = 'coluni_if';
+    } else if (hasIFCEFET && !hasColuniIF) {
+      final = 'if_cefet';
+    } else if (hasAmbos && !hasColuniIF && !hasIFCEFET) {
+      // só IF Sudeste marcado
+      final = 'ambos';
+    }
+
+    // conflito (marcou algo que leva a coluni_if e if_cefet) -> coluni_if
+    if (hasColuniIF && hasIFCEFET) final = 'coluni_if';
+    // marcou IF Sudeste junto com IF/CEFET -> conflito potencial -> coluni_if? (sua regra: se marcar opções que encaminhem para os dois cursos => Coluni/IF)
+    if (hasAmbos && hasIFCEFET) final = 'coluni_if';
+    // marcou IF Sudeste junto com Coluni/IF -> já cai em coluni_if
+
+    // render
+    tags.innerHTML = "";
+
+    box.classList.remove('hidden');
+
+    if (final === 'coluni_if') {
+      titulo.innerHTML = 'Trilha recomendada: <span class="text-[#5242ea]">Coluni / IF</span>';
+      resumo.textContent = "Melhor opção para cobrir sua(s) prova(s). Inclui Inglês e Redação.";
+      tags.innerHTML = `
+        <span class="px-4 py-2 rounded-full bg-[#c7ef59] text-slate-900 font-extrabold">Inclui Inglês</span>
+        <span class="px-4 py-2 rounded-full bg-[#c7ef59] text-slate-900 font-extrabold">Inclui Redação</span>
+      `;
+    } else if (final === 'if_cefet') {
+      titulo.innerHTML = 'Trilha recomendada: <span class="text-[#dd5737]">IFs / CEFETs</span>';
+      resumo.textContent = "Grade enxuta e direta para IFs/CEFETs (sem Inglês e sem Redação).";
+      tags.innerHTML = `
+        <span class="px-4 py-2 rounded-full bg-slate-200 text-slate-900 font-bold">Sem Inglês</span>
+        <span class="px-4 py-2 rounded-full bg-slate-200 text-slate-900 font-bold">Sem Redação</span>
+      `;
+    } else {
+      // ambos
+      titulo.innerHTML = 'Trilha recomendada: <span class="text-slate-900">Qualquer uma das duas</span>';
+      resumo.textContent = "Para IF Sudeste, você pode escolher qualquer uma das trilhas. Se quiser a grade mais completa, vá de Coluni/IF.";
+      tags.innerHTML = `
+        <span class="px-4 py-2 rounded-full bg-[#c7ef59] text-slate-900 font-extrabold">Coluni/IF (mais completo)</span>
+        <span class="px-4 py-2 rounded-full bg-slate-200 text-slate-900 font-bold">IF/CEFET (mais enxuto)</span>
+      `;
+    }
+
+    box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function limparSelecaoProvas() {
+    const checks = Array.from(document.querySelectorAll('input[type="checkbox"][data-group]'));
+    checks.forEach(c => c.checked = false);
+
+    const box = document.getElementById('resultadoProvas');
+    if (box) box.classList.add('hidden');
+  }
+</script>
+
+	  <script>
+  let player;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('heroVideo');
+  }
+
+  // carregar API do YouTube
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.body.appendChild(tag);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && player) {
+          player.playVideo();
+        } else if (player) {
+          player.pauseVideo();
+        }
+      });
+    },
+    { threshold: 0.6 } // 60% do vídeo visível
+  );
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const iframe = document.getElementById("heroVideo");
+    if (iframe) observer.observe(iframe);
+  });
+</script>
+
+</body>
+</html>
