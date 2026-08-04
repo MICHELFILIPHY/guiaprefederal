@@ -80,6 +80,46 @@
             margin-bottom: 2.5rem;
         }
 
+        /* Estilo para a seção CTA */
+        .cta-section {
+            background-color: var(--teal);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-radius: 1.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .cta-button-primary {
+            background-color: var(--primary-lime);
+            color: var(--text-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+        .cta-button-primary:hover {
+            background-color: white;
+            transform: scale(1.05);
+        }
+        .cta-button-secondary {
+            border: 2px solid var(--primary-lime);
+            color: var(--primary-lime);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+        .cta-button-secondary:hover {
+            background-color: var(--primary-lime);
+            color: var(--text-dark);
+            transform: scale(1.05);
+        }
+
         .subject-icon {
             transition: all 0.3s ease;
             border: 2px solid transparent;
@@ -116,13 +156,103 @@
             transform: translateY(-2px);
         }
 
-        .timeline-badge {
-            background-color: var(--primary-blue);
+        /* Floating Action Button (FAB) Styles */
+        .fab-container {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+        }
+        @media (min-width: 768px) {
+            .fab-container {
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+        .fab-main {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #5242ea;
             color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .fab-main .icon-open,
+        .fab-main .icon-close {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            position: absolute;
+        }
+        .fab-main .icon-close {
+            transform: rotate(-45deg) scale(0);
+            opacity: 0;
+        }
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+            transform: translateY(10px);
+        }
+        .fab-container.active .fab-options {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab-container.active .fab-main {
+            background-color: #dd5737;
+        }
+        .fab-container.active .fab-main .icon-open {
+            transform: rotate(45deg) scale(0);
+            opacity: 0;
+        }
+        .fab-container.active .fab-main .icon-close {
+            transform: rotate(0deg) scale(1);
+            opacity: 1;
+        }
+        .fab-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            text-decoration: none;
+        }
+        .fab-label {
+            background-color: white;
+            color: #1e293b;
+            padding: 6px 14px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            margin-right: 12px;
             font-weight: 700;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
             font-size: 0.875rem;
+            white-space: nowrap;
+        }
+        .fab-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-size: 20px;
+            transition: transform 0.2s ease;
+        }
+        .fab-option:hover .fab-icon {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -190,6 +320,22 @@
 
         <!-- Container Principal -->
         <div class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
+
+            <!-- Seção CTA (Call-to-Action) - Início -->
+            <section class="cta-section">
+                <h2 class="text-3xl font-black mb-3">Quer Gabaritar o Processo Seletivo do IFES?</h2>
+                <p class="max-w-2xl mx-auto mb-6">Nosso curso preparatório focado no IFES oferece aulas, simulados, materiais exclusivos e tudo o que você precisa para conquistar sua vaga técnica integrada!</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
+                        Conheça o Curso Intensivo
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        Fale Conosco no WhatsApp
+                    </a>
+                </div>
+            </section>
 
             <!-- Seção 1: Cronograma -->
             <section id="cronograma" class="section-card">
@@ -561,6 +707,22 @@
                 </div>
             </section>
 
+            <!-- Seção CTA (Call-to-Action) - Final -->
+            <section id="cta-final" class="section-card text-center" style="background: linear-gradient(135deg, var(--primary-blue), var(--teal));">
+                <h3 class="text-3xl font-black text-white mb-3">Garanta Sua Vaga no IFES com o Guia Pré-Federal</h3>
+                <p class="max-w-2xl mx-auto mb-6 text-blue-100">Não deixe a preparação para a última hora. Garanta a melhor mentoria, simulados direcionados e aulas com quem mais aprova nos Institutos Federais.</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="cta-button-primary flex items-center justify-center font-bold py-3 px-6 rounded-lg w-full sm:w-auto shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
+                        Matricule-se no Intensivo
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="flex items-center justify-center font-bold py-3 px-6 rounded-lg border-2 border-white text-white hover:bg-white hover:text-[#3007a0] transition-colors w-full sm:w-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        Falar no WhatsApp
+                    </a>
+                </div>
+            </section>
+
             <footer class="text-center mt-12 pt-8 border-t border-slate-200">
                 <p class="text-sm text-gray-500">Desenvolvido por <strong>Guia Pré-Federal</strong> com base no Edital PS 46/2026 do Instituto Federal do Espírito Santo (IFES).</p>
                 <p class="text-xs text-gray-400 mt-2">Consulte sempre a página oficial em <a href="https://ifes.edu.br/2027" target="_blank" class="underline text-indigo-600">ifes.edu.br/2027</a> para novidades e retificações.</p>
@@ -569,6 +731,28 @@
         </div>
     </main>
 
+    <!-- Botão Flutuante de Ação (FAB) -->
+    <div class="fab-container">
+        <div class="fab-options">
+            <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="fab-option">
+                <span class="fab-label">Nosso Intensivo</span>
+                <div class="fab-icon" style="background-color: #6408b0;">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </a>
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
+                <span class="fab-label">Contato WhatsApp</span>
+                <div class="fab-icon" style="background-color: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </a>
+        </div>
+        <button class="fab-main" id="fab-main-button">
+            <i class="fas fa-comment-dots icon-open"></i>
+            <i class="fas fa-times icon-close"></i>
+        </button>
+    </div>
+
     <script>
     // Mobile Menu Toggle
     const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -576,6 +760,19 @@
     mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Floating Action Button (FAB) Logic
+    const fabContainer = document.querySelector('.fab-container');
+    const fabMainButton = document.getElementById('fab-main-button');
+    fabMainButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        fabContainer.classList.toggle('active');
+    });
+    document.addEventListener('click', (event) => {
+        if (!fabContainer.contains(event.target)) {
+            fabContainer.classList.remove('active');
+        }
     });
 
     // DATASET DE CAMPI, CURSOS E VAGAS (Anexo 1 do Edital 46/2026)
@@ -808,7 +1005,7 @@
         }
     };
 
-    // CONTEÚDO PROGRAMÁTICO DYNAMICO (Anexo 10)
+    // CONTEÚDO PROGRAMÁTICO DINÂMICO (Anexo 10)
     const syllabusData = {
         portugues: `
             <h4 class="font-bold text-lg text-indigo-900 mb-3"><i class="fas fa-language mr-2"></i>Língua Portuguesa (11 Questões)</h4>
