@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RTR3DF7GK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2RTR3DF7GK');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Edital IFES (2026-2027) - Cursos Técnicos Integrados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #5242ea;
+            --primary-lime: #c7ef59;
+            --dark-blue: #3007a0;
+            --teal: #00abb1;
+            --purple: #6408b0;
+            --green: #7bcd47;
+            --dark-green: #005b38;
+            --orange-red: #dd5737;
+            --text-dark: #1a202c;
+            --text-light: #f0f4f8;
+
+            --brand-purple: #310099;
+            --brand-lime: #D4FF70;
+            --soft-gray: #f7f7f7;
+            --dark-text-original: #1f2937;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--soft-gray);
+            color: var(--dark-text-original);
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover {
+            color: var(--primary-blue);
+            border-bottom-color: var(--primary-blue);
+        }
+        
+        .hero-title .highlight {
+            background-color: var(--primary-lime);
+            color: var(--dark-blue);
+            padding: 0.25rem 1rem;
+            border-radius: 0.75rem;
+            display: inline-block;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--dark-blue);
+        }
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: #4A5568;
+        }
+
+        .section-card {
+            background-color: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            margin-bottom: 2.5rem;
+        }
+
+        .subject-icon {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .subject-icon.active {
+            background-color: var(--brand-lime);
+            color: var(--dark-text-original);
+            border-color: var(--brand-purple);
+            transform: translateY(-5px);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table th, .data-table td {
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .quota-card {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-blue);
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            transition: transform 0.2s ease;
+        }
+        .quota-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .timeline-badge {
+            background-color: var(--primary-blue);
+            color: white;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="https://guiaprefederal.com.br" class="flex items-center space-x-2">
+                <img src="https://guiaprefederal.com.br/logo.png" 
+                     alt="Guia - Pré Federal Logo" 
+                     class="rounded-full w-10 h-10" 
+                     style="background-color: #7bcd47;"
+                     onerror="this.onerror=null;this.src='https://placehold.co/40x40/7BCD47/FFFFFF?text=GPF';">
+                <span class="text-xl font-bold" style="color: #5242ea;">Guia Pré-Federal</span>
+            </a>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#cronograma" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Cronograma</a></li>
+                    <li><a href="#prova" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">A Prova</a></li>
+                    <li><a href="#campi" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Campi e Vagas</a></li>
+                    <li><a href="#cotas" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Cotas</a></li>
+                    <li><a href="#isencao" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Isenção & Atendimento</a></li>
+                    <li><a href="#conteudo" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">O que Estudar</a></li>
+                </ul>
+            </nav>
+            <button class="md:hidden text-slate-700 focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 shadow-md">
+            <ul class="flex flex-col items-center space-y-4">
+                <li><a href="#cronograma" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Cronograma</a></li>
+                <li><a href="#prova" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">A Prova</a></li>
+                <li><a href="#campi" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Campi e Vagas</a></li>
+                <li><a href="#cotas" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Cotas</a></li>
+                <li><a href="#isencao" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Isenção & Atendimento</a></li>
+                <li><a href="#conteudo" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">O que Estudar</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="bg-white py-16 border-b border-gray-100">
+            <div class="container mx-auto px-6 text-center">
+                 <img src="https://guiaprefederal.com.br/logo1.png" 
+                      alt="Logo Guia Pré-Federal" 
+                      class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 rounded-full shadow-lg border-4 border-gray-200" 
+                      style="background-color: var(--orange-red);"
+                      onerror="this.onerror=null;this.src='https://placehold.co/128x128/DD5737/FFFFFF?text=GPF';">
+                 <h1 class="text-4xl md:text-5xl font-black mb-4" style="color: var(--dark-blue);">
+                     Edital IFES <span class="px-3 py-1 rounded-md" style="background-color: var(--primary-lime); color: var(--dark-blue);">PS 46/2026</span>
+                 </h1>
+                 <p class="section-subtitle max-w-3xl mx-auto">
+                     Guia completo e descomplicado do Processo Seletivo para os Cursos Técnicos Integrados ao Ensino Médio (Ingresso 2027/1).
+                 </p>
+                 <div class="mt-6 flex flex-wrap justify-center gap-3 text-sm font-semibold">
+                     <span class="bg-blue-50 text-[#5242ea] px-4 py-2 rounded-full border border-blue-200"><i class="fas fa-graduation-cap mr-2"></i>3.587 Vagas</span>
+                     <span class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full border border-emerald-200"><i class="fas fa-map-marker-alt mr-2"></i>22 Campi</span>
+                     <span class="bg-purple-50 text-purple-700 px-4 py-2 rounded-full border border-purple-200"><i class="fas fa-calendar-alt mr-2"></i>Prova em 18/10/2026</span>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Container Principal -->
+        <div class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
+
+            <!-- Seção 1: Cronograma -->
+            <section id="cronograma" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--brand-purple);">
+                        <i class="fas fa-calendar-alt text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--brand-purple);">Cronograma Oficial do Edital</h3>
+                        <p class="text-sm text-gray-500">Principais datas que você não pode perder no PS 46/2026</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="data-table text-sm">
+                        <thead>
+                            <tr>
+                                <th>Atividade / Etapa</th>
+                                <th>Data / Período</th>
+                                <th>Local / Canal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="font-bold text-gray-800">Publicação do Edital</td>
+                                <td>03/08/2026</td>
+                                <td>ifes.edu.br/2027</td>
+                            </tr>
+                            <tr class="bg-blue-50/50">
+                                <td class="font-bold text-[#5242ea]">Período de Inscrição</td>
+                                <td class="font-semibold">03/08 a 09/09/2026</td>
+                                <td>Área do Candidato (online)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-amber-700">Solicitação de Isenção da Taxa (R$ 85,00)</td>
+                                <td>03/08 a 23/08/2026</td>
+                                <td>Área do Candidato</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Resultado da Isenção</td>
+                                <td>26/08/2026</td>
+                                <td>ifes.edu.br/2027</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-red-600">Último dia para pagamento do boleto</td>
+                                <td class="font-bold text-red-600">11/09/2026</td>
+                                <td>Rede Bancária</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Divulgação do Local de Prova</td>
+                                <td>25/09/2026</td>
+                                <td>Área do Candidato / Site</td>
+                            </tr>
+                            <tr class="bg-purple-100/60 font-bold" style="color: var(--dark-blue);">
+                                <td class="py-3"><i class="fas fa-pen-nib mr-2"></i>APLICAÇÃO DA PROVA OBJETIVA</td>
+                                <td class="py-3">18/10/2026 (Domingo)</td>
+                                <td class="py-3">Conforme cartão de inscrição</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Publicação do Gabarito e Caderno de Prova</td>
+                                <td>19/10/2026</td>
+                                <td>ifes.edu.br/2027</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Publicação da Nota da Prova Objetiva</td>
+                                <td>06/11/2026</td>
+                                <td>ifes.edu.br/2027</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Entrevistas de Heteroidentificação (Pretos e Pardos)</td>
+                                <td>12/11 a 19/11/2026</td>
+                                <td>Presencial no Campus da vaga</td>
+                            </tr>
+                            <tr class="bg-emerald-50">
+                                <td class="font-bold text-emerald-800">Homologação do Resultado Final</td>
+                                <td class="font-bold text-emerald-800">15/12/2026</td>
+                                <td>ifes.edu.br/2027</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Seção 2: Estrutura da Prova -->
+            <section id="prova" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--primary-blue);">
+                        <i class="fas fa-file-alt text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--dark-blue);">Raio-X da Prova Objetiva</h3>
+                        <p class="text-sm text-gray-500">Conheça a estrutura, pontuação e horários do dia do exame</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-center">
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Total de Questões</span>
+                        <p class="text-4xl font-black mt-2" style="color: var(--brand-purple);">40</p>
+                        <p class="text-xs text-gray-500 mt-1">Múltipla escolha (A a E)</p>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-center">
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Pontuação Máxima</span>
+                        <p class="text-4xl font-black mt-2" style="color: var(--primary-blue);">400</p>
+                        <p class="text-xs text-gray-500 mt-1">10 pontos por questão</p>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-center">
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Duração do Exame</span>
+                        <p class="text-4xl font-black mt-2" style="color: var(--dark-green);">4 horas</p>
+                        <p class="text-xs text-gray-500 mt-1">Das 14h às 18h</p>
+                    </div>
+                </div>
+
+                <!-- Distribuição por disciplina -->
+                <h4 class="font-bold text-lg mb-4 text-gray-800">Distribuição das Questões por Disciplina:</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+                    <div class="p-4 rounded-xl text-center border" style="background-color: #f0f4ff; border-color: #c7d2fe;">
+                        <span class="block text-sm font-bold text-indigo-900">Português</span>
+                        <span class="text-2xl font-black text-indigo-700">11</span>
+                        <span class="block text-xs text-indigo-600">questões (110 pts)</span>
+                    </div>
+                    <div class="p-4 rounded-xl text-center border" style="background-color: #f0fdf4; border-color: #bbf7d0;">
+                        <span class="block text-sm font-bold text-emerald-900">Matemática</span>
+                        <span class="text-2xl font-black text-emerald-700">11</span>
+                        <span class="block text-xs text-emerald-600">questões (110 pts)</span>
+                    </div>
+                    <div class="p-4 rounded-xl text-center border" style="background-color: #fefce8; border-color: #fef08a;">
+                        <span class="block text-sm font-bold text-amber-900">Ciências</span>
+                        <span class="text-2xl font-black text-amber-700">6</span>
+                        <span class="block text-xs text-amber-600">questões (60 pts)</span>
+                    </div>
+                    <div class="p-4 rounded-xl text-center border" style="background-color: #fff7ed; border-color: #fed7aa;">
+                        <span class="block text-sm font-bold text-orange-900">História</span>
+                        <span class="text-2xl font-black text-orange-700">6</span>
+                        <span class="block text-xs text-orange-600">questões (60 pts)</span>
+                    </div>
+                    <div class="p-4 rounded-xl text-center border" style="background-color: #fdf2f8; border-color: #fbcfe8;">
+                        <span class="block text-sm font-bold text-pink-900">Geografia</span>
+                        <span class="text-2xl font-black text-pink-700">6</span>
+                        <span class="block text-xs text-pink-600">questões (60 pts)</span>
+                    </div>
+                </div>
+
+                <!-- Horários do Dia de Prova -->
+                <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+                    <h4 class="font-bold text-base mb-3 text-gray-800"><i class="fas fa-clock mr-2 text-indigo-600"></i>Horários no Dia da Prova (18/10/2026):</h4>
+                    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div class="bg-white p-3 rounded-lg border">
+                            <span class="block text-xs text-gray-500 font-semibold">12h40</span>
+                            <span class="font-bold text-gray-800">Abertura dos Portões</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border">
+                            <span class="block text-xs text-red-500 font-bold">13h35</span>
+                            <span class="font-bold text-red-600">Fechamento dos Portões</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border">
+                            <span class="block text-xs text-gray-500 font-semibold">14h00</span>
+                            <span class="font-bold text-gray-800">Início da Prova</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border">
+                            <span class="block text-xs text-gray-500 font-semibold">16h00</span>
+                            <span class="font-bold text-gray-800">Saída liberada c/ caderno</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3"><i class="fas fa-info-circle mr-1"></i> <strong>Atenção:</strong> O candidato deve levar caneta esferográfica de corpo transparente com tinta preta ou azul-escura e documento oficial de identificação com foto original.</p>
+                </div>
+            </section>
+
+            <!-- Seção 3: Filtro Interativo de Campi e Cursos -->
+            <section id="campi" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--teal);">
+                        <i class="fas fa-university text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--dark-blue);">Campi, Cursos e Vagas (3.587 vagas)</h3>
+                        <p class="text-sm text-gray-500">Selecione o campus abaixo para visualizar os cursos, turnos e a divisão detalhada de cotas.</p>
+                    </div>
+                </div>
+
+                <!-- Seletor de Campus -->
+                <div class="mb-6">
+                    <label for="campus-select" class="block font-bold text-gray-700 mb-2">Selecione o Campus do IFES:</label>
+                    <select id="campus-select" onchange="renderCampusData()" class="w-full p-3 border-2 border-indigo-200 rounded-xl focus:ring-purple-500 focus:border-purple-500 text-gray-800 font-semibold bg-white shadow-sm">
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
+
+                <!-- Detalhes do Campus Selecionado -->
+                <div id="campus-info-box" class="bg-blue-50/60 p-4 rounded-xl border border-blue-200 mb-6 hidden">
+                    <h4 id="campus-title" class="font-black text-xl text-[#3007a0] mb-1"></h4>
+                    <p id="campus-address" class="text-sm text-gray-600 mb-1"><i class="fas fa-map-marker-alt mr-2 text-red-500"></i><span></span></p>
+                    <p id="campus-email" class="text-sm text-gray-600"><i class="fas fa-envelope mr-2 text-indigo-500"></i><span></span></p>
+                </div>
+
+                <!-- Tabela de Cursos do Campus -->
+                <div class="overflow-x-auto">
+                    <div id="courses-table-container">
+                        <!-- Table injected dynamically -->
+                    </div>
+                </div>
+
+                <div class="mt-4 bg-gray-50 p-4 rounded-lg text-xs text-gray-600 space-y-1">
+                    <p><strong>Legenda das Vagas:</strong></p>
+                    <p><strong>AC:</strong> Ampla Concorrência | <strong>AA1:</strong> Renda &le; 1 Salário Mínimo per capita | <strong>AA2:</strong> Escola Pública Independente de Renda</p>
+                    <p><strong>PPI:</strong> Pretos, Pardos e Indígenas | <strong>Q:</strong> Quilombolas | <strong>PCD:</strong> Pessoas com Deficiência | <strong>EP:</strong> Demais Estudantes de Escola Pública</p>
+                </div>
+            </section>
+
+            <!-- Seção 4: Entenda as Cotas -->
+            <section id="cotas" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--purple);">
+                        <i class="fas fa-users text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--brand-purple);">Reserva de Vagas (Ações Afirmativas / Cotas)</h3>
+                        <p class="text-sm text-gray-500">No mínimo 50% das vagas são destinadas a estudantes oriundos de escolas públicas</p>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6">
+                    <h4 class="font-bold text-amber-900 text-sm mb-1"><i class="fas fa-exclamation-triangle mr-2"></i>Regra Principal para Qualquer Cota:</h4>
+                    <p class="text-xs text-amber-800 leading-relaxed">
+                        Ter cursado <strong>integralmente do 1º ao 9º ano do Ensino Fundamental em escola pública brasileira</strong>. Quem estudou qualquer parte em escola particular (mesmo com bolsa integral) <strong>NÃO</strong> pode concorrer às cotas.
+                    </p>
+                </div>
+
+                <!-- Nova Lei de Cotas: Concorrência Prévia na AC -->
+                <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 rounded-r-lg mb-6">
+                    <h4 class="font-bold text-indigo-950 text-sm mb-1"><i class="fas fa-star mr-2"></i>Nova Regra de Seleção (Lei nº 14.723/2023):</h4>
+                    <p class="text-xs text-indigo-900 leading-relaxed">
+                        Todos os candidatos cotistas concorrem <strong>primeiramente nas vagas de Ampla Concorrência (AC)</strong>. Apenas se a nota não for suficiente para passar na AC, o candidato passa a disputar a vaga reservada de sua cota.
+                    </p>
+                </div>
+
+                <!-- Modalidades AA1 e AA2 -->
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="border rounded-xl p-5 bg-white shadow-sm border-purple-200">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-black text-lg text-purple-900">Grupo AA1</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded">Renda &le; 1 Salário Mínimo</span>
+                        </div>
+                        <p class="text-xs text-gray-600 mb-4">Renda familiar bruta per capita de até R$ 1.621,00 por pessoa da família.</p>
+                        <div class="space-y-2 text-xs">
+                            <div class="quota-card"><strong>AA1-PPI:</strong> Pretos, Pardos ou Indígenas com Renda &le; 1 SM</div>
+                            <div class="quota-card"><strong>AA1-Q:</strong> Quilombolas com Renda &le; 1 SM</div>
+                            <div class="quota-card"><strong>AA1-PCD:</strong> Pessoas com Deficiência com Renda &le; 1 SM</div>
+                            <div class="quota-card"><strong>AA1-EP:</strong> Demais alunos de Escola Pública com Renda &le; 1 SM</div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded-xl p-5 bg-white shadow-sm border-blue-200">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-black text-lg text-blue-900">Grupo AA2</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded">Independente de Renda</span>
+                        </div>
+                        <p class="text-xs text-gray-600 mb-4">Escola pública sem necessidade de comprovação de renda familiar.</p>
+                        <div class="space-y-2 text-xs">
+                            <div class="quota-card" style="border-left-color: var(--teal);"><strong>AA2-PPI:</strong> Pretos, Pardos ou Indígenas (Qualquer Renda)</div>
+                            <div class="quota-card" style="border-left-color: var(--teal);"><strong>AA2-Q:</strong> Quilombolas (Qualquer Renda)</div>
+                            <div class="quota-card" style="border-left-color: var(--teal);"><strong>AA2-PCD:</strong> Pessoas com Deficiência (Qualquer Renda)</div>
+                            <div class="quota-card" style="border-left-color: var(--teal);"><strong>AA2-EP:</strong> Demais alunos de Escola Pública (Qualquer Renda)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 5: Isenção de Taxa & Atendimento Especial -->
+            <section id="isencao" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--orange-red);">
+                        <i class="fas fa-hand-holding-usd text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--dark-blue);">Isenção de Taxa & Atendimento Especial</h3>
+                        <p class="text-sm text-gray-500">Saiba quem tem direito à gratuidade na taxa de R$ 85,00 e recursos de acessibilidade</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <!-- Isenção -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-base text-gray-900 mb-2"><i class="fas fa-check-circle text-green-600 mr-2"></i>Quem tem direito à Isenção (Gratuidade)?</h4>
+                        <p class="text-xs text-gray-600 mb-3 leading-relaxed">
+                            Poderá solicitar a isenção do pagamento da taxa de R$ 85,00 o candidato que estudou as <strong>duas últimas séries do Ensino Fundamental (8º e 9º ano) em escola pública</strong> OU em escola particular com bolsa integral por carência socioeconômica.
+                        </p>
+                        <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded">Prazo: 03/08 a 23/08/2026</span>
+                    </div>
+
+                    <!-- Treineiros -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-base text-gray-900 mb-2"><i class="fas fa-user-clock text-indigo-600 mr-2"></i>Condição de Treineiro</h4>
+                        <p class="text-xs text-gray-600 mb-3 leading-relaxed">
+                            Considera-se treineiro o candidato que não possua o ensino fundamental concluído até a data estipulada. O treineiro realiza a prova apenas para autoavaliação, não concorre às vagas e <strong>não tem direito à isenção de taxa</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Atendimento Especial -->
+                <h4 class="font-bold text-base text-gray-900 mb-3"><i class="fas fa-universal-access text-purple-600 mr-2"></i>Recursos para Atendimento Especial na Prova:</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+                    <div class="p-3 bg-white border rounded-lg">
+                        <span class="font-bold block text-gray-800">Tempo Adicional (+1 hora)</span>
+                        <span class="text-gray-500">Para PCD, Dislexia ou TEA</span>
+                    </div>
+                    <div class="p-3 bg-white border rounded-lg">
+                        <span class="font-bold block text-gray-800">Calculadora</span>
+                        <span class="text-gray-500">Fornecida para Discalculia</span>
+                    </div>
+                    <div class="p-3 bg-white border rounded-lg">
+                        <span class="font-bold block text-gray-800">Abafador de Ruídos</span>
+                        <span class="text-gray-500">Fornecido para pessoas com TEA</span>
+                    </div>
+                    <div class="p-3 bg-white border rounded-lg">
+                        <span class="font-bold block text-gray-800">Prova Ampliada / Braille</span>
+                        <span class="text-gray-500">Baixa visão ou cegueira</span>
+                    </div>
+                    <div class="p-3 bg-white border rounded-lg">
+                        <span class="font-bold block text-gray-800">Ledor / Transcritor</span>
+                        <span class="text-gray-500">Apoio na leitura e cartão-resposta</span>
+                    </div>
+                    <div class="p-3 bg-white border rounded-lg">
+                        <span class="font-bold block text-gray-800">Intérprete de Libras</span>
+                        <span class="text-gray-500">Tradução das orientações</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 6: Conteúdo Programático -->
+            <section id="conteudo" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--brand-purple);">
+                        <i class="fas fa-book text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--brand-purple);">O que Estudar? Conteúdo Programático</h3>
+                        <p class="text-sm text-gray-500">Clique nas disciplinas para visualizar os tópicos cobrados na prova oficial (Anexo 10 do Edital)</p>
+                    </div>
+                </div>
+
+                <!-- Ícones das Disciplinas -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-center mb-6">
+                    <div onclick="showSyllabus('portugues')" class="subject-icon active p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
+                        <i class="fas fa-language text-2xl text-indigo-600"></i>
+                        <span class="text-xs font-bold">Língua Portuguesa</span>
+                    </div>
+                    <div onclick="showSyllabus('matematica')" class="subject-icon p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
+                        <i class="fas fa-calculator text-2xl text-emerald-600"></i>
+                        <span class="text-xs font-bold">Matemática</span>
+                    </div>
+                    <div onclick="showSyllabus('ciencias')" class="subject-icon p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
+                        <i class="fas fa-flask text-2xl text-amber-600"></i>
+                        <span class="text-xs font-bold">Ciências da Natureza</span>
+                    </div>
+                    <div onclick="showSyllabus('historia')" class="subject-icon p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
+                        <i class="fas fa-landmark text-2xl text-orange-600"></i>
+                        <span class="text-xs font-bold">História</span>
+                    </div>
+                    <div onclick="showSyllabus('geografia')" class="subject-icon p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
+                        <i class="fas fa-globe-americas text-2xl text-pink-600"></i>
+                        <span class="text-xs font-bold">Geografia</span>
+                    </div>
+                </div>
+
+                <!-- Painel Exibidor do Conteúdo -->
+                <div id="syllabus-display" class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                    <!-- Dynamic content inserted via Javascript -->
+                </div>
+            </section>
+
+            <footer class="text-center mt-12 pt-8 border-t border-slate-200">
+                <p class="text-sm text-gray-500">Desenvolvido por <strong>Guia Pré-Federal</strong> com base no Edital PS 46/2026 do Instituto Federal do Espírito Santo (IFES).</p>
+                <p class="text-xs text-gray-400 mt-2">Consulte sempre a página oficial em <a href="https://ifes.edu.br/2027" target="_blank" class="underline text-indigo-600">ifes.edu.br/2027</a> para novidades e retificações.</p>
+            </footer>
+
+        </div>
+    </main>
+
+    <script>
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // DATASET DE CAMPI, CURSOS E VAGAS (Anexo 1 do Edital 46/2026)
+    const campiData = {
+        'alegre': {
+            nome: 'Campus Alegre',
+            endereco: 'Rodovia BR 482, Km 47 - Distrito de Rive - Alegre - ES',
+            email: 'pstecnico.ale@ifes.edu.br',
+            cursos: [
+                { nome: 'Agroindústria', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Agropecuária', turno: 'Integral', duracao: '3 anos', total: 144, ac: 72, aa1_ppi: 22, aa1_q: 1, aa1_pcd: 3, aa1_ep: 10, aa2_ppi: 22, aa2_q: 1, aa2_pcd: 3, aa2_ep: 10 },
+                { nome: 'Informática', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 }
+            ]
+        },
+        'aracruz': {
+            nome: 'Campus Aracruz',
+            endereco: 'Avenida Morobá, 248 - Bairro Morobá - Aracruz - ES',
+            email: 'pstecnico.ara@ifes.edu.br',
+            cursos: [
+                { nome: 'Mecânica', turno: 'Matutino', duracao: '3 anos', total: 40, ac: 20, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 2, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 2 },
+                { nome: 'Química', turno: 'Matutino', duracao: '3 anos', total: 80, ac: 40, aa1_ppi: 12, aa1_q: 1, aa1_pcd: 2, aa1_ep: 5, aa2_ppi: 12, aa2_q: 1, aa2_pcd: 2, aa2_ep: 5 }
+            ]
+        },
+        'bsf': {
+            nome: 'Campus Barra de São Francisco',
+            endereco: 'Rodovia ES 320 - KM 118 - Zona Rural - Barra de São Francisco - ES',
+            email: 'pstecnico.bsf@ifes.edu.br',
+            cursos: [
+                { nome: 'Agropecuária*', turno: 'Matutino', duracao: '3 anos', total: 80, ac: 40, aa1_ppi: 12, aa1_q: 1, aa1_pcd: 2, aa1_ep: 5, aa2_ppi: 12, aa2_q: 1, aa2_pcd: 2, aa2_ep: 5 },
+                { nome: 'Administração', turno: 'Matutino', duracao: '3 anos', total: 40, ac: 20, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 2, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 2 },
+                { nome: 'Administração', turno: 'Vespertino', duracao: '3 anos', total: 40, ac: 20, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 2, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 2 }
+            ]
+        },
+        'cachoeiro': {
+            nome: 'Campus Cachoeiro de Itapemirim',
+            endereco: 'Rod. ES 482 - Fazenda Morro Grande - Cachoeiro de Itapemirim - ES',
+            email: 'pstecnico.cai@ifes.edu.br',
+            cursos: [
+                { nome: 'Mecânica', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Eletrotécnica', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Informática para Internet', turno: 'Matutino', duracao: '3 anos', total: 40, ac: 20, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 2, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 2 },
+                { nome: 'Mineração', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 }
+            ]
+        },
+        'cariacica': {
+            nome: 'Campus Cariacica',
+            endereco: 'Rod. Governador José Sette, 184 - Itacibá - Cariacica - ES',
+            email: 'pstecnico.car@ifes.edu.br',
+            cursos: [
+                { nome: 'Administração', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Administração', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Manutenção de Sistemas Metroferroviários', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Manutenção de Sistemas Metroferroviários', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Portos', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Portos', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 }
+            ]
+        },
+        'centro_serrano': {
+            nome: 'Campus Centro-Serrano',
+            endereco: 'Estrada Guilherme João Frederico Kruger, s/nº - Caramuru - Santa Maria de Jetibá - ES',
+            email: 'pstecnico.cse@ifes.edu.br',
+            cursos: [
+                { nome: 'Administração', turno: 'Integral', duracao: '3 anos', total: 120, ac: 60, aa1_ppi: 18, aa1_q: 1, aa1_pcd: 3, aa1_ep: 8, aa2_ppi: 18, aa2_q: 1, aa2_pcd: 3, aa2_ep: 8 },
+                { nome: 'Agricultura', turno: 'Integral', duracao: '3 anos', total: 40, ac: 20, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 2, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 2 }
+            ]
+        },
+        'colatina': {
+            nome: 'Campus Colatina',
+            endereco: 'Rua Arino Gomes Leal, 1700 - Santa Margarida - Colatina - ES',
+            email: 'pstecnico.col@ifes.edu.br',
+            cursos: [
+                { nome: 'Administração', turno: 'Matutino', duracao: '3 anos', total: 76, ac: 38, aa1_ppi: 11, aa1_q: 2, aa1_pcd: 2, aa1_ep: 4, aa2_ppi: 11, aa2_q: 2, aa2_pcd: 2, aa2_ep: 4 },
+                { nome: 'Edificações', turno: 'Matutino', duracao: '3 anos', total: 76, ac: 38, aa1_ppi: 11, aa1_q: 2, aa1_pcd: 2, aa1_ep: 4, aa2_ppi: 11, aa2_q: 2, aa2_pcd: 2, aa2_ep: 4 },
+                { nome: 'Informática para Internet', turno: 'Matutino', duracao: '3 anos', total: 76, ac: 38, aa1_ppi: 11, aa1_q: 2, aa1_pcd: 2, aa1_ep: 4, aa2_ppi: 11, aa2_q: 2, aa2_pcd: 2, aa2_ep: 4 }
+            ]
+        },
+        'guarapari': {
+            nome: 'Campus Guarapari',
+            endereco: 'Alameda Francisco Vieira Simões, nº 720 - Aeroporto - Guarapari - ES',
+            email: 'pstecnico.gua@ifes.edu.br',
+            cursos: [
+                { nome: 'Administração', turno: 'Matutino', duracao: '3 anos', total: 40, ac: 20, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 2, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 2 },
+                { nome: 'Eletrotécnica', turno: 'Matutino', duracao: '3 anos', total: 32, ac: 16, aa1_ppi: 5, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 5, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Mecânica', turno: 'Matutino', duracao: '3 anos', total: 32, ac: 16, aa1_ppi: 5, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 5, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Mecânica', turno: 'Vespertino', duracao: '3 anos', total: 32, ac: 16, aa1_ppi: 5, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 5, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 }
+            ]
+        },
+        'ibatiba': {
+            nome: 'Campus Ibatiba',
+            endereco: 'Av. Sete de Novembro, 40 - Novo Horizonte - Ibatiba - ES',
+            email: 'pstecnico.iba@ifes.edu.br',
+            cursos: [
+                { nome: 'Florestas*', turno: 'Matutino', duracao: '3 anos', total: 80, ac: 40, aa1_ppi: 12, aa1_q: 1, aa1_pcd: 2, aa1_ep: 5, aa2_ppi: 12, aa2_q: 1, aa2_pcd: 2, aa2_ep: 5 },
+                { nome: 'Meio Ambiente*', turno: 'Vespertino', duracao: '3 anos', total: 80, ac: 40, aa1_ppi: 12, aa1_q: 1, aa1_pcd: 2, aa1_ep: 5, aa2_ppi: 12, aa2_q: 1, aa2_pcd: 2, aa2_ep: 5 }
+            ]
+        },
+        'itapina': {
+            nome: 'Campus Itapina',
+            endereco: 'Rodovia BR-259, Km 70 - Zona Rural - Colatina - ES',
+            email: 'pstecnico.ita@ifes.edu.br',
+            cursos: [
+                { nome: 'Agropecuária', turno: 'Integral', duracao: '3 anos', total: 144, ac: 72, aa1_ppi: 22, aa1_q: 1, aa1_pcd: 3, aa1_ep: 10, aa2_ppi: 22, aa2_q: 1, aa2_pcd: 3, aa2_ep: 10 },
+                { nome: 'Alimentos', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Zootecnia', turno: 'Integral', duracao: '3 anos', total: 72, ac: 36, aa1_ppi: 12, aa1_q: 1, aa1_pcd: 2, aa1_ep: 3, aa2_ppi: 12, aa2_q: 1, aa2_pcd: 2, aa2_ep: 3 }
+            ]
+        },
+        'linhares': {
+            nome: 'Campus Linhares',
+            endereco: 'Avenida Filogônio Peixoto, n.º 2220 - Bairro Aviso - Linhares - ES',
+            email: 'pstecnico.lin@ifes.edu.br',
+            cursos: [
+                { nome: 'Administração*', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Administração*', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Automação Industrial**', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Automação Industrial**', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Meio Ambiente***', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Meio Ambiente***', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 }
+            ]
+        },
+        'montanha': {
+            nome: 'Campus Montanha',
+            endereco: 'Rodovia ES-130 (Montanha-Vinhático), Km 1 - Palhinha - Montanha - ES',
+            email: 'pstecnico.mon@ifes.edu.br',
+            cursos: [
+                { nome: 'Administração', turno: 'Integral', duracao: '3 anos', total: 75, ac: 37, aa1_ppi: 12, aa1_q: 2, aa1_pcd: 2, aa1_ep: 3, aa2_ppi: 12, aa2_q: 2, aa2_pcd: 2, aa2_ep: 3 },
+                { nome: 'Agropecuária', turno: 'Integral', duracao: '3 anos', total: 75, ac: 37, aa1_ppi: 12, aa1_q: 2, aa1_pcd: 2, aa1_ep: 3, aa2_ppi: 12, aa2_q: 2, aa2_pcd: 2, aa2_ep: 3 }
+            ]
+        },
+        'nova_venecia': {
+            nome: 'Campus Nova Venécia',
+            endereco: 'Rodovia Miguel Curry Carneiro, 799 - Santa Luzia - Nova Venécia - ES',
+            email: 'pstecnico.nov@ifes.edu.br',
+            cursos: [
+                { nome: 'Edificações', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Mineração*', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Edificações', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Mineração', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 }
+            ]
+        },
+        'piuma': {
+            nome: 'Campus Piúma',
+            endereco: 'Rua Augusto Costa de Oliveira, 660 - Praia Doce - Piúma - ES',
+            email: 'pstecnico.piu@ifes.edu.br',
+            cursos: [
+                { nome: 'Aquicultura', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Aquicultura', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Pesca', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Pesca', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 }
+            ]
+        },
+        'presidente_kennedy': {
+            nome: 'Campus Presidente Kennedy',
+            endereco: 'Av. Claudionor Barreto da Costa, S/N, Bairro: Marobá - Presidente Kennedy - ES',
+            email: 'pstecnico.pke@ifes.edu.br',
+            cursos: [
+                { nome: 'Administração', turno: 'Matutino', duracao: '3 anos', total: 32, ac: 16, aa1_ppi: 5, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 5, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Administração', turno: 'Vespertino', duracao: '3 anos', total: 32, ac: 16, aa1_ppi: 5, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 5, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 }
+            ]
+        },
+        'santa_teresa': {
+            nome: 'Campus Santa Teresa',
+            endereco: 'Rodovia ES-080, Km 93 - São João de Petrópolis - Santa Teresa - ES',
+            email: 'pstecnico.sta@ifes.edu.br',
+            cursos: [
+                { nome: 'Agropecuária', turno: 'Integral', duracao: '3 anos', total: 160, ac: 80, aa1_ppi: 24, aa1_q: 4, aa1_pcd: 4, aa1_ep: 8, aa2_ppi: 24, aa2_q: 4, aa2_pcd: 4, aa2_ep: 8 },
+                { nome: 'Informática para Internet', turno: 'Integral', duracao: '3 anos', total: 40, ac: 20, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 2, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 2 },
+                { nome: 'Meio Ambiente', turno: 'Integral', duracao: '3 anos', total: 40, ac: 20, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 2, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 2 }
+            ]
+        },
+        'sao_mateus': {
+            nome: 'Campus São Mateus',
+            endereco: 'Rodovia BR 101 Norte, KM 58 Litorâneo - São Mateus - ES',
+            email: 'pstecnico.smt@ifes.edu.br',
+            cursos: [
+                { nome: 'Eletrotécnica', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Eletrotécnica', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Mecânica', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Mecânica', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 }
+            ]
+        },
+        'serra': {
+            nome: 'Campus Serra',
+            endereco: 'Avenida dos Sabiás, 330 - Morada de Laranjeiras - Serra - ES',
+            email: 'pstecnico.ser@ifes.edu.br',
+            cursos: [
+                { nome: 'Informática para Internet', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Mecatrônica', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 }
+            ]
+        },
+        'venda_nova': {
+            nome: 'Campus Venda Nova do Imigrante',
+            endereco: 'Rua Elizabeth Minete Perim, nº 500 - São Rafael - Venda Nova do Imigrante - ES',
+            email: 'pstecnico.vni@ifes.edu.br',
+            cursos: [
+                { nome: 'Administração*', turno: 'Matutino', duracao: '3 anos', total: 96, ac: 48, aa1_ppi: 15, aa1_q: 1, aa1_pcd: 2, aa1_ep: 6, aa2_ppi: 15, aa2_q: 1, aa2_pcd: 2, aa2_ep: 6 },
+                { nome: 'Agroindústria**', turno: 'Matutino', duracao: '3 anos', total: 64, ac: 32, aa1_ppi: 10, aa1_q: 1, aa1_pcd: 1, aa1_ep: 4, aa2_ppi: 10, aa2_q: 1, aa2_pcd: 1, aa2_ep: 4 },
+                { nome: 'Biotecnologia***', turno: 'Matutino', duracao: '3 anos', total: 32, ac: 16, aa1_ppi: 5, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 5, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 }
+            ]
+        },
+        'viana': {
+            nome: 'Campus Viana',
+            endereco: 'Rodovia BR-262, Km 12 - Universal - Viana - ES',
+            email: 'pstecnico.via@ifes.edu.br',
+            cursos: [
+                { nome: 'Logística', turno: 'Vespertino', duracao: '3 anos', total: 105, ac: 52, aa1_ppi: 16, aa1_q: 3, aa1_pcd: 3, aa1_ep: 5, aa2_ppi: 16, aa2_q: 3, aa2_pcd: 2, aa2_ep: 5 }
+            ]
+        },
+        'vila_velha': {
+            nome: 'Campus Vila Velha',
+            endereco: 'Av. Ministro Salgado Filho, 1.000 - Soteco - Vila Velha - ES',
+            email: 'pstecnico.vvl@ifes.edu.br',
+            cursos: [
+                { nome: 'Biotecnologia', turno: 'Matutino', duracao: '3 anos', total: 40, ac: 20, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 2, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 2 },
+                { nome: 'Química Ambiental', turno: 'Matutino', duracao: '3 anos', total: 40, ac: 20, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 2, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 2 }
+            ]
+        },
+        'vitoria': {
+            nome: 'Campus Vitória',
+            endereco: 'Av. Vitória, 1729 - Jucutuquara - Vitória - ES',
+            email: 'pstecnico.vi@ifes.edu.br',
+            cursos: [
+                { nome: 'Edificações', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Eletrotécnica', turno: 'Matutino', duracao: '3 anos', total: 32, ac: 16, aa1_ppi: 5, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 5, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Eletrotécnica', turno: 'Vespertino', duracao: '3 anos', total: 32, ac: 16, aa1_ppi: 5, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 5, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Estradas', turno: 'Vespertino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Mecânica', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Meio Ambiente', turno: 'Matutino', duracao: '3 anos', total: 36, ac: 18, aa1_ppi: 6, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 6, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 },
+                { nome: 'Metalurgia', turno: 'Matutino', duracao: '3 anos', total: 32, ac: 16, aa1_ppi: 5, aa1_q: 1, aa1_pcd: 1, aa1_ep: 1, aa2_ppi: 5, aa2_q: 1, aa2_pcd: 1, aa2_ep: 1 }
+            ]
+        }
+    };
+
+    // CONTEÚDO PROGRAMÁTICO DYNAMICO (Anexo 10)
+    const syllabusData = {
+        portugues: `
+            <h4 class="font-bold text-lg text-indigo-900 mb-3"><i class="fas fa-language mr-2"></i>Língua Portuguesa (11 Questões)</h4>
+            <ul class="list-disc list-inside space-y-2 text-sm text-gray-700">
+                <li><b>Leitura e Interpretação de Textos:</b> Compreensão global, inferência de sentido, identificação de tema principal e secundários em diversos gêneros.</li>
+                <li><b>Língua e Linguagem:</b> Linguagem verbal e não-verbal; fala x escrita; linguagem culta/formal e coloquial/informal.</li>
+                <li><b>Variação Linguística:</b> Conceito, variantes regionais, sociais e históricas; preconceito linguístico.</li>
+                <li><b>Morfologia:</b> Classes de palavras (substantivo, adjetivo, artigo, pronome, numeral, verbo, advérbio, preposição, conjunção, interjeição); estrutura e formação de palavras.</li>
+                <li><b>Sintaxe:</b> Frase, oração e período; período simples e composto (coordenação e subordinação); concordância verbal e nominal; regência verbal e nominal.</li>
+                <li><b>Figuras de Linguagem:</b> Sonoras (onomatopeia, aliteração), de palavra (metáfora, metonímia), de sintaxe (elipse, anáfora, pleonasmo) e de pensamento (hipérbole, eufemismo, antítese, paradoxo).</li>
+                <li><b>Semântica:</b> Sinonímia, antonímia, homonímia, paronímia, denotação x conotação, ambiguidade e intertextualidade.</li>
+                <li><b>Ortografia, Acentuação e Pontuação:</b> Regras do novo acordo ortográfico, acentuação de oxítonas, paroxítonas e proparoxítonas; uso dos sinais de pontuação e seus efeitos de sentido.</li>
+            </ul>`,
+        matematica: `
+            <h4 class="font-bold text-lg text-emerald-900 mb-3"><i class="fas fa-calculator mr-2"></i>Matemática (11 Questões)</h4>
+            <ul class="list-disc list-inside space-y-2 text-sm text-gray-700">
+                <li><b>Números e Operações:</b> Teoria dos conjuntos (união, interseção, diferença); conjuntos numéricos ($\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$); números primos, MMC e MDC; potenciação e radiciação; notação científica.</li>
+                <li><b>Matemática Financeira e Proporcionalidade:</b> Razão e proporção, regra de três simples e composta; porcentagem, acréscimos e descontos sucessivos; juros simples e compostos.</li>
+                <li><b>Álgebra:</b> Expressões algébricas, produtos notáveis e fatoração; equações e sistemas do 1º e 2º grau; noções de função e sequências numéricas.</li>
+                <li><b>Geometria Plana:</b> Polígonos e triângulos (cevianas, pontos notáveis, congruência e semelhança); Teorema de Tales e Teorema de Pitágoras; relações métricas e trigonométricas no triângulo retângulo; área de figuras planas e comprimento da circunferência.</li>
+                <li><b>Grandezas e Medidas:</b> Perímetro, volume, capacidade, massa, tempo; conversão de unidades no sistema métrico decimal.</li>
+                <li><b>Probabilidade e Estatística:</b> Leitura e interpretação de gráficos e tabelas; estatística descritiva (média, moda e mediana); princípio fundamental da contagem e eventos aleatórios.</li>
+            </ul>`,
+        ciencias: `
+            <h4 class="font-bold text-lg text-amber-900 mb-3"><i class="fas fa-flask mr-2"></i>Ciências da Natureza (6 Questões)</h4>
+            <ul class="list-disc list-inside space-y-2 text-sm text-gray-700">
+                <li><b>Matéria e Energia:</b> Misturas homogêneas/heterogêneas e métodos de separação; transformações químicas e físicas; estrutura atômica; máquinas simples e formas de propagação do calor; fontes e tipos de energia, circuitos elétricos e consumo consciente.</li>
+                <li><b>Vida e Evolução:</b> A célula como unidade da vida; interação entre os sistemas nervoso e locomotor humano; diversidade dos ecossistemas brasileiros, cadeias alimentares e impactos ambientais; biotecnologia e heredograma; mecanismos reprodutivos, ISTs e ideias evolucionistas (Darwin e Lamarck).</li>
+                <li><b>Terra e Universo:</b> Forma, estrutura e movimentos da Terra (rotação e translação); sistema Sol, Terra e Lua (eclipses e fases); efeito estufa, camada de ozônio e dinâmica atmosférica; placas tectônicas, vulcões e terremotos.</li>
+            </ul>`,
+        historia: `
+            <h4 class="font-bold text-lg text-orange-900 mb-3"><i class="fas fa-landmark mr-2"></i>História (6 Questões)</h4>
+            <ul class="list-disc list-inside space-y-2 text-sm text-gray-700">
+                <li><b>Antiguidade e Idade Média:</b> Democracia e cidadania na Grécia e Roma Antiga; os povos originários das Américas e África; a passagem para o Feudalismo e o papel da Igreja na Idade Média.</li>
+                <li><b>Mundo Moderno e Colonização:</b> Renascimento, Iluminismo e Reformas Religiosas; expansão marítima europeia e a conquista das Américas; escravidão e tráfico transatlântico de escravizados na América portuguesa.</li>
+                <li><b>Século XIX e Brasil Império:</b> Revolução Industrial e Revolução Francesa; Independência do Brasil, Primeiro e Segundo Reinado, abolição da escravatura e resistência negra e indígena.</li>
+                <li><b>Século XX e Brasil República:</b> Primeira República (República Velha); Era Vargas, Estado Novo e Trabalhismo; Primeira e Segunda Guerra Mundial, Nazifascismo e Guerra Fria; Ditadura Civil-Militar no Brasil (1964-1985) e o processo de Redemocratização (Constituição de 1988).</li>
+            </ul>`,
+        geografia: `
+            <h4 class="font-bold text-lg text-pink-900 mb-3"><i class="fas fa-globe-americas mr-2"></i>Geografia (6 Questões)</h4>
+            <ul class="list-disc list-inside space-y-2 text-sm text-gray-700">
+                <li><b>O Sujeito e seu Lugar no Mundo:</b> Formação territorial do Brasil, dinâmica e características da população brasileira (migrações, envelhecimento, urbanização).</li>
+                <li><b>Mundo do Trabalho e Globalização:</b> Meios técnico-científico-informacionais no campo e na cidade; globalização e blocos econômicos; industrialização e consumo dos recursos naturais.</li>
+                <li><b>Cartografia:</b> Leitura e interpretação de mapas, escalas, coordenadas geográficas, fusos horários e projeções cartográficas.</li>
+                <li><b>Natureza e Meio Ambiente:</b> Relevo e seus agentes transformadores; bacias hidrográficas do Brasil; domínios morfoclimáticos e biomas brasileiros; mudanças climáticas globais e impactos socioambientais.</li>
+            </ul>`
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        populateCampusSelect();
+        renderCampusData();
+        showSyllabus('portugues');
+    });
+
+    function populateCampusSelect() {
+        const select = document.getElementById('campus-select');
+        select.innerHTML = '';
+        for (const key in campiData) {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = campiData[key].nome;
+            select.appendChild(option);
+        }
+    }
+
+    function renderCampusData() {
+        const selectedKey = document.getElementById('campus-select').value;
+        const campus = campiData[selectedKey];
+        if (!campus) return;
+
+        // Display Campus Info Header
+        const infoBox = document.getElementById('campus-info-box');
+        document.querySelector('#campus-title').textContent = campus.nome;
+        document.querySelector('#campus-address span').textContent = campus.endereco;
+        document.querySelector('#campus-email span').textContent = campus.email;
+        infoBox.classList.remove('hidden');
+
+        // Render Courses Table
+        const container = document.getElementById('courses-table-container');
+        let html = `
+            <table class="data-table text-xs">
+                <thead>
+                    <tr class="bg-slate-100 text-gray-700">
+                        <th rowspan="2" class="align-middle">Curso Técnico</th>
+                        <th rowspan="2" class="align-middle text-center">Turno</th>
+                        <th rowspan="2" class="align-middle text-center">Duração</th>
+                        <th rowspan="2" class="align-middle text-center font-bold bg-blue-100">Total Vagas</th>
+                        <th rowspan="2" class="align-middle text-center font-bold bg-emerald-100">AC</th>
+                        <th colspan="4" class="text-center bg-purple-100 font-bold">Cotas AA1 (Renda &le; 1 SM)</th>
+                        <th colspan="4" class="text-center bg-indigo-100 font-bold">Cotas AA2 (Escola Pública)</th>
+                    </tr>
+                    <tr class="bg-slate-50 text-gray-600">
+                        <th class="text-center">PPI</th>
+                        <th class="text-center">Q</th>
+                        <th class="text-center">PCD</th>
+                        <th class="text-center">EP</th>
+                        <th class="text-center">PPI</th>
+                        <th class="text-center">Q</th>
+                        <th class="text-center">PCD</th>
+                        <th class="text-center">EP</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">`;
+
+        campus.cursos.forEach(c => {
+            html += `
+                <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="font-bold text-gray-800">${c.nome}</td>
+                    <td class="text-center">${c.turno}</td>
+                    <td class="text-center">${c.duracao}</td>
+                    <td class="text-center font-black bg-blue-50 text-blue-900">${c.total}</td>
+                    <td class="text-center font-bold bg-emerald-50 text-emerald-900">${c.ac}</td>
+                    <td class="text-center">${c.aa1_ppi}</td>
+                    <td class="text-center">${c.aa1_q}</td>
+                    <td class="text-center">${c.aa1_pcd}</td>
+                    <td class="text-center">${c.aa1_ep}</td>
+                    <td class="text-center">${c.aa2_ppi}</td>
+                    <td class="text-center">${c.aa2_q}</td>
+                    <td class="text-center">${c.aa2_pcd}</td>
+                    <td class="text-center">${c.aa2_ep}</td>
+                </tr>`;
+        });
+
+        html += `</tbody></table>`;
+        container.innerHTML = html;
+    }
+
+    function showSyllabus(subject) {
+        document.getElementById('syllabus-display').innerHTML = syllabusData[subject];
+        document.querySelectorAll('.subject-icon').forEach(icon => {
+            icon.classList.remove('active');
+        });
+        document.querySelector(`[onclick="showSyllabus('${subject}')"]`).classList.add('active');
+    }
+    </script>
+</body>
+</html>
