@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RTR3DF7GK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2RTR3DF7GK');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Edital CEFET-MG (2026-2027) - Cursos Técnicos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #5242ea;
+            --primary-lime: #c7ef59;
+            --dark-blue: #3007a0;
+            --teal: #00abb1;
+            --purple: #6408b0;
+            --green: #7bcd47;
+            --dark-green: #005b38;
+            --orange-red: #dd5737;
+            --cefet-blue: #0b2545;
+            --cefet-cyan: #134074;
+            --text-dark: #1a202c;
+            --text-light: #f0f4f8;
+
+            --brand-purple: #310099;
+            --brand-lime: #D4FF70;
+            --soft-gray: #f7f7f7;
+            --dark-text-original: #1f2937;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--soft-gray);
+            color: var(--dark-text-original);
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover {
+            color: var(--primary-blue);
+            border-bottom-color: var(--primary-blue);
+        }
+        
+        .hero-title .highlight {
+            background-color: var(--primary-lime);
+            color: var(--dark-blue);
+            padding: 0.25rem 1rem;
+            border-radius: 0.75rem;
+            display: inline-block;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--dark-blue);
+        }
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: #4A5568;
+        }
+
+        .section-card {
+            background-color: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            margin-bottom: 2.5rem;
+        }
+
+        /* Estilo para a seção CTA */
+        .cta-section {
+            background-color: var(--teal);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-radius: 1.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .cta-button-primary {
+            background-color: var(--primary-lime);
+            color: var(--text-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+        .cta-button-primary:hover {
+            background-color: white;
+            transform: scale(1.05);
+        }
+        .cta-button-secondary {
+            border: 2px solid var(--primary-lime);
+            color: var(--primary-lime);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+        .cta-button-secondary:hover {
+            background-color: var(--primary-lime);
+            color: var(--text-dark);
+            transform: scale(1.05);
+        }
+
+        .subject-icon {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .subject-icon.active {
+            background-color: var(--brand-lime);
+            color: var(--dark-text-original);
+            border-color: var(--brand-purple);
+            transform: translateY(-5px);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table th, .data-table td {
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .quota-card {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-blue);
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            transition: transform 0.2s ease;
+        }
+        .quota-card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Floating Action Button (FAB) Styles */
+        .fab-container {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+        }
+        @media (min-width: 768px) {
+            .fab-container {
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+        .fab-main {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #5242ea;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .fab-main .icon-open,
+        .fab-main .icon-close {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            position: absolute;
+        }
+        .fab-main .icon-close {
+            transform: rotate(-45deg) scale(0);
+            opacity: 0;
+        }
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+            transform: translateY(10px);
+        }
+        .fab-container.active .fab-options {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab-container.active .fab-main {
+            background-color: #dd5737;
+        }
+        .fab-container.active .fab-main .icon-open {
+            transform: rotate(45deg) scale(0);
+            opacity: 0;
+        }
+        .fab-container.active .fab-main .icon-close {
+            transform: rotate(0deg) scale(1);
+            opacity: 1;
+        }
+        .fab-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            text-decoration: none;
+        }
+        .fab-label {
+            background-color: white;
+            color: #1e293b;
+            padding: 6px 14px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            margin-right: 12px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            white-space: nowrap;
+        }
+        .fab-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-size: 20px;
+            transition: transform 0.2s ease;
+        }
+        .fab-option:hover .fab-icon {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="https://guiaprefederal.com.br" class="flex items-center space-x-2">
+                <img src="https://guiaprefederal.com.br/logo.png" 
+                     alt="Guia - Pré Federal Logo" 
+                     class="rounded-full w-10 h-10" 
+                     style="background-color: #7bcd47;"
+                     onerror="this.onerror=null;this.src='https://placehold.co/40x40/7BCD47/FFFFFF?text=GPF';">
+                <span class="text-xl font-bold" style="color: #5242ea;">Guia Pré-Federal</span>
+            </a>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#cronograma" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Cronograma</a></li>
+                    <li><a href="#prova" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">A Prova & Obra</a></li>
+                    <li><a href="#campi" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Campi e Vagas</a></li>
+                    <li><a href="#cotas" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Cotas (SRV)</a></li>
+                    <li><a href="#isencao" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Isenção & Regras</a></li>
+                    <li><a href="#conteudo" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">O que Estudar</a></li>
+                </ul>
+            </nav>
+            <button class="md:hidden text-slate-700 focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 shadow-md">
+            <ul class="flex flex-col items-center space-y-4">
+                <li><a href="#cronograma" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Cronograma</a></li>
+                <li><a href="#prova" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">A Prova & Obra</a></li>
+                <li><a href="#campi" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Campi e Vagas</a></li>
+                <li><a href="#cotas" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Cotas (SRV)</a></li>
+                <li><a href="#isencao" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Isenção & Regras</a></li>
+                <li><a href="#conteudo" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">O que Estudar</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="bg-white py-16 border-b border-gray-100">
+            <div class="container mx-auto px-6 text-center">
+                 <img src="https://guiaprefederal.com.br/logo1.png" 
+                      alt="Logo Guia Pré-Federal" 
+                      class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 rounded-full shadow-lg border-4 border-gray-200" 
+                      style="background-color: var(--orange-red);"
+                      onerror="this.onerror=null;this.src='https://placehold.co/128x128/DD5737/FFFFFF?text=GPF';">
+                 <h1 class="text-4xl md:text-5xl font-black mb-4" style="color: var(--dark-blue);">
+                     Edital CEFET-MG <span class="px-3 py-1 rounded-md" style="background-color: var(--primary-lime); color: var(--dark-blue);">Edital 491/2026</span>
+                 </h1>
+                 <p class="section-subtitle max-w-3xl mx-auto">
+                     Guia completo e descomplicado do Processo Seletivo para os Cursos Técnicos do CEFET-MG (Ingresso 2027/1 e 2027/2).
+                 </p>
+                 <div class="mt-6 flex flex-wrap justify-center gap-3 text-sm font-semibold">
+                     <span class="bg-blue-50 text-[#5242ea] px-4 py-2 rounded-full border border-blue-200"><i class="fas fa-graduation-cap mr-2"></i>2.174 Vagas</span>
+                     <span class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full border border-emerald-200"><i class="fas fa-map-marker-alt mr-2"></i>9 Municípios / Campi</span>
+                     <span class="bg-purple-50 text-purple-700 px-4 py-2 rounded-full border border-purple-200"><i class="fas fa-calendar-alt mr-2"></i>Prova em 29/11/2026</span>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Container Principal -->
+        <div class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
+
+            <!-- Seção CTA (Call-to-Action) - Início -->
+            <section class="cta-section">
+                <h2 class="text-3xl font-black mb-3">Quer Conquistar Sua Vaga no CEFET-MG?</h2>
+                <p class="max-w-2xl mx-auto mb-6">Nosso curso preparatório focado no CEFET-MG oferece aulas completas, análise detalhada da obra "O Alienista", simulados direcionados e a melhor mentoria do mercado!</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="cta-button-primary flex items-center justify-center w-full sm:w-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
+                        Conheça o Curso Intensivo
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-button-secondary flex items-center justify-center w-full sm:w-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        Fale Conosco no WhatsApp
+                    </a>
+                </div>
+            </section>
+
+            <!-- Seção 1: Cronograma -->
+            <section id="cronograma" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--brand-purple);">
+                        <i class="fas fa-calendar-alt text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--brand-purple);">Cronograma Oficial (Edital 491/2026)</h3>
+                        <p class="text-sm text-gray-500">Principais datas que você precisa acompanhar na Seleção CEFET-MG 2027</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="data-table text-sm">
+                        <thead>
+                            <tr>
+                                <th>Atividade / Etapa</th>
+                                <th>Data / Período</th>
+                                <th>Local / Canal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="font-bold text-gray-800">Publicação do Edital</td>
+                                <td>15/07/2026</td>
+                                <td>processoseletivo.cefetmg.br</td>
+                            </tr>
+                            <tr class="bg-blue-50/50">
+                                <td class="font-bold text-[#5242ea]">Período de Inscrição</td>
+                                <td class="font-semibold">01/08 a 05/10/2026 (até 23h59)</td>
+                                <td>Sistema da COPEVE (Online)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-amber-700">Solicitação de Isenção da Taxa (R$ 75,00)</td>
+                                <td>01/08 a 15/09/2026</td>
+                                <td>Área do Candidato</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Resultado da Isenção</td>
+                                <td>21/09/2026</td>
+                                <td>processoseletivo.cefetmg.br</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-red-600">Último dia para pagamento da Taxa de Inscrição</td>
+                                <td class="font-bold text-red-600">06/10/2026</td>
+                                <td>PagTesouro (PIX, Cartão ou Boleto GRU)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Homologação das Inscrições</td>
+                                <td>14/10/2026</td>
+                                <td>processoseletivo.cefetmg.br</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Liberação do CDI (Local de Prova)</td>
+                                <td>24/11/2026</td>
+                                <td>Área do Candidato</td>
+                            </tr>
+                            <tr class="bg-purple-100/60 font-bold" style="color: var(--dark-blue);">
+                                <td class="py-3"><i class="fas fa-pen-nib mr-2"></i>APLICAÇÃO DA PROVA OBJETIVA</td>
+                                <td class="py-3">29/11/2026 (Domingo - Tarde)</td>
+                                <td class="py-3">Conforme indicado no CDI</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Divulgação das Questões e Gabarito Preliminar</td>
+                                <td>30/11/2026 (a partir das 20h)</td>
+                                <td>processoseletivo.cefetmg.br</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Divulgação das Notas Apuradas</td>
+                                <td>07/12/2026</td>
+                                <td>Área do Candidato</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-emerald-800">Divulgação do Resultado Final (1ª Chamada)</td>
+                                <td class="font-bold text-emerald-800">15/12/2026</td>
+                                <td>processoseletivo.cefetmg.br</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-indigo-700">Confirmação de Interesse na Lista de Espera (Excedentes)</td>
+                                <td>15/12/2026 a 29/01/2027</td>
+                                <td>Área do Candidato</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="font-bold">Matrícula Presencial da 1ª Chamada</td>
+                                <td>25/01 a 29/01/2027</td>
+                                <td>SRCA do Campus do Curso</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Seção 2: Estrutura da Prova & Obra Literária -->
+            <section id="prova" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--primary-blue);">
+                        <i class="fas fa-file-alt text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--dark-blue);">Estrutura da Prova Objetiva</h3>
+                        <p class="text-sm text-gray-500">Conheça as matérias, número de questões, horários e a obra literária obrigatória</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-center">
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Total de Questões</span>
+                        <p class="text-4xl font-black mt-2" style="color: var(--brand-purple);">50</p>
+                        <p class="text-xs text-gray-500 mt-1">Múltipla escolha (1 ponto cada)</p>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-center">
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Pontuação Máxima</span>
+                        <p class="text-4xl font-black mt-2" style="color: var(--primary-blue);">50</p>
+                        <p class="text-xs text-gray-500 mt-1">Sem Prova de Redação</p>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-center">
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Duração do Exame</span>
+                        <p class="text-4xl font-black mt-2" style="color: var(--dark-green);">3 horas</p>
+                        <p class="text-xs text-gray-500 mt-1">Das 14h às 17h</p>
+                    </div>
+                </div>
+
+                <!-- Obra Literária Obrigatória -->
+                <div class="bg-indigo-50 border-2 border-indigo-200 p-5 rounded-xl mb-8 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+                    <div class="bg-indigo-600 text-white p-4 rounded-xl text-center flex-shrink-0">
+                        <i class="fas fa-book-open text-3xl"></i>
+                        <span class="block text-xs font-bold uppercase mt-1">Livro Obrigatório</span>
+                    </div>
+                    <div>
+                        <h4 class="font-black text-xl text-indigo-950 mb-1">"O Alienista" — Machado de Assis</h4>
+                        <p class="text-xs text-indigo-900 leading-relaxed">
+                            Obra de leitura obrigatória para a prova de <strong>Língua Portuguesa e Literatura Brasileira</strong>. Pode também ser explorada de forma interdisciplinar nas demais áreas. O livro em PDF está disponível gratuitamente na página oficial do CEFET-MG.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Distribuição por disciplina -->
+                <h4 class="font-bold text-lg mb-4 text-gray-800">Distribuição das Questões por Disciplina:</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                    <div class="p-4 rounded-xl text-center border" style="background-color: #f0f4ff; border-color: #c7d2fe;">
+                        <span class="block text-sm font-bold text-indigo-900">Português e Literatura</span>
+                        <span class="text-3xl font-black text-indigo-700">15</span>
+                        <span class="block text-xs text-indigo-600">questões (Desempate 1º)</span>
+                    </div>
+                    <div class="p-4 rounded-xl text-center border" style="background-color: #f0fdf4; border-color: #bbf7d0;">
+                        <span class="block text-sm font-bold text-emerald-900">Matemática</span>
+                        <span class="text-3xl font-black text-emerald-700">15</span>
+                        <span class="block text-xs text-emerald-600">questões (Desempate 2º)</span>
+                    </div>
+                    <div class="p-4 rounded-xl text-center border" style="background-color: #fefce8; border-color: #fef08a;">
+                        <span class="block text-sm font-bold text-amber-900">Ciências da Natureza</span>
+                        <span class="text-3xl font-black text-amber-700">8</span>
+                        <span class="block text-xs text-amber-600">questões (Desempate 3º)</span>
+                    </div>
+                    <div class="p-4 rounded-xl text-center border" style="background-color: #fff7ed; border-color: #fed7aa;">
+                        <span class="block text-sm font-bold text-orange-900">História (6) & Geografia (6)</span>
+                        <span class="text-3xl font-black text-orange-700">12</span>
+                        <span class="block text-xs text-orange-600">questões (Desempate 4º e 5º)</span>
+                    </div>
+                </div>
+
+                <!-- Regras de Documentos de Identificação -->
+                <div class="bg-red-50 p-5 rounded-xl border border-red-200">
+                    <h4 class="font-bold text-base mb-2 text-red-900"><i class="fas fa-exclamation-circle mr-2"></i>Atenção Máxima com o Documento de Identidade FÍSICO!</h4>
+                    <p class="text-xs text-red-800 leading-relaxed mb-3">
+                        O CEFET-MG <strong>NÃO aceita documentos digitais</strong> (como CNH Digital, RG Digital ou e-Título), nem certidões de nascimento, nem cópias (mesmo autenticadas). É <strong>obrigatório apresentar Documento Oficial em Papel/Físico</strong> com foto recente e assinatura.
+                    </p>
+                    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                        <div class="bg-white p-2.5 rounded border text-red-800">❌ Documentos Digitais</div>
+                        <div class="bg-white p-2.5 rounded border text-red-800">❌ Cópias (Mesmo Autenticadas)</div>
+                        <div class="bg-white p-2.5 rounded border text-red-800">❌ Documentos c/ "Infantil"</div>
+                        <div class="bg-white p-2.5 rounded border text-red-800">❌ Certidão de Nascimento</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 3: Filtro Interativo de Campi e Cursos -->
+            <section id="campi" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--teal);">
+                        <i class="fas fa-university text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--dark-blue);">Campi, Cursos e Vagas (2.174 vagas)</h3>
+                        <p class="text-sm text-gray-500">Selecione o município/campus do CEFET-MG para visualizar os cursos, formas de ingresso e divisão de cotas.</p>
+                    </div>
+                </div>
+
+                <!-- Seletor de Campus -->
+                <div class="mb-6">
+                    <label for="campus-select" class="block font-bold text-gray-700 mb-2">Selecione o Campus do CEFET-MG:</label>
+                    <select id="campus-select" onchange="renderCampusData()" class="w-full p-3 border-2 border-indigo-200 rounded-xl focus:ring-purple-500 focus:border-purple-500 text-gray-800 font-semibold bg-white shadow-sm">
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
+
+                <!-- Detalhes do Campus Selecionado -->
+                <div id="campus-info-box" class="bg-blue-50/60 p-4 rounded-xl border border-blue-200 mb-6 hidden">
+                    <h4 id="campus-title" class="font-black text-xl text-[#3007a0] mb-1"></h4>
+                    <p id="campus-address" class="text-sm text-gray-600 mb-1"><i class="fas fa-map-marker-alt mr-2 text-red-500"></i><span></span></p>
+                </div>
+
+                <!-- Tabela de Cursos do Campus -->
+                <div class="overflow-x-auto">
+                    <div id="courses-table-container">
+                        <!-- Table injected dynamically -->
+                    </div>
+                </div>
+
+                <div class="mt-4 bg-gray-50 p-4 rounded-lg text-xs text-gray-600 space-y-1">
+                    <p><strong>Legenda das Formas de Ingresso:</strong></p>
+                    <p><strong>INT (Integrada):</strong> Técnico + Ensino Médio no CEFET-MG (Diurno - 3 anos) | <strong>CONCOM/SUB:</strong> Concomitante ou Subsequente (Noturno - 1 a 2 anos)</p>
+                    <p><strong>LB:</strong> Candidatos de Escola Pública com Renda &le; 1,0 Salário Mínimo per capita | <strong>LI:</strong> Candidatos de Escola Pública Independente de Renda</p>
+                </div>
+            </section>
+
+            <!-- Seção 4: Entenda as Cotas (SRV) -->
+            <section id="cotas" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--purple);">
+                        <i class="fas fa-users text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--brand-purple);">Sistema de Reserva de Vagas (SRV / Cotas)</h3>
+                        <p class="text-sm text-gray-500">No mínimo 50% das vagas são reservadas a estudantes da rede pública de ensino</p>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6">
+                    <h4 class="font-bold text-amber-900 text-sm mb-1"><i class="fas fa-exclamation-triangle mr-2"></i>Requisito de Escola Pública:</h4>
+                    <p class="text-xs text-amber-800 leading-relaxed">
+                        Ter cursado <strong>integralmente do 1º ao 9º ano do Ensino Fundamental em escola pública brasileira</strong>. Quem estudou qualquer período em escola particular (mesmo com bolsa 100%) <strong>NÃO</strong> pode concorrer pelo SRV.
+                    </p>
+                </div>
+
+                <!-- Múltiplas Opções de Curso -->
+                <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mb-6">
+                    <h4 class="font-bold text-blue-950 text-sm mb-1"><i class="fas fa-list-ol mr-2"></i>Escolha de Até 3 Opções de Curso:</h4>
+                    <p class="text-xs text-blue-900 leading-relaxed">
+                        No ato da inscrição, você pode indicar até <strong>3 opções de curso</strong> (no mesmo campus e forma) por ordem de preferência. Se for aprovado na sua 1ª opção, não será convocado nas opções posteriores.
+                    </p>
+                </div>
+
+                <!-- Modalidades LB e LI -->
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="border rounded-xl p-5 bg-white shadow-sm border-purple-200">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-black text-lg text-purple-900">Grupo LB (Baixa Renda)</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded">Renda &le; 1,0 SM per capita</span>
+                        </div>
+                        <p class="text-xs text-gray-600 mb-4">Renda familiar bruta per capita de até 1 Salário Mínimo por pessoa da família.</p>
+                        <div class="space-y-2 text-xs">
+                            <div class="quota-card"><strong>LB_PPI:</strong> Pretos, Pardos ou Indígenas + Renda &le; 1 SM</div>
+                            <div class="quota-card"><strong>LB_Q:</strong> Quilombolas + Renda &le; 1 SM</div>
+                            <div class="quota-card"><strong>LB_PcD:</strong> Pessoas com Deficiência + Renda &le; 1 SM</div>
+                            <div class="quota-card"><strong>LB_EP:</strong> Demais estudantes de Escola Pública + Renda &le; 1 SM</div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded-xl p-5 bg-white shadow-sm border-blue-200">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-black text-lg text-blue-900">Grupo LI (Qualquer Renda)</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded">Independente de Renda</span>
+                        </div>
+                        <p class="text-xs text-gray-600 mb-4">Escola pública sem necessidade de comprovação da renda familiar.</p>
+                        <div class="space-y-2 text-xs">
+                            <div class="quota-card" style="border-left-color: var(--teal);"><strong>LI_PPI:</strong> Pretos, Pardos ou Indígenas (Qualquer Renda)</div>
+                            <div class="quota-card" style="border-left-color: var(--teal);"><strong>LI_Q:</strong> Quilombolas (Qualquer Renda)</div>
+                            <div class="quota-card" style="border-left-color: var(--teal);"><strong>LI_PcD:</strong> Pessoas com Deficiência (Qualquer Renda)</div>
+                            <div class="quota-card" style="border-left-color: var(--teal);"><strong>LI_EP:</strong> Demais estudantes de Escola Pública (Qualquer Renda)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 5: Isenção de Taxa & Atendimento Especial -->
+            <section id="isencao" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--orange-red);">
+                        <i class="fas fa-hand-holding-usd text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--dark-blue);">Isenção de Taxa & Atendimento Especial</h3>
+                        <p class="text-sm text-gray-500">Regras para obter gratuidade da taxa de R$ 75,00 e condições de acessibilidade no dia do exame</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <!-- Isenção -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-base text-gray-900 mb-2"><i class="fas fa-check-circle text-green-600 mr-2"></i>Quem pode pedir Isenção (Lei 12.799/2013)?</h4>
+                        <p class="text-xs text-gray-600 mb-3 leading-relaxed">
+                            Candidatos que cursaram o <strong>Ensino Fundamental integral em escola pública (ou particular com bolsa 100%)</strong> E possuem renda familiar per capita igual ou inferior a <strong>1,5 Salário Mínimo</strong>.
+                        </p>
+                        <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded">Prazo para Isenção: 01/08 a 15/09/2026</span>
+                    </div>
+
+                    <!-- Formas de Pagamento -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-base text-gray-900 mb-2"><i class="fas fa-credit-card text-indigo-600 mr-2"></i>Pagamento da Taxa (R$ 75,00)</h4>
+                        <p class="text-xs text-gray-600 mb-3 leading-relaxed">
+                            O pagamento deve ser iniciado diretamente na Área do Candidato através do portal PagTesouro. Formas aceitas: <strong>PIX, Cartão de Crédito ou Boleto GRU Simples</strong> (exclusivo Banco do Brasil).
+                        </p>
+                        <span class="inline-block bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded">Vencimento Improrrogável: 06/10/2026</span>
+                    </div>
+                </div>
+
+                <!-- Atendimento Especial -->
+                <h4 class="font-bold text-base text-gray-900 mb-3"><i class="fas fa-universal-access text-purple-600 mr-2"></i>Recursos para Atendimento Especial no Exame:</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+                    <div class="p-3 bg-white border rounded-lg">
+                        <span class="font-bold block text-gray-800">Tempo Adicional (+1 hora)</span>
+                        <span class="text-gray-500">Para PcD e necessidades de saúde</span>
+                    </div>
+                    <div class="p-3 bg-white border rounded-lg">
+                        <span class="font-bold block text-gray-800">Prova Ampliada / Braille</span>
+                        <span class="text-gray-500">Baixa visão ou cegueira</span>
+                    </div>
+                    <div class="p-3 bg-white border rounded-lg">
+                        <span class="font-bold block text-gray-800">Ledor e Transcritor</span>
+                        <span class="text-gray-500">Apoio na leitura e na folha de respostas</span>
+                    </div>
+                    <div class="p-3 bg-white border rounded-lg">
+                        <span class="font-bold block text-gray-800">Intérprete de LIBRAS</span>
+                        <span class="text-gray-500">Tradução das orientações</span>
+                    </div>
+                    <div class="p-3 bg-white border rounded-lg">
+                        <span class="font-bold block text-gray-800">Condições para Lactantes</span>
+                        <span class="text-gray-500">Espaço para amamentação com acompanhante</span>
+                    </div>
+                    <div class="p-3 bg-white border rounded-lg">
+                        <span class="font-bold block text-gray-800">Acessibilidade Física</span>
+                        <span class="text-gray-500">Salas no térreo ou prédio acessível</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 6: Conteúdo Programático -->
+            <section id="conteudo" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--brand-purple);">
+                        <i class="fas fa-book text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--brand-purple);">O que Estudar? Conteúdo Programático</h3>
+                        <p class="text-sm text-gray-500">Clique nas disciplinas para visualizar as habilidades cobradas na Prova Objetiva (Anexo V do Edital 491/2026)</p>
+                    </div>
+                </div>
+
+                <!-- Ícones das Disciplinas -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center mb-6">
+                    <div onclick="showSyllabus('portugues')" class="subject-icon active p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
+                        <i class="fas fa-language text-2xl text-indigo-600"></i>
+                        <span class="text-xs font-bold">Língua Portuguesa & Literatura</span>
+                    </div>
+                    <div onclick="showSyllabus('matematica')" class="subject-icon p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
+                        <i class="fas fa-calculator text-2xl text-emerald-600"></i>
+                        <span class="text-xs font-bold">Matemática</span>
+                    </div>
+                    <div onclick="showSyllabus('ciencias')" class="subject-icon p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
+                        <i class="fas fa-flask text-2xl text-amber-600"></i>
+                        <span class="text-xs font-bold">Ciências da Natureza</span>
+                    </div>
+                    <div onclick="showSyllabus('humanas')" class="subject-icon p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
+                        <i class="fas fa-globe-americas text-2xl text-orange-600"></i>
+                        <span class="text-xs font-bold">Ciências Humanas (Hist/Geo)</span>
+                    </div>
+                </div>
+
+                <!-- Painel Exibidor do Conteúdo -->
+                <div id="syllabus-display" class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                    <!-- Dynamic content inserted via Javascript -->
+                </div>
+            </section>
+
+            <!-- Seção CTA (Call-to-Action) - Final -->
+            <section id="cta-final" class="section-card text-center" style="background: linear-gradient(135deg, var(--primary-blue), var(--teal));">
+                <h3 class="text-3xl font-black text-white mb-3">Garanta Sua Vaga no CEFET-MG com o Guia Pré-Federal</h3>
+                <p class="max-w-2xl mx-auto mb-6 text-blue-100">Prepare-se com aulas focadas no edital, simulados e análise completa do livro "O Alienista". Não deixe para a última hora!</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="cta-button-primary flex items-center justify-center font-bold py-3 px-6 rounded-lg w-full sm:w-auto shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
+                        Matricule-se no Intensivo
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="flex items-center justify-center font-bold py-3 px-6 rounded-lg border-2 border-white text-white hover:bg-white hover:text-[#3007a0] transition-colors w-full sm:w-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        Falar no WhatsApp
+                    </a>
+                </div>
+            </section>
+
+            <footer class="text-center mt-12 pt-8 border-t border-slate-200">
+                <p class="text-sm text-gray-500">Desenvolvido por <strong>Guia Pré-Federal</strong> com base no Edital nº 491/2026 do Centro Federal de Educação Tecnológica de Minas Gerais (CEFET-MG).</p>
+                <p class="text-xs text-gray-400 mt-2">Consulte sempre a página oficial em <a href="https://www.processoseletivo.cefetmg.br" target="_blank" class="underline text-indigo-600">processoseletivo.cefetmg.br</a> para novidades e retificações.</p>
+            </footer>
+
+        </div>
+    </main>
+
+    <!-- Botão Flutuante de Ação (FAB) -->
+    <div class="fab-container">
+        <div class="fab-options">
+            <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="fab-option">
+                <span class="fab-label">Nosso Intensivo</span>
+                <div class="fab-icon" style="background-color: #6408b0;">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </a>
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
+                <span class="fab-label">Contato WhatsApp</span>
+                <div class="fab-icon" style="background-color: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </a>
+        </div>
+        <button class="fab-main" id="fab-main-button">
+            <i class="fas fa-comment-dots icon-open"></i>
+            <i class="fas fa-times icon-close"></i>
+        </button>
+    </div>
+
+    <script>
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Floating Action Button (FAB) Logic
+    const fabContainer = document.querySelector('.fab-container');
+    const fabMainButton = document.getElementById('fab-main-button');
+    fabMainButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        fabContainer.classList.toggle('active');
+    });
+    document.addEventListener('click', (event) => {
+        if (!fabContainer.contains(event.target)) {
+            fabContainer.classList.remove('active');
+        }
+    });
+
+    // DATASET COMPLETO DE CAMPI, CURSOS E VAGAS DO CEFET-MG (Edital 491/2026 - Quadros VI a XV)
+    const campiData = {
+        'bh_1': {
+            nome: 'Belo Horizonte (Campi I e II) — Oferta 2027/1',
+            endereco: 'Campus I: Av. Amazonas, 5.253 - Nova Suíça | Campus II: Av. Amazonas, 7.675 - Nova Gameleira',
+            cursos: [
+                { nome: 'Edificações', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 72, ac: 36, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 11, li_q: 0, li_pcd: 2, li_ep: 5 },
+                { nome: 'Eletromecânica', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Eletromecânica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 72, ac: 36, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 11, li_q: 0, li_pcd: 2, li_ep: 5 },
+                { nome: 'Eletrônica', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 35, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Eletrônica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 72, ac: 36, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 11, li_q: 0, li_pcd: 2, li_ep: 5 },
+                { nome: 'Eletrotécnica', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 38, ac: 19, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Eletrotécnica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 72, ac: 36, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 11, li_q: 0, li_pcd: 2, li_ep: 5 },
+                { nome: 'Equipamentos Biomédicos', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 64, ac: 32, lb_ppi: 10, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 4 },
+                { nome: 'Estradas', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 18, ac: 7, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 3, li_q: 0, li_pcd: 1, li_ep: 1 },
+                { nome: 'Hospedagem', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Hospedagem', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '1 ano', total: 20, ac: 9, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 3, li_q: 0, li_pcd: 1, li_ep: 1 },
+                { nome: 'Informática', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Mecânica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 72, ac: 36, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 11, li_q: 0, li_pcd: 2, li_ep: 5 },
+                { nome: 'Mecânica', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 72, ac: 36, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 11, li_q: 0, li_pcd: 2, li_ep: 5 },
+                { nome: 'Mecatrônica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Meio Ambiente', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Meio Ambiente', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Química', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Química', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 30, ac: 15, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1 },
+                { nome: 'Redes de Computadores', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Trânsito', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 18, ac: 7, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 3, li_q: 0, li_pcd: 1, li_ep: 1 }
+            ]
+        },
+        'bh_2': {
+            nome: 'Belo Horizonte — Oferta 2027/2 (2º Semestre)',
+            endereco: 'Campus I: Av. Amazonas, 5.253 - Nova Suíça',
+            cursos: [
+                { nome: 'Eletrônica', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 35, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Química', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 30, ac: 15, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1 }
+            ]
+        },
+        'araxa': {
+            nome: 'Campus Araxá',
+            endereco: 'Av. Ministro Olavo Drummond, 25 - Bairro São Geraldo - Araxá - MG',
+            cursos: [
+                { nome: 'Edificações', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Edificações', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 25, ac: 11, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 4, li_q: 0, li_pcd: 1, li_ep: 1 },
+                { nome: 'Eletrônica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Eletrônica', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Mecânica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 28, ac: 13, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1 },
+                { nome: 'Mecânica', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 25, ac: 11, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 4, li_q: 0, li_pcd: 1, li_ep: 1 },
+                { nome: 'Mineração', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Mineração', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 }
+            ]
+        },
+        'contagem': {
+            nome: 'Campus Contagem',
+            endereco: 'Alameda das Perdizes, 61 - Bairro Cabral - Contagem - MG',
+            cursos: [
+                { nome: 'Controle Ambiental', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 33, ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Eletroeletrônica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 32, ac: 16, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Informática', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 32, ac: 16, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 }
+            ]
+        },
+        'curvelo': {
+            nome: 'Campus Curvelo',
+            endereco: 'Rua Raymundo Mattoso, 900 - Bairro Santa Rita - Curvelo - MG',
+            cursos: [
+                { nome: 'Edificações', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Eletrotécnica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 34, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Meio Ambiente', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 34, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 }
+            ]
+        },
+        'divinopolis': {
+            nome: 'Campus Divinópolis',
+            endereco: 'Rua Álvares de Azevedo, 400 - Bairro Bela Vista - Divinópolis - MG',
+            cursos: [
+                { nome: 'Eletromecânica', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Informática', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Mecatrônica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Produção de Moda', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 }
+            ]
+        },
+        'leopoldina': {
+            nome: 'Campus Leopoldina',
+            endereco: 'Rua José Peres, 558 - Centro - Leopoldina - MG',
+            cursos: [
+                { nome: 'Eletromecânica', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 34, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Eletrotécnica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 35, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Informática', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 34, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Mecânica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 34, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Mecânica', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 34, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 }
+            ]
+        },
+        'nepomuceno': {
+            nome: 'Campus Nepomuceno',
+            endereco: 'Av. Monsenhor Luiz de Gonzaga, 103 - Centro - Nepomuceno - MG',
+            cursos: [
+                { nome: 'Administração', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '1.5 ano', total: 32, ac: 16, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Administração', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 34, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Eletrotécnica', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 32, ac: 16, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Eletrotécnica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 34, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Mecatrônica', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 32, ac: 16, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Redes de Computadores', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 34, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 }
+            ]
+        },
+        'timoteo': {
+            nome: 'Campus Timóteo',
+            endereco: 'Rua 19 de Novembro, 121 - Centro Norte - Timóteo - MG',
+            cursos: [
+                { nome: 'Desenvolvimento de Sistemas', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Edificações', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 34, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Metalurgia', forma: 'Concomitante / Subsequente', turno: 'Noturno', duracao: '2 anos', total: 32, ac: 16, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Química', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 34, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 }
+            ]
+        },
+        'varginha': {
+            nome: 'Campus Varginha',
+            endereco: 'Av. dos Imigrantes, 1.000 - Bairro Vargem - Varginha - MG',
+            cursos: [
+                { nome: 'Edificações', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Informática', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 36, ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Mecatrônica', forma: 'Integrada', turno: 'Integral', duracao: '3 anos', total: 34, ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2 },
+                { nome: 'Mecatrônica', forma: 'Subsequente', turno: 'Noturno', duracao: '2 anos', total: 24, ac: 11, lb_ppi: 4, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 4, li_q: 0, li_pcd: 1, li_ep: 1 }
+            ]
+        }
+    };
+
+    // CONTEÚDO PROGRAMÁTICO (Anexo V - Matriz de Referência BNCC)
+    const syllabusData = {
+        portugues: `
+            <h4 class="font-bold text-lg text-indigo-900 mb-3"><i class="fas fa-language mr-2"></i>Língua Portuguesa & Literatura Brasileira (15 Questões - Desempate 1º)</h4>
+            <div class="bg-indigo-100/70 p-3.5 rounded-lg mb-4 text-xs text-indigo-950 font-semibold border border-indigo-200">
+                <i class="fas fa-book mr-1 text-indigo-700"></i> <strong>Obra Literária Obrigatória:</strong> <em>"O Alienista"</em> (Machado de Assis) — Leitura indispensável.
+            </div>
+            <ul class="list-disc list-inside space-y-2 text-sm text-gray-700">
+                <li><b>HL01:</b> Organização temática e tópica do texto (título/texto, progressão temática, continuidade e não-contradição).</li>
+                <li><b>HL02:</b> Recursos persuasivos e estratégias argumentativas (escolhas lexicais, metáforas, ironia, humor e caricatura).</li>
+                <li><b>HL03:</b> Análise crítica de teses, opiniões, posicionamentos explícitos/implícitos e força dos argumentos.</li>
+                <li><b>HL04:</b> Relações lógico-discursivas e coesão textual (causalidade, temporalidade, oposição, condição, finalidade).</li>
+                <li><b>HL05:</b> Intertextualidade, alusões e diálogos entre textos literários clássicos e produções contemporâneas.</li>
+                <li><b>HL06:</b> Traços identitários, sociais, culturais e políticos no contexto histórico da obra literária.</li>
+                <li><b>HL07:</b> Elementos do texto narrativo ficcional (enredo, foco narrativo, vozes, espaço/tempo e particularidades linguísticas).</li>
+                <li><b>HL08:</b> Recursos expressivos sonoros (rimas, aliterações), semânticos (figuras de linguagem) e gráfico-espaciais.</li>
+            </ul>`,
+        matematica: `
+            <h4 class="font-bold text-lg text-emerald-900 mb-3"><i class="fas fa-calculator mr-2"></i>Matemática (15 Questões - Desempate 2º)</h4>
+            <ul class="list-disc list-inside space-y-2 text-sm text-gray-700">
+                <li><b>HM01:</b> Conjuntos (união, interseção, diferença), conjuntos numéricos ($\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$), potenciação, radiciação e notação científica.</li>
+                <li><b>HM02:</b> Fatoração, produtos notáveis e resolução de equações polinomiais de 1º e 2º grau.</li>
+                <li><b>HM03:</b> Grandezas e medidas, proporção direta/inversa, regra de três simples/composta, porcentagem e juros simples/compostos.</li>
+                <li><b>HM04:</b> Estudo de funções de 1º e 2º graus (domínio, imagem, gráficos, zeros) e sistemas de equações.</li>
+                <li><b>HM05:</b> Geometria Plana: retas paralelas, polígonos, triângulos, quadriláteros e propriedades da circunferência.</li>
+                <li><b>HM06:</b> Semelhança de figuras, Teorema de Pitágoras, relações métricas/trigonométricas e áreas de figuras planas.</li>
+                <li><b>HM07:</b> Estatística: leitura de gráficos (barras, linhas, setores), tabelas, média, moda, mediana e amplitude.</li>
+                <li><b>HM08:</b> Probabilidade: princípio aditivo/multiplicativo da contagem, espaço amostral e eventos dependentes/independentes.</li>
+            </ul>`,
+        ciencias: `
+            <h4 class="font-bold text-lg text-amber-900 mb-3"><i class="fas fa-flask mr-2"></i>Ciências da Natureza (8 Questões - Desempate 3º)</h4>
+            <ul class="list-disc list-inside space-y-2 text-sm text-gray-700">
+                <li><b>HCN01 / HCN02:</b> Modelos explicativos, separação de misturas, reciclagem e sustentabilidade ambiental.</li>
+                <li><b>HCN03:</b> Seres vivos: mecanismos reprodutivos, adaptação evolutiva e equilíbrio dos ecossistemas.</li>
+                <li><b>HCN04:</b> Sistemas do corpo humano, saúde pública, imunização e hábitos para qualidade de vida.</li>
+                <li><b>HCN05 / HCN06:</b> Óptica geométrica (visão, lentes e espelhos) e Física clássica (cinemática, velocidade e aceleração).</li>
+                <li><b>HCN07 / HCN08:</b> Reações químicas (Leis de Lavoisier e Proust), estequiometria básica e Tabela Periódica dos elementos.</li>
+            </ul>`,
+        humanas: `
+            <h4 class="font-bold text-lg text-orange-900 mb-3"><i class="fas fa-globe-americas mr-2"></i>Ciências Humanas — História & Geografia (12 Questões - Desempate 4º e 5º)</h4>
+            <ul class="list-disc list-inside space-y-2 text-sm text-gray-700">
+                <li><b>HCH01 / HCH02:</b> Cartografia (mapas, escalas, curvas de nível, imagens de satélite) e características geoambientais do espaço mundial.</li>
+                <li><b>HCH03 / HCH04:</b> Industrialização, urbanização, demografia, indicadores socioeconômicos e diversidade cultural no Brasil.</li>
+                <li><b>HCH05 / HCH06:</b> Geografia Física (relevo, solos, clima, biomas, hidrografia) e dinâmica do espaço agrário/rural.</li>
+                <li><b>HCH07 a HCH10:</b> Processos históricos nas Américas, África e Europa dos séculos XIX ao XXI (Império, República no Brasil, Guerras Mundiais e Globalização).</li>
+                <li><b>HCH11 / HCH12:</b> Lutas sociais de populações marginalizadas (negros, indígenas e mulheres) e transformações do trabalho no capitalismo.</li>
+            </ul>`
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        populateCampusSelect();
+        renderCampusData();
+        showSyllabus('portugues');
+    });
+
+    function populateCampusSelect() {
+        const select = document.getElementById('campus-select');
+        select.innerHTML = '';
+        for (const key in campiData) {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = campiData[key].nome;
+            select.appendChild(option);
+        }
+    }
+
+    function renderCampusData() {
+        const selectedKey = document.getElementById('campus-select').value;
+        const campus = campiData[selectedKey];
+        if (!campus) return;
+
+        // Display Campus Info Header
+        const infoBox = document.getElementById('campus-info-box');
+        document.querySelector('#campus-title').textContent = campus.nome;
+        document.querySelector('#campus-address span').textContent = campus.endereco;
+        infoBox.classList.remove('hidden');
+
+        // Render Courses Table
+        const container = document.getElementById('courses-table-container');
+        let html = `
+            <table class="data-table text-xs">
+                <thead>
+                    <tr class="bg-slate-100 text-gray-700">
+                        <th rowspan="2" class="align-middle">Curso Técnico</th>
+                        <th rowspan="2" class="align-middle text-center">Forma</th>
+                        <th rowspan="2" class="align-middle text-center">Turno</th>
+                        <th rowspan="2" class="align-middle text-center font-bold bg-blue-100">Total Vagas</th>
+                        <th rowspan="2" class="align-middle text-center font-bold bg-emerald-100">AC</th>
+                        <th colspan="4" class="text-center bg-purple-100 font-bold">Cotas LB (Renda &le; 1,0 SM)</th>
+                        <th colspan="4" class="text-center bg-indigo-100 font-bold">Cotas LI (Qualquer Renda)</th>
+                    </tr>
+                    <tr class="bg-slate-50 text-gray-600">
+                        <th class="text-center">PPI</th>
+                        <th class="text-center">Q</th>
+                        <th class="text-center">PcD</th>
+                        <th class="text-center">EP</th>
+                        <th class="text-center">PPI</th>
+                        <th class="text-center">Q</th>
+                        <th class="text-center">PcD</th>
+                        <th class="text-center">EP</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">`;
+
+        campus.cursos.forEach(c => {
+            html += `
+                <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="font-bold text-gray-800">${c.nome}</td>
+                    <td class="text-center">${c.forma}</td>
+                    <td class="text-center">${c.turno}</td>
+                    <td class="text-center font-black bg-blue-50 text-blue-900">${c.total}</td>
+                    <td class="text-center font-bold bg-emerald-50 text-emerald-900">${c.ac}</td>
+                    <td class="text-center">${c.lb_ppi}</td>
+                    <td class="text-center">${c.lb_q}</td>
+                    <td class="text-center">${c.lb_pcd}</td>
+                    <td class="text-center">${c.lb_ep}</td>
+                    <td class="text-center">${c.li_ppi}</td>
+                    <td class="text-center">${c.li_q}</td>
+                    <td class="text-center">${c.li_pcd}</td>
+                    <td class="text-center">${c.li_ep}</td>
+                </tr>`;
+        });
+
+        html += `</tbody></table>`;
+        container.innerHTML = html;
+    }
+
+    function showSyllabus(subject) {
+        document.getElementById('syllabus-display').innerHTML = syllabusData[subject];
+        document.querySelectorAll('.subject-icon').forEach(icon => {
+            icon.classList.remove('active');
+        });
+        document.querySelector(`[onclick="showSyllabus('${subject}')"]`).classList.add('active');
+    }
+    </script>
+</body>
+</html>
