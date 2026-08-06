@@ -31,8 +31,6 @@
             --green: #7bcd47;
             --dark-green: #005b38;
             --orange-red: #dd5737;
-            --ifmg-green: #005b38;
-            --ifmg-light-green: #7bcd47;
             --text-dark: #1a202c;
             --soft-gray: #f7f7f7;
             --dark-text-original: #1f2937;
@@ -49,17 +47,10 @@
             border-bottom: 2px solid transparent;
         }
         .nav-link:hover {
-            color: var(--ifmg-green);
-            border-bottom-color: var(--ifmg-green);
+            color: var(--dark-green);
+            border-bottom-color: var(--dark-green);
         }
         
-        .hero-title .highlight {
-            background-color: var(--primary-lime);
-            color: var(--dark-green);
-            padding: 0.25rem 1rem;
-            border-radius: 0.75rem;
-            display: inline-block;
-        }
         .section-title {
             font-size: 2.25rem;
             font-weight: 900;
@@ -81,7 +72,7 @@
 
         /* Seção CTA Personalizada para IFMG */
         .cta-section {
-            background: linear-gradient(135deg, var(--dark-green), var(--purple));
+            background: linear-gradient(135deg, var(--dark-green), var(--dark-blue));
             color: white;
             padding: 3rem 1.5rem;
             text-align: center;
@@ -102,7 +93,7 @@
         }
         .cta-button-primary:hover {
             background-color: white;
-            color: var(--purple);
+            color: var(--dark-green);
             transform: scale(1.05);
         }
         .cta-button-secondary {
@@ -147,7 +138,7 @@
 
         .quota-card {
             background-color: #f8fafc;
-            border-left: 4px solid var(--ifmg-green);
+            border-left: 4px solid var(--dark-green);
             border-radius: 0.5rem;
             padding: 1.25rem;
             transition: transform 0.2s ease;
@@ -176,7 +167,7 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background-color: var(--ifmg-green);
+            background-color: var(--dark-green);
             color: white;
             border: none;
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
@@ -264,14 +255,15 @@
                 <img src="https://guiaprefederal.com.br/logo.png" 
                      alt="Guia - Pré Federal Logo" 
                      class="rounded-full w-10 h-10" 
-                     style="background-color: #7bcd47;"
-                     onerror="this.onerror=null;this.src='https://placehold.co/40x40/7BCD47/FFFFFF?text=GPF';">
+                     style="background-color: #005b38;"
+                     onerror="this.onerror=null;this.src='https://placehold.co/40x40/005B38/FFFFFF?text=GPF';">
                 <span class="text-xl font-bold" style="color: var(--dark-green);">Guia Pré-Federal</span>
             </a>
             <nav class="hidden md:block">
                 <ul class="flex space-x-6">
                     <li><a href="#cronograma" class="text-slate-700 hover:text-[#005b38] font-medium transition duration-300">Cronograma</a></li>
                     <li><a href="#prova" class="text-slate-700 hover:text-[#005b38] font-medium transition duration-300">A Prova</a></li>
+                    <li><a href="#escolha-vagas" class="text-slate-700 hover:text-[#005b38] font-medium transition duration-300">Escolha de Vagas</a></li>
                     <li><a href="#campi" class="text-slate-700 hover:text-[#005b38] font-medium transition duration-300">Campi e Vagas</a></li>
                     <li><a href="#cotas" class="text-slate-700 hover:text-[#005b38] font-medium transition duration-300">Cotas (SRV)</a></li>
                     <li><a href="#isencao" class="text-slate-700 hover:text-[#005b38] font-medium transition duration-300">Isenção & Regras</a></li>
@@ -286,6 +278,7 @@
             <ul class="flex flex-col items-center space-y-4">
                 <li><a href="#cronograma" class="block text-slate-700 hover:text-[#005b38] font-medium py-2">Cronograma</a></li>
                 <li><a href="#prova" class="block text-slate-700 hover:text-[#005b38] font-medium py-2">A Prova</a></li>
+                <li><a href="#escolha-vagas" class="block text-slate-700 hover:text-[#005b38] font-medium py-2">Escolha de Vagas</a></li>
                 <li><a href="#campi" class="block text-slate-700 hover:text-[#005b38] font-medium py-2">Campi e Vagas</a></li>
                 <li><a href="#cotas" class="block text-slate-700 hover:text-[#005b38] font-medium py-2">Cotas (SRV)</a></li>
                 <li><a href="#isencao" class="block text-slate-700 hover:text-[#005b38] font-medium py-2">Isenção & Regras</a></li>
@@ -300,18 +293,19 @@
                  <img src="https://guiaprefederal.com.br/logo1.png" 
                       alt="Logo Guia Pré-Federal" 
                       class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 rounded-full shadow-lg border-4 border-gray-200" 
-                      style="background-color: var(--ifmg-green);"
+                      style="background-color: var(--dark-green);"
                       onerror="this.onerror=null;this.src='https://placehold.co/128x128/005B38/FFFFFF?text=GPF';">
                  <h1 class="text-4xl md:text-5xl font-black mb-4" style="color: var(--dark-green);">
-                     Edital IFMG <span class="px-3 py-1 rounded-md text-white shadow-sm" style="background-color: var(--ifmg-green);">Edital 853/2026</span>
+                     Edital IFMG <span class="px-3 py-1 rounded-md text-white shadow-sm" style="background-color: var(--green);">Edital 853/2026</span>
                  </h1>
                  <p class="section-subtitle max-w-3xl mx-auto">
-                     Guia completo e descomplicado do Processo Seletivo dos Cursos Técnicos Integrados ao Ensino Médio do IFMG (Ingresso 2027).
+                     Guia completo e descomplicado do Processo Seletivo dos Cursos Técnicos Integrados do IFMG (Ingresso 2027).
                  </p>
                  <div class="mt-6 flex flex-wrap justify-center gap-3 text-sm font-semibold">
-                     <span class="bg-emerald-50 text-emerald-900 px-4 py-2 rounded-full border border-emerald-200"><i class="fas fa-graduation-cap mr-2 text-emerald-600"></i>Cursos Técnicos Integrados</span>
-                     <span class="bg-amber-50 text-amber-900 px-4 py-2 rounded-full border border-amber-200"><i class="fas fa-map-marker-alt mr-2 text-amber-600"></i>18 Campi em MG</span>
-                     <span class="bg-red-50 text-red-900 px-4 py-2 rounded-full border border-red-200"><i class="fas fa-calendar-alt mr-2 text-red-600"></i>Prova em 01/11/2026 (13h)</span>
+                     <span class="bg-emerald-50 text-emerald-900 px-4 py-2 rounded-full border border-emerald-200"><i class="fas fa-graduation-cap mr-2 text-emerald-600"></i>Cursos Técnicos Integrados (Tempo Integral)</span>
+                     <span class="bg-blue-50 text-blue-900 px-4 py-2 rounded-full border border-blue-200"><i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>18 Campi em Minas Gerais</span>
+                     <span class="bg-amber-50 text-amber-900 px-4 py-2 rounded-full border border-amber-200"><i class="fas fa-list-check mr-2 text-amber-600"></i>48 Questões Objetivas</span>
+                     <span class="bg-red-50 text-red-900 px-4 py-2 rounded-full border border-red-200"><i class="fas fa-calendar-alt mr-2 text-red-600"></i>Prova em 01/11/2026 (13:00h)</span>
                  </div>
             </div>
         </section>
@@ -336,12 +330,12 @@
 
             <section id="cronograma" class="section-card">
                 <div class="flex items-center space-x-3 mb-6">
-                    <div class="p-3 rounded-lg text-white" style="background-color: var(--ifmg-green);">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--dark-green);">
                         <i class="fas fa-calendar-alt text-xl"></i>
                     </div>
                     <div>
                         <h3 class="text-2xl font-bold" style="color: var(--dark-green);">Cronograma Oficial (Edital 853/2026)</h3>
-                        <p class="text-sm text-gray-500">Principais datas que você precisa acompanhar no Processo Seletivo 2027 do IFMG</p>
+                        <p class="text-sm text-gray-500">Principais datas do Processo Seletivo 2027 dos Cursos Técnicos Integrados do IFMG</p>
                     </div>
                 </div>
 
@@ -356,9 +350,9 @@
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             <tr class="bg-emerald-50/50">
-                                <td class="font-bold text-[#005b38]">Período de Inscrição</td>
+                                <td class="font-bold text-[#005b38]">Período de Inscrição na Internet</td>
                                 <td class="font-semibold">03/08 a 14/09/2026</td>
-                                <td>Portal IFMG (via gov.br)</td>
+                                <td>Área do Candidato (via gov.br) em www.ifmg.edu.br</td>
                             </tr>
                             <tr>
                                 <td class="font-bold text-amber-700">Solicitação de Isenção da Taxa (R$ 75,00)</td>
@@ -366,34 +360,34 @@
                                 <td>Área do Candidato</td>
                             </tr>
                             <tr>
-                                <td class="font-bold">Resultado Preliminar da Isenção</td>
+                                <td class="font-bold">Resultado Preliminar das Isenções</td>
                                 <td>31/08/2026</td>
                                 <td>www.ifmg.edu.br</td>
                             </tr>
                             <tr>
-                                <td class="font-bold text-red-600">Último dia para pagamento da Taxa de Inscrição</td>
+                                <td class="font-bold text-red-600">Último dia para Pagamento da Taxa de Inscrição</td>
                                 <td class="font-bold text-red-600">15/09/2026</td>
-                                <td>PagTesouro / Boleto GRU</td>
+                                <td>PagTesouro (PIX, Cartão ou GRU)</td>
                             </tr>
                             <tr>
-                                <td class="font-bold">Homologação das Inscrições e Solicitações de Prova Especial</td>
-                                <td>25/09/2026</td>
+                                <td class="font-bold">Divulgação da Lista Preliminar de Inscrições Homologadas</td>
+                                <td>18/09/2026</td>
                                 <td>www.ifmg.edu.br</td>
                             </tr>
                             <tr>
-                                <td class="font-bold text-purple-700">Envio da Documentação de Cotas (Upload)</td>
-                                <td class="font-bold text-purple-700">28/09 a 09/10/2026</td>
-                                <td>Área do Candidato (Sistema)</td>
+                                <td class="font-bold text-orange-700">Envio de Documentos para Comprovação de Cotas (Upload)</td>
+                                <td class="font-bold text-orange-700">28/09 a 09/10/2026</td>
+                                <td>Área do Candidato</td>
                             </tr>
                             <tr>
-                                <td class="font-bold">Disponibilização do Cartão Definitivo de Inscrição (CDI)</td>
-                                <td>13/10/2026</td>
+                                <td class="font-bold text-emerald-800">Disponibilização do Comprovante Definitivo de Inscrição (CDI / Local)</td>
+                                <td class="font-bold text-emerald-800">13/10/2026</td>
                                 <td>Área do Candidato</td>
                             </tr>
                             <tr class="bg-emerald-100/70 font-bold" style="color: var(--dark-green);">
                                 <td class="py-3"><i class="fas fa-pen-nib mr-2"></i>APLICAÇÃO DA PROVA OBJETIVA PRESENCIAL</td>
                                 <td class="py-3">01/11/2026 (Domingo - 13:00h)</td>
-                                <td class="py-3">Portões fecham às 13h00!</td>
+                                <td class="py-3">Portões abrem 12h00 / Fecham às 13h00!</td>
                             </tr>
                             <tr>
                                 <td class="font-bold">Divulgação do Gabarito Preliminar e Caderno de Provas</td>
@@ -401,19 +395,19 @@
                                 <td>www.ifmg.edu.br</td>
                             </tr>
                             <tr>
-                                <td class="font-bold">Publicação do Resultado Preliminar</td>
+                                <td class="font-bold">Divulgação do Resultado Preliminar</td>
                                 <td>25/11/2026</td>
                                 <td>www.ifmg.edu.br</td>
                             </tr>
-                            <tr>
-                                <td class="font-bold text-emerald-800">Divulgação do RESULTADO FINAL</td>
-                                <td class="font-bold text-emerald-800">A partir de 01/12/2026</td>
+                            <tr class="bg-emerald-50">
+                                <td class="font-bold text-emerald-900">Divulgação do RESULTADO FINAL</td>
+                                <td class="font-bold text-emerald-900">A partir de 01/12/2026</td>
                                 <td>www.ifmg.edu.br</td>
                             </tr>
                             <tr>
-                                <td class="font-bold text-indigo-700">Realização das Bancas de Heteroidentificação (Pretos/Pardos)</td>
+                                <td class="font-bold text-purple-800">Realização das Bancas de Heteroidentificação (Pretos e Pardos)</td>
                                 <td>07/12 a 18/12/2026</td>
-                                <td>No Campus da vaga pleiteada</td>
+                                <td>Divulgação pelos campi locais</td>
                             </tr>
                         </tbody>
                     </table>
@@ -422,12 +416,12 @@
 
             <section id="prova" class="section-card">
                 <div class="flex items-center space-x-3 mb-6">
-                    <div class="p-3 rounded-lg text-white" style="background-color: var(--ifmg-green);">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--dark-green);">
                         <i class="fas fa-file-alt text-xl"></i>
                     </div>
                     <div>
                         <h3 class="text-2xl font-bold" style="color: var(--dark-green);">Estrutura da Prova Objetiva Presencial</h3>
-                        <p class="text-sm text-gray-500">Conheça as matérias, total de questões, horários de aplicação e regras de eliminação</p>
+                        <p class="text-sm text-gray-500">Conheça as áreas, quantidade de questões, horários de aplicação e regras de documentos</p>
                     </div>
                 </div>
 
@@ -435,42 +429,42 @@
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-center">
                         <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Total de Questões</span>
                         <p class="text-4xl font-black mt-2" style="color: var(--dark-green);">48</p>
-                        <p class="text-xs text-gray-500 mt-1">Múltipla escolha (4 alternativas: A, B, C, D)</p>
+                        <p class="text-xs text-gray-500 mt-1">Múltipla escolha com 4 alternativas (A, B, C, D) - 1 pt cada</p>
                     </div>
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-center">
-                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Pontuação Máxima</span>
-                        <p class="text-4xl font-black mt-2" style="color: var(--primary-blue);">48</p>
-                        <p class="text-xs text-gray-500 mt-1">1 Ponto por questão acerta (Sem Redação)</p>
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Formato dos Cursos</span>
+                        <p class="text-lg font-black mt-2 text-emerald-800">Tempo Integral</p>
+                        <p class="text-xs text-gray-500 mt-1">Aulas nos períodos da manhã e tarde (3 anos)</p>
                     </div>
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-center">
                         <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Duração do Exame</span>
                         <p class="text-4xl font-black mt-2" style="color: var(--orange-red);">4 horas</p>
-                        <p class="text-xs text-gray-500 mt-1">Portões fecham às 13:00h!</p>
+                        <p class="text-xs text-gray-500 mt-1">Portões abrem 12h00 e fecham impreterivelmente às 13h00!</p>
                     </div>
                 </div>
 
-                <!-- Distribuição por disciplina -->
-                <h4 class="font-bold text-lg mb-4 text-gray-800">Distribuição das Questões por Área do Conhecimento:</h4>
+                <!-- Distribuição por área -->
+                <h4 class="font-bold text-lg mb-4 text-gray-800">Distribuição das Questões por Área do Conhecimento (Seção 7 do Edital):</h4>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-                    <div class="p-4 rounded-xl text-center border bg-blue-50 border-blue-200">
-                        <span class="block text-sm font-bold text-indigo-900">Linguagens e Códigos</span>
+                    <div class="p-4 rounded-xl text-center border bg-indigo-50 border-indigo-200">
+                        <span class="block text-xs font-bold text-indigo-900">Linguagens, Códigos e suas Tecnologias</span>
                         <span class="text-3xl font-black text-indigo-700">12</span>
                         <span class="block text-xs text-indigo-600">questões (Desempate 1º)</span>
                     </div>
                     <div class="p-4 rounded-xl text-center border bg-emerald-50 border-emerald-200">
-                        <span class="block text-sm font-bold text-emerald-900">Matemática e Tecnologias</span>
+                        <span class="block text-xs font-bold text-emerald-900">Matemática e suas Tecnologias</span>
                         <span class="text-3xl font-black text-emerald-700">12</span>
                         <span class="block text-xs text-emerald-600">questões (Desempate 2º)</span>
                     </div>
                     <div class="p-4 rounded-xl text-center border bg-amber-50 border-amber-200">
-                        <span class="block text-sm font-bold text-amber-900">Ciências da Natureza</span>
+                        <span class="block text-xs font-bold text-amber-900">Ciências da Natureza e suas Tecnologias</span>
                         <span class="text-3xl font-black text-amber-700">12</span>
                         <span class="block text-xs text-amber-600">questões (Desempate 3º)</span>
                     </div>
                     <div class="p-4 rounded-xl text-center border bg-orange-50 border-orange-200">
-                        <span class="block text-sm font-bold text-orange-900">Ciências Humanas</span>
+                        <span class="block text-xs font-bold text-orange-900">Ciências Humanas e suas Tecnologias</span>
                         <span class="text-3xl font-black text-orange-700">12</span>
-                        <span class="block text-xs text-orange-600">questões (Desempate 4º)</span>
+                        <span class="block text-xs text-orange-600">questões</span>
                     </div>
                 </div>
 
@@ -478,7 +472,7 @@
                 <div class="bg-red-50 p-5 rounded-xl border border-red-200 mb-6">
                     <h4 class="font-bold text-base mb-2 text-red-900"><i class="fas fa-exclamation-triangle mr-2"></i>Atenção à Regra do Zero!</h4>
                     <p class="text-xs text-red-800 leading-relaxed">
-                        Será **automaticamente ELIMINADA** a pessoa candidata que obtiver **nota 0 (zero) em qualquer uma das 4 áreas do conhecimento** na prova objetiva. Portanto, responda todas as matérias com atenção!
+                        Será <strong>ELIMINADO do Processo Seletivo</strong> a pessoa candidata que obtiver <strong>nota 0 (zero) em qualquer uma das 4 áreas do conhecimento</strong> da prova objetiva.
                     </p>
                 </div>
 
@@ -486,14 +480,93 @@
                 <div class="bg-amber-50 p-5 rounded-xl border border-amber-200">
                     <h4 class="font-bold text-base mb-2 text-amber-900"><i class="fas fa-id-card mr-2"></i>Documentos de Identificação Exigidos no Dia da Prova</h4>
                     <p class="text-xs text-amber-800 leading-relaxed mb-3">
-                        Apresente documento oficial físico original com foto recente (RG, CIN, CNH, Passaporte ou Carteira de Trabalho). Não são aceitas cópias ou documentos armazenados em celulares.
+                        Apresente documento oficial físico original com foto recente e assinatura (RG, CIN, CNH, Passaporte ou Carteira de Trabalho). 
                     </p>
                     <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-2 text-xs">
-                        <div class="bg-white p-2.5 rounded border text-red-800">❌ Documentos Digitais</div>
+                        <div class="bg-white p-2.5 rounded border text-red-800">❌ CNH / RG Digital no celular</div>
                         <div class="bg-white p-2.5 rounded border text-red-800">❌ Cópias (Mesmo Autenticadas)</div>
-                        <div class="bg-white p-2.5 rounded border text-red-800">❌ Cartão CPF em papel</div>
+                        <div class="bg-white p-2.5 rounded border text-red-800">❌ Documento Danificado / Ilegível</div>
                         <div class="bg-white p-2.5 rounded border text-emerald-800">✔️ Documento Físico c/ Foto</div>
                     </div>
+                </div>
+            </section>
+
+            <section id="escolha-vagas" class="section-card">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--dark-green);">
+                        <i class="fas fa-list-check text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold" style="color: var(--dark-green);">Como Funciona a Escolha de Opções & Classificação no IFMG?</h3>
+                        <p class="text-sm text-gray-500">Regras de escolha de até 3 cursos no mesmo campus, convocação compulsória e recomendação estratégica do edital</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                        <div class="text-emerald-900 font-bold text-base mb-1"><i class="fas fa-1 mr-2"></i>Até 3 Cursos no Mesmo Campus</div>
+                        <p class="text-xs text-gray-700 leading-relaxed">
+                            No ato da inscrição, você pode indicar até <strong>3 opções de cursos técnicos integrados no mesmo campus</strong>, definindo sua ordem de prioridade.
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
+                        <div class="text-amber-900 font-bold text-base mb-1"><i class="fas fa-lock mr-2"></i>Convocação Compulsória</div>
+                        <p class="text-xs text-gray-700 leading-relaxed">
+                            Se for convocado(a) para qualquer uma das opções indicadas (mesmo a 2ª ou 3ª), você é <strong>obrigado(a) a ocupar essa vaga</strong>. Não é permitido recusá-la para tentar vaga na 1ª opção!
+                        </p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                        <div class="text-blue-900 font-bold text-base mb-1"><i class="fas fa-project-diagram mr-2"></i>Processamento de Opções</div>
+                        <p class="text-xs text-gray-700 leading-relaxed">
+                            Sua nota é testada primeiramente na 1ª opção. Se for aprovado(a) nela, as demais opções recebem a indicação <i>"Convocado em outro curso"</i> e são canceladas.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tabela Explicativa do IFMG -->
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 mb-4">
+                    <h4 class="font-bold text-base text-gray-900 mb-3"><i class="fas fa-sitemap text-emerald-700 mr-2"></i>Exemplo Prático de Como as Opções São Processadas (Seção 9 do Edital 853/2026):</h4>
+                    <div class="overflow-x-auto">
+                        <table class="data-table text-xs">
+                            <thead>
+                                <tr class="bg-slate-200 text-gray-800">
+                                    <th>1ª Opção</th>
+                                    <th>2ª Opção</th>
+                                    <th>3ª Opção</th>
+                                    <th>Resultado e Convocação Final</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-bold text-emerald-700">Classificado(a)</td>
+                                    <td class="text-gray-400">Classificado(a)</td>
+                                    <td class="text-gray-400">Excedente</td>
+                                    <td class="font-bold text-emerald-900">Convocado(a) obrigatoriamente na 1ª Opção</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-red-600">Excedente</td>
+                                    <td class="font-bold text-emerald-700">Classificado(a)</td>
+                                    <td class="text-gray-400">Classificado(a)</td>
+                                    <td class="font-bold text-emerald-900">Convocado(a) obrigatoriamente na 2ª Opção</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-red-600">Excedente</td>
+                                    <td class="text-red-600">Excedente</td>
+                                    <td class="font-bold text-emerald-700">Classificado(a)</td>
+                                    <td class="font-bold text-emerald-900">Convocado(a) obrigatoriamente na 3ª Opção</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-red-600">Excedente</td>
+                                    <td class="text-red-600">Excedente</td>
+                                    <td class="text-red-600">Excedente</td>
+                                    <td class="text-blue-900 font-semibold">Fica na Lista de Espera como Excedente nas 3 opções!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-amber-900 mt-3 italic bg-amber-100/80 p-3 rounded-lg border border-amber-200">
+                        <strong><i class="fas fa-lightbulb text-amber-600 mr-1"></i>Recomendação Importante do Edital (Página 3):</strong> Se você já definiu claramente o curso que deseja e sua intenção é ingressar EXCLUSIVAMENTE nele, recomenda-se marcar <strong>apenas uma opção</strong> na etapa de inscrição!
+                    </p>
                 </div>
             </section>
 
@@ -503,8 +576,8 @@
                         <i class="fas fa-university text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold" style="color: var(--dark-green);">Campi, Cursos e Vagas (18 Unidades)</h3>
-                        <p class="text-sm text-gray-500">Selecione o campus do IFMG para visualizar os cursos integrados, vagas por modalidade e turnos.</p>
+                        <h3 class="text-2xl font-bold" style="color: var(--dark-green);">Campi, Cursos e Vagas (18 Campi)</h3>
+                        <p class="text-sm text-gray-500">Selecione o campus do IFMG para visualizar os cursos integrados em tempo integral e a distribuição de vagas por cota.</p>
                     </div>
                 </div>
 
@@ -530,19 +603,19 @@
                 </div>
 
                 <div class="mt-4 bg-gray-50 p-4 rounded-lg text-xs text-gray-600 space-y-1">
-                    <p><strong>Legenda das Modalidades de Concorrência:</strong></p>
-                    <p><strong>AC:</strong> Ampla Concorrência | <strong>LB:</strong> Escola Pública com Renda &le; 1,0 Salário Mínimo per capita (CadÚnico) | <strong>LI:</strong> Escola Pública Independente de Renda</p>
+                    <p><strong>Legenda das Modalidades de Concorrência (SRV):</strong></p>
+                    <p><strong>AC:</strong> Ampla Concorrência | <strong>LB:</strong> Escola Pública com Renda &le; 1,0 Salário Mínimo per capita | <strong>LI:</strong> Escola Pública Independente de Renda</p>
                     <p><strong>PPI:</strong> Pretos, Pardos ou Indígenas | <strong>Q:</strong> Quilombolas | <strong>PcD:</strong> Pessoas com Deficiência | <strong>EP:</strong> Demais de Escola Pública</p>
                 </div>
             </section>
 
             <section id="cotas" class="section-card">
                 <div class="flex items-center space-x-3 mb-6">
-                    <div class="p-3 rounded-lg text-white" style="background-color: var(--purple);">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--dark-green);">
                         <i class="fas fa-users text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold" style="color: var(--purple);">Sistema de Reserva de Vagas (SRV / Cotas)</h3>
+                        <h3 class="text-2xl font-bold" style="color: var(--dark-green);">Sistema de Reserva de Vagas (SRV / Cotas)</h3>
                         <p class="text-sm text-gray-500">Divisão de vagas conforme a Lei nº 12.711/2012 e atualizações da Lei nº 14.723/2023</p>
                     </div>
                 </div>
@@ -550,44 +623,36 @@
                 <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6">
                     <h4 class="font-bold text-amber-900 text-sm mb-1"><i class="fas fa-exclamation-circle mr-2"></i>Requisito Inegociável de Escola Pública:</h4>
                     <p class="text-xs text-amber-800 leading-relaxed">
-                        Ter cursado <strong>integralmente do 1º ao 9º ano do Ensino Fundamental em escola pública brasileira</strong>. Quem estudou qualquer período em escola particular (mesmo como bolsista 100%) ou em escolas do Sistema S (SESI, SENAI) <strong>NÃO</strong> pode concorrer pelo SRV.
-                    </p>
-                </div>
-
-                <!-- Escolha de Até 3 Opções -->
-                <div class="bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded-r-lg mb-6">
-                    <h4 class="font-bold text-emerald-950 text-sm mb-1"><i class="fas fa-list-ol mr-2"></i>Escolha de Até 3 Cursos:</h4>
-                    <p class="text-xs text-emerald-900 leading-relaxed">
-                        Na inscrição, você pode indicar até <strong>3 opções de cursos do mesmo campus</strong>. Se for convocado na sua 1ª opção, não poderá declinar dela para tentar vaga nas opções posteriores!
+                        Ter cursado <strong>integralmente do 1º ao 9º ano do Ensino Fundamental em escola pública brasileira</strong>. Quem estudou qualquer período em escola particular (mesmo como bolsista) ou em escolas do Sistema S (SESI, SENAI, SENAC) <strong>NÃO</strong> pode concorrer pelo SRV.
                     </p>
                 </div>
 
                 <!-- Modalidades LB e LI -->
                 <div class="grid md:grid-cols-2 gap-6 mb-6">
-                    <div class="border rounded-xl p-5 bg-white shadow-sm border-purple-200">
+                    <div class="border rounded-xl p-5 bg-white shadow-sm border-emerald-200">
                         <div class="flex items-center justify-between mb-3">
-                            <span class="font-black text-lg text-purple-900">Grupo LB (Baixa Renda)</span>
-                            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded">Renda &le; 1,0 SM per capita</span>
+                            <span class="font-black text-lg text-emerald-900">Grupo LB (Baixa Renda)</span>
+                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">Renda &le; 1,0 SM per capita</span>
                         </div>
-                        <p class="text-xs text-gray-600 mb-4">Comprovação direta via consulta ao Cadastro Único (CadÚnico) com atualização nos últimos 24 meses.</p>
+                        <p class="text-xs text-gray-600 mb-4">Atestado via consulta direta do IFMG ao Cadastro Único (CadÚnico) atualizado nos últimos 24 meses.</p>
                         <div class="space-y-2 text-xs">
                             <div class="quota-card"><strong>LB_PPI:</strong> Pretos, Pardos ou Indígenas + Renda &le; 1 SM</div>
                             <div class="quota-card"><strong>LB_Q:</strong> Quilombolas + Renda &le; 1 SM</div>
-                            <div class="quota-card"><strong>LB_PcD:</strong> Pessoas com Deficiência + Renda &le; 1 SM</div>
+                            <div class="quota-card"><strong>LB_PCD:</strong> Pessoas com Deficiência + Renda &le; 1 SM</div>
                             <div class="quota-card"><strong>LB_EP:</strong> Demais estudantes de Escola Pública + Renda &le; 1 SM</div>
                         </div>
                     </div>
 
-                    <div class="border rounded-xl p-5 bg-white shadow-sm border-emerald-200">
+                    <div class="border rounded-xl p-5 bg-white shadow-sm border-indigo-200">
                         <div class="flex items-center justify-between mb-3">
-                            <span class="font-black text-lg text-emerald-900">Grupo LI (Qualquer Renda)</span>
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">Independente de Renda</span>
+                            <span class="font-black text-lg text-indigo-900">Grupo LI (Qualquer Renda)</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded">Independente de Renda</span>
                         </div>
                         <p class="text-xs text-gray-600 mb-4">Exige apenas ter cursado integralmente o ensino fundamental na rede pública.</p>
                         <div class="space-y-2 text-xs">
                             <div class="quota-card" style="border-left-color: var(--teal);"><strong>LI_PPI:</strong> Pretos, Pardos ou Indígenas (Qualquer Renda)</div>
                             <div class="quota-card" style="border-left-color: var(--teal);"><strong>LI_Q:</strong> Quilombolas (Qualquer Renda)</div>
-                            <div class="quota-card" style="border-left-color: var(--teal);"><strong>LI_PcD:</strong> Pessoas com Deficiência (Qualquer Renda)</div>
+                            <div class="quota-card" style="border-left-color: var(--teal);"><strong>LI_PCD:</strong> Pessoas com Deficiência (Qualquer Renda)</div>
                             <div class="quota-card" style="border-left-color: var(--teal);"><strong>LI_EP:</strong> Demais estudantes de Escola Pública (Qualquer Renda)</div>
                         </div>
                     </div>
@@ -600,8 +665,8 @@
                         <i class="fas fa-hand-holding-usd text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold" style="color: var(--dark-green);">Isenção de Taxa & Envio de Documentos</h3>
-                        <p class="text-sm text-gray-500">Regras para gratuidade da taxa de R$ 75,00 e prazos para upload dos comprovantes de cotas</p>
+                        <h3 class="text-2xl font-bold" style="color: var(--dark-green);">Isenção de Taxa & Atendimento Especial</h3>
+                        <p class="text-sm text-gray-500">Regras para gratuidade da taxa de R$ 75,00 e solicitações de atendimento especializado</p>
                     </div>
                 </div>
 
@@ -610,30 +675,30 @@
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
                         <h4 class="font-bold text-base text-gray-900 mb-2"><i class="fas fa-check-circle text-green-600 mr-2"></i>Quem tem direito à Isenção?</h4>
                         <p class="text-xs text-gray-600 mb-3 leading-relaxed">
-                            Pessoas com renda familiar per capita igual ou inferior a <strong>1,5 Salário Mínimo</strong> que estudaram o Ensino Fundamental em escola pública (ou particular como bolsista 100%).
+                            Renda familiar per capita &le; 1,5 Salário Mínimo e ter cursado o Ensino Fundamental em escola pública (ou bolsista 100% em escola privada).
                         </p>
                         <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded">Prazo para pedir Isenção: 03/08 a 21/08/2026</span>
                     </div>
 
-                    <!-- Upload de Documentos -->
+                    <!-- Atendimento Especial -->
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                        <h4 class="font-bold text-base text-gray-900 mb-2"><i class="fas fa-cloud-upload-alt text-indigo-600 mr-2"></i>Upload de Documentos de Cotas</h4>
+                        <h4 class="font-bold text-base text-gray-900 mb-2"><i class="fas fa-wheelchair text-indigo-600 mr-2"></i>Atendimento Especial e Lactantes</h4>
                         <p class="text-xs text-gray-600 mb-3 leading-relaxed">
-                            Candidatos optantes pelas reservas de vagas deverão anexar no sistema os documentos de comprovação (histórico escolar, autodeclarações, laudos).
+                            Candidatas lactantes têm direito a tempo de amamentação (30 min a cada 2h com compensação). Atendimento especial para PcD e neurodivergentes.
                         </p>
-                        <span class="inline-block bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded">Período de Upload: 28/09 a 09/10/2026</span>
+                        <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded">Solicitar na Inscrição: 03/08 a 14/09/2026</span>
                     </div>
                 </div>
             </section>
 
             <section id="conteudo" class="section-card">
                 <div class="flex items-center space-x-3 mb-6">
-                    <div class="p-3 rounded-lg text-white" style="background-color: var(--ifmg-green);">
+                    <div class="p-3 rounded-lg text-white" style="background-color: var(--dark-green);">
                         <i class="fas fa-book text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold" style="color: var(--dark-green);">O que Estudar? Conteúdo Programático</h3>
-                        <p class="text-sm text-gray-500">Clique nas áreas para visualizar os conteúdos da Matriz de Referência da Prova Objetiva (Anexo VIII do Edital 853/2026)</p>
+                        <h3 class="text-2xl font-bold" style="color: var(--dark-green);">O que Estudar? Conteúdo Programático Detalhado</h3>
+                        <p class="text-sm text-gray-500">Matriz de Referência BNCC da Prova Objetiva do IFMG (Anexo VIII do Edital 853/2026)</p>
                     </div>
                 </div>
 
@@ -641,19 +706,19 @@
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center mb-6">
                     <div onclick="showSyllabus('linguagens')" class="subject-icon active p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
                         <i class="fas fa-language text-2xl text-indigo-600"></i>
-                        <span class="text-xs font-bold">Linguagens & Códigos</span>
+                        <span class="text-xs font-bold">Linguagens (12 Q)</span>
                     </div>
                     <div onclick="showSyllabus('matematica')" class="subject-icon p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
                         <i class="fas fa-calculator text-2xl text-emerald-600"></i>
-                        <span class="text-xs font-bold">Matemática & Tecnologias</span>
+                        <span class="text-xs font-bold">Matemática (12 Q)</span>
                     </div>
                     <div onclick="showSyllabus('ciencias')" class="subject-icon p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
                         <i class="fas fa-flask text-2xl text-amber-600"></i>
-                        <span class="text-xs font-bold">Ciências da Natureza</span>
+                        <span class="text-xs font-bold">Ciências Natureza (12 Q)</span>
                     </div>
                     <div onclick="showSyllabus('humanas')" class="subject-icon p-4 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-2">
                         <i class="fas fa-globe-americas text-2xl text-orange-600"></i>
-                        <span class="text-xs font-bold">Ciências Humanas</span>
+                        <span class="text-xs font-bold">Ciências Humanas (12 Q)</span>
                     </div>
                 </div>
 
@@ -663,9 +728,9 @@
                 </div>
             </section>
 
-            <section id="cta-final" class="section-card text-center" style="background: linear-gradient(135deg, var(--dark-green), var(--orange-red));">
+            <section id="cta-final" class="section-card text-center" style="background: linear-gradient(135deg, var(--dark-green), var(--green));">
                 <h3 class="text-3xl font-black text-white mb-3">Garanta Sua Vaga no IFMG com o Guia Pré-Federal</h3>
-                <p class="max-w-2xl mx-auto mb-6 text-emerald-100">Prepare-se com aulas focadas nas habilidades do edital, simulados e a melhor mentoria do mercado!</p>
+                <p class="max-w-2xl mx-auto mb-6 text-emerald-100">Prepare-se com aulas focadas nos tópicos do edital, simulados e a melhor mentoria do mercado!</p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
                     <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="cta-button-primary flex items-center justify-center font-bold py-3 px-6 rounded-lg w-full sm:w-auto shadow-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 13V2l8 4-8 4"/><path d="M12 22v-8"/><path d="M20 10.5v7c0 .8-.5 1.5-1.3 1.8l-6 2.3c-.4.2-.9.2-1.3 0l-6-2.3A2 2 0 0 1 4 17.5v-7"/><path d="m4 6.5 8 4 8-4"/><path d="m4 13.5 8 4 8-4"/></svg>
@@ -680,18 +745,18 @@
 
             <footer class="text-center mt-12 pt-8 border-t border-slate-200">
                 <p class="text-sm text-gray-500">Desenvolvido por <strong>Guia Pré-Federal</strong> com base no Edital nº 853/2026 do Instituto Federal de Educação, Ciência e Tecnologia de Minas Gerais (IFMG).</p>
-                <p class="text-xs text-gray-400 mt-2">Consulte sempre a página oficial em <a href="https://www.ifmg.edu.br" target="_blank" class="underline text-emerald-600">www.ifmg.edu.br</a> para retificações e comunicados.</p>
+                <p class="text-xs text-gray-400 mt-2">Consulte sempre o portal oficial em <a href="https://www.ifmg.edu.br" target="_blank" class="underline text-emerald-700">www.ifmg.edu.br</a> para retificações e editais complementares.</p>
             </footer>
 
         </div>
     </main>
 
-    <!-- Botão Flutuante de Ação (FAB) -->
+    <!-- Floating Action Button (FAB) -->
     <div class="fab-container">
         <div class="fab-options">
             <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="fab-option">
                 <span class="fab-label">Nosso Intensivo</span>
-                <div class="fab-icon" style="background-color: #6408b0;">
+                <div class="fab-icon" style="background-color: #005b38;">
                     <i class="fas fa-rocket"></i>
                 </div>
             </a>
@@ -735,274 +800,237 @@
         'arcos': {
             nome: 'Campus Arcos',
             cursos: [
-                { nome: 'Administração', ac: 22, lb_ppi: 8, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 7, li_q: 0, li_pcd: 1, li_ep: 3, total: 45 },
-                { nome: 'Mecânica', ac: 22, lb_ppi: 8, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 7, li_q: 0, li_pcd: 1, li_ep: 3, total: 45 }
+                { nome: 'Administração', forma: 'Integrada (Tempo Integral)', ac: 22, lb_ppi: 8, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 7, li_q: 0, li_pcd: 1, li_ep: 3, total: 45 },
+                { nome: 'Mecânica', forma: 'Integrada (Tempo Integral)', ac: 22, lb_ppi: 8, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 7, li_q: 0, li_pcd: 1, li_ep: 3, total: 45 }
             ]
         },
         'bambui': {
             nome: 'Campus Bambuí',
             cursos: [
-                { nome: 'Administração', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Agroindústria', ac: 15, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1, total: 30 },
-                { nome: 'Agropecuária', ac: 45, lb_ppi: 14, lb_q: 1, lb_pcd: 2, lb_ep: 6, li_ppi: 13, li_q: 0, li_pcd: 2, li_ep: 7, total: 90 },
-                { nome: 'Biotecnologia', ac: 15, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1, total: 30 },
-                { nome: 'Eletromecânica', ac: 16, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2, total: 32 },
-                { nome: 'Informática', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 }
+                { nome: 'Administração', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Agroindústria', forma: 'Integrada (Tempo Integral)', ac: 15, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1, total: 30 },
+                { nome: 'Agropecuária', forma: 'Integrada (Tempo Integral)', ac: 45, lb_ppi: 14, lb_q: 1, lb_pcd: 2, lb_ep: 6, li_ppi: 13, li_q: 0, li_pcd: 2, li_ep: 7, total: 90 },
+                { nome: 'Biotecnologia', forma: 'Integrada (Tempo Integral)', ac: 15, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1, total: 30 },
+                { nome: 'Eletromecânica', forma: 'Integrada (Tempo Integral)', ac: 16, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 2, total: 32 },
+                { nome: 'Informática', forma: 'Integrada (Tempo Integral)', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 }
             ]
         },
         'betim': {
             nome: 'Campus Betim',
             cursos: [
-                { nome: 'Automação Industrial', ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, total: 60 },
-                { nome: 'Mecânica', ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, total: 60 },
-                { nome: 'Química', ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, total: 60 }
+                { nome: 'Automação Industrial', forma: 'Integrada (Tempo Integral)', ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, total: 60 },
+                { nome: 'Mecânica', forma: 'Integrada (Tempo Integral)', ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, total: 60 },
+                { nome: 'Química', forma: 'Integrada (Tempo Integral)', ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, total: 60 }
             ]
         },
         'congonhas': {
             nome: 'Campus Congonhas',
             cursos: [
-                { nome: 'Edificações', ac: 35, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, total: 70 },
-                { nome: 'Mecânica', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 },
-                { nome: 'Mineração', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 }
+                { nome: 'Edificações', forma: 'Integrada (Tempo Integral)', ac: 35, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, total: 70 },
+                { nome: 'Mecânica', forma: 'Integrada (Tempo Integral)', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 },
+                { nome: 'Mineração', forma: 'Integrada (Tempo Integral)', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 }
             ]
         },
         'lafaiete': {
             nome: 'Campus Conselheiro Lafaiete',
             cursos: [
-                { nome: 'Eletrotécnica', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Mecânica', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Segurança do Trabalho', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
+                { nome: 'Eletrotécnica', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Mecânica', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Segurança do Trabalho', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
             ]
         },
         'formiga': {
             nome: 'Campus Formiga',
             cursos: [
-                { nome: 'Administração', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Eletrotécnica', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 },
-                { nome: 'Informática', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
+                { nome: 'Administração', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Eletrotécnica', forma: 'Integrada (Tempo Integral)', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 },
+                { nome: 'Informática', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
             ]
         },
         'gv': {
             nome: 'Campus Governador Valadares',
             cursos: [
-                { nome: 'Edificações', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Meio Ambiente', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Segurança do Trabalho', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
+                { nome: 'Edificações', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Meio Ambiente', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Segurança do Trabalho', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
             ]
         },
         'ibirite': {
             nome: 'Campus Ibirité',
             cursos: [
-                { nome: 'Automação Industrial', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Informática', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Mecatrônica', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Sistemas de Energia Renovável', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
+                { nome: 'Automação Industrial', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Informática', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Mecatrônica', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Sistemas de Energia Renovável', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
             ]
         },
         'ipatinga': {
             nome: 'Campus Ipatinga',
             cursos: [
-                { nome: 'Automação Industrial', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Eletrotécnica', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
+                { nome: 'Automação Industrial', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Eletrotécnica', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
             ]
         },
         'itabirito': {
             nome: 'Campus Itabirito',
             cursos: [
-                { nome: 'Automação Industrial', ac: 35, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, total: 70 },
-                { nome: 'Desenvolvimento de Sistemas', ac: 15, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1, total: 30 }
+                { nome: 'Automação Industrial', forma: 'Integrada (Tempo Integral)', ac: 35, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, total: 70 },
+                { nome: 'Desenvolvimento de Sistemas', forma: 'Integrada (Tempo Integral)', ac: 15, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1, total: 30 }
             ]
         },
         'ourobranco': {
             nome: 'Campus Ouro Branco',
             cursos: [
-                { nome: 'Administração', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Informática', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Metalurgia', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
+                { nome: 'Administração', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Informática', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Metalurgia', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
             ]
         },
         'ouropreto': {
             nome: 'Campus Ouro Preto',
             cursos: [
-                { nome: 'Administração', ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, total: 60 },
-                { nome: 'Automação Industrial', ac: 40, lb_ppi: 12, lb_q: 1, lb_pcd: 2, lb_ep: 5, li_ppi: 12, li_q: 0, li_pcd: 2, li_ep: 6, total: 80 },
-                { nome: 'Edificações', ac: 45, lb_ppi: 14, lb_q: 1, lb_pcd: 2, lb_ep: 6, li_ppi: 13, li_q: 0, li_pcd: 2, li_ep: 7, total: 90 },
-                { nome: 'Metalurgia', ac: 45, lb_ppi: 14, lb_q: 1, lb_pcd: 2, lb_ep: 6, li_ppi: 13, li_q: 0, li_pcd: 2, li_ep: 7, total: 90 },
-                { nome: 'Mineração', ac: 45, lb_ppi: 14, lb_q: 1, lb_pcd: 2, lb_ep: 6, li_ppi: 13, li_q: 0, li_pcd: 2, li_ep: 7, total: 90 }
+                { nome: 'Administração', forma: 'Integrada (Tempo Integral)', ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, total: 60 },
+                { nome: 'Automação Industrial', forma: 'Integrada (Tempo Integral)', ac: 40, lb_ppi: 12, lb_q: 1, lb_pcd: 2, lb_ep: 5, li_ppi: 12, li_q: 0, li_pcd: 2, li_ep: 6, total: 80 },
+                { nome: 'Edificações', forma: 'Integrada (Tempo Integral)', ac: 45, lb_ppi: 14, lb_q: 1, lb_pcd: 2, lb_ep: 6, li_ppi: 13, li_q: 0, li_pcd: 2, li_ep: 7, total: 90 },
+                { nome: 'Metalurgia', forma: 'Integrada (Tempo Integral)', ac: 45, lb_ppi: 14, lb_q: 1, lb_pcd: 2, lb_ep: 6, li_ppi: 13, li_q: 0, li_pcd: 2, li_ep: 7, total: 90 },
+                { nome: 'Mineração', forma: 'Integrada (Tempo Integral)', ac: 45, lb_ppi: 14, lb_q: 1, lb_pcd: 2, lb_ep: 6, li_ppi: 13, li_q: 0, li_pcd: 2, li_ep: 7, total: 90 }
             ]
         },
         'piumhi': {
             nome: 'Campus Piumhi',
             cursos: [
-                { nome: 'Edificações', ac: 40, lb_ppi: 12, lb_q: 1, lb_pcd: 2, lb_ep: 5, li_ppi: 12, li_q: 0, li_pcd: 2, li_ep: 6, total: 80 }
+                { nome: 'Edificações', forma: 'Integrada (Tempo Integral)', ac: 40, lb_ppi: 12, lb_q: 1, lb_pcd: 2, lb_ep: 5, li_ppi: 12, li_q: 0, li_pcd: 2, li_ep: 6, total: 80 }
             ]
         },
         'pontenova': {
             nome: 'Campus Ponte Nova',
             cursos: [
-                { nome: 'Administração', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Informática', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 }
+                { nome: 'Administração', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Informática', forma: 'Integrada (Tempo Integral)', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 }
             ]
         },
         'neves': {
             nome: 'Campus Ribeirão das Neves',
             cursos: [
-                { nome: 'Administração', ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, total: 60 },
-                { nome: 'Eletroeletrônica', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 },
-                { nome: 'Informática', ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, total: 60 }
+                { nome: 'Administração', forma: 'Integrada (Tempo Integral)', ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, total: 60 },
+                { nome: 'Eletroeletrônica', forma: 'Integrada (Tempo Integral)', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 },
+                { nome: 'Informática', forma: 'Integrada (Tempo Integral)', ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, total: 60 }
             ]
         },
         'sabara': {
             nome: 'Campus Sabará',
             cursos: [
-                { nome: 'Administração', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 },
-                { nome: 'Eletrônica', ac: 35, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, total: 70 },
-                { nome: 'Informática', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 }
+                { nome: 'Administração', forma: 'Integrada (Tempo Integral)', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 },
+                { nome: 'Eletrônica', forma: 'Integrada (Tempo Integral)', ac: 35, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, total: 70 },
+                { nome: 'Informática', forma: 'Integrada (Tempo Integral)', ac: 17, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 35 }
             ]
         },
         'santaluzia': {
             nome: 'Campus Santa Luzia',
             cursos: [
-                { nome: 'Edificações', ac: 40, lb_ppi: 12, lb_q: 1, lb_pcd: 2, lb_ep: 5, li_ppi: 12, li_q: 0, li_pcd: 2, li_ep: 6, total: 80 },
-                { nome: 'Meio Ambiente', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Segurança do Trabalho', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
+                { nome: 'Edificações', forma: 'Integrada (Tempo Integral)', ac: 40, lb_ppi: 12, lb_q: 1, lb_pcd: 2, lb_ep: 5, li_ppi: 12, li_q: 0, li_pcd: 2, li_ep: 6, total: 80 },
+                { nome: 'Meio Ambiente', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Segurança do Trabalho', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 }
             ]
         },
         'sje': {
             nome: 'Campus São João Evangelista',
             cursos: [
-                { nome: 'Agrimensura', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
-                { nome: 'Agropecuária', ac: 35, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, total: 70 },
-                { nome: 'Informática', ac: 35, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, total: 70 },
-                { nome: 'Nutrição e Dietética', ac: 35, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, total: 70 }
+                { nome: 'Agrimensura', forma: 'Integrada (Tempo Integral)', ac: 20, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 3, total: 40 },
+                { nome: 'Agropecuária', forma: 'Integrada (Tempo Integral)', ac: 35, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, total: 70 },
+                { nome: 'Informática', forma: 'Integrada (Tempo Integral)', ac: 35, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, total: 70 },
+                { nome: 'Nutrição e Dietética', forma: 'Integrada (Tempo Integral)', ac: 35, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, total: 70 }
             ]
         }
     };
 
-    // CONTEÚDO PROGRAMÁTICO IFMG DETALHADO (Anexo VIII - Matriz de Referência BNCC Edital 853/2026)
+    // CONTEÚDO PROGRAMÁTICO IFMG DETALHADO POR DISCIPLINA/UNIDADE TEMÁTICA (Anexo VIII - Edital 853/2026)
     const syllabusData = {
         linguagens: `
-            <h4 class="font-bold text-lg text-indigo-900 mb-2"><i class="fas fa-language mr-2"></i>Linguagens, Códigos e suas Tecnologias (12 Questões)</h4>
+            <h4 class="font-bold text-lg text-indigo-900 mb-2"><i class="fas fa-language mr-2"></i>Linguagens, Códigos e suas Tecnologias (12 Questões - Desempate 1º)</h4>
             <div class="bg-indigo-100/70 p-3 rounded-lg mb-4 text-xs text-indigo-950 font-semibold border border-indigo-200">
-                <i class="fas fa-exclamation-circle mr-1 text-indigo-700"></i> Dica de Estudo: Matriz oficial baseada nas habilidades da BNCC. Atenção: nota 0 (zero) nesta área elimina o candidato do processo seletivo!
+                <i class="fas fa-info-circle mr-1 text-indigo-700"></i> Foco em Análise Linguística/Semiótica, Leitura, Textos Argumentativos, Normas da Língua e Recursos Multissemióticos.
             </div>
             <div class="space-y-4 text-xs sm:text-sm text-gray-700">
                 <div>
                     <h5 class="font-bold text-indigo-800 text-sm border-b border-indigo-200 pb-1 mb-2"><i class="fas fa-pen-nib mr-1"></i> 1. Análise Linguística e Semiótica (Gramática e Texto)</h5>
                     <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Gêneros Textuais de Direitos:</b> Leitura e interpretação de gêneros em espaços de direitos (ouvidorias, SAC, canais de reclamação e manifestos).</li>
-                        <li><b>Análise Gramatical Completa:</b> Ortografia oficial, acentuação gráfica, pontuação expressiva, concordância nominal/verbal e regência nominal/verbal.</li>
-                        <li><b>Sintaxe da Oração:</b> Termos constitutivos da oração (sujeito, predicado, complementos e modificadores); orações adjetivas restritivas e explicativas no período composto.</li>
-                        <li><b>Morfologia e Classes de Palavras:</b> Flexões e empregos de substantivos, adjetivos, pronomes, verbos (modos e tempos verbais) e processos de formação de palavras.</li>
-                        <li><b>Colocação Pronominal:</b> Regras e usos de próclise, mesóclise e ênclise no português norma-padrão vs. linguagem coloquial.</li>
-                        <li><b>Coesão e Coerência:</b> Recursos de coesão referencial (pronomes, sinônimos, hiperônimos) e sequencial (conectores, conjunções, relações de causalidade e condição).</li>
-                        <li><b>Recursos Discursivos e Estilo:</b> Estratégias de modalização, efeitos de sentido do uso de sujeito ativo e passivo, figuras de linguagem (sonoras, de palavras, de sintaxe e de pensamento).</li>
-                        <li><b>Variabilidade Linguística:</b> Variedades da língua falada e escrita, conceito de norma-padrão, adequação vocabular e combate ao preconceito linguístico.</li>
+                        <li><b>Sintaxe da Oração e do Período:</b> Termos constitutivos da oração (sujeito, verbo, complementos e modificadores); sujeito ativo vs. passivo; orações adjetivas restritivas e explicativas.</li>
+                        <li><b>Norma-Padrão e Regências:</b> Concordância verbal e nominal; regência verbal e nominal na norma-padrão vs. português coloquial; colocação pronominal.</li>
+                        <li><b>Morfologia e Léxico:</b> Estrutura e processos de formação de palavras no contexto de produção.</li>
+                        <li><b>Coesão e Coerência:</b> Recursos de coesão referencial e sequencial; conectores de causa, consequência, oposição e ordenação de eventos.</li>
+                        <li><b>Recursos Expressivos e Variedade:</b> Figuras de linguagem; variedades da língua falada, norma-padrão e combate ao preconceito linguístico.</li>
                     </ul>
                 </div>
                 <div>
                     <h5 class="font-bold text-indigo-800 text-sm border-b border-indigo-200 pb-1 mb-2"><i class="fas fa-book-open mr-1"></i> 2. Leitura, Literatura e Intertextualidade</h5>
                     <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Organização e Progressão Temática:</b> Identificação do tema central, tópicos, subtópicos, articulação entre título e texto, e continuidade de ideias.</li>
-                        <li><b>Análise Argumentativa e Persuasão:</b> Identificação de teses, opiniões, argumentos, contra-argumentos e recursos persuasivos (caricatura, ironia, humor e escolhas lexicais).</li>
-                        <li><b>Discurso e Apropriação Textual:</b> Distinção e efeitos de sentido de citação, paráfrase, discurso direto, indireto e indireto livre.</li>
-                        <li><b>Análise de Texto Literário (Prosa e Poesia):</b> Leitura literária, autoria, contexto socio-histórico, elementos da narrativa (enredo, foco narrativo, tempo cronológico/psicológico e espaço).</li>
-                        <li><b>Recursos Poéticos e Visuais:</b> Estrofação, rimas, aliteração, assonância, onomatopeia, mancha gráfica e relação entre imagem e texto verbal.</li>
-                        <li><b>Cidadania e Leitura Crítica:</b> Diferenciação entre fato e opinião, distinção entre liberdade de expressão e discurso de ódio, e combate a fake news nas redes sociais.</li>
+                        <li><b>Texto Literário e Poético:</b> Análise de recursos sonoros, semânticos e visuais em poemas e prosas; elementos típicos da narrativa (foco narrativo, tempo e espaço).</li>
+                        <li><b>Análise Crítica e Argumentação:</b> Distinção de fato vs. opinião; estrutura argumentativa em editoriais, artigos e mídias digitais; combate às notícias falsas (fake news).</li>
+                        <li><b>Apropriação Textual e Intertextualidade:</b> Paráfrase, citação, discurso direto, indireto e indireto livre.</li>
+                        <li><b>Multissemiose:</b> Leitura de textos verbais e não-verbais, tiras, charges, efeito de humor e ironia.</li>
                     </ul>
                 </div>
             </div>`,
 
         matematica: `
-            <h4 class="font-bold text-lg text-emerald-900 mb-2"><i class="fas fa-calculator mr-2"></i>Matemática e suas Tecnologias (12 Questões)</h4>
+            <h4 class="font-bold text-lg text-emerald-900 mb-2"><i class="fas fa-calculator mr-2"></i>Matemática e suas Tecnologias (12 Questões - Desempate 2º)</h4>
             <div class="bg-emerald-100/70 p-3 rounded-lg mb-4 text-xs text-emerald-950 font-semibold border border-emerald-200">
-                <i class="fas fa-exclamation-circle mr-1 text-emerald-700"></i> Dica de Estudo: Matriz oficial com foco em resolução de problemas, geometria e conceitos de contagem/estatística.
+                <i class="fas fa-exclamation-circle mr-1 text-emerald-700"></i> Dica de Estudo: Resolução de problemas práticos do cotidiano envolvendo cálculo numérico, álgebra, geometria e probabilidade.
             </div>
             <div class="space-y-4 text-xs sm:text-sm text-gray-700">
                 <div>
                     <h5 class="font-bold text-emerald-800 text-sm border-b border-emerald-200 pb-1 mb-2"><i class="fas fa-list-ol mr-1"></i> 1. Números e Operações</h5>
                     <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Conjuntos e Números Naturais:</b> Representação no sistema de numeração decimal, valor posicional, ordenação e quatro operações fundamentais.</li>
-                        <li><b>Divisibilidade:</b> Números primos e compostos, múltiplos, divisores, cálculo de MDC (Máximo Divisor Comum) e MMC (Mínimo Múltiplo Comum).</li>
-                        <li><b>Conjuntos Numéricos:</b> Operações com inteiros, racionais (frações equivalentes, decimais exatos, dízimas periódicas) e reais na reta numérica.</li>
-                        <li><b>Potenciação e Radiciação:</b> Propriedades das potências com expoentes inteiros, simplificação de radicais e aplicação de notação científica em grandes/pequenas medidas.</li>
-                        <li><b>Porcentagem e Finanças:</b> Cálculo percentual em problemas cotidianos, aplicação de acréscimos e decréscimos sucessivos.</li>
+                        <li><b>Conjuntos Numéricos:</b> Operações com números Naturais, Inteiros, Racionais (frações, decimais e dízimas) e Reais; ordenação na reta numérica.</li>
+                        <li><b>Teoria dos Números:</b> Múltiplos, divisores, números primos, cálculo de MMC e MDC em problemas práticos.</li>
+                        <li><b>Potenciação e Radiciação:</b> Propriedades operatórias, potências de 10 e Notação Científica.</li>
                     </ul>
                 </div>
                 <div>
                     <h5 class="font-bold text-emerald-800 text-sm border-b border-emerald-200 pb-1 mb-2"><i class="fas fa-square-root-variable mr-1"></i> 2. Álgebra e Proporcionalidade</h5>
                     <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Expressões Algébricas:</b> Utilização de variáveis, cálculo de valor numérico, fatoração algébrica e produtos notáveis.</li>
-                        <li><b>Proporcionalidade:</b> Razão, proporção, regra de três simples e composta, grandezas direta e inversamente proporcionais.</li>
-                        <li><b>Equações e Sistemas de 1º Grau:</b> Equações lineares com uma e duas variáveis, sistemas de equações de 1º grau e representação no plano cartesiano.</li>
-                        <li><b>Equações de 2º Grau:</b> Resolução algébrica de equações incompletas e completas (fórmula de Bhaskara, relações de soma e produto).</li>
+                        <li><b>Expressões Algébricas:</b> Produtos notáveis, fatoração e simplificação de expressões.</li>
+                        <li><b>Equações e Sistemas:</b> Equações do 1º e 2º graus; sistemas de equações de 1º grau no plano cartesiano.</li>
+                        <li><b>Razão, Proporção e Porcentagem:</b> Regra de três simples e composta (proporcionalidade direta e inversa); acréscimos e decréscimos sucessivos.</li>
                     </ul>
                 </div>
                 <div>
-                    <h5 class="font-bold text-emerald-800 text-sm border-b border-emerald-200 pb-1 mb-2"><i class="fas fa-shapes mr-1"></i> 3. Geometria Plana, Espacial e Cartesiana</h5>
+                    <h5 class="font-bold text-emerald-800 text-sm border-b border-emerald-200 pb-1 mb-2"><i class="fas fa-shapes mr-1"></i> 3. Geometria, Medidas e Estatística</h5>
                     <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Polígonos e Ângulos:</b> Propriedades dos triângulos e quadriláteros; retas paralelas cortadas por transversais; cevianas (mediatriz, altura, bissetriz).</li>
-                        <li><b>Semelhança e Proporção Geométrica:</b> Triângulos semelhantes e aplicação do Teorema de Tales em feixes de retas paralelas.</li>
-                        <li><b>Triângulo Retângulo:</b> Relações métricas no triângulo retângulo e aplicação direta do Teorema de Pitágoras.</li>
-                        <li><b>Poliedros e Sólidos:</b> Relação de Euler (V - A + F = 2) em poliedros; planificação, vistas ortogonais e projeções de prismas e cilindros.</li>
-                        <li><b>Geometria Cartesiana e Transformações:</b> Coordenadas no plano cartesiano, translação, rotação e reflexão de figuras.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-bold text-emerald-800 text-sm border-b border-emerald-200 pb-1 mb-2"><i class="fas fa-ruler-combined mr-1"></i> 4. Grandezas, Medidas, Probabilidade e Estatística</h5>
-                    <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Conversão de Unidades:</b> Sistemas de medidas de comprimento, massa, tempo, temperatura, área, capacidade e volume.</li>
-                        <li><b>Cálculo de Perímetro e Área:</b> Áreas de triângulos, quadriláteros, polígonos regulares, círculos (comprimento da circunferência) e figuras compostas.</li>
-                        <li><b>Cálculo de Volume:</b> Determinação do volume em prismas e cilindros retos.</li>
-                        <li><b>Contagem e Probabilidade:</b> Princípios aditivo e multiplicativo de contagem; cálculo da probabilidade de eventos aleatórios em forma fracionária, decimal e percentual.</li>
-                        <li><b>Estatística Descritiva:</b> Interpretação de tabelas, fluxogramas e gráficos (barras, colunas, linhas, setores); cálculo de média, moda, mediana e amplitude.</li>
+                        <li><b>Geometria Plana:</b> Propriedades dos polígonos, soma de ângulos, Teorema de Tales, semelhança de triângulos, Teorema de Pitágoras e razões trigonométricas no triângulo retângulo.</li>
+                        <li><b>Perímetro, Área e Volume:</b> Área de figuras planas, comprimento do círculo e volume de prismas e cilindros retos.</li>
+                        <li><b>Probabilidade e Estatística:</b> Princípios aditivo e multiplicativo de contagem; cálculo de probabilidade; leitura de gráficos/tabelas e medidas de tendência central (média, moda e mediana).</li>
                     </ul>
                 </div>
             </div>`,
 
         ciencias: `
-            <h4 class="font-bold text-lg text-amber-900 mb-2"><i class="fas fa-flask mr-2"></i>Ciências da Natureza e suas Tecnologias (12 Questões)</h4>
+            <h4 class="font-bold text-lg text-amber-900 mb-2"><i class="fas fa-flask mr-2"></i>Ciências da Natureza e suas Tecnologias (12 Questões - Desempate 3º)</h4>
             <div class="bg-amber-100/70 p-3 rounded-lg mb-4 text-xs text-amber-950 font-semibold border border-amber-200">
-                <i class="fas fa-exclamation-circle mr-1 text-amber-700"></i> Dica de Estudo: Integra conceitos fundamentais das três áreas do conhecimento: Física, Química e Biologia / Ecologia.
+                <i class="fas fa-exclamation-circle mr-1 text-amber-700"></i> Dica de Estudo: Tópicos integrados de Física, Química e Biologia aplicados à saúde, tecnologia e meio ambiente.
             </div>
             <div class="space-y-4 text-xs sm:text-sm text-gray-700">
                 <div>
                     <h5 class="font-bold text-amber-800 text-sm border-b border-amber-200 pb-1 mb-2"><i class="fas fa-atom mr-1"></i> 1. Física e Transformações de Energia</h5>
                     <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Máquinas Simples:</b> Princípios e aplicações de alavancas, roldanas e planos inclinados na rotina diária.</li>
-                        <li><b>Termologia e Calor:</b> Propagação de calor (condução, convecção e radiação), materiais condutores e isolantes, escalas termométricas, calor e sensação térmica.</li>
-                        <li><b>Eletricidade e Consumo:</b> Transformação de energia em eletrodomésticos (térmica, luminosa, sonora, mecânica), circuitos elétricos simples, cálculo de consumo mensal (potência x tempo) e uso consciente.</li>
-                        <li><b>Matriz Energética:</b> Fontes renováveis e não renováveis, funcionamento de usinas (hidrelétrica, eólica, solar, termelétrica) e impactos socioambientais.</li>
-                        <li><b>Cinemática e Óptica:</b> Análise do movimento uniforme e variado em gráficos/equações; óptica geométrica (espelhos, lentes e visão humana).</li>
-                        <li><b>Ondas e Radiações:</b> Radiações eletromagnéticas e suas aplicações na medicina e no cotidiano.</li>
+                        <li><b>Mecânica e Cinemática:</b> Máquinas simples; movimento uniforme e variado (interpretação de gráficos e velocidades).</li>
+                        <li><b>Termologia e Óptica:</b> Propagação de calor (condução, convecção e radiação); óptica geométrica em lentes e espelhos.</li>
+                        <li><b>Eletricidade e Fontes de Energia:</b> Circuitos elétricos simples; cálculo de consumo residencial; fontes renováveis vs. não renováveis.</li>
                     </ul>
                 </div>
                 <div>
                     <h5 class="font-bold text-amber-800 text-sm border-b border-amber-200 pb-1 mb-2"><i class="fas fa-vial mr-1"></i> 2. Química e Constituição da Matéria</h5>
                     <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Matéria e Misturas:</b> Conceito de misturas homogêneas e heterogêneas; processos de separação de misturas (filtração, decantação, destilação, etc.).</li>
-                        <li><b>Transformações Química vs. Física:</b> Evidências práticas de reações químicas na transformação de materiais.</li>
-                        <li><b>Modelos Atômicos e Tabela Periódica:</b> Evolução dos modelos (Dalton, Thomson, Rutherford, Bohr), estrutura atômica (prótons, nêutrons, elétrons) e organização periódica.</li>
-                        <li><b>Reações Químicas e Leis Ponderais:</b> Conservação das massas (Lei de Lavoisier) e proporções definidas (Lei de Proust), balanceamento e estequiometria básica.</li>
-                        <li><b>Estados Físicos:</b> Mudanças de estado físico e modelo cinético-molecular submicroscópico das partículas.</li>
+                        <li><b>Matéria e Misturas:</b> Estados físicos e mudanças de fase; misturas homogêneas e heterogêneas; processos de separação de misturas.</li>
+                        <li><b>Reações Químicas e Tabela Periódica:</b> Leis ponderais (Lavoisier e Proust); modelos atômicos; classificação periódica dos elementos.</li>
                     </ul>
                 </div>
                 <div>
                     <h5 class="font-bold text-amber-800 text-sm border-b border-amber-200 pb-1 mb-2"><i class="fas fa-dna mr-1"></i> 3. Biologia, Corpo Humano e Ecologia</h5>
                     <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Citologia:</b> A célula como unidade da vida, organelas celulares e diferenças entre células animais, vegetais e bacterianas.</li>
-                        <li><b>Fisiologia Humana e Saúde:</b> Sistemas do corpo (nervoso, locomotor, digestório, circulatório, respiratório, excretor), distúrbios nutricionais, hábitos saudáveis e imunização.</li>
-                        <li><b>Doenças Infectocontagiosas:</b> Microrganismos causadores de doenças (vírus, bactérias, protozoários e fungos) e medidas profiláticas.</li>
-                        <li><b>Botânica e Zoologia:</b> Morfologia das plantas, fotossíntese, transporte e relações adaptativas dos animais nos ecossistemas.</li>
-                        <li><b>Ecologia e Sustentabilidade:</b> Teias e cadeias alimentares, fluxo de energia, ciclos biogeoquímicos (água, carbono, nitrogênio, oxigênio) e consumo sustentável.</li>
-                        <li><b>Genética e Evolução:</b> Princípios de hereditariedade (1ª Lei de Mendel), teorias evolucionistas comparadas (Lamarckismo x Darwinismo) e seleção natural.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-bold text-amber-800 text-sm border-b border-amber-200 pb-1 mb-2"><i class="fas fa-globe mr-1"></i> 4. Terra e Universo</h5>
-                    <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Astrofísica e Movimentos Terrestres:</b> Posições relativas Sol-Terra-Lua, estações do ano, fases da Lua e eclipses.</li>
-                        <li><b>Atmosfera e Clima:</b> Composição do ar, efeito estufa natural vs. intensificado por ações humanas e preservação da camada de ozônio.</li>
+                        <li><b>Célula e Fisiologia Humana:</b> Célula como unidade vital; tecidos e órgãos do corpo humano; saúde e hábitos nutricionais.</li>
+                        <li><b>Ecologia e Evolução:</b> Ciclos biogeoquímicos (água, carbono, nitrogênio e oxigênio); teorias de Lamarck vs. Darwin; princípios de genética mendeliana.</li>
                     </ul>
                 </div>
             </div>`,
@@ -1010,39 +1038,23 @@
         humanas: `
             <h4 class="font-bold text-lg text-orange-900 mb-2"><i class="fas fa-globe-americas mr-2"></i>Ciências Humanas e suas Tecnologias (12 Questões)</h4>
             <div class="bg-orange-100/70 p-3 rounded-lg mb-4 text-xs text-orange-950 font-semibold border border-orange-200">
-                <i class="fas fa-exclamation-circle mr-1 text-orange-700"></i> Dica de Estudo: Integração temática entre História, Geografia, Sociedade, Cidadania e Direitos Humanos do século XIX aos dias atuais.
+                <i class="fas fa-exclamation-circle mr-1 text-orange-700"></i> Dica de Estudo: Integração entre História do Brasil/Geral, Geografia e Direitos Humanos do século XIX aos dias atuais.
             </div>
             <div class="space-y-4 text-xs sm:text-sm text-gray-700">
                 <div>
-                    <h5 class="font-bold text-orange-800 text-sm border-b border-orange-200 pb-1 mb-2"><i class="fas fa-landmark mr-1"></i> 1. História do Brasil e do Mundo</h5>
+                    <h5 class="font-bold text-orange-800 text-sm border-b border-orange-200 pb-1 mb-2"><i class="fas fa-landmark mr-1"></i> 1. História do Brasil e Contemporânea</h5>
                     <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Mundo Moderno e Colonização:</b> Conexões entre Europa, África e América; Navegações, Humanismo, Iluminismo e laicidade do Estado.</li>
-                        <li><b>Escravidão e Sociedade Colonial:</b> Tráfico atlántico, escravização de indígenas e africanos, resistência negra e quilombola.</li>
-                        <li><b>Brasil no Século XIX:</b> Processos de independência nas Américas, o Império no Brasil (1º Reinado, Regência e 2º Reinado), disputas pelo poder, escravidão e abolicionismo.</li>
-                        <li><b>Mundo Contemporáneo no Século XIX:</b> Revolução Industrial, Revolução Francesa, Imperialismo na África e Ásia, eugenia e racismo científico.</li>
-                        <li><b>Primeira República (1889-1930):</b> Oligarquias, coronelismo, modernização urbana, movimentos sociais e cultura afro-brasileira no pós-abolição.</li>
-                        <li><b>Era Vargas (1930-1945):</b> Estado Novo, industrialização, trabalhismo e autoritarismo.</li>
-                        <li><b>Totalitarismos e Guerras Mundiais:</b> 1ª Guerra Mundial, Fascismo, Nazismo, 2ª Guerra Mundial, Holocausto, criação da ONU e Carta dos Direitos Humanos.</li>
-                        <li><b>Ditadura Civil-Militar (1964-1985):</b> Mecanismos de repressão, movimentos de resistência, questão indígena e lutas democráticas.</li>
-                        <li><b>Redemocratização e Brasil Atual:</b> Constituição de 1988, Direitos Humanos, cidadania, inserção do Brasil na globalização e história recente do Brasil (1989 até a atualidade).</li>
+                        <li><b>Mundo Contemporâneo e Iluminismo:</b> Iluminismo e laicidade do Estado; Revolução Industrial e Imperialismo europeu na África e Ásia; Totalitarismos e Direitos Humanos pós-1945.</li>
+                        <li><b>Brasil Imperial e República:</b> Processo de independência; Brasil Império e abolicionismo; Primeira República (1889-1930); Era Vargas e Ditadura Civil-Militar brasileira.</li>
+                        <li><b>Cidadania e Redemocratização:</b> Constituição de 1988; lutas sociais de negros, indígenas e mulheres por direitos.</li>
                     </ul>
                 </div>
                 <div>
-                    <h5 class="font-bold text-orange-800 text-sm border-b border-orange-200 pb-1 mb-2"><i class="fas fa-map-marked-alt mr-1"></i> 2. Geografia Humana, Econômica e Cartografia</h5>
+                    <h5 class="font-bold text-orange-800 text-sm border-b border-orange-200 pb-1 mb-2"><i class="fas fa-map-marked-alt mr-1"></i> 2. Geografia e Espaço Geográfico</h5>
                     <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Cartografia e Representação Espacial:</b> Leitura de mapas temáticos, croquis, cartogramas, anamorfoses e imagens de satélite.</li>
-                        <li><b>Globalização e Geopolítica:</b> Ordem econômica mundial, empresas multinacionais, blocos econômicos e integração global do Brasil a partir dos anos 1990.</li>
-                        <li><b>Urbanização e Industrialização:</b> Processo de industrialização e urbanização no Brasil e no mundo, e conflitos socioespaciais urbanos.</li>
-                        <li><b>Espaço Agrário e Campo:</b> Ocupação do espaço rural, agronegócio, agricultura familiar, lutas pela terra e territorialidades de comunidades tradicionais.</li>
-                        <li><b>População e Diversidade Étnico-Cultural:</b> Dinâmica demográfica brasileira, fluxos migratórios, desigualdades de renda/gênero e lutas de grupos marginalizados (negros, indígenas, mulheres, camponeses).</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-bold text-orange-800 text-sm border-b border-orange-200 pb-1 mb-2"><i class="fas fa-mountain mr-1"></i> 3. Geografia Física e Meio Ambiente</h5>
-                    <ul class="list-disc list-inside space-y-1.5 ml-1">
-                        <li><b>Componentes da Geografia Física:</b> Geologia, relevo, solos, recursos hídricos, bacias hidrográficas e vegetação no Brasil e no mundo.</li>
-                        <li><b>Climatologia e Biomas:</b> Formação e dinâmica dos padrões climáticos e biomas terrestres no Brasil e no mundo.</li>
-                        <li><b>Impactos Socioambientais:</b> Transformação das paisagens pela ação humana, degradação ambiental, mudanças climáticas e práticas de sustentabilidade.</li>
+                        <li><b>Cartografia e Representações:</b> Anamorfoses, croquis, mapas temáticos e imagens de satélite.</li>
+                        <li><b>Geografia Humana e Econômica:</b> Urbanização e industrialização no Brasil e no mundo; modernização agrícola; globalização e fluxos internacionais.</li>
+                        <li><b>Geografia Física e Meio Ambiente:</b> Clima, relevo, biomas e impactos socioambientais decorrentes da ação humana.</li>
                     </ul>
                 </div>
             </div>`
@@ -1082,9 +1094,10 @@
                 <thead>
                     <tr class="bg-slate-100 text-gray-700">
                         <th rowspan="2" class="align-middle">Curso Técnico Integrado</th>
-                        <th rowspan="2" class="align-middle text-center font-bold bg-blue-100">Total Vagas</th>
-                        <th rowspan="2" class="align-middle text-center font-bold bg-emerald-100">AC</th>
-                        <th colspan="4" class="text-center bg-purple-100 font-bold">Cotas LB (Renda &le; 1,0 SM)</th>
+                        <th rowspan="2" class="align-middle">Modalidade / Turno</th>
+                        <th rowspan="2" class="align-middle text-center font-bold bg-emerald-100">Total Vagas</th>
+                        <th rowspan="2" class="align-middle text-center font-bold bg-indigo-100">AC</th>
+                        <th colspan="4" class="text-center bg-emerald-100 font-bold">Cotas LB (Renda &le; 1,0 SM)</th>
                         <th colspan="4" class="text-center bg-indigo-100 font-bold">Cotas LI (Qualquer Renda)</th>
                     </tr>
                     <tr class="bg-slate-50 text-gray-600">
@@ -1104,8 +1117,9 @@
             html += `
                 <tr class="hover:bg-slate-50 transition-colors">
                     <td class="font-bold text-gray-800">${c.nome}</td>
-                    <td class="text-center font-black bg-blue-50 text-blue-900">${c.total}</td>
-                    <td class="text-center font-bold bg-emerald-50 text-emerald-900">${c.ac}</td>
+                    <td class="text-gray-600">${c.forma}</td>
+                    <td class="text-center font-black bg-emerald-50 text-emerald-900">${c.total}</td>
+                    <td class="text-center font-bold bg-indigo-50 text-indigo-900">${c.ac}</td>
                     <td class="text-center">${c.lb_ppi}</td>
                     <td class="text-center">${c.lb_q}</td>
                     <td class="text-center">${c.lb_pcd}</td>
