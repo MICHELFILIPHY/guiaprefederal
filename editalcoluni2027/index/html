@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RTR3DF7GK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2RTR3DF7GK');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Edital CAp-Coluni UFV 2027 - Guia Pré-Federal</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Paleta Oficial Guia Pré-Federal */
+            --brand-primary: #5242ea;
+            --brand-dark-blue: #3007a0;
+            --brand-teal: #00abb1;
+            --brand-lime: #c7ef59;
+            --brand-purple: #6408b0;
+            --brand-green: #7bcd47;
+            --brand-dark-green: #005b38;
+            --brand-coral: #dd5737;
+            --neutral-bg: #f8fafc;
+            --text-main: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--neutral-bg);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Styling Cards and Clean Containers */
+        .glass-card {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Banner CTA Estilizado */
+        .cta-clean {
+            background: linear-gradient(135deg, var(--brand-dark-blue) 0%, var(--brand-primary) 100%);
+            color: white;
+            border-radius: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 30px -5px rgba(82, 66, 234, 0.3);
+        }
+
+        .cta-btn-lime {
+            background-color: var(--brand-lime);
+            color: #0f172a;
+            font-weight: 800;
+            transition: all 0.3s ease;
+        }
+        .cta-btn-lime:hover {
+            background-color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(199, 239, 89, 0.4);
+        }
+
+        .cta-btn-outline {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .cta-btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Badges e Ícones */
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.025em;
+        }
+
+        .subject-tab {
+            transition: all 0.25s ease;
+            border: 2px solid transparent;
+        }
+        .subject-tab.active {
+            background-color: #ffffff;
+            border-color: var(--brand-primary);
+            color: var(--brand-primary);
+            box-shadow: 0 4px 12px rgba(82, 66, 234, 0.12);
+        }
+
+        /* Table Styling */
+        .clean-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .clean-table th {
+            background-color: #f1f5f9;
+            color: #334155;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            padding: 0.85rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .clean-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 0.875rem;
+        }
+
+        /* Floating Action Button (FAB) */
+        .fab-container {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+        }
+        .fab-main {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background-color: var(--brand-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 8px 20px rgba(82, 66, 234, 0.4);
+            font-size: 22px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fab-main .icon-close {
+            display: none;
+        }
+        .fab-container.active .fab-main {
+            background-color: var(--brand-coral);
+            transform: rotate(180deg);
+        }
+        .fab-container.active .fab-main .icon-open {
+            display: none;
+        }
+        .fab-container.active .fab-main .icon-close {
+            display: block;
+        }
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.25s ease;
+            transform: translateY(12px);
+            margin-bottom: 10px;
+        }
+        .fab-container.active .fab-options {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        .fab-label {
+            background-color: white;
+            color: #1e293b;
+            padding: 5px 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-right: 10px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        .fab-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200/80 transition-all">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <a href="https://guiaprefederal.com.br" class="flex items-center space-x-3">
+                <img src="https://guiaprefederal.com.br/logo.png" 
+                     alt="Guia Pré-Federal Logo" 
+                     class="rounded-full w-10 h-10 object-contain p-1 border border-slate-200 shadow-sm" 
+                     style="background-color: var(--brand-coral);"
+                     onerror="this.onerror=null;this.src='https://placehold.co/40x40/DD5737/FFFFFF?text=GPF';">
+                <span class="text-lg font-black tracking-tight" style="color: var(--brand-primary);">Guia Pré-Federal</span>
+            </a>
+
+            <nav class="hidden lg:block">
+                <ul class="flex space-x-6 text-xs font-bold text-slate-600">
+                    <li><a href="#cronograma" class="hover:text-[#5242ea] transition">Cronograma</a></li>
+                    <li><a href="#prova-pesos" class="hover:text-[#5242ea] transition">A Prova & Pesos</a></li>
+                    <li><a href="#livro" class="hover:text-[#5242ea] transition">Obra Literária</a></li>
+                    <li><a href="#vagas-cotas" class="hover:text-[#5242ea] transition">Vagas & Cotas</a></li>
+                    <li><a href="#regras" class="hover:text-[#5242ea] transition">Regras Importantes</a></li>
+                    <li><a href="#conteudo" class="hover:text-[#5242ea] transition">O que Estudar</a></li>
+                </ul>
+            </nav>
+
+            <button class="lg:hidden text-slate-700 p-2 focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 py-4 px-6 shadow-lg">
+            <ul class="flex flex-col space-y-3 font-semibold text-sm text-slate-700">
+                <li><a href="#cronograma" class="block py-1">Cronograma</a></li>
+                <li><a href="#prova-pesos" class="block py-1">A Prova & Pesos</a></li>
+                <li><a href="#livro" class="block py-1">Obra Literária</a></li>
+                <li><a href="#vagas-cotas" class="block py-1">Vagas & Cotas</a></li>
+                <li><a href="#regras" class="block py-1">Regras Importantes</a></li>
+                <li><a href="#conteudo" class="block py-1">O que Estudar</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="bg-white py-12 md:py-16 border-b border-slate-200/60 relative overflow-hidden">
+            <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+                <img src="https://guiaprefederal.com.br/logo1.png" 
+                     alt="Logo Guia Pré-Federal" 
+                     class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 rounded-full shadow-md border-2 border-slate-200 p-1.5 object-contain" 
+                     style="background-color: var(--brand-coral);"
+                     onerror="this.onerror=null;this.src='https://placehold.co/96x96/DD5737/FFFFFF?text=GPF';">
+                
+                <span class="inline-block bg-indigo-50 text-indigo-700 text-xs font-extrabold px-3 py-1 rounded-full mb-3 border border-indigo-100 uppercase tracking-wide">
+                    UFV - Universidade Federal de Viçosa
+                </span>
+                
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                    Edital CAp-Coluni <span class="px-2.5 py-0.5 rounded-lg text-white inline-block shadow-sm" style="background-color: var(--brand-primary);">2027</span>
+                </h1>
+                
+                <p class="mt-3 text-sm md:text-base text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+                    Guia essencial e simplificado para o Exame de Seleção do Colégio de Aplicação da UFV (Edital nº 008/2026/PRE). Ingresso na 1ª Série do Ensino Médio.
+                </p>
+
+                <div class="mt-6 flex flex-wrap justify-center gap-2 text-xs font-bold">
+                    <span class="bg-emerald-50 text-emerald-800 px-3 py-1.5 rounded-full border border-emerald-200/80 flex items-center">
+                        <i class="fas fa-graduation-cap mr-1.5 text-emerald-600"></i>150 Vagas em Tempo Integral
+                    </span>
+                    <span class="bg-indigo-50 text-indigo-800 px-3 py-1.5 rounded-full border border-indigo-200/80 flex items-center">
+                        <i class="fas fa-star mr-1.5 text-indigo-600"></i>73 Pontos Totais (Pesos Especiais)
+                    </span>
+                    <span class="bg-amber-50 text-amber-800 px-3 py-1.5 rounded-full border border-amber-200/80 flex items-center">
+                        <i class="fas fa-book-open mr-1.5 text-amber-600"></i>Livro: A cabeça do santo
+                    </span>
+                    <span class="bg-rose-50 text-rose-800 px-3 py-1.5 rounded-full border border-rose-200/80 flex items-center">
+                        <i class="fas fa-calendar-alt mr-1.5 text-rose-600"></i>Prova em 07/11/2026
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+
+            <section class="cta-clean p-6 sm:p-8 mb-10 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 max-w-xl">
+                    <span class="bg-white/20 text-white text-[11px] font-black px-2.5 py-0.5 rounded uppercase tracking-wider">Curso Preparatório</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white leading-tight">Quer Garantir Sua Vaga no Coluni UFV?</h2>
+                    <p class="text-indigo-100 text-xs sm:text-sm font-normal leading-relaxed">
+                        Aulas focadas na matriz do edital, correção de redação no padrão do Coluni e simulados com ranking.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto shrink-0">
+                    <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="cta-btn-lime px-5 py-3 rounded-xl text-xs text-center flex items-center justify-center">
+                        <i class="fas fa-rocket mr-2"></i>Conhecer o Intensivo
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-btn-outline px-5 py-3 rounded-xl text-xs text-center flex items-center justify-center">
+                        <i class="fab fa-whatsapp mr-2 text-emerald-300"></i>WhatsApp
+                    </a>
+                </div>
+            </section>
+
+            <section id="cronograma" class="glass-card p-6 sm:p-8 mb-10">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-primary);">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Cronograma Oficial (Edital nº 008/2026/PRE)</h3>
+                        <p class="text-xs text-slate-500">Principais prazos do Exame de Seleção CAp-Coluni 2027</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="clean-table">
+                        <thead>
+                            <tr>
+                                <th>Etapa / Atividade</th>
+                                <th>Período / Data</th>
+                                <th>Horário / Canal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="bg-indigo-50/40">
+                                <td class="font-bold text-indigo-950">Inscrições pela Internet</td>
+                                <td class="font-semibold text-slate-800">14/07 a 04/09/2026</td>
+                                <td class="text-xs text-slate-600">Até 18h em pse.coluni.ufv.br (Conta Gov.br + CPF)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-amber-800">Solicitação de Isenção da Taxa (R$ 90,00)</td>
+                                <td>14/07 a 07/08/2026</td>
+                                <td class="text-xs text-slate-600">Até 18h (Exige CadÚnico cadastrado)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Resultado Preliminar da Isenção</td>
+                                <td>11/08/2026</td>
+                                <td class="text-xs text-slate-600">A partir das 17h no site oficial</td>
+                            </tr>
+                            <tr class="bg-rose-50/50">
+                                <td class="font-bold text-rose-700">Último dia para Pagamento da Taxa</td>
+                                <td class="font-bold text-rose-700">04/09/2026</td>
+                                <td class="text-xs text-slate-600">Boleto Bancário (Horário bancário)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Emissão do Comprovante Definitivo (CDI)</td>
+                                <td>23/10 a 06/11/2026</td>
+                                <td class="text-xs text-slate-600">Na Área do Candidato em pse.coluni.ufv.br</td>
+                            </tr>
+                            <tr class="bg-indigo-100/70 font-bold" style="color: var(--brand-dark-blue);">
+                                <td class="py-3.5"><i class="fas fa-pen-nib mr-2 text-indigo-600"></i>APLICAÇÃO DAS PROVAS (OBJETIVA + REDAÇÃO)</td>
+                                <td class="py-3.5">07/11/2026 (Sábado)</td>
+                                <td class="py-3.5 text-xs">Portões abrem 12h20 / Fecham 13h00! Prova das 13h30 às 18h00</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Gabarito Oficial Preliminar</td>
+                                <td>11/11/2026</td>
+                                <td class="text-xs text-slate-600">Às 09 horas em pse.coluni.ufv.br</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Resultado das Questões Objetivas</td>
+                                <td>Novembro/2026</td>
+                                <td class="text-xs text-slate-600">Apenas os 600 primeiros têm a Redação corrigida</td>
+                            </tr>
+                            <tr class="bg-emerald-50">
+                                <td class="font-bold text-emerald-900">Divulgação do RESULTADO FINAL</td>
+                                <td class="font-bold text-emerald-900">15/12/2026</td>
+                                <td class="text-xs text-emerald-700 font-semibold">Lista oficial dos 150 aprovados em pse.coluni.ufv.br</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="prova-pesos" class="glass-card p-6 sm:p-8 mb-10">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-teal);">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Composição da Prova & Sistema de Pesos</h3>
+                        <p class="text-xs text-slate-500">O Coluni avalia 73 pontos totais divididos entre Questões Objetivas e Produção Textual</p>
+                    </div>
+                </div>
+
+                <!-- Tabela de Distribuição e Pesos -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6">
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-slate-600 mb-3"><i class="fas fa-list-ol mr-1.5 text-indigo-600"></i>Quadro Oficial de Provas e Pesos (Quadro 2 do Edital):</h4>
+                    
+                    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 text-center">
+                        <div class="bg-white p-3 rounded-lg border border-indigo-200 shadow-sm">
+                            <span class="block text-[10px] font-extrabold uppercase text-indigo-800">Português</span>
+                            <span class="text-lg font-black text-indigo-600">10 Q</span>
+                            <span class="block text-[10px] text-slate-500 font-bold mt-0.5">Peso 2 (20 pts)</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-emerald-200 shadow-sm">
+                            <span class="block text-[10px] font-extrabold uppercase text-emerald-800">Matemática</span>
+                            <span class="text-lg font-black text-emerald-600">10 Q</span>
+                            <span class="block text-[10px] text-slate-500 font-bold mt-0.5">Peso 2 (20 pts)</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-amber-200 shadow-sm">
+                            <span class="block text-[10px] font-extrabold uppercase text-amber-800">Ciências</span>
+                            <span class="text-lg font-black text-amber-600">08 Q</span>
+                            <span class="block text-[10px] text-slate-500 font-bold mt-0.5">Peso 1 (8 pts)</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-teal-200 shadow-sm">
+                            <span class="block text-[10px] font-extrabold uppercase text-teal-800">Geografia</span>
+                            <span class="text-lg font-black text-teal-600">04 Q</span>
+                            <span class="block text-[10px] text-slate-500 font-bold mt-0.5">Peso 1 (4 pts)</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-orange-200 shadow-sm">
+                            <span class="block text-[10px] font-extrabold uppercase text-orange-800">História</span>
+                            <span class="text-lg font-black text-orange-600">04 Q</span>
+                            <span class="block text-[10px] text-slate-500 font-bold mt-0.5">Peso 1 (4 pts)</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-300 shadow-sm">
+                            <span class="block text-[10px] font-extrabold uppercase text-slate-700">Inglês</span>
+                            <span class="text-lg font-black text-slate-700">02 Q</span>
+                            <span class="block text-[10px] text-slate-500 font-bold mt-0.5">Peso 1 (2 pts)</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-purple-200 shadow-sm col-span-2 sm:col-span-2 lg:col-span-1">
+                            <span class="block text-[10px] font-extrabold uppercase text-purple-800">Redação (2ª Etapa)</span>
+                            <span class="text-lg font-black text-purple-600">1 Discursiva</span>
+                            <span class="block text-[10px] text-slate-500 font-bold mt-0.5">15 pts (Top 600)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destaque: Regra de Ouro dos 75% da Nota e Filtro de 600 Redações -->
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-indigo-50/70 p-4 rounded-xl border border-indigo-200">
+                        <h5 class="font-extrabold text-sm text-indigo-950 mb-1 flex items-center">
+                            <i class="fas fa-crown text-amber-500 mr-2"></i>O Triângulo de Ouro (75% da Nota)
+                        </h5>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Juntas, <strong>Português (20 pts)</strong>, <strong>Matemática (20 pts)</strong> e a <strong>Produção Textual (15 pts)</strong> somam <strong>55 dos 73 pontos totais</strong> (75,3% da nota da seleção). O foco nessas três disciplinas é determinante!
+                        </p>
+                    </div>
+
+                    <div class="bg-amber-50/70 p-4 rounded-xl border border-amber-200">
+                        <h5 class="font-extrabold text-sm text-amber-950 mb-1 flex items-center">
+                            <i class="fas fa-filter text-amber-600 mr-2"></i>Apenas 600 Redações Corrigidas
+                        </h5>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            A prova objetiva funciona como um filtro inicial: somente os <strong>4 primeiros classificados por vaga</strong> (300 da Ampla Concorrência e 300 das Cotas) têm a Redação corrigida pelo Coluni!
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="livro" class="glass-card p-6 sm:p-8 mb-10 border-2" style="border-color: var(--brand-coral);">
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                    <div class="w-20 h-28 bg-rose-100 rounded-lg shadow-md border border-rose-200 flex flex-col justify-center items-center text-center p-2 shrink-0">
+                        <i class="fas fa-book-journal-whills text-3xl text-rose-600 mb-1"></i>
+                        <span class="text-[9px] font-black uppercase text-rose-900 leading-tight">Leitura Obrigatória</span>
+                    </div>
+
+                    <div class="space-y-2 text-center sm:text-layout-left">
+                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                            <span class="bg-rose-100 text-rose-800 text-[10px] font-black px-2.5 py-0.5 rounded uppercase">Exame de Seleção 2027</span>
+                            <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2.5 py-0.5 rounded">Companhia das Letras</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-black text-slate-900">"A cabeça do santo"</h3>
+                        <p class="text-xs font-bold text-rose-700">Autora: Socorro Acioli (São Paulo, 2014)</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            A leitura do romance é indispensável para responder às questões de Língua Portuguesa e pode servir de repertório ou articulação temática para a Produção Textual (Redação).
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="vagas-cotas" class="glass-card p-6 sm:p-8 mb-10">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-purple);">
+                        <i class="fas fa-users-rectangle"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Quadro de Vagas & Sistema de Cotas (150 Vagas)</h3>
+                        <p class="text-xs text-slate-500">Divisão conforme a Lei nº 12.711/2012 e atualização da Lei nº 14.723/2023</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div class="p-5 rounded-xl border border-indigo-200 bg-indigo-50/30">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-black text-indigo-900 text-sm">Ampla Concorrência (AC)</span>
+                            <span class="bg-indigo-600 text-white font-black text-xs px-2.5 py-0.5 rounded-full">75 Vagas (50%)</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Destinadas a todos os candidatos interessados, independentemente de terem cursado escola pública ou privada.
+                        </p>
+                    </div>
+
+                    <div class="p-5 rounded-xl border border-emerald-200 bg-emerald-50/30">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-black text-emerald-900 text-sm">Vagas Reservadas (Cotistas)</span>
+                            <span class="bg-emerald-600 text-white font-black text-xs px-2.5 py-0.5 rounded-full">75 Vagas (50%)</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Exclusivas para estudantes que cursaram **todo o Ensino Fundamental (1º ao 9º ano)** em escolas públicas brasileiras.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tabela de Subdivisão de Cotas -->
+                <div class="overflow-x-auto mb-4">
+                    <table class="clean-table">
+                        <thead>
+                            <tr>
+                                <th>Modalidade</th>
+                                <th>Grupo de Cota / Requisitos</th>
+                                <th class="text-center">Renda Limite</th>
+                                <th class="text-center">Nº de Vagas</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-xs">
+                            <tr>
+                                <td class="font-bold text-emerald-900">LB_PPI</td>
+                                <td>Escola Pública + Pretos, Pardos ou Indígenas</td>
+                                <td class="text-center font-semibold text-emerald-700">&le; 1,0 Salário Mínimo</td>
+                                <td class="text-center font-black bg-emerald-50 text-emerald-900">23</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-emerald-900">LB_Q</td>
+                                <td>Escola Pública + Quilombolas</td>
+                                <td class="text-center font-semibold text-emerald-700">&le; 1,0 Salário Mínimo</td>
+                                <td class="text-center font-black bg-emerald-50 text-emerald-900">01</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-emerald-900">LB_PCD</td>
+                                <td>Escola Pública + Pessoas com Deficiência</td>
+                                <td class="text-center font-semibold text-emerald-700">&le; 1,0 Salário Mínimo</td>
+                                <td class="text-center font-black bg-emerald-50 text-emerald-900">04</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-emerald-900">LB_EP</td>
+                                <td>Escola Pública (Demais estudantes)</td>
+                                <td class="text-center font-semibold text-emerald-700">&le; 1,0 Salário Mínimo</td>
+                                <td class="text-center font-black bg-emerald-50 text-emerald-900">10</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-indigo-900">LI_PPI</td>
+                                <td>Escola Pública + Pretos, Pardos ou Indígenas</td>
+                                <td class="text-center text-slate-500 font-medium">Qualquer Renda</td>
+                                <td class="text-center font-black bg-indigo-50 text-indigo-900">22</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-indigo-900">LI_Q</td>
+                                <td>Escola Pública + Quilombolas</td>
+                                <td class="text-center text-slate-500 font-medium">Qualquer Renda</td>
+                                <td class="text-center font-black bg-indigo-50 text-indigo-900">00</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-indigo-900">LI_PCD</td>
+                                <td>Escola Pública + Pessoas com Deficiência</td>
+                                <td class="text-center text-slate-500 font-medium">Qualquer Renda</td>
+                                <td class="text-center font-black bg-indigo-50 text-indigo-900">04</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-indigo-900">LI_EP</td>
+                                <td>Escola Pública (Demais estudantes)</td>
+                                <td class="text-center text-slate-500 font-medium">Qualquer Renda</td>
+                                <td class="text-center font-black bg-indigo-50 text-indigo-900">11</td>
+                            </tr>
+                            <tr class="bg-slate-100 font-bold">
+                                <td>AC</td>
+                                <td>Ampla Concorrência (Sem reserva de vaga)</td>
+                                <td class="text-center">Qualquer Renda</td>
+                                <td class="text-center font-black text-slate-900">75</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="text-[11px] text-slate-500 italic">
+                    * Todos os candidatos cotistas concorrem **primeiro na Ampla Concorrência**. Se alcançarem nota para AC, entram por AC e liberam a vaga de cota para o próximo candidato cotista da lista!
+                </p>
+            </section>
+
+            <section id="regras" class="glass-card p-6 sm:p-8 mb-10">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-coral);">
+                        <i class="fas fa-triangle-exclamation"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Regras Especiais & Orientações do Dia da Prova</h3>
+                        <p class="text-xs text-slate-500">Detalhes importantes sobre Treineiros, Sabatistas e Documentos</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <div class="font-bold text-xs text-slate-900 mb-1"><i class="fas fa-user-graduate text-indigo-600 mr-1.5"></i>Candidatos Treineiros</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Estudantes do 7º ou 8º ano podem fazer a prova para testar conhecimentos. O resultado de treineiro tem caráter meramente informativo e é divulgado **90 dias após** o resultado oficial.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <div class="font-bold text-xs text-slate-900 mb-1"><i class="fas fa-id-card text-emerald-600 mr-1.5"></i>Documento Físico Obrigatório</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Obrigatorio apresentar documento oficial **físico original com foto e assinatura** (RG, CIN, CNH ou Passaporte). Não são aceitos documentos em celular ou cópias mesmo autenticadas.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <div class="font-bold text-xs text-slate-900 mb-1"><i class="fas fa-place-of-worship text-amber-600 mr-1.5"></i>Atendimento a Sabatistas</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Candidatos que guardam o sábado por convicção religiosa devem chegar ao local de prova às 13h00, permanecer em sala de confinamento e iniciar a prova às **18h30min**.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="conteudo" class="glass-card p-6 sm:p-8 mb-10">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-primary);">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">O que Estudar? Conteúdo Programático Detalhado</h3>
+                        <p class="text-xs text-slate-500">Matriz de conteúdos oficial do Exame de Seleção do CAp-Coluni 2027</p>
+                    </div>
+                </div>
+
+                <!-- Botões das Matérias -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 mb-6">
+                    <button onclick="showSyllabus('portugues')" class="subject-tab active p-2.5 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-1 text-xs font-extrabold">
+                        <i class="fas fa-language text-lg text-indigo-600"></i>
+                        <span>Português (20pts)</span>
+                    </button>
+                    <button onclick="showSyllabus('matematica')" class="subject-tab p-2.5 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-1 text-xs font-extrabold">
+                        <i class="fas fa-calculator text-lg text-emerald-600"></i>
+                        <span>Matemática (20pts)</span>
+                    </button>
+                    <button onclick="showSyllabus('ciencias')" class="subject-tab p-2.5 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-1 text-xs font-extrabold">
+                        <i class="fas fa-flask text-lg text-amber-600"></i>
+                        <span>Ciências (8pts)</span>
+                    </button>
+                    <button onclick="showSyllabus('geografia')" class="subject-tab p-2.5 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-1 text-xs font-extrabold">
+                        <i class="fas fa-globe-americas text-lg text-teal-600"></i>
+                        <span>Geografia (4pts)</span>
+                    </button>
+                    <button onclick="showSyllabus('historia')" class="subject-tab p-2.5 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-1 text-xs font-extrabold">
+                        <i class="fas fa-landmark text-lg text-orange-600"></i>
+                        <span>História (4pts)</span>
+                    </button>
+                    <button onclick="showSyllabus('redacao')" class="subject-tab p-2.5 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-1 text-xs font-extrabold">
+                        <i class="fas fa-pen-nib text-lg text-purple-600"></i>
+                        <span>Redação (15pts)</span>
+                    </button>
+                </div>
+
+                <!-- Painel Exibidor do Conteúdo -->
+                <div id="syllabus-display" class="bg-slate-50/80 p-5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-700 space-y-4">
+                    <!-- Javascript Injected -->
+                </div>
+            </section>
+
+            <section class="cta-clean p-8 text-center space-y-4 mb-10">
+                <span class="bg-white/20 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Garanta Sua Vaga no Coluni UFV</span>
+                <h3 class="text-2xl sm:text-3xl font-black text-white">Pronto para Conquistar a Maior Nota?</h3>
+                <p class="max-w-xl mx-auto text-indigo-100 text-xs sm:text-sm leading-relaxed">
+                    Prepare-se com aulas gravadas e ao vivo, simulados direcionados, correções de redação e a melhor mentoria do mercado.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2">
+                    <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="cta-btn-lime px-6 py-3.5 rounded-xl text-xs flex items-center justify-center">
+                        <i class="fas fa-rocket mr-2"></i>Matricular-se no Intensivo
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-btn-outline px-6 py-3.5 rounded-xl text-xs flex items-center justify-center">
+                        <i class="fab fa-whatsapp mr-2 text-emerald-300"></i>Falar no WhatsApp
+                    </a>
+                </div>
+            </section>
+
+            <footer class="text-center text-slate-400 text-xs py-6 border-t border-slate-200">
+                <p>Desenvolvido com excelência por <strong>Guia Pré-Federal</strong> com base no Edital nº 008/2026/PRE do Colégio de Aplicação da Universidade Federal de Viçosa (CAp-Coluni UFV).</p>
+                <p class="mt-1">Acompanhe sempre o portal oficial em <a href="https://www.pse.coluni.ufv.br" target="_blank" class="underline text-indigo-600">pse.coluni.ufv.br</a></p>
+            </footer>
+
+        </div>
+    </main>
+
+    <div class="fab-container">
+        <div class="fab-options">
+            <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="fab-option">
+                <span class="fab-label">Curso Intensivo</span>
+                <div class="fab-icon" style="background-color: var(--brand-primary);">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </a>
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
+                <span class="fab-label">Atendimento WhatsApp</span>
+                <div class="fab-icon" style="background-color: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </a>
+        </div>
+        <button class="fab-main" id="fab-main-button">
+            <i class="fas fa-comment-dots icon-open"></i>
+            <i class="fas fa-times icon-close"></i>
+        </button>
+    </div>
+
+    <script>
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Floating Action Button (FAB) Toggle
+    const fabContainer = document.querySelector('.fab-container');
+    const fabMainButton = document.getElementById('fab-main-button');
+    fabMainButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        fabContainer.classList.toggle('active');
+    });
+    document.addEventListener('click', (e) => {
+        if (!fabContainer.contains(e.target)) {
+            fabContainer.classList.remove('active');
+        }
+    });
+
+    // CONTEÚDO PROGRAMÁTICO DETALHADO DO COLUNI 2027
+    const syllabusData = {
+        portugues: `
+            <h4 class="font-extrabold text-base text-indigo-900 border-b border-indigo-200 pb-2 mb-3">Língua Portuguesa (10 Questões x Peso 2 = 20 Pontos)</h4>
+            <div class="space-y-3">
+                <div>
+                    <h5 class="font-bold text-indigo-800"><i class="fas fa-book-open mr-1.5"></i>1. Leitura e Compreensão de Textos</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Identificação do tema central, subtemas e construção do sentido global.</li>
+                        <li>Interpretação e articulação crítica entre fato e opinião.</li>
+                        <li>Significação de palavras no discurso e efeitos de sentido (denotação e conotação).</li>
+                        <li>Análise de diferentes gêneros textuais (notícia, crônica, charge, carta, artigo, manual, etc.).</li>
+                        <li>Interpretação de linguagem verbal e não-verbal associadas.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-indigo-800"><i class="fas fa-pen-fancy mr-1.5"></i>2. Análise da Língua, Formas e Sentidos</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Elementos de textualização: mecanismos de coesão referencial e sequencial, e coerência.</li>
+                        <li>Relações morfossintáticas, semânticas e discursivo-argumentativas da oração.</li>
+                        <li>Variedades linguísticas e distinção de registros (formal e informal).</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-indigo-800"><i class="fas fa-feather-alt mr-1.5"></i>3. Leitura do Romance Obrigatório</h5>
+                    <p class="text-slate-600 mb-1">Análise completa da obra <b>"A cabeça do santo"</b> (Socorro Acioli):</p>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Elementos da narrativa (enredo, foco narrativo, personagens, tempo e espaço).</li>
+                        <li>Recursos da linguagem literária: metáfora, ambiguidade, ironia, antítese e personificação.</li>
+                        <li>Relação entre o texto literário e seu contexto sócio-histórico e cultural.</li>
+                    </ul>
+                </div>
+            </div>`,
+
+        matematica: `
+            <h4 class="font-extrabold text-base text-emerald-900 border-b border-emerald-200 pb-2 mb-3">Matemática (10 Questões x Peso 2 = 20 Pontos)</h4>
+            <div class="space-y-3">
+                <div>
+                    <h5 class="font-bold text-emerald-800"><i class="fas fa-layer-group mr-1.5"></i>1. Conjuntos e Números</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Operações com conjuntos: união, interseção, diferença e complementar.</li>
+                        <li>Números Naturais e Inteiros: divisibilidade, primos, MMC e MDC.</li>
+                        <li>Racionais e Irracionais: equivalência de frações, dízimas periódicas, radicais e racionalização.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-emerald-800"><i class="fas fa-square-root-variable mr-1.5"></i>2. Cálculo Algébrico e Equações</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Expressões algébricas, produtos notáveis, fatoração e frações algébricas.</li>
+                        <li>Resolução de equações do 1º e 2º graus e sistemas de equações.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-emerald-800"><i class="fas fa-shapes mr-1.5"></i>3. Geometria, Financeira e Estatística</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Bissetriz, círculo, Teorema de Tales, congruência e semelhança de triângulos.</li>
+                        <li>Relações métricas e trigonométricas no triângulo retângulo; áreas e volumes.</li>
+                        <li>Razão, proporção, regra de três simples/composta, porcentagem e juros simples.</li>
+                        <li>Estatística: leitura de gráficos de linhas, barras, setores e Média Aritmética.</li>
+                    </ul>
+                </div>
+            </div>`,
+
+        redacao: `
+            <h4 class="font-extrabold text-base text-purple-900 border-b border-purple-200 pb-2 mb-3">Produção Textual / Redação (1 Questão Discursiva = 15 Pontos)</h4>
+            <div class="space-y-3">
+                <p class="text-slate-600">A prova de Produção Textual do Coluni possui avaliação rigorosa ("triplo cego" por 3 corretores independentes) e exige atenção especial aos seguintes quesitos:</p>
+                <div>
+                    <h5 class="font-bold text-purple-800"><i class="fas fa-tasks mr-1.5"></i>Competências Avaliadas</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li><b>Atendimento à Proposta e Tema:</b> Compreensão integral do tema proposto e articulação com os textos motivadores/obra literária.</li>
+                        <li><b>Adequação ao Gênero Solicitado:</b> Domínio do tipo e gênero exigido (Dissertativo-Argumentativo, Carta, Crônica, Notícia, Artigo de Opinião, etc.).</li>
+                        <li><b>Estratégias Argumentativas e Raciocínio Crítico:</b> Construção de tese clara e argumentos sólidos, pertinentes e consistentes.</li>
+                        <li><b>Norma-Padrão e Coesão:</b> Correção gramatical, variedade de vocabulário, e articulação coerente através de conectores formais.</li>
+                        <li><b>Extensão Mínima:</b> Ter no mínimo 12 linhas escritas (textos com menos de 12 linhas são desclassificados!).</li>
+                    </ul>
+                </div>
+            </div>`,
+
+        ciencias: `
+            <h4 class="font-extrabold text-base text-amber-900 border-b border-amber-200 pb-2 mb-3">Ciências (8 Questões x Peso 1 = 8 Pontos)</h4>
+            <div class="space-y-3">
+                <div>
+                    <h5 class="font-bold text-amber-800"><i class="fas fa-dna mr-1.5"></i>1. Biologia e Saúde</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Citologia (membrana, organelas, núcleo, respiração e fermentação).</li>
+                        <li>Classificação e reinos: vírus, bactérias, fungos, plantas e animais.</li>
+                        <li>Anatomia e Fisiologia Humana (sistemas digestório, respiratório, circulatório, nervoso, locomotor, reprodutor).</li>
+                        <li>Genética (DNA, 1ª Lei de Mendel, sistema ABO/Rh) e Ecologia (cadeias alimentares, poluição, biomas).</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-amber-800"><i class="fas fa-atom mr-1.5"></i>2. Física e Química</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Física: Movimento (velocidade, aceleração), Leis de Newton, Trabalho, Energia, Termologia, Hidrostática, Óptica e Eletricidade.</li>
+                        <li>Química: Propriedades da matéria, processos de separação de misturas, reações químicas, modelos atômicos (Dalton, Thomson, Rutherford-Bohr) e Tabela Periódica.</li>
+                    </ul>
+                </div>
+            </div>`,
+
+        geografia: `
+            <h4 class="font-extrabold text-base text-teal-900 border-b border-teal-200 pb-2 mb-3">Geografia (4 Questões x Peso 1 = 4 Pontos)</h4>
+            <div class="space-y-3">
+                <ul class="list-disc list-inside space-y-1.5 text-slate-600 ml-2">
+                    <li><b>Cartografia:</b> Orientação, escalas, fusos horários e interpretação crítica de mapas.</li>
+                    <li><b>Dinâmicas da Natureza:</b> Relevo, agentes internos/externos, hidrografia, climas, biomas e impactos socioambientais no Brasil e no mundo.</li>
+                    <li><b>Espaço Geográfico Mundial:</b> Continentes, geopolítica, globalização e fluxos socioeconômicos.</li>
+                    <li><b>Espaço Geográfico Brasileiro:</b> Urbanização, agropecuária, demografia e diversidades regionais.</li>
+                </ul>
+            </div>`,
+
+        historia: `
+            <h4 class="font-extrabold text-base text-orange-900 border-b border-orange-200 pb-2 mb-3">História (4 Questões x Peso 1 = 4 Pontos)</h4>
+            <div class="space-y-3">
+                <ul class="list-disc list-inside space-y-1.5 text-slate-600 ml-2">
+                    <li><b>A Crise da Ordem Burguesa:</b> Imperialismo, Primeira Guerra Mundial, Revolução Russa, Crise de 1929, Regimes Totalitários (Nazifascismo), Segunda Guerra Mundial e Guerra Fria.</li>
+                    <li><b>América Latina e Atualidades:</b> Descolonização afro-asiática e conflitos do Século XXI.</li>
+                    <li><b>História do Brasil no Século XX e XXI:</b> República Oligárquica, Revolução de 1930, Era Vargas e Estado Novo, Governos Populistas, Ditadura Civil-Militar (1964-1985), Redemocratização e Nova República aos dias atuais.</li>
+                </ul>
+            </div>`
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showSyllabus('portugues');
+    });
+
+    function showSyllabus(subject) {
+        document.getElementById('syllabus-display').innerHTML = syllabusData[subject];
+        document.querySelectorAll('.subject-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.querySelector(`[onclick="showSyllabus('${subject}')"]`).classList.add('active');
+    }
+    </script>
+</body>
+</html>
