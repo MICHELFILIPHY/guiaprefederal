@@ -423,22 +423,31 @@
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-4">
+                <div class="grid md:grid-cols-3 gap-4">
                     <div class="bg-indigo-50/70 p-4 rounded-xl border border-indigo-200">
                         <h5 class="font-extrabold text-sm text-indigo-950 mb-1 flex items-center">
-                            <i class="fas fa-clock text-indigo-600 mr-2"></i>Duração & Horário dos Portões
+                            <i class="fas fa-clock text-indigo-600 mr-2"></i>Duração & Portões
                         </h5>
                         <p class="text-xs text-slate-700 leading-relaxed">
-                            A prova tem duração total de <strong>4 horas (13h00 às 17h00)</strong>. Os portões do local de prova abrem às 12h00 e <strong>fecham pontualmente às 13h00</strong>. É recomendável chegar com 1 hora de antecedência.
+                            A prova tem duração de <strong>4 horas (13h00 às 17h00)</strong>. Portões abrem às 12h00 e <strong>fecham às 13h00</strong>.
                         </p>
                     </div>
 
                     <div class="bg-emerald-50/70 p-4 rounded-xl border border-emerald-200">
                         <h5 class="font-extrabold text-sm text-emerald-950 mb-1 flex items-center">
-                            <i class="fas fa-id-card text-emerald-600 mr-2"></i>Documento Físico Obrigatório
+                            <i class="fas fa-id-card text-emerald-600 mr-2"></i>Documento Obrigatório
                         </h5>
                         <p class="text-xs text-slate-700 leading-relaxed">
-                            Apresentação obrigatória de <strong>Documento Oficial de Identidade ORIGINAL com foto</strong> (RG, CIN, CNH ou Passaporte). O documento deve ser o do próprio candidato (mesmo menor de idade).
+                            Apresentar <strong>Documento de Identidade ORIGINAL com foto</strong> (RG, CIN, CNH ou Passaporte) do próprio candidato.
+                        </p>
+                    </div>
+
+                    <div class="bg-amber-50/80 p-4 rounded-xl border border-amber-200/90">
+                        <h5 class="font-extrabold text-sm text-amber-950 mb-1 flex items-center">
+                            <i class="fas fa-exclamation-triangle text-amber-600 mr-2"></i>Critério de Classificação
+                        </h5>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            <strong>Importante:</strong> É obrigatório acertar <strong>pelo menos 01 (uma) questão</strong> na prova objetiva (não zerar a prova) para não ser eliminado(a).
                         </p>
                     </div>
                 </div>
@@ -574,6 +583,73 @@
                         <span class="font-extrabold text-xs text-amber-900 uppercase block mb-1">Cota Institucional B</span>
                         <span class="text-lg font-black text-amber-700">5% Vagas PCD</span>
                         <p class="text-xs text-slate-600 mt-1">Vagas reservadas para PCD independentemente da renda e tipo de escola.</p>
+                    </div>
+                </div>
+
+                <!-- Organograma Visual da Distribuição de Vagas (Figura 1 do Edital IFBA) -->
+                <div class="p-5 my-6 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm">
+                    <div class="text-center mb-5">
+                        <span class="bg-indigo-100 text-indigo-800 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Esquema Ilustrativo do Edital</span>
+                        <h4 class="text-base font-black text-slate-900 mt-1">Esquema da Distribuição de Vagas do IFBA</h4>
+                        <p class="text-xs text-slate-500">Divisão percentual das vagas por ampla concorrência, cota B e ações afirmativas (LB e LI)</p>
+                    </div>
+
+                    <div class="space-y-6 text-xs font-bold">
+                        <!-- Nível 1: Total e Grandes Divisões -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-center">
+                            <div class="p-3 rounded-xl bg-white border border-slate-300 shadow-sm flex flex-col justify-center items-center">
+                                <span class="text-xs text-slate-500 font-semibold">VAGAS TOTAIS</span>
+                                <span class="text-lg font-black text-emerald-600">100% Vagas</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-indigo-50 border border-indigo-200 flex flex-col justify-center items-center">
+                                <span class="text-xs text-indigo-800 font-semibold">Ampla Concorrência</span>
+                                <span class="text-lg font-black text-indigo-600">Até 32,2%</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 flex flex-col justify-center items-center">
+                                <span class="text-xs text-amber-800 font-semibold">Cota B (PCD Geral)</span>
+                                <span class="text-lg font-black text-amber-600">5.0%</span>
+                            </div>
+                        </div>
+
+                        <!-- Nível 2: Escola Pública 62,8% -->
+                        <div class="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200">
+                            <div class="flex items-center justify-between border-b border-emerald-200 pb-2 mb-3">
+                                <span class="text-sm font-black text-emerald-950"><i class="fas fa-school mr-2 text-emerald-600"></i>Cota Escola Pública (62,8% das Vagas Totais)</span>
+                                <span class="bg-emerald-600 text-white text-[10px] px-2 py-0.5 rounded-full">Lei nº 14.723/2023</span>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <!-- Grupo LB: Renda <= 1 SM -->
+                                <div class="bg-white p-3.5 rounded-xl border border-emerald-200 shadow-sm">
+                                    <div class="flex justify-between items-center mb-2 pb-1 border-b border-slate-100">
+                                        <span class="text-xs font-black text-emerald-900">Grupo LB (Renda &le; 1 SM)</span>
+                                        <span class="text-[11px] font-black text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">50% do Cursado Pública</span>
+                                    </div>
+                                    <ul class="space-y-1.5 text-[11px] text-slate-700">
+                                        <li class="flex justify-between items-center"><span>Pretos e Pardos (LB_PP):</span> <strong class="text-indigo-600">79,69%</strong></li>
+                                        <li class="flex justify-between items-center"><span>Indígenas (LB_I):</span> <strong class="text-indigo-600">1,62%</strong></li>
+                                        <li class="flex justify-between items-center"><span>Quilombolas (LB_Q):</span> <strong class="text-indigo-600">5,62%</strong></li>
+                                        <li class="flex justify-between items-center"><span>Pessoas c/ Deficiência (LB_PCD):</span> <strong class="text-indigo-600">7,92%</strong></li>
+                                        <li class="flex justify-between items-center"><span>Demais Escola Pública (LB_EP):</span> <strong class="text-indigo-600">5,17%</strong></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Grupo LI: Renda > 1 SM / Independente de Renda -->
+                                <div class="bg-white p-3.5 rounded-xl border border-blue-200 shadow-sm">
+                                    <div class="flex justify-between items-center mb-2 pb-1 border-b border-slate-100">
+                                        <span class="text-xs font-black text-blue-900">Grupo LI (Qualquer Renda)</span>
+                                        <span class="text-[11px] font-black text-blue-700 bg-blue-100 px-2 py-0.5 rounded">50% do Cursado Pública</span>
+                                    </div>
+                                    <ul class="space-y-1.5 text-[11px] text-slate-700">
+                                        <li class="flex justify-between items-center"><span>Pretos e Pardos (LI_PP):</span> <strong class="text-blue-600">79,69%</strong></li>
+                                        <li class="flex justify-between items-center"><span>Indígenas (LI_I):</span> <strong class="text-blue-600">1,62%</strong></li>
+                                        <li class="flex justify-between items-center"><span>Quilombolas (LI_Q):</span> <strong class="text-blue-600">5,62%</strong></li>
+                                        <li class="flex justify-between items-center"><span>Pessoas c/ Deficiência (LI_PCD):</span> <strong class="text-blue-600">7,92%</strong></li>
+                                        <li class="flex justify-between items-center"><span>Demais Escola Pública (LI_EP):</span> <strong class="text-blue-600">5,17%</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
