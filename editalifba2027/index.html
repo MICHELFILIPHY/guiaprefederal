@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RTR3DF7GK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2RTR3DF7GK');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Edital IFBA 2027 - Cursos Técnicos Integrados</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Paleta Oficial Guia Pré-Federal */
+            --brand-primary: #5242ea;
+            --brand-dark-blue: #3007a0;
+            --brand-teal: #00abb1;
+            --brand-lime: #c7ef59;
+            --brand-purple: #6408b0;
+            --brand-green: #7bcd47;
+            --brand-dark-green: #005b38;
+            --brand-coral: #dd5737;
+            --neutral-bg: #f8fafc;
+            --text-main: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--neutral-bg);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Glass Cards and Clean Containers */
+        .glass-card {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Banner CTA Estilizado */
+        .cta-clean {
+            background: linear-gradient(135deg, var(--brand-dark-blue) 0%, var(--brand-purple) 100%);
+            color: white;
+            border-radius: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 30px -5px rgba(48, 7, 160, 0.3);
+        }
+
+        .cta-btn-lime {
+            background-color: var(--brand-lime);
+            color: #0f172a;
+            font-weight: 800;
+            transition: all 0.3s ease;
+        }
+        .cta-btn-lime:hover {
+            background-color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(199, 239, 89, 0.4);
+        }
+
+        .cta-btn-outline {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .cta-btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Subject Tabs */
+        .subject-tab {
+            transition: all 0.25s ease;
+            border: 2px solid transparent;
+        }
+        .subject-tab.active {
+            background-color: #ffffff;
+            border-color: var(--brand-primary);
+            color: var(--brand-primary);
+            box-shadow: 0 4px 12px rgba(82, 66, 234, 0.12);
+        }
+
+        /* Table Styling */
+        .clean-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .clean-table th {
+            background-color: #f1f5f9;
+            color: #334155;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            padding: 0.85rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .clean-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 0.875rem;
+        }
+
+        /* Floating Action Button (FAB) */
+        .fab-container {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+        }
+        .fab-main {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background-color: var(--brand-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 8px 20px rgba(82, 66, 234, 0.4);
+            font-size: 22px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fab-main .icon-close {
+            display: none;
+        }
+        .fab-container.active .fab-main {
+            background-color: var(--brand-coral);
+            transform: rotate(180deg);
+        }
+        .fab-container.active .fab-main .icon-open {
+            display: none;
+        }
+        .fab-container.active .fab-main .icon-close {
+            display: block;
+        }
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.25s ease;
+            transform: translateY(12px);
+            margin-bottom: 10px;
+        }
+        .fab-container.active .fab-options {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        .fab-label {
+            background-color: white;
+            color: #1e293b;
+            padding: 5px 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-right: 10px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        .fab-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200/80 transition-all">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <a href="https://guiaprefederal.com.br" class="flex items-center space-x-3">
+                <img src="https://guiaprefederal.com.br/logo.png" 
+                     alt="Guia Pré-Federal Logo" 
+                     class="rounded-full w-10 h-10 object-contain p-1 border border-slate-200 shadow-sm" 
+                     style="background-color: var(--brand-coral);"
+                     onerror="this.onerror=null;this.src='https://placehold.co/40x40/DD5737/FFFFFF?text=GPF';">
+                <span class="text-lg font-black tracking-tight" style="color: var(--brand-primary);">Guia Pré-Federal</span>
+            </a>
+
+            <nav class="hidden lg:block">
+                <ul class="flex space-x-6 text-xs font-bold text-slate-600">
+                    <li><a href="#cronograma" class="hover:text-[#5242ea] transition">Cronograma</a></li>
+                    <li><a href="#prova" class="hover:text-[#5242ea] transition">A Prova</a></li>
+                    <li><a href="#escolha-vagas" class="hover:text-[#5242ea] transition">Escolha de Opções</a></li>
+                    <li><a href="#campi" class="hover:text-[#5242ea] transition">Campi e Vagas</a></li>
+                    <li><a href="#cotas" class="hover:text-[#5242ea] transition">Cotas</a></li>
+                    <li><a href="#conteudo" class="hover:text-[#5242ea] transition">O que Estudar</a></li>
+                </ul>
+            </nav>
+
+            <button class="lg:hidden text-slate-700 p-2 focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 py-4 px-6 shadow-lg">
+            <ul class="flex flex-col space-y-3 font-semibold text-sm text-slate-700">
+                <li><a href="#cronograma" class="block py-1">Cronograma</a></li>
+                <li><a href="#prova" class="block py-1">A Prova</a></li>
+                <li><a href="#escolha-vagas" class="block py-1">Escolha de Opções</a></li>
+                <li><a href="#campi" class="block py-1">Campi e Vagas</a></li>
+                <li><a href="#cotas" class="block py-1">Cotas</a></li>
+                <li><a href="#conteudo" class="block py-1">O que Estudar</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="bg-white py-12 md:py-16 border-b border-slate-200/60 relative overflow-hidden">
+            <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+                <img src="https://guiaprefederal.com.br/logo1.png" 
+                     alt="Logo Guia Pré-Federal" 
+                     class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 rounded-full shadow-md border-2 border-slate-200 p-1.5 object-contain" 
+                     style="background-color: var(--brand-coral);"
+                     onerror="this.onerror=null;this.src='https://placehold.co/96x96/DD5737/FFFFFF?text=GPF';">
+                
+                <span class="inline-block bg-emerald-50 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full mb-3 border border-emerald-200/80 uppercase tracking-wide">
+                    IFBA - Instituto Federal da Bahia
+                </span>
+                
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                    Edital IFBA Integrado <span class="px-2.5 py-0.5 rounded-lg text-white inline-block shadow-sm" style="background-color: var(--brand-dark-green);">2027</span>
+                </h1>
+                
+                <p class="mt-3 text-sm md:text-base text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+                    Guia simplificado e completo do Processo Seletivo de Ingresso nos Cursos Técnicos Integrados ao Ensino Médio do IFBA para o ano letivo de 2027.
+                </p>
+
+                <div class="mt-6 flex flex-wrap justify-center gap-2 text-xs font-bold">
+                    <span class="bg-emerald-50 text-emerald-800 px-3 py-1.5 rounded-full border border-emerald-200/80 flex items-center">
+                        <i class="fas fa-graduation-cap mr-1.5 text-emerald-600"></i>3.488+ Vagas Integradas
+                    </span>
+                    <span class="bg-indigo-50 text-indigo-800 px-3 py-1.5 rounded-full border border-indigo-200/80 flex items-center">
+                        <i class="fas fa-school mr-1.5 text-indigo-600"></i>24+ Campi na Bahia
+                    </span>
+                    <span class="bg-amber-50 text-amber-800 px-3 py-1.5 rounded-full border border-amber-200/80 flex items-center">
+                        <i class="fas fa-tasks mr-1.5 text-amber-600"></i>Prova Objetiva (36 Qs / 4 Horas)
+                    </span>
+                    <span class="bg-rose-50 text-rose-800 px-3 py-1.5 rounded-full border border-rose-200/80 flex items-center">
+                        <i class="fas fa-calendar-alt mr-1.5 text-rose-600"></i>Prova em 18/10/2026
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+
+            <section class="cta-clean p-6 sm:p-8 mb-10 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 max-w-xl">
+                    <span class="bg-white/20 text-white text-[11px] font-black px-2.5 py-0.5 rounded uppercase tracking-wider">Curso Preparatório Especializado</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white leading-tight">Quer Garantir Sua Vaga no IFBA 2027?</h2>
+                    <p class="text-indigo-100 text-xs sm:text-sm font-normal leading-relaxed">
+                        Aprenda todo o conteúdo da BNCC cobrado na prova objetiva com aulas direcionadas, simulados e suporte completo.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto shrink-0">
+                    <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="cta-btn-lime px-5 py-3 rounded-xl text-xs text-center flex items-center justify-center">
+                        <i class="fas fa-rocket mr-2"></i>Conhecer o Intensivo
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-btn-outline px-5 py-3 rounded-xl text-xs text-center flex items-center justify-center">
+                        <i class="fab fa-whatsapp mr-2 text-emerald-300"></i>WhatsApp
+                    </a>
+                </div>
+            </section>
+
+            <section id="cronograma" class="glass-card p-6 sm:p-8 mb-10">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-dark-green);">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Cronograma Oficial (Ingresso 2027)</h3>
+                        <p class="text-xs text-slate-500">Prazos e datas importantes do edital de cursos integrados do IFBA</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="clean-table">
+                        <thead>
+                            <tr>
+                                <th>Etapa / Atividade</th>
+                                <th>Período / Data</th>
+                                <th>Local / Canal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="bg-indigo-50/40">
+                                <td class="font-bold text-indigo-950">Inscrições pela Internet (Gov.br + CPF do Estudante)</td>
+                                <td class="font-semibold text-slate-800">10/08 a 10/09/2026</td>
+                                <td class="text-xs text-slate-600">Até 23h59 no portal oficial do IFBA / Fundação CEFETMINAS</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-amber-800">Solicitação de Isenção da Taxa (R$ 75,00)</td>
+                                <td>10/08 a 21/08/2026</td>
+                                <td class="text-xs text-slate-600">Até 23h59 via sistema eletrônico (CadÚnico ou Escola Pública)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Resultado Definitivo de Isenções</td>
+                                <td>Até 08/09/2026</td>
+                                <td class="text-xs text-slate-600">Divulgação no site do processo seletivo</td>
+                            </tr>
+                            <tr class="bg-rose-50/50">
+                                <td class="font-bold text-rose-700">Último Dia para Pagamento do Boleto (R$ 75,00)</td>
+                                <td class="font-bold text-rose-700">11/09/2026</td>
+                                <td class="text-xs text-slate-600">Rede bancária e lotéricas (Até horário bancário)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Lista Definitiva de Inscrições Confirmadas</td>
+                                <td>18/09/2026</td>
+                                <td class="text-xs text-slate-600">Publicação nos portais FCM e IFBA</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Divulgação dos Locais de Prova</td>
+                                <td>Até 13/10/2026</td>
+                                <td class="text-xs text-slate-600">Na Área do Candidato / Comprovante de Inscrição</td>
+                            </tr>
+                            <tr class="bg-emerald-100/70 font-bold" style="color: var(--brand-dark-green);">
+                                <td class="py-3.5"><i class="fas fa-pen-nib mr-2 text-emerald-700"></i>APLICAÇÃO DA PROVA OBJETIVA</td>
+                                <td class="py-3.5">18/10/2026 (Domingo)</td>
+                                <td class="py-3.5 text-xs">Abertura portões 12h00 / Fechamento 13h00! Prova das 13h00 às 17h00</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Gabarito Preliminar</td>
+                                <td>21/10/2026</td>
+                                <td class="text-xs text-slate-600">Divulgação nos portais oficiais</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Resultado Final de Classificação</td>
+                                <td>16/11/2026</td>
+                                <td class="text-xs text-slate-600">Convocação para bancas de verificação de cotistas</td>
+                            </tr>
+                            <tr class="bg-indigo-50">
+                                <td class="font-bold text-indigo-900">Bancas de Verificação (Cotas e Heteroidentificação)</td>
+                                <td>24/11 a 27/11/2026</td>
+                                <td class="text-xs text-indigo-800">Aferição de autodeclaração, renda e laudos de PcD</td>
+                            </tr>
+                            <tr class="bg-emerald-50">
+                                <td class="font-bold text-emerald-900">Resultado Definitivo das Bancas e Matrícula</td>
+                                <td class="font-bold text-emerald-900">08/12/2026</td>
+                                <td class="text-xs text-emerald-700 font-semibold">Envio de documentos de matrícula pelo GOV.BR</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="prova" class="glass-card p-6 sm:p-8 mb-10">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-primary);">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Estrutura da Prova Objetiva</h3>
+                        <p class="text-xs text-slate-500">A seleção do IFBA é composta por 36 questões de múltipla escolha baseadas na BNCC</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center mb-6">
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                        <span class="block text-[10px] font-extrabold uppercase text-indigo-800">Linguagens</span>
+                        <span class="text-xl font-black text-indigo-600">08 Qs</span>
+                        <span class="block text-[10px] text-slate-500 font-bold mt-0.5">Português e Literatura</span>
+                    </div>
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                        <span class="block text-[10px] font-extrabold uppercase text-emerald-800">Matemática</span>
+                        <span class="text-xl font-black text-emerald-600">08 Qs</span>
+                        <span class="block text-[10px] text-slate-500 font-bold mt-0.5">Matemática BNCC</span>
+                    </div>
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                        <span class="block text-[10px] font-extrabold uppercase text-amber-800">Ciências Humanas</span>
+                        <span class="text-xl font-black text-amber-600">10 Qs</span>
+                        <span class="block text-[10px] text-slate-500 font-bold mt-0.5">História e Geografia</span>
+                    </div>
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                        <span class="block text-[10px] font-extrabold uppercase text-teal-800">Ciências da Natureza</span>
+                        <span class="text-xl font-black text-teal-600">10 Qs</span>
+                        <span class="block text-[10px] text-slate-500 font-bold mt-0.5">Biologia, Física e Química</span>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-indigo-50/70 p-4 rounded-xl border border-indigo-200">
+                        <h5 class="font-extrabold text-sm text-indigo-950 mb-1 flex items-center">
+                            <i class="fas fa-clock text-indigo-600 mr-2"></i>Duração & Horário dos Portões
+                        </h5>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            A prova tem duração total de <strong>4 horas (13h00 às 17h00)</strong>. Os portões do local de prova abrem às 12h00 e <strong>fecham pontualmente às 13h00</strong>. É recomendável chegar com 1 hora de antecedência.
+                        </p>
+                    </div>
+
+                    <div class="bg-emerald-50/70 p-4 rounded-xl border border-emerald-200">
+                        <h5 class="font-extrabold text-sm text-emerald-950 mb-1 flex items-center">
+                            <i class="fas fa-id-card text-emerald-600 mr-2"></i>Documento Físico Obrigatório
+                        </h5>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Apresentação obrigatória de <strong>Documento Oficial de Identidade ORIGINAL com foto</strong> (RG, CIN, CNH ou Passaporte). O documento deve ser o do próprio candidato (mesmo menor de idade).
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="escolha-vagas" class="glass-card p-6 sm:p-8 mb-10">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-purple);">
+                        <i class="fas fa-list-check"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Como Funciona a Escolha de Opções & Classificação?</h3>
+                        <p class="text-xs text-slate-500">Regras de escolha de 1ª e 2ª opção de curso no IFBA</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <h4 class="font-extrabold text-slate-900 mb-1 text-sm flex items-center">
+                            <i class="fas fa-check-circle text-indigo-600 mr-2"></i>Até 2 Opções de Curso no Mesmo Campus
+                        </h4>
+                        <p class="text-slate-600">
+                            No ato da inscrição, o estudante pode escolher até **2 opções de curso** no mesmo campus (caso a unidade ofereça mais de um curso). Se o campus oferecer apenas um curso integrado, concorre-se apenas à 1ª opção.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <h4 class="font-extrabold text-slate-900 mb-1 text-sm flex items-center">
+                            <i class="fas fa-layer-group text-emerald-600 mr-2"></i>Convocação Automática e Dupla Concorrência
+                        </h4>
+                        <p class="text-slate-600 mb-2">
+                            Todas as pessoas candidatas cotistas concorrem **primeiro nas vagas de Ampla Concorrência (AC)**. Se não atingirem a nota suficiente para AC, passam a concorrer nas vagas reservadas da sua cota.
+                        </p>
+                        <p class="text-slate-600">
+                            A convocação para a **2ª opção** só ocorre se o candidato não tiver sido chamado na 1ª opção e se houver vagas remanescentes na 2ª opção após chamar todos os aptos de 1ª opção.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <h4 class="font-extrabold text-slate-900 mb-1 text-sm flex items-center">
+                            <i class="fas fa-sort-amount-down text-amber-600 mr-2"></i>Critérios de Desempate
+                        </h4>
+                        <p class="text-slate-600 mb-2">
+                            Em caso de empate na Nota Final da Prova Objetiva, a ordem de prioridade para desempate é:
+                        </p>
+                        <ol class="list-decimal list-inside space-y-1 text-slate-700 font-semibold ml-2">
+                            <li>Maior nota em Linguagens</li>
+                            <li>Maior nota em Matemática</li>
+                            <li>Maior nota em Ciências Humanas</li>
+                            <li>Maior nota em Física / Química</li>
+                            <li>Menor número de inscrição</li>
+                            <li>Maior idade (candidato mais velho)</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <section id="campi" class="glass-card p-6 sm:p-8 mb-10">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-dark-green);">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Consulta de Campi, Cursos e Vagas (3.488 Vagas)</h3>
+                        <p class="text-xs text-slate-500">Selecione o Campus do IFBA para ver a oferta completa de cursos e cotas</p>
+                    </div>
+                </div>
+
+                <!-- Filtro de Campus -->
+                <div class="mb-6">
+                    <label for="campus-select" class="block font-bold text-xs uppercase text-slate-700 mb-2">
+                        <i class="fas fa-filter text-indigo-600 mr-1.5"></i>Selecione o Campus de Interesse:
+                    </label>
+                    <select id="campus-select" onchange="filterCampus()" class="w-full p-3 rounded-xl border border-slate-300 bg-white font-bold text-sm text-slate-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                        <option value="barreiras">Campus Barreiras</option>
+                        <option value="brumado">Campus Brumado</option>
+                        <option value="camacari">Campus Camaçari</option>
+                        <option value="campo_formoso">Campus Campo Formoso</option>
+                        <option value="euclides_da_cunha">Campus Euclides da Cunha</option>
+                        <option value="eunapolis">Campus Eunápolis</option>
+                        <option value="feira_de_santana">Campus Feira de Santana</option>
+                        <option value="ilheus">Campus Ilhéus</option>
+                        <option value="irece">Campus Irecê</option>
+                        <option value="jacobina">Campus Jacobina</option>
+                        <option value="jaguaquara">Campus Jaguaquara</option>
+                        <option value="jequie">Campus Jequié</option>
+                        <option value="juazeiro">Campus Juazeiro</option>
+                        <option value="lauro_de_freitas">Campus Lauro de Freitas</option>
+                        <option value="paulo_afonso">Campus Paulo Afonso</option>
+                        <option value="porto_seguro">Campus Porto Seguro</option>
+                        <option value="salvador">Campus Salvador</option>
+                        <option value="santo_amaro">Campus Santo Amaro</option>
+                        <option value="santo_antonio_de_jesus">Campus Santo Antônio de Jesus</option>
+                        <option value="seabra">Campus Seabra</option>
+                        <option value="simoes_filho">Campus Simões Filho</option>
+                        <option value="ubaitaba">Campus Ubaitaba</option>
+                        <option value="valenca">Campus Valença</option>
+                        <option value="vitoria_da_conquista">Campus Vitória da Conquista</option>
+                    </select>
+                </div>
+
+                <!-- Tabela de Exibição das Vagas -->
+                <div id="campus-table-container" class="overflow-x-auto">
+                    <!-- Injetado via Javascript -->
+                </div>
+            </section>
+
+            <section id="cotas" class="glass-card p-6 sm:p-8 mb-10">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-coral);">
+                        <i class="fas fa-users-viewfinder"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Entenda o Sistema de Cotas (Lei nº 14.723/2023)</h3>
+                        <p class="text-xs text-slate-500">62,8% das vagas são destinadas a estudantes de escolas públicas brasileiras</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="p-4 rounded-xl border border-indigo-200 bg-indigo-50/40">
+                        <span class="font-extrabold text-xs text-indigo-900 uppercase block mb-1">Ampla Concorrência (AC)</span>
+                        <span class="text-lg font-black text-indigo-700">Até 32,2% Vagas</span>
+                        <p class="text-xs text-slate-600 mt-1">Destinadas a todos os estudantes, independente do tipo de escola de origem.</p>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/40">
+                        <span class="font-extrabold text-xs text-emerald-900 uppercase block mb-1">Escola Pública (Cotas)</span>
+                        <span class="text-lg font-black text-emerald-700">62,8% Vagas</span>
+                        <p class="text-xs text-slate-600 mt-1">Exclusivo para quem cursou o Ensino Fundamental integralmente em escola pública.</p>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40">
+                        <span class="font-extrabold text-xs text-amber-900 uppercase block mb-1">Cota Institucional B</span>
+                        <span class="text-lg font-black text-amber-700">5% Vagas PCD</span>
+                        <p class="text-xs text-slate-600 mt-1">Vagas reservadas para PCD independentemente da renda e tipo de escola.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-2">
+                    <h5 class="font-bold text-slate-900 text-sm mb-1"><i class="fas fa-info-circle text-indigo-600 mr-1.5"></i>Categorias de Reserva de Vagas do IFBA:</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-1">
+                        <li><strong>LB_PP / LI_PP:</strong> Pretos e Pardos (Com Renda $\le$ 1 SM ou Sem Limite de Renda).</li>
+                        <li><strong>LB_I / LI_I:</strong> Indígenas com declaração de pertencimento comunitário.</li>
+                        <li><strong>LB_Q / LI_Q:</strong> Quilombolas com declaração e certificação da Fundação Palmares.</li>
+                        <li><strong>LB_PCD / LI_PCD:</strong> Pessoas com Deficiência com laudo médico especializado.</li>
+                        <li><strong>LB_EP / LI_EP:</strong> Demais estudantes egressos de escola pública.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="conteudo" class="glass-card p-6 sm:p-8 mb-10">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-primary);">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">O que Estudar? Conteúdo Programático Detalhado</h3>
+                        <p class="text-xs text-slate-500">Matriz de habilidades da BNCC cobrada na prova objetiva do IFBA 2027</p>
+                    </div>
+                </div>
+
+                <!-- Botões das Matérias -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
+                    <button onclick="showSyllabus('portugues')" class="subject-tab active p-3 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-1 text-xs font-extrabold">
+                        <i class="fas fa-language text-xl text-indigo-600"></i>
+                        <span>Linguagens (8 Qs)</span>
+                    </button>
+                    <button onclick="showSyllabus('matematica')" class="subject-tab p-3 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-1 text-xs font-extrabold">
+                        <i class="fas fa-calculator text-xl text-emerald-600"></i>
+                        <span>Matemática (8 Qs)</span>
+                    </button>
+                    <button onclick="showSyllabus('humanas')" class="subject-tab p-3 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-1 text-xs font-extrabold">
+                        <i class="fas fa-globe-americas text-xl text-amber-600"></i>
+                        <span>C. Humanas (10 Qs)</span>
+                    </button>
+                    <button onclick="showSyllabus('natureza')" class="subject-tab p-3 rounded-xl cursor-pointer bg-slate-100 flex flex-col items-center justify-center space-y-1 text-xs font-extrabold">
+                        <i class="fas fa-flask text-xl text-teal-600"></i>
+                        <span>C. Natureza (10 Qs)</span>
+                    </button>
+                </div>
+
+                <!-- Painel Exibidor do Conteúdo -->
+                <div id="syllabus-display" class="bg-slate-50/80 p-5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-700 space-y-4">
+                    <!-- Javascript Injected -->
+                </div>
+            </section>
+
+            <section class="cta-clean p-8 text-center space-y-4 mb-10">
+                <span class="bg-white/20 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Sua Vaga no IFBA Começa Aqui</span>
+                <h3 class="text-2xl sm:text-3xl font-black text-white">Pronto para Conquistar a Aprovacão?</h3>
+                <p class="max-w-xl mx-auto text-indigo-100 text-xs sm:text-sm leading-relaxed">
+                    Estude com a melhor preparação focada nos exames das Instituições Federais. Aulas, questões e suporte especializado.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2">
+                    <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="cta-btn-lime px-6 py-3.5 rounded-xl text-xs flex items-center justify-center">
+                        <i class="fas fa-rocket mr-2"></i>Matricular-se no Intensivo
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="cta-btn-outline px-6 py-3.5 rounded-xl text-xs flex items-center justify-center">
+                        <i class="fab fa-whatsapp mr-2 text-emerald-300"></i>Falar no WhatsApp
+                    </a>
+                </div>
+            </section>
+
+            <footer class="text-center text-slate-400 text-xs py-6 border-t border-slate-200">
+                <p>Desenvolvido com excelência por <strong>Guia Pré-Federal</strong> com base nos dados oficiais do Edital Ingresso 2027 do Instituto Federal da Bahia (IFBA).</p>
+                <p class="mt-1">Acompanhe sempre o portal oficial do candidato em <a href="https://portal.ifba.edu.br/ingresso2027" target="_blank" class="underline text-indigo-600">portal.ifba.edu.br/ingresso2027</a></p>
+            </footer>
+
+        </div>
+    </main>
+
+    <div class="fab-container">
+        <div class="fab-options">
+            <a href="https://guiaprefederal.com.br/intensivo2026" target="_blank" class="fab-option">
+                <span class="fab-label">Curso Intensivo</span>
+                <div class="fab-icon" style="background-color: var(--brand-primary);">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </a>
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
+                <span class="fab-label">Atendimento WhatsApp</span>
+                <div class="fab-icon" style="background-color: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </a>
+        </div>
+        <button class="fab-main" id="fab-main-button">
+            <i class="fas fa-comment-dots icon-open"></i>
+            <i class="fas fa-times icon-close"></i>
+        </button>
+    </div>
+
+    <script>
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Floating Action Button (FAB) Toggle
+    const fabContainer = document.querySelector('.fab-container');
+    const fabMainButton = document.getElementById('fab-main-button');
+    fabMainButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        fabContainer.classList.toggle('active');
+    });
+    document.addEventListener('click', (e) => {
+        if (!fabContainer.contains(e.target)) {
+            fabContainer.classList.remove('active');
+        }
+    });
+
+    // DATASET COMPLETO DOS CAMPI DO IFBA (ANEXO 2)
+    const campiData = {
+        barreiras: {
+            name: "Campus Barreiras",
+            courses: [
+                { name: "Técnico Integrado em Informática", turno: "Matutino", duracao: "3 Anos", vagas: 50, ac: 14, pcd_b: 3, lb_pp: 16, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 16, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Alimentos", turno: "Vespertino", duracao: "3 Anos", vagas: 50, ac: 14, pcd_b: 3, lb_pp: 16, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 16, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Edificações", turno: "Vespertino", duracao: "3 Anos", vagas: 50, ac: 14, pcd_b: 3, lb_pp: 16, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 16, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        brumado: {
+            name: "Campus Brumado",
+            courses: [
+                { name: "Técnico Integrado em Edificações", turno: "Matutino", duracao: "3 Anos", vagas: 35, ac: 7, pcd_b: 2, lb_pp: 9, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 9, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Informática", turno: "Vespertino", duracao: "3 Anos", vagas: 35, ac: 7, pcd_b: 2, lb_pp: 9, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 9, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 }
+            ]
+        },
+        camacari: {
+            name: "Campus Camaçari",
+            courses: [
+                { name: "Técnico Integrado em Informática", turno: "Matutino", duracao: "4 Anos", vagas: 100, ac: 28, pcd_b: 5, lb_pp: 25, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_pp: 25, li_i: 1, li_q: 2, li_pcd: 2, li_ep: 2 },
+                { name: "Técnico Integrado em Eletrotécnica", turno: "Vespertino", duracao: "4 Anos", vagas: 80, ac: 22, pcd_b: 4, lb_pp: 21, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_pp: 21, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        campo_formoso: {
+            name: "Campus Campo Formoso",
+            courses: [
+                { name: "Técnico Integrado em Sistemas de Energia Renovável", turno: "Integral", duracao: "3 Anos", vagas: 70, ac: 19, pcd_b: 4, lb_pp: 18, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 18, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        euclides_da_cunha: {
+            name: "Campus Euclides da Cunha",
+            courses: [
+                { name: "Técnico Integrado em Informática", turno: "Integral", duracao: "3 Anos", vagas: 40, ac: 10, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Edificações", turno: "Integral", duracao: "3 Anos", vagas: 35, ac: 8, pcd_b: 2, lb_pp: 9, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 9, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 }
+            ]
+        },
+        eunapolis: {
+            name: "Campus Eunápolis",
+            courses: [
+                { name: "Técnico Integrado em Edificações", turno: "Matutino", duracao: "4 Anos", vagas: 75, ac: 22, pcd_b: 4, lb_pp: 19, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 19, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Meio Ambiente", turno: "Matutino", duracao: "4 Anos", vagas: 75, ac: 22, pcd_b: 4, lb_pp: 19, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 19, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Informática", turno: "Matutino", duracao: "4 Anos", vagas: 75, ac: 22, pcd_b: 4, lb_pp: 19, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 19, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        feira_de_santana: {
+            name: "Campus Feira de Santana",
+            courses: [
+                { name: "Técnico Integrado em Edificações", turno: "Matutino", duracao: "4 Anos", vagas: 70, ac: 19, pcd_b: 4, lb_pp: 18, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 18, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Eletrotécnica", turno: "Matutino", duracao: "4 Anos", vagas: 70, ac: 19, pcd_b: 4, lb_pp: 18, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 18, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        ilheus: {
+            name: "Campus Ilhéus",
+            courses: [
+                { name: "Técnico Integrado em Edificações", turno: "Matutino", duracao: "4 Anos", vagas: 60, ac: 14, pcd_b: 3, lb_pp: 16, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 16, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Informática", turno: "Matutino", duracao: "4 Anos", vagas: 60, ac: 14, pcd_b: 3, lb_pp: 16, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 16, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Segurança do Trabalho", turno: "Matutino", duracao: "3 Anos", vagas: 60, ac: 14, pcd_b: 3, lb_pp: 16, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 16, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        irece: {
+            name: "Campus Irecê",
+            courses: [
+                { name: "Técnico Integrado em Biocombustíveis", turno: "Matutino", duracao: "4 Anos", vagas: 55, ac: 13, pcd_b: 3, lb_pp: 15, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 15, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Eletromecânica", turno: "Matutino", duracao: "4 Anos", vagas: 55, ac: 13, pcd_b: 3, lb_pp: 15, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 15, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Informática", turno: "Matutino", duracao: "4 Anos", vagas: 55, ac: 13, pcd_b: 3, lb_pp: 15, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 15, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        jacobina: {
+            name: "Campus Jacobina",
+            courses: [
+                { name: "Técnico Integrado em Informática", turno: "Matutino", duracao: "4 Anos", vagas: 80, ac: 23, pcd_b: 4, lb_pp: 21, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_pp: 21, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Mineração", turno: "Matutino", duracao: "4 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Eletromecânica", turno: "Matutino", duracao: "4 Anos", vagas: 80, ac: 23, pcd_b: 4, lb_pp: 21, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_pp: 21, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        jaguaquara: {
+            name: "Campus Jaguaquara",
+            courses: [
+                { name: "Técnico Integrado em Agropecuária", turno: "Integral", duracao: "3 Anos", vagas: 60, ac: 14, pcd_b: 3, lb_pp: 16, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 16, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        jequie: {
+            name: "Campus Jequié",
+            courses: [
+                { name: "Técnico Integrado em Eletromecânica", turno: "Matutino", duracao: "3 Anos", vagas: 70, ac: 19, pcd_b: 4, lb_pp: 18, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 18, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Informática", turno: "Matutino", duracao: "3 Anos", vagas: 70, ac: 19, pcd_b: 4, lb_pp: 18, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 18, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        juazeiro: {
+            name: "Campus Juazeiro",
+            courses: [
+                { name: "Técnico Integrado em Administração", turno: "Integral", duracao: "3 Anos", vagas: 50, ac: 13, pcd_b: 3, lb_pp: 13, lb_i: 1, lb_q: 1, lb_pcd: 2, lb_ep: 1, li_pp: 13, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Segurança do Trabalho", turno: "Integral", duracao: "3 Anos", vagas: 50, ac: 13, pcd_b: 3, lb_pp: 13, lb_i: 1, lb_q: 1, lb_pcd: 2, lb_ep: 1, li_pp: 13, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        lauro_de_freitas: {
+            name: "Campus Lauro de Freitas",
+            courses: [
+                { name: "Técnico Integrado em Sistemas de Energia Renovável", turno: "Vespertino", duracao: "3 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 }
+            ]
+        },
+        paulo_afonso: {
+            name: "Campus Paulo Afonso",
+            courses: [
+                { name: "Técnico Integrado em Biocombustíveis", turno: "Matutino", duracao: "4 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Eletromecânica", turno: "Matutino", duracao: "4 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Informática", turno: "Matutino", duracao: "4 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 }
+            ]
+        },
+        porto_seguro: {
+            name: "Campus Porto Seguro",
+            courses: [
+                { name: "Técnico Integrado em Alimentos", turno: "Matutino", duracao: "4 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Biocombustíveis", turno: "Matutino", duracao: "4 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Informática", turno: "Matutino", duracao: "4 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 }
+            ]
+        },
+        salvador: {
+            name: "Campus Salvador",
+            courses: [
+                { name: "Técnico Integrado em Automação Industrial", turno: "Matutino", duracao: "3 Anos", vagas: 50, ac: 14, pcd_b: 3, lb_pp: 14, lb_i: 1, lb_q: 1, lb_pcd: 2, lb_ep: 1, li_pp: 14, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Edificações", turno: "Matutino", duracao: "3 Anos", vagas: 70, ac: 22, pcd_b: 4, lb_pp: 19, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 19, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Eletrônica", turno: "Matutino", duracao: "3 Anos", vagas: 50, ac: 14, pcd_b: 3, lb_pp: 14, lb_i: 1, lb_q: 1, lb_pcd: 2, lb_ep: 1, li_pp: 14, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Eletrotécnica", turno: "Matutino", duracao: "3 Anos", vagas: 50, ac: 14, pcd_b: 3, lb_pp: 14, lb_i: 1, lb_q: 1, lb_pcd: 2, lb_ep: 1, li_pp: 14, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Geologia", turno: "Matutino", duracao: "3 Anos", vagas: 50, ac: 14, pcd_b: 3, lb_pp: 14, lb_i: 1, lb_q: 1, lb_pcd: 2, lb_ep: 1, li_pp: 14, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Mecânica", turno: "Matutino", duracao: "3 Anos", vagas: 50, ac: 14, pcd_b: 3, lb_pp: 14, lb_i: 1, lb_q: 1, lb_pcd: 2, lb_ep: 1, li_pp: 14, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Química", turno: "Matutino", duracao: "3 Anos", vagas: 70, ac: 22, pcd_b: 4, lb_pp: 19, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 19, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Refrigeração e Climatização", turno: "Matutino", duracao: "3 Anos", vagas: 50, ac: 14, pcd_b: 3, lb_pp: 14, lb_i: 1, lb_q: 1, lb_pcd: 2, lb_ep: 1, li_pp: 14, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        santo_amaro: {
+            name: "Campus Santo Amaro",
+            courses: [
+                { name: "Técnico Integrado em Informática", turno: "Matutino", duracao: "4 Anos", vagas: 25, ac: 5, pcd_b: 1, lb_pp: 7, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 7, li_i: 0, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Eletromecânica", turno: "Matutino", duracao: "4 Anos", vagas: 25, ac: 5, pcd_b: 1, lb_pp: 7, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 7, li_i: 0, li_q: 1, li_pcd: 1, li_ep: 1 }
+            ]
+        },
+        santo_antonio_de_jesus: {
+            name: "Campus Santo Antônio de Jesus",
+            courses: [
+                { name: "Técnico Integrado em Informática", turno: "Matutino", duracao: "3 Anos", vagas: 80, ac: 23, pcd_b: 4, lb_pp: 21, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_pp: 21, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        seabra: {
+            name: "Campus Seabra",
+            courses: [
+                { name: "Técnico Integrado em Informática", turno: "Matutino", duracao: "4 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Meio Ambiente", turno: "Matutino", duracao: "4 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 }
+            ]
+        },
+        simoes_filho: {
+            name: "Campus Simões Filho",
+            courses: [
+                { name: "Técnico Integrado em Metalurgia", turno: "Matutino", duracao: "4 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Mecânica", turno: "Matutino", duracao: "4 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Petróleo e Gás Natural", turno: "Vespertino", duracao: "4 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 }
+            ]
+        },
+        ubaitaba: {
+            name: "Campus Ubaitaba",
+            courses: [
+                { name: "Técnico Integrado em Informática", turno: "Integral", duracao: "3 Anos", vagas: 40, ac: 8, pcd_b: 2, lb_pp: 11, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 11, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 }
+            ]
+        },
+        valenca: {
+            name: "Campus Valença",
+            courses: [
+                { name: "Técnico Integrado em Aquicultura", turno: "Integral", duracao: "3 Anos", vagas: 60, ac: 14, pcd_b: 3, lb_pp: 16, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 16, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Guia de Turismo", turno: "Integral", duracao: "3 Anos", vagas: 60, ac: 14, pcd_b: 3, lb_pp: 16, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 16, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Informática", turno: "Integral", duracao: "3 Anos", vagas: 60, ac: 14, pcd_b: 3, lb_pp: 16, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 16, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 }
+            ]
+        },
+        vitoria_da_conquista: {
+            name: "Campus Vitória da Conquista",
+            courses: [
+                { name: "Técnico Integrado em Eletromecânica", turno: "Integral", duracao: "3 Anos", vagas: 35, ac: 7, pcd_b: 2, lb_pp: 9, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 9, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Eletrônica", turno: "Integral", duracao: "3 Anos", vagas: 70, ac: 19, pcd_b: 4, lb_pp: 18, lb_i: 1, lb_q: 2, lb_pcd: 2, lb_ep: 1, li_pp: 18, li_i: 1, li_q: 1, li_pcd: 2, li_ep: 1 },
+                { name: "Técnico Integrado em Informática", turno: "Integral", duracao: "3 Anos", vagas: 35, ac: 7, pcd_b: 2, lb_pp: 9, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 9, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 },
+                { name: "Técnico Integrado em Meio Ambiente", turno: "Integral", duracao: "3 Anos", vagas: 35, ac: 7, pcd_b: 2, lb_pp: 9, lb_i: 1, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_pp: 9, li_i: 1, li_q: 1, li_pcd: 1, li_ep: 1 }
+            ]
+        }
+    };
+
+    // CONTEÚDO PROGRAMÁTICO DETALHADO DO IFBA (ANEXO 7 - BNCC)
+    const syllabusData = {
+        portugues: `
+            <h4 class="font-extrabold text-base text-indigo-900 border-b border-indigo-200 pb-2 mb-3">Linguagens (8 Questões)</h4>
+            <div class="space-y-3">
+                <div>
+                    <h5 class="font-bold text-indigo-800"><i class="fas fa-newspaper mr-1.5"></i>1. Leitura e Cultura Digital</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Análise de notícias falsas (fake news), checagem de fontes e fidedignidade do relato.</li>
+                        <li>Análise de gêneros da cultura digital: memes, gifs, charges digitais e comentários.</li>
+                        <li>Intertextualidade: paráfrases, citações, paródias e alusões entre textos literários e artísticos.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-indigo-800"><i class="fas fa-pen-fancy mr-1.5"></i>2. Análise Linguística e Gramática</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Processos de formação de palavras por composição (aglutinação e justaposição).</li>
+                        <li>Termos constitutivos da oração: sujeito e modificadores, verbo, complementos e adjuntos.</li>
+                        <li>Coesão textual: pronomes relativos, anáforas, catáforas e substituidores lexicais.</li>
+                        <li>Figuras de linguagem: ironia, eufemismo, antítese, aliteração e assonância.</li>
+                    </ul>
+                </div>
+            </div>`,
+
+        matematica: `
+            <h4 class="font-extrabold text-base text-emerald-900 border-b border-emerald-200 pb-2 mb-3">Matemática (8 Questões)</h4>
+            <div class="space-y-3">
+                <div>
+                    <h5 class="font-bold text-emerald-800"><i class="fas fa-calculator mr-1.5"></i>1. Álgebra e Números</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Princípio multiplicativo da contagem.</li>
+                        <li>Sistemas de equações polinomiais de 1º grau e representação no plano cartesiano.</li>
+                        <li>Produtos notáveis, fatoração e equações do 2º grau.</li>
+                        <li>Porcentagem e cálculos de percentuais sucessivos na educação financeira.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-emerald-800"><i class="fas fa-shapes mr-1.5"></i>2. Geometria, Medidas e Gráficos</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Área de figuras planas (quadriláteros, triângulos e círculos).</li>
+                        <li>Teorema de Pitágoras e relações de proporcionalidade em retas paralelas cortadas por secantes.</li>
+                        <li>Grandezas direta e inversamente proporcionais, escalas e taxas de variação.</li>
+                        <li>Avaliação de gráficos de barras, colunas, linhas e setores.</li>
+                    </ul>
+                </div>
+            </div>`,
+
+        humanas: `
+            <h4 class="font-extrabold text-base text-amber-900 border-b border-amber-200 pb-2 mb-3">Ciências Humanas (10 Questões - História e Geografia)</h4>
+            <div class="space-y-3">
+                <div>
+                    <h5 class="font-bold text-amber-800"><i class="fas fa-globe-americas mr-1.5"></i>1. Geografia</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Globalização, mundialização e corporações na ordem econômica mundial.</li>
+                        <li>Cartografia: leitura de mapas temáticos, croquis, anamorfoses e projeções.</li>
+                        <li>Fluxos migratórios na América Latina e dinâmica demográfica mundial.</li>
+                        <li>Gestão de recursos hídricos e problemáticas das grandes cidades latino-americanas.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-amber-800"><i class="fas fa-landmark mr-1.5"></i>2. História</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Navegações modernas e conexões entre Novo Mundo, Europa, África e Ásia.</li>
+                        <li>Revolução Industrial, rebeliões na América Portuguesa e lutas de independência no Brasil.</li>
+                        <li>Segundo Reinado, inserção dos negros no pós-abolição e ditadura civil-militar no Brasil.</li>
+                        <li>Totalitarismos (fascismo/nazismo) e lutas por direitos na Constituição de 1988.</li>
+                    </ul>
+                </div>
+            </div>`,
+
+        natureza: `
+            <h4 class="font-extrabold text-base text-teal-900 border-b border-teal-200 pb-2 mb-3">Ciências da Natureza (10 Questões - Biologia, Química e Física)</h4>
+            <div class="space-y-3">
+                <div>
+                    <h5 class="font-bold text-teal-800"><i class="fas fa-dna mr-1.5"></i>1. Biologia</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Célula como unidade funcional e indicadores de saúde pública (vacinação e saneamento).</li>
+                        <li>Ecossistemas brasileiros, impacto de catástrofes e Unidades de Conservação.</li>
+                        <li>Puberdade, métodos contraceptivos, prevenção de DSTs e evolução por seleção natural.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-teal-800"><i class="fas fa-atom mr-1.5"></i>2. Química e Física</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 ml-2">
+                        <li>Misturas homogêneas/heterogêneas, métodos de separação e reações químicas.</li>
+                        <li>Modelos atômicos, conservação das massas e mudanças de estado físico.</li>
+                        <li>Máquinas simples, propagação do calor, fontes de energia e cálculo de consumo elétrico.</li>
+                        <li>Óptica geométrica (visão humana e lentes) e estrutura do Sistema Solar no Universo.</li>
+                    </ul>
+                </div>
+            </div>`
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showSyllabus('portugues');
+        filterCampus();
+    });
+
+    function showSyllabus(subject) {
+        document.getElementById('syllabus-display').innerHTML = syllabusData[subject];
+        document.querySelectorAll('.subject-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.querySelector(`[onclick="showSyllabus('${subject}')"]`).classList.add('active');
+    }
+
+    function filterCampus() {
+        const campusKey = document.getElementById('campus-select').value;
+        const data = campiData[campusKey];
+        const container = document.getElementById('campus-table-container');
+
+        if (!data) return;
+
+        let html = `
+            <h4 class="font-black text-sm text-indigo-950 mb-3 flex items-center">
+                <i class="fas fa-graduation-cap text-indigo-600 mr-2"></i>Cursos e Vagas do ${data.name}
+            </h4>
+            <div class="overflow-x-auto">
+                <table class="clean-table text-xs">
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Turno / Duração</th>
+                            <th class="text-center">Total</th>
+                            <th class="text-center bg-indigo-50">AC</th>
+                            <th class="text-center bg-amber-50">Cota B</th>
+                            <th class="text-center bg-emerald-50">LB_PP</th>
+                            <th class="text-center bg-emerald-50">LB_I</th>
+                            <th class="text-center bg-emerald-50">LB_Q</th>
+                            <th class="text-center bg-emerald-50">LB_PCD</th>
+                            <th class="text-center bg-emerald-50">LB_EP</th>
+                            <th class="text-center bg-blue-50">LI_PP</th>
+                            <th class="text-center bg-blue-50">LI_I</th>
+                            <th class="text-center bg-blue-50">LI_Q</th>
+                            <th class="text-center bg-blue-50">LI_PCD</th>
+                            <th class="text-center bg-blue-50">LI_EP</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">`;
+
+        data.courses.forEach(c => {
+            html += `
+                <tr>
+                    <td class="font-bold text-slate-800">${c.name}</td>
+                    <td class="text-slate-600 font-semibold">${c.turno} (${c.duracao})</td>
+                    <td class="text-center font-black text-slate-900">${c.vagas}</td>
+                    <td class="text-center font-bold text-indigo-900 bg-indigo-50/50">${c.ac}</td>
+                    <td class="text-center font-bold text-amber-900 bg-amber-50/50">${c.pcd_b}</td>
+                    <td class="text-center font-semibold text-emerald-900 bg-emerald-50/30">${c.lb_pp}</td>
+                    <td class="text-center font-semibold text-emerald-900 bg-emerald-50/30">${c.lb_i}</td>
+                    <td class="text-center font-semibold text-emerald-900 bg-emerald-50/30">${c.lb_q}</td>
+                    <td class="text-center font-semibold text-emerald-900 bg-emerald-50/30">${c.lb_pcd}</td>
+                    <td class="text-center font-semibold text-emerald-900 bg-emerald-50/30">${c.lb_ep}</td>
+                    <td class="text-center font-semibold text-blue-900 bg-blue-50/30">${c.li_pp}</td>
+                    <td class="text-center font-semibold text-blue-900 bg-blue-50/30">${c.li_i}</td>
+                    <td class="text-center font-semibold text-blue-900 bg-blue-50/30">${c.li_q}</td>
+                    <td class="text-center font-semibold text-blue-900 bg-blue-50/30">${c.li_pcd}</td>
+                    <td class="text-center font-semibold text-blue-900 bg-blue-50/30">${c.li_ep}</td>
+                </tr>`;
+        });
+
+        html += `</tbody></table></div>`;
+        container.innerHTML = html;
+    }
+    </script>
+</body>
+</html>
