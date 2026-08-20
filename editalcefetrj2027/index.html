@@ -1,54 +1,43 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RTR3DF7GK"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-2RTR3DF7GK');
-    </script>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia Edital CEFET-RJ 2027 | Cursos Técnicos Integrados - Guia Pré-Federal</title>
-
+    <title>Guia Edital CEFET-RJ 2027 - Cursos Técnicos Integrados | Guia Pré-Federal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <!-- Google Fonts - Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
+        /* Paleta Oficial da Marca:
+           - Roxo Principal: #6408b0
+           - Azul/Índigo: #5242ea
+           - Verde Limão: #c7ef59
+           - Verde: #7bcd47
+           - Laranja Coral: #dd5737
+           - Azul Petróleo: #00abb1
+        */
         :root {
-            /* Paleta Oficial Guia Pré-Federal */
             --brand-purple: #6408b0;
             --brand-blue: #5242ea;
             --brand-lime: #c7ef59;
             --brand-green: #7bcd47;
             --brand-coral: #dd5737;
             --brand-teal: #00abb1;
-            --cefet-navy: #0f172a;
-            --cefet-blue: #1e40af;
         }
-
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
             color: #0f172a;
-            -webkit-font-smoothing: antialiased;
         }
-
         .hero-gradient {
-            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-purple) 100%);
+            background: linear-gradient(135deg, #5242ea 0%, #6408b0 100%);
         }
-
         .section-title {
             position: relative;
             display: inline-block;
@@ -61,13 +50,16 @@
             left: 50%;
             transform: translateX(-50%);
             bottom: 0;
-            width: 50px;
+            width: 60px;
             height: 4px;
-            background-color: var(--brand-blue);
+            background-color: #5242ea;
             border-radius: 9999px;
         }
-
-        /* Floating Action Button (FAB) */
+        .tab-btn.active {
+            background-color: #5242ea;
+            color: white;
+            box-shadow: 0 4px 12px rgba(82, 66, 234, 0.3);
+        }
         .fab-container {
             position: fixed;
             bottom: 1.25rem;
@@ -78,36 +70,32 @@
             align-items: flex-end;
         }
         .fab-main {
-            width: 60px;
-            height: 60px;
+            width: 58px;
+            height: 58px;
             border-radius: 50%;
-            background-color: var(--brand-blue);
+            background-color: #5242ea;
             color: white;
             border: none;
-            box-shadow: 0 8px 20px rgba(82, 66, 234, 0.4);
-            font-size: 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            font-size: 22px;
             cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .fab-main .icon-close { display: none; }
         .fab-container.active .fab-main {
-            background-color: var(--brand-coral);
-            transform: rotate(180deg);
+            background-color: #dd5737;
+            transform: rotate(135deg);
         }
-        .fab-container.active .fab-main .icon-open { display: none; }
-        .fab-container.active .fab-main .icon-close { display: block; }
-
         .fab-options {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
             visibility: hidden;
             opacity: 0;
-            transition: all 0.25s ease;
-            transform: translateY(12px);
+            transition: all 0.3s ease;
+            transform: translateY(15px);
             margin-bottom: 12px;
         }
         .fab-container.active .fab-options {
@@ -118,475 +106,445 @@
         .fab-option {
             display: flex;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             text-decoration: none;
         }
         .fab-label {
             background-color: white;
-            color: #1e293b;
+            color: #0f172a;
             padding: 6px 14px;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             margin-right: 12px;
             font-weight: 700;
             font-size: 0.85rem;
             white-space: nowrap;
         }
         .fab-icon {
-            width: 48px;
-            height: 48px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            font-size: 20px;
-        }
-
-        .subject-tab-btn.active {
-            background-color: var(--brand-blue);
-            color: white;
-            font-weight: 800;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-size: 18px;
         }
     </style>
 </head>
 <body class="antialiased text-slate-800">
 
-    <header class="bg-white shadow-sm py-3.5 sticky top-0 z-50 border-b border-slate-100">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <a href="https://www.guiaprefederal.com.br" class="flex items-center space-x-3">
-                <img src="./logo.png" alt="Logo Guia Pré-Federal" class="rounded-full w-10 h-10 object-contain p-1 shadow-sm" style="background-color: var(--brand-coral);" onerror="this.onerror=null;this.src='https://placehold.co/40x40/DD5737/FFFFFF?text=GPF';">
-                <span class="text-xl font-black tracking-tight" style="color: var(--brand-blue);">Guia - Pré Federal</span>
+    <!-- Navigation Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm py-3.5 sticky top-0 z-50 border-b border-slate-100">
+        <div class="container mx-auto px-4 max-w-6xl flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
+                <!-- Logo com fundo Laranja Coral oficial -->
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md transition group-hover:scale-105" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia - Pré Federal" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-black tracking-tight text-[#5242ea] leading-none">Guia - Pré Federal</span>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Edital CEFET-RJ 2027</span>
+                </div>
             </a>
-            
+
+            <!-- Desktop Menu -->
             <nav class="hidden lg:block">
-                <ul class="flex space-x-6 text-sm font-bold text-slate-700">
-                    <li><a href="#cronograma" class="hover:text-[#5242ea] transition"><i class="fas fa-calendar-alt mr-1.5 text-indigo-500"></i>Cronograma</a></li>
-                    <li><a href="#prova" class="hover:text-[#5242ea] transition"><i class="fas fa-file-signature mr-1.5 text-purple-600"></i>A Prova & Redação</a></li>
-                    <li><a href="#escolha-vagas" class="hover:text-[#5242ea] transition"><i class="fas fa-check-double mr-1.5 text-emerald-600"></i>Opções & Regras</a></li>
-                    <li><a href="#campi" class="hover:text-[#5242ea] transition"><i class="fas fa-building-columns mr-1.5 text-blue-600"></i>Campi & Vagas</a></li>
-                    <li><a href="#cotas" class="hover:text-[#5242ea] transition"><i class="fas fa-users text-rose-500 mr-1.5"></i>Cotas</a></li>
-                    <li><a href="#conteudo" class="hover:text-[#5242ea] transition"><i class="fas fa-book-open text-teal-600 mr-1.5"></i>O que Estudar?</a></li>
+                <ul class="flex space-x-5 text-xs font-bold uppercase tracking-wider text-slate-600">
+                    <li><a href="#datas-destaque" class="hover:text-[#5242ea] transition py-1 border-b-2 border-transparent hover:border-[#5242ea]"><i class="fas fa-calendar-alt text-amber-500 mr-1"></i>Datas</a></li>
+                    <li><a href="#escolha-vagas" class="hover:text-[#5242ea] transition py-1 border-b-2 border-transparent hover:border-[#5242ea]">Como Funciona</a></li>
+                    <li><a href="#campi" class="hover:text-[#5242ea] transition py-1 border-b-2 border-transparent hover:border-[#5242ea]">Campi & Vagas</a></li>
+                    <li><a href="#prova" class="hover:text-[#5242ea] transition py-1 border-b-2 border-transparent hover:border-[#5242ea]">A Prova</a></li>
+                    <li><a href="#cotas" class="hover:text-[#5242ea] transition py-1 border-b-2 border-transparent hover:border-[#5242ea]">Cotas</a></li>
+                    <li><a href="#isencao" class="hover:text-[#5242ea] transition py-1 border-b-2 border-transparent hover:border-[#5242ea]">Isenção</a></li>
+                    <li><a href="#conteudo" class="hover:text-[#5242ea] transition py-1 border-b-2 border-transparent hover:border-[#5242ea]">O que Estudar</a></li>
                 </ul>
             </nav>
 
-            <button class="lg:hidden text-slate-700 focus:outline-none p-2" id="mobile-menu-button">
-                <i class="fas fa-bars text-2xl"></i>
+            <!-- CTA Header Button -->
+            <div class="hidden sm:flex items-center space-x-2">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] hover:bg-opacity-90 text-slate-900 font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fas fa-rocket mr-1.5 text-indigo-700"></i> Curso Intensivo
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-3.5 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fab fa-whatsapp mr-1 text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden text-slate-800 text-xl focus:outline-none p-1">
+                <i class="fas fa-bars"></i>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 py-4 px-6 shadow-lg">
-            <ul class="flex flex-col space-y-3 font-semibold text-sm text-slate-700">
-                <li><a href="#cronograma" class="block py-1"><i class="fas fa-calendar-alt mr-2 text-indigo-500"></i>Cronograma</a></li>
-                <li><a href="#prova" class="block py-1"><i class="fas fa-file-signature mr-2 text-purple-600"></i>A Prova & Redação</a></li>
-                <li><a href="#escolha-vagas" class="block py-1"><i class="fas fa-check-double mr-2 text-emerald-600"></i>Opções & Regras</a></li>
-                <li><a href="#campi" class="block py-1"><i class="fas fa-building-columns mr-2 text-blue-600"></i>Campi & Vagas</a></li>
-                <li><a href="#cotas" class="block py-1"><i class="fas fa-users mr-2 text-rose-500"></i>Cotas</a></li>
-                <li><a href="#conteudo" class="block py-1"><i class="fas fa-book-open mr-2 text-teal-600"></i>O que Estudar?</a></li>
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 py-3 px-4 shadow-lg">
+            <ul class="flex flex-col space-y-2.5 text-xs font-bold uppercase tracking-wider text-slate-700">
+                <li><a href="#datas-destaque" class="mobile-link block py-2 px-3 rounded-lg bg-amber-50 text-amber-900 font-black"><i class="fas fa-calendar-alt text-amber-600 mr-2"></i>Datas Importantes</a></li>
+                <li><a href="#escolha-vagas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Como Funciona a Escolha</a></li>
+                <li><a href="#campi" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Campi & Vagas</a></li>
+                <li><a href="#prova" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">A Prova & Redação</a></li>
+                <li><a href="#cotas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Cotas & Lei de Ações Afirmativas</a></li>
+                <li><a href="#isencao" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Isenção da Taxa</a></li>
+                <li><a href="#conteudo" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Conteúdo Programático</a></li>
+                <li class="pt-2 flex flex-col space-y-2">
+                    <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="w-full bg-[#c7ef59] text-slate-900 font-black py-2.5 rounded-xl text-xs uppercase tracking-wider text-center block shadow-md">
+                        <i class="fas fa-rocket mr-1.5 text-indigo-700"></i> Conhecer o Intensivo 2026
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="w-full bg-emerald-500 text-white font-black py-2.5 rounded-xl text-xs uppercase tracking-wider text-center block shadow-md">
+                        <i class="fab fa-whatsapp mr-1.5"></i> Falar no WhatsApp
+                    </a>
+                </li>
             </ul>
         </div>
     </header>
 
-    <section class="hero-gradient text-white pt-12 pb-16 md:pt-16 md:pb-20 rounded-b-3xl shadow-xl relative overflow-hidden">
-        <div class="container mx-auto px-4 text-center relative z-10">
-            <img src="./logo1.png" alt="Logo Guia Pré-Federal" class="w-20 h-20 md:w-28 md:h-28 mx-auto mb-4 rounded-full shadow-lg border-4 border-white/40 object-contain p-1.5" style="background-color: var(--brand-coral);" onerror="this.onerror=null;this.src='https://placehold.co/112x112/DD5737/FFFFFF?text=GPF';">
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-gradient text-white py-12 md:py-16 relative overflow-hidden">
+        <div class="container mx-auto px-4 max-w-6xl relative z-10 text-center">
             
-            <div class="inline-flex items-center space-x-2 bg-white/20 text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-white/30 backdrop-blur-md">
-                <i class="fas fa-landmark text-amber-300"></i>
-                <span>Edital Oficial nº 05/2026 • Ingresso 2027</span>
+            <!-- Logo no Hero com fundo Laranja Coral -->
+            <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-5 rounded-full flex items-center justify-center p-3 shadow-2xl border-4 border-white/40" style="background-color: #dd5737;">
+                <img src="./logo1.png" onerror="this.onerror=null; this.src='https://placehold.co/120x120/dd5737/ffffff?text=GPF';" alt="Guia - Pré Federal" class="w-full h-full object-contain">
             </div>
 
-            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black leading-tight max-w-4xl mx-auto tracking-tight">
-                Guia Completo do Processo Seletivo CEFET-RJ 2027
+            <div class="inline-flex items-center space-x-2 bg-white/10 px-4 py-1.5 rounded-full backdrop-blur-md mb-4 border border-white/20">
+                <i class="fas fa-bullhorn text-[#c7ef59]"></i>
+                <span class="text-xs font-black uppercase tracking-wider text-slate-100">Processo Seletivo 2027 • Edital nº 05/2026</span>
+            </div>
+            
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4 leading-tight">
+                Guia Completo do Edital <span class="text-[#c7ef59]">CEFET-RJ 2027</span>
             </h1>
             
-            <p class="text-base md:text-xl mt-4 max-w-3xl mx-auto text-indigo-100 font-normal leading-relaxed">
-                Raio-X completo das <strong>1.024 vagas</strong> técnicas integradas distribuídas nos 7 campi do CEFET-RJ (Maracanã, Maria da Graça, Nova Iguaçu, Petrópolis, Nova Friburgo, Itaguaí e Valença).
+            <p class="text-slate-100 text-sm md:text-base max-w-3xl mx-auto mb-8 font-medium leading-relaxed">
+                Tudo o que você precisa saber para garantir sua vaga nos Cursos Técnicos Integrados ao Ensino Médio: 1.024 vagas, prova objetiva, redação, cotas e cronograma oficial.
             </p>
 
-            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 font-extrabold py-3.5 px-8 rounded-xl shadow-lg hover:bg-white transition duration-300 transform hover:scale-105 inline-flex items-center justify-center">
-                    <i class="fas fa-rocket mr-2.5"></i>Garantir Vaga no Curso Intensivo
+            <!-- CTAS PRINCIPAIS DO CURSO E NAVEGAÇÃO -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fas fa-rocket mr-2 text-indigo-900"></i> Conheça Nosso Curso Intensivo 2026
                 </a>
-                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-white/10 hover:bg-white/20 text-white font-bold py-3.5 px-8 rounded-xl border border-white/30 backdrop-blur-md transition duration-300 inline-flex items-center justify-center">
-                    <i class="fab fa-whatsapp mr-2 text-emerald-400"></i>Tirar Dúvidas com Orientador
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fab fa-whatsapp mr-2 text-lg"></i> Falar com a Coordenação
                 </a>
             </div>
 
-            <!-- Destaques em Badges Rápidos -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto mt-10 text-xs font-bold">
-                <div class="bg-white/10 p-3 rounded-xl border border-white/20 backdrop-blur-sm">
-                    <span class="block text-indigo-200 text-[10px] uppercase">Vagas Totais</span>
-                    <span class="text-base md:text-lg font-black text-white">1.024 Vagas</span>
+            <!-- Botões de Atalho Interno -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6 pt-4 border-t border-white/10">
+                <a href="#datas-destaque" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-calendar-alt mr-1.5 text-amber-400"></i> Ver Prazos Importantes
+                </a>
+                <a href="#prova" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-file-alt mr-1.5 text-rose-300"></i> Prova & Redação
+                </a>
+                <a href="#conteudo" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-book mr-1.5 text-lime-300"></i> O que Estudar
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIMEIRA SEÇÃO: DATAS IMPORTANTES -->
+    <section id="datas-destaque" class="py-10 bg-amber-50/80 border-b border-amber-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-amber-300 shadow-md">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 pb-4 border-b border-slate-200 gap-4">
+                    <div>
+                        <span class="bg-amber-100 text-amber-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-1.5 inline-block border border-amber-300">
+                            <i class="fas fa-bell mr-1 text-amber-700"></i> Atenção aos Prazos Oficiais
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-black text-slate-900">Datas Importantes do Processo Seletivo</h2>
+                    </div>
+                    <div class="text-xs font-bold text-slate-500 bg-slate-100 px-3.5 py-2 rounded-xl border border-slate-200">
+                        <i class="fas fa-info-circle text-indigo-600 mr-1"></i> Edital nº 05/2026 • Banca SELECON
+                    </div>
                 </div>
-                <div class="bg-white/10 p-3 rounded-xl border border-white/20 backdrop-blur-sm">
-                    <span class="block text-indigo-200 text-[10px] uppercase">Banca Examinadora</span>
-                    <span class="text-base md:text-lg font-black text-white">Instituto SELECON</span>
-                </div>
-                <div class="bg-white/10 p-3 rounded-xl border border-white/20 backdrop-blur-sm">
-                    <span class="block text-indigo-200 text-[10px] uppercase">Taxa de Inscrição</span>
-                    <span class="text-base md:text-lg font-black text-white">R$ 70,00</span>
-                </div>
-                <div class="bg-white/10 p-3 rounded-xl border border-white/20 backdrop-blur-sm">
-                    <span class="block text-indigo-200 text-[10px] uppercase">Estrutura da Prova</span>
-                    <span class="text-base md:text-lg font-black text-white">30 Questões + Redação</span>
+
+                <!-- Tabela Responsiva de Datas -->
+                <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                    <table class="w-full text-left border-collapse text-xs md:text-sm">
+                        <thead>
+                            <tr class="bg-indigo-950 text-white font-bold uppercase text-[11px] tracking-wider">
+                                <th class="py-3.5 px-4 md:px-6"><i class="fas fa-calendar-day mr-2 text-lime-400"></i>Etapa / Evento</th>
+                                <th class="py-3.5 px-4 md:px-6"><i class="fas fa-clock mr-2 text-lime-400"></i>Período / Data Oficial</th>
+                                <th class="py-3.5 px-4 md:px-6 hidden sm:table-cell"><i class="fas fa-info-circle mr-2 text-lime-400"></i>Observação</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Publicação do Edital nº 05/2026</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-indigo-700">20/08/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Divulgação oficial das regras e vagas do certame</td>
+                            </tr>
+                            <tr class="bg-amber-50/80 hover:bg-amber-100/60 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-file-signature text-amber-600 mr-1.5"></i>Solicitação de Isenção da Taxa (R$ 70)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-amber-800">20/08/2026 (00h) a 26/08/2026 (23h59)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-600">Alunos de escola pública, CadÚnico, Auxílio Emergencial ou Supera RJ</td>
+                            </tr>
+                            <tr class="bg-blue-50/80 hover:bg-blue-100/60 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-user-plus text-blue-600 mr-1.5"></i>Período de Inscrições Online</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-blue-800">20/08/2026 (00h) a 27/09/2026 (23h59)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-600">Exclusivamente no site do SELECON com CPF do candidato</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Último dia para Pagamento do Boleto</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">Até 28/09/2026 (1º dia útil pós-inscrição)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Pagamento bancário ou casas lotéricas</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Cartão de Confirmação (CDI / Local de Prova)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-purple-700">Conforme cronograma SELECON</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Consulta obrigatória do local e sala da prova</td>
+                            </tr>
+                            <tr class="bg-rose-50/80 hover:bg-rose-100/60 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-edit text-rose-600 mr-1.5"></i>Aplicação das Provas (Objetiva + Redação)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-rose-800">Das 09h às 13h (4 horas)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-600">Fechamento dos portões impreterivelmente às 08h50</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Gabarito Preliminar da Prova Objetiva</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">Dia do Exame (a partir das 19h)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Prazo de 1 dia útil para interposição de recursos</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Resultado Final e Chamada de Matrícula</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-emerald-700">Divulgação no site do SELECON</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Lista final, convocação para heteroidentificação e matrículas</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="cronograma" class="py-16 bg-white border-b border-slate-200">
-        <div class="container mx-auto px-4 max-w-5xl">
-            <div class="text-center mb-10">
-                <span class="bg-indigo-50 text-indigo-800 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider mb-2 border border-indigo-200 inline-block">
-                    Datas Importantes
-                </span>
-                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Cronograma Oficial do Exame CEFET-RJ</h2>
-                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
-                    Fique atento aos prazos do edital para não perder nenhuma etapa do processo seletivo do CEFET-RJ!
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
-                    <div class="w-2 h-full bg-blue-600 absolute left-0 top-0"></div>
-                    <span class="text-[10px] font-extrabold text-blue-600 uppercase tracking-wider block mb-1">Inscrições Online</span>
-                    <h3 class="text-lg font-black text-slate-900 mb-1">Período de Inscrição</h3>
-                    <p class="text-xs text-slate-600">No site da SELECON com preenchimento dos dados do aluno e CPF próprio.</p>
-                </div>
-
-                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
-                    <div class="w-2 h-full bg-emerald-500 absolute left-0 top-0"></div>
-                    <span class="text-[10px] font-extrabold text-emerald-600 uppercase tracking-wider block mb-1">Isenção da Taxa</span>
-                    <h3 class="text-lg font-black text-slate-900 mb-1">Pedido de Isenção (R$ 70)</h3>
-                    <p class="text-xs text-slate-600">Disponível para alunos de escola pública, cadastrados no CadÚnico, Auxílio Emergencial ou Supera RJ.</p>
-                </div>
-
-                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
-                    <div class="w-2 h-full bg-purple-600 absolute left-0 top-0"></div>
-                    <span class="text-[10px] font-extrabold text-purple-600 uppercase tracking-wider block mb-1">Cartão de Confirmação</span>
-                    <h3 class="text-lg font-black text-slate-900 mb-1">Local de Prova (CDI)</h3>
-                    <p class="text-xs text-slate-600">Atenção ao endereço impresso no cartão! As provas ocorrem em diversos locais e não apenas na sede do Maracanã.</p>
-                </div>
-
-                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
-                    <div class="w-2 h-full bg-rose-600 absolute left-0 top-0"></div>
-                    <span class="text-[10px] font-extrabold text-rose-600 uppercase tracking-wider block mb-1">Dia do Exame</span>
-                    <h3 class="text-lg font-black text-slate-900 mb-1">Aplicação das Provas</h3>
-                    <p class="text-xs text-slate-600">Horário: 09h às 13h (Portões fecham às 08h50). Duração total de 4 horas.</p>
-                </div>
-
-                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
-                    <div class="w-2 h-full bg-amber-500 absolute left-0 top-0"></div>
-                    <span class="text-[10px] font-extrabold text-amber-600 uppercase tracking-wider block mb-1">Gabarito e Recursos</span>
-                    <h3 class="text-lg font-black text-slate-900 mb-1">Gabarito Preliminar</h3>
-                    <p class="text-xs text-slate-600">Divulgado a partir das 19h no dia do exame, com prazo de 1 dia útil para recursos.</p>
-                </div>
-
-                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
-                    <div class="w-2 h-full bg-indigo-600 absolute left-0 top-0"></div>
-                    <span class="text-[10px] font-extrabold text-indigo-600 uppercase tracking-wider block mb-1">Aprovação Final</span>
-                    <h3 class="text-lg font-black text-slate-900 mb-1">Resultado Final & Matrículas</h3>
-                    <p class="text-xs text-slate-600">Resultado final com lista de classificados, convocação para heteroidentificação e matrículas online.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="prova" class="py-16 bg-slate-50 border-b border-slate-200">
-        <div class="container mx-auto px-4 max-w-5xl">
-            <div class="text-center mb-10">
-                <span class="bg-purple-100 text-purple-900 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider mb-2 border border-purple-200 inline-block">
-                    Estrutura do Exame
-                </span>
-                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Como é a Prova do CEFET-RJ?</h2>
-                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
-                    A seleção é realizada em **fase única** com duração máxima de **4 horas**.
-                </p>
-            </div>
-
-            <!-- Tabela de Composição da Prova -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="bg-blue-100 text-blue-900 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Objetiva</span>
-                            <span class="text-xs font-black text-blue-600">30 Questões (150 pts)</span>
-                        </div>
-                        <h3 class="text-xl font-black text-slate-900 mb-2">Prova Objetiva</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                            30 questões de múltipla escolha com 4 opções de resposta (A, B, C, D) divididas entre as disciplinas fundamentais.
-                        </p>
-                        <ul class="text-xs font-semibold text-slate-700 space-y-1.5 border-t border-slate-100 pt-3">
-                            <li class="flex justify-between"><span><i class="fas fa-check text-blue-500 mr-1.5"></i>Língua Portuguesa:</span> <strong>10 Q (50 pts)</strong></li>
-                            <li class="flex justify-between"><span><i class="fas fa-check text-blue-500 mr-1.5"></i>Matemática:</span> <strong>10 Q (50 pts)</strong></li>
-                            <li class="flex justify-between"><span><i class="fas fa-check text-blue-500 mr-1.5"></i>Ciências da Natureza:</span> <strong>05 Q (25 pts)</strong></li>
-                            <li class="flex justify-between"><span><i class="fas fa-check text-blue-500 mr-1.5"></i>Ciências Humanas:</span> <strong>05 Q (25 pts)</strong></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="bg-purple-100 text-purple-900 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Discursiva</span>
-                            <span class="text-xs font-black text-purple-600">Valendo 100 pts</span>
-                        </div>
-                        <h3 class="text-xl font-black text-slate-900 mb-2">Prova de Redação</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                            Produção de texto <strong>dissertativo-argumentativo em prosa</strong> em língua portuguesa a partir de um tema proposto.
-                        </p>
-                        <div class="bg-purple-50 p-3 rounded-xl border border-purple-100 text-[11px] text-purple-900 font-medium">
-                            <i class="fas fa-exclamation-triangle text-amber-500 mr-1"></i> Redações em verso, que fugirem ao tema ou ferirem os Direitos Humanos serão anuladas.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="bg-amber-100 text-amber-900 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Filtro de Correção</span>
-                            <span class="text-xs font-black text-amber-600">Regra do Dobro</span>
-                        </div>
-                        <h3 class="text-xl font-black text-slate-900 mb-2">Quem tem a Redação Corrigida?</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed mb-3">
-                            Apenas os candidatos classificados na Prova Objetiva em quantidade igual ao <strong>DOBRO das vagas</strong> oferecidas em cada curso/grupo terão a redação corrigida.
-                        </p>
-                        <p class="text-xs font-bold text-slate-800">
-                            Pontuação Máxima Total: <strong>250 pontos</strong> (150 pts Objetiva + 100 pts Redação).
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Regras de Eliminação e Desempate -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-rose-50 p-5 rounded-2xl border border-rose-200">
-                    <h4 class="text-base font-black text-rose-900 mb-2 flex items-center">
-                        <i class="fas fa-times-circle text-rose-600 mr-2"></i> O que elimina o candidato no CEFET-RJ?
-                    </h4>
-                    <ul class="text-xs text-rose-800 space-y-1.5 font-medium">
-                        <li>• Faltar no dia do exame ou chegar após o fechamento dos portões (08h50).</li>
-                        <li>• <strong>Aproveitamento nulo (nota ZERO)</strong> na prova de Língua Portuguesa.</li>
-                        <li>• <strong>Aproveitamento nulo (nota ZERO)</strong> na prova de Matemática.</li>
-                        <li>• <strong>Aproveitamento nulo (nota ZERO)</strong> na Prova de Redação.</li>
-                        <li>• Portar telefone celular ativado ou tocando durante a aplicação.</li>
-                    </ul>
-                </div>
-
-                <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-200">
-                    <h4 class="text-base font-black text-indigo-900 mb-2 flex items-center">
-                        <i class="fas fa-sort-amount-down text-indigo-600 mr-2"></i> Critérios Oficiais de Desempate
-                    </h4>
-                    <ol class="text-xs text-indigo-900 space-y-1.5 font-semibold list-decimal list-inside">
-                        <li><strong>1º Critério:</strong> Maior número de pontos em Língua Portuguesa (Objetiva + Redação).</li>
-                        <li><strong>2º Critério:</strong> Maior número de pontos na Prova Objetiva de Matemática.</li>
-                        <li><strong>3º Critério:</strong> Maior número de pontos em Ciências da Natureza.</li>
-                        <li><strong>4º Critério:</strong> Candidato com maior idade.</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- Seção de Escolha de Vagas e Classificação -->
     <section id="escolha-vagas" class="py-16 bg-white border-b border-slate-200">
         <div class="container mx-auto px-4 max-w-5xl">
-            <div class="text-center mb-10">
-                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
-                    Inscrição e Opção Única
+            <div class="text-center mb-12">
+                <span class="bg-indigo-50 text-indigo-800 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-indigo-200 inline-block">
+                    Regras do Edital CEFET-RJ
                 </span>
-                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Como Funciona a Escolha de Opções & Classificação?</h2>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Como Funciona a Escolha de Opções & Classificação no CEFET-RJ?</h2>
                 <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
-                    Entenda como realizar sua opção no ato da inscrição para não cometer erros que causam desclassificação.
+                    Entenda detalhadamente como o candidato seleciona seu curso e como funciona o sistema de concorrência e classificação.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                    <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-lg mb-4">1</div>
-                    <h3 class="text-lg font-black text-slate-900 mb-2">Escolha Exclusiva</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Cada candidato só pode realizar **uma única inscrição**, escolhendo obrigatoriamente **1 Campus, 1 Curso Técnico e 1 Grupo de Concorrência** (Ampla Concorrência ou Cota).
-                    </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card 1: Escolha Única -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center flex-shrink-0 text-xl font-bold">1</div>
+                    <div>
+                        <h3 class="text-lg font-black text-slate-900 mb-1.5">Opção Única de Campus e Curso</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                            No CEFET-RJ, cada candidato só pode realizar <strong>uma única inscrição</strong>, devendo escolher obrigatoriamente <strong>apenas um campus, um curso e um grupo de concorrência</strong> (AC ou Cotas). Diferente de outros institutos, não há escolha de 2ª opção.
+                        </p>
+                    </div>
                 </div>
 
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                    <div class="w-10 h-10 rounded-xl bg-purple-600 text-white flex items-center justify-center font-black text-lg mb-4">2</div>
-                    <h3 class="text-lg font-black text-slate-900 mb-2">Alerta de Grupo Correto</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Inscrever-se em cota sem ter cursado o Ensino Fundamental (1º ao 9º ano) **100% em escola pública** é a principal causa de eliminação no ato da matrícula. Quem estudou em escola privada com bolsa deve optar por **AC**.
-                    </p>
+                <!-- Card 2: Dupla Concorrência -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center flex-shrink-0 text-xl font-bold">2</div>
+                    <div>
+                        <h3 class="text-lg font-black text-slate-900 mb-1.5">Dupla Concorrência Automática (Lei nº 14.723/23)</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                            Todos os candidatos inscritos nas vagas reservadas (cotistas) disputam <strong>primeiramente na Ampla Concorrência (AC)</strong>. Se a nota não for suficiente para passar na AC, o candidato concorre automaticamente nas vagas reservadas da sua cota.
+                        </p>
+                    </div>
                 </div>
 
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-black text-lg mb-4">3</div>
-                    <h3 class="text-lg font-black text-slate-900 mb-2">Remanejamento de Vagas</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Se restarem vagas ociosas em algum grupo de cotas, elas são remanejadas entre os grupos de egressos de escola pública e, em última instância, destinadas aos candidatos da Ampla Concorrência.
+                <!-- Card 3: Regra do Dobro das Vagas -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 text-xl font-bold">3</div>
+                    <div>
+                        <h3 class="text-lg font-black text-slate-900 mb-1.5">Seleção para Correção da Redação</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                            Apenas os candidatos classificados na prova objetiva até o <strong>DOBRO do número de vagas oferecidas</strong> em cada grupo/campus terão suas redações corrigidas. Todos os empatados na última posição dessa nota de corte também têm a redação corrigida.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4: 100% Escola Pública -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-600 text-white flex items-center justify-center flex-shrink-0 text-xl font-bold">4</div>
+                    <div>
+                        <h3 class="text-lg font-black text-slate-900 mb-1.5">Exigência Rigorosa de Escola Pública</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                            Para concorrer a qualquer cota (LB ou LI), o aluno deve ter estudado <strong>todo o Ensino Fundamental (1º ao 9º ano) em escola pública</strong>. Ter estudado em escola particular com bolsa 100% ou filantrópica desqualifica o candidato da cota, restando apenas a Ampla Concorrência.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner Alerta do Edital -->
+            <div class="mt-8 bg-rose-50 border-l-4 border-rose-600 p-5 rounded-r-2xl">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-exclamation-triangle text-rose-600 text-xl flex-shrink-0"></i>
+                    <p class="text-xs text-rose-900 font-bold leading-relaxed">
+                        <strong class="uppercase">Cuidado com a inscrição incorreta:</strong> O edital alerta que selecionar um grupo de concorrência inadequado no formulário é a maior causa de eliminação de candidatos aprovados no ato da matrícula. Confira bem seu histórico escolar antes de escolher a cota!
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="campi" class="py-16 bg-slate-50 border-b border-slate-200">
+    <!-- Seção Campi e Vagas -->
+    <section id="campi" class="py-16 bg-slate-50">
         <div class="container mx-auto px-4 max-w-6xl">
             <div class="text-center mb-10">
-                <span class="bg-blue-100 text-blue-900 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider mb-2 border border-blue-200 inline-block">
-                    Painel de Vagas 2027
+                <span class="bg-indigo-100 text-indigo-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-indigo-200 inline-block">
+                    1.024 Vagas Distribuídas
                 </span>
-                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Campi, Cursos e Vagas no CEFET-RJ</h2>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Campi, Cursos e Vagas do CEFET-RJ</h2>
                 <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
-                    Selecione o campus abaixo para consultar os cursos e o total de vagas disponíveis no edital.
+                    Filtre pelo campus do CEFET-RJ e confira os cursos técnicos integrados oferecidos e suas vagas.
                 </p>
-
-                <!-- Botões Filtro por Campus -->
-                <div class="flex flex-wrap justify-center gap-2 mt-6" id="campus-filter-buttons">
-                    <button onclick="filterCampus('ALL')" class="campus-btn active bg-slate-900 text-white font-black text-xs px-4 py-2 rounded-xl transition">Todos os 7 Campi (1.024 Vagas)</button>
-                    <button onclick="filterCampus('MARACANÃ')" class="campus-btn bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs px-4 py-2 rounded-xl border border-slate-200 transition">Maracanã (Rio)</button>
-                    <button onclick="filterCampus('MARIA DA GRAÇA')" class="campus-btn bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs px-4 py-2 rounded-xl border border-slate-200 transition">Maria da Graça (Rio)</button>
-                    <button onclick="filterCampus('NOVA IGUAÇU')" class="campus-btn bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs px-4 py-2 rounded-xl border border-slate-200 transition">Nova Iguaçu</button>
-                    <button onclick="filterCampus('PETRÓPOLIS')" class="campus-btn bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs px-4 py-2 rounded-xl border border-slate-200 transition">Petrópolis</button>
-                    <button onclick="filterCampus('NOVA FRIBURGO')" class="campus-btn bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs px-4 py-2 rounded-xl border border-slate-200 transition">Nova Friburgo</button>
-                    <button onclick="filterCampus('ITAGUAÍ')" class="campus-btn bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs px-4 py-2 rounded-xl border border-slate-200 transition">Itaguaí</button>
-                    <button onclick="filterCampus('VALENÇA')" class="campus-btn bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs px-4 py-2 rounded-xl border border-slate-200 transition">Valença</button>
-                </div>
             </div>
 
-            <!-- Grid de Cards por Campus -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="campus-grid">
+            <!-- Botões de Filtro de Campus -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8" id="campus-filter">
+                <button onclick="filterCampus('ALL')" class="campus-btn active bg-indigo-600 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-md transition">Todos os Campi (7)</button>
+                <button onclick="filterCampus('Maracanã')" class="campus-btn bg-white text-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 transition">Maracanã</button>
+                <button onclick="filterCampus('Maria da Graça')" class="campus-btn bg-white text-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 transition">Maria da Graça</button>
+                <button onclick="filterCampus('Nova Iguaçu')" class="campus-btn bg-white text-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 transition">Nova Iguaçu</button>
+                <button onclick="filterCampus('Petrópolis')" class="campus-btn bg-white text-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 transition">Petrópolis</button>
+                <button onclick="filterCampus('Nova Friburgo')" class="campus-btn bg-white text-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 transition">Nova Friburgo</button>
+                <button onclick="filterCampus('Itaguaí')" class="campus-btn bg-white text-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 transition">Itaguaí</button>
+                <button onclick="filterCampus('Valença')" class="campus-btn bg-white text-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 transition">Valença</button>
+            </div>
+
+            <!-- Grade de Cards de Cursos/Campi -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="campi-grid">
                 
                 <!-- Maracanã -->
-                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-campus="MARACANÃ">
+                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition" data-campus="Maracanã">
                     <div class="flex justify-between items-start mb-3">
-                        <span class="bg-blue-100 text-blue-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase">Rio de Janeiro / RJ</span>
-                        <span class="bg-slate-100 text-slate-800 text-[10px] font-extrabold px-2 py-0.5 rounded">3 Anos Integrado</span>
+                        <span class="bg-indigo-100 text-indigo-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider">Campus Sede</span>
+                        <span class="bg-purple-100 text-purple-900 text-[10px] font-bold px-2 py-0.5 rounded">Rio de Janeiro</span>
                     </div>
-                    <h3 class="text-xl font-black text-slate-900 mb-1">Campus Maracanã</h3>
-                    <p class="text-xs text-slate-500 mb-4">Sede Principal - Rio de Janeiro</p>
+                    <h3 class="text-xl font-black text-slate-900 mb-1">Maracanã</h3>
+                    <p class="text-xs font-semibold text-slate-500 mb-4">Turnos: Manhã ou Tarde (3 Anos)</p>
                     <div class="border-t border-slate-100 pt-3">
-                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Ofertados:</h4>
-                        <ul class="space-y-1 text-xs text-slate-700 font-medium">
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Edificações</li>
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Eletrônica</li>
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Eletrotécnica</li>
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Estradas</li>
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Informática</li>
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Mecânica</li>
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Meteorologia</li>
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Química</li>
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Segurança do Trabalho</li>
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Telecomunicações</li>
+                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Técnicos Integrados:</h4>
+                        <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Edificações</span><strong class="text-indigo-900">72 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Eletrônica</span><strong class="text-indigo-900">72 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Eletrotécnica</span><strong class="text-indigo-900">72 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Estradas</span><strong class="text-indigo-900">36 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Informática</span><strong class="text-indigo-900">72 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Mecânica</span><strong class="text-indigo-900">72 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Meteorologia</span><strong class="text-indigo-900">36 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Química</span><strong class="text-indigo-900">72 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Segurança do Trabalho</span><strong class="text-indigo-900">36 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Telecomunicações</span><strong class="text-indigo-900">36 Vagas</strong></li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Maria da Graça -->
-                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-campus="MARIA DA GRAÇA">
+                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition" data-campus="Maria da Graça">
                     <div class="flex justify-between items-start mb-3">
-                        <span class="bg-blue-100 text-blue-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase">Rio de Janeiro / RJ</span>
-                        <span class="bg-slate-100 text-slate-800 text-[10px] font-extrabold px-2 py-0.5 rounded">3 Anos Integrado</span>
+                        <span class="bg-indigo-100 text-indigo-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider">Unidade Urbana</span>
+                        <span class="bg-purple-100 text-purple-900 text-[10px] font-bold px-2 py-0.5 rounded">Zona Norte</span>
                     </div>
-                    <h3 class="text-xl font-black text-slate-900 mb-1">Campus Maria da Graça</h3>
-                    <p class="text-xs text-slate-500 mb-4">Zona Norte - Rio de Janeiro</p>
+                    <h3 class="text-xl font-black text-slate-900 mb-1">Maria da Graça</h3>
+                    <p class="text-xs font-semibold text-slate-500 mb-4">Regime de 2 Turnos (3 Anos)</p>
                     <div class="border-t border-slate-100 pt-3">
-                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Ofertados:</h4>
-                        <ul class="space-y-1 text-xs text-slate-700 font-medium">
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Automobilística</li>
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Enfermagem</li>
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Manutenção Metroferroviária</li>
-                            <li><i class="fas fa-angle-right text-blue-600 mr-1.5"></i> Energias Renováveis</li>
+                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Técnicos Integrados:</h4>
+                        <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Automobilística</span><strong class="text-indigo-900">36 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Construção Naval</span><strong class="text-indigo-900">36 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Energias Renováveis</span><strong class="text-indigo-900">36 Vagas</strong></li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Nova Iguaçu -->
-                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-campus="NOVA IGUAÇU">
+                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition" data-campus="Nova Iguaçu">
                     <div class="flex justify-between items-start mb-3">
-                        <span class="bg-purple-100 text-purple-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase">Baixada Fluminense</span>
-                        <span class="bg-slate-100 text-slate-800 text-[10px] font-extrabold px-2 py-0.5 rounded">3 Anos Integrado</span>
+                        <span class="bg-indigo-100 text-indigo-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider">Baixada Fluminense</span>
+                        <span class="bg-purple-100 text-purple-900 text-[10px] font-bold px-2 py-0.5 rounded">Nova Iguaçu</span>
                     </div>
-                    <h3 class="text-xl font-black text-slate-900 mb-1">Campus Nova Iguaçu</h3>
-                    <p class="text-xs text-slate-500 mb-4">Nova Iguaçu / RJ</p>
+                    <h3 class="text-xl font-black text-slate-900 mb-1">Nova Iguaçu</h3>
+                    <p class="text-xs font-semibold text-slate-500 mb-4">Regime de 2 Turnos (3 Anos)</p>
                     <div class="border-t border-slate-100 pt-3">
-                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Ofertados:</h4>
-                        <ul class="space-y-1 text-xs text-slate-700 font-medium">
-                            <li><i class="fas fa-angle-right text-purple-600 mr-1.5"></i> Automação Industrial</li>
-                            <li><i class="fas fa-angle-right text-purple-600 mr-1.5"></i> Enfermagem</li>
-                            <li><i class="fas fa-angle-right text-purple-600 mr-1.5"></i> Informática</li>
-                            <li><i class="fas fa-angle-right text-purple-600 mr-1.5"></i> Telecomunicações</li>
+                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Técnicos Integrados:</h4>
+                        <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Enfermagem</span><strong class="text-indigo-900">36 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Automação Industrial</span><strong class="text-indigo-900">36 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5 font-bold text-rose-700"><span><i class="fas fa-angle-right text-rose-600 mr-1.5"></i> Informática</span><strong>72 Vagas</strong></li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Petrópolis -->
-                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-campus="PETRÓPOLIS">
+                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition" data-campus="Petrópolis">
                     <div class="flex justify-between items-start mb-3">
-                        <span class="bg-emerald-100 text-emerald-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase">Região Serrana</span>
-                        <span class="bg-slate-100 text-slate-800 text-[10px] font-extrabold px-2 py-0.5 rounded">3 Anos Integrado</span>
+                        <span class="bg-indigo-100 text-indigo-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider">Região Serrana</span>
+                        <span class="bg-purple-100 text-purple-900 text-[10px] font-bold px-2 py-0.5 rounded">Petrópolis</span>
                     </div>
-                    <h3 class="text-xl font-black text-slate-900 mb-1">Campus Petrópolis</h3>
-                    <p class="text-xs text-slate-500 mb-4">Petrópolis / RJ</p>
+                    <h3 class="text-xl font-black text-slate-900 mb-1">Petrópolis</h3>
+                    <p class="text-xs font-semibold text-slate-500 mb-4">Regime de 2 Turnos (3 Anos)</p>
                     <div class="border-t border-slate-100 pt-3">
-                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Ofertados:</h4>
-                        <ul class="space-y-1 text-xs text-slate-700 font-medium">
-                            <li><i class="fas fa-angle-right text-emerald-600 mr-1.5"></i> Telecomunicações</li>
-                            <li><i class="fas fa-angle-right text-emerald-600 mr-1.5"></i> Computação Gráfica</li>
+                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Técnicos Integrados:</h4>
+                        <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Telecomunicações</span><strong class="text-indigo-900">36 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Desenho Industrial</span><strong class="text-indigo-900">36 Vagas</strong></li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Nova Friburgo -->
-                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-campus="NOVA FRIBURGO">
+                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition" data-campus="Nova Friburgo">
                     <div class="flex justify-between items-start mb-3">
-                        <span class="bg-emerald-100 text-emerald-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase">Região Serrana</span>
-                        <span class="bg-slate-100 text-slate-800 text-[10px] font-extrabold px-2 py-0.5 rounded">3 Anos Integrado</span>
+                        <span class="bg-indigo-100 text-indigo-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider">Região Serrana</span>
+                        <span class="bg-purple-100 text-purple-900 text-[10px] font-bold px-2 py-0.5 rounded">Nova Friburgo</span>
                     </div>
-                    <h3 class="text-xl font-black text-slate-900 mb-1">Campus Nova Friburgo</h3>
-                    <p class="text-xs text-slate-500 mb-4">Nova Friburgo / RJ</p>
+                    <h3 class="text-xl font-black text-slate-900 mb-1">Nova Friburgo</h3>
+                    <p class="text-xs font-semibold text-slate-500 mb-4">Regime de 2 Turnos (3 Anos)</p>
                     <div class="border-t border-slate-100 pt-3">
-                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Ofertados:</h4>
-                        <ul class="space-y-1 text-xs text-slate-700 font-medium">
-                            <li><i class="fas fa-angle-right text-emerald-600 mr-1.5"></i> Informática</li>
-                            <li><i class="fas fa-angle-right text-emerald-600 mr-1.5"></i> Gestão de Turismo</li>
+                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Técnicos Integrados:</h4>
+                        <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Informática</span><strong class="text-indigo-900">36 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Gestão de Turismo</span><strong class="text-indigo-900">36 Vagas</strong></li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Itaguaí -->
-                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-campus="ITAGUAÍ">
+                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition" data-campus="Itaguaí">
                     <div class="flex justify-between items-start mb-3">
-                        <span class="bg-teal-100 text-teal-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase">Costa Verde</span>
-                        <span class="bg-slate-100 text-slate-800 text-[10px] font-extrabold px-2 py-0.5 rounded">3 Anos Integrado</span>
+                        <span class="bg-indigo-100 text-indigo-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider">Costa Verde</span>
+                        <span class="bg-purple-100 text-purple-900 text-[10px] font-bold px-2 py-0.5 rounded">Itaguaí</span>
                     </div>
-                    <h3 class="text-xl font-black text-slate-900 mb-1">Campus Itaguaí</h3>
-                    <p class="text-xs text-slate-500 mb-4">Itaguaí / RJ</p>
+                    <h3 class="text-xl font-black text-slate-900 mb-1">Itaguaí</h3>
+                    <p class="text-xs font-semibold text-slate-500 mb-4">Regime de 2 Turnos (3 Anos)</p>
                     <div class="border-t border-slate-100 pt-3">
-                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Ofertados:</h4>
-                        <ul class="space-y-1 text-xs text-slate-700 font-medium">
-                            <li><i class="fas fa-angle-right text-teal-600 mr-1.5"></i> Portos</li>
-                            <li><i class="fas fa-angle-right text-teal-600 mr-1.5"></i> Mecânica</li>
+                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Técnicos Integrados:</h4>
+                        <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Mecânica</span><strong class="text-indigo-900">36 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Porto</span><strong class="text-indigo-900">36 Vagas</strong></li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Valença -->
-                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-campus="VALENÇA">
+                <div class="campus-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition" data-campus="Valença">
                     <div class="flex justify-between items-start mb-3">
-                        <span class="bg-rose-100 text-rose-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase">Sul Fluminense</span>
-                        <span class="bg-slate-100 text-slate-800 text-[10px] font-extrabold px-2 py-0.5 rounded">3 Anos Integrado</span>
+                        <span class="bg-indigo-100 text-indigo-900 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider">Médio Paraíba</span>
+                        <span class="bg-purple-100 text-purple-900 text-[10px] font-bold px-2 py-0.5 rounded">Valença</span>
                     </div>
-                    <h3 class="text-xl font-black text-slate-900 mb-1">Campus Valença</h3>
-                    <p class="text-xs text-slate-500 mb-4">Valença / RJ</p>
+                    <h3 class="text-xl font-black text-slate-900 mb-1">Valença</h3>
+                    <p class="text-xs font-semibold text-slate-500 mb-4">Regime de 2 Turnos (3 Anos)</p>
                     <div class="border-t border-slate-100 pt-3">
-                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Ofertados:</h4>
-                        <ul class="space-y-1 text-xs text-slate-700 font-medium">
-                            <li><i class="fas fa-angle-right text-rose-600 mr-1.5"></i> Administração</li>
-                            <li><i class="fas fa-angle-right text-rose-600 mr-1.5"></i> Alimentos</li>
-                            <li><i class="fas fa-angle-right text-rose-600 mr-1.5"></i> Química</li>
+                        <h4 class="text-xs font-black text-slate-700 uppercase mb-2">Cursos Técnicos Integrados:</h4>
+                        <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                            <li class="flex justify-between py-0.5 border-b border-slate-50"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Alimentos</span><strong class="text-indigo-900">36 Vagas</strong></li>
+                            <li class="flex justify-between py-0.5"><span><i class="fas fa-angle-right text-indigo-600 mr-1.5"></i> Química</span><strong class="text-indigo-900">36 Vagas</strong></li>
                         </ul>
                     </div>
                 </div>
@@ -595,276 +553,388 @@
         </div>
     </section>
 
-    <section id="cotas" class="py-16 bg-white border-b border-slate-200">
+    <!-- Seção A Prova -->
+    <section id="prova" class="py-16 bg-white border-y border-slate-200">
         <div class="container mx-auto px-4 max-w-5xl">
-            <div class="text-center mb-10">
-                <span class="bg-rose-100 text-rose-900 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider mb-2 border border-rose-200 inline-block">
-                    Reserva de Vagas (Lei 12.711/2012)
+            <div class="text-center mb-12">
+                <span class="bg-rose-100 text-rose-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-rose-200 inline-block">
+                    Etapa Única • 4 Horas de Prova
                 </span>
-                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Regras de Cotas & Comprovação de Renda</h2>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">A Prova Objetiva & Redação CEFET-RJ</h2>
                 <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
-                    50% das vagas do CEFET-RJ são reservadas para estudantes egressos do Ensino Fundamental Público.
+                    A prova é aplicada em um único dia (das 09h às 13h) e é composta por 30 questões objetivas + 1 Produção Textual.
                 </p>
             </div>
 
-            <div class="bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-200 mb-8">
-                <h3 class="text-lg font-black text-slate-900 mb-4 flex items-center">
-                    <i class="fas fa-layer-group text-blue-600 mr-2.5"></i> Grupos de Concorrência Oficiais no CEFET-RJ
-                </h3>
+            <!-- Tabela de Estrutura da Prova -->
+            <div class="overflow-x-auto bg-slate-50 rounded-2xl border border-slate-200 shadow-sm mb-10">
+                <table class="w-full text-left border-collapse text-xs md:text-sm">
+                    <thead>
+                        <tr class="bg-indigo-950 text-white font-bold uppercase text-[11px] tracking-wider border-b border-indigo-900">
+                            <th class="py-3.5 px-4 md:px-6">Área de Conhecimento / Prova</th>
+                            <th class="py-3.5 px-4 md:px-6">Número de Questões</th>
+                            <th class="py-3.5 px-4 md:px-6">Pontuação Total</th>
+                            <th class="py-3.5 px-4 md:px-6 hidden sm:table-cell">Peso / Importância</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <tr class="hover:bg-slate-100 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-book text-indigo-600 mr-2"></i>Língua Portuguesa</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">10 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-black text-indigo-700">50 pontos</td>
+                            <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">1º Critério de Desempate</td>
+                        </tr>
+                        <tr class="hover:bg-slate-100 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-calculator text-purple-600 mr-2"></i>Matemática</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">10 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-black text-purple-700">50 pontos</td>
+                            <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">2º Critério de Desempate</td>
+                        </tr>
+                        <tr class="hover:bg-slate-100 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-flask text-teal-600 mr-2"></i>Ciências da Natureza (Física, Química, Bio)</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">05 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-black text-teal-700">25 pontos</td>
+                            <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">3º Critério de Desempate</td>
+                        </tr>
+                        <tr class="hover:bg-slate-100 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-globe-americas text-emerald-600 mr-2"></i>Ciências Humanas (História e Geografia)</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">05 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-black text-emerald-700">25 pontos</td>
+                            <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Geral</td>
+                        </tr>
+                        <tr class="bg-amber-50/80 font-black text-slate-900 hover:bg-amber-100/80 transition">
+                            <td class="py-3.5 px-4 md:px-6 text-rose-800"><i class="fas fa-pen-nib text-rose-600 mr-2"></i>Prova de Redação (Dissertativo-Argumentativa)</td>
+                            <td class="py-3.5 px-4 md:px-6 text-slate-800">01 Produção Textual</td>
+                            <td class="py-3.5 px-4 md:px-6 text-rose-700 font-extrabold">100 pontos</td>
+                            <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-amber-900">Corrigida para o dobro das vagas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                    <div class="bg-white p-4 rounded-xl border border-slate-200">
-                        <span class="font-extrabold text-blue-600 text-sm block mb-1">Grupo AC</span>
-                        <p class="text-slate-600">Ampla Concorrência - Aberto a todos os estudantes (escolas públicas ou particulares).</p>
+            <!-- Destaques e Regras de Eliminação -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="bg-rose-50 p-4 rounded-xl border border-rose-200">
+                    <h4 class="font-black text-rose-900 mb-1 uppercase"><i class="fas fa-times-circle mr-1"></i>Regra de Eliminação</h4>
+                    <p class="text-rose-800 font-medium">Será eliminado o candidato que tirar NOTA ZERO em Português, Matemática ou na Redação.</p>
+                </div>
+                <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
+                    <h4 class="font-black text-amber-900 mb-1 uppercase"><i class="fas fa-clock mr-1"></i>Fechamento dos Portões</h4>
+                    <p class="text-amber-800 font-medium">Os portões abrem às 08h e FECHAM IMPRETERIVELMENTE às 08h50. A prova começa às 09h.</p>
+                </div>
+                <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-200">
+                    <h4 class="font-black text-indigo-900 mb-1 uppercase"><i class="fas fa-id-card mr-1"></i>Documentos Aceitos</h4>
+                    <p class="text-indigo-800 font-medium">Documento de identidade original com foto (RG, Passaporte ou Gov.br direto no aplicativo oficial).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Cotas -->
+    <section id="cotas" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-purple-100 text-purple-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-purple-200 inline-block">
+                    Lei Federal nº 12.711/2012 e Lei nº 14.723/2023
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Reserva de Vagas e Cotas CEFET-RJ</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    50% de todas as vagas do CEFET-RJ são reservadas para estudantes oriundos de escolas públicas brasileiras.
+                </p>
+            </div>
+
+            <!-- Tabela de Modalidades de Cotas -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+                <div class="p-4 bg-slate-900 text-white font-bold text-xs uppercase tracking-wider">
+                    Divisão das Categoria de Inscrição (Grupos de Concorrência)
+                </div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium text-slate-700">
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                        <strong class="text-indigo-900 font-black block mb-1">Grupo AC (Ampla Concorrência)</strong>
+                        Destinado a estudantes de qualquer rede de ensino (pública ou particular).
                     </div>
-
-                    <div class="bg-white p-4 rounded-xl border border-slate-200">
-                        <span class="font-extrabold text-indigo-600 text-sm block mb-1">Grupos LB (Baixa Renda ≤ 1 Salário Mínimo)</span>
-                        <p class="text-slate-600 mb-2">Escola Pública + Renda per capita igual ou inferior a 1,0 Salário Mínimo:</p>
-                        <ul class="space-y-1 font-semibold text-slate-700">
-                            <li>• <strong>LB_PPI:</strong> Pretos, Pardos e Indígenas</li>
-                            <li>• <strong>LB_Q:</strong> Quilombolas</li>
-                            <li>• <strong>LB_PCD:</strong> Pessoas com Deficiência</li>
-                            <li>• <strong>LB_EP:</strong> Escola Pública Geral</li>
-                        </ul>
+                    <div class="p-3.5 rounded-xl bg-purple-50 border border-purple-200">
+                        <strong class="text-purple-900 font-black block mb-1">Grupo LB_PPI (Renda $\le$ 1 Salário + PPI + Escola Pública)</strong>
+                        Escola pública + Renda $\le$ 1,0 Salário Mínimo per capita + Pretos, Pardos ou Indígenas.
                     </div>
-
-                    <div class="bg-white p-4 rounded-xl border border-slate-200">
-                        <span class="font-extrabold text-emerald-600 text-sm block mb-1">Grupos LI (Independente de Renda)</span>
-                        <p class="text-slate-600 mb-2">Escola Pública + Qualquer renda familiar:</p>
-                        <ul class="space-y-1 font-semibold text-slate-700">
-                            <li>• <strong>LI_PPI:</strong> Pretos, Pardos e Indígenas</li>
-                            <li>• <strong>LI_Q:</strong> Quilombolas</li>
-                            <li>• <strong>LI_PCD:</strong> Pessoas com Deficiência</li>
-                            <li>• <strong>LI_EP:</strong> Escola Pública Geral</li>
-                        </ul>
+                    <div class="p-3.5 rounded-xl bg-purple-50 border border-purple-200">
+                        <strong class="text-purple-900 font-black block mb-1">Grupo LB_EP (Renda $\le$ 1 Salário + Escola Pública)</strong>
+                        Escola pública + Renda $\le$ 1,0 Salário Mínimo per capita (Independente de Etnia).
                     </div>
-
-                    <div class="bg-white p-4 rounded-xl border border-slate-200">
-                        <span class="font-extrabold text-rose-600 text-sm block mb-1">Banca de Heteroidentificação (CECER)</span>
-                        <p class="text-slate-600">
-                            Candidatos convocados nos grupos **LB_PPI** e **LI_PPI** deverão passar por procedimento de heteroidentificação presencial/remoto. O critério é exclusivamente fenotípico.
-                        </p>
+                    <div class="p-3.5 rounded-xl bg-purple-50 border border-purple-200">
+                        <strong class="text-purple-900 font-black block mb-1">Grupo LB_PCD / LB_Q</strong>
+                        Escola pública + Renda $\le$ 1,0 Salário Mínimo per capita + Pessoa com Deficiência ou Quilombola.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-200">
+                        <strong class="text-blue-900 font-black block mb-1">Grupo LI_PPI (Qualquer Renda + PPI + Escola Pública)</strong>
+                        Escola pública + Qualquer renda + Pretos, Pardos ou Indígenas.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-200">
+                        <strong class="text-blue-900 font-black block mb-1">Grupo LI_EP (Qualquer Renda + Escola Pública)</strong>
+                        Escola pública + Qualquer renda (Independente de Etnia).
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="conteudo" class="py-16 bg-slate-50 border-b border-slate-200">
+    <!-- Seção Isenção -->
+    <section id="isencao" class="py-16 bg-white border-b border-slate-200">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-10">
-                <span class="bg-teal-100 text-teal-900 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider mb-2 border border-teal-200 inline-block">
-                    Conteúdo Programático Oficial
+                <span class="bg-amber-100 text-amber-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-amber-200 inline-block">
+                    Taxa de Inscrição: R$ 70,00
                 </span>
-                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">O que Estudar para o CEFET-RJ?</h2>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Como Solicitar a Isenção da Taxa no CEFET-RJ?</h2>
                 <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
-                    Navegue entre as abas das disciplinas para visualizar os tópicos exigidos na prova.
+                    A solicitação deve ser feita online no site do SELECON nas datas oficiais do cronograma.
                 </p>
+            </div>
 
-                <!-- Abas por Disciplina -->
-                <div class="flex flex-wrap justify-center gap-2 mt-6" id="subject-tabs">
-                    <button onclick="showSubject('portugues')" class="subject-tab-btn active bg-slate-200 text-slate-800 font-extrabold text-xs px-4 py-2.5 rounded-xl transition">Língua Portuguesa & Redação</button>
-                    <button onclick="showSubject('matematica')" class="subject-tab-btn bg-slate-200 text-slate-800 font-extrabold text-xs px-4 py-2.5 rounded-xl transition">Matemática</button>
-                    <button onclick="showSubject('fisica')" class="subject-tab-btn bg-slate-200 text-slate-800 font-extrabold text-xs px-4 py-2.5 rounded-xl transition">Física</button>
-                    <button onclick="showSubject('quimica')" class="subject-tab-btn bg-slate-200 text-slate-800 font-extrabold text-xs px-4 py-2.5 rounded-xl transition">Química</button>
-                    <button onclick="showSubject('biologia')" class="subject-tab-btn bg-slate-200 text-slate-800 font-extrabold text-xs px-4 py-2.5 rounded-xl transition">Biologia</button>
-                    <button onclick="showSubject('historia')" class="subject-tab-btn bg-slate-200 text-slate-800 font-extrabold text-xs px-4 py-2.5 rounded-xl transition">História</button>
-                    <button onclick="showSubject('geografia')" class="subject-tab-btn bg-slate-200 text-slate-800 font-extrabold text-xs px-4 py-2.5 rounded-xl transition">Geografia</button>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-medium">
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="text-amber-600 text-2xl mb-2"><i class="fas fa-school"></i></div>
+                    <h3 class="font-black text-slate-900 mb-1 text-sm">1. Alunos de Escola Pública</h3>
+                    <p class="text-slate-600">Apresentando a Declaração Escolar conforme modelo oficial do Anexo VIII do edital.</p>
                 </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="text-indigo-600 text-2xl mb-2"><i class="fas fa-id-card"></i></div>
+                    <h3 class="font-black text-slate-900 mb-1 text-sm">2. Inscritos no CadÚnico</h3>
+                    <p class="text-slate-600">Informando o Número de Identificação Social (NIS) ativo do candidato.</p>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="text-emerald-600 text-2xl mb-2"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h3 class="font-black text-slate-900 mb-1 text-sm">3. Auxílio Emergencial</h3>
+                    <p class="text-slate-600">Comprovante de cadastro ou extrato bancário de recebimento do Auxílio Emergencial.</p>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="text-purple-600 text-2xl mb-2"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="font-black text-slate-900 mb-1 text-sm">4. Supera RJ</h3>
+                    <p class="text-slate-600">Comprovante de beneficiário do programa estadual Supera RJ do Governo do Estado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Conteúdo Programático -->
+    <section id="conteudo" class="py-16 bg-slate-50">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-10">
+                <span class="bg-indigo-100 text-indigo-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-indigo-200 inline-block">
+                    Programa Oficial do Exame
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">O que Estudar para o Exame do CEFET-RJ?</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Clique nas disciplinas abaixo para navegar pelos conteúdos cobrança na Prova Objetiva e na Redação.
+                </p>
+            </div>
+
+            <!-- Navegação por Abas -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8" id="subject-tabs">
+                <button onclick="switchTab('portugues')" class="tab-btn active font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-book mr-1.5"></i>Língua Portuguesa</button>
+                <button onclick="switchTab('matematica')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-calculator mr-1.5"></i>Matemática</button>
+                <button onclick="switchTab('fisica')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-atom mr-1.5"></i>Física</button>
+                <button onclick="switchTab('quimica')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-flask mr-1.5"></i>Química</button>
+                <button onclick="switchTab('biologia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-dna mr-1.5"></i>Biologia</button>
+                <button onclick="switchTab('historia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-landmark mr-1.5"></i>História</button>
+                <button onclick="switchTab('geografia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-globe-americas mr-1.5"></i>Geografia</button>
+                <button onclick="switchTab('redacao')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-pen-nib mr-1.5"></i>Redação</button>
             </div>
 
             <!-- Conteúdo das Abas -->
-            <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm" id="subject-content-box">
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm text-xs leading-relaxed text-slate-700">
                 
                 <!-- Português -->
-                <div id="subject-portugues" class="subject-content block">
-                    <h3 class="text-xl font-black text-slate-900 mb-3 flex items-center">
-                        <i class="fas fa-pen-nib text-blue-600 mr-2"></i> Língua Portuguesa & Produção Textual
-                    </h3>
-                    <ul class="text-xs text-slate-700 space-y-2 font-medium">
-                        <li>• <strong>Leitura e Produção Textual:</strong> Tipos de intertextualidade (alusão, citação, discurso direto/indireto/livre), figuras de linguagem, tipologias e gêneros textuais, mecanismos de coesão, coerência e pontuação.</li>
-                        <li>• <strong>Morfologia:</strong> Emprego das classes de palavras, estrutura e formação de palavras, neologismos e uso dos tempos/modos verbais.</li>
-                        <li>• <strong>Sintaxe:</strong> Concordância verbal e nominal, regência verbal e nominal, relações sintáticas no período simples e composto, vozes verbais e seus efeitos de sentido.</li>
-                        <li>• <strong>Semântica:</strong> Escolha lexical, preconceito linguístico, ambiguidade, polissemia, conotação/denotação, sinônimos, hiperônimos e hipônimos.</li>
-                        <li>• <strong>Redação:</strong> Texto dissertativo-argumentativo em prosa com foco no tema proposto, coesão, coerência e respeito aos direitos humanos.</li>
+                <div id="tab-portugues" class="tab-content space-y-4">
+                    <h3 class="text-lg font-black text-indigo-900 pb-2 border-b border-slate-100"><i class="fas fa-book text-indigo-600 mr-2"></i>Língua Portuguesa (10 Questões • 50 Pontos)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Leitura e Produção Textual:</strong> Tipos de intertextualidade (alusão, citação, discurso direto, indireto e indireto livre), figuras de linguagem, tipologia e gêneros textuais, mecanismos de coesão, coerência e pontuação.</li>
+                        <li><strong>Morfologia:</strong> Emprego das classes de palavras, estrutura e formação de palavras (neologismos e renovação vocabular), uso dos tempos e modos verbais no texto.</li>
+                        <li><strong>Sintaxe:</strong> Concordância verbal e nominal, regência verbal e nominal, relações sintáticas nos períodos simples e compostos, emprego das vozes verbais.</li>
+                        <li><strong>Semântica:</strong> Escolha lexical, preconceito linguístico, ambiguidade, polissemia, denotação, conotação e relações de sinonímia, hiperônimos e hipônimos.</li>
                     </ul>
                 </div>
 
                 <!-- Matemática -->
-                <div id="subject-matematica" class="subject-content hidden">
-                    <h3 class="text-xl font-black text-slate-900 mb-3 flex items-center">
-                        <i class="fas fa-calculator text-purple-600 mr-2"></i> Matemática
-                    </h3>
-                    <ul class="text-xs text-slate-700 space-y-2 font-medium">
-                        <li>• <strong>Aritmética e Álgebra:</strong> Operações com conjuntos, diagramas de Venn, polinômios, fatoração, produtos notáveis, números reais, proporcionalidade direta e inversa, MDC/MMC, notação científica e potenciação.</li>
-                        <li>• <strong>Matemática Financeira:</strong> Porcentagem, cálculo de juros simples e compostos.</li>
-                        <li>• <strong>Funções e Equações:</strong> Estudo de funções reais (Constante, Afim e Quadrática - gráficos e sinais), equações de 1º e 2º graus, equações fracionárias e sistemas de equações.</li>
-                        <li>• <strong>Geometria Plana & Espacial:</strong> Propriedades de triângulos e pontos notáveis, Teorema de Tales, semelhança de triângulos, relações métricas no triângulo retângulo, perímetros/áreas de figuras planas, e volume de prismas.</li>
-                        <li>• <strong>Trigonometria & Medidas:</strong> Relações trigonométricas no triângulo retângulo, Lei dos Senos/Cossenos e conversão no sistema métrico decimal.</li>
+                <div id="tab-matematica" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-purple-900 pb-2 border-b border-slate-100"><i class="fas fa-calculator text-purple-600 mr-2"></i>Matemática (10 Questões • 50 Pontos)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Aritmética, Álgebra e Análise:</strong> Conjuntos (operações, pertinência, Venn), polinômios e produtos notáveis, números reais, MMC, MDC, porcentagem, juros simples e compostos, estudo de funções (Afim e Quadrática), equações de 1º e 2º graus.</li>
+                        <li><strong>Geometria Plana e Espacial:</strong> Triângulos, pontos notáveis, Teorema de Tales, semelhança, relações métricas no triângulo retângulo, perímetros e áreas, prismas (áreas, volumes e planificação).</li>
+                        <li><strong>Trigonometria e Sistemas de Medida:</strong> Relações no triângulo retângulo, Lei dos Senos e Cossenos, conversão de unidades de massa, capacidade, tempo e ângulo.</li>
                     </ul>
                 </div>
 
                 <!-- Física -->
-                <div id="subject-fisica" class="subject-content hidden">
-                    <h3 class="text-xl font-black text-slate-900 mb-3 flex items-center">
-                        <i class="fas fa-atom text-indigo-600 mr-2"></i> Física
-                    </h3>
-                    <ul class="text-xs text-slate-700 space-y-2 font-medium">
-                        <li>• <strong>Introdução & Mecânica:</strong> Fenômenos e grandezas físicas, conceitos básicos de cinemática, princípios da dinâmica (Leis de Newton), trabalho, potência, energia mecânica e noções básicas de astronomia.</li>
-                        <li>• <strong>Física Ondulatória & Óptica:</strong> Conceitos fundamentais de ondas, fenômenos luminosos, óptica geométrica em espelhos planos e esféricos.</li>
-                        <li>• <strong>Termologia:</strong> Escalas termométricas, calorimetria e formas de transmissão de calor (condução, convecção e radiação).</li>
-                        <li>• <strong>Eletricidade & Magnetismo:</strong> Eletrização, carga elétrica, corrente elétrica, 1ª Lei de Ohm, bússola e magnetismo terrestre.</li>
+                <div id="tab-fisica" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-teal-900 pb-2 border-b border-slate-100"><i class="fas fa-atom text-teal-600 mr-2"></i>Física (Ciências da Natureza)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Mecânica:</strong> Conceitos básicos de cinemática, Leis de Newton, trabalho, potência e energia mecânica.</li>
+                        <li><strong>Física Ondulatória e Óptica:</strong> Conceitos fundamentais, fenômenos ondulatórios e luminosos, óptica geométrica em espelhos planos e esféricos.</li>
+                        <li><strong>Calor e Eletricidade:</strong> Escalas termométricas, calorimetria, formas de transmissão de calor, eletrização, corrente elétrica, 1ª Lei de Ohm e magnetismo (ímãs e bússola).</li>
                     </ul>
                 </div>
 
                 <!-- Química -->
-                <div id="subject-quimica" class="subject-content hidden">
-                    <h3 class="text-xl font-black text-slate-900 mb-3 flex items-center">
-                        <i class="fas fa-flask text-emerald-600 mr-2"></i> Química
-                    </h3>
-                    <ul class="text-xs text-slate-700 space-y-2 font-medium">
-                        <li>• <strong>Matéria e Energia:</strong> Propriedades e estados físicos da matéria, mudanças de estado e interpretação gráfica.</li>
-                        <li>• <strong>Substâncias e Misturas:</strong> Sistemas homogêneos e heterogêneos, substâncias simples/compostas e métodos de separação de misturas.</li>
-                        <li>• <strong>Fenômenos & Estrutura Atômica:</strong> Fenômenos físicos e químicos, estrutura do átomo (prótons, nêutrons, elétrons), número atômico, número de massa, íons, isótopos, isóbaros e isótonos.</li>
-                        <li>• <strong>Tabela Periódica:</strong> Organização em períodos/famílias, símbolos dos elementos e aplicações no cotidiano.</li>
+                <div id="tab-quimica" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-emerald-900 pb-2 border-b border-slate-100"><i class="fas fa-flask text-emerald-600 mr-2"></i>Química (Ciências da Natureza)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Matéria, Energia e Misturas:</strong> Estados físicos da matéria, mudanças de estado, substâncias puras e misturas, métodos de separação de misturas.</li>
+                        <li><strong>Estrutura Atômica e Tabela Periódica:</strong> Modelo atômico, número atômico/massa, íons, isótopos, isóbaros, isótonos, tabela periódica atual e aplicação dos elementos no cotidiano.</li>
                     </ul>
                 </div>
 
                 <!-- Biologia -->
-                <div id="subject-biologia" class="subject-content hidden">
-                    <h3 class="text-xl font-black text-slate-900 mb-3 flex items-center">
-                        <i class="fas fa-dna text-teal-600 mr-2"></i> Biologia
-                    </h3>
-                    <ul class="text-xs text-slate-700 space-y-2 font-medium">
-                        <li>• <strong>Célula e Genética:</strong> Estrutura celular (membrana, citoplasma, núcleo), metabolismo celular, conceitos de genética e biotecnologia.</li>
-                        <li>• <strong>Evolução e Seres Vivos:</strong> Evidências evolutivas, características gerais dos grandes reinos (Monera, Protista, Fungos, Vegetais e Animais).</li>
-                        <li>• <strong>Ecologia & Meio Ambiente:</strong> Habitat, nicho ecológico, cadeias e teias alimentares, biomas, ciclos biogeoquímicos (água, carbono, oxigênio) e impactos da poluição ambiental.</li>
-                        <li>• <strong>Corpo Humano & Saúde:</strong> Nutrição, funcionamento básico dos sistemas digestório, respiratório, excretor e reprodução humana.</li>
+                <div id="tab-biologia" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-lime-900 pb-2 border-b border-slate-100"><i class="fas fa-dna text-lime-600 mr-2"></i>Biologia (Ciências da Natureza)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Célula e Genética:</strong> Estrutura celular, organelas, noções de genética, biotecnologia e evidências evolutivas.</li>
+                        <li><strong>Ecologia e Saúde:</strong> Ecossistemas, biomas, cadeias alimentares, poluição ambiental, nutrição, funcionamento dos sistemas (digestório, respiratório, excretor) e reprodução humana.</li>
                     </ul>
                 </div>
 
                 <!-- História -->
-                <div id="subject-historia" class="subject-content hidden">
-                    <h3 class="text-xl font-black text-slate-900 mb-3 flex items-center">
-                        <i class="fas fa-monument text-amber-600 mr-2"></i> História
-                    </h3>
-                    <ul class="text-xs text-slate-700 space-y-2 font-medium">
-                        <li>• <strong>Mundo Moderno:</strong> Crise do feudalismo, Renascimento, Reforma Protestante e formação dos Estados Nacionais Absolutistas.</li>
-                        <li>• <strong>Expansão Marítima & Mercantilismo:</strong> Navegações portuguesa e espanhola, visão de mundo, metalismo, balança comercial e monopólios.</li>
-                        <li>• <strong>América Pré-Colombiana & Conquista:</strong> Sociedades Inca, Asteca, Maia e povos indígenas brasileiros; processo de conquista e colonização.</li>
-                        <li>• <strong>Brasil Colônia:</strong> Capitanias hereditárias, Governo-Geral, jesuítas, escravidão indígena e africana, economia açucareira e ciclo da mineração.</li>
+                <div id="tab-historia" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-rose-900 pb-2 border-b border-slate-100"><i class="fas fa-landmark text-rose-600 mr-2"></i>História (Ciências Humanas)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Mundo Moderno:</strong> Feudalismo, Renascimento, Reforma Protestante, Absolutismo, Expansão Marítima Europeia e Mercantilismo.</li>
+                        <li><strong>América e Brasil Colônia:</strong> Povos pré-colombianos, capitanias hereditárias, escravidão indígena e africana, economia açucareira e mineração.</li>
                     </ul>
                 </div>
 
                 <!-- Geografia -->
-                <div id="subject-geografia" class="subject-content hidden">
-                    <h3 class="text-xl font-black text-slate-900 mb-3 flex items-center">
-                        <i class="fas fa-globe-americas text-rose-600 mr-2"></i> Geografia
-                    </h3>
-                    <ul class="text-xs text-slate-700 space-y-2 font-medium">
-                        <li>• <strong>Cartografia & Orientação:</strong> Leitura de mapas, pontos cardeais, coordenadas geográficas e fusos horários do Brasil.</li>
-                        <li>• <strong>Ambientes Naturais:</strong> Climas do Brasil (climogramas), formações vegetais, biomas, placas tectônicas e agentes do relevo.</li>
-                        <li>• <strong>Espaço Geográfico Brasileiro:</strong> Divisão do IBGE, regiões geoeconômicas, industrialização, agropecuária, êxodo rural, urbanização e dinâmica populacional (pirâmides etárias).</li>
-                        <li>• <strong>Espaço Mundial & Globalização:</strong> Características dos continentes, expansão do comércio, multinacionais e blocos econômicos.</li>
+                <div id="tab-geografia" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-amber-900 pb-2 border-b border-slate-100"><i class="fas fa-globe-americas text-amber-600 mr-2"></i>Geografia (Ciências Humanas)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Cartografia e Ambientes Naturais:</strong> Mapas, coordenadas, fusos horários, climas e vegetações do Brasil, tectônica de placas e relevo.</li>
+                        <li><strong>Espaço Brasileiro e Mundial:</strong> Regiões geoeconômicas do IBGE, industrialização, urbanização, pirâmides etárias e globalização.</li>
                     </ul>
+                </div>
+
+                <!-- Redação -->
+                <div id="tab-redacao" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-indigo-900 pb-2 border-b border-slate-100"><i class="fas fa-pen-nib text-rose-600 mr-2"></i>Prova de Redação (100 Pontos)</h3>
+                    <p class="font-medium text-slate-700">A prova de redação consistirá em uma **produção de texto dissertativo-argumentativo em prosa**, avaliada apenas para os candidatos selecionados na prova objetiva (até o dobro do número de vagas do curso/campus).</p>
+                    <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 font-bold text-rose-900">
+                        <i class="fas fa-exclamation-circle mr-1"></i> Causas de Anulação/Nota Zero na Redação:
+                        <ul class="list-disc list-inside mt-1 font-normal text-rose-800">
+                            <li>Redações desenvolvidas em verso.</li>
+                            <li>Fuga total ao tema proposto.</li>
+                            <li>Desrespeito aos Direitos Humanos.</li>
+                            <li>Aproveitamento nulo ou folha em branco.</li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <section class="py-12 bg-slate-900 text-white border-t border-slate-800">
-        <div class="container mx-auto px-4 text-center max-w-4xl">
-            <h3 class="text-2xl md:text-3xl font-black mb-3">Quer ser Aprovado no CEFET-RJ 2027?</h3>
-            <p class="text-slate-300 text-xs md:text-sm max-w-2xl mx-auto mb-6">
-                Prepare-se com aulas gravadas e ao vivo, listas focadas no padrão SELECON, simulados completos e correção individual de redação!
+    <!-- BANNER DE CTA PARA MATRÍCULA NO CURSINHO -->
+    <section class="py-12 bg-gradient-to-r from-[#5242ea] to-[#6408b0] text-white">
+        <div class="container mx-auto px-4 max-w-5xl text-center">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center p-2.5 mx-auto mb-4 shadow-xl border-2 border-white/30" style="background-color: #dd5737;">
+                <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+            </div>
+            
+            <span class="bg-[#c7ef59] text-slate-900 font-black text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">
+                Sua Aprovação Começa Aqui
+            </span>
+            
+            <h2 class="text-2xl md:text-4xl font-black mb-3 leading-tight">
+                Quer Passar no <span class="text-[#c7ef59]">CEFET-RJ 2027</span>?
+            </h2>
+            
+            <p class="text-slate-100 text-xs md:text-sm max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
+                Estude com o preparatório 100% online líder em aprovação para Escolas e Institutos Federais. Aulas ao vivo, material exclusivo, simulados no formato SELECON e monitoria tira-dúvidas diretamente pelo WhatsApp.
             </p>
 
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 font-extrabold py-3.5 px-8 rounded-xl shadow-lg hover:bg-white transition duration-300 transform hover:scale-105 inline-flex items-center justify-center text-xs">
-                    <i class="fas fa-rocket mr-2"></i>Conhecer o Curso Intensivo 2026
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-8 py-3.5 rounded-xl transition shadow-2xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fas fa-rocket mr-2 text-indigo-900"></i> Quero Me Matricular no Intensivo
                 </a>
-                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-[#25D366] hover:bg-emerald-600 text-white font-extrabold py-3.5 px-8 rounded-xl transition duration-300 inline-flex items-center justify-center text-xs">
-                    <i class="fab fa-whatsapp mr-2 text-base"></i>Falar com Coordenador no WhatsApp
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-8 py-3.5 rounded-xl transition shadow-2xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fab fa-whatsapp mr-2 text-lg"></i> Falar com um Consultor
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="bg-slate-950 text-slate-400 py-8 text-center text-xs border-t border-slate-800">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-center items-center mb-3">
-                <img src="./logo.png" alt="Logo Guia Pré-Federal" class="h-8 w-8 rounded-full p-1" style="background-color: var(--brand-coral);" onerror="this.onerror=null;this.src='https://placehold.co/32x32/DD5737/FFFFFF?text=GPF';">
-                <span class="font-extrabold text-white ml-2 text-sm">Guia - Pré Federal</span>
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800 text-xs">
+        <div class="container mx-auto px-4 max-w-6xl text-center">
+            <div class="flex justify-center items-center space-x-3 mb-6">
+                <!-- Logo no footer com fundo Laranja Coral -->
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+                </div>
+                <span class="text-lg font-black tracking-tight text-white">Guia - Pré Federal</span>
             </div>
-            <p class="mb-1">Preparatório Especializado em Escolas e Institutos Federais</p>
-            <p>&copy; 2026 Guia Pré-Federal. Todos os direitos reservados.</p>
+            <p class="text-slate-400 font-medium mb-4 max-w-xl mx-auto">
+                Preparatório 100% online especializado no ingresso aos Cursos Técnicos Integrados das Escolas e Institutos Federais.
+            </p>
+            <p class="text-slate-500">&copy; 2026 Guia Pré-Federal. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <!-- Botão Flutuante de Ação (FAB) -->
+    <!-- Floating Action Button (FAB) -->
     <div class="fab-container">
         <div class="fab-options">
             <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="fab-option">
-                <span class="fab-label">Nosso Intensivo</span>
-                <div class="fab-icon" style="background-color: var(--brand-purple);">
+                <span class="fab-label">Nosso Intensivo 2026</span>
+                <div class="fab-icon" style="background-color: #6408b0;">
                     <i class="fas fa-rocket"></i>
                 </div>
             </a>
             <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
-                <span class="fab-label">Contato WhatsApp</span>
+                <span class="fab-label">Falar no WhatsApp</span>
                 <div class="fab-icon" style="background-color: #25D366;">
                     <i class="fab fa-whatsapp"></i>
                 </div>
             </a>
         </div>
-        <button class="fab-main" id="fab-main-button">
-            <i class="fas fa-comment-dots icon-open"></i>
-            <i class="fas fa-times icon-close"></i>
+        <button class="fab-main" id="fab-main-btn">
+            <i class="fas fa-comment-dots"></i>
         </button>
     </div>
 
+    <!-- Script Interativo -->
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        // Menu Mobile Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-            });
-        }
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
 
-        // FAB Toggle
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Toggle FAB
         const fabContainer = document.querySelector('.fab-container');
-        const fabMainButton = document.getElementById('fab-main-button');
-        if (fabMainButton) {
-            fabMainButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                fabContainer.classList.toggle('active');
-            });
-            document.addEventListener('click', (e) => {
-                if (!fabContainer.contains(e.target)) {
-                    fabContainer.classList.remove('active');
-                }
-            });
-        }
+        const fabBtn = document.getElementById('fab-main-btn');
+        fabBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            fabContainer.classList.toggle('active');
+        });
+        document.addEventListener('click', () => fabContainer.classList.remove('active'));
 
-        // Filtro de Campi
+        // Filtro de Campi do CEFET-RJ
         function filterCampus(campusName) {
             document.querySelectorAll('.campus-btn').forEach(btn => {
-                btn.classList.remove('active', 'bg-slate-900', 'text-white');
-                btn.classList.add('bg-white', 'text-slate-800');
+                btn.classList.remove('active', 'bg-indigo-600', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
             });
-
-            event.currentTarget.classList.add('active', 'bg-slate-900', 'text-white');
-            event.currentTarget.classList.remove('bg-white', 'text-slate-800');
+            event.target.classList.add('active', 'bg-indigo-600', 'text-white');
+            event.target.classList.remove('bg-white', 'text-slate-700');
 
             const cards = document.querySelectorAll('.campus-card');
             cards.forEach(card => {
-                const campus = card.getAttribute('data-campus');
-                if (campusName === 'ALL' || campus === campusName) {
+                if (campusName === 'ALL' || card.getAttribute('data-campus') === campusName) {
                     card.style.display = 'block';
                 } else {
                     card.style.display = 'none';
@@ -872,24 +942,17 @@
             });
         }
 
-        // Abas do Conteúdo Programático
-        function showSubject(subjectId) {
-            document.querySelectorAll('.subject-tab-btn').forEach(btn => {
+        // Navegação entre Abas de Conteúdo
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
+            event.target.classList.add('active');
 
-            event.currentTarget.classList.add('active');
-
-            document.querySelectorAll('.subject-content').forEach(content => {
+            document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.add('hidden');
-                content.classList.remove('block');
             });
-
-            const target = document.getElementById('subject-' + subjectId);
-            if (target) {
-                target.classList.remove('hidden');
-                target.classList.add('block');
-            }
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
         }
     </script>
 </body>
