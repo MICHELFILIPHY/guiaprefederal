@@ -126,7 +126,7 @@
             z-index: 9999;
             display: flex;
             flex-direction: column-reverse;
-            align-items: flex-end; /* Alterado de 'center' para 'flex-end' para alinhar à direita */
+            align-items: flex-end; /* Alinhado à direita */
         }
         @media (min-width: 768px) {
             .fab-container {
@@ -223,15 +223,15 @@
     <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-2">
-                <!-- LOGO ATUALIZADO AQUI -->
                 <img src="./logo.png" alt="Guia - Pré Federal Logo" class="rounded-full w-10 h-10" style="background-color: #7bcd47;">
                 <span class="text-xl font-bold text-[#5242ea]">Guia - Pré Federal</span>
             </a>
             <nav class="hidden md:block">
-                <ul class="flex space-x-6">
+                <ul class="flex space-x-6 items-center">
                     <li><a href="#quem-somos" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Quem Somos</a></li>
                     <li><a href="#professores" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Nossa Equipe</a></li>
                     <li><a href="#editais-informativos" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Editais</a></li>
+                    <li><a href="#mapa" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300 flex items-center"><i class="fas fa-map-marked-alt mr-1 text-[#00abb1]"></i> Mapa</a></li>
                     <li><a href="#vestibulinho-escola" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Vestibulinhos</a></li>
                     <li><a href="#o-que-oferecemos" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Cursos</a></li>
                     <li><a href="#contato" class="text-slate-700 hover:text-[#5242ea] font-medium transition duration-300">Contato</a></li>
@@ -245,7 +245,8 @@
             <ul class="flex flex-col items-center space-y-4">
                  <li><a href="#quem-somos" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Quem Somos</a></li>
                  <li><a href="#professores" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Nossa Equipe</a></li>
-                <li><a href="#editais-informativos" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Editais</a></li>
+                 <li><a href="#editais-informativos" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Editais</a></li>
+                 <li><a href="#mapa" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2"><i class="fas fa-map-marked-alt mr-1 text-[#00abb1]"></i> Mapa</a></li>
                 <li><a href="#vestibulinho-escola" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Vestibulinhos</a></li>
                 <li><a href="#o-que-oferecemos" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Cursos</a></li>
                 <li><a href="#contato" class="block text-slate-700 hover:text-[#5242ea] font-medium py-2">Contato</a></li>
@@ -263,7 +264,6 @@
             <p class="text-lg md:text-xl mb-8 opacity-90">
                 Preparação 100% online, especializada e focada no ingresso de estudantes nas melhores escolas do país.
             </p>
-            <!-- Botão atualizado para o link do Intensivo -->
             <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105 inline-block">
                 Conheça Nossos Cursos <i class="fas fa-arrow-right ml-2"></i>
             </a>
@@ -503,7 +503,7 @@
         </div>
     </section>
 
-    <!-- Informativos dos Editais Section (NOVA SEÇÃO EXCLUSIVA E DESTACADA) -->
+    <!-- Informativos dos Editais Section -->
     <section id="editais-informativos" class="py-16 md:py-24 bg-slate-50 border-t border-b border-slate-200">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-4 section-title mx-auto">Informativos dos Editais</h2>
@@ -587,7 +587,7 @@
     <!-- Interactive Map Section -->
     <section id="mapa" class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-4 section-title mx-auto">Mapa das Escolas Federais em MG, ES e BA</h2>
+            <h2 class="text-3xl font-bold text-center mb-4 section-title mx-auto">Mapa das Escolas Federais em MG, ES, RJ e BA</h2>
             <p class="text-center text-slate-600 max-w-3xl mx-auto mb-10">Navegue pelo mapa para encontrar o campus mais próximo de você. Clique nos marcadores para ver mais detalhes sobre cada instituição e os cursos ofertados.</p>
             <div id="map"></div>
             <div id="map-legend" class="flex flex-wrap justify-center gap-4 mt-6"></div>
@@ -710,8 +710,8 @@
     <!-- Botão Flutuante de Ação (FAB) -->
     <div class="fab-container">
         <div class="fab-options">
-            <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="fab-option">
-                <span class="fab-label">Nosso Intensivo</span>
+            <a href="https://guiaprefederal.com.br/extensivo2026/" target="_blank" class="fab-option">
+                <span class="fab-label">Nosso Extensivo</span>
                 <div class="fab-icon" style="background-color: #6408b0;">
                     <i class="fas fa-rocket"></i>
                 </div>
@@ -766,7 +766,7 @@
         // Interactive Map Logic
         document.addEventListener('DOMContentLoaded', function () {
             // 1. Initialize Map with scrollWheelZoom disabled
-            const map = L.map('map', { scrollWheelZoom: false }).setView([-15.7801, -43.9292], 6); // Visão ampliada para MG, ES e BA
+            const map = L.map('map', { scrollWheelZoom: false }).setView([-15.7801, -43.9292], 6); // Visão ampliada para MG, ES, RJ e BA
 
             // 2. Add Tile Layer
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -783,75 +783,78 @@
                 'Coluni (UFV)': { color: '#6d28d9', name: 'Coluni (UFV)' }, // Violet
                 'IF Sul de Minas': { color: '#dc2626', name: 'IF Sul de Minas' }, // Red
                 'IFES': { color: '#00abb1', name: 'IFES (ES)' }, // Azul Petróleo
-                'IFBA': { color: '#dd5737', name: 'IFBA (BA)' } // Laranja
+                'IFBA': { color: '#dd5737', name: 'IFBA (BA)' }, // Laranja
+                'CEFET-RJ': { color: '#8b5cf6', name: 'CEFET-RJ' }, // Roxo Claro
+                'IFF': { color: '#10b981', name: 'IFF (RJ)' }, // Esmeralda
+                'CTUR-UFRRJ': { color: '#f59e0b', name: 'CTUR (RJ)' } // Amarelo Escuro
             };
 
             const schools = [
-                // Minas Gerais
+                // Minas Gerais (Atualizado com novos cursos e campus)
                 { city: 'Almenara', institution: 'IFNMG', coords: [-16.173, -40.696], info: 'Campus Almenara' },
                 { city: 'Araçuaí', institution: 'IFNMG', coords: [-16.852, -42.067], info: 'Campus Araçuaí' },
-                { city: 'Arcos', institution: 'IFMG', coords: [-20.289, -45.539], info: 'Campus Arcos' },
+                { city: 'Arcos', institution: 'IFMG', coords: [-20.289, -45.539], info: 'Campus Arcos - Cursos: Mecânica' },
                 { city: 'Arinos', institution: 'IFNMG', coords: [-15.918, -46.105], info: 'Campus Arinos' },
-                { city: 'Araxá', institution: 'CEFET-MG', coords: [-19.593, -46.941], info: 'Unidade Araxá' },
-                { city: 'Bambuí', institution: 'IFMG', coords: [-20.006, -45.977], info: 'Campus Bambuí' },
+                { city: 'Araxá', institution: 'CEFET-MG', coords: [-19.593, -46.941], info: 'Unidade Araxá - Cursos: Edificações, Eletrônica, Mecânica' },
+                { city: 'Bambuí', institution: 'IFMG', coords: [-20.006, -45.977], info: 'Campus Bambuí - Cursos: Agropecuária, Informática, Manutenção Automotiva, Meio Ambiente' },
                 { city: 'Barbacena', institution: 'IF Sudeste MG', coords: [-21.225, -43.774], info: 'Campus Barbacena' },
-                { city: 'Belo Horizonte', institution: 'CEFET-MG', coords: [-19.920, -43.937], info: 'Campus I / II' },
-                { city: 'Belo Horizonte', institution: 'IFMG', coords: [-19.924, -43.994], info: 'Campus Belo Horizonte' },
-                { city: 'Betim', institution: 'IFMG', coords: [-19.967, -44.197], info: 'Campus Betim' },
+                { city: 'Belo Horizonte', institution: 'CEFET-MG', coords: [-19.920, -43.937], info: 'Campus I e II - Cursos: Edificações, Eletrônica, Eletrotécnica, Equipamentos Biomédicos, Estradas, Informática, Mecânica, Mecatrônica, Meio Ambiente, Química, Redes de Computadores, Trânsito' },
+                { city: 'Belo Horizonte', institution: 'IFMG', coords: [-19.924, -43.994], info: 'Campus Belo Horizonte (Reitoria)' },
+                { city: 'Betim', institution: 'IFMG', coords: [-19.967, -44.197], info: 'Campus Betim - Cursos: Automação Industrial, Mecânica, Química' },
                 { city: 'Bom Sucesso', institution: 'IF Sudeste MG', coords: [-21.035, -44.258], info: 'Campus Bom Sucesso' },
                 { city: 'Campina Verde', institution: 'IFTM', coords: [-19.537, -49.485], info: 'Campus Campina Verde' },
                 { city: 'Carmo de Minas', institution: 'IF Sul de Minas', coords: [-22.119, -45.131], info: 'Campus Avançado Carmo de Minas' },
                 { city: 'Cataguases', institution: 'IF Sudeste MG', coords: [-21.389, -42.697], info: 'Campus Cataguases' },
-                { city: 'Congonhas', institution: 'IFMG', coords: [-20.500, -43.856], info: 'Campus Congonhas' },
-                { city: 'Conselheiro Lafaiete', institution: 'IFMG', coords: [-20.661, -43.786], info: 'Campus Conselheiro Lafaiete' },
-                { city: 'Contagem', institution: 'CEFET-MG', coords: [-19.932, -44.054], info: 'Unidade Contagem' },
-                { city: 'Curvelo', institution: 'CEFET-MG', coords: [-18.756, -44.428], info: 'Unidade Curvelo' },
+                { city: 'Congonhas', institution: 'IFMG', coords: [-20.500, -43.856], info: 'Campus Congonhas - Cursos: Edificações, Eletrotécnica, Mecânica, Mineração' },
+                { city: 'Conselheiro Lafaiete', institution: 'IFMG', coords: [-20.661, -43.786], info: 'Campus Conselheiro Lafaiete - Cursos: Eletrotécnica, Mecânica' },
+                { city: 'Contagem', institution: 'CEFET-MG', coords: [-19.932, -44.054], info: 'Unidade Contagem - Cursos: Controle Ambiental, Eletromecânica, Informática' },
+                { city: 'Curvelo', institution: 'CEFET-MG', coords: [-18.756, -44.428], info: 'Unidade Curvelo - Cursos: Edificações, Eletrotécnica, Meio Ambiente' },
                 { city: 'Diamantina', institution: 'IFNMG', coords: [-18.248, -43.600], info: 'Campus Diamantina' },
-                { city: 'Divinópolis', institution: 'CEFET-MG', coords: [-20.139, -44.885], info: 'Unidade Divinópolis' },
-                { city: 'Formiga', institution: 'IFMG', coords: [-20.465, -45.426], info: 'Campus Formiga' },
-                { city: 'Governador Valadares', institution: 'IFMG', coords: [-18.851, -41.949], info: 'Campus Governador Valadares' },
-                { city: 'Ibirité', institution: 'IFMG', coords: [-20.021, -44.058], info: 'Campus Ibirité' },
+                { city: 'Divinópolis', institution: 'CEFET-MG', coords: [-20.139, -44.885], info: 'Unidade Divinópolis - Cursos: Eletromecânica, Informática, Produção de Moda' },
+                { city: 'Formiga', institution: 'IFMG', coords: [-20.465, -45.426], info: 'Campus Formiga - Cursos: Administração, Eletrotécnica, Informática' },
+                { city: 'Governador Valadares', institution: 'IFMG', coords: [-18.851, -41.949], info: 'Campus Governador Valadares - Cursos: Edificações, Meio Ambiente, Segurança do Trabalho' },
+                { city: 'Ibirité', institution: 'IFMG', coords: [-20.021, -44.058], info: 'Campus Ibirité - Cursos: Automação Industrial, Mecatrônica, Sistemas de Energia Renovável' },
                 { city: 'Inconfidentes', institution: 'IF Sul de Minas', coords: [-22.316, -46.326], info: 'Campus Inconfidentes' },
-                { city: 'Ipatinga', institution: 'IFMG', coords: [-19.479, -42.531], info: 'Campus Ipatinga' },
-                { city: 'Itabirito', institution: 'IFMG', coords: [-20.253, -43.801], info: 'Campus Itabirito' },
+                { city: 'Ipatinga', institution: 'IFMG', coords: [-19.479, -42.531], info: 'Campus Ipatinga - Cursos: Eletrotécnica, Mecânica, Segurança do Trabalho' },
+                { city: 'Itabirito', institution: 'IFMG', coords: [-20.253, -43.801], info: 'Campus Itabirito - Cursos: Automação Industrial, Informática' },
                 { city: 'Ituiutaba', institution: 'IFTM', coords: [-18.972, -49.465], info: 'Campus Ituiutaba' },
                 { city: 'Janaúba', institution: 'IFNMG', coords: [-15.803, -43.309], info: 'Campus Janaúba' },
                 { city: 'Januária', institution: 'IFNMG', coords: [-15.485, -44.363], info: 'Campus Januária' },
                 { city: 'Juiz de Fora', institution: 'IF Sudeste MG', coords: [-21.764, -43.349], info: 'Campus Juiz de Fora' },
-                { city: 'Leopoldina', institution: 'CEFET-MG', coords: [-21.531, -42.643], info: 'Unidade Leopoldina' },
+                { city: 'Leopoldina', institution: 'CEFET-MG', coords: [-21.531, -42.643], info: 'Unidade Leopoldina - Cursos: Eletromecânica, Eletrotécnica, Informática, Mecânica' },
                 { city: 'Machado', institution: 'IF Sul de Minas', coords: [-21.674, -45.920], info: 'Campus Machado' },
                 { city: 'Manhuaçu', institution: 'IF Sudeste MG', coords: [-20.258, -42.033], info: 'Campus Manhuaçu' },
                 { city: 'Montes Claros', institution: 'IFNMG', coords: [-16.735, -43.861], info: 'Campus Montes Claros' },
                 { city: 'Muriaé', institution: 'IF Sudeste MG', coords: [-21.131, -42.367], info: 'Campus Muriaé' },
                 { city: 'Muzambinho', institution: 'IF Sul de Minas', coords: [-21.375, -46.529], info: 'Campus Muzambinho' },
-                { city: 'Nepomuceno', institution: 'CEFET-MG', coords: [-21.233, -45.236], info: 'Unidade Nepomuceno' },
-                { city: 'Ouro Branco', institution: 'IFMG', coords: [-20.523, -43.694], info: 'Campus Ouro Branco' },
-                { city: 'Ouro Preto', institution: 'IFMG', coords: [-20.385, -43.504], info: 'Campus Ouro Preto' },
+                { city: 'Nepomuceno', institution: 'CEFET-MG', coords: [-21.233, -45.236], info: 'Unidade Nepomuceno - Cursos: Eletrotécnica, Mecatrônica, Redes de Computadores' },
+                { city: 'Ouro Branco', institution: 'IFMG', coords: [-20.523, -43.694], info: 'Campus Ouro Branco - Cursos: Administração, Informática, Metalurgia' },
+                { city: 'Ouro Preto', institution: 'IFMG', coords: [-20.385, -43.504], info: 'Campus Ouro Preto - Cursos: Administração, Automação Industrial, Edificações, Mineração, Metalurgia, Meio Ambiente, Segurança do Trabalho' },
                 { city: 'Paracatu', institution: 'IFTM', coords: [-17.221, -46.875], info: 'Campus Paracatu' },
                 { city: 'Passos', institution: 'IF Sul de Minas', coords: [-20.719, -46.609], info: 'Campus Passos' },
                 { city: 'Patos de Minas', institution: 'IFTM', coords: [-18.578, -46.516], info: 'Campus Patos de Minas' },
                 { city: 'Patrocínio', institution: 'IFTM', coords: [-18.943, -46.994], info: 'Campus Patrocínio' },
                 { city: 'Pirapora', institution: 'IFNMG', coords: [-17.346, -44.942], info: 'Campus Pirapora' },
-                { city: 'Piumhi', institution: 'IFMG', coords: [-20.465, -45.958], info: 'Campus Piumhi' },
+                { city: 'Piumhi', institution: 'IFMG', coords: [-20.465, -45.958], info: 'Campus Piumhi - Cursos: Edificações' },
                 { city: 'Poços de Caldas', institution: 'IF Sul de Minas', coords: [-21.787, -46.561], info: 'Campus Poços de Caldas' },
-                { city: 'Ponte Nova', institution: 'IFMG', coords: [-20.411, -42.903], info: 'Campus Ponte Nova' },
+                { city: 'Ponte Nova', institution: 'IFMG', coords: [-20.411, -42.903], info: 'Campus Ponte Nova - Cursos: Administração, Informática' },
                 { city: 'Porteirinha', institution: 'IFNMG', coords: [-15.742, -43.026], info: 'Campus Porteirinha' },
                 { city: 'Pouso Alegre', institution: 'IF Sul de Minas', coords: [-22.230, -45.935], info: 'Campus Pouso Alegre' },
-                { city: 'Ribeirão das Neves', institution: 'IFMG', coords: [-19.767, -44.087], info: 'Campus Ribeirão das Neves' },
+                { city: 'Ribeirão das Neves', institution: 'IFMG', coords: [-19.767, -44.087], info: 'Campus Ribeirão das Neves - Cursos: Administração, Eletrotécnica, Informática' },
                 { city: 'Rio Pomba', institution: 'IF Sudeste MG', coords: [-21.276, -43.179], info: 'Campus Rio Pomba' },
-                { city: 'Sabará', institution: 'IFMG', coords: [-19.888, -43.807], info: 'Campus Sabará' },
+                { city: 'Sabará', institution: 'IFMG', coords: [-19.888, -43.807], info: 'Campus Sabará - Cursos: Administração, Eletrônica, Informática' },
                 { city: 'Salinas', institution: 'IFNMG', coords: [-16.169, -42.290], info: 'Campus Salinas' },
-                { city: 'Santa Luzia', institution: 'IFMG', coords: [-19.769, -43.851], info: 'Campus Santa Luzia' },
+                { city: 'Santa Luzia', institution: 'IFMG', coords: [-19.769, -43.851], info: 'Campus Santa Luzia - Cursos: Design de Interiores, Edificações, Paisagismo' },
                 { city: 'Santos Dumont', institution: 'IF Sudeste MG', coords: [-21.455, -43.551], info: 'Campus Santos Dumont' },
                 { city: 'São João del-Rei', institution: 'IF Sudeste MG', coords: [-21.135, -44.262], info: 'Campus São João del-Rei' },
-                { city: 'São João Evangelista', institution: 'IFMG', coords: [-18.550, -42.766], info: 'Campus São João Evangelista' },
+                { city: 'São João Evangelista', institution: 'IFMG', coords: [-18.550, -42.766], info: 'Campus São João Evangelista - Cursos: Agropecuária, Manutenção e Suporte em Informática, Nutrição e Dietética' },
                 { city: 'Teófilo Otoni', institution: 'IFNMG', coords: [-17.858, -41.505], info: 'Campus Teófilo Otoni' },
-                { city: 'Timóteo', institution: 'CEFET-MG', coords: [-19.582, -42.645], info: 'Unidade Timóteo' },
+                { city: 'Timóteo', institution: 'CEFET-MG', coords: [-19.582, -42.645], info: 'Unidade Timóteo - Cursos: Edificações, Informática, Metalurgia, Química' },
                 { city: 'Três Corações', institution: 'IF Sul de Minas', coords: [-21.696, -45.253], info: 'Campus Três Corações' },
                 { city: 'Ubá', institution: 'IF Sudeste MG', coords: [-21.121, -42.942], info: 'Campus Ubá' },
                 { city: 'Uberaba', institution: 'IFTM', coords: [-19.748, -47.931], info: 'Campus Uberaba' },
                 { city: 'Uberlândia', institution: 'IFTM', coords: [-18.918, -48.277], info: 'Campus Uberlândia' },
-                { city: 'Varginha', institution: 'CEFET-MG', coords: [-21.551, -45.432], info: 'Unidade Varginha' },
+                { city: 'Varginha', institution: 'CEFET-MG', coords: [-21.551, -45.432], info: 'Unidade Varginha - Cursos: Edificações, Mecatrônica, Redes de Computadores' },
                 { city: 'Viçosa', institution: 'Coluni (UFV)', coords: [-20.754, -42.879], info: 'Colégio de Aplicação da UFV' },
 
                 // Espírito Santo (IFES)
@@ -862,15 +865,56 @@
                 { city: 'Cachoeiro de Itapemirim (ES)', institution: 'IFES', coords: [-20.8489, -41.1128], info: 'Campus Cachoeiro - Cursos: Eletromecânica, Eletrotécnica, Informática para Internet, Mecânica, Mineração' },
                 { city: 'Colatina (ES)', institution: 'IFES', coords: [-19.5400, -40.6300], info: 'Campi Colatina e Itapina - Cursos: Administração, Agropecuária, Alimentos, Edificações, Informática para Internet, Meio Ambiente, Zootecnia' },
 
-                // Bahia (IFBA)
-                { city: 'Salvador (BA)', institution: 'IFBA', coords: [-12.9822, -38.4813], info: 'Campus Salvador (Barbalho) - Cursos: Automação Industrial, Edificações, Eletrônica, Eletrotécnica, Geologia, Mecânica, Química, Refrigeração e Climatização' },
+                // Rio de Janeiro (CEFET-RJ, IFF, CTUR-UFRRJ)
+                { city: 'Itaguaí (RJ)', institution: 'CEFET-RJ', coords: [-22.8491, -43.7781], info: 'Campus Itaguaí - Cursos: Automação Industrial, Logística, Mecânica' },
+                { city: 'Nova Friburgo (RJ)', institution: 'CEFET-RJ', coords: [-22.2816, -42.5311], info: 'Campus Nova Friburgo - Cursos: Administração, Informática' },
+                { city: 'Nova Iguaçu (RJ)', institution: 'CEFET-RJ', coords: [-22.7559, -43.4508], info: 'Campus Nova Iguaçu - Cursos: Automação Industrial, Enfermagem, Informática, Telecomunicações' },
+                { city: 'Petrópolis (RJ)', institution: 'CEFET-RJ', coords: [-22.5050, -43.1789], info: 'Campus Petrópolis - Cursos: Telecomunicações' },
+                { city: 'Rio de Janeiro (RJ - Maracanã)', institution: 'CEFET-RJ', coords: [-22.9122, -43.2239], info: 'Campus Maracanã - Cursos: Administração, Edificações, Eletrônica, Eletrotécnica, Estradas, Eventos, Informática, Mecânica, Meteorologia, Segurança do Trabalho, Telecomunicações' },
+                { city: 'Rio de Janeiro (RJ - Maria da Graça)', institution: 'CEFET-RJ', coords: [-22.8872, -43.2722], info: 'Campus Maria da Graça - Cursos: Automação Industrial, Manutenção Automotiva, Produção Cultural, Segurança do Trabalho' },
+                { city: 'Valença (RJ)', institution: 'CEFET-RJ', coords: [-22.2458, -43.7011], info: 'Campus Valença - Cursos: Alimentos, Química' },
+                { city: 'Bom Jesus do Itabapoana (RJ)', institution: 'IFF', coords: [-21.1378, -41.6789], info: 'Campus Bom Jesus - Cursos: Agropecuária, Alimentos, Informática, Meio Ambiente, Química' },
+                { city: 'Cabo Frio (RJ)', institution: 'IFF', coords: [-22.8797, -42.0197], info: 'Campus Cabo Frio - Cursos: Eletromecânica, Hospedagem, Química' },
+                { city: 'Cambuci (RJ)', institution: 'IFF', coords: [-21.5722, -41.9083], info: 'Campus Cambuci - Cursos: Agroecologia, Agropecuária' },
+                { city: 'Campos dos Goytacazes (RJ - Centro)', institution: 'IFF', coords: [-21.7544, -41.3242], info: 'Campus Campos Centro - Cursos: Automação Industrial, Edificações, Eletrotécnica, Estradas, Informática, Mecânica, Química, Segurança do Trabalho, Telecomunicações' },
+                { city: 'Campos dos Goytacazes (RJ - Guarus)', institution: 'IFF', coords: [-21.7314, -41.3325], info: 'Campus Campos Guarus - Cursos: Eletromecânica, Eletrônica, Enfermagem, Farmácia, Meio Ambiente' },
+                { city: 'Cordeiro (RJ)', institution: 'IFF', coords: [-22.0294, -42.3658], info: 'Centro de Referência Cordeiro - Cursos: Mecânica' },
+                { city: 'Duque de Caxias (RJ)', institution: 'IFF', coords: [-22.5694, -43.2719], info: 'Unidade INMETRO (Xerém) - Cursos: Biotecnologia, Metrologia, Segurança Cibernética' },
+                { city: 'Itaboraí (RJ)', institution: 'IFF', coords: [-22.7444, -42.8544], info: 'Campus Itaboraí - Cursos: Automação Industrial, Informática, Química' },
+                { city: 'Itaperuna (RJ)', institution: 'IFF', coords: [-21.2069, -41.8889], info: 'Campus Itaperuna - Cursos: Administração, Automação Industrial, Eletrotécnica, Informática, Mecânica, Química' },
+                { city: 'Macaé (RJ)', institution: 'IFF', coords: [-22.3781, -41.7869], info: 'Campus Macaé - Cursos: Automação Industrial, Eletromecânica, Eletrônica, Meio Ambiente, Segurança do Trabalho' },
+                { city: 'Magé (RJ)', institution: 'IFF', coords: [-22.6539, -43.0411], info: 'Campus Magé - Cursos: Administração' },
+                { city: 'Maricá (RJ)', institution: 'IFF', coords: [-22.9189, -42.8186], info: 'Campus Maricá - Cursos: Edificações, Meio Ambiente' },
+                { city: 'Quissamã (RJ)', institution: 'IFF', coords: [-22.1106, -41.4725], info: 'Campus Quissamã - Cursos: Administração, Eletromecânica, Informática, Segurança do Trabalho' },
+                { city: 'Santo Antônio de Pádua (RJ)', institution: 'IFF', coords: [-21.5433, -42.1794], info: 'Campus Pádua - Cursos: Administração, Automação Industrial, Edificações, Eletrotécnica' },
+                { city: 'São João da Barra (RJ)', institution: 'IFF', coords: [-21.6358, -41.0511], info: 'Campus São João da Barra - Cursos: Administração, Eletromecânica, Petróleo e Gás, Transporte Aquaviário' },
+                { city: 'Seropédica (RJ)', institution: 'CTUR-UFRRJ', coords: [-22.7481, -43.7083], info: 'CTUR - UFRRJ - Cursos: Agroecologia, Hospedagem, Meio Ambiente' },
+
+                // Bahia (IFBA) - Completo
+                { city: 'Barreiras (BA)', institution: 'IFBA', coords: [-12.1447, -45.0031], info: 'Campus Barreiras - Cursos: Alimentos, Edificações, Informática' },
+                { city: 'Brumado (BA)', institution: 'IFBA', coords: [-14.2008, -41.6669], info: 'Campus Brumado - Cursos: Edificações, Informática' },
                 { city: 'Camaçari (BA)', institution: 'IFBA', coords: [-12.7100, -38.3200], info: 'Campus Camaçari - Cursos: Eletrotécnica, Informática' },
+                { city: 'Campo Formoso (BA)', institution: 'IFBA', coords: [-10.5117, -40.3200], info: 'Campus Campo Formoso - Cursos: Sistemas de Energia Renovável' },
+                { city: 'Euclides da Cunha (BA)', institution: 'IFBA', coords: [-10.5103, -39.0142], info: 'Campus Euclides da Cunha - Cursos: Edificações, Informática' },
+                { city: 'Eunápolis (BA)', institution: 'IFBA', coords: [-16.3769, -39.5847], info: 'Campus Eunápolis - Cursos: Edificações, Informática, Meio Ambiente' },
                 { city: 'Feira de Santana (BA)', institution: 'IFBA', coords: [-12.2667, -38.9667], info: 'Campus Feira de Santana - Cursos: Edificações, Eletrotécnica' },
-                { city: 'Vitória da Conquista (BA)', institution: 'IFBA', coords: [-14.8500, -40.8400], info: 'Campus Vitória da Conquista - Cursos: Eletromecânica, Eletrônica, Informática, Meio Ambiente' },
-                { city: 'Ilhéus (BA)', institution: 'IFBA', coords: [-14.8000, -39.0500], info: 'Campus Ilhéus - Cursos: Edificações, Informática, Segurança do Trabalho' },
-                { city: 'Juazeiro (BA)', institution: 'IFBA', coords: [-9.4166, -40.5035], info: 'Campus Juiz de Fora (BA) - Cursos: Administração, Segurança do Trabalho' },
-                { city: 'Simões Filho (BA)', institution: 'IFBA', coords: [-12.7870, -38.4032], info: 'Campus Simões Filho - Cursos: Eletromecânica, Mecânica, Metalurgia, Petróleo e Gás' },
-                { city: 'Valença (BA)', institution: 'IFBA', coords: [-13.3700, -39.0730], info: 'Campus Valença - Cursos: Agropecuária, Aquicultura, Guia de Turismo' }
+                { city: 'Ilhéus (BA)', institution: 'IFBA', coords: [-14.8000, -39.0500], info: 'Campus Ilhéus - Cursos: Biocombustíveis, Edificações, Informática, Segurança do Trabalho' },
+                { city: 'Irecê (BA)', institution: 'IFBA', coords: [-11.3033, -41.8544], info: 'Campus Irecê - Cursos: Eletromecânica, Informática' },
+                { city: 'Jacobina (BA)', institution: 'IFBA', coords: [-11.1833, -40.5167], info: 'Campus Jacobina - Cursos: Eletromecânica, Informática, Mineração' },
+                { city: 'Jaguaquara (BA)', institution: 'IFBA', coords: [-13.5133, -39.9708], info: 'Campus Jaguaquara - Cursos: Agroecologia' },
+                { city: 'Jequié (BA)', institution: 'IFBA', coords: [-13.8583, -40.0889], info: 'Campus Jequié - Cursos: Eletromecânica, Informática' },
+                { city: 'Juazeiro (BA)', institution: 'IFBA', coords: [-9.4166, -40.5035], info: 'Campus Juazeiro - Cursos: Administração, Segurança do Trabalho' },
+                { city: 'Lauro de Freitas (BA)', institution: 'IFBA', coords: [-12.8944, -38.3242], info: 'Campus Lauro de Freitas - Cursos: Sistemas de Energia Renovável' },
+                { city: 'Paulo Afonso (BA)', institution: 'IFBA', coords: [-9.3975, -38.2569], info: 'Campus Paulo Afonso - Cursos: Biocombustíveis, Eletromecânica' },
+                { city: 'Porto Seguro (BA)', institution: 'IFBA', coords: [-16.4497, -39.0647], info: 'Campus Porto Seguro - Cursos: Alimentos, Biocombustíveis, Informática' },
+                { city: 'Salvador (BA)', institution: 'IFBA', coords: [-12.9822, -38.4813], info: 'Campus Salvador - Cursos: Automação Industrial, Edificações, Eletrônica, Eletrotécnica, Geologia, Informática, Mecânica, Química, Refrigeração e Climatização' },
+                { city: 'Santo Amaro (BA)', institution: 'IFBA', coords: [-12.5478, -38.7081], info: 'Campus Santo Amaro - Cursos: Eletromecânica, Informática' },
+                { city: 'Santo Antônio de Jesus (BA)', institution: 'IFBA', coords: [-12.9686, -39.2550], info: 'Campus Santo Antônio de Jesus - Cursos: Informática' },
+                { city: 'Seabra (BA)', institution: 'IFBA', coords: [-12.4231, -41.7708], info: 'Campus Seabra - Cursos: Informática, Meio Ambiente' },
+                { city: 'Simões Filho (BA)', institution: 'IFBA', coords: [-12.7870, -38.4032], info: 'Campus Simões Filho - Cursos: Eletromecânica, Mecânica, Meio Ambiente, Metalurgia, Petróleo e Gás Natural' },
+                { city: 'Ubaitaba (BA)', institution: 'IFBA', coords: [-14.3131, -39.3244], info: 'Campus Ubaitaba - Cursos: Informática' },
+                { city: 'Valença (BA)', institution: 'IFBA', coords: [-13.3700, -39.0730], info: 'Campus Valença - Cursos: Aquicultura, Eletromecânica, Guia de Turismo, Informática' },
+                { city: 'Vitória da Conquista (BA)', institution: 'IFBA', coords: [-14.8500, -40.8400], info: 'Campus Vitória da Conquista - Cursos: Eletrônica, Informática, Meio Ambiente' }
             ];
 
             // 4. Create Custom Icons and Add Markers
