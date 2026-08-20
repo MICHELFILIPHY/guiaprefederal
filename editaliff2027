@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Edital IFF 2027 - Cursos Técnicos | Guia Pré-Federal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --brand-teal: #00abb1;
+            --brand-emerald: #059669;
+            --brand-lime: #c7ef59;
+            --brand-coral: #dd5737;
+            --brand-indigo: #5242ea;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f5132 0%, #00abb1 50%, #059669 100%);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #00abb1;
+            border-radius: 9999px;
+        }
+        .tab-btn.active {
+            background-color: #00abb1;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 171, 177, 0.3);
+        }
+        .modality-btn.active {
+            background-color: #00abb1;
+            color: white;
+            border-color: #00abb1;
+        }
+        .fab-container {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+        }
+        .fab-main {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background-color: #00abb1;
+            color: white;
+            border: none;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fab-container.active .fab-main {
+            background-color: #dd5737;
+            transform: rotate(135deg);
+        }
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+            transform: translateY(15px);
+            margin-bottom: 12px;
+        }
+        .fab-container.active .fab-options {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        .fab-label {
+            background-color: white;
+            color: #0f172a;
+            padding: 6px 14px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-right: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .fab-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="antialiased text-slate-800">
+
+    <!-- Navigation Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm py-3.5 sticky top-0 z-50 border-b border-slate-100">
+        <div class="container mx-auto px-4 max-w-6xl flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
+                <!-- Logo com fundo Laranja Coral oficial -->
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md transition group-hover:scale-105" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia - Pré Federal" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-black tracking-tight text-[#00abb1] leading-none">Guia - Pré Federal</span>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Edital IFF 2027</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:block">
+                <ul class="flex space-x-5 text-xs font-bold uppercase tracking-wider text-slate-600">
+                    <li><a href="#datas-destaque" class="hover:text-[#00abb1] transition py-1 border-b-2 border-transparent hover:border-[#00abb1]"><i class="fas fa-calendar-alt text-amber-500 mr-1"></i>Datas</a></li>
+                    <li><a href="#escolha-vagas" class="hover:text-[#00abb1] transition py-1 border-b-2 border-transparent hover:border-[#00abb1]">Como Funciona</a></li>
+                    <li><a href="#prova" class="hover:text-[#00abb1] transition py-1 border-b-2 border-transparent hover:border-[#00abb1]">A Prova</a></li>
+                    <li><a href="#cotas" class="hover:text-[#00abb1] transition py-1 border-b-2 border-transparent hover:border-[#00abb1]">Cotas</a></li>
+                    <li><a href="#isencao" class="hover:text-[#00abb1] transition py-1 border-b-2 border-transparent hover:border-[#00abb1]">Isenção</a></li>
+                    <li><a href="#quadro-vagas" class="hover:text-[#00abb1] transition py-1 border-b-2 border-transparent hover:border-[#00abb1]"><i class="fas fa-university text-teal-600 mr-1"></i>Cidades & Vagas</a></li>
+                    <li><a href="#conteudo" class="hover:text-[#00abb1] transition py-1 border-b-2 border-transparent hover:border-[#00abb1]">O que Estudar</a></li>
+                </ul>
+            </nav>
+
+            <!-- CTA Header Button -->
+            <div class="hidden sm:flex items-center space-x-2">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] hover:bg-opacity-90 text-slate-900 font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fas fa-rocket mr-1.5 text-emerald-800"></i> Curso Intensivo
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-3.5 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fab fa-whatsapp mr-1 text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden text-slate-800 text-xl focus:outline-none p-1">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 py-3 px-4 shadow-lg">
+            <ul class="flex flex-col space-y-2.5 text-xs font-bold uppercase tracking-wider text-slate-700">
+                <li><a href="#datas-destaque" class="mobile-link block py-2 px-3 rounded-lg bg-amber-50 text-amber-900 font-black"><i class="fas fa-calendar-alt text-amber-600 mr-2"></i>Datas Importantes</a></li>
+                <li><a href="#escolha-vagas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Como Funciona o Processo</a></li>
+                <li><a href="#prova" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">A Prova Objetiva</a></li>
+                <li><a href="#cotas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Cotas & Ações Afirmativas</a></li>
+                <li><a href="#isencao" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Isenção da Taxa</a></li>
+                <li><a href="#quadro-vagas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100"><i class="fas fa-university text-teal-600 mr-2"></i>Cidades, Cursos & Vagas</a></li>
+                <li><a href="#conteudo" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Conteúdo Programático</a></li>
+                <li class="pt-2 flex flex-col space-y-2">
+                    <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="w-full bg-[#c7ef59] text-slate-900 font-black py-2.5 rounded-xl text-xs uppercase tracking-wider text-center block shadow-md">
+                        <i class="fas fa-rocket mr-1.5 text-emerald-800"></i> Conhecer o Intensivo 2026
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="w-full bg-emerald-500 text-white font-black py-2.5 rounded-xl text-xs uppercase tracking-wider text-center block shadow-md">
+                        <i class="fab fa-whatsapp mr-1.5"></i> Falar no WhatsApp
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-gradient text-white py-12 md:py-16 relative overflow-hidden">
+        <div class="container mx-auto px-4 max-w-6xl relative z-10 text-center">
+            
+            <!-- Logo no Hero com fundo Laranja Coral -->
+            <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-5 rounded-full flex items-center justify-center p-3 shadow-2xl border-4 border-white/40" style="background-color: #dd5737;">
+                <img src="./logo1.png" onerror="this.onerror=null; this.src='https://placehold.co/120x120/dd5737/ffffff?text=GPF';" alt="Guia - Pré Federal" class="w-full h-full object-contain">
+            </div>
+
+            <div class="inline-flex items-center space-x-2 bg-white/10 px-4 py-1.5 rounded-full backdrop-blur-md mb-4 border border-white/20">
+                <i class="fas fa-bullhorn text-[#c7ef59]"></i>
+                <span class="text-xs font-black uppercase tracking-wider text-slate-100">Processo Seletivo 2027 • Edital nº 33/2026</span>
+            </div>
+            
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4 leading-tight">
+                Guia Completo do Edital <span class="text-[#c7ef59]">IFF 2027</span>
+            </h1>
+            
+            <p class="text-slate-100 text-sm md:text-base max-w-3xl mx-auto mb-8 font-medium leading-relaxed">
+                Instituto Federal Fluminense: Cursos Técnicos de Nível Médio (Integrados, Concomitantes e Subsequentes). Confira todas as regras, prova objetiva de 40 questões, distribuição de vagas por cotas e cidades.
+            </p>
+
+            <!-- CTAS PRINCIPAIS DO CURSO E NAVEGAÇÃO -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fas fa-rocket mr-2 text-emerald-900"></i> Conheça Nosso Curso Intensivo 2026
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fab fa-whatsapp mr-2 text-lg"></i> Falar com a Coordenação
+                </a>
+            </div>
+
+            <!-- Botões de Atalho Interno -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6 pt-4 border-t border-white/10">
+                <a href="#datas-destaque" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-calendar-alt mr-1.5 text-amber-400"></i> Ver Prazos Importantes
+                </a>
+                <a href="#prova" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-file-alt mr-1.5 text-emerald-300"></i> Estrutura da Prova
+                </a>
+                <a href="#quadro-vagas" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-building mr-1.5 text-teal-300"></i> Vagas por Cidade
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIMEIRA SEÇÃO: DATAS IMPORTANTES (Clean & Destaque no Início) -->
+    <section id="datas-destaque" class="py-10 bg-amber-50/80 border-b border-amber-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-amber-300 shadow-md">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 pb-4 border-b border-slate-200 gap-4">
+                    <div>
+                        <span class="bg-amber-100 text-amber-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-1.5 inline-block border border-amber-300">
+                            <i class="fas fa-bell mr-1 text-amber-700"></i> Atenção aos Prazos do Edital nº 33/2026
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-black text-slate-900">Datas Importantes do Processo Seletivo IFF 2027</h2>
+                    </div>
+                    <div class="text-xs font-bold text-slate-500 bg-slate-100 px-3.5 py-2 rounded-xl border border-slate-200">
+                        <i class="fas fa-info-circle text-teal-600 mr-1"></i> Inscrições pelo Portal IFF (selecoes.iff.edu.br)
+                    </div>
+                </div>
+
+                <!-- Tabela Responsiva de Datas -->
+                <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                    <table class="w-full text-left border-collapse text-xs md:text-sm">
+                        <thead>
+                            <tr class="bg-teal-950 text-white font-bold uppercase text-[11px] tracking-wider">
+                                <th class="py-3.5 px-4 md:px-6"><i class="fas fa-calendar-day mr-2 text-lime-400"></i>Etapa / Evento</th>
+                                <th class="py-3.5 px-4 md:px-6"><i class="fas fa-clock mr-2 text-lime-400"></i>Período / Data Oficial</th>
+                                <th class="py-3.5 px-4 md:px-6 hidden sm:table-cell"><i class="fas fa-info-circle mr-2 text-lime-400"></i>Observação</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Publicação do Edital nº 33/2026</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-teal-700">19/08/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Divulgação oficial no Portal Seleções IFF</td>
+                            </tr>
+                            <tr class="bg-amber-50/80 hover:bg-amber-100/60 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-file-signature text-amber-600 mr-1.5"></i>Solicitação de Isenção da Taxa de Inscrição</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-amber-800">19/08/2026 a 25/09/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-600">Para inscritos no CadÚnico com renda per capita &le; 0,5 salário mínimo</td>
+                            </tr>
+                            <tr class="bg-emerald-50/80 hover:bg-emerald-100/60 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-user-plus text-emerald-600 mr-1.5"></i>Período de Inscrições Online</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-emerald-800">19/08/2026 a 08/10/2026 (até 23h59)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-600">Exclusivamente no Portal de Inscrições do IFF via Gov.br</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Resultado do Pedido de Isenção</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">Preliminar: 01/10 | Final: 07/10/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Prazo de recurso em 02/10/2026</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Último Dia para Pagamento da Taxa (GRU / Pix / Cartão)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-rose-700">Até 09/10/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">R$ 40,00 (Integrado) / R$ 30,00 (Concomitante e Subsequente)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Cartão de Confirmação de Inscrição (CCI / Local de Prova)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-purple-700">02/12/2026 a 05/12/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Impressão obrigatória contendo o prédio e a sala de prova</td>
+                            </tr>
+                            <tr class="bg-emerald-100/70 hover:bg-emerald-200/60 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-emerald-950"><i class="fas fa-edit text-emerald-700 mr-1.5"></i>Aplicação da Prova Objetiva</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-emerald-900">06/12/2026 (Domingo) • 09h30 às 12h30</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-emerald-950 font-bold">Fechamento dos portões 20min após o início da prova</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Divulgação do Gabarito Oficial</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">06/12/2026 (a partir das 18h)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Recurso contra o gabarito no dia 07/12/2026</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Resultado Final & Homologação</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-teal-700">22/12/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Convocação oficial com lista de aprovados e reclassificação</td>
+                            </tr>
+                            <tr class="bg-teal-50 hover:bg-teal-100 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-teal-900"><i class="fas fa-graduation-cap text-teal-600 mr-1.5"></i>Período de Matrícula Online</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-teal-800">04/01/2027 a 08/01/2027</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-teal-900">Realizada pelo Balcão Digital do Gov.br</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Regras e Funcionamento do IFF -->
+    <section id="escolha-vagas" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-teal-50 text-teal-800 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-teal-200 inline-block">
+                    Regras do Edital nº 33/2026
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Como Funcionam os Cursos do IFF?</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Entenda as 3 formas de oferta dos cursos técnicos oferecidos pelo Instituto Federal Fluminense.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Integrado -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center text-xl font-bold mb-4">1</div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Técnico Integrado</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        O estudante cursa o <strong>Ensino Médio e a Formação Técnica juntos no IFF</strong>, em tempo diurno/integral. Duração de 3 a 4 anos. Exige ter concluído o 9º ano do Ensino Fundamental. Taxa: <strong>R$ 40,00</strong>.
+                    </p>
+                </div>
+
+                <!-- Card 2: Concomitante -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl font-bold mb-4">2</div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Técnico Concomitante</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        O estudante cursa <strong>apenas as disciplinas técnicas no IFF</strong>, enquanto faz o Ensino Médio em outra escola (a partir do 2º ano) ou para quem já concluiu o Ensino Médio. Taxa: <strong>R$ 30,00</strong>.
+                    </p>
+                </div>
+
+                <!-- Card 3: Subsequente -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-xl font-bold mb-4">3</div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Técnico Subsequente</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        Destinado exclusivamente a <strong>estudantes que já concluíram o Ensino Médio</strong> ou equivalente (EJA/ENCCEJA). O curso foca apenas nas disciplinas profissionalizantes. Taxa: <strong>R$ 30,00</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Alerta do Processo de Inscrição -->
+            <div class="mt-8 bg-emerald-50 border-l-4 border-emerald-600 p-5 rounded-r-2xl">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-info-circle text-emerald-600 text-2xl flex-shrink-0"></i>
+                    <p class="text-xs text-emerald-950 font-semibold leading-relaxed">
+                        <strong>Autenticação pelo Gov.br:</strong> A inscrição no IFF é realizada através do Portal de Inscrições do IFF integrado ao login único do Governo Federal (Gov.br). Cada candidato deve possuir seu próprio CPF ativo para se inscrever.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO A PROVA (COLOCADA ANTES DAS VAGAS CONFORME SOLICITADO) -->
+    <section id="prova" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-teal-100 text-teal-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-teal-200 inline-block">
+                    Etapa Única • 3 Horas de Prova
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">A Prova Objetiva do IFF 2027</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    A prova é aplicada em um único dia (06/12/2026, das 09h30 às 12h30) e contém 40 questões objetivas de múltipla escolha (A, B, C, D, E).
+                </p>
+            </div>
+
+            <!-- Tabela de Estrutura da Prova para Integrados -->
+            <div class="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm mb-8">
+                <div class="bg-teal-950 text-white font-bold px-6 py-3 text-xs uppercase tracking-wider">
+                    Estrutura para Cursos Técnicos Integrados e Concomitantes (40 Questões)
+                </div>
+                <table class="w-full text-left border-collapse text-xs md:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 font-bold uppercase text-[11px] tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-4 md:px-6">Área de Conhecimento / Componente</th>
+                            <th class="py-3 px-4 md:px-6">Número de Questões</th>
+                            <th class="py-3 px-4 md:px-6">Valor da Questão</th>
+                            <th class="py-3 px-4 md:px-6 hidden sm:table-cell">Pontuação Total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-book text-teal-600 mr-2"></i>Língua Portuguesa</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">10 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-600">1,0 ponto</td>
+                            <td class="py-3 px-4 md:px-6 hidden sm:table-cell font-black text-teal-700">10 pontos</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-calculator text-emerald-600 mr-2"></i>Matemática</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">10 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-600">1,0 ponto</td>
+                            <td class="py-3 px-4 md:px-6 hidden sm:table-cell font-black text-emerald-700">10 pontos</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-flask text-indigo-600 mr-2"></i>Ciências Naturais (Física, Química, Biologia)</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">10 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-600">1,0 ponto</td>
+                            <td class="py-3 px-4 md:px-6 hidden sm:table-cell font-black text-indigo-700">10 pontos</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-landmark text-amber-600 mr-2"></i>História</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">05 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-600">1,0 ponto</td>
+                            <td class="py-3 px-4 md:px-6 hidden sm:table-cell font-black text-amber-700">05 pontos</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-globe-americas text-rose-600 mr-2"></i>Geografia</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">05 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-600">1,0 ponto</td>
+                            <td class="py-3 px-4 md:px-6 hidden sm:table-cell font-black text-rose-700">05 pontos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Alerta do Critério de Eliminação (Não Zerar / Pontuação Mínima) -->
+            <div class="bg-rose-50 border-l-4 border-rose-600 p-5 rounded-r-2xl mb-8">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-exclamation-triangle text-rose-600 text-2xl flex-shrink-0"></i>
+                    <div>
+                        <h4 class="font-black text-rose-900 uppercase text-xs">Critério Obrigatório de Classificação:</h4>
+                        <p class="text-xs text-rose-800 font-semibold mt-0.5 leading-relaxed">
+                            Para não ser eliminado do Processo Seletivo IFF 2027, o candidato deve alcançar a pontuação mínima exigida. Para a grande maioria dos campi no Ensino Técnico Integrado, é necessário acertar <strong>no mínimo 8 pontos</strong> na prova objetiva (com exceção do Campus Cambuci, onde a pontuação mínima é de 1 ponto).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regras no dia da prova -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-clock text-teal-600 mr-1"></i>Abertura e Fechamento</h4>
+                    <p class="text-slate-600 font-medium">Recomenda-se chegar 1h antes (08h30). Os portões FECHAM impreterivelmente 20 minutos após o início oficial da prova.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-id-card text-teal-600 mr-1"></i>O que Levar</h4>
+                    <p class="text-slate-600 font-medium">Documento de identidade oficial com foto, Cartão de Confirmação (CCI) e caneta esferográfica de tinta preta.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-door-open text-teal-600 mr-1"></i>Permanência Mínima</h4>
+                    <p class="text-slate-600 font-medium">É permitido sair da sala após 1 hora de prova. O Caderno de Questões só poderá ser levado após 2 horas de prova.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Cotas -->
+    <section id="cotas" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-teal-100 text-teal-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-teal-200 inline-block">
+                    Lei nº 12.711/2012 e Lei nº 14.723/2023
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Reserva de Vagas e Cotas no IFF</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    No mínimo 50% de todas as vagas do IFF são destinadas a estudantes que cursaram integralmente o Ensino Fundamental em escolas públicas nacionais.
+                </p>
+            </div>
+
+            <!-- Tabela de Modalidades de Cotas -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+                <div class="p-4 bg-teal-950 text-white font-bold text-xs uppercase tracking-wider">
+                    As 8 Modalidades de Cotas no IFF (Categorias LB e LI)
+                </div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium text-slate-700">
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                        <strong class="text-teal-900 font-black block mb-1">Ampla Concorrência (AC)</strong>
+                        Destinado a todos os candidatos, independentemente da escola em que estudaram.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-teal-50 border border-teal-200">
+                        <strong class="text-teal-950 font-black block mb-1">Cota LB_PPI (&le; 1 Salário + PPI + Escola Pública)</strong>
+                        Escola pública + Renda &le; 1,0 Salário Mínimo per capita + Pretos, Pardos ou Indígenas.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-teal-50 border border-teal-200">
+                        <strong class="text-teal-950 font-black block mb-1">Cota LB_EP (&le; 1 Salário + Escola Pública Ampla)</strong>
+                        Escola pública + Renda &le; 1,0 Salário Mínimo per capita (qualquer etnia).
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-teal-50 border border-teal-200">
+                        <strong class="text-teal-950 font-black block mb-1">Cota LB_Q e LB_PCD (&le; 1 Salário + Quilombola / PCD)</strong>
+                        Escola pública + Renda &le; 1,0 Salário Mínimo per capita + Quilombola ou Pessoa com Deficiência.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">Cota LI_PPI (Qualquer Renda + PPI + Escola Pública)</strong>
+                        Escola pública + Independente de Renda + Pretos, Pardos ou Indígenas.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">Cota LI_EP (Qualquer Renda + Escola Pública Ampla)</strong>
+                        Escola pública + Independente de Renda (qualquer etnia).
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">Cota LI_Q e LI_PCD (Qualquer Renda + Quilombola / PCD)</strong>
+                        Escola pública + Independente de Renda + Quilombola ou Pessoa com Deficiência.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Isenção -->
+    <section id="isencao" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-10">
+                <span class="bg-amber-100 text-amber-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-amber-200 inline-block">
+                    Taxa: R$ 40,00 (Integrado) / R$ 30,00 (Demais)
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Isenção da Taxa de Inscrição no IFF</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    A solicitação deve ser feita online até o dia 25/09/2026 durante o preenchimento da inscrição.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 max-w-3xl mx-auto text-xs font-medium text-slate-700 leading-relaxed space-y-3 shadow-sm">
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-check-circle text-teal-600 text-lg flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-slate-900 text-sm block mb-1">Requisitos para pedir a isenção da taxa:</strong>
+                        1. Estar regularmente inscrito no <strong>Cadastro Único para Programas Sociais do Governo Federal (CadÚnico)</strong>;<br>
+                        2. Apresentar renda familiar bruta per capita de <strong>até meio salário mínimo por pessoa</strong>.
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 border-t border-slate-200 pt-3">
+                    <i class="fas fa-info-circle text-teal-600 text-lg flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-slate-900 text-sm block mb-1">Como solicitar no formulário:</strong>
+                        Marque a opção de isenção no ato da inscrição e informe o número do seu <strong>NIS (Número de Identificação Social)</strong> ativo do próprio candidato.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO QUADRO DE VAGAS COM SELETOR POR CIDADE / CAMPUS (ESTILO IFMG) -->
+    <section id="quadro-vagas" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-10">
+                <span class="bg-teal-100 text-teal-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-teal-200 inline-block">
+                    Anexo 2 do Edital nº 33/2026 • Quadro Oficial
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Cidades, Cursos & Vagas por Cota no IFF</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Selecione a cidade/campus abaixo ou digite o nome do curso para visualizar a tabela de vagas com a distribuição exata de cada cota.
+                </p>
+            </div>
+
+            <!-- Painel de Filtros e Busca -->
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 mb-8 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                    
+                    <!-- Dropdown de Seleção de Cidade / Campus -->
+                    <div class="md:col-span-6">
+                        <label class="block text-xs font-black uppercase text-slate-700 mb-1.5">
+                            <i class="fas fa-map-marker-alt text-teal-600 mr-1"></i> Selecionar Cidade / Campus:
+                        </label>
+                        <select id="campus-select" onchange="applyVagasFilter()" class="w-full bg-white border border-slate-300 text-slate-900 text-xs rounded-xl p-3 font-bold focus:ring-2 focus:ring-teal-500 focus:outline-none shadow-sm">
+                            <option value="ALL">Mostrar Todos os Campi / Cidades (15 Unidades)</option>
+                            <option value="Bom Jesus do Itabapoana">Bom Jesus do Itabapoana (Norte Fluminense)</option>
+                            <option value="Cabo Frio">Cabo Frio (Região dos Lagos)</option>
+                            <option value="INMETRO Xerém">INMETRO - Xerém / Duque de Caxias</option>
+                            <option value="Cambuci">Cambuci (Noroeste Fluminense)</option>
+                            <option value="Campos Centro">Campos Centro (Campos dos Goytacazes)</option>
+                            <option value="Campos Guarus">Campos Guarus (Campos dos Goytacazes)</option>
+                            <option value="Itaboraí">Itaboraí (Região Metropolitana)</option>
+                            <option value="Itaperuna">Itaperuna (Noroeste Fluminense)</option>
+                            <option value="Macaé">Macaé (Região Oceânica)</option>
+                            <option value="Magé">Magé (Região Metropolitana)</option>
+                            <option value="Maricá">Maricá (Região Metropolitana)</option>
+                            <option value="Quissamã">Quissamã (Norte Fluminense)</option>
+                            <option value="Santo Antônio de Pádua">Santo Antônio de Pádua (Noroeste Fluminense)</option>
+                            <option value="São João da Barra">São João da Barra (Norte Fluminense)</option>
+                            <option value="Cordeiro">Cordeiro (Centro de Referência)</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo de Busca em Tempo Real -->
+                    <div class="md:col-span-6">
+                        <label class="block text-xs font-black uppercase text-slate-700 mb-1.5">
+                            <i class="fas fa-search text-teal-600 mr-1"></i> Pesquisar por Curso ou Palavra-Chave:
+                        </label>
+                        <input type="text" id="vagas-search-input" onkeyup="applyVagasFilter()" placeholder="Ex: Informática, Enfermagem, Edificações, Automação..." class="w-full bg-white border border-slate-300 text-slate-900 text-xs rounded-xl p-3 font-bold focus:ring-2 focus:ring-teal-500 focus:outline-none shadow-sm">
+                    </div>
+                </div>
+
+                <!-- Filtros de Modalidade -->
+                <div class="mt-4 pt-4 border-t border-slate-200 flex flex-wrap items-center gap-2">
+                    <span class="text-[11px] font-black uppercase text-slate-500 mr-2"><i class="fas fa-filter text-teal-600 mr-1"></i>Modalidade:</span>
+                    <button onclick="setModalityFilter('ALL')" class="modality-btn active text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-slate-700 transition">Todas</button>
+                    <button onclick="setModalityFilter('Integrado')" class="modality-btn text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-slate-700 transition">Integrado</button>
+                    <button onclick="setModalityFilter('Concomitante')" class="modality-btn text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-slate-700 transition">Concomitante</button>
+                    <button onclick="setModalityFilter('Subsequente')" class="modality-btn text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-slate-700 transition">Subsequente</button>
+                </div>
+            </div>
+
+            <!-- Legenda das Siglas de Cotas -->
+            <div class="mb-6 bg-teal-50/60 p-4 rounded-xl border border-teal-200 text-[11px] text-slate-700 font-medium">
+                <strong class="text-teal-950 font-black block mb-1">Entenda as Colunas das Cotas na Tabela:</strong>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+                    <div><span class="font-bold text-teal-900">AC:</span> Ampla Concorrência</div>
+                    <div><span class="font-bold text-teal-900">LB_PPI:</span> Renda &le; 1 SM + PPI</div>
+                    <div><span class="font-bold text-teal-900">LB_EP:</span> Renda &le; 1 SM + Esc. Pública</div>
+                    <div><span class="font-bold text-teal-900">LB_Q:</span> Renda &le; 1 SM + Quilombola</div>
+                    <div><span class="font-bold text-teal-900">LB_PCD:</span> Renda &le; 1 SM + PCD</div>
+                    <div><span class="font-bold text-emerald-900">LI_PPI:</span> Qualq. Renda + PPI</div>
+                    <div><span class="font-bold text-emerald-900">LI_EP:</span> Qualq. Renda + Esc. Pública</div>
+                    <div><span class="font-bold text-emerald-900">LI_Q:</span> Qualq. Renda + Quilombola</div>
+                    <div><span class="font-bold text-emerald-900">LI_PCD:</span> Qualq. Renda + PCD</div>
+                    <div><span class="font-bold text-slate-900">Total:</span> Vagas Totais</div>
+                </div>
+            </div>
+
+            <!-- Tabela Interativa e Responsiva de Vagas por Curso e Cidade -->
+            <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm bg-white">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-teal-950 text-white font-bold uppercase text-[10px] tracking-wider text-center">
+                            <th class="py-3 px-3 text-left w-1/4">Campus / Cidade & Curso</th>
+                            <th class="py-3 px-2">Mod.</th>
+                            <th class="py-3 px-2">Turno</th>
+                            <th class="py-3 px-2 bg-teal-900">AC</th>
+                            <th class="py-3 px-2 bg-teal-800" title="Renda <= 1 SM, PPI">LB_PPI</th>
+                            <th class="py-3 px-2 bg-teal-800" title="Renda <= 1 SM, Escola Pública">LB_EP</th>
+                            <th class="py-3 px-2 bg-teal-800" title="Renda <= 1 SM, Quilombola">LB_Q</th>
+                            <th class="py-3 px-2 bg-teal-800" title="Renda <= 1 SM, PCD">LB_PCD</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="Qualquer renda, PPI">LI_PPI</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="Qualquer renda, Escola Pública">LI_EP</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="Qualquer renda, Quilombola">LI_Q</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="Qualquer renda, PCD">LI_PCD</th>
+                            <th class="py-3 px-2 bg-slate-900 text-lime-400 font-black">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vagas-table-body" class="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <!-- Gerado via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="vagas-no-results" class="hidden text-center py-12 bg-slate-50 rounded-2xl border border-slate-200 my-4">
+                <i class="fas fa-search-minus text-3xl text-slate-400 mb-2"></i>
+                <h4 class="font-bold text-slate-800 text-sm">Nenhum curso ou vaga foi encontrado</h4>
+                <p class="text-xs text-slate-500">Tente ajustar a busca ou limpar a seleção da cidade/campus.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Conteúdo Programático -->
+    <section id="conteudo" class="py-16 bg-slate-50">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-10">
+                <span class="bg-teal-100 text-teal-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-teal-200 inline-block">
+                    Matriz de Referência Oficial
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">O que Estudar para a Prova do IFF 2027?</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Selecione a disciplina abaixo para visualizar os tópicos e habilidades exigidas na Prova Objetiva.
+                </p>
+            </div>
+
+            <!-- Navegação por Abas -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8" id="subject-tabs">
+                <button onclick="switchTab('portugues')" class="tab-btn active font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-book mr-1.5"></i>Língua Portuguesa</button>
+                <button onclick="switchTab('matematica')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-calculator mr-1.5"></i>Matemática</button>
+                <button onclick="switchTab('ciencias')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-flask mr-1.5"></i>Ciências Naturais</button>
+                <button onclick="switchTab('historia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-landmark mr-1.5"></i>História</button>
+                <button onclick="switchTab('geografia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-globe-americas mr-1.5"></i>Geografia</button>
+            </div>
+
+            <!-- Conteúdo das Abas -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm text-xs leading-relaxed text-slate-700">
+                
+                <!-- Português -->
+                <div id="tab-portugues" class="tab-content space-y-4">
+                    <h3 class="text-lg font-black text-teal-900 pb-2 border-b border-slate-100"><i class="fas fa-book text-teal-600 mr-2"></i>Língua Portuguesa (10 Questões • Matriz IFF)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Procedimentos de Leitura:</strong> Interpretação de linguagem verbal e não verbal, tese x argumentos, informações explícitas e implícitas, contexto de produção e vozes no texto.</li>
+                        <li><strong>Gêneros Textuais e Linguagem:</strong> Suporte, funções da linguagem, figuras de linguagem (ironia, metáfora, eufemismo), variação linguística e registros formal/informal.</li>
+                        <li><strong>Coesão e Coerência:</strong> Mecanismos de coesão referencial (pronomes, anáforas), operadores argumentativos, pontuação, ortografia e regras de acentuação gráfica.</li>
+                    </ul>
+                </div>
+
+                <!-- Matemática -->
+                <div id="tab-matematica" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-emerald-900 pb-2 border-b border-slate-100"><i class="fas fa-calculator text-emerald-600 mr-2"></i>Matemática (10 Questões • Matriz IFF)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Espaço e Forma:</strong> Propriedades de triângulos, polígonos, Teorema de Pitágoras, Teorema de Tales, razões trigonométricas no triângulo retângulo e plano cartesiano.</li>
+                        <li><strong>Grandezas e Medidas:</strong> Perímetro e área de figuras planas (polígonos e círculos), volume de prismas e cilindros, unidades de medida e cálculo com razões.</li>
+                        <li><strong>Números, Álgebra e Funções:</strong> Operações com números reais, porcentagem, juros, expressões algébricas, equações e sistemas de 1º e 2º graus, estudo de funções (Afim e Quadrática).</li>
+                        <li><strong>Tratamento da Informação:</strong> Probabilidade simples, interpretação de gráficos e tabelas, e princípio multiplicativo da contagem.</li>
+                    </ul>
+                </div>
+
+                <!-- Ciências Naturais -->
+                <div id="tab-ciencias" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-indigo-900 pb-2 border-b border-slate-100"><i class="fas fa-flask text-indigo-600 mr-2"></i>Ciências Naturais (10 Questões • Física, Química e Biologia)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Biologia & Ecologia:</strong> Organização celular, vírus/bactérias, saúde pública, vacinas, teias alimentares, relações ecológicas, fotossíntese e corpo humano.</li>
+                        <li><strong>Química da Matéria:</strong> Misturas homogêneas/heterogêneas, métodos de separação, transformações físicas e químicas, modelo atômico e tabela periódica.</li>
+                        <li><strong>Física & Fenômenos:</strong> Formas de propagação de calor, circuitos elétricos simples, consumo de energia, leis de Newton, cinemática básica e óptica geométrica.</li>
+                    </ul>
+                </div>
+
+                <!-- História -->
+                <div id="tab-historia" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-amber-900 pb-2 border-b border-slate-100"><i class="fas fa-landmark text-amber-600 mr-2"></i>História (5 Questões • Matriz IFF)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Antigo Regime e Mundo Moderno:</strong> Crise do feudalismo, Renascimento, Expansão Marítima Europeia, Absolutismo e Mercantilismo.</li>
+                        <li><strong>Colonização e América Portuguesa:</strong> Povos indígenas pré-colombianos, escravidão africana, economia do açúcar e da mineração no Brasil.</li>
+                        <li><strong>Mundo Contemporâneo e República:</strong> Revolução Industrial, processo de independência do Brasil e inserção dos negros no pós-abolição.</li>
+                    </ul>
+                </div>
+
+                <!-- Geografia -->
+                <div id="tab-geografia" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-rose-900 pb-2 border-b border-slate-100"><i class="fas fa-globe-americas text-rose-600 mr-2"></i>Geografia (5 Questões • Matriz IFF)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Linguagem Cartográfica:</strong> Orientação, coordenadas geográficas, fusos horários e interpretação de mapas temáticos.</li>
+                        <li><strong>Espaço Brasileiro:</strong> Divisão regional do IBGE e complexos geoeconômicos, domínios morfoclimáticos e biomas brasileiros.</li>
+                        <li><strong>Espaço Mundial & Globalização:</strong> Integração econômica e cultural, urbanização, dinâmica demográfica e fontes de energia.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BANNER DE CTA PARA MATRÍCULA NO CURSINHO -->
+    <section class="py-12 bg-gradient-to-r from-[#00abb1] to-[#059669] text-white">
+        <div class="container mx-auto px-4 max-w-5xl text-center">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center p-2.5 mx-auto mb-4 shadow-xl border-2 border-white/30" style="background-color: #dd5737;">
+                <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+            </div>
+            
+            <span class="bg-[#c7ef59] text-slate-900 font-black text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">
+                Sua Aprovação Começa Aqui
+            </span>
+            
+            <h2 class="text-2xl md:text-4xl font-black mb-3 leading-tight">
+                Quer Passar no <span class="text-[#c7ef59]">IFF 2027</span>?
+            </h2>
+            
+            <p class="text-slate-100 text-xs md:text-sm max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
+                Estude com o preparatório 100% online líder em aprovação para Escolas e Institutos Federais. Aulas ao vivo, materiais exclusivos em PDF, simulados no formato IFF e mentoria tira-dúvidas diretamente pelo WhatsApp.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-8 py-3.5 rounded-xl transition shadow-2xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fas fa-rocket mr-2 text-emerald-950"></i> Quero Me Matricular no Intensivo
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-8 py-3.5 rounded-xl transition shadow-2xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fab fa-whatsapp mr-2 text-lg"></i> Falar com um Consultor
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800 text-xs">
+        <div class="container mx-auto px-4 max-w-6xl text-center">
+            <div class="flex justify-center items-center space-x-3 mb-6">
+                <!-- Logo no footer com fundo Laranja Coral -->
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+                </div>
+                <span class="text-lg font-black tracking-tight text-white">Guia - Pré Federal</span>
+            </div>
+            <p class="text-slate-400 font-medium mb-4 max-w-xl mx-auto">
+                Preparatório 100% online especializado no ingresso aos Cursos Técnicos Integrados das Escolas e Institutos Federais.
+            </p>
+            <p class="text-slate-500">&copy; 2026 Guia Pré-Federal. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button (FAB) -->
+    <div class="fab-container">
+        <div class="fab-options">
+            <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="fab-option">
+                <span class="fab-label">Nosso Intensivo 2026</span>
+                <div class="fab-icon" style="background-color: #00abb1;">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </a>
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
+                <span class="fab-label">Falar no WhatsApp</span>
+                <div class="fab-icon" style="background-color: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </a>
+        </div>
+        <button class="fab-main" id="fab-main-btn">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <!-- Script Interativo com Dados Completos das Vagas do IFF -->
+    <script>
+        // Dados Oficiais de Vagas por Campus e Curso do IFF 2027
+        const vagasData = [
+            // Bom Jesus do Itabapoana
+            { campus: "Bom Jesus do Itabapoana", curso: "Agropecuária", mod: "Integrado", turno: "Diurno", ac: 35, lb_ppi: 11, lb_ep: 4, lb_q: 2, lb_pcd: 1, li_ppi: 10, li_ep: 5, li_q: 0, li_pcd: 2, total: 70 },
+            { campus: "Bom Jesus do Itabapoana", curso: "Alimentos", mod: "Integrado", turno: "Diurno", ac: 35, lb_ppi: 11, lb_ep: 4, lb_q: 2, lb_pcd: 1, li_ppi: 10, li_ep: 5, li_q: 0, li_pcd: 2, total: 70 },
+            { campus: "Bom Jesus do Itabapoana", curso: "Informática", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Bom Jesus do Itabapoana", curso: "Meio Ambiente", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Bom Jesus do Itabapoana", curso: "Química", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+
+            // Cabo Frio
+            { campus: "Cabo Frio", curso: "Eletromecânica", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Cabo Frio", curso: "Hospedagem", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Cabo Frio", curso: "Química", mod: "Integrado", turno: "Diurno", ac: 15, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 1, total: 30 },
+
+            // INMETRO Xerém
+            { campus: "INMETRO Xerém", curso: "Biotecnologia", mod: "Subsequente", turno: "Tarde", ac: 5, lb_ppi: 3, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 3, li_ep: 1, li_q: 0, li_pcd: 1, total: 16 },
+            { campus: "INMETRO Xerém", curso: "Metrologia", mod: "Subsequente", turno: "Tarde", ac: 11, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 4, li_ep: 1, li_q: 0, li_pcd: 1, total: 25 },
+            { campus: "INMETRO Xerém", curso: "Segurança Cibernética", mod: "Subsequente", turno: "Tarde", ac: 11, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 4, li_ep: 1, li_q: 0, li_pcd: 1, total: 25 },
+
+            // Cambuci
+            { campus: "Cambuci", curso: "Agroecologia", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Cambuci", curso: "Agropecuária", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+
+            // Campos Centro
+            { campus: "Campos Centro", curso: "Automação Industrial", mod: "Integrado", turno: "Diurno", ac: 20, lb_ppi: 6, lb_ep: 2, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 3, li_q: 0, li_pcd: 1, total: 40 },
+            { campus: "Campos Centro", curso: "Edificações", mod: "Integrado", turno: "Diurno", ac: 40, lb_ppi: 12, lb_ep: 5, lb_q: 1, lb_pcd: 2, li_ppi: 12, li_ep: 6, li_q: 0, li_pcd: 2, total: 80 },
+            { campus: "Campos Centro", curso: "Eletrotécnica", mod: "Integrado", turno: "Diurno", ac: 40, lb_ppi: 12, lb_ep: 5, lb_q: 1, lb_pcd: 2, li_ppi: 12, li_ep: 6, li_q: 0, li_pcd: 2, total: 80 },
+            { campus: "Campos Centro", curso: "Informática", mod: "Integrado", turno: "Diurno", ac: 20, lb_ppi: 6, lb_ep: 2, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 3, li_q: 0, li_pcd: 1, total: 40 },
+            { campus: "Campos Centro", curso: "Mecânica", mod: "Integrado", turno: "Diurno", ac: 40, lb_ppi: 12, lb_ep: 5, lb_q: 1, lb_pcd: 2, li_ppi: 12, li_ep: 6, li_q: 0, li_pcd: 2, total: 80 },
+            { campus: "Campos Centro", curso: "Automação Industrial", mod: "Concomitante", turno: "Manhã", ac: 9, lb_ppi: 3, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 3, li_ep: 1, li_q: 0, li_pcd: 1, total: 20 },
+            { campus: "Campos Centro", curso: "Automação Industrial", mod: "Concomitante", turno: "Noite", ac: 9, lb_ppi: 3, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 3, li_ep: 1, li_q: 0, li_pcd: 1, total: 20 },
+            { campus: "Campos Centro", curso: "Edificações", mod: "Concomitante", turno: "Noite", ac: 20, lb_ppi: 6, lb_ep: 2, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 3, li_q: 0, li_pcd: 1, total: 40 },
+            { campus: "Campos Centro", curso: "Eletrotécnica", mod: "Concomitante", turno: "Noite", ac: 9, lb_ppi: 3, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 3, li_ep: 1, li_q: 0, li_pcd: 1, total: 20 },
+            { campus: "Campos Centro", curso: "Estradas", mod: "Concomitante", turno: "Noite", ac: 20, lb_ppi: 6, lb_ep: 2, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 3, li_q: 0, li_pcd: 1, total: 40 },
+            { campus: "Campos Centro", curso: "Informática", mod: "Concomitante", turno: "Noite", ac: 9, lb_ppi: 3, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 3, li_ep: 1, li_q: 0, li_pcd: 1, total: 20 },
+            { campus: "Campos Centro", curso: "Mecânica", mod: "Concomitante", turno: "Manhã", ac: 9, lb_ppi: 3, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 3, li_ep: 1, li_q: 0, li_pcd: 1, total: 20 },
+            { campus: "Campos Centro", curso: "Mecânica", mod: "Concomitante", turno: "Noite", ac: 20, lb_ppi: 6, lb_ep: 2, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 3, li_q: 0, li_pcd: 1, total: 40 },
+            { campus: "Campos Centro", curso: "Química", mod: "Concomitante", turno: "Tarde", ac: 15, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 1, total: 30 },
+            { campus: "Campos Centro", curso: "Segurança do Trabalho", mod: "Subsequente", turno: "Noite", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+
+            // Campos Guarus
+            { campus: "Campos Guarus", curso: "Eletrônica", mod: "Integrado", turno: "Diurno", ac: 30, lb_ppi: 9, lb_ep: 3, lb_q: 2, lb_pcd: 1, li_ppi: 9, li_ep: 4, li_q: 0, li_pcd: 2, total: 60 },
+            { campus: "Campos Guarus", curso: "Meio Ambiente", mod: "Integrado", turno: "Diurno", ac: 30, lb_ppi: 9, lb_ep: 3, lb_q: 2, lb_pcd: 1, li_ppi: 9, li_ep: 4, li_q: 0, li_pcd: 2, total: 60 },
+            { campus: "Campos Guarus", curso: "Eletromecânica", mod: "Subsequente", turno: "Noite", ac: 15, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 1, total: 30 },
+            { campus: "Campos Guarus", curso: "Enfermagem", mod: "Subsequente", turno: "Manhã", ac: 15, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 1, total: 30 },
+            { campus: "Campos Guarus", curso: "Farmácia", mod: "Subsequente", turno: "Noite", ac: 15, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 1, total: 30 },
+
+            // Itaboraí
+            { campus: "Itaboraí", curso: "Automação Industrial", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Itaboraí", curso: "Informática", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Itaboraí", curso: "Química", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+
+            // Itaperuna
+            { campus: "Itaperuna", curso: "Administração", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Itaperuna", curso: "Eletrotécnica", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Itaperuna", curso: "Informática", mod: "Integrado", turno: "Diurno", ac: 30, lb_ppi: 9, lb_ep: 3, lb_q: 2, lb_pcd: 1, li_ppi: 9, li_ep: 4, li_q: 0, li_pcd: 2, total: 60 },
+            { campus: "Itaperuna", curso: "Mecânica", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Itaperuna", curso: "Química", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Itaperuna", curso: "Eletrotécnica", mod: "Concomitante", turno: "Noite", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Itaperuna", curso: "Automação Industrial", mod: "Subsequente", turno: "Noite", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+
+            // Macaé
+            { campus: "Macaé", curso: "Automação Industrial", mod: "Integrado", turno: "Diurno", ac: 30, lb_ppi: 9, lb_ep: 3, lb_q: 1, lb_pcd: 2, li_ppi: 9, li_ep: 4, li_q: 0, li_pcd: 2, total: 60 },
+            { campus: "Macaé", curso: "Eletromecânica", mod: "Integrado", turno: "Diurno", ac: 30, lb_ppi: 9, lb_ep: 2, lb_q: 1, lb_pcd: 3, li_ppi: 9, li_ep: 4, li_q: 0, li_pcd: 2, total: 60 },
+            { campus: "Macaé", curso: "Eletrônica", mod: "Integrado", turno: "Diurno", ac: 30, lb_ppi: 9, lb_ep: 2, lb_q: 3, lb_pcd: 1, li_ppi: 9, li_ep: 4, li_q: 0, li_pcd: 2, total: 60 },
+            { campus: "Macaé", curso: "Meio Ambiente", mod: "Integrado", turno: "Diurno", ac: 15, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 1, total: 30 },
+            { campus: "Macaé", curso: "Automação Industrial", mod: "Subsequente", turno: "Noite", ac: 20, lb_ppi: 6, lb_ep: 2, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 3, li_q: 0, li_pcd: 1, total: 40 },
+            { campus: "Macaé", curso: "Eletromecânica", mod: "Subsequente", turno: "Noite", ac: 20, lb_ppi: 6, lb_ep: 2, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 3, li_q: 0, li_pcd: 1, total: 40 },
+            { campus: "Macaé", curso: "Segurança do Trabalho", mod: "Subsequente", turno: "Noite", ac: 20, lb_ppi: 6, lb_ep: 2, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 3, li_q: 0, li_pcd: 1, total: 40 },
+
+            // Magé
+            { campus: "Magé", curso: "Administração", mod: "Integrado", turno: "Diurno", ac: 15, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 1, total: 30 },
+
+            // Maricá
+            { campus: "Maricá", curso: "Edificações", mod: "Integrado", turno: "Diurno", ac: 30, lb_ppi: 9, lb_ep: 3, lb_q: 1, lb_pcd: 2, li_ppi: 9, li_ep: 4, li_q: 0, li_pcd: 2, total: 60 },
+            { campus: "Maricá", curso: "Meio Ambiente", mod: "Integrado", turno: "Diurno", ac: 30, lb_ppi: 9, lb_ep: 3, lb_q: 1, lb_pcd: 2, li_ppi: 9, li_ep: 4, li_q: 0, li_pcd: 2, total: 60 },
+
+            // Quissamã
+            { campus: "Quissamã", curso: "Administração", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Quissamã", curso: "Eletromecânica", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Quissamã", curso: "Informática", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Quissamã", curso: "Administração", mod: "Concomitante", turno: "Noite", ac: 20, lb_ppi: 6, lb_ep: 2, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 3, li_q: 0, li_pcd: 1, total: 40 },
+            { campus: "Quissamã", curso: "Segurança do Trabalho", mod: "Subsequente", turno: "Noite", ac: 20, lb_ppi: 6, lb_ep: 2, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 3, li_q: 0, li_pcd: 1, total: 40 },
+
+            // Santo Antônio de Pádua
+            { campus: "Santo Antônio de Pádua", curso: "Administração", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Santo Antônio de Pádua", curso: "Automação Industrial", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Santo Antônio de Pádua", curso: "Edificações", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Santo Antônio de Pádua", curso: "Eletrotécnica", mod: "Integrado", turno: "Diurno", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+            { campus: "Santo Antônio de Pádua", curso: "Eletrotécnica", mod: "Concomitante", turno: "Noite", ac: 17, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 6, li_ep: 2, li_q: 0, li_pcd: 1, total: 35 },
+
+            // São João da Barra
+            { campus: "São João da Barra", curso: "Administração", mod: "Integrado", turno: "Diurno", ac: 15, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 1, total: 30 },
+            { campus: "São João da Barra", curso: "Petróleo e Gás", mod: "Integrado", turno: "Diurno", ac: 15, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 1, total: 30 },
+            { campus: "São João da Barra", curso: "Transporte Aquaviário", mod: "Integrado", turno: "Diurno", ac: 15, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 1, total: 30 },
+            { campus: "São João da Barra", curso: "Eletromecânica", mod: "Concomitante", turno: "Tarde", ac: 15, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 1, total: 30 },
+
+            // Cordeiro
+            { campus: "Cordeiro", curso: "Mecânica", mod: "Concomitante", turno: "Noite", ac: 15, lb_ppi: 5, lb_ep: 1, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 1, total: 30 }
+        ];
+
+        let selectedModality = 'ALL';
+
+        function setModalityFilter(mod) {
+            selectedModality = mod;
+            document.querySelectorAll('.modality-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-[#00abb1]', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+            event.target.classList.add('active', 'bg-[#00abb1]', 'text-white');
+            event.target.classList.remove('bg-white', 'text-slate-700');
+            applyVagasFilter();
+        }
+
+        function applyVagasFilter() {
+            const selectedCampus = document.getElementById('campus-select').value;
+            const searchVal = document.getElementById('vagas-search-input').value.toLowerCase().trim();
+            const tbody = document.getElementById('vagas-table-body');
+            const noResults = document.getElementById('vagas-no-results');
+
+            tbody.innerHTML = '';
+            let count = 0;
+
+            vagasData.forEach(item => {
+                const matchesCampus = (selectedCampus === 'ALL' || item.campus === selectedCampus);
+                const matchesModality = (selectedModality === 'ALL' || item.mod === selectedModality);
+                const matchesSearch = (searchVal === '' || item.curso.toLowerCase().includes(searchVal) || item.campus.toLowerCase().includes(searchVal));
+
+                if (matchesCampus && matchesModality && matchesSearch) {
+                    count++;
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-teal-50/50 transition border-b border-slate-100 text-center";
+                    tr.innerHTML = `
+                        <td class="py-3 px-3 text-left">
+                            <strong class="text-slate-900 block text-xs">${item.curso}</strong>
+                            <span class="text-[10px] text-teal-800 font-bold"><i class="fas fa-building mr-1"></i>${item.campus}</span>
+                        </td>
+                        <td class="py-3 px-2 font-bold text-slate-700 text-[11px]">${item.mod}</td>
+                        <td class="py-3 px-2 font-semibold text-slate-500 text-[11px]">${item.turno}</td>
+                        <td class="py-3 px-2 font-black text-teal-900 bg-teal-50/60">${item.ac}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_ppi}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_ep}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_q}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_pcd}</td>
+                        <td class="py-3 px-2 text-emerald-950 font-semibold bg-emerald-50/30">${item.li_ppi}</td>
+                        <td class="py-3 px-2 text-emerald-950 font-semibold bg-emerald-50/30">${item.li_ep}</td>
+                        <td class="py-3 px-2 text-emerald-950 font-semibold bg-emerald-50/30">${item.li_q}</td>
+                        <td class="py-3 px-2 text-emerald-950 font-semibold bg-emerald-50/30">${item.li_pcd}</td>
+                        <td class="py-3 px-2 font-black text-emerald-800 bg-emerald-100/60 text-sm">${item.total}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            });
+
+            if (count === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Menu Mobile Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Toggle FAB
+        const fabContainer = document.querySelector('.fab-container');
+        const fabBtn = document.getElementById('fab-main-btn');
+        fabBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            fabContainer.classList.toggle('active');
+        });
+        document.addEventListener('click', () => fabContainer.classList.remove('active'));
+
+        // Navegação entre Abas de Conteúdo
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+        }
+
+        // Inicializar tabela ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            applyVagasFilter();
+        });
+    </script>
+</body>
+</html>
