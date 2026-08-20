@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Edital CTUR UFRRJ 2027 - Cursos Técnicos | Guia Pré-Federal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --brand-green: #15803d;
+            --brand-emerald: #059669;
+            --brand-lime: #c7ef59;
+            --brand-coral: #dd5737;
+            --brand-indigo: #5242ea;
+            --brand-light: #f0fdf4;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #064e3b 0%, #059669 50%, #047857 100%);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #059669;
+            border-radius: 9999px;
+        }
+        .tab-btn.active {
+            background-color: #059669;
+            color: white;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+        }
+        .modality-btn.active {
+            background-color: #059669;
+            color: white;
+            border-color: #059669;
+        }
+        .fab-container {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+        }
+        .fab-main {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background-color: #059669;
+            color: white;
+            border: none;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fab-container.active .fab-main {
+            background-color: #dd5737;
+            transform: rotate(135deg);
+        }
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+            transform: translateY(15px);
+            margin-bottom: 12px;
+        }
+        .fab-container.active .fab-options {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        .fab-label {
+            background-color: white;
+            color: #0f172a;
+            padding: 6px 14px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-right: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .fab-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="antialiased text-slate-800">
+
+    <!-- Navigation Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm py-3.5 sticky top-0 z-50 border-b border-slate-100">
+        <div class="container mx-auto px-4 max-w-6xl flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
+                <!-- Logo com fundo Laranja Coral oficial -->
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md transition group-hover:scale-105" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia - Pré Federal" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-black tracking-tight text-[#059669] leading-none">Guia - Pré Federal</span>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Edital CTUR UFRRJ 2027</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:block">
+                <ul class="flex space-x-5 text-xs font-bold uppercase tracking-wider text-slate-600">
+                    <li><a href="#datas-destaque" class="hover:text-[#059669] transition py-1 border-b-2 border-transparent hover:border-[#059669]"><i class="fas fa-calendar-alt text-amber-500 mr-1"></i>Datas</a></li>
+                    <li><a href="#escolha-vagas" class="hover:text-[#059669] transition py-1 border-b-2 border-transparent hover:border-[#059669]">Como Funciona</a></li>
+                    <li><a href="#prova" class="hover:text-[#059669] transition py-1 border-b-2 border-transparent hover:border-[#059669]">A Prova & Redação</a></li>
+                    <li><a href="#cotas" class="hover:text-[#059669] transition py-1 border-b-2 border-transparent hover:border-[#059669]">Cotas</a></li>
+                    <li><a href="#isencao" class="hover:text-[#059669] transition py-1 border-b-2 border-transparent hover:border-[#059669]">Isenção</a></li>
+                    <li><a href="#quadro-vagas" class="hover:text-[#059669] transition py-1 border-b-2 border-transparent hover:border-[#059669]"><i class="fas fa-university text-emerald-600 mr-1"></i>Cursos & Vagas</a></li>
+                    <li><a href="#conteudo" class="hover:text-[#059669] transition py-1 border-b-2 border-transparent hover:border-[#059669]">O que Estudar</a></li>
+                </ul>
+            </nav>
+
+            <!-- CTA Header Button -->
+            <div class="hidden sm:flex items-center space-x-2">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] hover:bg-opacity-90 text-slate-900 font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fas fa-rocket mr-1.5 text-emerald-800"></i> Curso Intensivo
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-3.5 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fab fa-whatsapp mr-1 text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden text-slate-800 text-xl focus:outline-none p-1">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 py-3 px-4 shadow-lg">
+            <ul class="flex flex-col space-y-2.5 text-xs font-bold uppercase tracking-wider text-slate-700">
+                <li><a href="#datas-destaque" class="mobile-link block py-2 px-3 rounded-lg bg-amber-50 text-amber-900 font-black"><i class="fas fa-calendar-alt text-amber-600 mr-2"></i>Datas Importantes</a></li>
+                <li><a href="#escolha-vagas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Como Funciona os Cursos</a></li>
+                <li><a href="#prova" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">A Prova & Redação</a></li>
+                <li><a href="#cotas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Cotas & Ações Afirmativas</a></li>
+                <li><a href="#isencao" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Isenção da Taxa</a></li>
+                <li><a href="#quadro-vagas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100"><i class="fas fa-university text-emerald-600 mr-2"></i>Cursos & Vagas</a></li>
+                <li><a href="#conteudo" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Conteúdo Programático Completo</a></li>
+                <li class="pt-2 flex flex-col space-y-2">
+                    <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="w-full bg-[#c7ef59] text-slate-900 font-black py-2.5 rounded-xl text-xs uppercase tracking-wider text-center block shadow-md">
+                        <i class="fas fa-rocket mr-1.5 text-emerald-800"></i> Conhecer o Intensivo 2026
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="w-full bg-emerald-500 text-white font-black py-2.5 rounded-xl text-xs uppercase tracking-wider text-center block shadow-md">
+                        <i class="fab fa-whatsapp mr-1.5"></i> Falar no WhatsApp
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-gradient text-white py-12 md:py-16 relative overflow-hidden">
+        <div class="container mx-auto px-4 max-w-6xl relative z-10 text-center">
+            
+            <!-- Logo no Hero com fundo Laranja Coral -->
+            <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-5 rounded-full flex items-center justify-center p-3 shadow-2xl border-4 border-white/40" style="background-color: #dd5737;">
+                <img src="./logo1.png" onerror="this.onerror=null; this.src='https://placehold.co/120x120/dd5737/ffffff?text=GPF';" alt="Guia - Pré Federal" class="w-full h-full object-contain">
+            </div>
+
+            <div class="inline-flex items-center space-x-2 bg-white/10 px-4 py-1.5 rounded-full backdrop-blur-md mb-4 border border-white/20">
+                <i class="fas fa-leaf text-[#c7ef59]"></i>
+                <span class="text-xs font-black uppercase tracking-wider text-slate-100">Colégio Técnico da UFRRJ • Edital nº 11/2026 (Ingresso 2027)</span>
+            </div>
+            
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4 leading-tight">
+                Guia Completo do Edital <span class="text-[#c7ef59]">CTUR UFRRJ 2027</span>
+            </h1>
+            
+            <p class="text-slate-100 text-sm md:text-base max-w-3xl mx-auto mb-8 font-medium leading-relaxed">
+                Colégio Técnico da Universidade Federal Rural do Rio de Janeiro (Seropédica): 245 vagas regulares + 7 vagas supranumerárias para Pessoas Trans nos cursos de <strong>Agroecologia, Hospedagem e Meio Ambiente</strong> (Ensino Médio Integrado e Concomitância Externa).
+            </p>
+
+            <!-- CTAS PRINCIPAIS DO CURSO E NAVEGAÇÃO -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fas fa-rocket mr-2 text-emerald-900"></i> Conheça Nosso Curso Intensivo 2026
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fab fa-whatsapp mr-2 text-lg"></i> Falar com a Coordenação
+                </a>
+            </div>
+
+            <!-- Botões de Atalho Interno -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6 pt-4 border-t border-white/10">
+                <a href="#datas-destaque" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-calendar-alt mr-1.5 text-amber-400"></i> Prazos do Edital
+                </a>
+                <a href="#prova" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-file-alt mr-1.5 text-emerald-300"></i> Prova & Redação
+                </a>
+                <a href="#quadro-vagas" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-seedling mr-1.5 text-lime-300"></i> Tabela de Vagas
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIMEIRA SEÇÃO: DATAS IMPORTANTES (Clean & Destaque) -->
+    <section id="datas-destaque" class="py-10 bg-amber-50/80 border-b border-amber-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-amber-300 shadow-md">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 pb-4 border-b border-slate-200 gap-4">
+                    <div>
+                        <span class="bg-amber-100 text-amber-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-1.5 inline-block border border-amber-300">
+                            <i class="fas fa-bell mr-1 text-amber-700"></i> Cronograma Oficial do Edital CTUR nº 11/2026
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-black text-slate-900">Datas Importantes do Concurso CTUR 2027</h2>
+                    </div>
+                    <div class="text-xs font-bold text-slate-500 bg-slate-100 px-3.5 py-2 rounded-xl border border-slate-200">
+                        <i class="fas fa-info-circle text-emerald-600 mr-1"></i> Inscrições pelo portal ctur.ufrrj.br
+                    </div>
+                </div>
+
+                <!-- Tabela Responsiva do Cronograma Oficial -->
+                <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                    <table class="w-full text-left border-collapse text-xs md:text-sm">
+                        <thead>
+                            <tr class="bg-emerald-950 text-white font-bold uppercase text-[11px] tracking-wider">
+                                <th class="py-3.5 px-4 md:px-6"><i class="fas fa-calendar-day mr-2 text-lime-400"></i>Etapa / Evento do Edital</th>
+                                <th class="py-3.5 px-4 md:px-6"><i class="fas fa-clock mr-2 text-lime-400"></i>Período / Data Oficial</th>
+                                <th class="py-3.5 px-4 md:px-6 hidden sm:table-cell"><i class="fas fa-info-circle mr-2 text-lime-400"></i>Observação Importante</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Publicação Oficial do Edital nº 11/2026</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-emerald-700">14/08/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Divulgado no portal do Colégio Técnico da UFRRJ (ctur.ufrrj.br)</td>
+                            </tr>
+                            <tr class="bg-amber-50/80 hover:bg-amber-100/60 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-file-signature text-amber-600 mr-1.5"></i>Solicitação de Isenção da Taxa de Inscrição</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-amber-800">17/08/2026 a 21/08/2026 (09h às 16h)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-600">Presencialmente na Secretaria do CTUR ou envio conforme regras do item 4.2</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Divulgação dos Contemplados com a Isenção</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">25/08/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Quem teve pedido indeferido precisa pagar a GRU até 15/09/2026</td>
+                            </tr>
+                            <tr class="bg-emerald-50/80 hover:bg-emerald-100/60 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-user-plus text-emerald-600 mr-1.5"></i>Período de Inscrições Online</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-emerald-800">17/08/2026 a 14/09/2026 (até as 15h)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-600">Exclusivamente via internet pelo site ctur.ufrrj.br com CPF do candidato</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Último Dia para Pagamento da Taxa (GRU Banco do Brasil)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-rose-700">15/09/2026 (expediente bancário)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">R$ 70,00 (Integrado) / R$ 35,00 (Concomitância Externa)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Cartão de Confirmação de Inscrição (CCI / Local de Prova)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-purple-700">A partir de 25/09/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Impressão no painel com indicação de prédio e sala do concurso</td>
+                            </tr>
+                            <tr class="bg-emerald-100/70 hover:bg-emerald-200/60 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-emerald-950"><i class="fas fa-edit text-emerald-700 mr-1.5"></i>Aplicação da Prova Objetiva e Redação</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-emerald-900">11/10/2026 (Domingo) • 13h30 às 16h30</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-emerald-950 font-bold">Portões abrem às 12h00 e FECHAM impreterivelmente às 13h00</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Divulgação do Gabarito Preliminar da Objetiva</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">12/10/2026 (Recurso: 14/10/2026)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Resultado dos recursos do gabarito em 16/10/2026</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Resultado Preliminar da Prova Objetiva & Notas da Redação</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-purple-700">Objetiva: 23/10 | Redação: 13/11/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Revisão das notas de redação requerida presencialmente em 17/11/2026</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Resultado Preliminar Geral do Concurso</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-emerald-700">25/11/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Convocação dos candidatos aprovados para verificação de cotas</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Bancas de Verificação de Cotas & Heteroidentificação</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-indigo-700">30/11/2026 a 02/12/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Perícia médica PcD e entrevista presencial de heteroidentificação no CTUR</td>
+                            </tr>
+                            <tr class="bg-emerald-100/70 hover:bg-emerald-200/60 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-emerald-950"><i class="fas fa-trophy text-emerald-700 mr-1.5"></i>Resultado Final & 1ª Convocação para Matrícula</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-emerald-900">18/12/2026</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-emerald-950 font-bold">Publicação oficial das listas dos aprovados em todas as categorias</td>
+                            </tr>
+                            <tr class="bg-emerald-50 hover:bg-emerald-100 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-emerald-900"><i class="fas fa-graduation-cap text-emerald-600 mr-1.5"></i>Período de Matrículas da 1ª Convocação</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-emerald-800">11, 12 e 13/01/2027 (Presencial no CTUR)</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-emerald-900">Agroecologia: 11/01 | Hospedagem: 12/01 | Meio Ambiente: 13/01</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">2ª Convocação para Matrícula (Reclassificação)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">15/01/2027 (Matrícula: 20 e 21/01/2027)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Convocação da lista de espera para vagas remanescentes</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">3ª Convocação para Matrícula (Reclassificação)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">22/01/2027 (Matrícula: 26/01/2027)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Chamada presencial final das listas de espera</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Regras e Funcionamento dos Cursos no CTUR -->
+    <section id="escolha-vagas" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-emerald-50 text-emerald-800 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Regras do Edital nº 11/2026
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Como Funcionam os Cursos do CTUR?</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    O Colégio Técnico da UFRRJ oferece cursos técnicos de nível médio em 2 modalidades com alta excelência no campus Seropédica.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card 1: Integrado -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl font-bold mb-4">1</div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Ensino Médio Integrado ao Técnico</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium mb-3">
+                        O estudante cursa a formação geral do Ensino Médio + as disciplinas do Curso Técnico juntas no CTUR.
+                    </p>
+                    <ul class="text-xs text-slate-700 space-y-1.5 font-semibold">
+                        <li><i class="fas fa-check text-emerald-600 mr-1.5"></i><strong>Requisito:</strong> Ter concluído ou estar concluindo o 9º ano em 2026.</li>
+                        <li><i class="fas fa-check text-emerald-600 mr-1.5"></i><strong>Duração:</strong> 3 anos em turno Integral (07h30 às 17h00).</li>
+                        <li><i class="fas fa-check text-emerald-600 mr-1.5"></i><strong>Estágio Obrigatório:</strong> 160h (Agroecologia/Hospedagem) ou 100h (Meio Ambiente).</li>
+                        <li><i class="fas fa-check text-emerald-600 mr-1.5"></i><strong>Taxa da Inscrição:</strong> R$ 70,00.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Concomitância Externa -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center text-xl font-bold mb-4">2</div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Concomitância Externa ao Ensino Médio</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium mb-3">
+                        O estudante cursa apenas a parte técnica no CTUR enquanto faz o Ensino Médio Regular em outra escola.
+                    </p>
+                    <ul class="text-xs text-slate-700 space-y-1.5 font-semibold">
+                        <li><i class="fas fa-check text-teal-600 mr-1.5"></i><strong>Requisito:</strong> Matriculado a partir do 2º ano do Ensino Médio em outra escola ou com Ensino Médio completo.</li>
+                        <li><i class="fas fa-check text-teal-600 mr-1.5"></i><strong>Duração:</strong> 2 anos em turno parcial (Manhã ou Tarde).</li>
+                        <li><i class="fas fa-check text-teal-600 mr-1.5"></i><strong>Horários:</strong> Hospedagem (Manhã: 07h30 às 11h50) | Agroecologia e Meio Ambiente (Tarde: 13h20 às 17h50).</li>
+                        <li><i class="fas fa-check text-teal-600 mr-1.5"></i><strong>Taxa da Inscrição:</strong> R$ 35,00.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Alerta sobre CPF do próprio candidato -->
+            <div class="mt-8 bg-emerald-50 border-l-4 border-emerald-600 p-5 rounded-r-2xl">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-id-card text-emerald-600 text-2xl flex-shrink-0"></i>
+                    <p class="text-xs text-emerald-950 font-semibold leading-relaxed">
+                        <strong>Inscrição Obrigatoriamente com CPF do Estudante:</strong> A inscrição e o pagamento da GRU devem ser realizados exclusivamente utilizando o <strong>CPF do próprio candidato</strong> (mesmo menor de idade). Não é permitido utilizar o CPF dos pais sob pena de ter a inscrição indeferida!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO A PROVA & REDAÇÃO (COLOCADA ANTES DAS VAGAS) -->
+    <section id="prova" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Etapa Única • 3 Horas de Prova (13h30 às 16h30)
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">A Prova Objetiva & Redação do CTUR 2027</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    A prova é realizada no dia <strong>11/10/2026 (Domingo)</strong>. Os portões abrem às 12h00 e fecham impreterivelmente às 13h00.
+                </p>
+            </div>
+
+            <!-- Tabela de Estrutura da Prova para Integrados -->
+            <div class="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm mb-8">
+                <div class="bg-emerald-950 text-white font-bold px-6 py-3 text-xs uppercase tracking-wider flex justify-between items-center">
+                    <span>1. Estrutura para Cursos Técnicos Integrados ao Ensino Médio (60 Pontos Totais)</span>
+                    <span class="bg-emerald-800 text-lime-300 text-[10px] px-2.5 py-0.5 rounded-full font-extrabold">3 Anos • Integral</span>
+                </div>
+                <table class="w-full text-left border-collapse text-xs md:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 font-bold uppercase text-[11px] tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-4 md:px-6">Bloco de Prova</th>
+                            <th class="py-3 px-4 md:px-6">Disciplinas Contempladas</th>
+                            <th class="py-3 px-4 md:px-6">Nº de Questões</th>
+                            <th class="py-3 px-4 md:px-6">Pontuação do Bloco</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900">Bloco 1</td>
+                            <td class="py-3 px-4 md:px-6">Linguagens (4 q. / 8 pts) + Matemática (6 q. / 12 pts)</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">10 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-black text-emerald-700">20 pontos</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900">Bloco 2</td>
+                            <td class="py-3 px-4 md:px-6">Ciências Humanas (4 q. / 8 pts) + Ciências da Natureza (6 q. / 12 pts)</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">10 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-black text-emerald-700">20 pontos</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition bg-emerald-50/50">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-pen-nib text-emerald-700 mr-1.5"></i>Redação</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">Texto Dissertativo-Argumentativo em prosa sobre tema proposto</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">1 Prova</td>
+                            <td class="py-3 px-4 md:px-6 font-black text-emerald-800">20 pontos</td>
+                        </tr>
+                        <tr class="bg-emerald-100/70 font-black">
+                            <td class="py-3 px-4 md:px-6 text-emerald-950 uppercase" colspan="2">TOTAL INTEGRADO (BLOCO 1 + BLOCO 2 + REDAÇÃO)</td>
+                            <td class="py-3 px-4 md:px-6 text-emerald-950">20 Questões</td>
+                            <td class="py-3 px-4 md:px-6 text-emerald-950 text-sm">60 PONTOS MÁXIMO</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabela de Estrutura da Prova para Concomitância Externa -->
+            <div class="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm mb-8">
+                <div class="bg-teal-950 text-white font-bold px-6 py-3 text-xs uppercase tracking-wider flex justify-between items-center">
+                    <span>2. Estrutura para Cursos Técnicos em Concomitância Externa (60 Pontos Totais)</span>
+                    <span class="bg-teal-800 text-teal-200 text-[10px] px-2.5 py-0.5 rounded-full font-extrabold">2 Anos • Parcial</span>
+                </div>
+                <table class="w-full text-left border-collapse text-xs md:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 font-bold uppercase text-[11px] tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-4 md:px-6">Bloco de Prova</th>
+                            <th class="py-3 px-4 md:px-6">Disciplinas Contempladas</th>
+                            <th class="py-3 px-4 md:px-6">Nº de Questões</th>
+                            <th class="py-3 px-4 md:px-6">Pontuação do Bloco</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900">Bloco 1</td>
+                            <td class="py-3 px-4 md:px-6">Linguagens e Códigos (Língua Portuguesa)</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">10 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-black text-teal-700">20 pontos</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900">Bloco 2</td>
+                            <td class="py-3 px-4 md:px-6">Matemática e Suas Tecnologias</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">10 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-black text-teal-700">20 pontos</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition bg-teal-50/50">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-pen-nib text-teal-700 mr-1.5"></i>Redação</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">Texto Dissertativo-Argumentativo em prosa sobre tema proposto</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">1 Prova</td>
+                            <td class="py-3 px-4 md:px-6 font-black text-teal-800">20 pontos</td>
+                        </tr>
+                        <tr class="bg-teal-100/70 font-black">
+                            <td class="py-3 px-4 md:px-6 text-teal-950 uppercase" colspan="2">TOTAL CONCOMITÂNCIA (BLOCO 1 + BLOCO 2 + REDAÇÃO)</td>
+                            <td class="py-3 px-4 md:px-6 text-teal-950">20 Questões</td>
+                            <td class="py-3 px-4 md:px-6 text-teal-950 text-sm">60 PONTOS MÁXIMO</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- REGRA DE CORREÇÃO DA REDAÇÃO (3X VAGAS) & ELIMINAÇÃO POR ZERO -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                
+                <!-- Card Regra do Triplo de Vagas (Redação) -->
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-2xl">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-star text-amber-600 text-2xl flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-black text-amber-950 uppercase text-xs mb-1">Correção da Redação (Regra de 3x Vagas):</h4>
+                            <p class="text-xs text-amber-900 font-medium leading-relaxed">
+                                A Prova de Redação só será corrigida para os candidatos classificados na Prova Objetiva até uma quantidade equivalente a <strong>3 vezes o número de vagas oferecidas</strong> em cada modalidade/grupo do curso escolhido (Quadro X). Em caso de empate na última vaga, todos os empatados têm a redação corrigida.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Critério de Eliminação (Não Zerar) -->
+                <div class="bg-rose-50 border-l-4 border-rose-600 p-5 rounded-r-2xl">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-exclamation-triangle text-rose-600 text-2xl flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-black text-rose-950 uppercase text-xs mb-1">Critério Obrigatório de Não Eliminação:</h4>
+                            <p class="text-xs text-rose-900 font-medium leading-relaxed">
+                                É <strong>obrigatório acertar pelo menos 1 ponto em cada Bloco da Prova Objetiva e não zerar a Prova de Redação</strong>. Faltar no dia da prova, obter nota zero em qualquer um dos blocos ou nota zero na redação elimina o candidato automaticamente.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Dicas para o dia da prova -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-clock text-emerald-600 mr-1"></i>Portões e Horários</h4>
+                    <p class="text-slate-600 font-medium">Recomenda-se chegar às 12h00 (1h30 de antecedência). Portões <strong>fecham pontualmente às 13h00</strong>. Prova das 13h30 às 16h30.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-id-card text-emerald-600 mr-1"></i>O que Levar</h4>
+                    <p class="text-slate-600 font-medium">Documento de identidade oficial original com foto (DETRAN, RG, CNH), Cartão de Confirmação (CCI) e caneta esferográfica preta em tubo transparente.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-door-open text-emerald-600 mr-1"></i>Permanência em Sala</h4>
+                    <p class="text-slate-600 font-medium">Permanência mínima obrigatória em sala de 60 minutos. O Caderno de Questões só poderá ser levado para casa após 2 horas de prova.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Cotas e Reserva de Vagas -->
+    <section id="cotas" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Lei nº 12.711/2012, Lei nº 14.723/2023 & Resoluções UFRRJ
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Reserva de Vagas, Cotas & Ações Afirmativas no CTUR</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    50% das vagas são destinadas a estudantes que cursaram <strong>integralmente do 1º ao 9º ano do Ensino Fundamental em escolas públicas</strong>.
+                </p>
+            </div>
+
+            <!-- Tabela de Modalidades de Cotas (Grupo I - Escola Pública e Grupo II - Cotas Especiais) -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+                <div class="p-4 bg-emerald-950 text-white font-bold text-xs uppercase tracking-wider">
+                    As Modalidades de Reserva de Vagas do CTUR UFRRJ
+                </div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium text-slate-700">
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                        <strong class="text-emerald-900 font-black block mb-1">Ampla Concorrência (Grupo AC)</strong>
+                        Aberto a todos os candidatos, independentemente da escola em que estudaram.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-purple-50 border border-purple-200">
+                        <strong class="text-purple-950 font-black block mb-1">Cota T01 - Pessoa Trans (7 Vagas Supranumerárias)</strong>
+                        Ações afirmativas para candidatos Trans (transexual ou travesti) maiores de 18 anos ou emancipados. Independe da escola de origem!
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-teal-50 border border-teal-200">
+                        <strong class="text-teal-950 font-black block mb-1">Cota V01 - PcD Geral (Pessoa com Deficiência)</strong>
+                        Reservada a pessoas com deficiência sem exigência de ter cursado o Ensino Fundamental em escola pública.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">AA1 / AA2 (&le; 1 SM + EP + PPI ou Quilombola)</strong>
+                        Escola pública + Renda &le; 1,0 Salário Mínimo per capita + Pretos, Pardos, Indígenas (AA1) ou Quilombolas (AA2).
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">AA3 / AA4 (&le; 1 SM + EP + PcD ou Ampla)</strong>
+                        Escola pública + Renda &le; 1,0 Salário Mínimo per capita + Pessoa com Deficiência (AA3) ou Ampla Escola Pública (AA4).
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">AA5 / AA6 (Qualquer Renda + EP + PPI ou Quilombola)</strong>
+                        Escola pública + Independente de Renda + Pretos, Pardos, Indígenas (AA5) ou Quilombolas (AA6).
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">AA7 / AA8 (Qualquer Renda + EP + PcD ou Ampla)</strong>
+                        Escola pública + Independente de Renda + Pessoa com Deficiência (AA7) ou Ampla Escola Pública (AA8).
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Isenção -->
+    <section id="isencao" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-10">
+                <span class="bg-amber-100 text-amber-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-amber-200 inline-block">
+                    Taxa: R$ 70,00 (Integrado) / R$ 35,00 (Concomitância)
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Isenção da Taxa de Inscrição no CTUR</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    A solicitação deve ser feita exclusivamente entre os dias <strong>17/08 e 21/08/2026 (das 09h às 16h)</strong>.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 max-w-3xl mx-auto text-xs font-medium text-slate-700 leading-relaxed space-y-3 shadow-sm">
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-check-circle text-emerald-600 text-lg flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-slate-900 text-sm block mb-1">Requisito para obter a Isenção:</strong>
+                        Ter cursado ou estar cursando <strong>integralmente TODO o Ensino Fundamental (1º ao 9º ano) em escola da Rede Pública de Ensino brasileira</strong> (municipal, estadual ou federal).
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 border-t border-slate-200 pt-3">
+                    <i class="fas fa-info-circle text-emerald-600 text-lg flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-slate-900 text-sm block mb-1">Como solicitar na Secretaria do CTUR:</strong>
+                        Apresente o comprovante de inscrição, documento com foto + CPF original e a Declaração de estudos em escola pública preenchida conforme o <strong>Anexo XV do edital</strong>. A lista dos contemplados sai em 25/08/2026.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO QUADRO DE VAGAS DO CTUR -->
+    <section id="quadro-vagas" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-10">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    245 Vagas Regulares + 7 Vagas Trans
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Cursos & Distribuição de Vagas do CTUR UFRRJ</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Consulte a tabela oficial do Quadro V do edital com a quantidade de vagas para cada curso e modalidade.
+                </p>
+            </div>
+
+            <!-- Painel de Filtro por Modalidade -->
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 mb-8 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <label class="block text-xs font-black uppercase text-slate-700 mb-1.5">
+                            <i class="fas fa-filter text-emerald-600 mr-1"></i> Filtrar por Modalidade de Curso:
+                        </label>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="setModalityFilter('ALL')" class="modality-btn active text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 transition">Todos os Cursos</button>
+                            <button onclick="setModalityFilter('Integrado')" class="modality-btn text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 transition">Integrado (3 Anos • Integral)</button>
+                            <button onclick="setModalityFilter('Concomitante')" class="modality-btn text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 transition">Concomitância Externa (2 Anos)</button>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-auto">
+                        <input type="text" id="vagas-search-input" onkeyup="applyVagasFilter()" placeholder="Pesquisar curso (ex: Agroecologia, Meio Ambiente...)" class="w-full md:w-72 bg-white border border-slate-300 text-slate-900 text-xs rounded-xl p-2.5 font-bold focus:ring-2 focus:ring-emerald-500 focus:outline-none shadow-sm">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela Interativa de Vagas -->
+            <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm bg-white">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-emerald-950 text-white font-bold uppercase text-[10px] tracking-wider text-center">
+                            <th class="py-3 px-3 text-left w-1/4">Curso Técnico</th>
+                            <th class="py-3 px-2">Modalidade</th>
+                            <th class="py-3 px-2">Turno</th>
+                            <th class="py-3 px-2 bg-emerald-900">AC</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB PPI">LB_PPI</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB EP">LB_EP</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB Q">LB_Q</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB PCD">LB_PCD</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI PPI">LI_PPI</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI EP">LI_EP</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI Q">LI_Q</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI PCD">LI_PCD</th>
+                            <th class="py-3 px-2 bg-purple-900 text-purple-200">TRANS</th>
+                            <th class="py-3 px-2 bg-slate-900 text-lime-400 font-black">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vagas-table-body" class="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <!-- Gerado via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="vagas-no-results" class="hidden text-center py-12 bg-slate-50 rounded-2xl border border-slate-200 my-4">
+                <i class="fas fa-search-minus text-3xl text-slate-400 mb-2"></i>
+                <h4 class="font-bold text-slate-800 text-sm">Nenhum curso foi encontrado</h4>
+                <p class="text-xs text-slate-500">Tente ajustar o termo digitado na busca.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Conteúdo Programático -->
+    <section id="conteudo" class="py-16 bg-slate-50">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-10">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Conteúdo Oficial do Anexo I e II
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">O que Estudar para a Prova do CTUR 2027?</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Selecione a disciplina abaixo para visualizar o programa verticalizado cobrado no concurso.
+                </p>
+            </div>
+
+            <!-- Navegação por Abas -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8" id="subject-tabs">
+                <button onclick="switchTab('portugues')" class="tab-btn active font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-book mr-1.5"></i>Linguagens & Redação</button>
+                <button onclick="switchTab('matematica')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-calculator mr-1.5"></i>Matemática</button>
+                <button onclick="switchTab('humanas')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-globe-americas mr-1.5"></i>Ciências Humanas</button>
+                <button onclick="switchTab('natureza')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-flask mr-1.5"></i>Ciências da Natureza</button>
+            </div>
+
+            <!-- Conteúdo das Abas -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm text-xs leading-relaxed text-slate-700">
+                
+                <!-- Linguagens & Redação -->
+                <div id="tab-portugues" class="tab-content space-y-4">
+                    <h3 class="text-lg font-black text-emerald-900 pb-2 border-b border-slate-100"><i class="fas fa-book text-emerald-600 mr-2"></i>Linguagens & Produção Textual</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Compreensão e Interpretação de Textos:</strong> Texto verbal e não verbal; texto em prosa e verso; constituição e funcionamento de gêneros e tipos textuais.</li>
+                        <li><strong>Gramática em Uso:</strong> Classes de palavras; significação vocabular (sinônimos, antônimos, homônimos e parônimos); frase, oração e período; relações sintáticas e semânticas no período simples e composto.</li>
+                        <li><strong>Produção Textual (Redação Dissertativo-Argumentativa):</strong> Domínio da modalidade escrita formal, repertório sociocultural, coerência, coesão e construção do ponto de vista.</li>
+                    </ul>
+                </div>
+
+                <!-- Matemática -->
+                <div id="tab-matematica" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-emerald-900 pb-2 border-b border-slate-100"><i class="fas fa-calculator text-emerald-600 mr-2"></i>Matemática</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Números e Operações:</strong> Conjuntos numéricos (N, Z, Q, R), MMC, MDC, proporcionalidade e cálculo de porcentagem.</li>
+                        <li><strong>Pensamento Algébrico:</strong> Linguagem algébrica, equações, inequações e sistemas de 1º e 2º graus.</li>
+                        <li><strong>Formas e Medidas:</strong> Unidades de medida (comprimento, massa, área, volume, tempo e ângulo), Teorema de Pitágoras, razões trigonométricas no triângulo retângulo, perímetro, área e volume de bloco retangular.</li>
+                        <li><strong>Tratamento da Informação:</strong> Leitura de gráficos e tabelas, média aritmética simples/ponderada e contagem.</li>
+                    </ul>
+                </div>
+
+                <!-- Ciências Humanas -->
+                <div id="tab-humanas" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-amber-900 pb-2 border-b border-slate-100"><i class="fas fa-globe-americas text-amber-600 mr-2"></i>Ciências Humanas (História & Geografia)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <strong class="text-amber-900 font-black block mb-1 text-xs">HISTÓRIA:</strong>
+                            <ul class="space-y-1 list-disc list-inside text-slate-600">
+                                <li>Revoluções Burguesas, Revolução Industrial e Iluminismo.</li>
+                                <li>Independência do Brasil, Primeiro e Segundo Reinado.</li>
+                                <li>Imperialismo, 1ª e 2ª Guerra Mundial e Guerra Fria.</li>
+                                <li>Primeira República, Era Vargas e Ditadura Militar no Brasil.</li>
+                            </ul>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <strong class="text-amber-900 font-black block mb-1 text-xs">GEOGRAFIA:</strong>
+                            <ul class="space-y-1 list-disc list-inside text-slate-600">
+                                <li>Coordenadas geográficas, fusos horários e cartografia.</li>
+                                <li>Regiões do Brasil, biomas, climas e relevo brasileiro.</li>
+                                <li>Globalização, matrizes energéticas e urbanização.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ciências da Natureza -->
+                <div id="tab-natureza" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-purple-900 pb-2 border-b border-slate-100"><i class="fas fa-flask text-purple-600 mr-2"></i>Ciências da Natureza (Biologia, Química & Física)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <strong class="text-purple-900 font-black block mb-1 text-xs">BIOLOGIA:</strong>
+                            <ul class="space-y-1 list-disc list-inside text-slate-600">
+                                <li>Citologia e metabolismo celular.</li>
+                                <li>Fisiologia humana e saúde pública.</li>
+                                <li>Ecologia, biomas e evolução.</li>
+                            </ul>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <strong class="text-purple-900 font-black block mb-1 text-xs">QUÍMICA:</strong>
+                            <ul class="space-y-1 list-disc list-inside text-slate-600">
+                                <li>Misturas e separação de materiais.</li>
+                                <li>Transformações e equações químicas.</li>
+                                <li>Estrutura da matéria e poluição ambiental.</li>
+                            </ul>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <strong class="text-purple-900 font-black block mb-1 text-xs">FÍSICA:</strong>
+                            <ul class="space-y-1 list-disc list-inside text-slate-600">
+                                <li>Cinemática e Leis de Newton.</li>
+                                <li>Trabalho, energia e termologia.</li>
+                                <li>Óptica, ondas e eletricidade simples.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BANNER DE CTA PARA MATRÍCULA NO CURSINHO -->
+    <section class="py-12 bg-gradient-to-r from-[#064e3b] to-[#059669] text-white">
+        <div class="container mx-auto px-4 max-w-5xl text-center">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center p-2.5 mx-auto mb-4 shadow-xl border-2 border-white/30" style="background-color: #dd5737;">
+                <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+            </div>
+            
+            <span class="bg-[#c7ef59] text-slate-900 font-black text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">
+                Sua Vaga no CTUR Começa Aqui
+            </span>
+            
+            <h2 class="text-2xl md:text-4xl font-black mb-3 leading-tight">
+                Quer Passar no Concurso <span class="text-[#c7ef59]">CTUR UFRRJ 2027</span>?
+            </h2>
+            
+            <p class="text-slate-100 text-xs md:text-sm max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
+                Estude com o preparatório 100% online líder em aprovação nas Escolas e Institutos Federais. Aulas direcionadas, material em PDF, simulados no modelo do CTUR e correção individualizada de redação.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-8 py-3.5 rounded-xl transition shadow-2xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fas fa-rocket mr-2 text-emerald-950"></i> Quero Me Matricular no Intensivo
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-8 py-3.5 rounded-xl transition shadow-2xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fab fa-whatsapp mr-2 text-lg"></i> Falar com um Consultor
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800 text-xs">
+        <div class="container mx-auto px-4 max-w-6xl text-center">
+            <div class="flex justify-center items-center space-x-3 mb-6">
+                <!-- Logo no footer com fundo Laranja Coral -->
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+                </div>
+                <span class="text-lg font-black tracking-tight text-white">Guia - Pré Federal</span>
+            </div>
+            <p class="text-slate-400 font-medium mb-4 max-w-xl mx-auto">
+                Preparatório 100% online especializado no ingresso aos Cursos Técnicos Integrados das Escolas e Institutos Federais.
+            </p>
+            <p class="text-slate-500">&copy; 2026 Guia Pré-Federal. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button (FAB) -->
+    <div class="fab-container">
+        <div class="fab-options">
+            <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="fab-option">
+                <span class="fab-label">Nosso Intensivo 2026</span>
+                <div class="fab-icon" style="background-color: #059669;">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </a>
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
+                <span class="fab-label">Falar no WhatsApp</span>
+                <div class="fab-icon" style="background-color: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </a>
+        </div>
+        <button class="fab-main" id="fab-main-btn">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <!-- Script Interativo com Dados do Quadro V (CTUR UFRRJ) -->
+    <script>
+        // Dados Oficiais de Vagas por Curso do CTUR UFRRJ (Edital nº 11/2026)
+        const vagasData = [
+            { curso: "Agroecologia", mod: "Integrado", turno: "Integral", ac: 31, lb_ppi: 12, lb_ep: 2, lb_q: 1, lb_pcd: 4, li_ppi: 10, li_ep: 4, li_q: 0, li_pcd: 2, trans: 2, total: "70 + 2" },
+            { curso: "Agroecologia", mod: "Concomitante", turno: "Tarde", ac: 15, lb_ppi: 2, lb_ep: 6, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 2, trans: 1, total: "35 + 1" },
+            { curso: "Hospedagem", mod: "Integrado", turno: "Integral", ac: 15, lb_ppi: 6, lb_ep: 2, lb_q: 1, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 2, trans: 1, total: "35 + 1" },
+            { curso: "Hospedagem", mod: "Concomitante", turno: "Manhã", ac: 15, lb_ppi: 1, lb_ep: 2, lb_q: 1, lb_pcd: 6, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 2, trans: 1, total: "35 + 1" },
+            { curso: "Meio Ambiente", mod: "Integrado", turno: "Integral", ac: 15, lb_ppi: 6, lb_ep: 1, lb_q: 2, lb_pcd: 1, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 2, trans: 1, total: "35 + 1" },
+            { curso: "Meio Ambiente", mod: "Concomitante", turno: "Tarde", ac: 15, lb_ppi: 6, lb_ep: 1, lb_q: 1, lb_pcd: 2, li_ppi: 5, li_ep: 1, li_q: 0, li_pcd: 2, trans: 1, total: "35 + 1" }
+        ];
+
+        let selectedModality = 'ALL';
+
+        function setModalityFilter(mod) {
+            selectedModality = mod;
+            document.querySelectorAll('.modality-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-[#059669]', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+            event.target.classList.add('active', 'bg-[#059669]', 'text-white');
+            event.target.classList.remove('bg-white', 'text-slate-700');
+            applyVagasFilter();
+        }
+
+        function applyVagasFilter() {
+            const searchVal = document.getElementById('vagas-search-input').value.toLowerCase().trim();
+            const tbody = document.getElementById('vagas-table-body');
+            const noResults = document.getElementById('vagas-no-results');
+
+            tbody.innerHTML = '';
+            let count = 0;
+
+            vagasData.forEach(item => {
+                const matchesModality = (selectedModality === 'ALL' || item.mod.toLowerCase().includes(selectedModality.toLowerCase()));
+                const matchesSearch = (searchVal === '' || item.curso.toLowerCase().includes(searchVal) || item.mod.toLowerCase().includes(searchVal));
+
+                if (matchesModality && matchesSearch) {
+                    count++;
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-emerald-50/50 transition border-b border-slate-100 text-center";
+                    tr.innerHTML = `
+                        <td class="py-3 px-3 text-left">
+                            <strong class="text-slate-900 block text-xs">Técnico em ${item.curso}</strong>
+                            <span class="text-[10px] text-emerald-800 font-bold"><i class="fas fa-university mr-1"></i>CTUR - UFRRJ</span>
+                        </td>
+                        <td class="py-3 px-2 font-bold text-slate-700 text-[11px]">${item.mod}</td>
+                        <td class="py-3 px-2 font-semibold text-slate-500 text-[11px]">${item.turno}</td>
+                        <td class="py-3 px-2 font-black text-emerald-900 bg-emerald-50/60">${item.ac}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_ppi}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_ep}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_q}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_pcd}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_ppi}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_ep}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_q}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_pcd}</td>
+                        <td class="py-3 px-2 text-purple-900 font-bold bg-purple-50">${item.trans}</td>
+                        <td class="py-3 px-2 font-black text-emerald-800 bg-emerald-100/60 text-sm">${item.total}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            });
+
+            if (count === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Menu Mobile Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Toggle FAB
+        const fabContainer = document.querySelector('.fab-container');
+        const fabBtn = document.getElementById('fab-main-btn');
+        fabBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            fabContainer.classList.toggle('active');
+        });
+        document.addEventListener('click', () => fabContainer.classList.remove('active'));
+
+        // Navegação entre Abas de Conteúdo
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+        }
+
+        // Inicializar tabela ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            applyVagasFilter();
+        });
+    </script>
+</body>
+</html>
