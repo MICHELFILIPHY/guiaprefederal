@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Edital IFFar 2027 - Cursos Técnicos Integrados | Guia Pré-Federal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --brand-gaúcho-green: #00875f;
+            --brand-gaúcho-dark: #005a40;
+            --brand-emerald: #059669;
+            --brand-lime: #c7ef59;
+            --brand-coral: #dd5737;
+            --brand-gold: #f59e0b;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        /* Gradient exclusivo Gaúcho/Farroupilha para o IFFar */
+        .hero-gradient {
+            background: linear-gradient(135deg, #004b32 0%, #00875f 50%, #059669 100%);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #00875f;
+            border-radius: 9999px;
+        }
+        .tab-btn.active {
+            background-color: #00875f;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 135, 95, 0.35);
+        }
+        .fab-container {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+        }
+        .fab-main {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background-color: #00875f;
+            color: white;
+            border: none;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fab-container.active .fab-main {
+            background-color: #dd5737;
+            transform: rotate(135deg);
+        }
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+            transform: translateY(15px);
+            margin-bottom: 12px;
+        }
+        .fab-container.active .fab-options {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        .fab-label {
+            background-color: white;
+            color: #0f172a;
+            padding: 6px 14px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-right: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .fab-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="antialiased text-slate-800">
+
+    <!-- Navigation Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm py-3.5 sticky top-0 z-50 border-b border-slate-100">
+        <div class="container mx-auto px-4 max-w-6xl flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
+                <!-- Logo com fundo Laranja Coral oficial -->
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md transition group-hover:scale-105" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia - Pré Federal" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-black tracking-tight text-[#00875f] leading-none">Guia - Pré Federal</span>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Edital IFFar 2027 • RS</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:block">
+                <ul class="flex space-x-5 text-xs font-bold uppercase tracking-wider text-slate-600">
+                    <li><a href="#datas-destaque" class="hover:text-[#00875f] transition py-1 border-b-2 border-transparent hover:border-[#00875f]"><i class="fas fa-calendar-alt text-amber-500 mr-1"></i>Datas</a></li>
+                    <li><a href="#escolha-vagas" class="hover:text-[#00875f] transition py-1 border-b-2 border-transparent hover:border-[#00875f]">Como Funciona</a></li>
+                    <li><a href="#prova" class="hover:text-[#00875f] transition py-1 border-b-2 border-transparent hover:border-[#00875f]">A Prova Objetiva</a></li>
+                    <li><a href="#cotas" class="hover:text-[#00875f] transition py-1 border-b-2 border-transparent hover:border-[#00875f]">Cotas & Regras</a></li>
+                    <li><a href="#quadro-vagas" class="hover:text-[#00875f] transition py-1 border-b-2 border-transparent hover:border-[#00875f]"><i class="fas fa-university text-[#00875f] mr-1"></i>Campi & Vagas</a></li>
+                    <li><a href="#conteudo" class="hover:text-[#00875f] transition py-1 border-b-2 border-transparent hover:border-[#00875f]">O que Estudar</a></li>
+                </ul>
+            </nav>
+
+            <!-- CTA Header Button -->
+            <div class="hidden sm:flex items-center space-x-2">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] hover:bg-opacity-90 text-slate-900 font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fas fa-rocket mr-1.5 text-emerald-800"></i> Curso Intensivo
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-3.5 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fab fa-whatsapp mr-1 text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden text-slate-800 text-xl focus:outline-none p-1">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 py-3 px-4 shadow-lg">
+            <ul class="flex flex-col space-y-2.5 text-xs font-bold uppercase tracking-wider text-slate-700">
+                <li><a href="#datas-destaque" class="mobile-link block py-2 px-3 rounded-lg bg-amber-50 text-amber-900 font-black"><i class="fas fa-calendar-alt text-amber-600 mr-2"></i>Datas Importantes</a></li>
+                <li><a href="#escolha-vagas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Como Funciona o Processo</a></li>
+                <li><a href="#prova" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">A Prova Objetiva</a></li>
+                <li><a href="#cotas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Cotas & Regras de Acesso</a></li>
+                <li><a href="#quadro-vagas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100"><i class="fas fa-university text-[#00875f] mr-2"></i>Campi, Cursos & Vagas</a></li>
+                <li><a href="#conteudo" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Conteúdo Programático Completo</a></li>
+                <li class="pt-2 flex flex-col space-y-2">
+                    <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="w-full bg-[#c7ef59] text-slate-900 font-black py-2.5 rounded-xl text-xs uppercase tracking-wider text-center block shadow-md">
+                        <i class="fas fa-rocket mr-1.5 text-emerald-800"></i> Conhecer o Intensivo 2026
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="w-full bg-emerald-500 text-white font-black py-2.5 rounded-xl text-xs uppercase tracking-wider text-center block shadow-md">
+                        <i class="fab fa-whatsapp mr-1.5"></i> Falar no WhatsApp
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-gradient text-white py-12 md:py-16 relative overflow-hidden">
+        <div class="container mx-auto px-4 max-w-6xl relative z-10 text-center">
+            
+            <!-- Logo no Hero com fundo Laranja Coral -->
+            <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-5 rounded-full flex items-center justify-center p-3 shadow-2xl border-4 border-white/40" style="background-color: #dd5737;">
+                <img src="./logo1.png" onerror="this.onerror=null; this.src='https://placehold.co/120x120/dd5737/ffffff?text=GPF';" alt="Guia - Pré Federal" class="w-full h-full object-contain">
+            </div>
+
+            <div class="inline-flex items-center space-x-2 bg-white/10 px-4 py-1.5 rounded-full backdrop-blur-md mb-4 border border-white/20">
+                <i class="fas fa-award text-[#c7ef59]"></i>
+                <span class="text-xs font-black uppercase tracking-wider text-slate-100">Instituto Federal Farroupilha (RS) • Edital nº 226/2026</span>
+            </div>
+            
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4 leading-tight">
+                Guia Completo do Edital <span class="text-[#c7ef59]">IFFar 2027</span>
+            </h1>
+            
+            <p class="text-slate-100 text-sm md:text-base max-w-3xl mx-auto mb-6 font-medium leading-relaxed">
+                Instituto Federal de Educação, Ciência e Tecnologia Farroupilha no Rio Grande do Sul: <strong>1.851 vagas gratuitas</strong> em Cursos Técnicos Integrados ao Ensino Médio distribuídas entre 12 campi. Inscrição <strong>100% gratuita (R$ 0,00)</strong>, prova de 40 questões, distribuição de cotas e programa de estudos.
+            </p>
+
+            <!-- Destaque de Inscrição Gratuita -->
+            <div class="inline-block bg-[#c7ef59] text-slate-900 font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider mb-8 shadow-lg">
+                <i class="fas fa-gift text-emerald-800 mr-1.5"></i> INSCRIÇÃO 100% GRATUITA • SEM TAXA DE BANCAS
+            </div>
+
+            <!-- CTAS PRINCIPAIS DO CURSO E LINK OFICIAL DE INSCRIÇÃO -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="https://sis.iffarroupilha.edu.br/candidato" target="_blank" class="bg-white text-emerald-950 hover:bg-slate-100 font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105 border-2 border-white">
+                    <i class="fas fa-external-link-alt mr-2 text-[#00875f]"></i> Portal de Inscrições SIS IFFar
+                </a>
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fas fa-rocket mr-2 text-emerald-900"></i> Cursinho Intensivo Guia Pré-Federal
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fab fa-whatsapp mr-2 text-lg"></i> Falar no WhatsApp
+                </a>
+            </div>
+
+            <!-- Botões de Atalho Interno -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6 pt-4 border-t border-white/10">
+                <a href="#datas-destaque" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-calendar-alt mr-1.5 text-amber-400"></i> Prazos Importantes
+                </a>
+                <a href="#prova" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-file-alt mr-1.5 text-emerald-300"></i> Estrutura da Prova
+                </a>
+                <a href="#quadro-vagas" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-building mr-1.5 text-lime-300"></i> 12 Campi & 1.851 Vagas
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIMEIRA SEÇÃO: DATAS IMPORTANTES NO TOPO DA PÁGINA -->
+    <section id="datas-destaque" class="py-10 bg-amber-50/80 border-b border-amber-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-amber-300 shadow-md">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 pb-4 border-b border-slate-200 gap-4">
+                    <div>
+                        <span class="bg-amber-100 text-amber-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-1.5 inline-block border border-amber-300">
+                            <i class="fas fa-bell mr-1 text-amber-700"></i> Cronograma Oficial do Edital IFFar nº 226/2026
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-black text-slate-900">Datas Importantes do Processo Seletivo IFFar 2027</h2>
+                    </div>
+                    <div>
+                        <a href="https://sis.iffarroupilha.edu.br/candidato" target="_blank" class="text-xs font-bold text-white bg-[#00875f] hover:bg-[#005a40] px-4 py-2 rounded-xl transition inline-flex items-center shadow-sm">
+                            <i class="fas fa-user-plus mr-1.5"></i> Inscrever-se Grátis no SIS IFFar
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tabela Responsiva do Cronograma Oficial -->
+                <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                    <table class="w-full text-left border-collapse text-xs md:text-sm">
+                        <thead>
+                            <tr class="bg-[#004b32] text-white font-bold uppercase text-[11px] tracking-wider">
+                                <th class="py-3.5 px-4 md:px-6"><i class="fas fa-calendar-day mr-2 text-lime-400"></i>Etapa / Evento do Edital</th>
+                                <th class="py-3.5 px-4 md:px-6"><i class="fas fa-clock mr-2 text-lime-400"></i>Período / Data Oficial</th>
+                                <th class="py-3.5 px-4 md:px-6 hidden sm:table-cell"><i class="fas fa-info-circle mr-2 text-lime-400"></i>Observação Importante</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Publicação Oficial do Edital nº 226/2026</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-[#00875f]">03/08/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Divulgado no portal oficial do Instituto Federal Farroupilha</td>
+                            </tr>
+                            <tr class="bg-emerald-50/80 hover:bg-emerald-100/60 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-gift text-emerald-600 mr-1.5"></i>Período de Inscrições Online (Sem Taxa)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-emerald-800">03/08/2026 a 09/09/2026 (até 23h59)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-600">Exclusivamente via internet pelo sistema SIS IFFar. Inscrição 100% gratuita!</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Envio de Laudo Médico PcD e Docs de Acessibilidade</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">03/08/2026 a 09/09/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Anexar laudo com CID em PDF no momento da inscrição no sistema</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Convocação e Agendamento da Heteroidentificação</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">15/09/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Candidatos Pretos e Pardos (presencial ou solicitação de banca virtual)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Sessões da Banca de Heteroidentificação Presencial</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-purple-700">16, 17, 18 e 21/09/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Realizada no campus de opção do candidato</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Publicação da Lista Definitiva de Inscritos e Locais de Prova</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">05/10/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Consulta obrigatória no portal do IFFar para verificar sala e prédio</td>
+                            </tr>
+                            <tr class="bg-emerald-100/80 hover:bg-emerald-200/60 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-emerald-950"><i class="fas fa-edit text-emerald-700 mr-1.5"></i>Aplicação da Prova Objetiva</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-emerald-900">18/10/2026 (Domingo) • 14h00 às 18h00</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-emerald-950 font-bold">Abertura das salas às 13h00. Chegar com no mínimo 30 min de antecedência!</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Gabarito Preliminar e Caderno de Questões</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">18/10/2026 (a partir das 21h)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Prazo para interposição de recursos no dia 19/10/2026</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Gabarito Definitivo e Desempenho Individual do Aluno</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">Gabarito: 26/10 | Desempenho: 27/10/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Consulta do extrato de pontos no painel do candidato do SIS IFFar</td>
+                            </tr>
+                            <tr class="bg-emerald-100/80 hover:bg-emerald-200/60 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-emerald-950"><i class="fas fa-trophy text-emerald-700 mr-1.5"></i>1ª Chamada - Lista de Candidatos Classificados</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-emerald-900">03/11/2026</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-emerald-950 font-bold">Publicação oficial das listas de aprovados de todos os grupos</td>
+                            </tr>
+                            <tr class="bg-emerald-50 hover:bg-emerald-100 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-emerald-900"><i class="fas fa-file-upload text-emerald-600 mr-1.5"></i>Período de Confirmação de Vagas da 1ª Chamada</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-emerald-800">03/11/2026 a 16/11/2026</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-emerald-900">Envio da documentação completa em PDF no sistema de inscrição</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">2ª Chamada (Reclassificação de Vagas Remanescentes)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">30/11/2026 (Confirmação: 30/11 a 07/12/2026)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Convocação dos candidatos da lista de espera</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Regras e Funcionamento do IFFar -->
+    <section id="escolha-vagas" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-emerald-50 text-[#00875f] text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Regras do Edital nº 226/2026
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Como Funcionam os Cursos do IFFar no Rio Grande do Sul?</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Todos os 1.851 cursos ofertados são na modalidade <strong>Técnico Integrado ao Ensino Médio</strong> com duração de 3 anos em turno diurno integral.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Integrado -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-[#00875f] text-white flex items-center justify-center text-xl font-bold mb-4">1</div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Ensino Médio + Técnico</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        O estudante realiza as disciplinas da formação geral do Ensino Médio e a formação profissional técnica juntas no IFFar, com uma única matrícula.
+                    </p>
+                </div>
+
+                <!-- Card 2: Requisitos de Escolaridade -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center text-xl font-bold mb-4">2</div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Apenas para Concluintes do 9º Ano</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        Destinado exclusivamente a quem concluiu ou está concluindo o 9º ano do Ensino Fundamental em 2026. <strong>Não podem participar candidatos que já possuam o Ensino Médio completo ou estejam cursando o Ensino Médio!</strong>
+                    </p>
+                </div>
+
+                <!-- Card 3: Inscrição 100% Gratuita e Treineiro -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-600 text-white flex items-center justify-center text-xl font-bold mb-4">3</div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Taxa ZERO & Opção Treineiro</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        Inscrição totalmente gratuita para todos os candidatos. Estudantes de séries anteriores podem se inscrever na condição de <strong>Treineiro</strong> apenas para testar conhecimentos.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Alerta do Edital sobre Escolaridade e CPF -->
+            <div class="mt-8 bg-rose-50 border-l-4 border-rose-600 p-5 rounded-r-2xl">
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-exclamation-triangle text-rose-600 text-2xl flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <h4 class="font-black text-rose-950 uppercase text-xs mb-1">Atenção Especial às Regras de Inscrição:</h4>
+                        <p class="text-xs text-rose-900 font-semibold leading-relaxed">
+                            1. <strong>Exclusividade de Nível:</strong> Candidatos que já estejam concluindo ou tenham concluído o Ensino Médio não têm direito à vaga e serão eliminados caso se inscrevam.<br>
+                            2. <strong>CPF do Estudante:</strong> O cadastro no sistema SIS IFFar deve ser feito impreterivelmente no <strong>CPF do próprio aluno</strong>. Inscrições no CPF dos pais acarretam o indeferimento da matrícula!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO A PROVA OBJETIVA DO IFFAR -->
+    <section id="prova" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Etapa Única • 4 Horas de Duração (14h00 às 18h00)
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">A Prova Objetiva do IFFar 2027</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    A prova é composta por 40 questões objetivas interdisciplinares de múltipla escolha (A, B, C, D, E), baseadas nas Diretrizes Curriculares do Ensino Fundamental.
+                </p>
+            </div>
+
+            <!-- Tabela de Estrutura da Prova Objetiva -->
+            <div class="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm mb-8">
+                <div class="bg-[#004b32] text-white font-bold px-6 py-3 text-xs uppercase tracking-wider flex justify-between items-center">
+                    <span>Estrutura da Prova Objetiva (40 Questões • 5 Alternativas por Questão)</span>
+                    <span class="bg-emerald-800 text-lime-300 text-[10px] px-2.5 py-0.5 rounded-full font-extrabold">Aplicação: 18/10/2026</span>
+                </div>
+                <table class="w-full text-left border-collapse text-xs md:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 font-bold uppercase text-[11px] tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-4 md:px-6">Área / Componente Curricular</th>
+                            <th class="py-3 px-4 md:px-6">Nº de Questões</th>
+                            <th class="py-3 px-4 md:px-6">Valor por Questão</th>
+                            <th class="py-3 px-4 md:px-6">Peso & Detalhes</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-book text-[#00875f] mr-2"></i>Língua Portuguesa</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">08 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-600">1,0 ponto</td>
+                            <td class="py-3 px-4 md:px-6 font-medium text-slate-500">Leitura, variedades, morfologia, sintaxe, concordância e acentuação</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-calculator text-[#00875f] mr-2"></i>Matemática</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">08 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-600">1,0 ponto</td>
+                            <td class="py-3 px-4 md:px-6 font-medium text-slate-500">Expressões, regra de três, equações de 1º e 2º grau, geometria e Tales</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-globe-americas text-amber-600 mr-2"></i>Geografia</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">08 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-600">1,0 ponto</td>
+                            <td class="py-3 px-4 md:px-6 font-medium text-slate-500">Cartografia, biomas, clima, espaço urbano/rural e Geografia do RS</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-landmark text-amber-600 mr-2"></i>História</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">08 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-600">1,0 ponto</td>
+                            <td class="py-3 px-4 md:px-6 font-medium text-slate-500">Colonização, escravidão, Revolução Farroupilha, Brasil República e atualidades</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-flask text-teal-600 mr-2"></i>Ciências Naturais (Física, Química, Biologia)</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-800">08 questões</td>
+                            <td class="py-3 px-4 md:px-6 font-bold text-slate-600">1,0 ponto</td>
+                            <td class="py-3 px-4 md:px-6 font-medium text-slate-500">Células, ecologia, máquinas simples, termologia, misturas e matéria</td>
+                        </tr>
+                        <tr class="bg-emerald-100/70 font-black">
+                            <td class="py-3 px-4 md:px-6 text-emerald-950 uppercase" colspan="2">TOTAL DA PROVA OBJETIVA</td>
+                            <td class="py-3 px-4 md:px-6 text-emerald-950">40 Questões</td>
+                            <td class="py-3 px-4 md:px-6 text-emerald-950 text-sm">40 PONTOS TOTAL MÁXIMO</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- REGRA DE ELIMINAÇÃO E CRITÉRIO DE DESEMPATE -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                
+                <!-- Card Eliminação por Zero -->
+                <div class="bg-rose-50 border-l-4 border-rose-600 p-5 rounded-r-2xl">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-exclamation-circle text-rose-600 text-2xl flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-black text-rose-950 uppercase text-xs mb-1">Critério de Eliminação na Prova:</h4>
+                            <p class="text-xs text-rose-900 font-medium leading-relaxed">
+                                Será automaticamente desclassificado do concurso o candidato que <strong>faltar à prova, não assinar ou não entregar o cartão-resposta, ou obtiver nota ZERO no total da prova objetiva</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Critérios de Desempate -->
+                <div class="bg-emerald-50 border-l-4 border-[#00875f] p-5 rounded-r-2xl">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-sort-amount-down text-[#00875f] text-2xl flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-black text-emerald-950 uppercase text-xs mb-1">Critérios de Desempate no IFFar:</h4>
+                            <p class="text-xs text-emerald-900 font-medium leading-relaxed">
+                                1º) Candidato de <strong>maior idade</strong> (ano, mês e dia);<br>
+                                2º) Maior número de acertos em <strong>Língua Portuguesa</strong>;<br>
+                                3º) Maior número de acertos em <strong>Matemática</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Dicas para o dia da prova -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-clock text-[#00875f] mr-1"></i>Horário da Prova</h4>
+                    <p class="text-slate-600 font-medium">Os locais abrem às 13h00. Chegar com no mínimo 30 min de antecedência. <strong>A prova ocorre das 14h00 às 18h00 (4h de duração)</strong>.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-id-card text-[#00875f] mr-1"></i>O que Levar</h4>
+                    <p class="text-slate-600 font-medium">Documento oficial de identidade original com foto (RG, CIN, CNH, Passaporte ou e-Título digital), caneta esferográfica transparente azul ou preta e lanche em recipiente transparente.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-door-open text-[#00875f] mr-1"></i>Permanência Mínima</h4>
+                    <p class="text-slate-600 font-medium">Permanência mínima em sala de 1 hora. O caderno de questões só pode ser levado após decorridas 2 horas de prova.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Cotas e Reserva de Vagas -->
+    <section id="cotas" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Lei nº 12.711/2012, Lei nº 14.723/2023 & Programa Especial IFFar
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Reserva de Vagas & Sistema de Cotas no IFFar</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    60% das vagas são reservadas ao Programa Especial de Acesso ao IFFar (escola pública) e 5% para PcD Geral, além de 35% de Ampla Concorrência.
+                </p>
+            </div>
+
+            <!-- Tabela de Modalidades de Cotas -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+                <div class="p-4 bg-[#004b32] text-white font-bold text-xs uppercase tracking-wider">
+                    Divisão das Categorias de Concorrência no IFFar
+                </div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium text-slate-700">
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                        <strong class="text-[#00875f] font-black block mb-1">Ampla Concorrência (35% das Vagas - AC)</strong>
+                        Aberto a todos os candidatos, independentemente de renda ou escola de origem.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-purple-50 border border-purple-200">
+                        <strong class="text-purple-950 font-black block mb-1">Cota PcD Geral (5% das Vagas)</strong>
+                        Destinado a Pessoas com Deficiência, <strong>sem exigência de ter estudado em escola pública</strong>.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">Cota LB_PPI / LB_Q / LB_PCD / LB_EP (&le; 1,0 Salário Mínimo)</strong>
+                        Escola pública + Renda familiar bruta &le; 1,0 Salário Mínimo per capita (R$ 1.621,00) + PPI, Quilombola, PcD ou Ampla Escola Pública.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">Cota LI_PPI / LI_Q / LI_PCD / LI_EP (Qualquer Renda)</strong>
+                        Escola pública + Independente de renda familiar + PPI, Quilombola, PcD ou Ampla Escola Pública.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Procedimento de Heteroidentificação e PcD -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium">
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h4 class="font-black text-slate-900 uppercase mb-1.5"><i class="fas fa-users text-[#00875f] mr-1.5"></i>Heteroidentificação (Pretos e Pardos)</h4>
+                    <p class="text-slate-600 leading-relaxed">
+                        Entrevista presencial no campus de opção (16/09 a 21/09/2026). Caso o candidato necessite de realização no formato virtual, deve solicitar até a data final das inscrições pelo e-mail <code>heteroidentificacao@iffarroupilha.edu.br</code>.
+                    </p>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h4 class="font-black text-slate-900 uppercase mb-1.5"><i class="fas fa-file-medical text-[#00875f] mr-1.5"></i>Comprovação de Laudo Médico PcD</h4>
+                    <p class="text-slate-600 leading-relaxed">
+                        Anexar laudo médico original em PDF com código CID no ato da inscrição. Caso indeferido pela banca médica, o candidato é reconduzido automaticamente para a Ampla Concorrência.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO QUADRO DE VAGAS COM SELETOR POR CAMPUS / CIDADE (12 CAMPI DO IFFAR) -->
+    <section id="quadro-vagas" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-10">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Anexo II do Edital nº 226/2026 • 1.851 Vagas Totais
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Cidades, Cursos & Vagas por Cota no IFFar (RS)</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Selecione o campus abaixo ou digite o nome do curso para consultar a distribuição exata de vagas em cada cota.
+                </p>
+            </div>
+
+            <!-- Painel de Filtros e Busca -->
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 mb-8 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                    
+                    <!-- Dropdown de Seleção de Cidade / Campus -->
+                    <div class="md:col-span-6">
+                        <label class="block text-xs font-black uppercase text-slate-700 mb-1.5">
+                            <i class="fas fa-map-marker-alt text-[#00875f] mr-1"></i> Selecionar Campus / Cidade (Rio Grande do Sul):
+                        </label>
+                        <select id="campus-select" onchange="applyVagasFilter()" class="w-full bg-white border border-slate-300 text-slate-900 text-xs rounded-xl p-3 font-bold focus:ring-2 focus:ring-[#00875f] focus:outline-none shadow-sm">
+                            <option value="ALL">Mostrar Todos os 12 Campi do IFFar (1.851 Vagas)</option>
+                            <option value="Alegrete">Alegrete (210 Vagas)</option>
+                            <option value="Frederico Westphalen">Frederico Westphalen (210 Vagas)</option>
+                            <option value="Jaguari">Jaguari (70 Vagas)</option>
+                            <option value="Júlio de Castilhos">Júlio de Castilhos (165 Vagas)</option>
+                            <option value="Panambi">Panambi (170 Vagas)</option>
+                            <option value="Santa Rosa">Santa Rosa (101 Vagas)</option>
+                            <option value="Santiago">Santiago (35 Vagas)</option>
+                            <option value="Santo Ângelo">Santo Ângelo (140 Vagas)</option>
+                            <option value="Santo Augusto">Santo Augusto (165 Vagas)</option>
+                            <option value="São Borja">São Borja (150 Vagas)</option>
+                            <option value="São Vicente do Sul">São Vicente do Sul (315 Vagas)</option>
+                            <option value="Uruguaiana">Uruguaiana (120 Vagas)</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo de Busca em Tempo Real -->
+                    <div class="md:col-span-6">
+                        <label class="block text-xs font-black uppercase text-slate-700 mb-1.5">
+                            <i class="fas fa-search text-[#00875f] mr-1"></i> Pesquisar por Curso ou Palavra-Chave:
+                        </label>
+                        <input type="text" id="vagas-search-input" onkeyup="applyVagasFilter()" placeholder="Ex: Agropecuária, Informática, Química, Administração, Mecatrônica..." class="w-full bg-white border border-slate-300 text-slate-900 text-xs rounded-xl p-3 font-bold focus:ring-2 focus:ring-[#00875f] focus:outline-none shadow-sm">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legenda das Siglas de Cotas -->
+            <div class="mb-6 bg-emerald-50/60 p-4 rounded-xl border border-emerald-200 text-[11px] text-slate-700 font-medium">
+                <strong class="text-emerald-950 font-black block mb-1">Entenda as Colunas das Cotas na Tabela Oficial do Anexo II:</strong>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+                    <div><span class="font-bold text-emerald-900">AC:</span> Ampla Concorrência (35%)</div>
+                    <div><span class="font-bold text-emerald-900">LB_PPI:</span> Renda &le; 1 SM + PPI</div>
+                    <div><span class="font-bold text-emerald-900">LB_Q:</span> Renda &le; 1 SM + Quilombola</div>
+                    <div><span class="font-bold text-emerald-900">LB_PCD:</span> Renda &le; 1 SM + PcD</div>
+                    <div><span class="font-bold text-emerald-900">LB_EP:</span> Renda &le; 1 SM + Esc. Pública</div>
+                    <div><span class="font-bold text-teal-900">LI_PPI:</span> Qualq. Renda + PPI</div>
+                    <div><span class="font-bold text-teal-900">LI_Q:</span> Qualq. Renda + Quilombola</div>
+                    <div><span class="font-bold text-teal-900">LI_PCD:</span> Qualq. Renda + PcD</div>
+                    <div><span class="font-bold text-teal-900">LI_EP:</span> Qualq. Renda + Esc. Pública</div>
+                    <div><span class="font-bold text-purple-900">PcD:</span> Cota PcD Geral (5%)</div>
+                </div>
+            </div>
+
+            <!-- Tabela Interativa de Vagas do IFFar -->
+            <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm bg-white">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-[#004b32] text-white font-bold uppercase text-[10px] tracking-wider text-center">
+                            <th class="py-3 px-3 text-left w-1/4">Campus / Cidade & Curso</th>
+                            <th class="py-3 px-2">Turno</th>
+                            <th class="py-3 px-2 bg-[#005a40]">AC</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB PPI">LB_PPI</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB Q">LB_Q</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB PCD">LB_PCD</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB EP">LB_EP</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI PPI">LI_PPI</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI Q">LI_Q</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI PCD">LI_PCD</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI EP">LI_EP</th>
+                            <th class="py-3 px-2 bg-purple-900 text-purple-200">PCD</th>
+                            <th class="py-3 px-2 bg-slate-900 text-lime-400 font-black">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vagas-table-body" class="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <!-- Gerado via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="vagas-no-results" class="hidden text-center py-12 bg-slate-50 rounded-2xl border border-slate-200 my-4">
+                <i class="fas fa-search-minus text-3xl text-slate-400 mb-2"></i>
+                <h4 class="font-bold text-slate-800 text-sm">Nenhum curso ou vaga foi encontrado</h4>
+                <p class="text-xs text-slate-500">Tente ajustar a busca ou limpar a seleção do campus.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Conteúdo Programático COMPLETO -->
+    <section id="conteudo" class="py-16 bg-slate-50">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-10">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Anexo VIII do Edital nº 226/2026
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">O que Estudar para a Prova do IFFar 2027?</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Selecione a disciplina abaixo para conferir os tópicos detalhados do programa de estudos do Ensino Fundamental.
+                </p>
+            </div>
+
+            <!-- Navegação por Abas -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8" id="subject-tabs">
+                <button onclick="switchTab('portugues')" class="tab-btn active font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-book mr-1.5"></i>Língua Portuguesa (8q)</button>
+                <button onclick="switchTab('matematica')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-calculator mr-1.5"></i>Matemática (8q)</button>
+                <button onclick="switchTab('geografia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-globe-americas mr-1.5"></i>Geografia (8q)</button>
+                <button onclick="switchTab('historia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-landmark mr-1.5"></i>História (8q)</button>
+                <button onclick="switchTab('ciencias')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-flask mr-1.5"></i>Ciências Naturais (8q)</button>
+            </div>
+
+            <!-- Conteúdo das Abas -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm text-xs leading-relaxed text-slate-700">
+                
+                <!-- Português -->
+                <div id="tab-portugues" class="tab-content space-y-3">
+                    <h3 class="text-lg font-black text-[#00875f] pb-2 border-b border-slate-100"><i class="fas fa-book text-[#00875f] mr-2"></i>Língua Portuguesa (8 Questões)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Leitura e Interpretação:</strong> Leitura, compreensão e interpretação de textos verbais e não verbais.</li>
+                        <li><strong>Linguagem e Variação:</strong> Níveis de linguagem; variedades regionais e sociais da língua portuguesa.</li>
+                        <li><strong>Semântica e Significação:</strong> Sinônimos, antônimos, homônimos, parônimos e figuras de linguagem.</li>
+                        <li><strong>Aspectos Gráficos & Gramática:</strong> Regras de acentuação gráfica, ortografia oficial e morfossintaxe.</li>
+                        <li><strong>Estrutura e Classes de Palavras:</strong> Estrutura e formação das palavras; classes gramaticais e suas flexões.</li>
+                        <li><strong>Sintaxe e Pontuação:</strong> Termos essenciais, integrantes e acessórios da oração; nexos oracionais; concordância verbal e nominal; regência e uso da pontuação.</li>
+                    </ul>
+                </div>
+
+                <!-- Matemática -->
+                <div id="tab-matematica" class="tab-content hidden space-y-3">
+                    <h3 class="text-lg font-black text-[#00875f] pb-2 border-b border-slate-100"><i class="fas fa-calculator text-[#00875f] mr-2"></i>Matemática (8 Questões)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Aritmética e Álgebra:</strong> Expressões numéricas; equações e problemas do 1º Grau; equações do 2º Grau; radicais (definições, operações e racionalização).</li>
+                        <li><strong>Matemática Comercial:</strong> Razão, proporção, regra de três simples/composta, porcentagem e juros simples.</li>
+                        <li><strong>Geometria Plana e Espacial:</strong> Classificação e propriedades de triângulos; semelhança de triângulos; Teorema de Tales (segmentos proporcionais); relações métricas e trigonométricas no triângulo retângulo; cálculo de perímetro e área de figuras planas.</li>
+                    </ul>
+                </div>
+
+                <!-- Geografia -->
+                <div id="tab-geografia" class="tab-content hidden space-y-3">
+                    <h3 class="text-lg font-black text-amber-900 pb-2 border-b border-slate-100"><i class="fas fa-globe-americas text-amber-600 mr-2"></i>Geografia (8 Questões)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Cartografia e Localização:</strong> Orientação (pontos cardeais/colaterais, latitude/longitude); noções de escala gráfica e numérica.</li>
+                        <li><strong>Espaço Geográfico Brasileiro:</strong> Posição do Brasil na América e no mundo; divisões político-administrativas do IBGE e regiões geoeconômicas; aspectos humanos e econômicos.</li>
+                        <li><strong>Meio Ambiente e Biomas:</strong> Aspectos naturais (relevo, clima, vegetação e hidrografia); impactos ambientais nos biomas brasileiros e no espaço urbano.</li>
+                        <li><strong>Geografia do Rio Grande do Sul:</strong> Relevo, clima, vegetação, hidrografia e aspectos socioeconômicos específicos do estado do Rio Grande do Sul.</li>
+                    </ul>
+                </div>
+
+                <!-- História -->
+                <div id="tab-historia" class="tab-content hidden space-y-3">
+                    <h3 class="text-lg font-black text-amber-900 pb-2 border-b border-slate-100"><i class="fas fa-landmark text-amber-600 mr-2"></i>História (8 Questões)</h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium">
+                        <li><strong>Mundo Colonial e das Américas:</strong> A América pré-colombiana; expansão marítimo-comercial europeia; colonização na América e o sistema colonial brasileiro; escravismo no Brasil.</li>
+                        <li><strong>História do Rio Grande do Sul:</strong> Ocupação territorial do Rio Grande do Sul e a **Revolução Farroupilha**.</li>
+                        <li><strong>Brasil Imperial e Republicano:</strong> Fim do sistema colonial na América espanhola/portuguesa; Período Imperial; República Velha (1889-1930); o Brasil de 1930 a 1964 (Era Vargas e populismo).</li>
+                        <li><strong>Mundo Contemporâneo:</strong> Regimes militares na América Latina; Redemocratização do Brasil; história do tempo presente e fatos do mundo atual.</li>
+                    </ul>
+                </div>
+
+                <!-- Ciências Naturais -->
+                <div id="tab-ciencias" class="tab-content hidden space-y-3">
+                    <h3 class="text-lg font-black text-teal-900 pb-2 border-b border-slate-100"><i class="fas fa-flask text-teal-600 mr-2"></i>Ciências Naturais (8 Questões • Física, Química e Biologia)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <strong class="text-teal-900 font-black block mb-1 text-xs">FÍSICA:</strong>
+                            <ul class="space-y-1 list-disc list-inside text-slate-600">
+                                <li>Referencial, MRU e MRUV.</li>
+                                <li>SI, Leis de Newton e forças.</li>
+                                <li>Máquinas simples (roldanas/alavancas).</li>
+                                <li>Trabalho, energia, pressão e hidrostática.</li>
+                                <li>Termologia, óptica e ondas/som.</li>
+                            </ul>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <strong class="text-teal-900 font-black block mb-1 text-xs">QUÍMICA:</strong>
+                            <ul class="space-y-1 list-disc list-inside text-slate-600">
+                                <li>Misturas homogêneas/heterogêneas.</li>
+                                <li>Separação de misturas e estados da matéria.</li>
+                                <li>Fenômenos físicos e químicos.</li>
+                                <li>Átomos, moléculas e símbolos.</li>
+                                <li>Introdução às ligações químicas.</li>
+                            </ul>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <strong class="text-teal-900 font-black block mb-1 text-xs">BIOLOGIA:</strong>
+                            <ul class="space-y-1 list-disc list-inside text-slate-600">
+                                <li>Caracteres dos seres vivos e células.</li>
+                                <li>Tecidos, órgãos e sistemas do corpo.</li>
+                                <li>Botânica: raízes, caules, folhas, frutos.</li>
+                                <li>Vertebrados e invertebrados.</li>
+                                <li>Ecologia e conceitos básicos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BANNER DE CTA PARA MATRÍCULA NO CURSINHO E INSCRIÇÃO OFICIAL -->
+    <section class="py-12 bg-gradient-to-r from-[#004b32] to-[#00875f] text-white">
+        <div class="container mx-auto px-4 max-w-5xl text-center">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center p-2.5 mx-auto mb-4 shadow-xl border-2 border-white/30" style="background-color: #dd5737;">
+                <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+            </div>
+            
+            <span class="bg-[#c7ef59] text-slate-900 font-black text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">
+                Sua Vaga no IFFar Começa Aqui
+            </span>
+            
+            <h2 class="text-2xl md:text-4xl font-black mb-3 leading-tight">
+                Quer Garantir sua Vaga no <span class="text-[#c7ef59]">IFFar 2027</span>?
+            </h2>
+            
+            <p class="text-slate-100 text-xs md:text-sm max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
+                Estude com o preparatório 100% online líder em aprovação nas Escolas e Institutos Federais. Aulas direcionadas, simulados focados na prova do IFFar e mentoria.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://sis.iffarroupilha.edu.br/candidato" target="_blank" class="bg-white text-emerald-950 hover:bg-slate-100 font-black px-8 py-3.5 rounded-xl transition shadow-2xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105 border-2 border-white">
+                    <i class="fas fa-external-link-alt mr-2 text-[#00875f]"></i> Inscrição Grátis no SIS IFFar
+                </a>
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-8 py-3.5 rounded-xl transition shadow-2xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fas fa-rocket mr-2 text-emerald-950"></i> Matricular no Curso Intensivo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800 text-xs">
+        <div class="container mx-auto px-4 max-w-6xl text-center">
+            <div class="flex justify-center items-center space-x-3 mb-6">
+                <!-- Logo no footer com fundo Laranja Coral -->
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+                </div>
+                <span class="text-lg font-black tracking-tight text-white">Guia - Pré Federal</span>
+            </div>
+            <p class="text-slate-400 font-medium mb-4 max-w-xl mx-auto">
+                Preparatório 100% online especializado no ingresso aos Cursos Técnicos Integrados das Escolas e Institutos Federais.
+            </p>
+            <p class="text-slate-500">&copy; 2026 Guia Pré-Federal. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button (FAB) -->
+    <div class="fab-container">
+        <div class="fab-options">
+            <a href="https://sis.iffarroupilha.edu.br/candidato" target="_blank" class="fab-option">
+                <span class="fab-label">Página de Inscrição SIS IFFar</span>
+                <div class="fab-icon" style="background-color: #00875f;">
+                    <i class="fas fa-external-link-alt"></i>
+                </div>
+            </a>
+            <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="fab-option">
+                <span class="fab-label">Nosso Intensivo 2026</span>
+                <div class="fab-icon" style="background-color: #059669;">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </a>
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
+                <span class="fab-label">Falar no WhatsApp</span>
+                <div class="fab-icon" style="background-color: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </a>
+        </div>
+        <button class="fab-main" id="fab-main-btn">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <!-- Script Interativo com Dados Oficiais do Quadro de Vagas do IFFar -->
+    <script>
+        // Dados Oficiais do Anexo II do Edital nº 226/2026 (IFFar - 1.851 Vagas)
+        const vagasData = [
+            // Alegrete
+            { campus: "Alegrete", curso: "Agropecuária", turno: "Integral", ac: 40, lb_ppi: 12, lb_q: 4, lb_pcd: 4, lb_ep: 16, li_ppi: 12, li_q: 4, li_pcd: 4, li_ep: 16, pcd: 8, total: 120 },
+            { campus: "Alegrete", curso: "Informática", turno: "Integral", ac: 20, lb_ppi: 6, lb_q: 2, lb_pcd: 2, lb_ep: 8, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 8, pcd: 4, total: 60 },
+            { campus: "Alegrete", curso: "Química", turno: "Integral", ac: 10, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 4, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 4, pcd: 2, total: 30 },
+
+            // Frederico Westphalen
+            { campus: "Frederico Westphalen", curso: "Administração", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+            { campus: "Frederico Westphalen", curso: "Agropecuária", turno: "Integral", ac: 33, lb_ppi: 9, lb_q: 3, lb_pcd: 3, lb_ep: 18, li_ppi: 9, li_q: 3, li_pcd: 3, li_ep: 18, pcd: 6, total: 105 },
+            { campus: "Frederico Westphalen", curso: "Informática", turno: "Integral", ac: 22, lb_ppi: 6, lb_q: 2, lb_pcd: 2, lb_ep: 12, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 12, pcd: 4, total: 70 },
+
+            // Jaguari
+            { campus: "Jaguari", curso: "Agricultura", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+            { campus: "Jaguari", curso: "Sistemas de Energia Renovável", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+
+            // Júlio de Castilhos
+            { campus: "Júlio de Castilhos", curso: "Administração", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+            { campus: "Júlio de Castilhos", curso: "Agropecuária", turno: "Integral", ac: 22, lb_ppi: 6, lb_q: 2, lb_pcd: 2, lb_ep: 12, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 12, pcd: 4, total: 70 },
+            { campus: "Júlio de Castilhos", curso: "Informática", turno: "Integral", ac: 20, lb_ppi: 6, lb_q: 2, lb_pcd: 2, lb_ep: 8, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 8, pcd: 4, total: 60 },
+
+            // Panambi
+            { campus: "Panambi", curso: "Agricultura", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+            { campus: "Panambi", curso: "Automação Industrial", turno: "Integral", ac: 10, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 4, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 4, pcd: 2, total: 30 },
+            { campus: "Panambi", curso: "Edificações", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+            { campus: "Panambi", curso: "Informática", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+            { campus: "Panambi", curso: "Química", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+
+            // Santa Rosa
+            { campus: "Santa Rosa", curso: "Edificações", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 5, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 5, pcd: 2, total: 33 },
+            { campus: "Santa Rosa", curso: "Mecatrônica", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+            { campus: "Santa Rosa", curso: "Móveis", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 5, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 5, pcd: 2, total: 33 },
+
+            // Santiago
+            { campus: "Santiago", curso: "Administração", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+
+            // Santo Ângelo
+            { campus: "Santo Ângelo", curso: "Administração", turno: "Integral", ac: 22, lb_ppi: 6, lb_q: 2, lb_pcd: 2, lb_ep: 12, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 12, pcd: 4, total: 70 },
+            { campus: "Santo Ângelo", curso: "Agropecuária", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+            { campus: "Santo Ângelo", curso: "Informática", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+
+            // Santo Augusto
+            { campus: "Santo Augusto", curso: "Administração", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+            { campus: "Santo Augusto", curso: "Agropecuária", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+            { campus: "Santo Augusto", curso: "Alimentos", turno: "Integral", ac: 20, lb_ppi: 6, lb_q: 2, lb_pcd: 2, lb_ep: 8, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 8, pcd: 4, total: 60 },
+            { campus: "Santo Augusto", curso: "Informática", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+
+            // São Borja
+            { campus: "São Borja", curso: "Administração", turno: "Integral", ac: 10, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 4, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 4, pcd: 2, total: 30 },
+            { campus: "São Borja", curso: "Eventos", turno: "Integral", ac: 20, lb_ppi: 6, lb_q: 2, lb_pcd: 2, lb_ep: 8, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 8, pcd: 4, total: 60 },
+            { campus: "São Borja", curso: "Informática", turno: "Integral", ac: 20, lb_ppi: 6, lb_q: 2, lb_pcd: 2, lb_ep: 8, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 8, pcd: 4, total: 60 },
+
+            // São Vicente do Sul
+            { campus: "São Vicente do Sul", curso: "Administração", turno: "Integral", ac: 22, lb_ppi: 6, lb_q: 2, lb_pcd: 2, lb_ep: 12, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 12, pcd: 4, total: 70 },
+            { campus: "São Vicente do Sul", curso: "Agropecuária", turno: "Integral", ac: 44, lb_ppi: 12, lb_q: 4, lb_pcd: 4, lb_ep: 24, li_ppi: 12, li_q: 4, li_pcd: 4, li_ep: 24, pcd: 8, total: 140 },
+            { campus: "São Vicente do Sul", curso: "Alimentos", turno: "Integral", ac: 11, lb_ppi: 3, lb_q: 1, lb_pcd: 1, lb_ep: 6, li_ppi: 3, li_q: 1, li_pcd: 1, li_ep: 6, pcd: 2, total: 35 },
+            { campus: "São Vicente do Sul", curso: "Manutenção e Suporte em Informática", turno: "Integral", ac: 22, lb_ppi: 6, lb_q: 2, lb_pcd: 2, lb_ep: 12, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 12, pcd: 4, total: 70 },
+
+            // Uruguaiana
+            { campus: "Uruguaiana", curso: "Administração", turno: "Integral", ac: 20, lb_ppi: 6, lb_q: 2, lb_pcd: 2, lb_ep: 8, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 8, pcd: 4, total: 60 },
+            { campus: "Uruguaiana", curso: "Informática", turno: "Integral", ac: 20, lb_ppi: 6, lb_q: 2, lb_pcd: 2, lb_ep: 8, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 8, pcd: 4, total: 60 }
+        ];
+
+        function applyVagasFilter() {
+            const selectedCampus = document.getElementById('campus-select').value;
+            const searchVal = document.getElementById('vagas-search-input').value.toLowerCase().trim();
+            const tbody = document.getElementById('vagas-table-body');
+            const noResults = document.getElementById('vagas-no-results');
+
+            tbody.innerHTML = '';
+            let count = 0;
+
+            vagasData.forEach(item => {
+                const matchesCampus = (selectedCampus === 'ALL' || item.campus === selectedCampus);
+                const matchesSearch = (searchVal === '' || item.curso.toLowerCase().includes(searchVal) || item.campus.toLowerCase().includes(searchVal));
+
+                if (matchesCampus && matchesSearch) {
+                    count++;
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-emerald-50/50 transition border-b border-slate-100 text-center";
+                    tr.innerHTML = `
+                        <td class="py-3 px-3 text-left">
+                            <strong class="text-slate-900 block text-xs">Técnico em ${item.curso}</strong>
+                            <span class="text-[10px] text-[#00875f] font-bold"><i class="fas fa-building mr-1"></i>Campus ${item.campus}</span>
+                        </td>
+                        <td class="py-3 px-2 font-semibold text-slate-500 text-[11px]">${item.turno}</td>
+                        <td class="py-3 px-2 font-black text-emerald-900 bg-emerald-50/60">${item.ac}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_ppi}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_q}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_pcd}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_ep}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_ppi}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_q}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_pcd}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_ep}</td>
+                        <td class="py-3 px-2 text-purple-900 font-bold bg-purple-50">${item.pcd}</td>
+                        <td class="py-3 px-2 font-black text-[#00875f] bg-emerald-100/60 text-sm">${item.total}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            });
+
+            if (count === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Menu Mobile Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Toggle FAB
+        const fabContainer = document.querySelector('.fab-container');
+        const fabBtn = document.getElementById('fab-main-btn');
+        fabBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            fabContainer.classList.toggle('active');
+        });
+        document.addEventListener('click', () => fabContainer.classList.remove('active'));
+
+        // Navegação entre Abas de Conteúdo
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+        }
+
+        // Inicializar tabela ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            applyVagasFilter();
+        });
+    </script>
+</body>
+</html>
