@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparativo Geral dos Vestibulinhos 2027 | Guia Pré-Federal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --brand-navy: #0f172a;
+            --brand-indigo: #4338ca;
+            --brand-emerald: #059669;
+            --brand-coral: #dd5737;
+            --brand-lime: #c7ef59;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+        }
+        .badge-redacao-sim { background-color: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+        .badge-redacao-nao { background-color: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+        .badge-livro-sim { background-color: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+        .badge-livro-nao { background-color: #f8fafc; color: #475569; border: 1px solid #e2e8f0; }
+        .tab-btn.active {
+            background-color: #312e81;
+            color: white;
+            box-shadow: 0 4px 12px rgba(49, 46, 129, 0.35);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm py-3.5 sticky top-0 z-50 border-b border-slate-100">
+        <div class="container mx-auto px-4 max-w-7xl flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-black tracking-tight text-slate-900 leading-none">Guia - Pré Federal</span>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Painel Comparativo de Vestibulinhos 2027</span>
+                </div>
+            </div>
+
+            <nav class="hidden lg:flex space-x-6 text-xs font-black uppercase tracking-wider text-slate-600">
+                <a href="#tabela-geral" class="hover:text-indigo-600 transition"><i class="fas fa-table mr-1.5 text-indigo-500"></i>Visão Geral</a>
+                <a href="#redacao-livros" class="hover:text-indigo-600 transition"><i class="fas fa-pen-nib mr-1.5 text-rose-500"></i>Redação & Livros</a>
+                <a href="#comparativo-disciplinas" class="hover:text-indigo-600 transition"><i class="fas fa-layer-group mr-1.5 text-emerald-500"></i>Conteúdos por Matéria</a>
+                <a href="#insights-estrategicos" class="hover:text-indigo-600 transition"><i class="fas fa-lightbulb mr-1.5 text-amber-500"></i>Estratégia & Dicas</a>
+            </nav>
+
+            <div class="flex items-center space-x-2">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] hover:bg-opacity-90 text-slate-900 font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fas fa-rocket mr-1.5 text-emerald-800"></i> Curso Intensivo
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-gradient text-white py-12 md:py-16 relative overflow-hidden">
+        <div class="container mx-auto px-4 max-w-6xl text-center relative z-10">
+            <div class="inline-flex items-center space-x-2 bg-white/10 px-4 py-1.5 rounded-full backdrop-blur-md mb-4 border border-white/20">
+                <i class="fas fa-balance-scale text-[#c7ef59]"></i>
+                <span class="text-xs font-black uppercase tracking-wider text-slate-100">Raio-X Comparativo dos Editais 2027</span>
+            </div>
+            
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4 leading-tight">
+                Comparativo Completo dos <span class="text-[#c7ef59]">Vestibulinhos Federais</span>
+            </h1>
+            
+            <p class="text-slate-200 text-sm md:text-base max-w-3xl mx-auto mb-8 font-medium leading-relaxed">
+                Analise e compare em detalhes os formatos de prova, redação, livros obrigatórios, pontuações, pesos e as convergências dos conteúdos programáticos entre as 10 principais instituições do país.
+            </p>
+
+            <!-- Cards Resumo no Hero -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto text-left">
+                <div class="bg-white/10 backdrop-blur-md p-3.5 rounded-xl border border-white/10">
+                    <span class="text-[10px] text-slate-300 font-bold uppercase block">Instituições</span>
+                    <span class="text-xl font-black text-[#c7ef59]">10 Redes</span>
+                    <span class="text-[11px] text-slate-300 block">MG, RJ, ES, BA e RS</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-3.5 rounded-xl border border-white/10">
+                    <span class="text-[10px] text-slate-300 font-bold uppercase block">Exigem Redação</span>
+                    <span class="text-xl font-black text-rose-300">3 de 10</span>
+                    <span class="text-[11px] text-slate-300 block">COLUNI, CEFET-RJ, CTUR</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-3.5 rounded-xl border border-white/10">
+                    <span class="text-[10px] text-slate-300 font-bold uppercase block">Livro Obrigatório</span>
+                    <span class="text-xl font-black text-amber-300">3 de 10</span>
+                    <span class="text-[11px] text-slate-300 block">COLUNI, CEFET-MG, COLTEC</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-3.5 rounded-xl border border-white/10">
+                    <span class="text-[10px] text-slate-300 font-bold uppercase block">Língua Inglesa</span>
+                    <span class="text-xl font-black text-blue-300">Exclusiva</span>
+                    <span class="text-[11px] text-slate-300 block">Apenas COLUNI (2q)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 1: QUADRO COMPARATIVO ESTRUTURAL DAS PROVAS -->
+    <section id="tabela-geral" class="py-12 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="text-center mb-8">
+                <span class="bg-indigo-50 text-indigo-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block border border-indigo-200">
+                    Visão Macroscópica
+                </span>
+                <h2 class="text-2xl md:text-3xl font-black text-slate-900">Estrutura de Avaliação, Pontos e Exigências</h2>
+                <p class="text-slate-600 text-xs md:text-sm max-w-2xl mx-auto mt-1">
+                    Compare lado a lado o total de questões, pontuação máxima, pesos diferenciados e se a prova possui redação ou leitura prévia de livros.
+                </p>
+            </div>
+
+            <!-- Tabela Comparativa Geral -->
+            <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-slate-900 text-white font-bold uppercase text-[10px] tracking-wider text-center">
+                            <th class="py-3.5 px-4 text-left">Instituição / Vestibulinho</th>
+                            <th class="py-3.5 px-3">Nº Questões</th>
+                            <th class="py-3.5 px-3">Pontuação Máxima</th>
+                            <th class="py-3.5 px-3">Distribuição das Matérias</th>
+                            <th class="py-3.5 px-3">Pesos Especiais</th>
+                            <th class="py-3.5 px-3">Redação?</th>
+                            <th class="py-3.5 px-3">Livro de Literatura?</th>
+                            <th class="py-3.5 px-3">Taxa Inscrição</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700 font-medium text-center">
+                        
+                        <!-- COLUNI -->
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 text-left font-black text-slate-900">
+                                <span class="text-indigo-700 font-black block text-sm">COLUNI (UFV)</span>
+                                <span class="text-[10px] text-slate-500 font-semibold">Viçosa - MG • Propedêutico</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-slate-800">38 questões</td>
+                            <td class="py-3 px-3 font-black text-indigo-900">73 pontos</td>
+                            <td class="py-3 px-3 text-[11px] text-slate-600">10 Port + 10 Mat + 8 Ciênc + 4 Hist + 4 Geog + 2 Inglês</td>
+                            <td class="py-3 px-3"><span class="bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded">Peso 2 (Port e Mat)</span></td>
+                            <td class="py-3 px-3"><span class="badge-redacao-sim text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-check mr-1"></i>SIM (15 pts)</span></td>
+                            <td class="py-3 px-3"><span class="badge-livro-sim text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-book mr-1"></i>A Cabeça do Santo</span></td>
+                            <td class="py-3 px-3 font-bold text-slate-800">R$ 90,00</td>
+                        </tr>
+
+                        <!-- CEFET-MG -->
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 text-left font-black text-slate-900">
+                                <span class="text-purple-700 font-black block text-sm">CEFET-MG</span>
+                                <span class="text-[10px] text-slate-500 font-semibold">9 Campi em MG • Integrado</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-slate-800">50 questões</td>
+                            <td class="py-3 px-3 font-black text-purple-900">50 pontos</td>
+                            <td class="py-3 px-3 text-[11px] text-slate-600">15 Port + 15 Mat + 8 Ciênc + 6 Hist + 6 Geog</td>
+                            <td class="py-3 px-3 text-slate-500 text-[11px]">Peso 1 (1 pt cada)</td>
+                            <td class="py-3 px-3"><span class="badge-redacao-nao text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-times mr-1"></i>NÃO</span></td>
+                            <td class="py-3 px-3"><span class="badge-livro-sim text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-book mr-1"></i>O Alienista</span></td>
+                            <td class="py-3 px-3 font-bold text-slate-800">R$ 75,00</td>
+                        </tr>
+
+                        <!-- COLTEC UFMG -->
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 text-left font-black text-slate-900">
+                                <span class="text-blue-900 font-black block text-sm">COLTEC (UFMG)</span>
+                                <span class="text-[10px] text-slate-500 font-semibold">Belo Horizonte - MG (Pampulha)</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-slate-800">40 questões</td>
+                            <td class="py-3 px-3 font-black text-blue-900">60 pontos</td>
+                            <td class="py-3 px-3 text-[11px] text-slate-600">10 Port + 10 Mat + 12 Ciênc + 4 Hist + 4 Geog</td>
+                            <td class="py-3 px-3"><span class="bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded">Peso 2 (Port e Mat)</span></td>
+                            <td class="py-3 px-3"><span class="badge-redacao-nao text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-times mr-1"></i>NÃO</span></td>
+                            <td class="py-3 px-3"><span class="badge-livro-sim text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-book mr-1"></i>O Jardim das Oliveiras</span></td>
+                            <td class="py-3 px-3 font-bold text-slate-800">R$ 105,00</td>
+                        </tr>
+
+                        <!-- CEFET-RJ -->
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 text-left font-black text-slate-900">
+                                <span class="text-indigo-600 font-black block text-sm">CEFET-RJ</span>
+                                <span class="text-[10px] text-slate-500 font-semibold">7 Campi no RJ (Banca SELECON)</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-slate-800">30 questões + Redação</td>
+                            <td class="py-3 px-3 font-black text-indigo-950">250 pontos</td>
+                            <td class="py-3 px-3 text-[11px] text-slate-600">10 Port (50p) + 10 Mat (50p) + 5 Ciênc (25p) + 5 Hum (25p)</td>
+                            <td class="py-3 px-3 text-slate-500 text-[11px]">5 pts por questão</td>
+                            <td class="py-3 px-3"><span class="badge-redacao-sim text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-check mr-1"></i>SIM (100 pts!)</span></td>
+                            <td class="py-3 px-3"><span class="badge-livro-nao text-[10px] font-bold px-2 py-1 rounded-full">Não Exige</span></td>
+                            <td class="py-3 px-3 font-bold text-slate-800">R$ 70,00</td>
+                        </tr>
+
+                        <!-- CTUR UFRRJ -->
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 text-left font-black text-slate-900">
+                                <span class="text-emerald-800 font-black block text-sm">CTUR (UFRRJ)</span>
+                                <span class="text-[10px] text-slate-500 font-semibold">Seropédica - RJ (Rural)</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-slate-800">20 questões + Redação</td>
+                            <td class="py-3 px-3 font-black text-emerald-900">60 pontos</td>
+                            <td class="py-3 px-3 text-[11px] text-slate-600">Bloco 1 (10q: Port/Mat) + Bloco 2 (10q: Hum/Nat)</td>
+                            <td class="py-3 px-3 text-slate-500 text-[11px]">Mat/Nat: 2 pts | Port/Hum: 2 pts</td>
+                            <td class="py-3 px-3"><span class="badge-redacao-sim text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-check mr-1"></i>SIM (20 pts)</span></td>
+                            <td class="py-3 px-3"><span class="badge-livro-nao text-[10px] font-bold px-2 py-1 rounded-full">Não Exige</span></td>
+                            <td class="py-3 px-3 font-bold text-slate-800">R$ 70,00</td>
+                        </tr>
+
+                        <!-- IF Sudeste MG -->
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 text-left font-black text-slate-900">
+                                <span class="text-teal-700 font-black block text-sm">IF Sudeste MG</span>
+                                <span class="text-[10px] text-slate-500 font-semibold">10 Campi em MG (COPESE)</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-slate-800">45 questões</td>
+                            <td class="py-3 px-3 font-black text-teal-900">90 pontos</td>
+                            <td class="py-3 px-3 text-[11px] text-slate-600">12 Port + 11 Mat + 12 Ciênc + 5 Hist + 5 Geog</td>
+                            <td class="py-3 px-3 text-slate-500 text-[11px]">Peso 2 (2 pts cada)</td>
+                            <td class="py-3 px-3"><span class="badge-redacao-nao text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-times mr-1"></i>NÃO</span></td>
+                            <td class="py-3 px-3"><span class="badge-livro-nao text-[10px] font-bold px-2 py-1 rounded-full">Não Exige</span></td>
+                            <td class="py-3 px-3 font-bold text-slate-800">R$ 35,00</td>
+                        </tr>
+
+                        <!-- IFF -->
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 text-left font-black text-slate-900">
+                                <span class="text-teal-800 font-black block text-sm">IFF (Fluminense)</span>
+                                <span class="text-[10px] text-slate-500 font-semibold">15 Unidades no RJ</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-slate-800">40 questões</td>
+                            <td class="py-3 px-3 font-black text-teal-950">40 pontos</td>
+                            <td class="py-3 px-3 text-[11px] text-slate-600">10 Port + 10 Mat + 10 Ciênc + 5 Hist + 5 Geog</td>
+                            <td class="py-3 px-3 text-slate-500 text-[11px]">Peso 1 (1 pt cada)</td>
+                            <td class="py-3 px-3"><span class="badge-redacao-nao text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-times mr-1"></i>NÃO</span></td>
+                            <td class="py-3 px-3"><span class="badge-livro-nao text-[10px] font-bold px-2 py-1 rounded-full">Não Exige</span></td>
+                            <td class="py-3 px-3 font-bold text-slate-800">R$ 40,00</td>
+                        </tr>
+
+                        <!-- IFMG -->
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 text-left font-black text-slate-900">
+                                <span class="text-emerald-700 font-black block text-sm">IFMG</span>
+                                <span class="text-[10px] text-slate-500 font-semibold">18 Campi em MG</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-slate-800">50 questões</td>
+                            <td class="py-3 px-3 font-black text-emerald-900">100 pontos</td>
+                            <td class="py-3 px-3 text-[11px] text-slate-600">15 Port + 15 Mat + 10 Ciênc + 5 Hist + 5 Geog</td>
+                            <td class="py-3 px-3 text-slate-500 text-[11px]">Peso 2 (2 pts cada)</td>
+                            <td class="py-3 px-3"><span class="badge-redacao-nao text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-times mr-1"></i>NÃO</span></td>
+                            <td class="py-3 px-3"><span class="badge-livro-nao text-[10px] font-bold px-2 py-1 rounded-full">Não Exige</span></td>
+                            <td class="py-3 px-3 font-bold text-slate-800">R$ 60,00 / 80,00</td>
+                        </tr>
+
+                        <!-- IFES -->
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 text-left font-black text-slate-900">
+                                <span class="text-cyan-700 font-black block text-sm">IFES</span>
+                                <span class="text-[10px] text-slate-500 font-semibold">Espírito Santo • 22 Campi</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-slate-800">40 questões</td>
+                            <td class="py-3 px-3 font-black text-cyan-900">400 pontos</td>
+                            <td class="py-3 px-3 text-[11px] text-slate-600">10 Port + 10 Mat + 10 Ciênc + 5 Hist + 5 Geog</td>
+                            <td class="py-3 px-3 text-slate-500 text-[11px]">10 pts por questão</td>
+                            <td class="py-3 px-3"><span class="badge-redacao-nao text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-times mr-1"></i>NÃO</span></td>
+                            <td class="py-3 px-3"><span class="badge-livro-nao text-[10px] font-bold px-2 py-1 rounded-full">Não Exige</span></td>
+                            <td class="py-3 px-3 font-bold text-slate-800">R$ 85,00</td>
+                        </tr>
+
+                        <!-- IFBA -->
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 text-left font-black text-slate-900">
+                                <span class="text-rose-700 font-black block text-sm">IFBA</span>
+                                <span class="text-[10px] text-slate-500 font-semibold">Bahia • 23 Campi</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-slate-800">40 questões</td>
+                            <td class="py-3 px-3 font-black text-rose-900">100 pontos</td>
+                            <td class="py-3 px-3 text-[11px] text-slate-600">10 Port + 10 Mat + 10 Ciênc + 5 Hist + 5 Geog</td>
+                            <td class="py-3 px-3 text-slate-500 text-[11px]">2,5 pts por questão</td>
+                            <td class="py-3 px-3"><span class="badge-redacao-nao text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-times mr-1"></i>NÃO</span></td>
+                            <td class="py-3 px-3"><span class="badge-livro-nao text-[10px] font-bold px-2 py-1 rounded-full">Não Exige</span></td>
+                            <td class="py-3 px-3 font-bold text-slate-800">R$ 50,00</td>
+                        </tr>
+
+                        <!-- IFFar -->
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-4 text-left font-black text-slate-900">
+                                <span class="text-emerald-600 font-black block text-sm">IFFar (Farroupilha)</span>
+                                <span class="text-[10px] text-slate-500 font-semibold">Rio Grande do Sul • 12 Campi</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-slate-800">40 questões</td>
+                            <td class="py-3 px-3 font-black text-emerald-900">40 pontos</td>
+                            <td class="py-3 px-3 text-[11px] text-slate-600">8 Port + 8 Mat + 8 Ciênc + 8 Hist + 8 Geog</td>
+                            <td class="py-3 px-3 text-slate-500 text-[11px]">Equilibrado (8q cada)</td>
+                            <td class="py-3 px-3"><span class="badge-redacao-nao text-[10px] font-black px-2 py-1 rounded-full"><i class="fas fa-times mr-1"></i>NÃO</span></td>
+                            <td class="py-3 px-3"><span class="badge-livro-nao text-[10px] font-bold px-2 py-1 rounded-full">Não Exige</span></td>
+                            <td class="py-3 px-3 font-black text-emerald-600">GRÁTIS (R$ 0)</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 2: FOCO CRÍTICO: REDAÇÃO, LIVROS & IDIOMAS -->
+    <section id="redacao-livros" class="py-12 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-10">
+                <span class="bg-rose-50 text-rose-800 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block border border-rose-200">
+                    Diferenciais Decisivos
+                </span>
+                <h2 class="text-2xl md:text-3xl font-black text-slate-900">Particularidades de Redação, Obras e Idiomas</h2>
+                <p class="text-slate-600 text-xs md:text-sm max-w-2xl mx-auto mt-1">
+                    Esses três tópicos costumam ser os maiores divisores de águas na pontuação e no planejamento do estudante.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Card 1: Redação -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center text-xl font-bold mb-4">
+                            <i class="fas fa-pen-nib"></i>
+                        </div>
+                        <h3 class="text-lg font-black text-slate-900 mb-2">Quem Cobra Redação?</h3>
+                        <p class="text-xs text-slate-600 mb-4 font-medium leading-relaxed">
+                            Apenas <strong>3 das 10 instituições</strong> exigem produção de texto:
+                        </p>
+                        <ul class="text-xs space-y-2.5 font-medium text-slate-700 mb-4">
+                            <li class="p-2.5 rounded-lg bg-rose-50/60 border border-rose-100">
+                                <strong class="text-rose-950 block font-bold">1. CEFET-RJ (Banca SELECON):</strong>
+                                Redação Dissertativo-Argumentativa em prosa valendo impressionantes <strong>100 pontos</strong> (40% do total da nota final). Correção limitada a <strong>2x o número de vagas</strong>.
+                            </li>
+                            <li class="p-2.5 rounded-lg bg-indigo-50/60 border border-indigo-100">
+                                <strong class="text-indigo-950 block font-bold">2. COLUNI (UFV):</strong>
+                                Produção Textual (15 pontos) com múltiplos gêneros possíveis (crônica, relato, carta pessoal/aberta, manifesto). Correção limitada a <strong>4x o número de vagas</strong>.
+                            </li>
+                            <li class="p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100">
+                                <strong class="text-emerald-950 block font-bold">3. CTUR (UFRRJ):</strong>
+                                Texto Dissertativo-Argumentativo valendo <strong>20 pontos</strong> (33,3% da prova). Correção limitada a <strong>3x o número de vagas</strong>.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="text-[11px] font-bold text-rose-800 bg-rose-50 p-2.5 rounded-xl border border-rose-200">
+                        <i class="fas fa-exclamation-circle mr-1"></i> Zerar a redação elimina o candidato imediatamente no CEFET-RJ e no CTUR.
+                    </div>
+                </div>
+
+                <!-- Card 2: Livros Obrigatórios -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl font-bold mb-4">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3 class="text-lg font-black text-slate-900 mb-2">Quem Exige Livros de Literatura?</h3>
+                        <p class="text-xs text-slate-600 mb-4 font-medium leading-relaxed">
+                            Apenas <strong>3 colégios universitários/técnicos de Minas Gerais</strong> adotam lista prévia de obras para as questões de Língua Portuguesa:
+                        </p>
+                        <ul class="text-xs space-y-2.5 font-medium text-slate-700 mb-4">
+                            <li class="p-2.5 rounded-lg bg-amber-50/60 border border-amber-100">
+                                <strong class="text-amber-950 block font-bold">COLUNI (UFV):</strong>
+                                Obra: <em>"A Cabeça do Santo"</em>, de Socorro Acioli. Pode ser exigida tanto nas questões objetivas quanto como intertexto da redação.
+                            </li>
+                            <li class="p-2.5 rounded-lg bg-purple-50/60 border border-purple-100">
+                                <strong class="text-purple-950 block font-bold">CEFET-MG:</strong>
+                                Obra: <em>"O Alienista"</em>, de Machado de Assis (conto integral clássico).
+                            </li>
+                            <li class="p-2.5 rounded-lg bg-blue-50/60 border border-blue-100">
+                                <strong class="text-blue-950 block font-bold">COLTEC (UFMG):</strong>
+                                Obra: <em>"O Jardim das Oliveiras"</em>, de Adélia Prado (Ed. Record, 2025). Poesia e prosa introspectiva mineira.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="text-[11px] font-bold text-amber-900 bg-amber-50 p-2.5 rounded-xl border border-amber-200">
+                        <i class="fas fa-info-circle mr-1"></i> Todas as demais 7 redes trabalham interpretação com textos contemporâneos e crônicas genéricas.
+                    </div>
+                </div>
+
+                <!-- Card 3: Língua Estrangeira (Inglês) -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-800 flex items-center justify-center text-xl font-bold mb-4">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3 class="text-lg font-black text-slate-900 mb-2">Quem Cobra Língua Inglesa?</h3>
+                        <p class="text-xs text-slate-600 mb-4 font-medium leading-relaxed">
+                            Existe um mito de que todos os institutos cobram inglês, mas a realidade dos editais é cirúrgica:
+                        </p>
+                        <div class="p-4 rounded-xl bg-blue-50 border border-blue-200 mb-4">
+                            <span class="inline-block bg-blue-600 text-white font-black text-[10px] px-2 py-0.5 rounded uppercase mb-2">Caso Exclusivo</span>
+                            <h4 class="text-xs font-black text-blue-950 mb-1">COLUNI (UFV - Viçosa)</h4>
+                            <p class="text-xs text-blue-900 font-semibold leading-relaxed">
+                                É o <strong>ÚNICO vestibulinho</strong> da lista que inclui questões formais de Língua Inglesa (2 questões objetivas com técnicas de <em>Skimming</em> e <em>Scanning</em>, vocabulário e interpretação).
+                            </p>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium leading-relaxed">
+                            CEFET-MG, COLTEC, CEFET-RJ, IFF, CTUR, IF Sudeste MG, IFMG, IFES, IFBA e IFFar <strong>NÃO cobram língua estrangeira</strong> no processo seletivo do integrado.
+                        </p>
+                    </div>
+                    <div class="text-[11px] font-bold text-blue-900 bg-blue-50 p-2.5 rounded-xl border border-blue-200">
+                        <i class="fas fa-check-circle mr-1"></i> Foco prioritário de estudos: Português, Matemática, Ciências e Humanas.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 3: ANÁLISE COMPARATIVA POR DISCIPLINA -->
+    <section id="comparativo-disciplinas" class="py-14 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-10">
+                <span class="bg-emerald-50 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Mapeamento Curricular Cruzado
+                </span>
+                <h2 class="text-3xl font-black text-slate-900">Convergências & Divergências de Conteúdo</h2>
+                <p class="text-slate-600 text-xs md:text-sm max-w-2xl mx-auto mt-1">
+                    Veja o que é padrão absoluto em todas as provas e onde estão os pontos fora da curva de cada banca examinadora.
+                </p>
+            </div>
+
+            <!-- Abas por Matéria -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8" id="disciplina-tabs">
+                <button onclick="switchDiscTab('matematica')" class="tab-btn active font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-calculator mr-1.5"></i>Matemática</button>
+                <button onclick="switchDiscTab('portugues')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-book mr-1.5"></i>Língua Portuguesa</button>
+                <button onclick="switchDiscTab('ciencias')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-flask mr-1.5"></i>Ciências da Natureza</button>
+                <button onclick="switchDiscTab('historia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-landmark mr-1.5"></i>História</button>
+                <button onclick="switchDiscTab('geografia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-globe-americas mr-1.5"></i>Geografia</button>
+            </div>
+
+            <!-- Bloco de Conteúdo das Abas -->
+            <div class="bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm text-xs leading-relaxed text-slate-700">
+                
+                <!-- ABA MATEMÁTICA -->
+                <div id="disc-matematica" class="disc-content space-y-6">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                        <h3 class="text-lg font-black text-slate-900"><i class="fas fa-calculator text-indigo-600 mr-2"></i>Matemática: O que todas cobram vs. Peculiaridades</h3>
+                        <span class="bg-indigo-100 text-indigo-900 font-bold px-3 py-1 rounded-full text-[10px]">Presente em 100% dos Editais</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-4 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-emerald-800 font-black block mb-2 text-sm"><i class="fas fa-check-double mr-1.5"></i>Núcleo Comum a TODAS as Bancas:</strong>
+                            <ul class="space-y-1.5 list-disc list-inside text-slate-600 font-medium">
+                                <li><strong>Aritmética:</strong> Conjuntos numéricos ($\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$), MMC, MDC, frações, dízimas periódicas e potenciação/radiciação.</li>
+                                <li><strong>Matemática Financeira/Comercial:</strong> Razão, proporção, regra de três simples/composta, porcentagem e juros simples.</li>
+                                <li><strong>Álgebra:</strong> Produtos notáveis, fatoração, equações e sistemas de 1º e 2º graus.</li>
+                                <li><strong>Funções:</strong> Conceito, estudo da função afim (1º grau) e função quadrática (2º grau), raízes e vértice da parábola.</li>
+                                <li><strong>Geometria Plana:</strong> Teorema de Tales, semelhança de triângulos, Teorema de Pitágoras, razões trigonométricas no triângulo retângulo (seno, cosseno, tangente) e cálculo de áreas planas.</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-amber-800 font-black block mb-2 text-sm"><i class="fas fa-search-plus mr-1.5"></i>Onde Estão as Diferenças e Armadilhas:</strong>
+                            <ul class="space-y-2 text-slate-600 font-medium">
+                                <li><strong class="text-slate-900">Geometria Espacial (Prismas e Cilindros):</strong> Cobrada com ênfase no <strong>CEFET-RJ, IFF, CEFET-MG e IF Sudeste MG</strong>. Muitas turmas focam apenas em geometria plana e perdem pontos preciosos aqui.</li>
+                                <li><strong class="text-slate-900">Estatística (Mediana e Moda):</strong> Enquanto quase todos cobram média aritmética simples e ponderada, o <strong>IFF e IF Sudeste MG</strong> cobram formalmente o cálculo de <em>Moda e Mediana</em> e leitura avançada de gráficos de setores/histogramas.</li>
+                                <li><strong class="text-slate-900">Cálculo de Polinômios:</strong> O <strong>IF Sudeste MG e o CEFET-RJ</strong> detalham operações elementares com polinômios e equações fracionárias redutíveis.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA PORTUGUÊS -->
+                <div id="disc-portugues" class="disc-content hidden space-y-6">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                        <h3 class="text-lg font-black text-slate-900"><i class="fas fa-book text-indigo-600 mr-2"></i>Língua Portuguesa: Interpretação, Gramática e Literatura</h3>
+                        <span class="bg-indigo-100 text-indigo-900 font-bold px-3 py-1 rounded-full text-[10px]">A matéria com maior peso geral</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-4 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-emerald-800 font-black block mb-2 text-sm"><i class="fas fa-check-double mr-1.5"></i>Núcleo Comum Universal:</strong>
+                            <ul class="space-y-1.5 list-disc list-inside text-slate-600 font-medium">
+                                <li><strong>Compreensão Textual:</strong> Textos multimodais, charges, tirinhas, crônicas, identificação de tese e argumentos.</li>
+                                <li><strong>Coesão e Coerência:</strong> Pronomes referenciais, conjunções coordenativas/subordinativas e pontuação como efeito de sentido.</li>
+                                <li><strong>Morfossintaxe:</strong> Classes de palavras (substantivo, adjetivo, pronome, verbo), concordância verbal/nominal, regência e crase.</li>
+                                <li><strong>Figuras de Linguagem:</strong> Metáfora, metonímia, antítese, ironia, hipérbole, personificação.</li>
+                                <li><strong>Variação Linguística:</strong> Registro formal vs. informal, preconceito linguístico e variedades regionais.</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-amber-800 font-black block mb-2 text-sm"><i class="fas fa-search-plus mr-1.5"></i>Peculiaridades Regionais:</strong>
+                            <ul class="space-y-2 text-slate-600 font-medium">
+                                <li><strong class="text-slate-900">Autores Africanos e Raízes Negras:</strong> O <strong>CEFET-RJ</strong> exige explicitamente autores dos Países Africanos de Língua Oficial Portuguesa (PALOP) e marcas da oralidade afro-brasileira.</li>
+                                <li><strong class="text-slate-900">Leitura Prévia Obrigatória:</strong> <strong>COLUNI</strong> (Socorro Acioli), <strong>CEFET-MG</strong> (Machado de Assis) e <strong>COLTEC</strong> (Adélia Prado). Nestes 3, a prova exige domínio do enredo, personagens e crítica social dos livros.</li>
+                                <li><strong class="text-slate-900">Peso 2 Eliminatório:</strong> No <strong>COLTEC</strong>, o candidato que tirar ZERO em Português ou Matemática é eliminado instantaneamente, mesmo gabaritando as outras matérias.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA CIÊNCIAS -->
+                <div id="disc-ciencias" class="disc-content hidden space-y-6">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                        <h3 class="text-lg font-black text-slate-900"><i class="fas fa-flask text-teal-600 mr-2"></i>Ciências Naturais: Biologia, Física e Química</h3>
+                        <span class="bg-teal-100 text-teal-900 font-bold px-3 py-1 rounded-full text-[10px]">Geralmente 8 a 12 Questões</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-3.5 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-teal-900 font-black block mb-1 text-xs uppercase"><i class="fas fa-dna mr-1"></i>Biologia (Todos)</strong>
+                            <p class="text-[11px] text-slate-600 font-medium leading-relaxed mb-2">Citologia (célula vegetal vs animal), reinos dos seres vivos, fisiologia dos sistemas humanos (digestório, respiratório, circulatório, excretor), genética básica (Mendel e sistema ABO), ecologia e saúde pública (ISTs e verminoses).</p>
+                            <span class="text-[10px] text-emerald-800 font-bold block bg-emerald-50 p-1.5 rounded">Comum a todos os 10 editais</span>
+                        </div>
+
+                        <div class="p-3.5 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-teal-900 font-black block mb-1 text-xs uppercase"><i class="fas fa-atom mr-1"></i>Física (Cuidado!)</strong>
+                            <p class="text-[11px] text-slate-600 font-medium leading-relaxed mb-2">Cinemática (MRU e MRUV), Leis de Newton, trabalho e energia mecânica, termometria/calorimetria, hidrostática (Pascal, Stevin, Arquimedes) e 1ª Lei de Ohm/Circuitos elétricos simples.</p>
+                            <span class="text-[10px] text-amber-800 font-bold block bg-amber-50 p-1.5 rounded">Forte peso no CEFET-MG, CEFET-RJ e IF Sudeste MG</span>
+                        </div>
+
+                        <div class="p-3.5 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-teal-900 font-black block mb-1 text-xs uppercase"><i class="fas fa-vial mr-1"></i>Química (Essenciais)</strong>
+                            <p class="text-[11px] text-slate-600 font-medium leading-relaxed mb-2">Estados físicos e separação de misturas, fenômenos físicos vs químicos, modelos atômicos (Dalton a Bohr), tabela periódica, ligações iônica/covalente e funções inorgânicas (ácido, base, sal, óxido).</p>
+                            <span class="text-[10px] text-teal-800 font-bold block bg-teal-50 p-1.5 rounded">Leis de Lavoisier/Proust no CEFET-RJ e IF Sudeste MG</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA HISTÓRIA -->
+                <div id="disc-historia" class="disc-content hidden space-y-6">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                        <h3 class="text-lg font-black text-slate-900"><i class="fas fa-landmark text-amber-700 mr-2"></i>História: Brasil, Geral e Conteúdos Regionais</h3>
+                        <span class="bg-amber-100 text-amber-900 font-bold px-3 py-1 rounded-full text-[10px]">Geralmente 4 a 8 Questões</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-4 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-emerald-800 font-black block mb-2 text-sm"><i class="fas fa-check-double mr-1.5"></i>Conteúdo Padrão Nacional:</strong>
+                            <ul class="space-y-1.5 list-disc list-inside text-slate-600 font-medium">
+                                <li><strong>História Geral:</strong> Feudalismo, Expansão Marítima, Renascimento, Reformas Religiosas, Iluminismo, Revolução Industrial, 1ª e 2ª Guerra Mundial e Guerra Fria.</li>
+                                <li><strong>Brasil Colônia:</strong> Povos indígenas, economia açucareira, escravidão africana, ciclo do ouro e revoltas nativistas/emancipacionistas.</li>
+                                <li><strong>Brasil Império e República:</strong> Independência, 1º e 2º Reinado, República Velha (coronelismo), Era Vargas, Ditadura Militar e Redemocratização (Constituição de 1988).</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-amber-800 font-black block mb-2 text-sm"><i class="fas fa-map-marked-alt mr-1.5"></i>As Cobranças Regionais (Atenção Máxima):</strong>
+                            <ul class="space-y-2.5 text-slate-600 font-medium">
+                                <li class="p-2 bg-emerald-50/50 rounded-lg border border-emerald-100">
+                                    <strong class="text-emerald-950 block font-bold">IFFar (Rio Grande do Sul):</strong>
+                                    Exige expressamente a <strong>Ocupação Territorial do RS e a Revolução Farroupilha</strong>. Alunos de outros estados precisam estudar esse módulo local!
+                                </li>
+                                <li class="p-2 bg-amber-50/50 rounded-lg border border-amber-100">
+                                    <strong class="text-amber-950 block font-bold">IF Sudeste MG e CEFET-MG (Minas Gerais):</strong>
+                                    Forte ênfase no Ciclo do Ouro das Minas Gerais, sociedade mineradora, Inconfidência Mineira e a República do Café com Leite.
+                                </li>
+                                <li class="p-2 bg-indigo-50/50 rounded-lg border border-indigo-100">
+                                    <strong class="text-indigo-950 block font-bold">IFBA (Bahia):</strong>
+                                    História da escravidão no Recôncavo Baiano, Revolta dos Búzios (Conjuração Baiana) e Independência da Bahia (2 de Julho).
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA GEOGRAFIA -->
+                <div id="disc-geografia" class="disc-content hidden space-y-6">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                        <h3 class="text-lg font-black text-slate-900"><i class="fas fa-globe-americas text-blue-700 mr-2"></i>Geografia: Física, Humana, Econômica e Regional</h3>
+                        <span class="bg-blue-100 text-blue-900 font-bold px-3 py-1 rounded-full text-[10px]">Geralmente 4 a 8 Questões</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-4 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-emerald-800 font-black block mb-2 text-sm"><i class="fas fa-check-double mr-1.5"></i>Tópicos Universais em Todas as Provas:</strong>
+                            <ul class="space-y-1.5 list-disc list-inside text-slate-600 font-medium">
+                                <li><strong>Cartografia:</strong> Coordenadas (latitude/longitude), fusos horários do Brasil, escalas cartográficas e leitura de mapas.</li>
+                                <li><strong>Geografia Física:</strong> Relevo, clima, hidrografia e os grandes Biomas brasileiros (Cerrado, Mata Atlântica, Caatinga, Amazônia, Pampa e Pantanal).</li>
+                                <li><strong>Geografia Humana & Econômica:</strong> Pirâmides etárias, transição demográfica, migrações, urbanização, modernização da agricultura e matrizes energéticas.</li>
+                                <li><strong>Geopolítica e Globalização:</strong> Divisão Internacional do Trabalho, blocos econômicos e impactos socioambientais.</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-blue-800 font-black block mb-2 text-sm"><i class="fas fa-search-location mr-1.5"></i>Peculiaridades Regionais nos Editais:</strong>
+                            <ul class="space-y-2.5 text-slate-600 font-medium">
+                                <li class="p-2 bg-emerald-50/50 rounded-lg border border-emerald-100">
+                                    <strong class="text-emerald-950 block font-bold">IFFar (Rio Grande do Sul):</strong>
+                                    Exige obrigatoriamente a <strong>Geografia do RS</strong>: Bioma Pampa, relevo da Depressão Central e Planalto, hidrografia e aspectos demográficos gaúchos.
+                                </li>
+                                <li class="p-2 bg-indigo-50/50 rounded-lg border border-indigo-100">
+                                    <strong class="text-indigo-950 block font-bold">IFES (Espírito Santo):</strong>
+                                    Questões aplicadas à Geografia regional capixaba, logística portuária e bacias hidrográficas locais (Rio Doce).
+                                </li>
+                                <li class="p-2 bg-purple-50/50 rounded-lg border border-purple-100">
+                                    <strong class="text-purple-950 block font-bold">CEFET-RJ e IFF (Rio de Janeiro):</strong>
+                                    Enfoque na Baixada Fluminense, Região Metropolitana do RJ, Bacia de Campos e impactos da indústria petrolífera.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 4: INSIGHTS ESTRATÉGICOS PARA A COORDENAÇÃO E ALUNOS -->
+    <section id="insights-estrategicos" class="py-14 bg-slate-900 text-white">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-10">
+                <span class="bg-[#c7ef59] text-slate-900 text-[10px] font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 inline-block">
+                    Estratégia Pedagógica Guia Pré-Federal
+                </span>
+                <h2 class="text-2xl md:text-3xl font-black">Como Preparar os Alunos para Todas as Bancas?</h2>
+                <p class="text-slate-300 text-xs md:text-sm max-w-2xl mx-auto mt-1 font-medium">
+                    A análise comparativa demonstra com clareza o caminho para conciliar vestibulinhos diferentes numa única turma preparatória.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
+                <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
+                    <div class="text-amber-400 text-2xl mb-3"><i class="fas fa-layer-group"></i></div>
+                    <h3 class="text-base font-black mb-2 text-white">1. O "Tronco Comum" Cobre 80%</h3>
+                    <p class="text-slate-300 leading-relaxed font-medium">
+                        Se o aluno dominar a base de <strong>Português (sintaxe/interpretação), Matemática (geometria plana, álgebra e funções) e Ciências Básicas</strong>, ele já é extremamente competitivo em qualquer um dos 10 vestibulinhos.
+                    </p>
+                </div>
+
+                <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
+                    <div class="text-rose-400 text-2xl mb-3"><i class="fas fa-pen-nib"></i></div>
+                    <h3 class="text-base font-black mb-2 text-white">2. Redação: O Maior Perigo de Eliminação</h3>
+                    <p class="text-slate-300 leading-relaxed font-medium">
+                        Candidatos que focam no <strong>CEFET-RJ (onde a redação vale 100 pontos)</strong> ou no <strong>CTUR e COLUNI</strong> não podem negligenciar a escrita semanal. Tirar zero na redação no RJ desclassifica o candidato mesmo com 100% de acertos na objetiva!
+                    </p>
+                </div>
+
+                <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
+                    <div class="text-lime-400 text-2xl mb-3"><i class="fas fa-book-reader"></i></div>
+                    <h3 class="text-base font-black mb-2 text-white">3. Módulos Eletivos de Obras & Localismo</h3>
+                    <p class="text-slate-300 leading-relaxed font-medium">
+                        A melhor estratégia é manter as <strong>aulas de livros (COLUNI, CEFET-MG, COLTEC)</strong> e as <strong>histórias regionais (Farroupilha no RS, Minas na mineração)</strong> em módulos direcionados de reta final, para não sobrecarregar quem fará provas sem essas exigências.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Banner CTA dentro do Comparativo -->
+            <div class="mt-12 bg-gradient-to-r from-indigo-900 to-slate-800 p-8 rounded-3xl border border-indigo-500/30 text-center">
+                <h3 class="text-xl md:text-2xl font-black mb-2">Quer Passar em Qualquer Federal do Brasil?</h3>
+                <p class="text-slate-300 text-xs md:text-sm max-w-xl mx-auto mb-6">
+                    Nosso preparatório é construído com matriz verticalizada de competências para garantir que você esteja pronto para qualquer banca organizadora.
+                </p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-6 py-3.5 rounded-xl transition text-xs uppercase tracking-wider inline-flex items-center shadow-lg">
+                        <i class="fas fa-rocket mr-2 text-emerald-950"></i> Matricular no Curso Intensivo
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-3.5 rounded-xl transition text-xs uppercase tracking-wider inline-flex items-center shadow-lg">
+                        <i class="fab fa-whatsapp mr-2 text-base"></i> Falar com a Equipe
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-white py-10 border-t border-slate-800 text-xs text-center">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex justify-center items-center space-x-3 mb-4">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center p-1" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+                </div>
+                <span class="text-base font-black">Guia - Pré Federal</span>
+            </div>
+            <p class="text-slate-400 font-medium mb-3">Painel de Inteligência e Mapeamento Curricular dos Editais Federais.</p>
+            <p class="text-slate-500">&copy; 2026 Guia Pré-Federal. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Script de Alternância de Abas -->
+    <script>
+        function switchDiscTab(tabId) {
+            document.querySelectorAll('#disciplina-tabs .tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            document.querySelectorAll('.disc-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById('disc-' + tabId).classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
