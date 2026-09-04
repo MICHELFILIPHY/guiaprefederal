@@ -413,190 +413,714 @@
         </div>
     </section>
 
-    <!-- SEÇÃO 3: ANÁLISE COMPARATIVA POR DISCIPLINA -->
+    <!-- SEÇÃO 3: ANÁLISE COMPARATIVA POR DISCIPLINA (DOSSIÊ COMPLETO PARA PROFESSORES) -->
     <section id="comparativo-disciplinas" class="py-14 bg-white border-b border-slate-200">
-        <div class="container mx-auto px-4 max-w-6xl">
+        <div class="container mx-auto px-4 max-w-7xl">
             <div class="text-center mb-10">
-                <span class="bg-emerald-50 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
-                    Mapeamento Curricular Cruzado
+                <span class="bg-indigo-100 text-indigo-950 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-indigo-200 inline-block">
+                    Matriz Curricular Comparada • Dossiê Pedagógico para Professores
                 </span>
-                <h2 class="text-3xl font-black text-slate-900">Convergências & Divergências de Conteúdo</h2>
-                <p class="text-slate-600 text-xs md:text-sm max-w-2xl mx-auto mt-1">
-                    Veja o que é padrão absoluto em todas as provas e onde estão os pontos fora da curva de cada banca examinadora.
+                <h2 class="text-2xl md:text-4xl font-black text-slate-900">Mapeamento Exaustivo dos Conteúdos Programáticos</h2>
+                <p class="text-slate-600 text-xs md:text-sm max-w-3xl mx-auto mt-2 font-medium leading-relaxed">
+                    Comparação minuciosa de cada disciplina entre os 10 vestibulinhos federais. Utilize este detalhamento para verificar o que é tronco comum obrigatório, os tópicos periféricos de alto risco e as cobranças regionais exclusivas de cada banca.
                 </p>
             </div>
 
             <!-- Abas por Matéria -->
             <div class="flex flex-wrap justify-center gap-2 mb-8" id="disciplina-tabs">
-                <button onclick="switchDiscTab('matematica')" class="tab-btn active font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-calculator mr-1.5"></i>Matemática</button>
-                <button onclick="switchDiscTab('portugues')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-book mr-1.5"></i>Língua Portuguesa</button>
-                <button onclick="switchDiscTab('ciencias')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-flask mr-1.5"></i>Ciências da Natureza</button>
-                <button onclick="switchDiscTab('historia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-landmark mr-1.5"></i>História</button>
-                <button onclick="switchDiscTab('geografia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-globe-americas mr-1.5"></i>Geografia</button>
+                <button onclick="switchDiscTab('matematica')" class="tab-btn active font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-calculator mr-1.5"></i>Matemática Completa</button>
+                <button onclick="switchDiscTab('portugues')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-book mr-1.5"></i>Língua Portuguesa & Obras</button>
+                <button onclick="switchDiscTab('ciencias')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-flask mr-1.5"></i>Ciências (Fís / Quím / Bio)</button>
+                <button onclick="switchDiscTab('historia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-landmark mr-1.5"></i>História Geral & do Brasil</button>
+                <button onclick="switchDiscTab('geografia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-globe-americas mr-1.5"></i>Geografia Física, Humana & Regional</button>
+                <button onclick="switchDiscTab('redacao-guia')" class="tab-btn font-black text-xs px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-pen-nib mr-1.5 text-rose-600"></i>Redação & Gêneros</button>
             </div>
 
             <!-- Bloco de Conteúdo das Abas -->
-            <div class="bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm text-xs leading-relaxed text-slate-700">
+            <div class="bg-slate-50 rounded-3xl p-6 md:p-10 border border-slate-200 shadow-sm text-xs leading-relaxed text-slate-700">
                 
                 <!-- ABA MATEMÁTICA -->
-                <div id="disc-matematica" class="disc-content space-y-6">
-                    <div class="flex items-center justify-between pb-3 border-b border-slate-200">
-                        <h3 class="text-lg font-black text-slate-900"><i class="fas fa-calculator text-indigo-600 mr-2"></i>Matemática: O que todas cobram vs. Peculiaridades</h3>
-                        <span class="bg-indigo-100 text-indigo-900 font-bold px-3 py-1 rounded-full text-[10px]">Presente em 100% dos Editais</span>
+                <div id="disc-matematica" class="disc-content space-y-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-200 gap-2">
+                        <div>
+                            <h3 class="text-xl font-black text-slate-900"><i class="fas fa-calculator text-indigo-600 mr-2"></i>Matemática: Matriz Completa das 10 Bancas</h3>
+                            <p class="text-xs text-slate-500 font-medium">Comparativo verticalizado: Aritmética, Álgebra, Funções, Geometria Plana/Espacial, Trigonometria e Estatística.</p>
+                        </div>
+                        <span class="bg-indigo-100 text-indigo-900 font-black px-3 py-1.5 rounded-full text-[11px] self-start md:self-auto border border-indigo-200">
+                            Presente em 100% dos Editais
+                        </span>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="p-4 bg-white rounded-xl border border-slate-200">
-                            <strong class="text-emerald-800 font-black block mb-2 text-sm"><i class="fas fa-check-double mr-1.5"></i>Núcleo Comum a TODAS as Bancas:</strong>
-                            <ul class="space-y-1.5 list-disc list-inside text-slate-600 font-medium">
-                                <li><strong>Aritmética:</strong> Conjuntos numéricos ($\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$), MMC, MDC, frações, dízimas periódicas e potenciação/radiciação.</li>
-                                <li><strong>Matemática Financeira/Comercial:</strong> Razão, proporção, regra de três simples/composta, porcentagem e juros simples.</li>
-                                <li><strong>Álgebra:</strong> Produtos notáveis, fatoração, equações e sistemas de 1º e 2º graus.</li>
-                                <li><strong>Funções:</strong> Conceito, estudo da função afim (1º grau) e função quadrática (2º grau), raízes e vértice da parábola.</li>
-                                <li><strong>Geometria Plana:</strong> Teorema de Tales, semelhança de triângulos, Teorema de Pitágoras, razões trigonométricas no triângulo retângulo (seno, cosseno, tangente) e cálculo de áreas planas.</li>
+                    <!-- 1. Núcleo Comum Absoluto -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200">
+                        <div class="flex items-center space-x-2 text-emerald-800 mb-3">
+                            <i class="fas fa-check-double text-base"></i>
+                            <h4 class="text-sm font-black uppercase tracking-wider">1. Núcleo Comum Obrigatório (Cobrado por Todas as 10 Bancas)</h4>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-slate-600">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Aritmética e Conjuntos</strong>
+                                <ul class="list-disc list-inside space-y-1 text-[11px]">
+                                    <li>Conjuntos numéricos ($\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$ e irracionais) e reta real.</li>
+                                    <li>Operações fundamentais, propriedades e expressões numéricas.</li>
+                                    <li>Múltiplos, divisores, critérios de divisibilidade, números primos, MMC e MDC.</li>
+                                    <li>Frações, números decimais, dízimas periódicas e fração geratriz.</li>
+                                    <li>Potenciação com expoentes inteiros e fracionários; radiciação e simplificação.</li>
+                                    <li>Notação científica e ordem de grandeza (muito cobrado no IFF e IF Sudeste MG).</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Matemática Comercial</strong>
+                                <ul class="list-disc list-inside space-y-1 text-[11px]">
+                                    <li>Razão e proporção; constante de proporcionalidade.</li>
+                                    <li>Grandezas direta e inversamente proporcionais.</li>
+                                    <li>Regra de três simples e composta.</li>
+                                    <li>Porcentagem: cálculo direto, aumentos e descontos sucessivos.</li>
+                                    <li>Juros simples: fórmulas, montante e aplicações no cotidiano comercial.</li>
+                                    <li>Leitura de tabelas de preços, parcelamentos e tarifas bancárias.</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Álgebra & Equações</strong>
+                                <ul class="list-disc list-inside space-y-1 text-[11px]">
+                                    <li>Linguagem algébrica, valor numérico e monômios.</li>
+                                    <li>Produtos notáveis clássicos (quadrado da soma/diferença e produto da soma pela diferença).</li>
+                                    <li>Fatoração algébrica (fator comum, agrupamento, trinômio quadrado perfeito).</li>
+                                    <li>Frações algébricas e simplificação.</li>
+                                    <li>Equações e inequações do 1º grau e problemas contextualizados.</li>
+                                    <li>Sistemas lineares de 1º grau a duas incógnitas (adição e substituição).</li>
+                                    <li>Equações do 2º grau completas e incompletas (Bhaskara, soma e produto).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Geometria Plana vs Espacial -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200">
+                        <div class="flex items-center space-x-2 text-indigo-800 mb-3">
+                            <i class="fas fa-shapes text-base"></i>
+                            <h4 class="text-sm font-black uppercase tracking-wider">2. Geometria e Trigonometria: O que Realmente Diferencia as Provas</h4>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-600">
+                            <div class="p-4 bg-indigo-50/50 rounded-xl border border-indigo-100">
+                                <strong class="text-indigo-950 block mb-1.5 font-bold">Geometria Plana (Comum a 100%)</strong>
+                                <ul class="list-disc list-inside space-y-1 text-[11px]">
+                                    <li>Ângulos: complementares, suplementares, opostos pelo vértice e retas paralelas cortadas por transversal.</li>
+                                    <li>Triângulos: classificação por lados/ângulos, soma dos ângulos internos ($180^\circ$).</li>
+                                    <li>Teorema de Tales e semelhança de triângulos.</li>
+                                    <li>Teorema de Pitágoras e relações métricas no triângulo retângulo.</li>
+                                    <li>Razões trigonométricas no triângulo retângulo: $\text{seno}, \text{cosseno e tangente}$ dos ângulos notáveis ($30^\circ, 45^\circ, 60^\circ$).</li>
+                                    <li>Cálculo de perímetros e áreas: triângulos, quadriláteros notáveis (quadrado, retângulo, losango, trapézio, paralelogramo).</li>
+                                    <li>Círculo e circunferência: raio, diâmetro, corda, comprimento ($2\pi r$) e área ($\pi r^2$).</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 bg-amber-50/60 rounded-xl border border-amber-200">
+                                <strong class="text-amber-950 block mb-1.5 font-bold">Geometria Espacial (PONTO CRÍTICO - Exigência Explícita)</strong>
+                                <p class="text-[11px] mb-2 leading-relaxed">
+                                    Muitos cursinhos negligenciam Geometria Espacial porque acham que "cai só no Ensino Médio". Porém, os editais do <strong>CEFET-RJ, IFF, CEFET-MG, CTUR e IF Sudeste MG</strong> cobram formalmente:
+                                </p>
+                                <ul class="list-disc list-inside space-y-1 text-[11px] text-amber-900 font-semibold">
+                                    <li>Volume do bloco retangular / paralelepípedo e cubo ($V = a \cdot b \cdot c$) (CTUR, COLTEC, IFMG).</li>
+                                    <li>Área total e volume de <strong>Prismas retos de qualquer base</strong> (CEFET-RJ, IFF, IF Sudeste MG).</li>
+                                    <li>Área lateral, área total e volume do <strong>Cilindro Circular Reto</strong> (IFF D25, IF Sudeste MG).</li>
+                                    <li>Planificação de sólidos geométricos e relação entre faces, vértices e arestas (IFF D3).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Funções, Estatística e Peculiaridades das Bancas -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-purple-900 block mb-2 text-xs uppercase font-black"><i class="fas fa-chart-line mr-1 text-purple-600"></i>Estudo de Funções (Afim e Quadrática)</strong>
+                            <p class="text-[11px] text-slate-600 mb-2 leading-relaxed">
+                                Cobrado com profundidade teórica no <strong>COLTEC, CEFET-MG, IF Sudeste MG, IFF e CEFET-RJ</strong>:
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-[11px] text-slate-600">
+                                <li>Conceito de função, variáveis dependente e independente, domínio e imagem.</li>
+                                <li>Plano cartesiano e interpretação gráfica de equações lineares.</li>
+                                <li><strong>Função Afim ($f(x) = ax + b$):</strong> taxa de variação (coeficiente angular $a$), coeficiente linear $b$, raiz/zero da função e gráficos.</li>
+                                <li><strong>Função Quadrática ($f(x) = ax^2 + bx + c$):</strong> concavidade, raízes reais (estudo do discriminante $\Delta$), coordenadas do vértice da parábola ($X_v, Y_v$), cálculo de valor máximo e mínimo (problemas de otimização de lucro, área ou altura de projétil).</li>
                             </ul>
                         </div>
 
-                        <div class="p-4 bg-white rounded-xl border border-slate-200">
-                            <strong class="text-amber-800 font-black block mb-2 text-sm"><i class="fas fa-search-plus mr-1.5"></i>Onde Estão as Diferenças e Armadilhas:</strong>
-                            <ul class="space-y-2 text-slate-600 font-medium">
-                                <li><strong class="text-slate-900">Geometria Espacial (Prismas e Cilindros):</strong> Cobrada com ênfase no <strong>CEFET-RJ, IFF, CEFET-MG e IF Sudeste MG</strong>. Muitas turmas focam apenas em geometria plana e perdem pontos preciosos aqui.</li>
-                                <li><strong class="text-slate-900">Estatística (Mediana e Moda):</strong> Enquanto quase todos cobram média aritmética simples e ponderada, o <strong>IFF e IF Sudeste MG</strong> cobram formalmente o cálculo de <em>Moda e Mediana</em> e leitura avançada de gráficos de setores/histogramas.</li>
-                                <li><strong class="text-slate-900">Cálculo de Polinômios:</strong> O <strong>IF Sudeste MG e o CEFET-RJ</strong> detalham operações elementares com polinômios e equações fracionárias redutíveis.</li>
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-rose-900 block mb-2 text-xs uppercase font-black"><i class="fas fa-chart-pie mr-1 text-rose-600"></i>Estatística e Probabilidade (O que Falta na Maioria das Turmas)</strong>
+                            <p class="text-[11px] text-slate-600 mb-2 leading-relaxed">
+                                As bancas do <strong>IFF (Descritores D53-D59), IF Sudeste MG (habilidades 35 a 42), COLTEC e CEFET-RJ</strong> exigem:
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-[11px] text-slate-600">
+                                <li>Leitura e interpretação avançada de gráficos estatísticos (barras, colunas, setores circulares, histogramas e infográficos).</li>
+                                <li>População e amostra; tipos de variáveis qualitativas e quantitativas (IF Sudeste MG).</li>
+                                <li><strong>Medidas de Tendência Central:</strong> Média aritmética simples, média aritmética ponderada, <strong>Moda e Mediana</strong> (cobrança expressa no IFF e IF Sudeste MG).</li>
+                                <li>Princípio Fundamental da Contagem (PFC) e cálculo de possibilidades simples.</li>
+                                <li>Probabilidade de eventos simples ($P = \frac{\text{casos favoráveis}}{\text{casos possíveis}}$).</li>
                             </ul>
                         </div>
+                    </div>
+
+                    <!-- Quadro Comparativo de Matemática por Banca -->
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white">
+                        <table class="w-full text-left border-collapse text-[11px]">
+                            <thead>
+                                <tr class="bg-slate-900 text-white font-bold uppercase text-[10px] text-center">
+                                    <th class="py-2.5 px-3 text-left">Instituição</th>
+                                    <th class="py-2.5 px-2">Nº Questões</th>
+                                    <th class="py-2.5 px-2">Peso</th>
+                                    <th class="py-2.5 px-2">Geom. Espacial</th>
+                                    <th class="py-2.5 px-2">Mediana/Moda</th>
+                                    <th class="py-2.5 px-2">Função 2º Grau (Vértice)</th>
+                                    <th class="py-2.5 px-3 text-left">Foco Predominante da Prova</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-700 text-center font-medium">
+                                <tr class="hover:bg-slate-50"><td class="py-2 px-3 text-left font-black text-indigo-700">COLUNI (UFV)</td><td>10</td><td>Peso 2 (20p)</td><td>Bloco retangular</td><td>Média</td><td>Conceito e raízes</td><td class="text-left">Problemas contextualizados de aritmética, proporcionalidade e geometria plana.</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="py-2 px-3 text-left font-black text-purple-700">CEFET-MG</td><td>15</td><td>Peso 1 (15p)</td><td>Prismas e Cubo</td><td>Média e gráficos</td><td>Vértice e máximos/mínimos</td><td class="text-left">Álgebra rigorosa, fatoração avançada, geometria plana e funções.</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="py-2 px-3 text-left font-black text-blue-900">COLTEC (UFMG)</td><td>10</td><td>Peso 2 (20p)</td><td>Paralelepípedo</td><td>Média e tabelas</td><td>Interpretação gráfica</td><td class="text-left">Raciocínio lógico, álgebra aplicada e geometria plana (Tales/Pitágoras/Áreas).</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="py-2 px-3 text-left font-black text-indigo-900">CEFET-RJ</td><td>10</td><td>5 pts/q (50p)</td><td>Prismas (Área/Vol)</td><td>Média ponderada</td><td>Estudo de sinais e vértice</td><td class="text-left">Polinômios, trigonometria, prismas e interpretação gráfica cartesiana.</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="py-2 px-3 text-left font-black text-teal-800">IFF (Fluminense)</td><td>10</td><td>1 pt/q (10p)</td><td>Prismas e Cilindros</td><td>Média, Mediana, Moda</td><td>Proporcionalidade direta ao quadrado</td><td class="text-left">Matriz SARESP/SAERJ: habilidades descritoras (D1 a D59) e tratamento da informação.</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="py-2 px-3 text-left font-black text-emerald-800">CTUR (UFRRJ)</td><td>6 (Bloco 1)</td><td>2 pts/q (12p)</td><td>Bloco retangular</td><td>Média aritmética</td><td>Equações de 2º grau</td><td class="text-left">Matemática instrumental, unidades de medida, proporcionalidade e geometria básica.</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="py-2 px-3 text-left font-black text-teal-700">IF Sudeste MG</td><td>11</td><td>2 pts/q (22p)</td><td>Prismas e Cilindros</td><td>Pesquisa, Média, Mediana</td><td>Vértice, parábola, máx/mín</td><td class="text-left">Extremamente detalhada: 42 competências com equações fracionárias e trigonometria.</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="py-2 px-3 text-left font-black text-emerald-700">IFMG</td><td>15</td><td>2 pts/q (30p)</td><td>Bloco retangular</td><td>Média e gráficos</td><td>Função afim e quadrática</td><td class="text-left">Forte peso: 30 pontos na prova objetiva, foco em álgebra e geometria plana.</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="py-2 px-3 text-left font-black text-cyan-800">IFES</td><td>10</td><td>10 pts/q (100p)</td><td>Sólidos elementares</td><td>Média</td><td>Gráficos</td><td class="text-left">Equilíbrio entre geometria euclidiana, aritmética comercial e álgebra.</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="py-2 px-3 text-left font-black text-emerald-600">IFFar (RS)</td><td>8</td><td>1 pt/q (8p)</td><td>Figuras planas</td><td>Média</td><td>Equações de 2º grau</td><td class="text-left">Foco em expressões numéricas, radicais, Tales, Pitágoras e matemática comercial.</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <!-- ABA PORTUGUÊS -->
-                <div id="disc-portugues" class="disc-content hidden space-y-6">
-                    <div class="flex items-center justify-between pb-3 border-b border-slate-200">
-                        <h3 class="text-lg font-black text-slate-900"><i class="fas fa-book text-indigo-600 mr-2"></i>Língua Portuguesa: Interpretação, Gramática e Literatura</h3>
-                        <span class="bg-indigo-100 text-indigo-900 font-bold px-3 py-1 rounded-full text-[10px]">A matéria com maior peso geral</span>
+                <div id="disc-portugues" class="disc-content hidden space-y-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-200 gap-2">
+                        <div>
+                            <h3 class="text-xl font-black text-slate-900"><i class="fas fa-book text-indigo-600 mr-2"></i>Língua Portuguesa & Literatura: Matriz Comparada</h3>
+                            <p class="text-xs text-slate-500 font-medium">Compreensão de Texto, Morfossintaxe, Mecanismos de Coesão, Variação Linguística e Leituras Obrigatórias.</p>
+                        </div>
+                        <span class="bg-rose-100 text-rose-900 font-black px-3 py-1.5 rounded-full text-[11px] self-start md:self-auto border border-rose-200">
+                            Maior Peso Médio Nacional
+                        </span>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="p-4 bg-white rounded-xl border border-slate-200">
-                            <strong class="text-emerald-800 font-black block mb-2 text-sm"><i class="fas fa-check-double mr-1.5"></i>Núcleo Comum Universal:</strong>
-                            <ul class="space-y-1.5 list-disc list-inside text-slate-600 font-medium">
-                                <li><strong>Compreensão Textual:</strong> Textos multimodais, charges, tirinhas, crônicas, identificação de tese e argumentos.</li>
-                                <li><strong>Coesão e Coerência:</strong> Pronomes referenciais, conjunções coordenativas/subordinativas e pontuação como efeito de sentido.</li>
-                                <li><strong>Morfossintaxe:</strong> Classes de palavras (substantivo, adjetivo, pronome, verbo), concordância verbal/nominal, regência e crase.</li>
-                                <li><strong>Figuras de Linguagem:</strong> Metáfora, metonímia, antítese, ironia, hipérbole, personificação.</li>
-                                <li><strong>Variação Linguística:</strong> Registro formal vs. informal, preconceito linguístico e variedades regionais.</li>
+                    <!-- Eixos Fundamentais de Português -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-indigo-950 block mb-2 font-bold text-xs uppercase"><i class="fas fa-file-alt text-indigo-600 mr-1.5"></i>1. Leitura & Tipologia Textual</strong>
+                            <ul class="list-disc list-inside space-y-1.5 text-[11px] text-slate-600">
+                                <li>Textos verbais, não verbais e multimodais (tirinhas, charges de Laerte/Henfil, infográficos, crônicas e campanhas publicitárias).</li>
+                                <li>Identificação da tese e dos argumentos de sustentação em textos de opinião.</li>
+                                <li>Distinção entre fato e opinião.</li>
+                                <li>Informações explícitas vs. inferência de implícitos e pressupostos.</li>
+                                <li>Gêneros textuais: crônica, notícia, reportagem, artigo de opinião, carta do leitor/pessoal, manifesto, relato e verbete.</li>
+                                <li>Intertextualidade: citação, paráfrase, paródia, alusão histórica e pastiche.</li>
                             </ul>
                         </div>
 
-                        <div class="p-4 bg-white rounded-xl border border-slate-200">
-                            <strong class="text-amber-800 font-black block mb-2 text-sm"><i class="fas fa-search-plus mr-1.5"></i>Peculiaridades Regionais:</strong>
-                            <ul class="space-y-2 text-slate-600 font-medium">
-                                <li><strong class="text-slate-900">Autores Africanos e Raízes Negras:</strong> O <strong>CEFET-RJ</strong> exige explicitamente autores dos Países Africanos de Língua Oficial Portuguesa (PALOP) e marcas da oralidade afro-brasileira.</li>
-                                <li><strong class="text-slate-900">Leitura Prévia Obrigatória:</strong> <strong>COLUNI</strong> (Socorro Acioli), <strong>CEFET-MG</strong> (Machado de Assis) e <strong>COLTEC</strong> (Adélia Prado). Nestes 3, a prova exige domínio do enredo, personagens e crítica social dos livros.</li>
-                                <li><strong class="text-slate-900">Peso 2 Eliminatório:</strong> No <strong>COLTEC</strong>, o candidato que tirar ZERO em Português ou Matemática é eliminado instantaneamente, mesmo gabaritando as outras matérias.</li>
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-indigo-950 block mb-2 font-bold text-xs uppercase"><i class="fas fa-project-diagram text-indigo-600 mr-1.5"></i>2. Coesão, Coerência e Sintaxe</strong>
+                            <ul class="list-disc list-inside space-y-1.5 text-[11px] text-slate-600">
+                                <li>Coesão referencial (anáfora, catáfora, pronominalização e elipse) e coesão sequencial.</li>
+                                <li>Conectivos: conjunções coordenativas (aditivas, adversativas, conclusivas, explicativas) e subordinativas (causais, temporais, conformativas, etc.).</li>
+                                <li>Morfossintaxe da oração: sujeito, predicado, transitividade verbal, complementos verbais e nominais.</li>
+                                <li>Relações sintáticas no período composto: coordenação e subordinação substantiva, adjetiva e adverbial.</li>
+                                <li>Regência verbal e nominal e ocorrência da <strong>Crase</strong>.</li>
+                                <li>Concordância verbal e nominal (incluindo casos especiais com sujeito composto, partitivo e pronome 'se').</li>
                             </ul>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-indigo-950 block mb-2 font-bold text-xs uppercase"><i class="fas fa-language text-indigo-600 mr-1.5"></i>3. Estilo, Semântica e Variação</strong>
+                            <ul class="list-disc list-inside space-y-1.5 text-[11px] text-slate-600">
+                                <li>Figuras de linguagem: metáfora, metonímia, antítese, paradoxo, ironia, hipérbole, personificação e eufemismo.</li>
+                                <li>Ambiguidade e polissemia vocabular.</li>
+                                <li>Denotação (sentido literal) vs. conotação (sentido figurado).</li>
+                                <li>Significação: sinônimos, antônimos, homônimos e parônimos.</li>
+                                <li>Variação linguística: diatópica (regional), diastrática (social), diafásica (registro formal vs informal) e histórica.</li>
+                                <li>Combate ao preconceito linguístico (exigência forte no IFF, CEFET-RJ e IF Sudeste MG).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Ponto de Atenção Exclusivo: Livros e Literatura -->
+                    <div class="bg-amber-50/70 p-5 rounded-2xl border border-amber-300">
+                        <h4 class="text-sm font-black text-amber-950 mb-2 uppercase flex items-center">
+                            <i class="fas fa-book-open text-amber-700 mr-2"></i> Quadro Comparativo: Obras Literárias Obrigatórias
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+                            <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
+                                <span class="bg-indigo-700 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase block mb-1">COLUNI (UFV)</span>
+                                <strong class="text-xs text-slate-900 block font-bold">"A Cabeça do Santo"</strong>
+                                <span class="text-[11px] text-slate-500 font-semibold block">Socorro Acioli</span>
+                                <p class="text-[10px] text-slate-600 mt-1.5 leading-relaxed">
+                                    Realismo mágico brasileiro no sertão cearense (Candeias). Narrativa de Samuel, a estátua de Santo Antônio, promessas de casamento, orfandade e intertextualidade na redação.
+                                </p>
+                            </div>
+                            <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
+                                <span class="bg-purple-700 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase block mb-1">CEFET-MG</span>
+                                <strong class="text-xs text-slate-900 block font-bold">"O Alienista"</strong>
+                                <span class="text-[11px] text-slate-500 font-semibold block">Machado de Assis</span>
+                                <p class="text-[10px] text-slate-600 mt-1.5 leading-relaxed">
+                                    Novela clássica do Realismo brasileiro. Dr. Simão Bacamarte, Casa Verde em Itaguaí, loucura, poder, ciência e ironia machadiana. Cobrado tanto no enredo quanto na morfossintaxe.
+                                </p>
+                            </div>
+                            <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
+                                <span class="bg-blue-900 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase block mb-1">COLTEC (UFMG)</span>
+                                <strong class="text-xs text-slate-900 block font-bold">"O Jardim das Oliveiras"</strong>
+                                <span class="text-[11px] text-slate-500 font-semibold block">Adélia Prado (Ed. Record, 2025)</span>
+                                <p class="text-[10px] text-slate-600 mt-1.5 leading-relaxed">
+                                    Poética mineira, espiritualidade, religiosidade popular, o cotidiano feminino no interior de Minas, linguagem lírica e recursos expressivos estilísticos.
+                                </p>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-amber-900 mt-3 font-semibold">
+                            ⚠️ <strong>Demais Bancas (CEFET-RJ, IFF, CTUR, IF Sudeste MG, IFMG, IFES, IFBA, IFFar):</strong> NÃO cobram livros prévios. Utilizam textos de suporte contemporâneos, crônicas de jornais, tirinhas e artigos de divulgação científica.
+                        </p>
+                    </div>
+
+                    <!-- Particularidade do CEFET-RJ -->
+                    <div class="p-4 bg-purple-50 rounded-2xl border border-purple-200 flex items-start space-x-3">
+                        <i class="fas fa-globe-africa text-purple-700 text-xl flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <strong class="text-purple-950 font-black text-xs block mb-1">Peculiaridade Exclusiva da SELECON / CEFET-RJ:</strong>
+                            <p class="text-[11px] text-purple-900 leading-relaxed font-medium">
+                                O edital do CEFET-RJ exige explicitamente o trabalho com <strong>autores dos Países Africanos de Língua Oficial Portuguesa (PALOP)</strong> (como Mia Couto, Ondjaki, Pepetela, Paulina Chiziane) e o reconhecimento de <strong>marcas da cultura e tradição de raiz africana</strong> na constituição do léxico e da oralidade brasileira.
+                            </p>
                         </div>
                     </div>
                 </div>
 
                 <!-- ABA CIÊNCIAS -->
-                <div id="disc-ciencias" class="disc-content hidden space-y-6">
-                    <div class="flex items-center justify-between pb-3 border-b border-slate-200">
-                        <h3 class="text-lg font-black text-slate-900"><i class="fas fa-flask text-teal-600 mr-2"></i>Ciências Naturais: Biologia, Física e Química</h3>
-                        <span class="bg-teal-100 text-teal-900 font-bold px-3 py-1 rounded-full text-[10px]">Geralmente 8 a 12 Questões</span>
+                <div id="disc-ciencias" class="disc-content hidden space-y-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-200 gap-2">
+                        <div>
+                            <h3 class="text-xl font-black text-slate-900"><i class="fas fa-flask text-teal-600 mr-2"></i>Ciências Naturais: Biologia, Física e Química</h3>
+                            <p class="text-xs text-slate-500 font-medium">Mapeamento dos 24 tópicos e 86 competências detalhadas (matriz COPESE / SAERJ / BNCC).</p>
+                        </div>
+                        <span class="bg-teal-100 text-teal-900 font-black px-3 py-1.5 rounded-full text-[11px] self-start md:self-auto border border-teal-200">
+                            8 a 12 Questões nas Provas
+                        </span>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="p-3.5 bg-white rounded-xl border border-slate-200">
-                            <strong class="text-teal-900 font-black block mb-1 text-xs uppercase"><i class="fas fa-dna mr-1"></i>Biologia (Todos)</strong>
-                            <p class="text-[11px] text-slate-600 font-medium leading-relaxed mb-2">Citologia (célula vegetal vs animal), reinos dos seres vivos, fisiologia dos sistemas humanos (digestório, respiratório, circulatório, excretor), genética básica (Mendel e sistema ABO), ecologia e saúde pública (ISTs e verminoses).</p>
-                            <span class="text-[10px] text-emerald-800 font-bold block bg-emerald-50 p-1.5 rounded">Comum a todos os 10 editais</span>
+                    <!-- BIOLOGIA -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200">
+                        <div class="flex items-center space-x-2 text-emerald-800 mb-3">
+                            <i class="fas fa-dna text-base"></i>
+                            <h4 class="text-sm font-black uppercase tracking-wider">Eixo 1: Biologia (Ecologia, Citologia, Fisiologia e Genética)</h4>
                         </div>
-
-                        <div class="p-3.5 bg-white rounded-xl border border-slate-200">
-                            <strong class="text-teal-900 font-black block mb-1 text-xs uppercase"><i class="fas fa-atom mr-1"></i>Física (Cuidado!)</strong>
-                            <p class="text-[11px] text-slate-600 font-medium leading-relaxed mb-2">Cinemática (MRU e MRUV), Leis de Newton, trabalho e energia mecânica, termometria/calorimetria, hidrostática (Pascal, Stevin, Arquimedes) e 1ª Lei de Ohm/Circuitos elétricos simples.</p>
-                            <span class="text-[10px] text-amber-800 font-bold block bg-amber-50 p-1.5 rounded">Forte peso no CEFET-MG, CEFET-RJ e IF Sudeste MG</span>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-[11px] text-slate-600">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Células e Tecidos</strong>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Célula eucarionte animal vs vegetal (parede celular, cloroplastos, vacúolo).</li>
+                                    <li>Funções das organelas (mitocôndria, ribossomo, complexo golgiense, retículos, lisossomos).</li>
+                                    <li>Membrana plasmática e processos de transporte.</li>
+                                    <li>Tecidos humanos: epitelial, conjuntivo, muscular e nervoso.</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Fisiologia Humana</strong>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Digestão e nutrição (tipos de nutrientes, órgãos do tubo digestório).</li>
+                                    <li>Sistema cardiovascular e circulação sanguínea.</li>
+                                    <li>Sistema respiratório e trocas gasosas.</li>
+                                    <li>Sistema excretor/urinário e homeostase.</li>
+                                    <li>Sistema nervoso e endócrino (hormônios da puberdade).</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Genética e Saúde</strong>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Cromossomos, DNA e determinação sexual humana.</li>
+                                    <li>1ª Lei de Mendel (monoibridismo e dominância).</li>
+                                    <li>Grupos sanguíneos (Sistema ABO e fator Rh) e transfusões.</li>
+                                    <li>Biotecnologia: clonagem, células-tronco e teste de DNA.</li>
+                                    <li>Saúde pública: parasitoses, verminoses, viroses e ISTs.</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Ecologia & Evolução</strong>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Cadeias e teias alimentares (produtores, consumidores, decompositores).</li>
+                                    <li>Relações ecológicas harmônicas e desarmônicas.</li>
+                                    <li>Grandes Biomas brasileiros e impactos ambientais (efeito estufa, chuva ácida).</li>
+                                    <li>Teorias da evolução: Lamarckismo vs. Darwinismo e seleção natural.</li>
+                                </ul>
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="p-3.5 bg-white rounded-xl border border-slate-200">
-                            <strong class="text-teal-900 font-black block mb-1 text-xs uppercase"><i class="fas fa-vial mr-1"></i>Química (Essenciais)</strong>
-                            <p class="text-[11px] text-slate-600 font-medium leading-relaxed mb-2">Estados físicos e separação de misturas, fenômenos físicos vs químicos, modelos atômicos (Dalton a Bohr), tabela periódica, ligações iônica/covalente e funções inorgânicas (ácido, base, sal, óxido).</p>
-                            <span class="text-[10px] text-teal-800 font-bold block bg-teal-50 p-1.5 rounded">Leis de Lavoisier/Proust no CEFET-RJ e IF Sudeste MG</span>
+                    <!-- FÍSICA -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200">
+                        <div class="flex items-center space-x-2 text-blue-800 mb-3">
+                            <i class="fas fa-atom text-base"></i>
+                            <h4 class="text-sm font-black uppercase tracking-wider">Eixo 2: Física (Mecânica, Termologia, Hidrostática, Ondulatória e Eletricidade)</h4>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-[11px] text-slate-600">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Cinemática & Dinâmica</strong>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Referencial, repouso, movimento e grandezas escalares/vetoriais.</li>
+                                    <li>Velocidade média e Movimento Uniforme (MRU).</li>
+                                    <li>Aceleração média e MRUV ($v = v_0 + at$). Queda livre e gravidade.</li>
+                                    <li><strong>Leis de Newton (1ª, 2ª e 3ª):</strong> Inércia, $F = m \cdot a$, Ação e Reação.</li>
+                                    <li>Peso, atrito, força de tração e sistemas com blocos.</li>
+                                    <li>Máquinas simples: alavancas, roldanas/polias e plano inclinado.</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Energia & Hidrostática</strong>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Trabalho de uma força ($W = F \cdot d \cdot \cos\theta$) e Potência mecânica.</li>
+                                    <li>Energia Cinética ($E_c = \frac{mv^2}{2}$) e Energia Potencial ($E_p = mgh$).</li>
+                                    <li>Princípio da conservação da energia mecânica.</li>
+                                    <li>Densidade e Pressão (pressão atmosférica).</li>
+                                    <li>Teorema de Stevin, vasos comunicantes e Princípio de Pascal (prensa hidráulica).</li>
+                                    <li>Princípio de Arquimedes e cálculo de empuxo.</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Termologia & Ondas</strong>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Temperatura, calor e equilíbrio térmico. Escalas termométricas.</li>
+                                    <li>Calor específico e trocas de calor ($Q = m \cdot c \cdot \Delta T$).</li>
+                                    <li>Condução, convecção e irradiação térmica. Dilatação anômala da água.</li>
+                                    <li>Ondas mecânicas vs eletromagnéticas; transversais vs longitudinais.</li>
+                                    <li>Equação fundamental da onda: $v = \lambda \cdot f$.</li>
+                                    <li>Fenômenos: reflexão, refração, difração e interferência.</li>
+                                    <li>Qualidades fisiológicas do som: altura, intensidade, timbre e eco.</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Óptica & Eletricidade</strong>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Princípios da óptica geométrica; fontes e meios de propagação.</li>
+                                    <li>Leis da reflexão: espelhos planos e esféricos (côncavos/convexos).</li>
+                                    <li>Leis da refração: lentes convergentes e divergentes; decomposição da luz branca.</li>
+                                    <li>Eletrização (atrito, contato, indução). Condutores e isolantes.</li>
+                                    <li>Diferença de potencial ($U$), corrente ($i$), resistência ($R$) e <strong>1ª Lei de Ohm ($U = R \cdot i$)</strong>.</li>
+                                    <li>Potência elétrica ($P = U \cdot i$) e consumo de energia em kWh. Circuitos elétricos simples.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUÍMICA -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200">
+                        <div class="flex items-center space-x-2 text-teal-800 mb-3">
+                            <i class="fas fa-vials text-base"></i>
+                            <h4 class="text-sm font-black uppercase tracking-wider">Eixo 3: Química (Matéria, Modelos Atômicos, Tabela Periódica e Reações)</h4>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-[11px] text-slate-600">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Matéria e Misturas</strong>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Propriedades específicas: densidade, solubilidade, PF e PE.</li>
+                                    <li>Substâncias simples e compostas.</li>
+                                    <li>Misturas homogêneas (soluções) e heterogêneas; fases de um sistema.</li>
+                                    <li>Métodos de separação: filtração, decantação, destilação simples/fracionada, centrifugação, catação, etc.</li>
+                                    <li>Estados físicos e mudanças de fase à luz do modelo cinético-molecular.</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Estrutura Atômica</strong>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Evolução dos modelos atômicos: Dalton (bola de bilhar), Thomson (pudim de passas), Rutherford e Bohr.</li>
+                                    <li>Partículas fundamentais: prótons, nêutrons e elétrons.</li>
+                                    <li>Número atômico ($Z$), número de massa ($A$), íons (cátions e ânions) e isótopos.</li>
+                                    <li>Organização da Tabela Periódica: períodos (camadas) e famílias/grupos (propriedades químicas semelhantes).</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Ligações Químicas</strong>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Camada de valência e Regra do Octeto.</li>
+                                    <li><strong>Ligação Iônica:</strong> transferência de elétrons entre metais e ametais; características dos compostos iônicos (altos PF/PE, condutores em solução aquosa).</li>
+                                    <li><strong>Ligação Covalente:</strong> compartilhamento de pares de elétrons entre ametais; moléculas e fórmulas estruturais simples.</li>
+                                    <li>Noções de ligação metálica (mar de elétrons).</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <strong class="text-slate-900 block mb-1 font-bold">Reações & Funções</strong>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Fenômenos físicos vs químicos (evidências macroscópicas de reação).</li>
+                                    <li>Equações químicas e balanceamento por tentativas.</li>
+                                    <li>Leis ponderais: Lei de Lavoisier (conservação das massas) e Proust.</li>
+                                    <li>Reações de combustão e de neutralização ácido-base.</li>
+                                    <li><strong>Funções Inorgânicas:</strong> Ácido, Base, Sal e Óxido — identificação, fórmula, nomenclatura e presença no cotidiano.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- ABA HISTÓRIA -->
-                <div id="disc-historia" class="disc-content hidden space-y-6">
-                    <div class="flex items-center justify-between pb-3 border-b border-slate-200">
-                        <h3 class="text-lg font-black text-slate-900"><i class="fas fa-landmark text-amber-700 mr-2"></i>História: Brasil, Geral e Conteúdos Regionais</h3>
-                        <span class="bg-amber-100 text-amber-900 font-bold px-3 py-1 rounded-full text-[10px]">Geralmente 4 a 8 Questões</span>
+                <div id="disc-historia" class="disc-content hidden space-y-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-200 gap-2">
+                        <div>
+                            <h3 class="text-xl font-black text-slate-900"><i class="fas fa-landmark text-amber-700 mr-2"></i>História: Matriz Completa e Cobranças Regionais</h3>
+                            <p class="text-xs text-slate-500 font-medium">Antiguidade, Feudalismo, Brasil Colônia, Império, República e História Contemporânea.</p>
+                        </div>
+                        <span class="bg-amber-100 text-amber-950 font-black px-3 py-1.5 rounded-full text-[11px] self-start md:self-auto border border-amber-200">
+                            4 a 8 Questões por Concurso
+                        </span>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="p-4 bg-white rounded-xl border border-slate-200">
-                            <strong class="text-emerald-800 font-black block mb-2 text-sm"><i class="fas fa-check-double mr-1.5"></i>Conteúdo Padrão Nacional:</strong>
-                            <ul class="space-y-1.5 list-disc list-inside text-slate-600 font-medium">
-                                <li><strong>História Geral:</strong> Feudalismo, Expansão Marítima, Renascimento, Reformas Religiosas, Iluminismo, Revolução Industrial, 1ª e 2ª Guerra Mundial e Guerra Fria.</li>
-                                <li><strong>Brasil Colônia:</strong> Povos indígenas, economia açucareira, escravidão africana, ciclo do ouro e revoltas nativistas/emancipacionistas.</li>
-                                <li><strong>Brasil Império e República:</strong> Independência, 1º e 2º Reinado, República Velha (coronelismo), Era Vargas, Ditadura Militar e Redemocratização (Constituição de 1988).</li>
+                    <!-- Eixos Cronológicos de História -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-amber-950 block mb-2 font-bold text-xs uppercase"><i class="fas fa-monument mr-1 text-amber-600"></i>1. Antiguidade e Feudalismo</strong>
+                            <ul class="list-disc list-inside space-y-1 text-[11px] text-slate-600">
+                                <li>Origens da humanidade e povoamento das Américas.</li>
+                                <li>Povos da Antiguidade Oriental (Egito e Mesopotâmia).</li>
+                                <li>Povos Pré-Colombianos (Maias, Incas, Astecas).</li>
+                                <li>Grécia Antiga: pólis (Atenas e Esparta), democracia e cultura clássica.</li>
+                                <li>Roma Antiga: República, Império, expansão e queda.</li>
+                                <li>O Mundo Feudal: suserania e vassalagem, poder da Igreja Católica, Cruzadas e peste negra.</li>
+                                <li>Crise do feudalismo e renascimento comercial e urbano.</li>
                             </ul>
                         </div>
 
-                        <div class="p-4 bg-white rounded-xl border border-slate-200">
-                            <strong class="text-amber-800 font-black block mb-2 text-sm"><i class="fas fa-map-marked-alt mr-1.5"></i>As Cobranças Regionais (Atenção Máxima):</strong>
-                            <ul class="space-y-2.5 text-slate-600 font-medium">
-                                <li class="p-2 bg-emerald-50/50 rounded-lg border border-emerald-100">
-                                    <strong class="text-emerald-950 block font-bold">IFFar (Rio Grande do Sul):</strong>
-                                    Exige expressamente a <strong>Ocupação Territorial do RS e a Revolução Farroupilha</strong>. Alunos de outros estados precisam estudar esse módulo local!
-                                </li>
-                                <li class="p-2 bg-amber-50/50 rounded-lg border border-amber-100">
-                                    <strong class="text-amber-950 block font-bold">IF Sudeste MG e CEFET-MG (Minas Gerais):</strong>
-                                    Forte ênfase no Ciclo do Ouro das Minas Gerais, sociedade mineradora, Inconfidência Mineira e a República do Café com Leite.
-                                </li>
-                                <li class="p-2 bg-indigo-50/50 rounded-lg border border-indigo-100">
-                                    <strong class="text-indigo-950 block font-bold">IFBA (Bahia):</strong>
-                                    História da escravidão no Recôncavo Baiano, Revolta dos Búzios (Conjuração Baiana) e Independência da Bahia (2 de Julho).
-                                </li>
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-amber-950 block mb-2 font-bold text-xs uppercase"><i class="fas fa-ship mr-1 text-amber-600"></i>2. Época Moderna & Brasil Colônia</strong>
+                            <ul class="list-disc list-inside space-y-1 text-[11px] text-slate-600">
+                                <li>Absolutismo monárquico e mercantilismo.</li>
+                                <li>Renascimento cultural, Reforma Protestante e Contrarreforma.</li>
+                                <li>Grandes Navegações e invasão da América.</li>
+                                <li>Brasil Pré-Colonial e Capitanias Hereditárias.</li>
+                                <li>Economia açucareira e engenho colonial.</li>
+                                <li>Escravidão de povos indígenas e tráfico negreiro transatlântico.</li>
+                                <li>Ciclo do Ouro em Minas Gerais e sociedade mineradora barroca.</li>
+                                <li>Revoltas Nativistas e Movimentos Emancipacionistas (Inconfidência Mineira e Conjuração Baiana).</li>
                             </ul>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-amber-950 block mb-2 font-bold text-xs uppercase"><i class="fas fa-crown mr-1 text-amber-600"></i>3. Revoluções e Brasil Imperial</strong>
+                            <ul class="list-disc list-inside space-y-1 text-[11px] text-slate-600">
+                                <li>Iluminismo e independência dos EUA.</li>
+                                <li>Revolução Industrial inglesa e formação da classe operária.</li>
+                                <li>Revolução Francesa e Era Napoleônica.</li>
+                                <li>Vinda da Família Real portuguesa ao Brasil (1808).</li>
+                                <li>Independência do Brasil (1822) e Primeiro Reinado (D. Pedro I).</li>
+                                <li>Período Regencial e revoltas provinciais (Cabanagem, Balaiada, Sabinada).</li>
+                                <li>Segundo Reinado (D. Pedro II): café, imigração e Guerra do Paraguai.</li>
+                                <li>Processo abolicionista e Leis emancipacionistas do século XIX.</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-amber-950 block mb-2 font-bold text-xs uppercase"><i class="fas fa-flag mr-1 text-amber-600"></i>4. Século XX & Brasil República</strong>
+                            <ul class="list-disc list-inside space-y-1 text-[11px] text-slate-600">
+                                <li>Imperialismo e partilha da África/Ásia.</li>
+                                <li>1ª Guerra Mundial e Revolução Russa de 1917.</li>
+                                <li>República Velha no Brasil (1889-1930): coronelismo e revoltas sociais (Canudos, Chibata, Vacina, Tenentismo).</li>
+                                <li>Crise de 1929, Fascismo, Nazismo e 2ª Guerra Mundial (participação da FEB).</li>
+                                <li>Era Vargas (1930-1945): Governo Provisório, Constitucional e Estado Novo.</li>
+                                <li>Período Populista (Dutra, Vargas, JK, Jânio, Jango).</li>
+                                <li>Ditadura Civil-Militar brasileira (1964-1985): AI-5, milagre econômico e abertura política.</li>
+                                <li>Redemocratização, Constituição de 1988 e Brasil contemporâneo.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Particularidades Regionais Obrigatórias -->
+                    <div class="bg-amber-50 p-5 rounded-2xl border border-amber-300">
+                        <strong class="text-xs font-black text-amber-950 uppercase block mb-2 flex items-center">
+                            <i class="fas fa-map-marked-alt text-amber-700 mr-2 text-base"></i> Tópicos Regionais Exclusivos (Onde Estudantes de Fora Erram Questões Fáceis):
+                        </strong>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-[11px]">
+                            <div class="p-3 bg-white rounded-xl border border-amber-200 shadow-sm">
+                                <span class="bg-emerald-700 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase block mb-1">IFFar (Rio Grande do Sul)</span>
+                                <strong class="text-slate-900 block font-bold">História do RS & Revolução Farroupilha</strong>
+                                <p class="text-slate-600 mt-1 leading-relaxed">
+                                    O edital do IFFar exige formalmente a <em>"Ocupação territorial do Rio Grande do Sul e a Revolução Farroupilha (Guerra dos Farrapos)"</em>. Conflito estancieiro contra os impostos imperiais do charque, proclamação da República Rio-Grandense (Piratini) e Tratado de Ponche Verde.
+                                </p>
+                            </div>
+                            <div class="p-3 bg-white rounded-xl border border-amber-200 shadow-sm">
+                                <span class="bg-rose-700 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase block mb-1">IFBA (Bahia)</span>
+                                <strong class="text-slate-900 block font-bold">História Baiana & 2 de Julho</strong>
+                                <p class="text-slate-600 mt-1 leading-relaxed">
+                                    Forte ênfase na <strong>Revolta dos Búzios (Conjuração Baiana de 1798)</strong> com caráter popular/alfaiates, a escravidão no Recôncavo e a luta armada pela <strong>Independência da Bahia (2 de Julho de 1823)</strong> contra as tropas portuguesas do general Madeira de Melo.
+                                </p>
+                            </div>
+                            <div class="p-3 bg-white rounded-xl border border-amber-200 shadow-sm">
+                                <span class="bg-purple-700 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase block mb-1">CEFET-MG / COLTEC / IF Sudeste MG</span>
+                                <strong class="text-slate-900 block font-bold">Sociedade Mineradora & Ouro</strong>
+                                <p class="text-slate-600 mt-1 leading-relaxed">
+                                    Questões constantes sobre a Vila Rica setecentista, o papel da Intendência das Minas, a cobrança do Quinto e da Derrama, as irmandades religiosas e o contexto da <strong>Inconfidência Mineira (1789)</strong> e Tiradentes.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- ABA GEOGRAFIA -->
-                <div id="disc-geografia" class="disc-content hidden space-y-6">
-                    <div class="flex items-center justify-between pb-3 border-b border-slate-200">
-                        <h3 class="text-lg font-black text-slate-900"><i class="fas fa-globe-americas text-blue-700 mr-2"></i>Geografia: Física, Humana, Econômica e Regional</h3>
-                        <span class="bg-blue-100 text-blue-900 font-bold px-3 py-1 rounded-full text-[10px]">Geralmente 4 a 8 Questões</span>
+                <div id="disc-geografia" class="disc-content hidden space-y-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-200 gap-2">
+                        <div>
+                            <h3 class="text-xl font-black text-slate-900"><i class="fas fa-globe-americas text-blue-700 mr-2"></i>Geografia: Física, Humana, Econômica & Regional</h3>
+                            <p class="text-xs text-slate-500 font-medium">Cartografia, Domínios Morfoclimáticos, Demografia, Espaço Agrário, Indústria e Geopolítica Mundial.</p>
+                        </div>
+                        <span class="bg-blue-100 text-blue-900 font-black px-3 py-1.5 rounded-full text-[11px] self-start md:self-auto border border-blue-200">
+                            4 a 8 Questões por Edital
+                        </span>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="p-4 bg-white rounded-xl border border-slate-200">
-                            <strong class="text-emerald-800 font-black block mb-2 text-sm"><i class="fas fa-check-double mr-1.5"></i>Tópicos Universais em Todas as Provas:</strong>
-                            <ul class="space-y-1.5 list-disc list-inside text-slate-600 font-medium">
-                                <li><strong>Cartografia:</strong> Coordenadas (latitude/longitude), fusos horários do Brasil, escalas cartográficas e leitura de mapas.</li>
-                                <li><strong>Geografia Física:</strong> Relevo, clima, hidrografia e os grandes Biomas brasileiros (Cerrado, Mata Atlântica, Caatinga, Amazônia, Pampa e Pantanal).</li>
-                                <li><strong>Geografia Humana & Econômica:</strong> Pirâmides etárias, transição demográfica, migrações, urbanização, modernização da agricultura e matrizes energéticas.</li>
-                                <li><strong>Geopolítica e Globalização:</strong> Divisão Internacional do Trabalho, blocos econômicos e impactos socioambientais.</li>
+                    <!-- Eixos de Geografia -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-blue-950 block mb-2 font-bold text-xs uppercase"><i class="fas fa-map mr-1 text-blue-600"></i>1. Cartografia & Orientação</strong>
+                            <ul class="list-disc list-inside space-y-1.5 text-[11px] text-slate-600">
+                                <li>Coordenadas geográficas: paralelos, meridianos, latitude e longitude.</li>
+                                <li>Orientação espacial: rosa dos ventos, pontos cardeais e colaterais.</li>
+                                <li><strong>Fusos Horários:</strong> cálculo de horas no mundo e os 4 fusos horários do Brasil.</li>
+                                <li>Escala cartográfica: numérica vs gráfica e cálculo de distâncias reais.</li>
+                                <li>Projeções cartográficas (Mercator vs Peters) e leitura de curvas de nível.</li>
                             </ul>
                         </div>
 
-                        <div class="p-4 bg-white rounded-xl border border-slate-200">
-                            <strong class="text-blue-800 font-black block mb-2 text-sm"><i class="fas fa-search-location mr-1.5"></i>Peculiaridades Regionais nos Editais:</strong>
-                            <ul class="space-y-2.5 text-slate-600 font-medium">
-                                <li class="p-2 bg-emerald-50/50 rounded-lg border border-emerald-100">
-                                    <strong class="text-emerald-950 block font-bold">IFFar (Rio Grande do Sul):</strong>
-                                    Exige obrigatoriamente a <strong>Geografia do RS</strong>: Bioma Pampa, relevo da Depressão Central e Planalto, hidrografia e aspectos demográficos gaúchos.
-                                </li>
-                                <li class="p-2 bg-indigo-50/50 rounded-lg border border-indigo-100">
-                                    <strong class="text-indigo-950 block font-bold">IFES (Espírito Santo):</strong>
-                                    Questões aplicadas à Geografia regional capixaba, logística portuária e bacias hidrográficas locais (Rio Doce).
-                                </li>
-                                <li class="p-2 bg-purple-50/50 rounded-lg border border-purple-100">
-                                    <strong class="text-purple-950 block font-bold">CEFET-RJ e IFF (Rio de Janeiro):</strong>
-                                    Enfoque na Baixada Fluminense, Região Metropolitana do RJ, Bacia de Campos e impactos da indústria petrolífera.
-                                </li>
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-blue-950 block mb-2 font-bold text-xs uppercase"><i class="fas fa-mountain mr-1 text-blue-600"></i>2. Geografia Física do Brasil</strong>
+                            <ul class="list-disc list-inside space-y-1.5 text-[11px] text-slate-600">
+                                <li>Geomorfologia: estrutura da Terra, placas tectônicas e relevo (planaltos, planícies e depressões).</li>
+                                <li>Climatologia: dinâmica das massas de ar (mEc, mEa, mTa, mTc, mPa), tipos climáticos e climogramas.</li>
+                                <li>Hidrografia: bacias hidrográficas (Amazônica, Tocantins-Araguaia, São Francisco, Platina) e águas subterrâneas.</li>
+                                <li><strong>Grandes Biomas Brasileiros:</strong> Amazônia, Cerrado, Mata Atlântica, Caatinga, Pantanal e Pampa. Impactos ambientais e desmatamento.</li>
                             </ul>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-blue-950 block mb-2 font-bold text-xs uppercase"><i class="fas fa-city mr-1 text-blue-600"></i>3. Demografia & Urbanização</strong>
+                            <ul class="list-disc list-inside space-y-1.5 text-[11px] text-slate-600">
+                                <li>Conceitos demográficos: população absoluta, relativa/densidade demográfica, fecundidade e mortalidade.</li>
+                                <li>Transição demográfica e leitura de <strong>Pirâmides Etárias</strong> brasileiras.</li>
+                                <li>Movimentos migratórios: êxodo rural, migração pendular, sazonal/transumância e migrações regionais.</li>
+                                <li>Urbanização acelerada: metropolização, conurbação, megacidades, cidades globais e problemas urbanos (segregação socioespacial, favelização e enchentes).</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                            <strong class="text-blue-950 block mb-2 font-bold text-xs uppercase"><i class="fas fa-bolt mr-1 text-blue-600"></i>4. Economia & Geopolítica</strong>
+                            <ul class="list-disc list-inside space-y-1.5 text-[11px] text-slate-600">
+                                <li>Divisão regional do Brasil: 5 regiões oficiais do IBGE vs 3 Complexos Geoeconômicos de Pedro Pinchas Geiger.</li>
+                                <li>Espaço Agrário: concentração de terras, agronegócio exportador vs agricultura familiar e conflitos no campo.</li>
+                                <li>Industrialização: substituição de importações e desconcentração industrial.</li>
+                                <li><strong>Matrizes Energéticas:</strong> hidrelétrica, termoelétrica, solar, eólica, biomassa e combustíveis fósseis.</li>
+                                <li>Globalização: blocos econômicos (Mercosul, UE), DIT e desigualdades mundiais.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Geografia Regional Específica -->
+                    <div class="bg-blue-50/70 p-5 rounded-2xl border border-blue-200">
+                        <strong class="text-xs font-black text-blue-950 uppercase block mb-2 flex items-center">
+                            <i class="fas fa-search-location text-blue-700 mr-2 text-base"></i> Tópicos de Geografia Local Exigidos nos Editais:
+                        </strong>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-[11px]">
+                            <div class="p-3 bg-white rounded-xl border border-blue-100 shadow-sm">
+                                <span class="bg-emerald-700 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase block mb-1">IFFar (Rio Grande do Sul)</span>
+                                <strong class="text-slate-900 block font-bold">Geografia Gaúcha</strong>
+                                <p class="text-slate-600 mt-1 leading-relaxed">
+                                    Exigência expressa: Bioma Pampa e Mata com Araucárias, relevo da Depressão Periférica e Planalto Meridional, bacia do Rio Uruguai e Lagoa dos Patos, e a pecuária gaúcha.
+                                </p>
+                            </div>
+                            <div class="p-3 bg-white rounded-xl border border-blue-100 shadow-sm">
+                                <span class="bg-indigo-700 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase block mb-1">CEFET-RJ & IFF (Rio de Janeiro)</span>
+                                <strong class="text-slate-900 block font-bold">Espaço Fluminense & Petróleo</strong>
+                                <p class="text-slate-600 mt-1 leading-relaxed">
+                                    Enfoque na Baixada Fluminense, Região dos Lagos, Bacia de Campos e Bacia de Santos, royalties petrolíferos, refino de petróleo e os impactos socioeconômicos no estado do RJ.
+                                </p>
+                            </div>
+                            <div class="p-3 bg-white rounded-xl border border-blue-100 shadow-sm">
+                                <span class="bg-cyan-700 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase block mb-1">IFES (Espírito Santo)</span>
+                                <strong class="text-slate-900 block font-bold">Geografia Capixaba</strong>
+                                <p class="text-slate-600 mt-1 leading-relaxed">
+                                    Logística e complexos portuários (Porto de Tubarão), escoamento de minério de ferro via ferrovia Vitória-Minas, cafeicultura de conilon e a bacia hidrográfica do Rio Doce.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA REDAÇÃO -->
+                <div id="disc-redacao-guia" class="disc-content hidden space-y-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-200 gap-2">
+                        <div>
+                            <h3 class="text-xl font-black text-slate-900"><i class="fas fa-pen-nib text-rose-600 mr-2"></i>Produção Textual & Redação: Onde o Concurso é Decidido</h3>
+                            <p class="text-xs text-slate-500 font-medium">Comparação dos gêneros exigidos, critérios de correção, notas de corte e regras de eliminação por nota zero.</p>
+                        </div>
+                        <span class="bg-rose-100 text-rose-900 font-black px-3 py-1.5 rounded-full text-[11px] self-start md:self-auto border border-rose-200">
+                            Até 100 Pontos na Prova Final
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- CEFET-RJ -->
+                        <div class="bg-white p-5 rounded-2xl border-2 border-indigo-200 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="bg-indigo-600 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">CEFET-RJ</span>
+                                    <span class="text-rose-600 font-black text-sm">100 PONTOS</span>
+                                </div>
+                                <h4 class="font-black text-slate-900 text-sm mb-2">Dissertação-Argumentativa em Prosa</h4>
+                                <p class="text-[11px] text-slate-600 leading-relaxed mb-3">
+                                    A redação representa incríveis <strong>40% de toda a nota final</strong> (100 de 250 pontos).
+                                </p>
+                                <ul class="list-disc list-inside space-y-1.5 text-[11px] text-slate-600 mb-4">
+                                    <li><strong>Estrutura:</strong> Introdução com tese explícita, dois parágrafos de desenvolvimento argumentativo e conclusão.</li>
+                                    <li><strong>Repertório:</strong> Exige repertório sociocultural legítimo e articulado à discussão temática.</li>
+                                    <li><strong>Direitos Humanos:</strong> Menção desrespeitosa aos direitos humanos zera a prova.</li>
+                                    <li><strong>Filtro 2x Vagas:</strong> A redação só é corrigida se o aluno ficar dentro do <strong>dobro do número de vagas</strong> na objetiva.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-rose-50 text-rose-900 p-2.5 rounded-xl text-[10px] font-bold border border-rose-200">
+                                🚨 Nota ZERO na redação elimina o candidato imediatamente, mesmo se gabaritar a objetiva!
+                            </div>
+                        </div>
+
+                        <!-- COLUNI -->
+                        <div class="bg-white p-5 rounded-2xl border-2 border-purple-200 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="bg-purple-700 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">COLUNI (UFV)</span>
+                                    <span class="text-purple-900 font-black text-sm">15 PONTOS</span>
+                                </div>
+                                <h4 class="font-black text-slate-900 text-sm mb-2">Múltiplos Gêneros Textuais</h4>
+                                <p class="text-[11px] text-slate-600 leading-relaxed mb-3">
+                                    Diferente do modelo tradicional que pede sempre dissertação, o COLUNI pode solicitar <strong>qualquer gênero textual</strong>:
+                                </p>
+                                <ul class="list-disc list-inside space-y-1.5 text-[11px] text-slate-600 mb-4">
+                                    <li><strong>Gêneros recorrentes:</strong> Crônica narrativa, relato de experiência pessoal, carta aberta, carta pessoal, manifesto, autobiografia, prefácio ou artigo opinativo.</li>
+                                    <li><strong>Intertextualidade com o Livro:</strong> A proposta costuma dialogar diretamente com o livro obrigatório (<em>A Cabeça do Santo</em>).</li>
+                                    <li><strong>Adequação ao interlocutor:</strong> O aluno precisa dominar a persona do emissor e do receptor estipulados na coletânea.</li>
+                                    <li><strong>Filtro 4x Vagas:</strong> Redação corrigida até 4 vezes o número de vagas da objetiva.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-purple-50 text-purple-900 p-2.5 rounded-xl text-[10px] font-bold border border-purple-200">
+                                💡 Exige que o cursinho pratique múltiplos formatos discursivos todas as semanas!
+                            </div>
+                        </div>
+
+                        <!-- CTUR -->
+                        <div class="bg-white p-5 rounded-2xl border-2 border-emerald-200 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="bg-emerald-700 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">CTUR (UFRRJ)</span>
+                                    <span class="text-emerald-900 font-black text-sm">20 PONTOS</span>
+                                </div>
+                                <h4 class="font-black text-slate-900 text-sm mb-2">Texto Dissertativo-Argumentativo</h4>
+                                <p class="text-[11px] text-slate-600 leading-relaxed mb-3">
+                                    Representa <strong>33,3% da pontuação total</strong> da prova (20 de 60 pontos), tanto para Integrado quanto Concomitante.
+                                </p>
+                                <ul class="list-disc list-inside space-y-1.5 text-[11px] text-slate-600 mb-4">
+                                    <li><strong>Formato:</strong> Prosa formal da Língua Portuguesa sobre tema social ou científico proposto na prova.</li>
+                                    <li><strong>Coesão e Coerência:</strong> Relações lógico-discursivas estruturadas, ausência de clichês e argumentação consistente.</li>
+                                    <li><strong>Filtro 3x Vagas:</strong> A redação só é corrigida para quem ficar classificado até <strong>3 vezes o número de vagas</strong> do curso e cota.</li>
+                                    <li><strong>Eliminação por Zero:</strong> Obter zero na redação desclassifica automaticamente o concorrente.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-emerald-50 text-emerald-900 p-2.5 rounded-xl text-[10px] font-bold border border-emerald-200">
+                                📌 Tema articulado com atualidades, sustentabilidade, meio ambiente e cidadania.
+                            </div>
                         </div>
                     </div>
                 </div>
