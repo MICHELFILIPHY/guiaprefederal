@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Edital IFSULDEMINAS 2027 - Cursos Técnicos Integrados | Guia Pré-Federal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --brand-ifsul-green: #047857;
+            --brand-ifsul-dark: #064e3b;
+            --brand-ifsul-purple: #4338ca;
+            --brand-emerald: #059669;
+            --brand-lime: #c7ef59;
+            --brand-coral: #dd5737;
+            --brand-slate-light: #f8fafc;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        /* Gradient exclusivo do IFSULDEMINAS */
+        .ifsul-gradient {
+            background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #1e1b4b 100%);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #059669;
+            border-radius: 9999px;
+        }
+        .tab-btn.active {
+            background-color: #047857;
+            color: white;
+            box-shadow: 0 4px 12px rgba(4, 120, 87, 0.35);
+            border-color: #047857;
+        }
+        .fab-container {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+        }
+        .fab-main {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background-color: #047857;
+            color: white;
+            border: 2px solid white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fab-container.active .fab-main {
+            background-color: #dd5737;
+            transform: rotate(135deg);
+        }
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+            transform: translateY(15px);
+            margin-bottom: 12px;
+        }
+        .fab-container.active .fab-options {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        .fab-label {
+            background-color: white;
+            color: #0f172a;
+            padding: 6px 14px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-right: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .fab-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="antialiased text-slate-800">
+
+    <header class="bg-white/95 backdrop-blur-md shadow-sm py-3.5 sticky top-0 z-50 border-b border-slate-100">
+        <div class="container mx-auto px-4 max-w-6xl flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
+                <!-- Logo com fundo Laranja Coral oficial -->
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md transition group-hover:scale-105" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia - Pré Federal" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-black tracking-tight text-[#047857] leading-none">Guia - Pré Federal</span>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Edital IFSULDEMINAS 2027 • Edital 210/2026</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:block">
+                <ul class="flex space-x-5 text-xs font-bold uppercase tracking-wider text-slate-600">
+                    <li><a href="#datas-destaque" class="hover:text-[#047857] transition py-1 border-b-2 border-transparent hover:border-[#047857]"><i class="fas fa-calendar-alt text-amber-500 mr-1"></i>Datas</a></li>
+                    <li><a href="#como-funciona" class="hover:text-[#047857] transition py-1 border-b-2 border-transparent hover:border-[#047857]">Como Funciona</a></li>
+                    <li><a href="#prova" class="hover:text-[#047857] transition py-1 border-b-2 border-transparent hover:border-[#047857]"><i class="fas fa-file-alt text-emerald-600 mr-1"></i>A Prova (25 Questões)</a></li>
+                    <li><a href="#cotas" class="hover:text-[#047857] transition py-1 border-b-2 border-transparent hover:border-[#047857]">Cotas & Regras</a></li>
+                    <li><a href="#quadro-vagas" class="hover:text-[#047857] transition py-1 border-b-2 border-transparent hover:border-[#047857]"><i class="fas fa-university text-[#047857] mr-1"></i>Campi & Vagas</a></li>
+                    <li><a href="#conteudo" class="hover:text-[#047857] transition py-1 border-b-2 border-transparent hover:border-[#047857]">O que Estudar</a></li>
+                </ul>
+            </nav>
+
+            <!-- CTA Header Buttons -->
+            <div class="hidden sm:flex items-center space-x-2">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] hover:bg-opacity-90 text-slate-900 font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fas fa-rocket mr-1.5 text-emerald-800"></i> Curso Intensivo
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-3.5 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fab fa-whatsapp mr-1 text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden text-slate-800 text-xl focus:outline-none p-1">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 py-3 px-4 shadow-lg">
+            <ul class="flex flex-col space-y-2.5 text-xs font-bold uppercase tracking-wider text-slate-700">
+                <li><a href="#datas-destaque" class="mobile-link block py-2 px-3 rounded-lg bg-amber-50 text-amber-900 font-black"><i class="fas fa-calendar-alt text-amber-600 mr-2"></i>Datas Importantes</a></li>
+                <li><a href="#como-funciona" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Como Funciona o Vestibular</a></li>
+                <li><a href="#prova" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100"><i class="fas fa-file-alt text-emerald-600 mr-2"></i>A Prova (25 Questões • 100 Pontos)</a></li>
+                <li><a href="#cotas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Cotas & Heteroidentificação</a></li>
+                <li><a href="#quadro-vagas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100"><i class="fas fa-university text-[#047857] mr-2"></i>10 Campi & 1.655 Vagas</a></li>
+                <li><a href="#conteudo" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Conteúdo Programático BNCC</a></li>
+                <li class="pt-2 flex flex-col space-y-2">
+                    <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="w-full bg-[#c7ef59] text-slate-900 font-black py-2.5 rounded-xl text-xs uppercase tracking-wider text-center block shadow-md">
+                        <i class="fas fa-rocket mr-1.5 text-emerald-800"></i> Conhecer o Intensivo 2026
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="w-full bg-emerald-500 text-white font-black py-2.5 rounded-xl text-xs uppercase tracking-wider text-center block shadow-md">
+                        <i class="fab fa-whatsapp mr-1.5"></i> Falar no WhatsApp
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section id="inicio" class="ifsul-gradient text-white py-12 md:py-16 relative overflow-hidden">
+        <div class="container mx-auto px-4 max-w-6xl relative z-10 text-center">
+            
+            <!-- Logo no Hero com fundo Laranja Coral -->
+            <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-5 rounded-full flex items-center justify-center p-3 shadow-2xl border-4 border-white/40" style="background-color: #dd5737;">
+                <img src="./logo1.png" onerror="this.onerror=null; this.src='https://placehold.co/120x120/dd5737/ffffff?text=GPF';" alt="Guia - Pré Federal" class="w-full h-full object-contain">
+            </div>
+
+            <div class="inline-flex items-center space-x-2 bg-white/10 px-4 py-1.5 rounded-full backdrop-blur-md mb-4 border border-white/20">
+                <i class="fas fa-graduation-cap text-[#c7ef59]"></i>
+                <span class="text-xs font-black uppercase tracking-wider text-slate-100">Instituto Federal do Sul de Minas Gerais • Edital nº 210/2026</span>
+            </div>
+            
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4 leading-tight">
+                Guia Completo do Vestibular <span class="text-[#c7ef59]">IFSULDEMINAS 2027</span>
+            </h1>
+            
+            <p class="text-slate-100 text-sm md:text-base max-w-3xl mx-auto mb-6 font-medium leading-relaxed">
+                Instituto Federal de Educação, Ciência e Tecnologia do Sul de Minas Gerais: <strong>1.655 vagas gratuitas</strong> em Cursos Técnicos Integrados ao Ensino Médio distribuídas entre 10 campi. Taxa de apenas <strong>R$ 20,00</strong>, prova presencial objetiva de <strong>25 questões (sem Ciências e sem Humanas!)</strong>, distribuição completa de cotas e programa de estudos.
+            </p>
+
+            <!-- Destaque do Formato Único da Prova -->
+            <div class="inline-block bg-[#4338ca] text-white font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider mb-8 shadow-lg border border-indigo-400/40">
+                <i class="fas fa-star text-amber-300 mr-1.5"></i> DIFERENCIAL EXCLUSIVO: PROVA OBJETIVA COM APENAS LINGUAGENS (15q) E MATEMÁTICA (10q) • 100 PONTOS TOTAIS
+            </div>
+
+            <!-- CTAS PRINCIPAIS DO CURSO E LINK OFICIAL DE INSCRIÇÃO -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="https://vestibular.ifsuldeminas.edu.br/" target="_blank" class="bg-white text-slate-900 hover:bg-slate-100 font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105 border-2 border-white">
+                    <i class="fas fa-external-link-alt mr-2 text-[#047857]"></i> Portal do Vestibular IFSULDEMINAS
+                </a>
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fas fa-rocket mr-2 text-emerald-950"></i> Cursinho Intensivo Guia Pré-Federal
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fab fa-whatsapp mr-2 text-lg"></i> Falar no WhatsApp
+                </a>
+            </div>
+
+            <!-- Botões de Atalho Interno -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6 pt-4 border-t border-white/10">
+                <a href="#datas-destaque" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-calendar-alt mr-1.5 text-amber-400"></i> Prazos Importantes
+                </a>
+                <a href="#prova" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-file-alt mr-1.5 text-emerald-300"></i> A Prova de 25 Questões
+                </a>
+                <a href="#quadro-vagas" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-university mr-1.5 text-lime-300"></i> 10 Campi & 1.655 Vagas
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="datas-destaque" class="py-10 bg-amber-50/80 border-b border-amber-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-amber-300 shadow-md">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 pb-4 border-b border-slate-200 gap-4">
+                    <div>
+                        <span class="bg-amber-100 text-amber-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-1.5 inline-block border border-amber-300">
+                            <i class="fas fa-bell mr-1 text-amber-700"></i> Cronograma Oficial do Edital 210/2026 • Processo Seletivo 2027/1
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-black text-slate-900">Datas Importantes do Vestibular IFSULDEMINAS 2027</h2>
+                    </div>
+                    <div>
+                        <a href="https://vestibular.ifsuldeminas.edu.br/" target="_blank" class="text-xs font-bold text-white bg-[#047857] hover:bg-[#064e3b] px-4 py-2 rounded-xl transition inline-flex items-center shadow-sm">
+                            <i class="fas fa-user-plus mr-1.5"></i> Página de Inscrição Oficial
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tabela Responsiva do Cronograma Oficial Completo -->
+                <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                    <table class="w-full text-left border-collapse text-xs md:text-sm">
+                        <thead>
+                            <tr class="bg-[#064e3b] text-white font-bold uppercase text-[11px] tracking-wider">
+                                <th class="py-3.5 px-4 md:px-6"><i class="fas fa-calendar-day mr-2 text-lime-400"></i>Etapa / Evento do Edital</th>
+                                <th class="py-3.5 px-4 md:px-6"><i class="fas fa-clock mr-2 text-lime-400"></i>Período / Data Oficial</th>
+                                <th class="py-3.5 px-4 md:px-6 hidden sm:table-cell"><i class="fas fa-info-circle mr-2 text-lime-400"></i>Observação Importante</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Publicação Oficial do Edital 210/2026</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-[#047857]">08/09/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Publicado no portal institucional do IFSULDEMINAS</td>
+                            </tr>
+                            <tr class="bg-amber-50/80 hover:bg-amber-100/60 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-file-signature text-amber-600 mr-1.5"></i>Solicitação de Isenção da Taxa de Inscrição</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-amber-800">08/09 (14h) a 09/10/2026 (até 17h59)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-600">No próprio sistema de inscrição via CadÚnico ou renda até 1,5 SM + escola pública</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Resultado dos Pedidos de Isenção de Taxa</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">Preliminar: 14/10 (14h) | Final: 20/10/2026 (14h)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Recurso do resultado da isenção nos dias 14 a 16/10/2026</td>
+                            </tr>
+                            <tr class="bg-emerald-50/80 hover:bg-emerald-100/60 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-user-plus text-emerald-600 mr-1.5"></i>Período de Inscrições Online</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-emerald-800">08/09 (14h) a 09/11/2026 (até 17h59)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-600">Exclusivamente pela internet com login Gov.br do próprio candidato</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Último Dia para Pagamento da Taxa (R$ 20,00)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-rose-700">10/11/2026 (expediente bancário)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Pagamento via Pix, cartão de crédito/débito, carteira digital ou GRU Banco do Brasil</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Publicação da Lista Definitiva de Inscritos</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-purple-700">16/11/2026 (a partir das 14h)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Confirmação de quem teve a inscrição confirmada para a prova</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Comprovante Definitivo de Inscrição (CDI / Local de Prova)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-purple-700">A partir de 30/11/2026 (às 14h)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Consulta obrigatória do endereço, prédio e sala de aplicação</td>
+                            </tr>
+                            <tr class="bg-emerald-100/80 hover:bg-emerald-200/60 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-emerald-950"><i class="fas fa-edit text-emerald-700 mr-1.5"></i>Aplicação da Prova Objetiva Presencial</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-emerald-900">06/12/2026 (Domingo) • 08h45 às 12h45</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-emerald-950 font-bold">Portões abrem às 07h30 e FECHAM pontualmente às 08h30!</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Gabarito Preliminar e Caderno de Questões</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">07/12/2026 (a partir das 14h)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Recursos contra gabarito de 07/12 (14h) a 09/12 (14h) | Final: 10/12</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Resultado das Notas das Questões Objetivas</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">Preliminar: 05/01/2027 | Final: 11/01/2027</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Divulgação da pontuação obtida por cada concorrente</td>
+                            </tr>
+                            <tr class="bg-blue-100/80 hover:bg-blue-200/60 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-blue-950"><i class="fas fa-trophy text-blue-700 mr-1.5"></i>Lista de Classificados (1ª Chamada Oficial)</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-blue-900">12/01/2027 (a partir das 14h)</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-blue-950 font-bold">Classificação oficial por curso, campus e cota</td>
+                            </tr>
+                            <tr class="bg-emerald-50 hover:bg-emerald-100 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-emerald-900"><i class="fas fa-file-upload text-emerald-600 mr-1.5"></i>Pedido de Matrícula Online da 1ª Chamada</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-emerald-800">12/01 (14h) a 18/01/2027 (até 23h59)</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-emerald-900">Upload de documentação na plataforma digital gov.br</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Banca de Heteroidentificação Online (1ª Chamada)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-indigo-700">13/01/2027 a 20/01/2027</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Entrevista remota individual via Google Meet</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Convocação Geral (Classificados & Aguardando Vaga)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">29/01/2027 (Matrícula: 29/01 a 04/02/2027)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Chamada ampla para preenchimento de todas as vagas remanescentes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="como-funciona" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-emerald-50 text-[#047857] text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Regras do Edital 210/2026
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Como Funciona o Vestibular do IFSULDEMINAS?</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    O Instituto Federal do Sul de Minas Gerais oferece cursos técnicos integrados ao ensino médio com formação pública, gratuita e de alta qualidade em 10 cidades mineiras.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Integrado -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-[#047857] text-white flex items-center justify-center text-xl font-bold mb-4">1</div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Ensino Médio Integrado</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        O estudante cursa o Ensino Médio propedêutico completo junto com a habilitação técnica profissionalizante no próprio IFSULDEMINAS, em turno diurno integral, com duração de 3 anos.
+                    </p>
+                </div>
+
+                <!-- Card 2: Prova Ágil -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-[#4338ca] text-white flex items-center justify-center text-xl font-bold mb-4">2</div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Apenas 25 Questões</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        Formato enxuto e objetivo: apenas <strong>15 questões de Linguagens</strong> (60 pontos) e <strong>10 questões de Matemática</strong> (40 pontos). Não há redação nem questões de Ciências/Humanas!
+                    </p>
+                </div>
+
+                <!-- Card 3: Taxa de R$ 20 & Isenção -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-600 text-white flex items-center justify-center text-xl font-bold mb-4">3</div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Taxa Super Acessível</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        A taxa é de apenas <strong>R$ 20,00</strong>. Candidatos de escola pública com renda per capita de até 1,5 salário mínimo ou inscritos no CadÚnico puderam pedir isenção total.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Alerta do Edital sobre CPF Próprio e Escolaridade -->
+            <div class="mt-8 bg-emerald-50 border-l-4 border-[#047857] p-5 rounded-r-2xl">
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-id-card text-[#047857] text-2xl flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <h4 class="font-black text-emerald-950 uppercase text-xs mb-1">Atenção Rigorosa às Regras de Cadastro:</h4>
+                        <p class="text-xs text-emerald-900 font-semibold leading-relaxed">
+                            1. <strong>CPF do Próprio Aluno:</strong> O login no sistema deve ser feito com a conta Gov.br e CPF exclusivo do estudante. É terminantemente proibido inscrever o estudante com o CPF dos pais!<br>
+                            2. <strong>Escolaridade:</strong> O candidato deve ter concluído ou estar concluindo o 9º ano do Ensino Fundamental em 2026. Alunos que já possuam o Ensino Médio completo não têm direito à vaga.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prova" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Etapa Única • 4 Horas de Prova (08h45 às 12h45)
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">A Prova Objetiva do IFSULDEMINAS 2027</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    A prova possui <strong>25 questões objetivas de múltipla escolha</strong> com 5 alternativas (A, B, C, D, E), totalizando <strong>100 pontos</strong> no total.
+                </p>
+            </div>
+
+            <!-- Tabela de Estrutura da Prova -->
+            <div class="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm mb-8">
+                <div class="bg-[#064e3b] text-white font-bold px-6 py-3 text-xs uppercase tracking-wider flex justify-between items-center">
+                    <span>Estrutura da Prova Objetiva (25 Questões • Total Máximo: 100 Pontos)</span>
+                    <span class="bg-emerald-800 text-lime-300 text-[10px] px-2.5 py-0.5 rounded-full font-extrabold">Data: 06/12/2026</span>
+                </div>
+                <table class="w-full text-left border-collapse text-xs md:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 font-bold uppercase text-[11px] tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-4 md:px-6">Área / Componente Curricular</th>
+                            <th class="py-3 px-4 md:px-6">Nº de Questões</th>
+                            <th class="py-3 px-4 md:px-6">Valor por Questão</th>
+                            <th class="py-3 px-4 md:px-6">Pontuação Máxima</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <tr class="hover:bg-slate-50 transition bg-emerald-50/40">
+                            <td class="py-3.5 px-4 md:px-6 font-black text-slate-900">
+                                <i class="fas fa-book text-[#047857] mr-2"></i>Linguagens e suas Tecnologias (Língua Portuguesa)
+                                <span class="block text-[10px] text-emerald-700 font-bold">60% de toda a pontuação da prova!</span>
+                            </td>
+                            <td class="py-3.5 px-4 md:px-6 font-bold text-slate-800">15 questões</td>
+                            <td class="py-3.5 px-4 md:px-6 font-bold text-slate-600">4,0 pontos</td>
+                            <td class="py-3.5 px-4 md:px-6 font-black text-[#047857]">60,0 pontos</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition bg-emerald-50/40">
+                            <td class="py-3.5 px-4 md:px-6 font-black text-slate-900">
+                                <i class="fas fa-calculator text-[#047857] mr-2"></i>Matemática e suas Tecnologias
+                                <span class="block text-[10px] text-emerald-700 font-bold">40% da nota final (álgebra, geometria e aritmética)</span>
+                            </td>
+                            <td class="py-3.5 px-4 md:px-6 font-bold text-slate-800">10 questões</td>
+                            <td class="py-3.5 px-4 md:px-6 font-bold text-slate-600">4,0 pontos</td>
+                            <td class="py-3.5 px-4 md:px-6 font-black text-[#047857]">40,0 pontos</td>
+                        </tr>
+                        <tr class="bg-[#064e3b] text-white font-black">
+                            <td class="py-3.5 px-4 md:px-6 uppercase" colspan="2">TOTAL DA AVALIAÇÃO OBJETIVA</td>
+                            <td class="py-3.5 px-4 md:px-6 text-lime-300">25 Questões</td>
+                            <td class="py-3.5 px-4 md:px-6 text-lime-300 text-sm">100,0 PONTOS TOTAIS</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- REGRA DE ELIMINAÇÃO E CRITÉRIOS DE DESEMPATE -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                
+                <!-- Card Eliminação por Zero -->
+                <div class="bg-rose-50 border-l-4 border-rose-600 p-5 rounded-r-2xl">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-exclamation-triangle text-rose-600 text-2xl flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-black text-rose-950 uppercase text-xs mb-1">Critério de Eliminação na Prova:</h4>
+                            <p class="text-xs text-rose-900 font-medium leading-relaxed">
+                                Será <strong>automaticamente eliminado do processo seletivo</strong> o candidato que faltar à prova ou <strong>obtiver nota ZERO na prova objetiva</strong>. Não há exigência de pontuação mínima por disciplina separada, desde que a nota total seja superior a zero.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Critérios de Desempate -->
+                <div class="bg-emerald-50 border-l-4 border-[#047857] p-5 rounded-r-2xl">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-sort-amount-down text-[#047857] text-2xl flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-black text-emerald-950 uppercase text-xs mb-1">Critérios Oficiais de Desempate:</h4>
+                            <p class="text-xs text-emerald-900 font-medium leading-relaxed">
+                                Em caso de empate no limite de corte, a preferência será sucessivamente dada a:
+                                <br>1º) Maior pontuação em <strong>Linguagens e suas Tecnologias</strong>;
+                                <br>2º) Maior pontuação em <strong>Matemática e suas Tecnologias</strong>;
+                                <br>3º) Candidato com <strong>idade mais elevada</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Orientações para o dia do exame -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-clock text-[#047857] mr-1"></i>Portões e Horários</h4>
+                    <p class="text-slate-600 font-medium">Os portões abrem às 07h30 e <strong>fecham pontualmente às 08h30</strong>. A prova é das 08h45 às 12h45 (4h de duração). Chegue com antecedência mínima de 30 minutos!</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-id-card text-[#047857] mr-1"></i>O que Levar</h4>
+                    <p class="text-slate-600 font-medium">Documento oficial original com foto (RG, CIN, CNH ou Passaporte), Comprovante Definitivo de Inscrição (CDI) e caneta esferográfica preta ou azul transparente.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-door-open text-[#047857] mr-1"></i>Permanência e Caderno</h4>
+                    <p class="text-slate-600 font-medium">Permanência mínima obrigatória em sala de <strong>60 minutos</strong>. Após esse tempo, o candidato já pode deixar o local e <strong>levar o caderno de prova consigo</strong>!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cotas" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Lei Federal nº 12.711/2012 e Lei nº 14.723/2023
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Reserva de Vagas & Sistema de Cotas no IFSULDEMINAS</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Pelo menos 50% das vagas são destinadas a estudantes de <strong>Escola Pública</strong>, além de cotas institucionais para <strong>PcD Geral</strong> e <strong>Ampla Concorrência</strong>.
+                </p>
+            </div>
+
+            <!-- Tabela de Modalidades de Cotas -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+                <div class="p-4 bg-[#064e3b] text-white font-bold text-xs uppercase tracking-wider">
+                    Divisão das Categorias de Concorrência (1.655 Vagas Totais)
+                </div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium text-slate-700">
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                        <strong class="text-[#047857] font-black block mb-1">Ampla Concorrência (772 Vagas - AC)</strong>
+                        Aberto a todos os candidatos, independentemente de renda, raça ou de ter cursado o Ensino Fundamental em escola particular ou pública.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-purple-50 border border-purple-200">
+                        <strong class="text-purple-950 font-black block mb-1">Cota PcD Geral (44 Vagas)</strong>
+                        Ação afirmativa institucional voltada a Pessoas com Deficiência com laudo comprobatório, <strong>provenientes ou não de escola pública</strong>.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">Cotas LB (&le; 1,0 Salário Mínimo per capita • 424 Vagas)</strong>
+                        Escola Pública + Renda bruta familiar &le; 1 SM por pessoa via CadÚnico, com reservas para autodeclarados Pretos, Pardos e Indígenas (LB_PPI), Quilombolas (LB_Q), PcD (LB_PCD) e Ampla Escola Pública (LB_EP).
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">Cotas LI (Independente de Renda • 415 Vagas)</strong>
+                        Escola Pública + Qualquer faixa de renda familiar, com reservas para autodeclarados Pretos, Pardos e Indígenas (LI_PPI), Quilombolas (LI_Q), PcD (LI_PCD) e Ampla Escola Pública (LI_EP).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Particularidades: Heteroidentificação Online e Fibromialgia -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium">
+                <div class="p-4 bg-indigo-50 rounded-2xl border border-indigo-200">
+                    <h4 class="font-black text-indigo-950 uppercase mb-1.5"><i class="fas fa-video text-indigo-600 mr-1.5"></i>Heteroidentificação 100% Online</h4>
+                    <p class="text-indigo-900 leading-relaxed">
+                        A banca de heteroidentificação para pretos e pardos ocorre de <strong>forma remota via Google Meet</strong>. O candidato menor de idade deve estar acompanhado pelo responsável, usar blusa de cor clara, sem maquiagem e com boa iluminação.
+                    </p>
+                </div>
+                <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200">
+                    <h4 class="font-black text-emerald-950 uppercase mb-1.5"><i class="fas fa-heartbeat text-emerald-600 mr-1.5"></i>Reconhecimento de Fibromialgia</h4>
+                    <p class="text-emerald-900 leading-relaxed">
+                        Em conformidade com a <strong>Lei nº 15.176/2025</strong>, o IFSULDEMINAS aceita a inscrição de candidatos com diagnóstico médico de fibromialgia na modalidade de reserva de vagas para PcD, mediante laudo e relatório funcional.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quadro-vagas" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-10">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    10 Campi • 1.655 Vagas Integradas ao Ensino Médio
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Cidades, Cursos & Vagas por Cota no IFSULDEMINAS</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Consulte as vagas em cada campus do Sul de Minas Gerais, com filtros dinâmicos e divisão exata por cota.
+                </p>
+            </div>
+
+            <!-- Painel de Filtros e Busca -->
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 mb-8 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                    
+                    <!-- Dropdown de Seleção de Cidade / Campus -->
+                    <div class="md:col-span-6">
+                        <label class="block text-xs font-black uppercase text-slate-700 mb-1.5">
+                            <i class="fas fa-map-marker-alt text-[#047857] mr-1"></i> Selecionar Cidade / Campus (Sul de Minas):
+                        </label>
+                        <select id="campus-select" onchange="applyVagasFilter()" class="w-full bg-white border border-slate-300 text-slate-900 text-xs rounded-xl p-3 font-bold focus:ring-2 focus:ring-[#047857] focus:outline-none shadow-sm">
+                            <option value="ALL">Mostrar Todos os 10 Campi (1.655 Vagas)</option>
+                            <option value="Inconfidentes">Inconfidentes (305 Vagas)</option>
+                            <option value="Machado">Machado (315 Vagas)</option>
+                            <option value="Muzambinho">Muzambinho (265 Vagas)</option>
+                            <option value="Passos">Passos (105 Vagas)</option>
+                            <option value="Poços de Caldas">Poços de Caldas (140 Vagas)</option>
+                            <option value="Pouso Alegre">Pouso Alegre (140 Vagas)</option>
+                            <option value="Carmo de Minas">Carmo de Minas (90 Vagas)</option>
+                            <option value="Três Corações">Três Corações (120 Vagas)</option>
+                            <option value="Itajubá">Itajubá (70 Vagas)</option>
+                            <option value="Boa Esperança">Boa Esperança (105 Vagas)</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo de Busca em Tempo Real -->
+                    <div class="md:col-span-6">
+                        <label class="block text-xs font-black uppercase text-slate-700 mb-1.5">
+                            <i class="fas fa-search text-[#047857] mr-1"></i> Pesquisar por Curso ou Palavra-Chave:
+                        </label>
+                        <input type="text" id="vagas-search-input" onkeyup="applyVagasFilter()" placeholder="Ex: Agropecuária, Informática, Administração, Alimentos, Mecânica..." class="w-full bg-white border border-slate-300 text-slate-900 text-xs rounded-xl p-3 font-bold focus:ring-2 focus:ring-[#047857] focus:outline-none shadow-sm">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legenda das Siglas de Cotas -->
+            <div class="mb-6 bg-emerald-50/60 p-4 rounded-xl border border-emerald-200 text-[11px] text-slate-700 font-medium">
+                <strong class="text-emerald-950 font-black block mb-1">Entenda as Colunas das Cotas na Tabela Oficial do Edital:</strong>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+                    <div><span class="font-bold text-emerald-900">AC:</span> Ampla Concorrência</div>
+                    <div><span class="font-bold text-emerald-900">LB_PPI:</span> Renda &le; 1 SM + PPI</div>
+                    <div><span class="font-bold text-emerald-900">LB_Q:</span> Renda &le; 1 SM + Quilombola</div>
+                    <div><span class="font-bold text-emerald-900">LB_PCD:</span> Renda &le; 1 SM + PCD</div>
+                    <div><span class="font-bold text-emerald-900">LB_EP:</span> Renda &le; 1 SM + Esc. Pública</div>
+                    <div><span class="font-bold text-teal-900">LI_PPI:</span> Qualq. Renda + PPI</div>
+                    <div><span class="font-bold text-teal-900">LI_Q:</span> Qualq. Renda + Quilombola</div>
+                    <div><span class="font-bold text-teal-900">LI_PCD:</span> Qualq. Renda + PCD</div>
+                    <div><span class="font-bold text-teal-900">LI_EP:</span> Qualq. Renda + Esc. Pública</div>
+                    <div><span class="font-bold text-purple-900">PcD:</span> PcD Geral (Inst.)</div>
+                </div>
+            </div>
+
+            <!-- Tabela Interativa de Vagas do IFSULDEMINAS -->
+            <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm bg-white">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-[#064e3b] text-white font-bold uppercase text-[10px] tracking-wider text-center">
+                            <th class="py-3 px-3 text-left w-1/4">Campus / Cidade & Curso</th>
+                            <th class="py-3 px-2">Turno</th>
+                            <th class="py-3 px-2 bg-[#047857]">AC</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB PPI">LB_PPI</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB Q">LB_Q</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB PCD">LB_PCD</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB EP">LB_EP</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI PPI">LI_PPI</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI Q">LI_Q</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI PCD">LI_PCD</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI EP">LI_EP</th>
+                            <th class="py-3 px-2 bg-purple-900 text-purple-200">PcD</th>
+                            <th class="py-3 px-2 bg-slate-900 text-lime-400 font-black">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vagas-table-body" class="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <!-- Gerado via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="vagas-no-results" class="hidden text-center py-12 bg-slate-50 rounded-2xl border border-slate-200 my-4">
+                <i class="fas fa-search-minus text-3xl text-slate-400 mb-2"></i>
+                <h4 class="font-bold text-slate-800 text-sm">Nenhum curso ou vaga foi encontrado</h4>
+                <p class="text-xs text-slate-500">Tente ajustar a busca ou limpar a seleção do campus.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="conteudo" class="py-16 bg-slate-50">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-10">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Conteúdo Programático Oficial (Base BNCC) • Edital 210/2026
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">O que Estudar para a Prova do IFSULDEMINAS 2027?</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Lembre-se: a prova exige <strong>exclusivamente Linguagens (15 questões) e Matemática (10 questões)</strong>. Confira o detalhamento de cada área.
+                </p>
+            </div>
+
+            <!-- Navegação por Abas -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8" id="subject-tabs">
+                <button onclick="switchTab('linguagens')" class="tab-btn active font-black text-xs px-5 py-3 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-book mr-1.5"></i>Linguagens e suas Tecnologias (15q • 60 Pts)</button>
+                <button onclick="switchTab('matematica')" class="tab-btn font-black text-xs px-5 py-3 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-calculator mr-1.5"></i>Matemática e suas Tecnologias (10q • 40 Pts)</button>
+            </div>
+
+            <!-- Conteúdo das Abas -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm text-xs leading-relaxed text-slate-700">
+                
+                <!-- Linguagens -->
+                <div id="tab-linguagens" class="tab-content space-y-4">
+                    <h3 class="text-lg font-black text-[#047857] pb-2 border-b border-slate-100 flex items-center justify-between">
+                        <span><i class="fas fa-book text-[#047857] mr-2"></i>Linguagens e suas Tecnologias (15 Questões • Valor: 60,0 Pontos)</span>
+                        <span class="bg-emerald-100 text-emerald-900 text-[10px] px-2.5 py-1 rounded-full font-extrabold">Maior Peso na Prova</span>
+                    </h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium text-slate-600">
+                        <li><strong>Leitura, Compreensão e Interpretação de Textos:</strong> Identificação da ideia central e tópicos secundários; distinção entre fato e opinião; localização de informações explícitas e inferência de implícitos e pressupostos.</li>
+                        <li><strong>Gêneros Textuais e Tipologias:</strong> Reconhecimento das funções comunicativas em crônicas, notícias, reportagens, artigos de opinião, tirinhas, charges, infográficos e campanhas publicitárias.</li>
+                        <li><strong>Coerência e Coesão Textual:</strong> Mecanismos de coesão referencial (pronominalização, elipse, anáfora) e sequencial (conjunções coordenativas e subordinativas, operadores discursivos e conectivos argumentativos).</li>
+                        <li><strong>Morfossintaxe da Língua Portuguesa:</strong> Emprego das classes gramaticais (substantivo, adjetivo, pronome, verbo e advérbio); estrutura da oração (termos essenciais, integrantes e acessórios); relações sintáticas no período composto.</li>
+                        <li><strong>Regência, Concordância e Crase:</strong> Concordância verbal e nominal padrão; regência verbal de verbos de uso comum e regras práticas de ocorrência da crase.</li>
+                        <li><strong>Recursos Expressivos e Figuras de Linguagem:</strong> Metáfora, metonímia, antítese, ironia, personificação, hipérbole, ambiguidade e polissemia vocabular.</li>
+                        <li><strong>Variação Linguística:</strong> Variedades regionais, sociais, estilísticas e combate ao preconceito linguístico nos diferentes contextos comunicativos.</li>
+                    </ul>
+                </div>
+
+                <!-- Matemática -->
+                <div id="tab-matematica" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-[#047857] pb-2 border-b border-slate-100 flex items-center justify-between">
+                        <span><i class="fas fa-calculator text-[#047857] mr-2"></i>Matemática e suas Tecnologias (10 Questões • Valor: 40,0 Pontos)</span>
+                        <span class="bg-indigo-100 text-indigo-900 text-[10px] px-2.5 py-1 rounded-full font-extrabold">Raciocínio Lógico & Álgebra</span>
+                    </h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium text-slate-600">
+                        <li><strong>Números e Operações:</strong> Conjuntos numéricos (Naturais ℕ, Inteiros ℤ, Racionais ℚ e Reais ℝ); operações fundamentais, múltiplos, divisores, critérios de divisibilidade, MMC e MDC; frações, decimais, dízimas periódicas e fração geratriz; potenciação, radiciação e notação científica.</li>
+                        <li><strong>Matemática Comercial & Financeira:</strong> Razão, proporção e grandezas direta e inversamente proporcionais; regra de três simples e composta; porcentagem, acréscimos e descontos sucessivos; juros simples e cálculo de montante.</li>
+                        <li><strong>Álgebra e Funções:</strong> Expressões algébricas, monômios, polinômios, produtos notáveis e fatoração; equações e inequações de 1º e 2º graus; sistemas de equações lineares com duas incógnitas; introdução às funções (afim e quadrática, raízes e gráficos).</li>
+                        <li><strong>Geometria Plana:</strong> Ângulos (complementares, suplementares, retas paralelas cortadas por transversal); triângulos (classificação, soma dos ângulos internos e congruência); Teorema de Tales e semelhança de triângulos; Teorema de Pitágoras e trigonometria básica no triângulo retângulo (seno, cosseno e tangente de 30°, 45° e 60°); perímetros e áreas de figuras planas (triângulos, quadriláteros e círculo).</li>
+                        <li><strong>Tratamento da Informação:</strong> Leitura e interpretação crítica de dados em tabelas e gráficos (barras, colunas, setores e linhas); medidas de tendência central (média aritmética simples e ponderada); noções de contagem e cálculo de probabilidade de eventos simples.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-gradient-to-r from-[#064e3b] via-[#047857] to-[#1e1b4b] text-white">
+        <div class="container mx-auto px-4 max-w-5xl text-center">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center p-2.5 mx-auto mb-4 shadow-xl border-2 border-white/30" style="background-color: #dd5737;">
+                <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+            </div>
+            
+            <span class="bg-[#c7ef59] text-slate-900 font-black text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">
+                Sua Vaga no IFSULDEMINAS Começa Aqui
+            </span>
+            
+            <h2 class="text-2xl md:text-4xl font-black mb-3 leading-tight">
+                Quer Passar no <span class="text-[#c7ef59]">IFSULDEMINAS 2027</span>?
+            </h2>
+            
+            <p class="text-slate-100 text-xs md:text-sm max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
+                Estude com o preparatório líder em aprovação nas Escolas e Institutos Federais de Minas Gerais. Curso direcionado exatamente ao formato de 25 questões, simulados nos moldes do IFSULDEMINAS, mentoria e suporte completo via WhatsApp.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://vestibular.ifsuldeminas.edu.br/" target="_blank" class="bg-white text-slate-900 hover:bg-slate-100 font-black px-8 py-3.5 rounded-xl transition shadow-2xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105 border-2 border-white">
+                    <i class="fas fa-external-link-alt mr-2 text-[#047857]"></i> Página Oficial do Vestibular
+                </a>
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-8 py-3.5 rounded-xl transition shadow-2xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fas fa-rocket mr-2 text-emerald-950"></i> Matricular no Curso Intensivo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800 text-xs">
+        <div class="container mx-auto px-4 max-w-6xl text-center">
+            <div class="flex justify-center items-center space-x-3 mb-6">
+                <!-- Logo no footer com fundo Laranja Coral -->
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+                </div>
+                <span class="text-lg font-black tracking-tight text-white">Guia - Pré Federal</span>
+            </div>
+            <p class="text-slate-400 font-medium mb-4 max-w-xl mx-auto">
+                Preparatório especializado no ingresso aos Cursos Técnicos Integrados das Escolas Técnicas e Institutos Federais.
+            </p>
+            <p class="text-slate-500">&copy; 2026 Guia Pré-Federal. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div class="fab-container">
+        <div class="fab-options">
+            <a href="https://vestibular.ifsuldeminas.edu.br/" target="_blank" class="fab-option">
+                <span class="fab-label">Inscrição IFSULDEMINAS</span>
+                <div class="fab-icon" style="background-color: #047857;">
+                    <i class="fas fa-external-link-alt"></i>
+                </div>
+            </a>
+            <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="fab-option">
+                <span class="fab-label">Nosso Intensivo 2026</span>
+                <div class="fab-icon" style="background-color: #059669;">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </a>
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
+                <span class="fab-label">Falar no WhatsApp</span>
+                <div class="fab-icon" style="background-color: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </a>
+        </div>
+        <button class="fab-main" id="fab-main-btn" title="Menu de Ajuda e Links">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <script>
+        // Dados Oficiais do Quadro de Vagas do IFSULDEMINAS - Edital 210/2026 (1.655 Vagas Totais)
+        const ifsulVagasData = [
+            // Campus Inconfidentes (305 vagas)
+            { campus: "Inconfidentes", curso: "Técnico em Administração", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Inconfidentes", curso: "Técnico em Agropecuária", turno: "Integral", ac: 49, lb_ppi: 16, lb_q: 1, lb_pcd: 2, lb_ep: 8, li_ppi: 16, li_q: 0, li_pcd: 2, li_ep: 8, pcd: 3, total: 105 },
+            { campus: "Inconfidentes", curso: "Técnico em Alimentos", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Inconfidentes", curso: "Técnico em Informática", turno: "Integral", ac: 29, lb_ppi: 9, lb_q: 2, lb_pcd: 1, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, pcd: 1, total: 60 },
+            { campus: "Inconfidentes", curso: "Técnico em Meio Ambiente", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Inconfidentes", curso: "Técnico em Geoprocessamento", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+
+            // Campus Machado (315 vagas)
+            { campus: "Machado", curso: "Técnico em Agropecuária", turno: "Integral", ac: 67, lb_ppi: 21, lb_q: 1, lb_pcd: 3, lb_ep: 10, li_ppi: 21, li_q: 0, li_pcd: 3, li_ep: 11, pcd: 3, total: 140 },
+            { campus: "Machado", curso: "Técnico em Alimentos", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Machado", curso: "Técnico em Administração", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Machado", curso: "Técnico em Informática", turno: "Integral", ac: 49, lb_ppi: 16, lb_q: 1, lb_pcd: 2, lb_ep: 8, li_ppi: 16, li_q: 0, li_pcd: 2, li_ep: 8, pcd: 3, total: 105 },
+
+            // Campus Muzambinho (265 vagas)
+            { campus: "Muzambinho", curso: "Técnico em Agropecuária", turno: "Integral", ac: 67, lb_ppi: 21, lb_q: 1, lb_pcd: 3, lb_ep: 10, li_ppi: 21, li_q: 0, li_pcd: 3, li_ep: 11, pcd: 3, total: 140 },
+            { campus: "Muzambinho", curso: "Técnico em Alimentos", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Muzambinho", curso: "Técnico em Informática", turno: "Integral", ac: 43, lb_ppi: 14, lb_q: 1, lb_pcd: 2, lb_ep: 6, li_ppi: 13, li_q: 0, li_pcd: 2, li_ep: 7, pcd: 2, total: 90 },
+
+            // Campus Passos (105 vagas)
+            { campus: "Passos", curso: "Técnico em Design Gráfico", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Passos", curso: "Técnico em Informática", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Passos", curso: "Técnico em Produção de Moda", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+
+            // Campus Poços de Caldas (140 vagas)
+            { campus: "Poços de Caldas", curso: "Técnico em Administração", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Poços de Caldas", curso: "Técnico em Artes Visuais", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Poços de Caldas", curso: "Técnico em Eletroeletrônica", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Poços de Caldas", curso: "Técnico em Informática", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+
+            // Campus Pouso Alegre (140 vagas)
+            { campus: "Pouso Alegre", curso: "Técnico em Administração", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Pouso Alegre", curso: "Técnico em Edificações", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Pouso Alegre", curso: "Técnico em Informática", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Pouso Alegre", curso: "Técnico em Química", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+
+            // Campus Carmo de Minas (90 vagas)
+            { campus: "Carmo de Minas", curso: "Técnico em Alimentos", turno: "Integral", ac: 14, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1, pcd: 1, total: 30 },
+            { campus: "Carmo de Minas", curso: "Técnico em Informática", turno: "Integral", ac: 14, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1, pcd: 1, total: 30 },
+            { campus: "Carmo de Minas", curso: "Técnico em Administração", turno: "Integral", ac: 14, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1, pcd: 1, total: 30 },
+
+            // Campus Três Corações (120 vagas)
+            { campus: "Três Corações", curso: "Técnico em Administração", turno: "Integral", ac: 29, lb_ppi: 9, lb_q: 2, lb_pcd: 1, lb_ep: 3, li_ppi: 9, li_q: 0, li_pcd: 2, li_ep: 4, pcd: 1, total: 60 },
+            { campus: "Três Corações", curso: "Técnico em Informática", turno: "Integral", ac: 14, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1, pcd: 1, total: 30 },
+            { campus: "Três Corações", curso: "Técnico em Mecânica", turno: "Integral", ac: 14, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 5, li_q: 0, li_pcd: 1, li_ep: 1, pcd: 1, total: 30 },
+
+            // Campus Itajubá (70 vagas)
+            { campus: "Itajubá", curso: "Técnico em Administração", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Itajubá", curso: "Técnico em Informática", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+
+            // Campus Boa Esperança (105 vagas)
+            { campus: "Boa Esperança", curso: "Técnico em Administração", turno: "Integral", ac: 16, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, pcd: 1, total: 35 },
+            { campus: "Boa Esperança", curso: "Técnico em Agropecuária", turno: "Integral", ac: 33, lb_ppi: 11, lb_q: 1, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 0, li_pcd: 2, li_ep: 5, pcd: 2, total: 70 }
+        ];
+
+        function applyVagasFilter() {
+            const selectedCampus = document.getElementById('campus-select').value;
+            const searchVal = document.getElementById('vagas-search-input').value.toLowerCase().trim();
+            const tbody = document.getElementById('vagas-table-body');
+            const noResults = document.getElementById('vagas-no-results');
+
+            tbody.innerHTML = '';
+            let count = 0;
+
+            ifsulVagasData.forEach(item => {
+                const matchesCampus = (selectedCampus === 'ALL' || item.campus === selectedCampus);
+                const matchesSearch = (searchVal === '' || item.curso.toLowerCase().includes(searchVal) || item.campus.toLowerCase().includes(searchVal));
+
+                if (matchesCampus && matchesSearch) {
+                    count++;
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-emerald-50/50 transition border-b border-slate-100 text-center";
+                    tr.innerHTML = `
+                        <td class="py-3 px-3 text-left">
+                            <strong class="text-slate-900 block text-xs md:text-sm">${item.curso}</strong>
+                            <span class="text-[10px] text-[#047857] font-bold"><i class="fas fa-university mr-1"></i>Campus ${item.campus} • 3 Anos</span>
+                        </td>
+                        <td class="py-3 px-2 font-semibold text-slate-500 text-[11px]">${item.turno}</td>
+                        <td class="py-3 px-2 font-black text-[#047857] bg-emerald-50/60">${item.ac}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_ppi}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_q}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_pcd}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_ep}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_ppi}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_q}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_pcd}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_ep}</td>
+                        <td class="py-3 px-2 text-purple-900 font-bold bg-purple-50">${item.pcd}</td>
+                        <td class="py-3 px-2 font-black text-emerald-800 bg-emerald-100/60 text-sm">${item.total}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            });
+
+            if (count === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Menu Mobile Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Floating Action Button Toggle
+        const fabContainer = document.querySelector('.fab-container');
+        const fabBtn = document.getElementById('fab-main-btn');
+        fabBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            fabContainer.classList.toggle('active');
+        });
+        document.addEventListener('click', () => fabContainer.classList.remove('active'));
+
+        // Navegação das Abas de Conteúdo
+        function switchTab(tabId) {
+            document.querySelectorAll('#subject-tabs .tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+        }
+
+        // Inicializar tabela ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            applyVagasFilter();
+        });
+    </script>
+</body>
+</html>
+`
