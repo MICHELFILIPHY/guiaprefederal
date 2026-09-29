@@ -60,7 +60,6 @@
       body { background: white !important; }
     }
 
-    /* Estilos do Documento PDF de Exportação */
     #pdf-render-template {
       display: none;
       font-family: 'Plus Jakarta Sans', Arial, sans-serif;
@@ -82,7 +81,7 @@
           </div>
           <div>
             <span class="text-base font-extrabold text-gpf-darkBlue tracking-tight block">Guia Pré-Federal</span>
-            <span class="text-[10px] text-slate-500 font-semibold block -mt-0.5">Diagnóstico & Plano de Estudos</span>
+            <span class="text-[10px] text-slate-500 font-semibold block -mt-0.5">Checklist Oficial & Raio-X dos Vestibulinhos</span>
           </div>
         </a>
 
@@ -116,7 +115,7 @@
         <span class="text-[11px] font-bold tracking-wider uppercase text-gpf-lime">Passo 1</span>
         <h1 class="text-xl sm:text-2xl font-bold mt-0.5">Escolha sua prova</h1>
         <p class="text-xs sm:text-sm text-slate-300 mt-1">
-          Selecione o vestibulinho que você vai prestar para calibrar seu checklist com as matérias que realmente caem nele.
+          O checklist do nosso curso vai se calibrar automaticamente para mostrar a frequência real de cada matéria na sua prova-alvo.
         </p>
       </div>
 
@@ -185,9 +184,9 @@
       <div id="card-instrucao-checkup" class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div class="text-[11px] font-bold uppercase text-gpf-blue" id="instrucao-banca-ativa">Passo 2 · Prova ativa: COLUNI</div>
-          <h2 class="text-sm sm:text-base font-bold text-slate-900 mt-0.5">Marque como você está em cada matéria:</h2>
+          <h2 class="text-sm sm:text-base font-bold text-slate-900 mt-0.5">Checklist Oficial do Guia Pré-Federal cruzado com a Prova</h2>
           <p class="text-xs text-slate-600 mt-0.5">
-            Clique em <strong>Mando bem</strong>, <strong>Mais ou menos</strong> ou <strong>Não sei ainda</strong>. O que você tiver dúvida vai direto para sua lista de revisão.
+            Cada tópico abaixo segue exatamente o cronograma de aulas do curso. Marque seu domínio para cruzar com a frequência real da banca.
           </p>
         </div>
         <button onclick="switchTab('revisao')" class="px-3.5 py-2 rounded-xl bg-gpf-blue text-white text-xs font-semibold hover:bg-gpf-darkBlue transition-all shrink-0">
@@ -200,24 +199,27 @@
           
           <div class="relative flex-1">
             <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-            <input type="text" id="input-search" oninput="applyFilters()" placeholder="Buscar matéria ou assunto..." class="w-full pl-8 pr-3 py-1.5 rounded-lg border border-slate-200 text-xs focus:outline-none focus:ring-1 focus:ring-gpf-blue focus:border-gpf-blue">
+            <input type="text" id="input-search" oninput="applyFilters()" placeholder="Buscar conteúdo oficial do curso..." class="w-full pl-8 pr-3 py-1.5 rounded-lg border border-slate-200 text-xs focus:outline-none focus:ring-1 focus:ring-gpf-blue focus:border-gpf-blue">
           </div>
 
-          <div class="flex items-center gap-1 overflow-x-auto pb-0.5">
-            <button onclick="setMasteryFilter('all')" id="filter-mas-all" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-white transition-all">
+          <div class="flex items-center gap-1 overflow-x-auto pb-0.5 custom-scroll">
+            <button onclick="setMasteryFilter('all')" id="filter-mas-all" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-white transition-all whitespace-nowrap">
               Todos
             </button>
-            <button onclick="setMasteryFilter('nao_domino')" id="filter-mas-nao_domino" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-rose-700 hover:bg-rose-50 transition-all">
+            <button onclick="setMasteryFilter('urgente_maxima')" id="filter-mas-urgente_maxima" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 transition-all whitespace-nowrap">
+              Urgência: Não sei + Cai muito
+            </button>
+            <button onclick="setMasteryFilter('atencao')" id="filter-mas-atencao" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition-all whitespace-nowrap">
+              Atenção: Mais ou menos + Cai muito
+            </button>
+            <button onclick="setMasteryFilter('nao_domino')" id="filter-mas-nao_domino" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-rose-700 hover:bg-rose-50 transition-all whitespace-nowrap">
               Não sei
             </button>
-            <button onclick="setMasteryFilter('parcial')" id="filter-mas-parcial" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-amber-700 hover:bg-amber-50 transition-all">
+            <button onclick="setMasteryFilter('parcial')" id="filter-mas-parcial" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-amber-700 hover:bg-amber-50 transition-all whitespace-nowrap">
               Mais ou menos
             </button>
-            <button onclick="setMasteryFilter('domino')" id="filter-mas-domino" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-emerald-700 hover:bg-emerald-50 transition-all">
+            <button onclick="setMasteryFilter('domino')" id="filter-mas-domino" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-emerald-700 hover:bg-emerald-50 transition-all whitespace-nowrap">
               Mando bem
-            </button>
-            <button onclick="setMasteryFilter('campeoes')" id="filter-mas-campeoes" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition-all">
-              Mais cobrados
             </button>
           </div>
         </div>
@@ -237,10 +239,10 @@
       
       <div class="bg-slate-900 rounded-2xl p-5 text-white">
         <div class="max-w-2xl">
-          <span class="text-[10px] font-bold text-gpf-lime uppercase tracking-wider">Lista Prática</span>
+          <span class="text-[10px] font-bold text-gpf-lime uppercase tracking-wider">Fila Estratégica de Revisão</span>
           <h2 class="text-lg sm:text-xl font-bold mt-0.5">O que você precisa revisar</h2>
           <p class="text-xs text-slate-300 mt-1">
-            Aqui estão os tópicos marcados como <strong class="text-rose-300">Não sei ainda</strong> ou <strong class="text-amber-300">Mais ou menos</strong> no <span id="revisao-banca-name" class="text-white font-bold">COLUNI</span>. Eles já estão ordenados de acordo com o que mais cai na prova.
+            Aqui estão os conteúdos do curso marcados com dúvida no <span id="revisao-banca-name" class="text-white font-bold">COLUNI</span>, ordenados rigorosamente pelo cruzamento entre <strong>seu nível de dificuldade</strong> e <strong>a incidência real da banca</strong>.
           </p>
         </div>
 
@@ -285,16 +287,16 @@
 
     </div>
 
-    <!-- ABA 3: O QUE MAIS CAI (RAIO-X) -->
+    <!-- ABA 3: O QUE MAIS CAI (RAIO-X DETALHADO PARA TODAS AS BANCAS) -->
     <div id="tab-graficos" class="space-y-5 hidden">
       
       <div class="bg-white rounded-2xl p-5 border border-slate-200">
         
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
           <div>
-            <span class="text-[10px] font-bold text-gpf-blue uppercase tracking-wider">Raio-X de Cobrança</span>
+            <span class="text-[10px] font-bold text-gpf-blue uppercase tracking-wider">Raio-X de Cobrança Auditado</span>
             <h2 class="text-lg sm:text-xl font-bold text-slate-900" id="chart-main-title">O que mais cai: COLUNI · UFV</h2>
-            <p class="text-xs text-slate-500 mt-0.5" id="chart-main-subtitle">Entenda o peso de cada matéria e como o exame cobra os conteúdos.</p>
+            <p class="text-xs text-slate-500 mt-0.5" id="chart-main-subtitle">Entenda o peso de cada matéria e a distribuição de conteúdo auditada.</p>
           </div>
 
           <div class="flex items-center gap-2">
@@ -342,8 +344,8 @@
         <div class="mt-6 pt-5 border-t border-slate-200">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
             <div>
-              <h3 class="text-sm font-bold text-slate-900">Conteúdos mais cobrados por disciplina</h3>
-              <p class="text-xs text-slate-500">Selecione uma matéria para conferir os tópicos responsáveis pela maior parte das questões.</p>
+              <h3 class="text-sm font-bold text-slate-900">Panorama Completo da Disciplina</h3>
+              <p class="text-xs text-slate-500">Selecione uma matéria para visualizar todos os tópicos classificados por frequência de cobrança.</p>
             </div>
 
             <div class="flex items-center gap-1 overflow-x-auto pb-1 custom-scroll" id="stat-subject-pills">
@@ -482,7 +484,7 @@
 
   </main>
 
-  <!-- CONTAINER DE RENDERIZAÇÃO DO PDF (BONITO, LIMPO E FORMAL) -->
+  <!-- CONTAINER DE RENDERIZAÇÃO DO PDF -->
   <div id="pdf-render-template">
     <div style="border-bottom: 2px solid #5242ea; padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-end;">
       <div>
@@ -518,9 +520,7 @@
       Tópicos Selecionados para Revisão (Ordenados por Incidência na Prova)
     </div>
 
-    <div id="pdf-topics-list" style="margin-bottom: 20px;">
-      <!-- Itens do PDF injetados via JS -->
-    </div>
+    <div id="pdf-topics-list" style="margin-bottom: 20px;"></div>
 
     <div style="border-top: 1px solid #e2e8f0; padding-top: 8px; font-size: 9px; color: #94a3b8; display: flex; justify-content: space-between;">
       <span>Guia Pré-Federal · guiaprefederal.com.br</span>
@@ -533,7 +533,7 @@
   </footer>
 
   <script>
-    /* DADOS COMPLETOS E AUDITADOS DAS 5 BANCAS */
+    /* DADOS DETALHADOS DAS 5 BANCAS COM TODAS AS DISCIPLINAS EM 3 FAIXAS DE INCIDÊNCIA */
     const bancasData = {
       coluni: {
         id: 'coluni',
@@ -541,87 +541,87 @@
         hasRedacao: true,
         hasIngles: true,
         materiaDesc: 'Português, Matemática, Ciências, Humanas, Redação e Inglês',
-        stat1: { 
-          title: 'Destaque Principal (Peso 2)', 
-          val: 'Português + Matemática', 
-          sub: '68,97% dos pontos da prova objetiva (40 de 58 pontos)' 
-        },
-        stat2: { 
-          title: 'Formato da Prova', 
-          val: '38 Questões (58 Pontos) + Redação', 
-          sub: 'Port (20 pts) · Mat (20 pts) · Ciênc (8 pts) · Geo (4 pts) · Hist (4 pts) · Ing (2 pts)' 
-        },
-        // Pontuação ponderada da prova objetiva: 20 + 20 + 8 + 4 + 4 + 2 = 58 pontos totais
-        weights: {
-          portugues: 34.5,
-          matematica: 34.5,
-          ciencias: 13.8,
-          geografia: 6.9,
-          historia: 6.9,
-          ingles: 3.4
-        },
+        stat1: { title: 'Destaque Principal (Peso 2)', val: 'Português + Matemática', sub: '68,97% dos pontos da prova objetiva (40 de 58 pontos)' },
+        stat2: { title: 'Formato da Prova', val: '38 Questões (58 Pontos) + Redação', sub: 'Port (20 pts) · Mat (20 pts) · Ciênc (8 pts) · Geo (4 pts) · Hist (4 pts) · Ing (2 pts)' },
+        weights: { portugues: 34.5, matematica: 34.5, ciencias: 13.8, geografia: 6.9, historia: 6.9, ingles: 3.4 },
         cognitive: { analise: 53.5, aplicacao: 19.5, compreensao: 13.6, interpretacao: 12.9, memorizacao: 0.6 },
-        rankings: {
+        subjectPanoramas: {
           portugues: [
-            { topic: 'Literatura e texto literário (Obra do ano)', pct: '40.8%', tip: 'Ler o livro obrigatório garante 2 quintos de toda a prova de Português.' },
-            { topic: 'Morfossintaxe e classes de palavras', pct: '13.8%', tip: 'Gramática aplicada ao sentido das frases, sem decoreba de termos secos.' },
-            { topic: 'Semântica e efeitos de sentido', pct: '13.1%', tip: 'Valores de advérbios, ironia e modalização do discurso.' },
-            { topic: 'Interpretação e compreensão de texto', pct: '10.8%', tip: 'Identificar a ideia central e intenção do autor nas entrelinhas.' },
-            { topic: 'Coesão e coerência textual', pct: '7.7%', tip: 'Conectivos e pronomes que garantem a ligação do texto.' },
-            { topic: 'Gêneros textuais e multimodalidade', pct: '6.2%', tip: 'Tirinhas, charges e anúncios publicitários.' }
+            { tier: 'alta', topic: 'Obras Literárias Obrigatórias do Edital', pct: '40.8%', obs: 'Livro do ano responde por mais de 2 quintos de toda a prova de Português.' },
+            { tier: 'alta', topic: 'Morfossintaxe da oração e articulação frasal', pct: '13.8%', obs: 'Classes de palavras e funções sintáticas aplicadas ao sentido do texto.' },
+            { tier: 'alta', topic: 'Relações lógico-discursivas (conjunções, advérbios)', pct: '13.1%', obs: 'Valores semânticos de conectivos e modalização discursiva.' },
+            { tier: 'media', topic: 'Informações implícitas e explícitas', pct: '10.8%', obs: 'Ideia central, pressupostos e subentendidos.' },
+            { tier: 'media', topic: 'Coerência e Coesão (sequencial e referencial)', pct: '7.7%', obs: 'Conectivos, anáforas e amarração textual.' },
+            { tier: 'media', topic: 'Gêneros e Tipos Textuais', pct: '6.2%', obs: 'Tirinhas, charges, anúncios e multimodalidade.' },
+            { tier: 'baixa', topic: 'Recursos literários e figuras de estilo', pct: '5.4%', obs: 'Metáforas, ironias e antíteses em contexto.' },
+            { tier: 'baixa', topic: 'Linguagem formal e informal e variedades linguísticas', pct: '1.5%', obs: 'Variação linguística e adequação de registro.' },
+            { tier: 'baixa', topic: 'Regras de acentuação, ortografia e pontuação', pct: '0.7%', obs: 'Gramática pura e regras de pontuação isoladas.' }
           ],
           matematica: [
-            { topic: 'Álgebra (equações, sistemas, polinômios)', pct: '21.5%', tip: 'Montar equações a partir de situações práticas do dia a dia.' },
-            { topic: 'Geometria plana (áreas, triângulos e ângulos)', pct: '20.8%', tip: 'Áreas por decomposição de figuras e Teorema de Pitágoras.' },
-            { topic: 'Números, conjuntos e aritmética', pct: '20.0%', tip: 'Frações, dízimas, divisibilidade e conjuntos numéricos.' },
-            { topic: 'Porcentagem e matemática financeira', pct: '11.5%', tip: 'Aumentos e descontos sucessivos em problemas comerciais.' },
-            { topic: 'Funções (afim e quadrática)', pct: '10.0%', tip: 'Interpretar gráficos e calcular pontos de máximo e mínimo.' }
+            { tier: 'alta', topic: 'Equações e Sistemas de 1º e 2º graus', pct: '21.5%', obs: 'Equações e sistemas aplicados a problemas cotidianos.' },
+            { tier: 'alta', topic: 'Áreas de figuras planas e Geometria Plana', pct: '20.8%', obs: 'Áreas por composição e Teorema de Pitágoras.' },
+            { tier: 'alta', topic: 'Números Naturais, Inteiros, Racionais e Irracionais', pct: '20.0%', obs: 'Frações, dízimas, conjuntos numéricos e aritmética básica.' },
+            { tier: 'media', topic: 'Porcentagem e Aumentos/Descontos Sucessivos', pct: '11.5%', obs: 'Problemas comerciais com porcentagens não aditivas.' },
+            { tier: 'media', topic: 'Função Afim (1º grau) e Função Quadrática (2º grau)', pct: '10.0%', obs: 'Gráficos, coordenadas do vértice e interpretação.' },
+            { tier: 'media', topic: 'Razão, Proporção e Regra de 3 simples e composta', pct: '4.6%', obs: 'Grandezas diretas e inversamente proporcionais.' },
+            { tier: 'baixa', topic: 'Estatística e Leitura de Dados', pct: '3.8%', obs: 'Médias e interpretação de gráficos/tabelas.' },
+            { tier: 'baixa', topic: 'Trigonometria e Triângulos Notáveis', pct: '1.5%', obs: 'Relações trigonométricas básicas no triângulo retângulo.' },
+            { tier: 'baixa', topic: 'Probabilidade e Análise Combinatória', pct: '0.8%', obs: 'Contagem simples e noções de probabilidade.' }
           ],
           biologia: [
-            { topic: 'Fisiologia humana e animal (Sistemas)', pct: '19.4%', tip: 'Digestão, respiração e circulação ligadas à saúde.' },
-            { topic: 'Zoologia e reino animal', pct: '13.4%', tip: 'Características gerais e adaptações dos animais ao meio.' },
-            { topic: 'Botânica e fisiologia vegetal', pct: '11.9%', tip: 'Fotossíntese, transporte de seiva e adaptações de plantas.' },
-            { topic: 'Saúde, doenças e saneamento básico', pct: '10.4%', tip: 'Vacinas, dengue, parasitoses e medidas preventivas.' },
-            { topic: 'Genética e divisão celular', pct: '10.4%', tip: 'Primeira Lei de Mendel, sistema ABO e heredogramas.' },
-            { topic: 'Ecologia e Citologia celular', pct: '17.9%', tip: 'Cadeias ecológicas, impactos ambientais e organelas.' }
+            { tier: 'alta', topic: 'Fisiologia humana (sistemas vitais)', pct: '19.4%', obs: 'Digestório, respiratório e circulatório ligados a hábitos.' },
+            { tier: 'alta', topic: 'Reino Animalia (Invertebrados e Cordados)', pct: '13.4%', obs: 'Adaptações dos animais e características gerais.' },
+            { tier: 'alta', topic: 'Reino Plantae e Fisiologia Vegetal (Botânica)', pct: '11.9%', obs: 'Transporte de seiva, fotossíntese e adaptações vegetais.' },
+            { tier: 'media', topic: 'Parasitologia, Saúde e Saneamento Básico', pct: '10.4%', obs: 'Vacinas, dengue, verminoses e prevenção.' },
+            { tier: 'media', topic: 'Genética (Primeira Lei, Tipos Sanguíneos e Heredogramas)', pct: '10.4%', obs: 'Heredogramas de famílias e alelos dominantes/recessivos.' },
+            { tier: 'media', topic: 'Origem da vida e conceitos de evolução', pct: '10.4%', obs: 'Seleção natural e adaptação ao ambiente.' },
+            { tier: 'media', topic: 'Ecologia e Impactos Ambientais', pct: '9.0%', obs: 'Cadeias tróficas, relações ecológicas e impactos antrópicos.' },
+            { tier: 'baixa', topic: 'A Célula, Citologia e Universo Celular', pct: '9.0%', obs: 'Organelas celulares e divisão celular.' },
+            { tier: 'baixa', topic: 'Tecidos do corpo humano (Histologia)', pct: '6.1%', obs: 'Funções de tecidos epitelial, conjuntivo e muscular.' }
           ],
           fisica: [
-            { topic: 'Óptica geométrica (luz, espelhos e lentes)', pct: '23.7%', tip: 'Assunto #1 de Física no COLUNI! Espelhos planos e esféricos.' },
-            { topic: 'Eletricidade (circuitos e potência em kWh)', pct: '21.1%', tip: 'Calcular o consumo na conta de luz e circuitos em série/paralelo.' },
-            { topic: 'Termologia (calor, temperatura e dilatação)', pct: '21.1%', tip: 'Condução, convecção, radiação e calor sensível.' },
-            { topic: 'Dinâmica e energia mecânica', pct: '18.4%', tip: 'Leis de Newton, força peso, atrito e conservação de energia.' },
-            { topic: 'Cinemática e movimento', pct: '7.9%', tip: 'Velocidade média e aceleração em situações práticas.' }
+            { tier: 'alta', topic: 'Óptica Geométrica (Luz, Espelhos e Lentes)', pct: '23.7%', obs: 'Assunto #1 de Física no COLUNI! Espelhos planos e refração.' },
+            { tier: 'alta', topic: 'Eletrodinâmica (Circuitos, Consumo em kWh e Potência)', pct: '21.1%', obs: 'Cálculo de consumo na conta de luz e circuitos em série/paralelo.' },
+            { tier: 'alta', topic: 'Termometria, Calorimetria e Dilatação Térmica', pct: '21.1%', obs: 'Condução, convecção, radiação e calor sensível.' },
+            { tier: 'media', topic: 'Leis de Newton, Forças e Energia Mecânica', pct: '18.4%', obs: 'Força peso, atrito, trabalho e conservação de energia.' },
+            { tier: 'baixa', topic: 'Cinemática: Velocidade média e aceleração', pct: '7.9%', obs: 'Velocidade média e situações práticas do trânsito.' },
+            { tier: 'baixa', topic: 'Hidrostática (Pressão e Empuxo)', pct: '5.3%', obs: 'Pressão atmosférica e princípio de Arquimedes.' },
+            { tier: 'baixa', topic: 'Astronomia (Fases da Lua e Gravitação)', pct: '0.0%', obs: 'Tema inexistente em 13 provas analisadas do COLUNI.' }
           ],
           quimica: [
-            { topic: 'Tabela periódica, átomos e modelos', pct: '37.9%', tip: 'Contar prótons, nêutrons e elétrons e localizar elementos por famílias.' },
-            { topic: 'Matéria, misturas e processos de separação', pct: '34.5%', tip: 'Destilação, filtração, decantação e tratamento de água.' },
-            { topic: 'Reações químicas e Leis ponderais', pct: '17.2%', tip: 'Conservação das massas de Lavoisier e proporções de Proust.' },
-            { topic: 'Funções inorgânicas e pH', pct: '6.9%', tip: 'Identificar ácidos e bases pelo cotidiano.' },
-            { topic: 'Ligações químicas', pct: '3.5%', tip: 'Propriedades de compostos iônicos e moleculares.' }
+            { tier: 'alta', topic: 'Modelos Atômicos, Distribuição e Tabela Periódica', pct: '37.9%', obs: 'Número de prótons/elétrons e localização na Tabela.' },
+            { tier: 'alta', topic: 'Misturas, Processos de Separação e Tratamento de Água', pct: '34.5%', obs: 'Decantação, destilação, filtração e tratamento da água.' },
+            { tier: 'media', topic: 'Reações Químicas, Balanceamento e Leis Ponderais', pct: '17.2%', obs: 'Conservação das massas (Lavoisier) e proporções de Proust.' },
+            { tier: 'baixa', topic: 'Funções Inorgânicas (Ácidos, Bases e pH)', pct: '6.9%', obs: 'Identificação de compostos inorgânicos e acidez.' },
+            { tier: 'baixa', topic: 'Ligações Químicas (iônica e covalente)', pct: '3.5%', obs: 'Propriedades dos compostos iônicos e moleculares.' }
           ],
           historia: [
-            { topic: 'Escravidão, resistência negra e indígenas', pct: '17.9%', tip: 'Eixo permanente de cidadania a partir de documentos e fontes.' },
-            { topic: 'Entreguerras, regimes totalitários e 2ª Guerra', pct: '17.9%', tip: 'Nazifascismo, crise de 1929 e holocausto.' },
-            { topic: 'Ditadura Militar no Brasil e redemocratização', pct: '16.4%', tip: 'Atos Institucionais (AI-5), Diretas Já e Constituição de 1988.' },
-            { topic: 'Guerra Fria e mundo contemporâneo', pct: '16.4%', tip: 'Bipolaridade EUA x URSS e corrida armamentista.' },
-            { topic: 'Era Vargas e Primeira República', pct: '20.9%', tip: 'Revolução de 30, CLT e coronelismo.' }
+            { tier: 'alta', topic: 'Escravidão, resistência negra e povos indígenas', pct: '17.9%', obs: 'Eixo permanente de cidadania com análise de fontes.' },
+            { tier: 'alta', topic: 'Regimes Totalitários e Segunda Guerra Mundial', pct: '17.9%', obs: 'Nazifascismo, crise de 1929 e antissemitismo.' },
+            { tier: 'alta', topic: 'Ditadura Militar no Brasil e Redemocratização', pct: '16.4%', obs: 'Atos institucionais (AI-5), censura e Diretas Já.' },
+            { tier: 'media', topic: 'Guerra Fria e Mundo Contemporâneo', pct: '16.4%', obs: 'Bipolaridade EUA x URSS e corrida armamentista.' },
+            { tier: 'media', topic: 'Revolução de 1930 e Era Vargas', pct: '10.4%', obs: 'Trabalhismo, CLT e Estado Novo.' },
+            { tier: 'media', topic: 'Brasil: Primeira República / República Velha', pct: '10.4%', obs: 'Coronelismo, voto de cabresto e revoltas sociais.' },
+            { tier: 'baixa', topic: 'Brasil Colônia, Império e História Antiga/Média', pct: '0.0%', obs: 'A prova do COLUNI foca 100% no século XX e contemporaneidade.' }
           ],
           geografia: [
-            { topic: 'Geografia urbana e industrialização do Brasil', pct: '14.9%', tip: 'Crescimento das cidades, periferização e fases industriais.' },
-            { topic: 'Geografia da população (demografia e pirâmides)', pct: '11.9%', tip: 'Leitura de pirâmides etárias e migrações no Brasil.' },
-            { topic: 'Cartografia, fusos horários e escalas', pct: '11.9%', tip: 'Cálculo prático de fuso horário e conversão de escala em centímetros.' },
-            { topic: 'Geografia econômica e globalização', pct: '10.4%', tip: 'Blocos econômicos e divisão internacional do trabalho.' },
-            { topic: 'Questão agrária e meio ambiente', pct: '9.0%', tip: 'Agronegócio, uso da terra e desmatamento.' }
+            { tier: 'alta', topic: 'Urbanização e Industrialização no Brasil', pct: '14.9%', obs: 'Crescimento urbano, periferização e fases industriais.' },
+            { tier: 'alta', topic: 'População Brasileira (demografia e pirâmides)', pct: '11.9%', obs: 'Leitura de pirâmides etárias e migrações internas.' },
+            { tier: 'alta', topic: 'Cartografia, fusos horários, escalas e coordenadas', pct: '11.9%', obs: 'Cálculo de fuso horário e conversão de escala métrica.' },
+            { tier: 'media', topic: 'Globalização, blocos econômicos e geopolítica', pct: '10.4%', obs: 'Divisão internacional do trabalho e avanços técnicos.' },
+            { tier: 'media', topic: 'Geografia agrária e questão fundiária', pct: '9.0%', obs: 'Agronegócio, uso da terra e fronteiras agrícolas.' },
+            { tier: 'media', topic: 'Climatologia, biomas e domínios naturais do Brasil', pct: '9.0%', obs: 'Cerrado, Mata Atlântica e dinâmica das chuvas.' },
+            { tier: 'baixa', topic: 'Geomorfologia, relevo e bacias hidrográficas', pct: '7.5%', obs: 'Bacias de Minas Gerais e agentes do relevo.' }
           ],
           redacao: [
-            { topic: 'Tipologia narrativa e gênero crônica', pct: '40.0%', tip: 'Clássico do COLUNI: narrar fatos cotidianos com sensibilidade e reflexão.' },
-            { topic: 'Cartas (pessoal, aberta e de leitor)', pct: '30.0%', tip: 'Estrutura com interlocutor claro, vocativo e adequação de registro.' },
-            { topic: 'Texto opinativo e dissertação', pct: '30.0%', tip: 'Defesa de ponto de vista com argumentos pertinentes.' }
+            { tier: 'alta', topic: 'Tipologia narrativa e gênero crônica cotidiana', pct: '40.0%', obs: 'Clássico absoluto do COLUNI: sensibilidade e reflexão diária.' },
+            { tier: 'alta', topic: 'Carta pessoal, carta de leitor e carta aberta', pct: '30.0%', obs: 'Interlocutor definido, vocativo e adequação de registro.' },
+            { tier: 'alta', topic: 'Tipologia argumentativa e texto opinativo', pct: '30.0%', obs: 'Defesa de ponto de vista fundamentado sobre temas sociais.' }
           ],
           ingles: [
-            { topic: 'Estratégias de leitura (Skimming e Scanning)', pct: '45.0%', tip: 'Localizar dados específicos no texto sem traduzir palavra por palavra.' },
-            { topic: 'Interpretação de tirinhas e anúncios', pct: '35.0%', tip: 'Linguagem verbal e não verbal associadas.' },
-            { topic: 'Gramática contextual e conectivos', pct: '20.0%', tip: 'Conectivos de oposição (but, however) e tempos do presente/passado.' }
+            { tier: 'alta', topic: 'Estratégias de leitura: Skimming e Scanning', pct: '45.0%', obs: 'Busca ágil de informações específicas sem tradução palavra por palavra.' },
+            { tier: 'alta', topic: 'Gêneros textuais multimodais: Tirinhas e anúncios', pct: '35.0%', obs: 'Associação entre linguagem verbal e não verbal.' },
+            { tier: 'media', topic: 'Conectivos textuais e gramática aplicada', pct: '20.0%', obs: 'Conectivos de oposição (however, but) e tempos do presente/passado.' }
           ]
         }
       },
@@ -635,55 +635,61 @@
         stat2: { title: 'Formato da Prova', val: '50 Questões (A a D)', sub: '15 Port · 15 Mat · 8 Ciênc · 6 Geo · 6 Hist' },
         weights: { portugues: 30.0, matematica: 30.0, ciencias: 16.0, geografia: 12.0, historia: 12.0 },
         cognitive: { analise: 43.4, aplicacao: 24.1, compreensao: 18.5, interpretacao: 13.4, memorizacao: 0.5 },
-        rankings: {
+        subjectPanoramas: {
           portugues: [
-            { topic: 'Literatura (Obra Obrigatória do Ano)', pct: '35.2%', tip: 'Quem lê o livro obrigatório garante mais de 1 terço da prova de Português!' },
-            { topic: 'Semântica e efeitos de sentido', pct: '11.4%', tip: 'Palavras no contexto, ironia e modalização do discurso.' },
-            { topic: 'Gêneros textuais e multimodalidade', pct: '10.2%', tip: 'Charges, tirinhas, memes e propagandas.' },
-            { topic: 'Figuras de linguagem e estilística', pct: '8.5%', tip: 'Metáforas, antíteses, ironias e hipérboles.' },
-            { topic: 'Interpretação e compreensão de texto', pct: '6.8%', tip: 'Identificar teses e argumentos centrais.' }
+            { tier: 'alta', topic: 'Obras Literárias Obrigatórias do Edital', pct: '35.2%', obs: 'Quem lê o livro obrigatório garante mais de um terço da prova!' },
+            { tier: 'alta', topic: 'Relações lógico-discursivas (conjunções, advérbios)', pct: '11.4%', obs: 'Semântica e valores no contexto discursivo.' },
+            { tier: 'alta', topic: 'Gêneros e Tipos Textuais', pct: '10.2%', obs: 'Charges, tirinhas, memes e propagandas.' },
+            { tier: 'media', topic: 'Recursos literários e figuras de estilo', pct: '8.5%', obs: 'Metáforas, antíteses, ironias e hipérboles.' },
+            { tier: 'media', topic: 'Informações implícitas e explícitas', pct: '6.8%', obs: 'Interpretação e identificação de teses centrais.' },
+            { tier: 'media', topic: 'Morfossintaxe da oração e articulação frasal', pct: '6.3%', obs: 'Gramática aplicada ao sentido da oração.' },
+            { tier: 'baixa', topic: 'Coerência e Coesão (sequencial e referencial)', pct: '5.1%', obs: 'Conectores e mecanismos de referenciação.' }
           ],
           matematica: [
-            { topic: 'Geometria plana (Áreas e Ângulos)', pct: '28.4%', tip: 'A rainha absoluta do CEFET: cálculo de áreas compostas e Pitágoras.' },
-            { topic: 'Números, conjuntos e aritmética', pct: '14.2%', tip: 'Frações, dízimas periódicas e operações com conjuntos.' },
-            { topic: 'Funções (afim e quadrática)', pct: '13.6%', tip: 'Interpretação de gráficos e cálculo de máximos e mínimos.' },
-            { topic: 'Álgebra (equações e fatoração)', pct: '12.5%', tip: 'Fatorar expressões e resolver sistemas lineares.' },
-            { topic: 'Proporcionalidade e regra de três', pct: '9.1%', tip: 'Regra de três simples, composta e grandezas inversas.' }
+            { tier: 'alta', topic: 'Áreas de figuras planas e Geometria Plana', pct: '28.4%', obs: 'A rainha absoluta do CEFET: decomposição de áreas e Pitágoras.' },
+            { tier: 'alta', topic: 'Números Naturais, Inteiros, Racionais e Irracionais', pct: '14.2%', obs: 'Frações, dízimas periódicas e conjuntos numéricos.' },
+            { tier: 'alta', topic: 'Função Afim (1º grau) e Função Quadrática (2º grau)', pct: '13.6%', obs: 'Interpretação gráfica e cálculo de pontos máximos/mínimos.' },
+            { tier: 'media', topic: 'Equações e Sistemas de 1º e 2º graus', pct: '12.5%', obs: 'Sistemas lineares e fatoração de expressões algébricas.' },
+            { tier: 'media', topic: 'Razão, Proporção e Regra de 3 simples e composta', pct: '9.1%', obs: 'Grandezas inversamente proporcionais e escalas.' },
+            { tier: 'baixa', topic: 'Estatística e Leitura de Dados', pct: '6.8%', obs: 'Interpretação de gráficos e cálculo de médias.' },
+            { tier: 'baixa', topic: 'Porcentagem e Matemática Financeira', pct: '4.5%', obs: 'Aumentos e descontos sucessivos.' }
           ],
           biologia: [
-            { topic: 'Fisiologia animal e humana', pct: '34.8%', tip: 'Sistemas do corpo humano ligados a hábitos de vida e saúde.' },
-            { topic: 'Ecologia e meio ambiente', pct: '23.9%', tip: 'Espécies invasoras, cadeias tróficas e poluição.' },
-            { topic: 'Botânica e fisiologia vegetal', pct: '19.6%', tip: 'Fotossíntese, transpiração e vasos condutores.' },
-            { topic: 'Microbiologia e vírus', pct: '6.5%', tip: 'Vírus, bactérias e importância das vacinas.' },
-            { topic: 'Genética básica', pct: '6.5%', tip: 'Primeira Lei de Mendel e noções de hereditariedade.' }
+            { tier: 'alta', topic: 'Fisiologia humana (sistemas vitais)', pct: '34.8%', obs: 'Maior assunto de Biologia no CEFET: digestório, circulatório e saúde.' },
+            { tier: 'alta', topic: 'Ecologia e Impactos Ambientais', pct: '23.9%', obs: 'Cadeias tróficas, espécies invasoras e impactos de poluição.' },
+            { tier: 'alta', topic: 'Reino Plantae e Fisiologia Vegetal (Botânica)', pct: '19.6%', obs: 'Fotossíntese, transpiração e vasos condutores.' },
+            { tier: 'baixa', topic: 'Parasitologia, Saúde e Microbiologia', pct: '6.5%', obs: 'Vírus, bactérias e importância das vacinas.' },
+            { tier: 'baixa', topic: 'Genética: Primeira Lei de Mendel', pct: '6.5%', obs: 'Hereditariedade básica e cruzamentos.' }
           ],
           fisica: [
-            { topic: 'Dinâmica e conservação da energia', pct: '20.8%', tip: 'Leis de Newton, atrito e conservação de energia mecânica.' },
-            { topic: 'Termologia (calor e dilatação)', pct: '18.8%', tip: 'Propagação do calor e cálculo de calor sensível.' },
-            { topic: 'Cinemática (velocidade e aceleração)', pct: '18.8%', tip: 'Gráficos de movimento e velocidade média.' },
-            { topic: 'Eletricidade (circuitos e potência)', pct: '12.5%', tip: 'Lâmpadas em série/paralelo e cálculo de consumo elétrico.' },
-            { topic: 'Óptica geométrica', pct: '10.4%', tip: 'Reflexão em espelhos planos e refração.' }
+            { tier: 'alta', topic: 'Leis de Newton, Forças e Energia Mecânica', pct: '20.8%', obs: 'Dinâmica, atrito e conservação de energia mecânica.' },
+            { tier: 'alta', topic: 'Termometria, Calorimetria e Dilatação Térmica', pct: '18.8%', obs: 'Propagação de calor e trocas térmicas.' },
+            { tier: 'alta', topic: 'Cinemática: Velocidade média e aceleração', pct: '18.8%', obs: 'Gráficos de movimento e encontro de móveis.' },
+            { tier: 'media', topic: 'Eletrodinâmica (Circuitos e Potência)', pct: '12.5%', obs: 'Circuitos elétricos com lâmpadas e cálculo de consumo.' },
+            { tier: 'baixa', topic: 'Óptica Geométrica (Luz e Espelhos)', pct: '10.4%', obs: 'Reflexão em espelhos planos e refração.' },
+            { tier: 'baixa', topic: 'Astronomia (Fases da Lua e Eclipses)', pct: '14.6%', obs: 'Fases da Lua, gravitação e estações do ano coladas à Física.' }
           ],
           quimica: [
-            { topic: 'Matéria, misturas e processos de separação', pct: '27.7%', tip: 'Identificar o método adequado para separar misturas do dia a dia.' },
-            { topic: 'Tabela periódica, átomo e modelos', pct: '25.5%', tip: 'Partículas atômicas e classificação periódica dos elementos.' },
-            { topic: 'Reações químicas e Leis ponderais', pct: '14.9%', tip: 'Conservação das massas (Lavoisier) e proporções de Proust.' },
-            { topic: 'Ligações químicas', pct: '6.4%', tip: 'Compostos iônicos, covalentes e propriedades.' },
-            { topic: 'Funções inorgânicas', pct: '4.3%', tip: 'Conceito de pH, ácidos e bases.' }
+            { tier: 'alta', topic: 'Misturas, Processos de Separação e Matéria', pct: '27.7%', obs: 'Métodos para separar misturas e fenômenos físicos/químicos.' },
+            { tier: 'alta', topic: 'Modelos Atômicos e Tabela Periódica', pct: '25.5%', obs: 'Partículas atômicas e famílias da tabela periódica.' },
+            { tier: 'media', topic: 'Reações Químicas e Leis Ponderais', pct: '14.9%', obs: 'Conservação de massas de Lavoisier e Proust.' },
+            { tier: 'baixa', topic: 'Ligações Químicas (iônica e covalente)', pct: '6.4%', obs: 'Propriedades dos compostos.' },
+            { tier: 'baixa', topic: 'Funções Inorgânicas (Ácidos e Bases)', pct: '4.3%', obs: 'Conceito de pH e neutralização.' }
           ],
           historia: [
-            { topic: 'Brasil República (1889–1930)', pct: '21.8%', tip: 'Canudos, Chibata, coronelismo e política do café com leite.' },
-            { topic: 'Guerra Fria e conflitos contemporâneos', pct: '16.4%', tip: 'Bipolaridade mundial e debates modernos.' },
-            { topic: 'Brasil Império (Primeiro e Segundo Reinado)', pct: '12.7%', tip: 'Independência, Guerra do Paraguai e abolição da escravidão.' },
-            { topic: 'Era Vargas', pct: '10.9%', tip: 'Revolução de 1930, Estado Novo e direitos trabalhistas.' },
-            { topic: 'Ditadura Militar no Brasil', pct: '10.9%', tip: 'Anos de chumbo, censura e processo de abertura política.' }
+            { tier: 'alta', topic: 'Brasil: Primeira República / República Velha', pct: '21.8%', obs: 'Canudos, coronelismo, café com leite e revoltas sociais.' },
+            { tier: 'alta', topic: 'Guerra Fria e Mundo Contemporâneo', pct: '16.4%', obs: 'Bipolaridade e debates tecnológicos modernos.' },
+            { tier: 'alta', topic: 'Brasil Império e escravidão', pct: '12.7%', obs: 'Primeiro e Segundo Reinado e abolição da escravatura.' },
+            { tier: 'media', topic: 'Revolução de 1930 e Era Vargas', pct: '10.9%', obs: 'Trabalhismo e Estado Novo.' },
+            { tier: 'media', topic: 'Ditadura Militar no Brasil', pct: '10.9%', obs: 'Censura, AI-5 e abertura política.' },
+            { tier: 'baixa', topic: 'Regimes Totalitários e Segunda Guerra', pct: '9.1%', obs: 'Nazifascismo e entreguerras.' }
           ],
           geografia: [
-            { topic: 'Cartografia, fusos e coordenadas', pct: '20.0%', tip: 'Cálculo de fuso com horário de verão e tempo de viagem.' },
-            { topic: 'Geografia econômica e globalização', pct: '20.0%', tip: 'Blocos econômicos e nova divisão industrial.' },
-            { topic: 'Climatologia, biomas e domínios naturais', pct: '18.2%', tip: 'Vegetações brasileiras e interpretação de climogramas.' },
-            { topic: 'Geografia da população', pct: '12.7%', tip: 'Dinâmica demográfica e migrações internas.' },
-            { topic: 'Geografia urbana e industrialização', pct: '12.7%', tip: 'Crescimento urbano e desconcentração industrial.' }
+            { tier: 'alta', topic: 'Cartografia, fusos horários, escalas e coordenadas', pct: '20.0%', obs: 'Cálculo de fusos com tempo de voo e projeções cartográficas.' },
+            { tier: 'alta', topic: 'Globalização, blocos econômicos e economia', pct: '20.0%', obs: 'Redes internacionais e integração produtiva.' },
+            { tier: 'alta', topic: 'Climatologia, biomas e domínios naturais do Brasil', pct: '18.2%', obs: 'Biomas brasileiros e interpretação de climogramas.' },
+            { tier: 'media', topic: 'População Brasileira e migrações', pct: '12.7%', obs: 'Dinâmica demográfica e migrações internas.' },
+            { tier: 'media', topic: 'Urbanização e Industrialização no Brasil', pct: '12.7%', obs: 'Crescimento urbano e infraestrutura.' }
           ]
         }
       },
@@ -697,55 +703,58 @@
         stat2: { title: 'Formato da Prova', val: '50 Questões (A a D)', sub: '15 Port · 15 Mat · 10 Ciências · 10 Humanas' },
         weights: { portugues: 30.0, matematica: 30.0, ciencias: 20.0, geografia: 10.0, historia: 10.0 },
         cognitive: { analise: 39.3, aplicacao: 24.6, interpretacao: 22.3, compreensao: 13.6, memorizacao: 0.2 },
-        rankings: {
+        subjectPanoramas: {
           portugues: [
-            { topic: 'Interpretação e compreensão de texto', pct: '28.0%', tip: 'Campeão absoluto do IFMG: interpretar tirinhas, charges e textos opinativos.' },
-            { topic: 'Gêneros textuais e multimodalidade', pct: '12.4%', tip: 'Reconhecer estrutura e objetivo de charges, tirinhas e cartazes.' },
-            { topic: 'Semântica e efeitos de sentido', pct: '11.2%', tip: 'Conotação, denotação e escolha lexical no texto.' },
-            { topic: 'Literatura geral e autores', pct: '10.6%', tip: 'Textos literários abordados como leitura compreensiva, sem livro fixo.' },
-            { topic: 'Figuras de linguagem e estilo', pct: '7.5%', tip: 'Metáforas, ironias e antíteses.' }
+            { tier: 'alta', topic: 'Informações implícitas e explícitas / Interpretação', pct: '28.0%', obs: 'Campeão supremo do IFMG: interpretar textos opinativos e charges.' },
+            { tier: 'alta', topic: 'Gêneros e Tipos Textuais', pct: '12.4%', obs: 'Charges, tirinhas e anúncios com linguagem multimodal.' },
+            { tier: 'alta', topic: 'Relações lógico-discursivas (conjunções, advérbios)', pct: '11.2%', obs: 'Sentido conotativo e escolha de vocabulário.' },
+            { tier: 'media', topic: 'Obras Literárias e Autores', pct: '10.6%', obs: 'Literatura tratada como leitura crítica, sem livro fixo.' },
+            { tier: 'media', topic: 'Recursos literários e figuras de estilo', pct: '7.5%', obs: 'Metáforas, ironias e antíteses.' },
+            { tier: 'baixa', topic: 'Morfossintaxe da oração e articulação frasal', pct: '6.8%', obs: 'Classes de palavras e pontuação funcional.' }
           ],
           matematica: [
-            { topic: 'Geometria plana (Áreas e Pitágoras)', pct: '24.1%', tip: 'Cálculo de áreas de terrenos e figuras compostas com conversão de escala.' },
-            { topic: 'Álgebra e sistemas de equações', pct: '15.2%', tip: 'Equações de 1º e 2º graus e sistemas aplicados a problemas.' },
-            { topic: 'Números, conjuntos e aritmética', pct: '13.3%', tip: 'Frações, dízimas e conjuntos numéricos.' },
-            { topic: 'Proporcionalidade e regra de três', pct: '8.9%', tip: 'Regras de três simples e composta em problemas práticos.' },
-            { topic: 'Estatística e leitura de dados', pct: '8.2%', tip: 'Interpretação de tabelas, gráficos de barras e médias.' }
+            { tier: 'alta', topic: 'Áreas de figuras planas e Geometria Plana', pct: '24.1%', obs: 'Cálculo de áreas de terrenos e figuras com conversão de escala.' },
+            { tier: 'alta', topic: 'Equações e Sistemas de 1º e 2º graus', pct: '15.2%', obs: 'Sistemas lineares aplicados a problemas do dia a dia.' },
+            { tier: 'alta', topic: 'Números Naturais, Inteiros, Racionais e Irracionais', pct: '13.3%', obs: 'Frações, dízimas e operações aritméticas fundamentais.' },
+            { tier: 'media', topic: 'Razão, Proporção e Regra de 3 simples e composta', pct: '8.9%', obs: 'Regra de três simples e proporcionalidade.' },
+            { tier: 'media', topic: 'Estatística e Leitura de Dados', pct: '8.2%', obs: 'Tabelas, gráficos de barras e médias.' },
+            { tier: 'baixa', topic: 'Porcentagem e Matemática Financeira', pct: '5.7%', obs: 'Aumentos e descontos percentuais.' }
           ],
           biologia: [
-            { topic: 'Fisiologia humana e sistemas do corpo', pct: '22.2%', tip: 'Digestão, respiração e sistema circulatório.' },
-            { topic: 'Ecologia e meio ambiente', pct: '20.0%', tip: 'Cadeias tróficas, relações ecológicas e equilíbrio biológico.' },
-            { topic: 'Citologia celular', pct: '17.8%', tip: 'Funções das organelas e estrutura celular.' },
-            { topic: 'Saúde e doenças', pct: '13.3%', tip: 'Prevenção de doenças infectocontagiosas e vacinas.' },
-            { topic: 'Microbiologia e parasitologia', pct: '11.1%', tip: 'Verminoses e protozooses frequentes no Brasil.' }
+            { tier: 'alta', topic: 'Fisiologia humana (sistemas vitais)', pct: '22.2%', obs: 'Digestório, respiratório e circulatório com hábitos saudáveis.' },
+            { tier: 'alta', topic: 'Ecologia e Impactos Ambientais', pct: '20.0%', obs: 'Cadeias tróficas, equilíbrio biológico e impactos ambientais.' },
+            { tier: 'alta', topic: 'A Célula, Citologia e Universo Celular', pct: '17.8%', obs: 'Organelas celulares e transporte através da membrana.' },
+            { tier: 'media', topic: 'Parasitologia, Saúde e Saneamento Básico', pct: '13.3%', obs: 'Doenças infectocontagiosas, vacinas e saneamento.' },
+            { tier: 'baixa', topic: 'Reino Plantae e Botânica', pct: '6.7%', obs: 'Estruturas das plantas e fotossíntese.' }
           ],
           fisica: [
-            { topic: 'Termologia (calor e temperatura)', pct: '28.0%', tip: 'Assunto #1 de Física no IFMG: trocas de calor e dilatação.' },
-            { topic: 'Dinâmica e energia mecânica', pct: '26.0%', tip: 'Leis de Newton, trabalho e energia cinética/potencial.' },
-            { topic: 'Cinemática', pct: '16.0%', tip: 'Velocidade média, aceleração e leitura de gráficos.' },
-            { topic: 'Eletricidade e magnetismo', pct: '12.0%', tip: 'Circuitos elétricos simples e cálculo de consumo de aparelhos.' },
-            { topic: 'Astronomia e gravitação', pct: '10.0%', tip: 'Fases da Lua, estações do ano e gravidade.' }
+            { tier: 'alta', topic: 'Termometria, Calorimetria e Dilatação Térmica', pct: '28.0%', obs: 'Assunto #1 de Física no IFMG: trocas de calor e dilatação.' },
+            { tier: 'alta', topic: 'Leis de Newton, Forças e Energia Mecânica', pct: '26.0%', obs: 'Trabalho, energia cinética/potencial e Leis de Newton.' },
+            { tier: 'media', topic: 'Cinemática: Velocidade média e aceleração', pct: '16.0%', obs: 'Velocidade média e análise de gráficos horários.' },
+            { tier: 'baixa', topic: 'Eletrodinâmica (Circuitos e Potência)', pct: '12.0%', obs: 'Circuitos elétricos simples e aparelhos domésticos.' },
+            { tier: 'baixa', topic: 'Astronomia (Fases da Lua e Gravitação)', pct: '10.0%', obs: 'Fases da Lua, gravidade e sistema solar.' }
           ],
           quimica: [
-            { topic: 'Matéria, misturas e separação', pct: '29.7%', tip: 'Fluxogramas e métodos industriais de separação de misturas.' },
-            { topic: 'Tabela periódica e átomo', pct: '21.6%', tip: 'Modelos atômicos e localização dos elementos.' },
-            { topic: 'Funções inorgânicas (ácidos e bases)', pct: '21.6%', tip: 'Identificação de pH e compostos do cotidiano.' },
-            { topic: 'Ligações químicas', pct: '10.8%', tip: 'Ligações iônica e covalente e propriedades.' },
-            { topic: 'Reações químicas e soluções', pct: '16.2%', tip: 'Balanceamento simples e concentração de soluções.' }
+            { tier: 'alta', topic: 'Misturas, Processos de Separação e Matéria', pct: '29.7%', obs: 'Fluxogramas e métodos industriais de separação de misturas.' },
+            { tier: 'alta', topic: 'Modelos Atômicos e Tabela Periódica', pct: '21.6%', obs: 'Modelos atômicos e localização dos elementos químicos.' },
+            { tier: 'alta', topic: 'Funções Inorgânicas (Ácidos e Bases)', pct: '21.6%', obs: 'Identificação de compostos pelo pH e neutralização.' },
+            { tier: 'media', topic: 'Reações Químicas e Soluções', pct: '16.2%', obs: 'Balanceamento e concentração simples de soluções.' },
+            { tier: 'baixa', topic: 'Ligações Químicas (iônica e covalente)', pct: '10.8%', obs: 'Propriedades dos compostos.' }
           ],
           historia: [
-            { topic: 'Idade Moderna (Renascimento e Iluminismo)', pct: '19.7%', tip: 'Maior bloco do IFMG: grandes navegações e revoluções burguesas.' },
-            { topic: 'Guerra Fria e mundo contemporâneo', pct: '12.7%', tip: 'Conflitos internacionais pós-1945.' },
-            { topic: 'Brasil Colônia', pct: '9.9%', tip: 'Ciclo do ouro e sociedade açucareira.' },
-            { topic: 'Era Vargas', pct: '8.5%', tip: 'Trabalhismo e industrialização brasileira.' },
-            { topic: 'Ditadura Militar e redemocratização', pct: '8.5%', tip: 'Censura, movimentos sociais e Diretas Já.' }
+            { tier: 'alta', topic: 'Idade Moderna (Grandes navegações, Iluminismo e Revoluções)', pct: '19.7%', obs: 'Maior bloco do IFMG: navegações, absolutismo e Iluminismo.' },
+            { tier: 'alta', topic: 'Guerra Fria e Mundo Contemporâneo', pct: '12.7%', obs: 'Conflitos internacionais e ordem pós-1945.' },
+            { tier: 'alta', topic: 'Brasil Colônia', pct: '9.9%', obs: 'Ciclo do ouro e sociedade açucareira colonial.' },
+            { tier: 'media', topic: 'Revolução de 1930 e Era Vargas', pct: '8.5%', obs: 'Trabalhismo e consolidação industrial.' },
+            { tier: 'media', topic: 'Ditadura Militar no Brasil e Redemocratização', pct: '8.5%', obs: 'Censura, movimentos sociais e Diretas Já.' },
+            { tier: 'baixa', topic: 'Brasil Império', pct: '8.5%', obs: 'Independência e Segundo Reinado.' }
           ],
           geografia: [
-            { topic: 'Questão ambiental e agrária no Brasil', pct: '21.7%', tip: 'Desmatamento, queimadas, biomas e conflitos fundiários.' },
-            { topic: 'Climatologia, biomas e domínios', pct: '15.0%', tip: 'Cerrado, Mata Atlântica e dinâmica das chuvas.' },
-            { topic: 'Cartografia, fusos e coordenadas', pct: '13.3%', tip: 'Escala métrica e cálculo de fusos.' },
-            { topic: 'Geografia econômica e globalização', pct: '13.3%', tip: 'Comércio global e integração produtiva.' },
-            { topic: 'Geografia da população', pct: '11.7%', tip: 'Envelhecimento da população e migrações internas.' }
+            { tier: 'alta', topic: 'Geografia agrária e questão fundiária', pct: '21.7%', obs: 'Queimadas, biomas e conflitos por terra no Brasil.' },
+            { tier: 'alta', topic: 'Climatologia, biomas e domínios naturais do Brasil', pct: '15.0%', obs: 'Cerrado, Mata Atlântica e dinâmica das chuvas.' },
+            { tier: 'alta', topic: 'Cartografia, fusos horários, escalas e coordenadas', pct: '13.3%', obs: 'Escala métrica e cálculo de fusos.' },
+            { tier: 'media', topic: 'Globalização, blocos econômicos e economia', pct: '13.3%', obs: 'Comércio global e integração produtiva.' },
+            { tier: 'baixa', topic: 'População Brasileira e demografia', pct: '11.7%', obs: 'Envelhecimento da população e migrações.' }
           ]
         }
       },
@@ -759,55 +768,56 @@
         stat2: { title: 'Formato da Prova', val: '30 Questões (A a E)', sub: '8 Port · 8 Mat · 8 Ciências · 6 Humanas' },
         weights: { portugues: 26.7, matematica: 26.7, ciencias: 26.7, geografia: 10.0, historia: 10.0 },
         cognitive: { analise: 45.7, aplicacao: 26.0, interpretacao: 14.3, compreensao: 13.3, memorizacao: 0.7 },
-        rankings: {
+        subjectPanoramas: {
           portugues: [
-            { topic: 'Morfossintaxe e gramática aplicada', pct: '27.5%', tip: 'Campeão #1 do IFNMG: classes de palavras e funções sintáticas na oração.' },
-            { topic: 'Interpretação e compreensão de texto', pct: '22.5%', tip: 'Textos com forte contexto social e regional de Minas Gerais.' },
-            { topic: 'Gêneros textuais e multimodalidade', pct: '12.5%', tip: 'Tirinhas, anúncios e textos informativos.' },
-            { topic: 'Coesão e coerência textual', pct: '12.5%', tip: 'Papel de conjunções e conectivos na estruturação das frases.' },
-            { topic: 'Semântica e efeitos de sentido', pct: '8.8%', tip: 'Significado de palavras em contexto e conotação.' }
+            { tier: 'alta', topic: 'Morfossintaxe da oração e articulação frasal', pct: '27.5%', obs: 'Campeão #1 do IFNMG: classes de palavras e funções sintáticas.' },
+            { tier: 'alta', topic: 'Informações implícitas e explícitas / Interpretação', pct: '22.5%', obs: 'Textos com forte contexto social e regional de Minas Gerais.' },
+            { tier: 'alta', topic: 'Gêneros e Tipos Textuais', pct: '12.5%', obs: 'Tirinhas, anúncios e textos informativos.' },
+            { tier: 'media', topic: 'Coerência e Coesão (sequencial e referencial)', pct: '12.5%', obs: 'Conjunções e conectivos articulando períodos.' },
+            { tier: 'media', topic: 'Relações lógico-discursivas (conjunções, advérbios)', pct: '8.8%', obs: 'Sentido de palavras em contexto discursivo.' },
+            { tier: 'baixa', topic: 'Obras Literárias Obrigatórias do Edital', pct: '1.2%', obs: 'Literatura quase não cai (sem livro obrigatório).' }
           ],
           matematica: [
-            { topic: 'Geometria plana (Áreas e Perímetros)', pct: '20.0%', tip: 'Cálculo de áreas de figuras planas e propriedades dos polígonos.' },
-            { topic: 'Proporcionalidade e regra de três', pct: '16.3%', tip: 'Regras de três simples e inversa aplicadas a problemas práticos.' },
-            { topic: 'Álgebra (equações e expressões)', pct: '16.3%', tip: 'Equações de 1º grau e simplificação de expressões.' },
-            { topic: 'Porcentagem e matemática financeira', pct: '12.5%', tip: 'Acréscimos, descontos e cálculo de juros simples.' },
-            { topic: 'Funções (afim e quadrática)', pct: '10.0%', tip: 'Leitura gráfica de funções e cálculo de raízes.' }
+            { tier: 'alta', topic: 'Áreas de figuras planas e Geometria Plana', pct: '20.0%', obs: 'Áreas de figuras planas e propriedades dos polígonos.' },
+            { tier: 'alta', topic: 'Razão, Proporção e Regra de 3 simples e composta', pct: '16.3%', obs: 'Regras de três simples e grandezas inversas.' },
+            { tier: 'alta', topic: 'Equações e Sistemas de 1º e 2º graus', pct: '16.3%', obs: 'Equações de 1º grau e simplificação algébrica.' },
+            { tier: 'media', topic: 'Porcentagem e Matemática Financeira', pct: '12.5%', obs: 'Acréscimos, descontos e juros simples.' },
+            { tier: 'media', topic: 'Função Afim (1º grau) e Função Quadrática (2º grau)', pct: '10.0%', obs: 'Leitura de gráficos e raízes.' },
+            { tier: 'baixa', topic: 'Números Naturais, Inteiros, Racionais e Irracionais', pct: '10.0%', obs: 'Operações fundamentais e frações.' }
           ],
           biologia: [
-            { topic: 'Ecologia e meio ambiente', pct: '27.5%', tip: 'Poluição, preservação do semiárido e cadeias alimentares.' },
-            { topic: 'Citologia e histologia humana', pct: '25.0%', tip: 'Células, organelas e tecidos biológicos.' },
-            { topic: 'Bioquímica e biomoléculas', pct: '15.0%', tip: 'Proteínas, lipídios e carboidratos no organismo.' },
-            { topic: 'Corpo humano e saúde', pct: '7.5%', tip: 'Hábitos saudáveis e prevenção de endemias.' },
-            { topic: 'Botânica básica', pct: '7.5%', tip: 'Adaptações vegetais ao clima seco do Norte de MG.' }
+            { tier: 'alta', topic: 'Ecologia e Impactos Ambientais', pct: '27.5%', obs: 'Poluição, semiárido mineiro e teias tróficas.' },
+            { tier: 'alta', topic: 'A Célula, Citologia e Universo Celular', pct: '25.0%', obs: 'Células, organelas e tecidos biológicos.' },
+            { tier: 'media', topic: 'Parasitologia, Saúde e Bioquímica', pct: '15.0%', obs: 'Proteínas, lipídios e saúde pública.' },
+            { tier: 'baixa', topic: 'Reino Plantae e Botânica', pct: '7.5%', obs: 'Adaptações vegetais ao clima seco do Norte de MG.' },
+            { tier: 'baixa', topic: 'Fisiologia humana (sistemas vitais)', pct: '7.5%', obs: 'Hábitos saudáveis e prevenção.' }
           ],
           fisica: [
-            { topic: 'Dinâmica e energia mecânica', pct: '50.0%', tip: 'Metade de toda a Física no IFNMG: força, peso, massa e conservação de energia.' },
-            { topic: 'Eletricidade e circuitos', pct: '18.2%', tip: 'Grandezas elétricas e circuitos em série e paralelo.' },
-            { topic: 'Termologia', pct: '13.6%', tip: 'Diferença entre calor e temperatura e trocas térmicas.' },
-            { topic: 'Cinemática', pct: '9.1%', tip: 'Velocidade e interpretação de deslocamentos.' },
-            { topic: 'Hidrostática e óptica', pct: '9.1%', tip: 'Pressão em fluidos e espelhos planos.' }
+            { tier: 'alta', topic: 'Leis de Newton, Forças e Energia Mecânica', pct: '50.0%', obs: 'Metade de toda a Física no IFNMG: força, peso e conservação de energia.' },
+            { tier: 'media', topic: 'Eletrodinâmica (Circuitos e Potência)', pct: '18.2%', obs: 'Grandezas elétricas e circuitos elétricos.' },
+            { tier: 'baixa', topic: 'Termometria, Calorimetria e Dilatação Térmica', pct: '13.6%', obs: 'Diferença entre calor e temperatura.' },
+            { tier: 'baixa', topic: 'Cinemática: Velocidade média e aceleração', pct: '9.1%', obs: 'Velocidade e deslocamento escalar.' }
           ],
           quimica: [
-            { topic: 'Tabela periódica, átomo e partículas', pct: '29.4%', tip: 'Estrutura atômica e distribuição de elétrons.' },
-            { topic: 'Matéria, misturas e processos de separação', pct: '23.5%', tip: 'Métodos físicos para separar misturas heterogêneas e homogêneas.' },
-            { topic: 'Funções inorgânicas', pct: '17.6%', tip: 'Identificar ácidos, bases e escala de pH.' },
-            { topic: 'Ligações químicas', pct: '11.8%', tip: 'Ligação iônica e ligação covalente.' },
-            { topic: 'Estados físicos e reações', pct: '17.7%', tip: 'Mudanças de fase e classificação de reações.' }
+            { tier: 'alta', topic: 'Modelos Atômicos e Tabela Periódica', pct: '29.4%', obs: 'Estrutura atômica e distribuição de elétrons.' },
+            { tier: 'alta', topic: 'Misturas, Processos de Separação e Matéria', pct: '23.5%', obs: 'Separação de misturas homogêneas e heterogêneas.' },
+            { tier: 'media', topic: 'Funções Inorgânicas (Ácidos e Bases)', pct: '17.6%', obs: 'Identificação de ácidos, bases e escala de pH.' },
+            { tier: 'baixa', topic: 'Ligações Químicas (iônica e covalente)', pct: '11.8%', obs: 'Ligação iônica e ligação covalente.' },
+            { tier: 'baixa', topic: 'Reações Químicas e Leis Ponderais', pct: '17.7%', obs: 'Classificação de reações e mudanças de fase.' }
           ],
           historia: [
-            { topic: 'Escravidão, África e cultura afro-brasileira', pct: '17.9%', tip: 'Resistência escrava, quilombos e identidade negra no Brasil.' },
-            { topic: 'Idade Moderna e revoluções', pct: '17.9%', tip: 'Grandes navegações e transição para o mundo moderno.' },
-            { topic: 'Guerra Fria e mundo contemporâneo', pct: '14.3%', tip: 'Ordem bipolar e reflexos na América Latina.' },
-            { topic: 'Ditadura Militar no Brasil', pct: '10.7%', tip: 'Regime militar e repressão política.' },
-            { topic: 'Brasil Império e Era Vargas', pct: '21.4%', tip: 'Independência do Brasil e modernização na Era Vargas.' }
+            { tier: 'alta', topic: 'Escravidão, resistência negra e povos indígenas', pct: '17.9%', obs: 'Resistência escrava, quilombos e identidade negra.' },
+            { tier: 'alta', topic: 'Idade Moderna (Grandes navegações e Revoluções)', pct: '17.9%', obs: 'Grandes navegações e transição moderna.' },
+            { tier: 'alta', topic: 'Guerra Fria e Mundo Contemporâneo', pct: '14.3%', obs: 'Ordem bipolar e reflexos na América Latina.' },
+            { tier: 'media', topic: 'Ditadura Militar no Brasil e Redemocratização', pct: '10.7%', obs: 'Regime militar e repressão política.' },
+            { tier: 'baixa', topic: 'Brasil Império e Era Vargas', pct: '21.4%', obs: 'Independência e modernização na Era Vargas.' }
           ],
           geografia: [
-            { topic: 'Geografia econômica e globalização', pct: '25.8%', tip: 'Maior tema no IFNMG: blocos econômicos e redes mundiais.' },
-            { topic: 'Cartografia, fusos e orientação', pct: '16.1%', tip: 'Cálculo de fusos e rosa dos ventos.' },
-            { topic: 'Geopolítica contemporânea', pct: '9.7%', tip: 'Conflitos e alianças internacionais.' },
-            { topic: 'Geografia urbana', pct: '9.7%', tip: 'Problemas urbanos e infraestrutura.' },
-            { topic: 'Questão ambiental e relevo', pct: '19.4%', tip: 'Preservação de biomas e agentes do relevo.' }
+            { tier: 'alta', topic: 'Globalização, blocos econômicos e economia', pct: '25.8%', obs: 'Maior tema no IFNMG: blocos econômicos e redes mundiais.' },
+            { tier: 'alta', topic: 'Cartografia, fusos horários, escalas e coordenadas', pct: '16.1%', obs: 'Cálculo de fusos e rosa dos ventos.' },
+            { tier: 'media', topic: 'Geopolítica mundial e conflitos contemporâneos', pct: '9.7%', obs: 'Conflitos e alianças internacionais.' },
+            { tier: 'media', topic: 'Urbanização e Industrialização no Brasil', pct: '9.7%', obs: 'Problemas urbanos e infraestrutura.' },
+            { tier: 'baixa', topic: 'Climatologia, biomas e relevo', pct: '19.4%', obs: 'Preservação de biomas e relevo.' }
           ]
         }
       },
@@ -821,191 +831,292 @@
         stat2: { title: 'Formato da Prova', val: '40 Questões (A a D)', sub: '10 Port · 10 Mat · 12 Ciências (4 Bio, 4 Quí, 4 Fís) · 4 Geo · 4 Hist' },
         weights: { portugues: 25.0, matematica: 25.0, ciencias: 30.0, geografia: 10.0, historia: 10.0 },
         cognitive: { analise: 48.1, aplicacao: 22.4, compreensao: 16.2, interpretacao: 13.3, memorizacao: 0 },
-        rankings: {
+        subjectPanoramas: {
           portugues: [
-            { topic: 'Literatura (Obra Obrigatória do Ano)', pct: '55.2%', tip: 'Maior peso de literatura de MG: 4 das 10 questões em 2026 foram sobre a obra indicada (Dom Casmurro)!' },
-            { topic: 'Semântica e coesão textual', pct: '13.3%', tip: 'Linguagem conotativa e efeitos de sentido de termos e adjetivos.' },
-            { topic: 'Interpretação, crônica e intertextualidade', pct: '13.3%', tip: 'Relações entre textos, crônicas cotidianas e músicas (ex.: Fagner e Tati Bernardi).' },
-            { topic: 'Morfossintaxe e gramática aplicada', pct: '8.6%', tip: 'Classes de palavras e pontuação (efeito do uso de vírgulas e pontos).' },
-            { topic: 'Gêneros textuais e estilística', pct: '5.7%', tip: 'Identificar a estrutura de crônicas, artigos e contos.' }
+            { tier: 'alta', topic: 'Obras Literárias Obrigatórias do Edital', pct: '55.2%', obs: 'Maior peso de literatura de MG: 4 das 10 questões em 2026 foram sobre a obra (Dom Casmurro)!' },
+            { tier: 'alta', topic: 'Relações lógico-discursivas (conjunções, advérbios)', pct: '13.3%', obs: 'Linguagem conotativa e efeitos de sentido no texto.' },
+            { tier: 'alta', topic: 'Informações implícitas e explícitas / Crônica', pct: '13.3%', obs: 'Intertextualidade entre crônica contemporânea e música.' },
+            { tier: 'media', topic: 'Morfossintaxe da oração e articulação frasal', pct: '8.6%', obs: 'Classes morfológicas e efeitos da pontuação (vírgulas e pontos).' },
+            { tier: 'baixa', topic: 'Gêneros e Tipos Textuais', pct: '5.7%', obs: 'Estrutura de crônicas, artigos e contos.' }
           ],
           matematica: [
-            { topic: 'Geometria plana (Áreas, Pitágoras e Perímetros)', pct: '24.8%', tip: 'Áreas de triângulos, Teorema de Pitágoras e planificação (ex.: cilindro e praça triangular).' },
-            { topic: 'Álgebra e equações (1º e 2º graus)', pct: '23.8%', tip: 'Parâmetros de equações do 2º grau (k² = -c/a) e propriedades de potenciação/radiciação.' },
-            { topic: 'Proporcionalidade e regra de três', pct: '15.2%', tip: 'Grandezas inversamente proporcionais (velocidade média e tempo) e conversão de unidades.' },
-            { topic: 'Números, conjuntos e frações', pct: '15.2%', tip: 'Diagramas de conjuntos numéricos com frações aplicados a pesquisas.' },
-            { topic: 'Estatística e leitura de dados', pct: '9.5%', tip: 'Média aritmética simples e ponderada a partir de tabelas (ex.: medalhas olímpicas).' },
-            { topic: 'Raciocínio lógico e sequências', pct: '6.7%', tip: 'Padrões de pontinhos e crescimento de sequências de figuras.' }
+            { tier: 'alta', topic: 'Áreas de figuras planas e Geometria Plana', pct: '24.8%', obs: 'Triângulos, Teorema de Pitágoras e planificação de cilindro.' },
+            { tier: 'alta', topic: 'Equações e Sistemas de 1º e 2º graus', pct: '23.8%', obs: 'Parâmetros de equações do 2º grau e potenciação.' },
+            { tier: 'alta', topic: 'Razão, Proporção e Regra de 3 simples e composta', pct: '15.2%', obs: 'Grandezas inversamente proporcionais (velocidade média e tempo).' },
+            { tier: 'media', topic: 'Números Naturais, Inteiros, Racionais e Irracionais', pct: '15.2%', obs: 'Diagramas de conjuntos numéricos com frações aplicados a pesquisas.' },
+            { tier: 'baixa', topic: 'Estatística e Leitura de Dados', pct: '9.5%', obs: 'Média aritmética simples e ponderada a partir de tabelas olímpicas.' },
+            { tier: 'baixa', topic: 'Noções de probabilidade e análise combinatória', pct: '6.7%', obs: 'Padrões de pontinhos e crescimento de sequências.' }
           ],
           biologia: [
-            { topic: 'Ecologia e impactos ambientais', pct: '23.8%', tip: 'Ação antrópica, queimadas no Pantanal e desmatamento na Amazônia com rios voadores.' },
-            { topic: 'Fisiologia humana e saúde', pct: '23.8%', tip: 'Hormônios (insulina, glucagon e controle da glicemia) e doenças crônicas.' },
-            { topic: 'Zoologia e seres vivos', pct: '19.0%', tip: 'Anfíbios como bioindicadores ambientais e características dos vertebrados.' },
-            { topic: 'Genética e hereditariedade', pct: '14.3%', tip: 'Interpretação de heredogramas de famílias e determinação de alelos dominantes/recessivos.' },
-            { topic: 'Botânica e fisiologia vegetal', pct: '14.3%', tip: 'Estruturas das plantas, fotossíntese e dependência de água.' }
+            { tier: 'alta', topic: 'Ecologia e Impactos Ambientais', pct: '23.8%', obs: 'Ação antrópica, queimadas no Pantanal e desmatamento.' },
+            { tier: 'alta', topic: 'Fisiologia humana (sistemas vitais)', pct: '23.8%', obs: 'Hormônios (insulina, glucagon) e controle de glicemia.' },
+            { tier: 'alta', topic: 'Reino Animalia (Invertebrados e Cordados)', pct: '19.0%', obs: 'Anfíbios como bioindicadores ambientais e vertebrados.' },
+            { tier: 'media', topic: 'Genética: Primeira Lei e Heredogramas', pct: '14.3%', obs: 'Interpretação de heredogramas e determinação de alelos.' },
+            { tier: 'baixa', topic: 'Reino Plantae e Botânica', pct: '14.3%', obs: 'Estruturas das plantas e fotossíntese.' }
           ],
           fisica: [
-            { topic: 'Dinâmica, energia e máquinas simples', pct: '31.0%', tip: 'Momento de força (torque), alavancas, chave de roda e Leis de Newton.' },
-            { topic: 'Eletricidade e circuitos elétricos', pct: '28.6%', tip: 'Instalação de interruptores paralelos (three-way), circuitos em série/paralelo e potência.' },
-            { topic: 'Termologia (calor e dilatação)', pct: '19.0%', tip: 'Armazenamento de energia térmica e trocas de calor.' },
-            { topic: 'Magnetismo e eletromagnetismo', pct: '9.5%', tip: 'Campo magnético terrestre, bússolas e alinhamento norte-sul.' },
-            { topic: 'Astronomia e gravitação', pct: '7.1%', tip: 'Fases da Lua, inclinação da órbita lunar e ocorrência de eclipses solares e lunares.' }
+            { tier: 'alta', topic: 'Leis de Newton, Forças e Energia Mecânica', pct: '31.0%', obs: 'Momento de força (torque), chave de roda e Leis de Newton.' },
+            { tier: 'alta', topic: 'Eletrodinâmica (Circuitos e Potência)', pct: '28.6%', obs: 'Interruptores paralelos (three-way), circuitos e potência.' },
+            { tier: 'media', topic: 'Termometria, Calorimetria e Dilatação Térmica', pct: '19.0%', obs: 'Armazenamento de energia térmica e trocas de calor.' },
+            { tier: 'baixa', topic: 'Magnetismo, bússola e campo magnético', pct: '9.5%', obs: 'Campo magnético terrestre e alinhamento de agulha de bússola.' },
+            { tier: 'baixa', topic: 'Astronomia (Fases da Lua e Gravitação)', pct: '7.1%', obs: 'Fases da Lua, inclinação de órbita e eclipses solares/lunares.' }
           ],
           quimica: [
-            { topic: 'Matéria, misturas e processos de separação', pct: '35.7%', tip: 'Tratamento de água (floculação/decantação) e métodos físicos de separação de misturas.' },
-            { topic: 'Estados físicos e mudanças de fase', pct: '26.2%', tip: 'Curvas de aquecimento, misturas homogêneas/heterogêneas e representação submicroscópica.' },
-            { topic: 'Átomo, tabela periódica e modelos', pct: '19.0%', tip: 'Consulta à Tabela Periódica (fornecida na prova) e propriedades de ligas metálicas (bronze: Cu e Sn).' },
-            { topic: 'Reações químicas e Leis ponderais', pct: '14.3%', tip: 'Conservação das massas e transformações químicas vs fenômenos físicos.' }
+            { tier: 'alta', topic: 'Misturas, Processos de Separação e Matéria', pct: '35.7%', obs: 'Tratamento de água (floculação/decantação) e filtração.' },
+            { tier: 'alta', topic: 'Estudo da matéria e estados físicos', pct: '26.2%', obs: 'Curvas de aquecimento, misturas e representação submicroscópica.' },
+            { tier: 'media', topic: 'Modelos Atômicos e Tabela Periódica', pct: '19.0%', obs: 'Consulta à Tabela Periódica fornecida e ligas metálicas (bronze).' },
+            { tier: 'baixa', topic: 'Reações Químicas e Leis Ponderais', pct: '14.3%', obs: 'Conservação das massas e transformações químicas.' }
           ],
           historia: [
-            { topic: 'Brasil República (República Velha, Vargas e Desenvolvimentismo)', pct: '26.2%', tip: 'Voto de cabresto e fraudes na República Velha, Era Vargas e anos desenvolvimentistas (JK).' },
-            { topic: 'Mundo contemporâneo e conflitos (sécs. XX e XXI)', pct: '23.8%', tip: 'Política de Boa Vizinhança (EUA e América Latina com Zé Carioca), 2ª Guerra e Guerra Fria.' },
-            { topic: 'Brasil Império e escravidão', pct: '19.0%', tip: 'Tráfico interno de escravos no séc. XIX (após a Lei Eusébio de Queiroz) e transição para o trabalho livre.' },
-            { topic: 'História moderna europeia', pct: '11.9%', tip: 'Iluminismo, absolutismo e revoluções burguesas.' },
-            { topic: 'Arte, cultura e sociedade', pct: '11.9%', tip: 'Análise de fontes históricas, charges e quadrinhos contemporâneos.' }
+            { tier: 'alta', topic: 'Brasil: Primeira República e Era Vargas', pct: '26.2%', obs: 'Voto de cabresto, fraudes eleitorais e desenvolvimentismo.' },
+            { tier: 'alta', topic: 'Guerra Fria e Mundo Contemporâneo', pct: '23.8%', obs: 'Política de Boa Vizinhança (Disney/Zé Carioca) e Guerra Fria.' },
+            { tier: 'alta', topic: 'Brasil Império e tráfico de escravos', pct: '19.0%', obs: 'Tráfico interno de escravos (Lei Eusébio de Queiroz).' },
+            { tier: 'baixa', topic: 'Idade Moderna (Iluminismo e Revoluções)', pct: '11.9%', obs: 'Iluminismo, absolutismo e fontes históricas.' }
           ],
           geografia: [
-            { topic: 'Geografia econômica e globalização', pct: '28.6%', tip: 'Avanços técnicos, inteligência artificial (assistentes virtuais), fluxo de informações e oligopólios.' },
-            { topic: 'Cartografia, orientação e escalas', pct: '19.0%', tip: 'Orientação pelo sol, pontos cardeais e cartografia decolonial/indígena (ex.: povo Xavante).' },
-            { topic: 'Questão agrária e ambiental', pct: '16.7%', tip: 'Espaço agrário no Brasil, expansão do café, Lei de Terras de 1850 e produção agrícola.' },
-            { topic: 'Climatologia, biomas e vegetação', pct: '14.3%', tip: 'Mata dos Cocais (palmeiras, babaçu e carnaúba), biomas de transição e climas do Brasil.' },
-            { topic: 'Dinâmica da Terra, população e relevo', pct: '14.3%', tip: 'Estrutura populacional, migrações e agentes transformadores do relevo.' }
+            { tier: 'alta', topic: 'Globalização, blocos econômicos e economia', pct: '28.6%', obs: 'Avanços técnicos, inteligência artificial (assistentes virtuais) e oligopólios.' },
+            { tier: 'alta', topic: 'Cartografia, fusos horários, escalas e coordenadas', pct: '19.0%', obs: 'Orientação pelo sol e cartografia decolonial/indígena (Xavante).' },
+            { tier: 'alta', topic: 'Geografia agrária e questão fundiária', pct: '16.7%', obs: 'Espaço agrário, expansão do café e Lei de Terras de 1850.' },
+            { tier: 'media', topic: 'Climatologia, biomas e domínios naturais do Brasil', pct: '14.3%', obs: 'Mata dos Cocais (palmeiras, babaçu) e climas brasileiros.' },
+            { tier: 'baixa', topic: 'Geomorfologia, relevo e população', pct: '14.3%', obs: 'Estrutura demográfica e relevo.' }
           ]
         }
       }
     };
 
-    /* BANCO DE TÓPICOS PROGRAMÁTICOS ANUAIS DO GUIA PRÉ-FEDERAL */
+    /* CONTEÚDO PROGRAMÁTICO OFICIAL DO GUIA PRÉ-FEDERAL COM INCIDÊNCIA CRUZADA */
     const allTopics = [
-      // PORTUGUÊS
-      { id: 'port_1', subject: 'portugues', teacher: 'Rainhany', name: 'Conceito de texto e significação', isChampion: false },
-      { id: 'port_2', subject: 'portugues', teacher: 'Rainhany', name: 'Linguagem Verbal X Não Verbal', isChampion: false },
-      { id: 'port_3', subject: 'portugues', teacher: 'Rainhany', name: 'Gêneros e Tipos Textuais', isChampion: true },
-      { id: 'port_4', subject: 'portugues', teacher: 'Rainhany', name: 'Coerência e Coesão (sequencial e referencial)', isChampion: true },
-      { id: 'port_5', subject: 'portugues', teacher: 'Rainhany', name: 'Linguagem formal e informal e variedades linguísticas', isChampion: false },
-      { id: 'port_6', subject: 'portugues', teacher: 'Rainhany', name: 'Relações lógico-discursivas (conjunções, advérbios)', isChampion: true },
-      { id: 'port_7', subject: 'portugues', teacher: 'Rainhany', name: 'Regras de acentuação, ortografia, pontuação e regência', isChampion: false },
-      { id: 'port_8', subject: 'portugues', teacher: 'Rainhany', name: 'Texto narrativo, dramático e poético', isChampion: false },
-      { id: 'port_9', subject: 'portugues', teacher: 'Rainhany', name: 'Informações implícitas e explícitas / Interdiscursividade', isChampion: true },
-      { id: 'port_10', subject: 'portugues', teacher: 'Rainhany', name: 'Texto e contexto sócio-histórico de produção', isChampion: false },
-      { id: 'port_11', subject: 'portugues', teacher: 'Rainhany', name: 'Morfossintaxe da oração e articulação frasal', isChampion: true },
-      { id: 'port_12', subject: 'portugues', teacher: 'Rainhany', name: 'Recursos literários e figuras de estilo (metáfora, ironia)', isChampion: true },
-      { id: 'port_13', subject: 'portugues', teacher: 'Rainhany', name: 'Obras Literárias Obrigatórias do Edital', isChampion: true },
+      // PORTUGUÊS (Profª. Rainhany)
+      { id: 'port_1', subject: 'portugues', teacher: 'Rainhany', name: 'Conceito de texto e significação',
+        stats: { coluni: { freq: 'baixa', pct: '1.5%' }, cefet: { freq: 'baixa', pct: '2.0%' }, ifmg: { freq: 'baixa', pct: '2.5%' }, ifnmg: { freq: 'baixa', pct: '1.2%' }, coltec: { freq: 'baixa', pct: '1.0%' } } },
+      { id: 'port_2', subject: 'portugues', teacher: 'Rainhany', name: 'Linguagem Verbal X Não Verbal',
+        stats: { coluni: { freq: 'media', pct: '6.2%' }, cefet: { freq: 'alta', pct: '10.2%' }, ifmg: { freq: 'alta', pct: '12.4%' }, ifnmg: { freq: 'alta', pct: '12.5%' }, coltec: { freq: 'media', pct: '5.7%' } } },
+      { id: 'port_3', subject: 'portugues', teacher: 'Rainhany', name: 'Gêneros Textuais e Tipos Textuais',
+        stats: { coluni: { freq: 'media', pct: '6.2%' }, cefet: { freq: 'alta', pct: '10.2%' }, ifmg: { freq: 'alta', pct: '12.4%' }, ifnmg: { freq: 'alta', pct: '12.5%' }, coltec: { freq: 'media', pct: '5.7%' } } },
+      { id: 'port_4', subject: 'portugues', teacher: 'Rainhany', name: 'Coerência e Coesão (sequencial e referencial)',
+        stats: { coluni: { freq: 'media', pct: '7.7%' }, cefet: { freq: 'media', pct: '5.1%' }, ifmg: { freq: 'media', pct: '6.2%' }, ifnmg: { freq: 'alta', pct: '12.5%' }, coltec: { freq: 'alta', pct: '13.3%' } } },
+      { id: 'port_5', subject: 'portugues', teacher: 'Rainhany', name: 'Linguagem formal e informal e variedades linguísticas',
+        stats: { coluni: { freq: 'baixa', pct: '1.5%' }, cefet: { freq: 'baixa', pct: '4.0%' }, ifmg: { freq: 'media', pct: '6.8%' }, ifnmg: { freq: 'baixa', pct: '1.2%' }, coltec: { freq: 'baixa', pct: '2.0%' } } },
+      { id: 'port_6', subject: 'portugues', teacher: 'Rainhany', name: 'Relações lógico-discursivas (conjunções, advérbios)',
+        stats: { coluni: { freq: 'alta', pct: '13.1%' }, cefet: { freq: 'alta', pct: '11.4%' }, ifmg: { freq: 'alta', pct: '11.2%' }, ifnmg: { freq: 'media', pct: '8.8%' }, coltec: { freq: 'alta', pct: '13.3%' } } },
+      { id: 'port_7', subject: 'portugues', teacher: 'Rainhany', name: 'Regras de acentuação gráfica, ortografia e pontuação',
+        stats: { coluni: { freq: 'baixa', pct: '0.7%' }, cefet: { freq: 'baixa', pct: '1.7%' }, ifmg: { freq: 'baixa', pct: '2.5%' }, ifnmg: { freq: 'baixa', pct: '3.8%' }, coltec: { freq: 'media', pct: '8.6%' } } },
+      { id: 'port_8', subject: 'portugues', teacher: 'Rainhany', name: 'Texto narrativo, dramático e poético',
+        stats: { coluni: { freq: 'media', pct: '5.0%' }, cefet: { freq: 'media', pct: '4.5%' }, ifmg: { freq: 'media', pct: '5.0%' }, ifnmg: { freq: 'baixa', pct: '2.5%' }, coltec: { freq: 'media', pct: '6.0%' } } },
+      { id: 'port_9', subject: 'portugues', teacher: 'Rainhany', name: 'Informações implícitas e explícitas / Interdiscursividade',
+        stats: { coluni: { freq: 'alta', pct: '10.8%' }, cefet: { freq: 'media', pct: '6.8%' }, ifmg: { freq: 'alta', pct: '28.0%' }, ifnmg: { freq: 'alta', pct: '22.5%' }, coltec: { freq: 'alta', pct: '13.3%' } } },
+      { id: 'port_10', subject: 'portugues', teacher: 'Rainhany', name: 'Texto e contexto sócio-histórico e cultural de produção',
+        stats: { coluni: { freq: 'media', pct: '6.0%' }, cefet: { freq: 'media', pct: '5.0%' }, ifmg: { freq: 'media', pct: '6.0%' }, ifnmg: { freq: 'media', pct: '5.0%' }, coltec: { freq: 'media', pct: '7.0%' } } },
+      { id: 'port_11', subject: 'portugues', teacher: 'Rainhany', name: 'Morfossintaxe da oração e articulação frasal',
+        stats: { coluni: { freq: 'alta', pct: '13.8%' }, cefet: { freq: 'media', pct: '6.3%' }, ifmg: { freq: 'media', pct: '6.8%' }, ifnmg: { freq: 'alta', pct: '27.5%' }, coltec: { freq: 'media', pct: '8.6%' } } },
+      { id: 'port_12', subject: 'portugues', teacher: 'Rainhany', name: 'Recursos literários e figuras de estilo (metáfora, ironia)',
+        stats: { coluni: { freq: 'media', pct: '5.4%' }, cefet: { freq: 'alta', pct: '8.5%' }, ifmg: { freq: 'media', pct: '7.5%' }, ifnmg: { freq: 'baixa', pct: '5.0%' }, coltec: { freq: 'media', pct: '5.0%' } } },
+      { id: 'port_13', subject: 'portugues', teacher: 'Rainhany', name: 'Obras Literárias Obrigatórias do Edital',
+        stats: { coluni: { freq: 'alta', pct: '40.8%' }, cefet: { freq: 'alta', pct: '35.2%' }, ifmg: { freq: 'baixa', pct: '10.6%' }, ifnmg: { freq: 'baixa', pct: '1.2%' }, coltec: { freq: 'alta', pct: '55.2%' } } },
 
-      // MATEMÁTICA
-      { id: 'mat_1', subject: 'matematica', teacher: 'Vinícius', name: 'Razão, Proporção e Regra de 3 simples e composta', isChampion: true },
-      { id: 'mat_2', subject: 'matematica', teacher: 'Vinícius', name: 'Porcentagem e Aumentos/Descontos Sucessivos', isChampion: true },
-      { id: 'mat_3', subject: 'matematica', teacher: 'Vinícius', name: 'Fundamentos de Geometria Plana e Retas Paralelas', isChampion: true },
-      { id: 'mat_4', subject: 'matematica', teacher: 'Vinícius', name: 'Triângulos, Teorema de Tales e Pitágoras', isChampion: true },
-      { id: 'mat_5', subject: 'matematica', teacher: 'Vinícius', name: 'Semelhança de Triângulos e Trigonometria básica', isChampion: false },
-      { id: 'mat_6', subject: 'matematica', teacher: 'Vinícius', name: 'Áreas de figuras planas (triângulos, trapézios, polígonos)', isChampion: true },
-      { id: 'mat_7', subject: 'matematica', teacher: 'Vinícius', name: 'Quadriláteros notáveis e Circunferência', isChampion: false },
-      { id: 'mat_8', subject: 'matematica', teacher: 'Vinícius', name: 'Juros Simples e Matemática Financeira básica', isChampion: false },
-      { id: 'mat_9', subject: 'matematica', teacher: 'Bruno', name: 'Noções de Conjuntos e Intervalos Reais', isChampion: true },
-      { id: 'mat_10', subject: 'matematica', teacher: 'Bruno', name: 'Números Naturais, Inteiros, Racionais e Irracionais', isChampion: true },
-      { id: 'mat_11', subject: 'matematica', teacher: 'Bruno', name: 'Potenciação, Radiciação e Racionalização', isChampion: false },
-      { id: 'mat_12', subject: 'matematica', teacher: 'Bruno', name: 'Expressões Algébricas, Produtos Notáveis e Fatoração', isChampion: true },
-      { id: 'mat_13', subject: 'matematica', teacher: 'Bruno', name: 'Equações e Sistemas de 1º e 2º graus', isChampion: true },
-      { id: 'mat_14', subject: 'matematica', teacher: 'Bruno', name: 'Função Afim (1º grau) e Função Quadrática (2º grau)', isChampion: true },
-      { id: 'mat_15', subject: 'matematica', teacher: 'Bruno', name: 'Probabilidade, Estatística e Análise Combinatória', isChampion: false },
+      // MATEMÁTICA (Prof. Vinícius)
+      { id: 'mat_1', subject: 'matematica', teacher: 'Vinícius', name: 'Razão, Proporção e Regra de 3 simples e composta',
+        stats: { coluni: { freq: 'media', pct: '4.6%' }, cefet: { freq: 'alta', pct: '9.1%' }, ifmg: { freq: 'alta', pct: '8.9%' }, ifnmg: { freq: 'alta', pct: '16.3%' }, coltec: { freq: 'alta', pct: '15.2%' } } },
+      { id: 'mat_2', subject: 'matematica', teacher: 'Vinícius', name: 'Porcentagem e Aumentos/Descontos Sucessivos',
+        stats: { coluni: { freq: 'alta', pct: '11.5%' }, cefet: { freq: 'media', pct: '4.5%' }, ifmg: { freq: 'media', pct: '5.7%' }, ifnmg: { freq: 'alta', pct: '12.5%' }, coltec: { freq: 'media', pct: '6.3%' } } },
+      { id: 'mat_3', subject: 'matematica', teacher: 'Vinícius', name: 'Fundamentos de Geometria Plana e Retas Paralelas',
+        stats: { coluni: { freq: 'alta', pct: '20.8%' }, cefet: { freq: 'alta', pct: '28.4%' }, ifmg: { freq: 'alta', pct: '24.1%' }, ifnmg: { freq: 'alta', pct: '20.0%' }, coltec: { freq: 'alta', pct: '24.8%' } } },
+      { id: 'mat_4', subject: 'matematica', teacher: 'Vinícius', name: 'Triângulos, Teorema de Tales e Pitágoras',
+        stats: { coluni: { freq: 'alta', pct: '20.8%' }, cefet: { freq: 'alta', pct: '28.4%' }, ifmg: { freq: 'alta', pct: '24.1%' }, ifnmg: { freq: 'alta', pct: '20.0%' }, coltec: { freq: 'alta', pct: '24.8%' } } },
+      { id: 'mat_5', subject: 'matematica', teacher: 'Vinícius', name: 'Semelhança de Triângulos e Trigonometria no Triângulo Retângulo',
+        stats: { coluni: { freq: 'baixa', pct: '1.5%' }, cefet: { freq: 'baixa', pct: '2.3%' }, ifmg: { freq: 'baixa', pct: '1.9%' }, ifnmg: { freq: 'baixa', pct: '2.0%' }, coltec: { freq: 'baixa', pct: '1.1%' } } },
+      { id: 'mat_6', subject: 'matematica', teacher: 'Vinícius', name: 'Áreas de figuras planas (triângulos, trapézios e polígonos)',
+        stats: { coluni: { freq: 'alta', pct: '20.8%' }, cefet: { freq: 'alta', pct: '28.4%' }, ifmg: { freq: 'alta', pct: '24.1%' }, ifnmg: { freq: 'alta', pct: '20.0%' }, coltec: { freq: 'alta', pct: '24.8%' } } },
+      { id: 'mat_7', subject: 'matematica', teacher: 'Vinícius', name: 'Quadriláteros Notáveis e Circunferência',
+        stats: { coluni: { freq: 'media', pct: '5.0%' }, cefet: { freq: 'media', pct: '6.0%' }, ifmg: { freq: 'media', pct: '5.0%' }, ifnmg: { freq: 'media', pct: '5.0%' }, coltec: { freq: 'media', pct: '5.0%' } } },
+      { id: 'mat_8', subject: 'matematica', teacher: 'Vinícius', name: 'Juros Simples e Matemática Financeira básica',
+        stats: { coluni: { freq: 'baixa', pct: '2.0%' }, cefet: { freq: 'baixa', pct: '2.5%' }, ifmg: { freq: 'baixa', pct: '2.0%' }, ifnmg: { freq: 'media', pct: '5.0%' }, coltec: { freq: 'baixa', pct: '1.5%' } } },
 
-      // CIÊNCIAS: BIOLOGIA
-      { id: 'bio_1', subject: 'biologia', teacher: 'Michel', name: 'Origem da vida e conceitos de evolução', isChampion: false },
-      { id: 'bio_2', subject: 'biologia', teacher: 'Michel', name: 'A Célula, Citologia e Universo Celular', isChampion: true },
-      { id: 'bio_3', subject: 'biologia', teacher: 'Michel', name: 'Vírus, Reino Monera, Protista e Fungi', isChampion: false },
-      { id: 'bio_4', subject: 'biologia', teacher: 'Michel', name: 'Reino Animalia (Invertebrados e Cordados)', isChampion: true },
-      { id: 'bio_5', subject: 'biologia', teacher: 'Michel', name: 'Reino Plantae e Fisiologia Vegetal (Botânica)', isChampion: true },
-      { id: 'bio_6', subject: 'biologia', teacher: 'Michel', name: 'Tecidos do corpo humano (Histologia)', isChampion: false },
-      { id: 'bio_7', subject: 'biologia', teacher: 'Michel', name: 'Fisiologia humana (digestório, respiratório, circulatório)', isChampion: true },
-      { id: 'bio_8', subject: 'biologia', teacher: 'Michel', name: 'Fisiologia humana (nervoso, excretor, endócrino e locomotor)', isChampion: true },
-      { id: 'bio_9', subject: 'biologia', teacher: 'Michel', name: 'Parasitologia, Saúde e Saneamento Básico', isChampion: true },
-      { id: 'bio_10', subject: 'biologia', teacher: 'Michel', name: 'Genética (Primeira Lei de Mendel, Tipos Sanguíneos e Heredogramas)', isChampion: true },
-      { id: 'bio_11', subject: 'biologia', teacher: 'Michel', name: 'Ecologia e Impactos Ambientais', isChampion: true },
+      // MATEMÁTICA (Prof. Bruno)
+      { id: 'mat_9', subject: 'matematica', teacher: 'Bruno', name: 'Noções de Conjuntos e Intervalos Reais',
+        stats: { coluni: { freq: 'alta', pct: '20.0%' }, cefet: { freq: 'alta', pct: '14.2%' }, ifmg: { freq: 'alta', pct: '13.3%' }, ifnmg: { freq: 'media', pct: '10.0%' }, coltec: { freq: 'alta', pct: '15.2%' } } },
+      { id: 'mat_10', subject: 'matematica', teacher: 'Bruno', name: 'Números Naturais, Inteiros, Racionais e Irracionais',
+        stats: { coluni: { freq: 'alta', pct: '20.0%' }, cefet: { freq: 'alta', pct: '14.2%' }, ifmg: { freq: 'alta', pct: '13.3%' }, ifnmg: { freq: 'media', pct: '10.0%' }, coltec: { freq: 'alta', pct: '15.2%' } } },
+      { id: 'mat_11', subject: 'matematica', teacher: 'Bruno', name: 'Potenciação, Radiciação e Racionalização',
+        stats: { coluni: { freq: 'media', pct: '6.0%' }, cefet: { freq: 'media', pct: '5.0%' }, ifmg: { freq: 'media', pct: '5.0%' }, ifnmg: { freq: 'media', pct: '5.0%' }, coltec: { freq: 'alta', pct: '10.0%' } } },
+      { id: 'mat_12', subject: 'matematica', teacher: 'Bruno', name: 'Expressões Algébricas, Produtos Notáveis e Fatoração',
+        stats: { coluni: { freq: 'alta', pct: '21.5%' }, cefet: { freq: 'alta', pct: '12.5%' }, ifmg: { freq: 'alta', pct: '15.2%' }, ifnmg: { freq: 'alta', pct: '16.3%' }, coltec: { freq: 'alta', pct: '23.8%' } } },
+      { id: 'mat_13', subject: 'matematica', teacher: 'Bruno', name: 'Equações e Sistemas de 1º e 2º graus',
+        stats: { coluni: { freq: 'alta', pct: '21.5%' }, cefet: { freq: 'alta', pct: '12.5%' }, ifmg: { freq: 'alta', pct: '15.2%' }, ifnmg: { freq: 'alta', pct: '16.3%' }, coltec: { freq: 'alta', pct: '23.8%' } } },
+      { id: 'mat_14', subject: 'matematica', teacher: 'Bruno', name: 'Função Afim (1º grau) e Função Quadrática (2º grau)',
+        stats: { coluni: { freq: 'alta', pct: '10.0%' }, cefet: { freq: 'alta', pct: '13.6%' }, ifmg: { freq: 'media', pct: '5.0%' }, ifnmg: { freq: 'alta', pct: '10.0%' }, coltec: { freq: 'media', pct: '5.0%' } } },
+      { id: 'mat_15', subject: 'matematica', teacher: 'Bruno', name: 'Noções de probabilidade e análise combinatória',
+        stats: { coluni: { freq: 'baixa', pct: '0.8%' }, cefet: { freq: 'baixa', pct: '2.3%' }, ifmg: { freq: 'baixa', pct: '4.4%' }, ifnmg: { freq: 'baixa', pct: '2.5%' }, coltec: { freq: 'baixa', pct: '1.1%' } } },
 
-      // CIÊNCIAS: FÍSICA
-      { id: 'fis_1', subject: 'fisica', teacher: 'Expedito', name: 'Grandezas, Conversões e Cinemática (velocidade e aceleração)', isChampion: false },
-      { id: 'fis_2', subject: 'fisica', teacher: 'Expedito', name: 'Queda Livre e Lançamento Vertical', isChampion: false },
-      { id: 'fis_3', subject: 'fisica', teacher: 'Expedito', name: 'Leis de Newton e Forças', isChampion: true },
-      { id: 'fis_4', subject: 'fisica', teacher: 'Expedito', name: 'Energia Mecânica, Trabalho e Máquinas Simples (Torque)', isChampion: true },
-      { id: 'fis_5', subject: 'fisica', teacher: 'Expedito', name: 'Hidrostática (Pressão, Densidade e Empuxo)', isChampion: false },
-      { id: 'fis_6', subject: 'fisica', teacher: 'Expedito', name: 'Termometria, Calorimetria e Dilatação Térmica', isChampion: true },
-      { id: 'fis_7', subject: 'fisica', teacher: 'Expedito', name: 'Óptica Geométrica (Luz, Espelhos planos/esféricos e Lentes)', isChampion: true },
-      { id: 'fis_8', subject: 'fisica', teacher: 'Expedito', name: 'Ondulatória e Acústica', isChampion: false },
-      { id: 'fis_9', subject: 'fisica', teacher: 'Expedito', name: 'Eletrostática e Eletrodinâmica (Circuitos, Consumo e Potência)', isChampion: true },
-      { id: 'fis_10', subject: 'fisica', teacher: 'Expedito', name: 'Magnetismo, Bússola e Astronomia (Fases da Lua e Eclipses)', isChampion: false },
+      // BIOLOGIA (Prof. Michel)
+      { id: 'bio_1', subject: 'biologia', teacher: 'Michel', name: 'Origem da vida e conceitos de evolução',
+        stats: { coluni: { freq: 'media', pct: '10.4%' }, cefet: { freq: 'baixa', pct: '4.0%' }, ifmg: { freq: 'baixa', pct: '4.0%' }, ifnmg: { freq: 'baixa', pct: '3.0%' }, coltec: { freq: 'baixa', pct: '3.0%' } } },
+      { id: 'bio_2', subject: 'biologia', teacher: 'Michel', name: 'A Célula, Citologia e Universo Celular',
+        stats: { coluni: { freq: 'baixa', pct: '9.0%' }, cefet: { freq: 'baixa', pct: '4.3%' }, ifmg: { freq: 'alta', pct: '17.8%' }, ifnmg: { freq: 'alta', pct: '25.0%' }, coltec: { freq: 'baixa', pct: '2.6%' } } },
+      { id: 'bio_3', subject: 'biologia', teacher: 'Michel', name: 'Vírus, Reino Monera, Protista e Fungi',
+        stats: { coluni: { freq: 'baixa', pct: '4.0%' }, cefet: { freq: 'baixa', pct: '6.5%' }, ifmg: { freq: 'media', pct: '11.1%' }, ifnmg: { freq: 'baixa', pct: '7.5%' }, coltec: { freq: 'media', pct: '7.0%' } } },
+      { id: 'bio_4', subject: 'biologia', teacher: 'Michel', name: 'Reino Animalia (Invertebrados e Cordados)',
+        stats: { coluni: { freq: 'alta', pct: '13.4%' }, cefet: { freq: 'baixa', pct: '4.3%' }, ifmg: { freq: 'baixa', pct: '6.7%' }, ifnmg: { freq: 'baixa', pct: '2.5%' }, coltec: { freq: 'alta', pct: '19.0%' } } },
+      { id: 'bio_5', subject: 'biologia', teacher: 'Michel', name: 'Reino Plantae e Fisiologia Vegetal (Botânica)',
+        stats: { coluni: { freq: 'alta', pct: '11.9%' }, cefet: { freq: 'alta', pct: '19.6%' }, ifmg: { freq: 'baixa', pct: '6.7%' }, ifnmg: { freq: 'baixa', pct: '7.5%' }, coltec: { freq: 'alta', pct: '14.3%' } } },
+      { id: 'bio_6', subject: 'biologia', teacher: 'Michel', name: 'Tecidos do corpo humano (Histologia)',
+        stats: { coluni: { freq: 'baixa', pct: '6.1%' }, cefet: { freq: 'baixa', pct: '3.0%' }, ifmg: { freq: 'baixa', pct: '4.0%' }, ifnmg: { freq: 'alta', pct: '12.0%' }, coltec: { freq: 'baixa', pct: '2.0%' } } },
+      { id: 'bio_7', subject: 'biologia', teacher: 'Michel', name: 'Fisiologia humana: digestório, respiratório, circulatório',
+        stats: { coluni: { freq: 'alta', pct: '19.4%' }, cefet: { freq: 'alta', pct: '34.8%' }, ifmg: { freq: 'alta', pct: '22.2%' }, ifnmg: { freq: 'baixa', pct: '7.5%' }, coltec: { freq: 'alta', pct: '23.8%' } } },
+      { id: 'bio_8', subject: 'biologia', teacher: 'Michel', name: 'Fisiologia humana: nervoso, excretor, endócrino e locomotor',
+        stats: { coluni: { freq: 'alta', pct: '19.4%' }, cefet: { freq: 'alta', pct: '34.8%' }, ifmg: { freq: 'alta', pct: '22.2%' }, ifnmg: { freq: 'baixa', pct: '7.5%' }, coltec: { freq: 'alta', pct: '23.8%' } } },
+      { id: 'bio_9', subject: 'biologia', teacher: 'Michel', name: 'Parasitologia, Saúde e Saneamento Básico',
+        stats: { coluni: { freq: 'media', pct: '10.4%' }, cefet: { freq: 'baixa', pct: '6.5%' }, ifmg: { freq: 'media', pct: '13.3%' }, ifnmg: { freq: 'baixa', pct: '7.5%' }, coltec: { freq: 'alta', pct: '23.7%' } } },
+      { id: 'bio_10', subject: 'biologia', teacher: 'Michel', name: 'Genética (Primeira Lei, Tipos Sanguíneos e Heredogramas)',
+        stats: { coluni: { freq: 'media', pct: '10.4%' }, cefet: { freq: 'baixa', pct: '6.5%' }, ifmg: { freq: 'baixa', pct: '4.0%' }, ifnmg: { freq: 'baixa', pct: '5.0%' }, coltec: { freq: 'alta', pct: '14.3%' } } },
+      { id: 'bio_11', subject: 'biologia', teacher: 'Michel', name: 'Ecologia e Impactos Ambientais',
+        stats: { coluni: { freq: 'media', pct: '9.0%' }, cefet: { freq: 'alta', pct: '23.9%' }, ifmg: { freq: 'alta', pct: '20.0%' }, ifnmg: { freq: 'alta', pct: '27.5%' }, coltec: { freq: 'alta', pct: '23.8%' } } },
 
-      // CIÊNCIAS: QUÍMICA
-      { id: 'qui_1', subject: 'quimica', teacher: 'Dudu', name: 'Estudo da Matéria, Estados Físicos e Curvas de Aquecimento', isChampion: true },
-      { id: 'qui_2', subject: 'quimica', teacher: 'Dudu', name: 'Substâncias simples, compostas e Misturas', isChampion: true },
-      { id: 'qui_3', subject: 'quimica', teacher: 'Dudu', name: 'Processos de Separação de Misturas e Tratamento de Água', isChampion: true },
-      { id: 'qui_4', subject: 'quimica', teacher: 'Dudu', name: 'Modelos Atômicos e Estrutura do Átomo', isChampion: true },
-      { id: 'qui_5', subject: 'quimica', teacher: 'Dudu', name: 'Distribuição Eletrônica e Tabela Periódica', isChampion: true },
-      { id: 'qui_6', subject: 'quimica', teacher: 'Dudu', name: 'Ligações Químicas (iônica e covalente)', isChampion: false },
-      { id: 'qui_7', subject: 'quimica', teacher: 'Dudu', name: 'Reações Químicas, Balanceamento e Leis Ponderais', isChampion: true },
-      { id: 'qui_8', subject: 'quimica', teacher: 'Dudu', name: 'Funções Inorgânicas (Ácidos, Bases, Sais, Óxidos e pH)', isChampion: false },
+      // FÍSICA (Prof. Expedito)
+      { id: 'fis_1', subject: 'fisica', teacher: 'Expedito', name: 'Grandezas, Conversões e Cinemática (velocidade e aceleração)',
+        stats: { coluni: { freq: 'baixa', pct: '7.9%' }, cefet: { freq: 'alta', pct: '18.8%' }, ifmg: { freq: 'media', pct: '16.0%' }, ifnmg: { freq: 'baixa', pct: '9.1%' }, coltec: { freq: 'baixa', pct: '5.0%' } } },
+      { id: 'fis_2', subject: 'fisica', teacher: 'Expedito', name: 'Queda Livre e Lançamento Vertical',
+        stats: { coluni: { freq: 'baixa', pct: '4.0%' }, cefet: { freq: 'media', pct: '8.0%' }, ifmg: { freq: 'media', pct: '8.0%' }, ifnmg: { freq: 'baixa', pct: '4.0%' }, coltec: { freq: 'baixa', pct: '3.0%' } } },
+      { id: 'fis_3', subject: 'fisica', teacher: 'Expedito', name: 'Leis de Newton e Forças',
+        stats: { coluni: { freq: 'alta', pct: '18.4%' }, cefet: { freq: 'alta', pct: '20.8%' }, ifmg: { freq: 'alta', pct: '26.0%' }, ifnmg: { freq: 'alta', pct: '50.0%' }, coltec: { freq: 'alta', pct: '31.0%' } } },
+      { id: 'fis_4', subject: 'fisica', teacher: 'Expedito', name: 'Energia Mecânica, Trabalho e Máquinas Simples (Torque)',
+        stats: { coluni: { freq: 'alta', pct: '18.4%' }, cefet: { freq: 'alta', pct: '20.8%' }, ifmg: { freq: 'alta', pct: '26.0%' }, ifnmg: { freq: 'alta', pct: '50.0%' }, coltec: { freq: 'alta', pct: '31.0%' } } },
+      { id: 'fis_5', subject: 'fisica', teacher: 'Expedito', name: 'Hidrostática (Pressão, Densidade e Empuxo)',
+        stats: { coluni: { freq: 'baixa', pct: '5.3%' }, cefet: { freq: 'baixa', pct: '6.3%' }, ifmg: { freq: 'baixa', pct: '6.0%' }, ifnmg: { freq: 'baixa', pct: '4.5%' }, coltec: { freq: 'baixa', pct: '2.6%' } } },
+      { id: 'fis_6', subject: 'fisica', teacher: 'Expedito', name: 'Termometria, Calorimetria e Dilatação Térmica',
+        stats: { coluni: { freq: 'alta', pct: '21.1%' }, cefet: { freq: 'alta', pct: '18.8%' }, ifmg: { freq: 'alta', pct: '28.0%' }, ifnmg: { freq: 'baixa', pct: '13.6%' }, coltec: { freq: 'alta', pct: '19.0%' } } },
+      { id: 'fis_7', subject: 'fisica', teacher: 'Expedito', name: 'Óptica Geométrica (Luz, Espelhos planos/esféricos e Lentes)',
+        stats: { coluni: { freq: 'alta', pct: '23.7%' }, cefet: { freq: 'baixa', pct: '10.4%' }, ifmg: { freq: 'baixa', pct: '4.0%' }, ifnmg: { freq: 'baixa', pct: '4.5%' }, coltec: { freq: 'baixa', pct: '7.9%' } } },
+      { id: 'fis_8', subject: 'fisica', teacher: 'Expedito', name: 'Ondulatória e Acústica',
+        stats: { coluni: { freq: 'baixa', pct: '2.0%' }, cefet: { freq: 'baixa', pct: '3.0%' }, ifmg: { freq: 'baixa', pct: '2.0%' }, ifnmg: { freq: 'baixa', pct: '2.0%' }, coltec: { freq: 'baixa', pct: '5.3%' } } },
+      { id: 'fis_9', subject: 'fisica', teacher: 'Expedito', name: 'Eletrostática e Eletrodinâmica (Circuitos, Consumo e Potência)',
+        stats: { coluni: { freq: 'alta', pct: '21.1%' }, cefet: { freq: 'media', pct: '12.5%' }, ifmg: { freq: 'media', pct: '12.0%' }, ifnmg: { freq: 'media', pct: '18.2%' }, coltec: { freq: 'alta', pct: '28.6%' } } },
+      { id: 'fis_10', subject: 'fisica', teacher: 'Expedito', name: 'Magnetismo, Bússola e Astronomia (Fases da Lua e Eclipses)',
+        stats: { coluni: { freq: 'nula', pct: null, note: 'Zero questões em 13 provas' }, cefet: { freq: 'media', pct: '14.6%' }, ifmg: { freq: 'media', pct: '10.0%' }, ifnmg: { freq: 'baixa', pct: '3.0%' }, coltec: { freq: 'media', pct: '16.6%' } } },
 
-      // HISTÓRIA
-      { id: 'hist_1', subject: 'historia', teacher: 'Renata', name: 'Imperialismo e Neocolonialismo na África e Ásia', isChampion: true },
-      { id: 'hist_2', subject: 'historia', teacher: 'Renata', name: 'Primeira Guerra Mundial e Crise de 1929', isChampion: true },
-      { id: 'hist_3', subject: 'historia', teacher: 'Renata', name: 'Regimes Totalitários e Segunda Guerra Mundial', isChampion: true },
-      { id: 'hist_4', subject: 'historia', teacher: 'Renata', name: 'Brasil República Velha (Coronelismo, Canudos, Voto de Cabresto)', isChampion: true },
-      { id: 'hist_5', subject: 'historia', teacher: 'Renata', name: 'Revolução de 1930 e Era Vargas (Constitucional e Estado Novo)', isChampion: true },
-      { id: 'hist_6', subject: 'historia', teacher: 'Renata', name: 'Período Democrático Populista e Anos Desenvolvimentistas (JK)', isChampion: true },
-      { id: 'hist_7', subject: 'historia', teacher: 'Renata', name: 'Ditadura Militar no Brasil (AI-5, Diretas Já e Redemocratização)', isChampion: true },
-      { id: 'hist_8', subject: 'historia', teacher: 'Renata', name: 'Guerra Fria, Descolonização e Política de Boa Vizinhança', isChampion: true },
-      { id: 'hist_9', subject: 'historia', teacher: 'Renata', name: 'Brasil Império e Tráfico Interno de Escravos (Lei Eusébio de Queiroz)', isChampion: true },
-      { id: 'hist_10', subject: 'historia', teacher: 'Renata', name: 'Idade Moderna Europeia (Iluminismo e Revoluções)', isChampion: false },
+      // QUÍMICA (Prof. Dudu)
+      { id: 'qui_1', subject: 'quimica', teacher: 'Dudu', name: 'Estudo da Matéria, Estados Físicos e Curvas de Aquecimento',
+        stats: { coluni: { freq: 'alta', pct: '34.5%' }, cefet: { freq: 'alta', pct: '27.7%' }, ifmg: { freq: 'alta', pct: '29.7%' }, ifnmg: { freq: 'alta', pct: '23.5%' }, coltec: { freq: 'alta', pct: '26.2%' } } },
+      { id: 'qui_2', subject: 'quimica', teacher: 'Dudu', name: 'Substâncias simples, compostas e Misturas',
+        stats: { coluni: { freq: 'alta', pct: '34.5%' }, cefet: { freq: 'alta', pct: '27.7%' }, ifmg: { freq: 'alta', pct: '29.7%' }, ifnmg: { freq: 'alta', pct: '23.5%' }, coltec: { freq: 'alta', pct: '35.7%' } } },
+      { id: 'qui_3', subject: 'quimica', teacher: 'Dudu', name: 'Processos de Separação de Misturas e Tratamento de Água',
+        stats: { coluni: { freq: 'alta', pct: '34.5%' }, cefet: { freq: 'alta', pct: '27.7%' }, ifmg: { freq: 'alta', pct: '29.7%' }, ifnmg: { freq: 'alta', pct: '23.5%' }, coltec: { freq: 'alta', pct: '35.7%' } } },
+      { id: 'qui_4', subject: 'quimica', teacher: 'Dudu', name: 'Modelos Atômicos e Estrutura do Átomo',
+        stats: { coluni: { freq: 'alta', pct: '37.9%' }, cefet: { freq: 'alta', pct: '25.5%' }, ifmg: { freq: 'alta', pct: '21.6%' }, ifnmg: { freq: 'alta', pct: '29.4%' }, coltec: { freq: 'alta', pct: '19.0%' } } },
+      { id: 'qui_5', subject: 'quimica', teacher: 'Dudu', name: 'Distribuição Eletrônica e Tabela Periódica',
+        stats: { coluni: { freq: 'alta', pct: '37.9%' }, cefet: { freq: 'alta', pct: '25.5%' }, ifmg: { freq: 'alta', pct: '21.6%' }, ifnmg: { freq: 'alta', pct: '29.4%' }, coltec: { freq: 'alta', pct: '19.0%' } } },
+      { id: 'qui_6', subject: 'quimica', teacher: 'Dudu', name: 'Ligações Químicas (iônica e covalente)',
+        stats: { coluni: { freq: 'baixa', pct: '3.5%' }, cefet: { freq: 'baixa', pct: '6.4%' }, ifmg: { freq: 'baixa', pct: '10.8%' }, ifnmg: { freq: 'baixa', pct: '11.8%' }, coltec: { freq: 'baixa', pct: '5.0%' } } },
+      { id: 'qui_7', subject: 'quimica', teacher: 'Dudu', name: 'Reações Químicas, Balanceamento e Leis Ponderais',
+        stats: { coluni: { freq: 'alta', pct: '17.2%' }, cefet: { freq: 'alta', pct: '14.9%' }, ifmg: { freq: 'alta', pct: '16.2%' }, ifnmg: { freq: 'alta', pct: '17.7%' }, coltec: { freq: 'alta', pct: '14.3%' } } },
+      { id: 'qui_8', subject: 'quimica', teacher: 'Dudu', name: 'Funções Inorgânicas (Ácidos, Bases, Sais, Óxidos e pH)',
+        stats: { coluni: { freq: 'baixa', pct: '6.9%' }, cefet: { freq: 'baixa', pct: '4.3%' }, ifmg: { freq: 'alta', pct: '21.6%' }, ifnmg: { freq: 'alta', pct: '17.6%' }, coltec: { freq: 'baixa', pct: '5.0%' } } },
 
-      // GEOGRAFIA
-      { id: 'geo_1', subject: 'geografia', teacher: 'Nael', name: 'Conceitos Fundamentais da Geografia e Cartografia Decolonial', isChampion: false },
-      { id: 'geo_2', subject: 'geografia', teacher: 'Nael', name: 'Cartografia, Fusos Horários, Coordenadas e Escalas', isChampion: true },
-      { id: 'geo_3', subject: 'geografia', teacher: 'Nael', name: 'Geomorfologia, Relevo e Dinâmica da Terra', isChampion: false },
-      { id: 'geo_4', subject: 'geografia', teacher: 'Nael', name: 'Climatologia, Biomas do Brasil (Cerrado, Pantanal, Mata dos Cocais)', isChampion: true },
-      { id: 'geo_5', subject: 'geografia', teacher: 'Nael', name: 'Hidrografia e Bacias Hidrográficas do Brasil', isChampion: false },
-      { id: 'geo_6', subject: 'geografia', teacher: 'Nael', name: 'População Brasileira (Dinâmica demográfica e pirâmides)', isChampion: true },
-      { id: 'geo_7', subject: 'geografia', teacher: 'Nael', name: 'Geografia Agrária e Lei de Terras de 1850 no Brasil', isChampion: true },
-      { id: 'geo_8', subject: 'geografia', teacher: 'Nael', name: 'Urbanização e Industrialização no Brasil', isChampion: true },
-      { id: 'geo_9', subject: 'geografia', teacher: 'Nael', name: 'Globalização, Inteligência Artificial, Tecnopolos e Oligopólios', isChampion: true },
+      // HISTÓRIA (Profª. Renata)
+      { id: 'hist_1', subject: 'historia', teacher: 'Renata', name: 'Imperialismo e Neocolonialismo na África e Ásia',
+        stats: { coluni: { freq: 'media', pct: '8.0%' }, cefet: { freq: 'baixa', pct: '4.0%' }, ifmg: { freq: 'media', pct: '7.0%' }, ifnmg: { freq: 'media', pct: '7.0%' }, coltec: { freq: 'baixa', pct: '5.0%' } } },
+      { id: 'hist_2', subject: 'historia', teacher: 'Renata', name: 'Primeira Guerra Mundial e Crise de 1929',
+        stats: { coluni: { freq: 'alta', pct: '17.9%' }, cefet: { freq: 'media', pct: '9.1%' }, ifmg: { freq: 'media', pct: '8.0%' }, ifnmg: { freq: 'media', pct: '7.0%' }, coltec: { freq: 'media', pct: '10.0%' } } },
+      { id: 'hist_3', subject: 'historia', teacher: 'Renata', name: 'Regimes Totalitários e Segunda Guerra Mundial',
+        stats: { coluni: { freq: 'alta', pct: '17.9%' }, cefet: { freq: 'media', pct: '9.1%' }, ifmg: { freq: 'media', pct: '8.0%' }, ifnmg: { freq: 'media', pct: '7.0%' }, coltec: { freq: 'alta', pct: '23.8%' } } },
+      { id: 'hist_4', subject: 'historia', teacher: 'Renata', name: 'Brasil República Velha (Coronelismo, Canudos, Voto de Cabresto)',
+        stats: { coluni: { freq: 'media', pct: '10.4%' }, cefet: { freq: 'alta', pct: '21.8%' }, ifmg: { freq: 'media', pct: '8.5%' }, ifnmg: { freq: 'baixa', pct: '7.1%' }, coltec: { freq: 'alta', pct: '26.2%' } } },
+      { id: 'hist_5', subject: 'historia', teacher: 'Renata', name: 'Revolução de 1930 e Era Vargas (Constitucional e Estado Novo)',
+        stats: { coluni: { freq: 'media', pct: '10.4%' }, cefet: { freq: 'alta', pct: '10.9%' }, ifmg: { freq: 'media', pct: '8.5%' }, ifnmg: { freq: 'alta', pct: '10.7%' }, coltec: { freq: 'alta', pct: '26.2%' } } },
+      { id: 'hist_6', subject: 'historia', teacher: 'Renata', name: 'Período Democrático Populista e Anos Desenvolvimentistas (JK)',
+        stats: { coluni: { freq: 'media', pct: '9.0%' }, cefet: { freq: 'media', pct: '7.0%' }, ifmg: { freq: 'media', pct: '6.0%' }, ifnmg: { freq: 'baixa', pct: '5.0%' }, coltec: { freq: 'alta', pct: '12.0%' } } },
+      { id: 'hist_7', subject: 'historia', teacher: 'Renata', name: 'Ditadura Militar no Brasil (AI-5, Diretas Já e Redemocratização)',
+        stats: { coluni: { freq: 'alta', pct: '16.4%' }, cefet: { freq: 'alta', pct: '10.9%' }, ifmg: { freq: 'media', pct: '8.5%' }, ifnmg: { freq: 'alta', pct: '10.7%' }, coltec: { freq: 'media', pct: '8.0%' } } },
+      { id: 'hist_8', subject: 'historia', teacher: 'Renata', name: 'Guerra Fria, Descolonização e Política de Boa Vizinhança',
+        stats: { coluni: { freq: 'alta', pct: '16.4%' }, cefet: { freq: 'alta', pct: '16.4%' }, ifmg: { freq: 'alta', pct: '12.7%' }, ifnmg: { freq: 'alta', pct: '14.3%' }, coltec: { freq: 'alta', pct: '23.8%' } } },
+      { id: 'hist_9', subject: 'historia', teacher: 'Renata', name: 'Brasil Império e Tráfico de Escravos (Lei Eusébio de Queiroz)',
+        stats: { coluni: { freq: 'nula', pct: null, note: 'COLUNI foca 100% no século XX' }, cefet: { freq: 'alta', pct: '12.7%' }, ifmg: { freq: 'media', pct: '8.5%' }, ifnmg: { freq: 'alta', pct: '10.7%' }, coltec: { freq: 'alta', pct: '19.0%' } } },
+      { id: 'hist_10', subject: 'historia', teacher: 'Renata', name: 'Escravidão, resistência negra e povos indígenas no Brasil',
+        stats: { coluni: { freq: 'alta', pct: '17.9%' }, cefet: { freq: 'baixa', pct: '5.5%' }, ifmg: { freq: 'media', pct: '8.0%' }, ifnmg: { freq: 'alta', pct: '17.9%' }, coltec: { freq: 'media', pct: '7.9%' } } },
+      { id: 'hist_11', subject: 'historia', teacher: 'Renata', name: 'Brasil Colônia (ciclo do ouro, açúcar e sociedade)',
+        stats: { coluni: { freq: 'nula', pct: null, note: 'Zero questões em 13 provas' }, cefet: { freq: 'baixa', pct: '5.5%' }, ifmg: { freq: 'alta', pct: '9.9%' }, ifnmg: { freq: 'baixa', pct: '3.6%' }, coltec: { freq: 'alta', pct: '10.5%' } } },
+      { id: 'hist_12', subject: 'historia', teacher: 'Renata', name: 'Idade Moderna Europeia (Iluminismo e Revoluções)',
+        stats: { coluni: { freq: 'baixa', pct: '1.5%' }, cefet: { freq: 'baixa', pct: '3.0%' }, ifmg: { freq: 'alta', pct: '19.7%' }, ifnmg: { freq: 'alta', pct: '17.9%' }, coltec: { freq: 'alta', pct: '13.2%' } } },
+      { id: 'hist_13', subject: 'historia', teacher: 'Renata', name: 'Pré-História, Antiguidade e Idade Média',
+        stats: { coluni: { freq: 'nula', pct: null, note: 'Zero questões em 13 provas' }, cefet: { freq: 'nula', pct: null, note: 'Praticamente ausente' }, ifmg: { freq: 'baixa', pct: '4.2%' }, ifnmg: { freq: 'baixa', pct: '7.1%' }, coltec: { freq: 'nula', pct: null, note: 'Ausente' } } },
 
-      // REDAÇÃO (EXCLUSIVO COLUNI)
-      { id: 'red_1', subject: 'redacao', teacher: 'Ailly', name: 'Estrutura da Prova de Redação do COLUNI', isChampion: false },
-      { id: 'red_2', subject: 'redacao', teacher: 'Ailly', name: 'Tipologia Narrativa e o Gênero Crônica Cotidiana', isChampion: true },
-      { id: 'red_3', subject: 'redacao', teacher: 'Ailly', name: 'Gênero Autobiografia e Tipos de Relato Pessoal', isChampion: false },
-      { id: 'red_4', subject: 'redacao', teacher: 'Ailly', name: 'Carta Pessoal, Carta de Leitor e Carta Aberta', isChampion: true },
-      { id: 'red_5', subject: 'redacao', teacher: 'Ailly', name: 'Tipologia Expositiva: Prefácio e Entrevista', isChampion: false },
-      { id: 'red_6', subject: 'redacao', teacher: 'Ailly', name: 'Gênero Síntese (Resumo)', isChampion: false },
-      { id: 'red_7', subject: 'redacao', teacher: 'Ailly', name: 'Tipologia Injuntiva: Manual de Instruções e Tutorial', isChampion: false },
-      { id: 'red_8', subject: 'redacao', teacher: 'Ailly', name: 'Tipologia Argumentativa e Estrutura do Texto Opinativo', isChampion: true },
-      { id: 'red_9', subject: 'redacao', teacher: 'Ailly', name: 'Tipos de Argumentos e Gênero Manifesto', isChampion: false },
+      // GEOGRAFIA (Prof. Nael)
+      { id: 'geo_1', subject: 'geografia', teacher: 'Nael', name: 'Conceitos Fundamentais da Geografia e Cartografia Decolonial',
+        stats: { coluni: { freq: 'baixa', pct: '3.0%' }, cefet: { freq: 'baixa', pct: '3.0%' }, ifmg: { freq: 'baixa', pct: '3.0%' }, ifnmg: { freq: 'baixa', pct: '3.0%' }, coltec: { freq: 'media', pct: '10.0%' } } },
+      { id: 'geo_2', subject: 'geografia', teacher: 'Nael', name: 'Cartografia, Fusos Horários, Coordenadas e Escalas',
+        stats: { coluni: { freq: 'alta', pct: '11.9%' }, cefet: { freq: 'alta', pct: '20.0%' }, ifmg: { freq: 'alta', pct: '13.3%' }, ifnmg: { freq: 'alta', pct: '16.1%' }, coltec: { freq: 'alta', pct: '19.0%' } } },
+      { id: 'geo_3', subject: 'geografia', teacher: 'Nael', name: 'Geomorfologia, Relevo e Dinâmica da Terra',
+        stats: { coluni: { freq: 'baixa', pct: '4.5%' }, cefet: { freq: 'baixa', pct: '5.0%' }, ifmg: { freq: 'media', pct: '10.0%' }, ifnmg: { freq: 'media', pct: '9.7%' }, coltec: { freq: 'media', pct: '10.5%' } } },
+      { id: 'geo_4', subject: 'geografia', teacher: 'Nael', name: 'Climatologia, Biomas do Brasil (Cerrado, Mata dos Cocais, etc.)',
+        stats: { coluni: { freq: 'media', pct: '9.0%' }, cefet: { freq: 'alta', pct: '18.2%' }, ifmg: { freq: 'alta', pct: '15.0%' }, ifnmg: { freq: 'baixa', pct: '3.2%' }, coltec: { freq: 'alta', pct: '14.3%' } } },
+      { id: 'geo_5', subject: 'geografia', teacher: 'Nael', name: 'Hidrografia e Bacias Hidrográficas do Brasil',
+        stats: { coluni: { freq: 'media', pct: '7.5%' }, cefet: { freq: 'baixa', pct: '4.0%' }, ifmg: { freq: 'media', pct: '10.0%' }, ifnmg: { freq: 'baixa', pct: '3.0%' }, coltec: { freq: 'baixa', pct: '4.0%' } } },
+      { id: 'geo_6', subject: 'geografia', teacher: 'Nael', name: 'População Brasileira (Dinâmica demográfica e pirâmides)',
+        stats: { coluni: { freq: 'alta', pct: '11.9%' }, cefet: { freq: 'media', pct: '12.7%' }, ifmg: { freq: 'media', pct: '11.7%' }, ifnmg: { freq: 'baixa', pct: '6.5%' }, coltec: { freq: 'media', pct: '10.5%' } } },
+      { id: 'geo_7', subject: 'geografia', teacher: 'Nael', name: 'Geografia Agrária e Lei de Terras de 1850 no Brasil',
+        stats: { coluni: { freq: 'media', pct: '9.0%' }, cefet: { freq: 'alta', pct: '10.9%' }, ifmg: { freq: 'alta', pct: '21.7%' }, ifnmg: { freq: 'media', pct: '9.7%' }, coltec: { freq: 'alta', pct: '16.7%' } } },
+      { id: 'geo_8', subject: 'geografia', teacher: 'Nael', name: 'Urbanização e Industrialização no Brasil',
+        stats: { coluni: { freq: 'alta', pct: '14.9%' }, cefet: { freq: 'media', pct: '12.7%' }, ifmg: { freq: 'baixa', pct: '6.7%' }, ifnmg: { freq: 'media', pct: '9.7%' }, coltec: { freq: 'media', pct: '10.5%' } } },
+      { id: 'geo_9', subject: 'geografia', teacher: 'Nael', name: 'Globalização, Inteligência Artificial, Tecnopolos e Economia',
+        stats: { coluni: { freq: 'alta', pct: '10.4%' }, cefet: { freq: 'alta', pct: '20.0%' }, ifmg: { freq: 'alta', pct: '13.3%' }, ifnmg: { freq: 'alta', pct: '25.8%' }, coltec: { freq: 'alta', pct: '28.6%' } } },
 
-      // INGLÊS (EXCLUSIVO COLUNI)
-      { id: 'ing_1', subject: 'ingles', teacher: 'Tainá', name: 'Estratégias de Leitura: Skimming (títulos, imagens e dados)', isChampion: true },
-      { id: 'ing_2', subject: 'ingles', teacher: 'Tainá', name: 'Estratégias de Leitura: Scanning (palavras-chave e busca ágil)', isChampion: true },
-      { id: 'ing_3', subject: 'ingles', teacher: 'Tainá', name: 'Gêneros multimodais: tirinhas, charges e anúncios publicitários', isChampion: true },
-      { id: 'ing_4', subject: 'ingles', teacher: 'Tainá', name: 'Perceber a intenção do autor e contexto', isChampion: false },
-      { id: 'ing_5', subject: 'ingles', teacher: 'Tainá', name: 'Comparatives, Superlatives e Grau dos Adjetivos', isChampion: false },
-      { id: 'ing_6', subject: 'ingles', teacher: 'Tainá', name: 'Tempos Verbais: Simple Present, Present Continuous e Imperativo', isChampion: false },
-      { id: 'ing_7', subject: 'ingles', teacher: 'Tainá', name: 'Tempos Verbais: Simple Past e Past Continuous', isChampion: false },
-      { id: 'ing_8', subject: 'ingles', teacher: 'Tainá', name: 'Verbo Modal CAN e Quantificadores (some, any, many, much)', isChampion: false },
-      { id: 'ing_9', subject: 'ingles', teacher: 'Tainá', name: 'Pronomes Relativos (who, which, that, whose)', isChampion: false },
-      { id: 'ing_10', subject: 'ingles', teacher: 'Tainá', name: 'Conectivos textuais (conjunções de oposição, causa e conclusão)', isChampion: true }
+      // REDAÇÃO (Profª. Ailly - Exclusivo COLUNI)
+      { id: 'red_1', subject: 'redacao', teacher: 'Ailly', name: 'Estrutura da Prova de Redação do COLUNI',
+        stats: { coluni: { freq: 'alta', pct: '100% da Redação' }, cefet: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, coltec: { freq: 'nula', pct: null, note: 'Sem Redação' } } },
+      { id: 'red_2', subject: 'redacao', teacher: 'Ailly', name: 'Tipologia Narrativa e o Gênero Crônica Cotidiana',
+        stats: { coluni: { freq: 'alta', pct: '40.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, coltec: { freq: 'nula', pct: null, note: 'Sem Redação' } } },
+      { id: 'red_3', subject: 'redacao', teacher: 'Ailly', name: 'Gênero Autobiografia e Tipos de Relato Pessoal',
+        stats: { coluni: { freq: 'media', pct: '10.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, coltec: { freq: 'nula', pct: null, note: 'Sem Redação' } } },
+      { id: 'red_4', subject: 'redacao', teacher: 'Ailly', name: 'Carta Pessoal, Carta de Leitor e Carta Aberta',
+        stats: { coluni: { freq: 'alta', pct: '30.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, coltec: { freq: 'nula', pct: null, note: 'Sem Redação' } } },
+      { id: 'red_5', subject: 'redacao', teacher: 'Ailly', name: 'Tipologia Expositiva: Prefácio e Entrevista',
+        stats: { coluni: { freq: 'baixa', pct: '5.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, coltec: { freq: 'nula', pct: null, note: 'Sem Redação' } } },
+      { id: 'red_6', subject: 'redacao', teacher: 'Ailly', name: 'Gênero Síntese (Resumo)',
+        stats: { coluni: { freq: 'baixa', pct: '5.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, coltec: { freq: 'nula', pct: null, note: 'Sem Redação' } } },
+      { id: 'red_7', subject: 'redacao', teacher: 'Ailly', name: 'Tipologia Injuntiva: Manual de Instruções e Tutorial',
+        stats: { coluni: { freq: 'baixa', pct: '5.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, coltec: { freq: 'nula', pct: null, note: 'Sem Redação' } } },
+      { id: 'red_8', subject: 'redacao', teacher: 'Ailly', name: 'Tipologia Argumentativa e Estrutura do Texto Opinativo',
+        stats: { coluni: { freq: 'alta', pct: '30.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, coltec: { freq: 'nula', pct: null, note: 'Sem Redação' } } },
+      { id: 'red_9', subject: 'redacao', teacher: 'Ailly', name: 'Tipos de Argumentos e Gênero Manifesto',
+        stats: { coluni: { freq: 'baixa', pct: '5.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Redação' }, coltec: { freq: 'nula', pct: null, note: 'Sem Redação' } } },
+
+      // INGLÊS (Profª. Tainá - Exclusivo COLUNI)
+      { id: 'ing_1', subject: 'ingles', teacher: 'Tainá', name: 'Estratégias de Leitura: Skimming (títulos, imagens e dados)',
+        stats: { coluni: { freq: 'alta', pct: '45.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Inglês' }, ifmg: { freq: 'nula', pct: null, note: 'Extinto em 2018' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Inglês' }, coltec: { freq: 'nula', pct: null, note: 'Sem Inglês' } } },
+      { id: 'ing_2', subject: 'ingles', teacher: 'Tainá', name: 'Estratégias de Leitura: Scanning (palavras-chave e busca ágil)',
+        stats: { coluni: { freq: 'alta', pct: '45.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Inglês' }, ifmg: { freq: 'nula', pct: null, note: 'Extinto em 2018' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Inglês' }, coltec: { freq: 'nula', pct: null, note: 'Sem Inglês' } } },
+      { id: 'ing_3', subject: 'ingles', teacher: 'Tainá', name: 'Gêneros multimodais: tirinhas, charges e anúncios publicitários',
+        stats: { coluni: { freq: 'alta', pct: '35.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Inglês' }, ifmg: { freq: 'nula', pct: null, note: 'Extinto em 2018' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Inglês' }, coltec: { freq: 'nula', pct: null, note: 'Sem Inglês' } } },
+      { id: 'ing_4', subject: 'ingles', teacher: 'Tainá', name: 'Perceber a intenção do autor e contexto',
+        stats: { coluni: { freq: 'media', pct: '20.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Inglês' }, ifmg: { freq: 'nula', pct: null, note: 'Extinto em 2018' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Inglês' }, coltec: { freq: 'nula', pct: null, note: 'Sem Inglês' } } },
+      { id: 'ing_5', subject: 'ingles', teacher: 'Tainá', name: 'Comparatives, Superlatives e Grau dos Adjetivos',
+        stats: { coluni: { freq: 'baixa', pct: '5.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Inglês' }, ifmg: { freq: 'nula', pct: null, note: 'Extinto em 2018' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Inglês' }, coltec: { freq: 'nula', pct: null, note: 'Sem Inglês' } } },
+      { id: 'ing_6', subject: 'ingles', teacher: 'Tainá', name: 'Tempos Verbais: Simple Present, Present Continuous e Imperativo',
+        stats: { coluni: { freq: 'baixa', pct: '5.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Inglês' }, ifmg: { freq: 'nula', pct: null, note: 'Extinto em 2018' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Inglês' }, coltec: { freq: 'nula', pct: null, note: 'Sem Inglês' } } },
+      { id: 'ing_7', subject: 'ingles', teacher: 'Tainá', name: 'Tempos Verbais: Simple Past e Past Continuous',
+        stats: { coluni: { freq: 'baixa', pct: '5.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Inglês' }, ifmg: { freq: 'nula', pct: null, note: 'Extinto em 2018' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Inglês' }, coltec: { freq: 'nula', pct: null, note: 'Sem Inglês' } } },
+      { id: 'ing_8', subject: 'ingles', teacher: 'Tainá', name: 'Verbo Modal CAN e Quantificadores (some, any, many, much)',
+        stats: { coluni: { freq: 'baixa', pct: '5.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Inglês' }, ifmg: { freq: 'nula', pct: null, note: 'Extinto em 2018' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Inglês' }, coltec: { freq: 'nula', pct: null, note: 'Sem Inglês' } } },
+      { id: 'ing_9', subject: 'ingles', teacher: 'Tainá', name: 'Pronomes Relativos (who, which, that, whose)',
+        stats: { coluni: { freq: 'baixa', pct: '5.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Inglês' }, ifmg: { freq: 'nula', pct: null, note: 'Extinto em 2018' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Inglês' }, coltec: { freq: 'nula', pct: null, note: 'Sem Inglês' } } },
+      { id: 'ing_10', subject: 'ingles', teacher: 'Tainá', name: 'Conectivos textuais (conjunções de oposição, causa e conclusão)',
+        stats: { coluni: { freq: 'alta', pct: '20.0%' }, cefet: { freq: 'nula', pct: null, note: 'Sem Inglês' }, ifmg: { freq: 'nula', pct: null, note: 'Extinto em 2018' }, ifnmg: { freq: 'nula', pct: null, note: 'Sem Inglês' }, coltec: { freq: 'nula', pct: null, note: 'Sem Inglês' } } }
     ];
 
     let currentBanca = 'coluni';
     let currentSubjectFilter = 'all';
     let currentMasteryFilter = 'all';
     let currentStatSubject = 'portugues';
-    let userMastery = {}; // { [topicId]: 'nao_domino' | 'parcial' | 'domino' }
-    let revisaoDone = {}; // { [topicId]: boolean }
+    let userMastery = {};
+    let revisaoDone = {};
 
-    // Carregar progresso do LocalStorage
     try {
       const savedMastery = localStorage.getItem('gpf_user_mastery');
       if (savedMastery) userMastery = JSON.parse(savedMastery);
       const savedDone = localStorage.getItem('gpf_revisao_done');
       if (savedDone) revisaoDone = JSON.parse(savedDone);
     } catch(e) {
-      console.warn("Storage local indisponível", e);
+      console.warn("Armazenamento local indisponível", e);
     }
 
     function switchTab(tabId) {
@@ -1042,7 +1153,6 @@
       if (!bancasData[bancaId]) return;
       currentBanca = bancaId;
 
-      // Atualiza botões do seletor
       ['coluni', 'cefet', 'ifmg', 'ifnmg', 'coltec'].forEach(id => {
         const btn = document.getElementById('target-btn-' + id);
         if (btn) {
@@ -1054,7 +1164,6 @@
         }
       });
 
-      // Atualiza Hero Card
       const data = bancasData[bancaId];
       document.getElementById('hero-banca-nome').innerText = data.name;
       document.getElementById('hero-banca-materias-info').innerText = data.materiaDesc;
@@ -1071,7 +1180,6 @@
       const chartSelect = document.getElementById('select-chart-banca');
       if (chartSelect) chartSelect.value = bancaId;
 
-      // Se matéria atual for redação ou inglês e a nova banca não tiver, volta pra português
       if (!data.hasRedacao && currentSubjectFilter === 'redacao') currentSubjectFilter = 'all';
       if (!data.hasIngles && currentSubjectFilter === 'ingles') currentSubjectFilter = 'all';
       if (!data.hasRedacao && currentStatSubject === 'redacao') currentStatSubject = 'portugues';
@@ -1129,13 +1237,13 @@
 
     function setMasteryFilter(masId) {
       currentMasteryFilter = masId;
-      ['all', 'nao_domino', 'parcial', 'domino', 'campeoes'].forEach(id => {
+      ['all', 'urgente_maxima', 'atencao', 'nao_domino', 'parcial', 'domino'].forEach(id => {
         const btn = document.getElementById('filter-mas-' + id);
         if (btn) {
           if (id === masId) {
-            btn.className = "px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-white transition-all";
+            btn.className = "px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-white transition-all whitespace-nowrap";
           } else {
-            btn.className = "px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all";
+            btn.className = "px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all whitespace-nowrap";
           }
         }
       });
@@ -1150,21 +1258,26 @@
       if (!container) return;
 
       const filtered = allTopics.filter(t => {
-        // Exclui redação e inglês se a banca não tiver
         if (!banca.hasRedacao && t.subject === 'redacao') return false;
         if (!banca.hasIngles && t.subject === 'ingles') return false;
 
-        // Filtro de Matéria
         if (currentSubjectFilter !== 'all' && t.subject !== currentSubjectFilter) return false;
 
-        // Filtro de Status
         const st = userMastery[t.id];
-        if (currentMasteryFilter === 'nao_domino' && st !== 'nao_domino') return false;
-        if (currentMasteryFilter === 'parcial' && st !== 'parcial') return false;
-        if (currentMasteryFilter === 'domino' && st !== 'domino') return false;
-        if (currentMasteryFilter === 'campeoes' && !t.isChampion) return false;
+        const stat = t.stats[currentBanca] || { freq: 'baixa', pct: null };
 
-        // Busca textual
+        if (currentMasteryFilter === 'urgente_maxima') {
+          if (st !== 'nao_domino' || stat.freq !== 'alta') return false;
+        } else if (currentMasteryFilter === 'atencao') {
+          if (st !== 'parcial' || stat.freq !== 'alta') return false;
+        } else if (currentMasteryFilter === 'nao_domino') {
+          if (st !== 'nao_domino') return false;
+        } else if (currentMasteryFilter === 'parcial') {
+          if (st !== 'parcial') return false;
+        } else if (currentMasteryFilter === 'domino') {
+          if (st !== 'domino') return false;
+        }
+
         if (query) {
           const matchName = t.name.toLowerCase().includes(query);
           const matchSubj = t.subject.toLowerCase().includes(query);
@@ -1178,7 +1291,7 @@
       if (filtered.length === 0) {
         container.innerHTML = `
           <div class="bg-white rounded-xl p-8 border border-slate-200 text-center text-slate-500 text-xs">
-            Nenhum conteúdo encontrado com esses filtros. Tente buscar por outro termo.
+            Nenhum conteúdo encontrado com esses filtros. Tente selecionar outra opção acima.
           </div>
         `;
         return;
@@ -1191,6 +1304,18 @@
         const isNao = state === 'nao_domino';
 
         const subjectLabel = subjectConfig.find(s => s.id === t.subject)?.name || t.subject;
+        const stat = t.stats[currentBanca] || { freq: 'baixa', pct: null };
+
+        let freqBadge = '';
+        if (stat.freq === 'alta') {
+          freqBadge = `<span class="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded border border-amber-200">Cai Muito ${stat.pct ? '· ' + stat.pct : ''}</span>`;
+        } else if (stat.freq === 'media') {
+          freqBadge = `<span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">Cai Moderadamente ${stat.pct ? '· ' + stat.pct : ''}</span>`;
+        } else if (stat.freq === 'baixa') {
+          freqBadge = `<span class="text-[10px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">Cai Pouco ${stat.pct ? '· ' + stat.pct : ''}</span>`;
+        } else if (stat.freq === 'nula') {
+          freqBadge = `<span class="text-[10px] font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-100">${stat.note || 'Não cobrado nesta prova'}</span>`;
+        }
 
         return `
           <div class="bg-white rounded-xl p-3 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-slate-300 transition-all">
@@ -1200,22 +1325,17 @@
                 <span class="text-[10px] font-bold uppercase tracking-wider text-gpf-blue bg-indigo-50 px-2 py-0.5 rounded">
                   ${subjectLabel} · Prof. ${t.teacher}
                 </span>
-                ${t.isChampion ? `
-                  <span class="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
-                    Muito cobrado
-                  </span>
-                ` : ''}
+                ${freqBadge}
               </div>
               <h4 class="text-xs sm:text-sm font-semibold text-slate-800 mt-1">${t.name}</h4>
             </div>
 
-            <!-- Botões de Marcação com 3 Estados -->
             <div class="flex items-center gap-1 shrink-0">
               <button onclick="setTopicMastery('${t.id}', 'nao_domino')" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
                 isNao ? 'bg-rose-500 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-rose-50 hover:text-rose-600'
               }">
                 <i class="fas fa-times-circle text-[10px]"></i>
-                <span>Não sei ainda</span>
+                <span>Não sei</span>
               </button>
 
               <button onclick="setTopicMastery('${t.id}', 'parcial')" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
@@ -1312,7 +1432,6 @@
 
       const banca = bancasData[currentBanca];
       
-      // Filtra os tópicos que o aluno marcou como dúvida
       const needed = allTopics.filter(t => {
         if (!banca.hasRedacao && t.subject === 'redacao') return false;
         if (!banca.hasIngles && t.subject === 'ingles') return false;
@@ -1320,19 +1439,26 @@
         return st === 'nao_domino' || st === 'parcial';
       });
 
-      // Ordena: tópicos que mais caem primeiro (isChampion) e depois os 'nao_domino' antes dos 'parcial'
       needed.sort((a, b) => {
-        if (a.isChampion !== b.isChampion) return b.isChampion ? 1 : -1;
-        const sa = userMastery[a.id] === 'nao_domino' ? 2 : 1;
-        const sb = userMastery[b.id] === 'nao_domino' ? 2 : 1;
-        return sb - sa;
+        const statA = a.stats[currentBanca]?.freq || 'baixa';
+        const statB = b.stats[currentBanca]?.freq || 'baixa';
+        const scoreFreqA = statA === 'alta' ? 3 : (statA === 'media' ? 2 : 1);
+        const scoreFreqB = statB === 'alta' ? 3 : (statB === 'media' ? 2 : 1);
+
+        const scoreUrgA = userMastery[a.id] === 'nao_domino' ? 2 : 1;
+        const scoreUrgB = userMastery[b.id] === 'nao_domino' ? 2 : 1;
+
+        const totalA = scoreFreqA * 2 + scoreUrgA;
+        const totalB = scoreFreqB * 2 + scoreUrgB;
+
+        return totalB - totalA;
       });
 
       if (needed.length === 0) {
         container.innerHTML = `
           <div class="bg-slate-50 rounded-xl p-8 border border-slate-200 text-center text-slate-500 text-xs">
             <i class="fas fa-check-circle text-emerald-500 text-2xl mb-2 block"></i>
-            Parabéns! Você não tem nenhum tópico pendente para revisar nessa banca no momento.
+            Parabéns! Você não tem nenhum conteúdo pendente para revisar nessa banca no momento.
           </div>
         `;
         return;
@@ -1342,6 +1468,14 @@
         const isDone = !!revisaoDone[t.id];
         const isNao = userMastery[t.id] === 'nao_domino';
         const subjName = subjectConfig.find(s => s.id === t.subject)?.name || t.subject;
+        const stat = t.stats[currentBanca] || { freq: 'baixa', pct: null };
+
+        let freqTag = '';
+        if (stat.freq === 'alta') {
+          freqTag = `<span class="text-[10px] font-bold text-amber-800 bg-amber-100 px-1.5 py-0.2 rounded">Cai Muito ${stat.pct ? '· ' + stat.pct : ''}</span>`;
+        } else if (stat.freq === 'media') {
+          freqTag = `<span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-1.5 py-0.2 rounded">Cai Moderadamente ${stat.pct ? '· ' + stat.pct : ''}</span>`;
+        }
 
         return `
           <div class="p-3 rounded-xl border flex items-center justify-between gap-3 transition-all ${
@@ -1353,7 +1487,7 @@
                 <div class="flex items-center gap-1.5 flex-wrap">
                   <span class="text-[10px] font-bold uppercase text-slate-500 font-mono">#${idx + 1}</span>
                   <span class="text-[10px] font-bold text-gpf-blue bg-indigo-50 px-1.5 py-0.2 rounded">${subjName}</span>
-                  ${t.isChampion ? `<span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.2 rounded">Mais Cobrado</span>` : ''}
+                  ${freqTag}
                   <span class="text-[10px] font-bold ${isNao ? 'text-rose-600' : 'text-amber-600'}">
                     ${isNao ? '· Não sei ainda' : '· Mais ou menos'}
                   </span>
@@ -1402,37 +1536,53 @@
       if (!card) return;
 
       const banca = bancasData[currentBanca];
-      const ranks = banca.rankings[currentStatSubject] || [];
+      const items = banca.subjectPanoramas?.[currentStatSubject] || [];
       const subjName = subjectConfig.find(s => s.id === currentStatSubject)?.name || currentStatSubject;
 
-      if (ranks.length === 0) {
-        card.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">Sem dados específicos de ranking para esta disciplina.</p>`;
+      if (items.length === 0) {
+        card.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">Sem dados específicos de incidência para esta matéria no ${banca.name}.</p>`;
         return;
+      }
+
+      const altas = items.filter(x => x.tier === 'alta');
+      const medias = items.filter(x => x.tier === 'media');
+      const baixas = items.filter(x => x.tier === 'baixa');
+
+      function buildGroup(title, list, badgeCls, badgeText) {
+        if (!list || list.length === 0) return '';
+        return `
+          <div class="mb-3.5 last:mb-0">
+            <div class="flex items-center gap-1.5 mb-2">
+              <span class="text-xs font-bold text-slate-800">${title}</span>
+              <span class="text-[9px] font-bold px-1.5 py-0.5 rounded ${badgeCls}">${badgeText} (${list.length})</span>
+            </div>
+            <div class="space-y-1.5">
+              ${list.map(r => `
+                <div class="bg-slate-50 rounded-lg p-2 border border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                  <div class="flex-1">
+                    <div class="text-xs font-semibold text-slate-800">${r.topic}</div>
+                    <div class="text-[11px] text-slate-500">${r.obs}</div>
+                  </div>
+                  ${r.pct ? `<span class="text-xs font-mono font-bold text-gpf-blue bg-white px-2 py-0.5 rounded border border-slate-200 shrink-0 self-end sm:self-center">${r.pct}</span>` : ''}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
       }
 
       card.innerHTML = `
         <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
           <div>
-            <h4 class="font-bold text-slate-900 text-xs sm:text-sm">Assuntos Mais Cobrados em ${subjName}</h4>
-            <p class="text-[11px] text-slate-500">Representam a maioria esmagadora das questões desta matéria no ${banca.name}.</p>
+            <h4 class="font-bold text-slate-900 text-xs sm:text-sm">Panorama Estatístico: ${subjName} (${banca.name})</h4>
+            <p class="text-[11px] text-slate-500">Classificação dos conteúdos programáticos por volume de cobrança histórica.</p>
           </div>
           <span class="text-[10px] font-mono font-bold text-gpf-blue bg-indigo-50 px-2 py-1 rounded">Base Auditada</span>
         </div>
 
-        <div class="space-y-2">
-          ${ranks.map((r, i) => `
-            <div class="bg-slate-50 rounded-lg p-2.5 border border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div class="flex items-start gap-2">
-                <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-700 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">${i + 1}</span>
-                <div>
-                  <div class="text-xs font-bold text-slate-800">${r.topic}</div>
-                  <div class="text-[11px] text-slate-500 mt-0.5">${r.tip}</div>
-                </div>
-              </div>
-              <span class="text-xs font-mono font-bold text-gpf-blue bg-white px-2 py-0.5 rounded border border-slate-200 shrink-0 self-end sm:self-center">${r.pct}</span>
-            </div>
-          `).join('')}
-        </div>
+        ${buildGroup('Cai Muito (Alta Incidência)', altas, 'bg-amber-100 text-amber-800', 'Prioridade Máxima')}
+        ${buildGroup('Cai Moderadamente (Média Incidência)', medias, 'bg-blue-50 text-blue-700', 'Incidência Regular')}
+        ${buildGroup('Cai Pouco ou Raramente (Baixa Incidência)', baixas, 'bg-slate-100 text-slate-600', 'Pouco Cobrado')}
       `;
     }
 
@@ -1443,7 +1593,6 @@
       const banca = bancasData[currentBanca];
       document.getElementById('chart-main-title').innerText = "O que mais cai: " + banca.name;
       
-      // Gráfico de Peso
       const weightCtx = document.getElementById('chart-weight-canvas')?.getContext('2d');
       if (weightCtx) {
         if (weightChartInstance) weightChartInstance.destroy();
@@ -1474,7 +1623,6 @@
         });
       }
 
-      // Gráfico Cognitivo
       const cogCtx = document.getElementById('chart-cognitive-canvas')?.getContext('2d');
       if (cogCtx) {
         if (cognitiveChartInstance) cognitiveChartInstance.destroy();
@@ -1515,7 +1663,6 @@
       }
     }
 
-    /* GERAÇÃO DE PDF BONITO E FORMATADO COM HTML2PDF */
     function gerarChecklistPDF() {
       const banca = bancasData[currentBanca];
       const validTopics = allTopics.filter(t => {
@@ -1525,15 +1672,14 @@
         return st === 'nao_domino' || st === 'parcial';
       });
 
-      // Ordenar por Campeão de cobrança e por urgência
       validTopics.sort((a, b) => {
-        if (a.isChampion !== b.isChampion) return b.isChampion ? -1 : 1;
-        const sa = userMastery[a.id] === 'nao_domino' ? 2 : 1;
-        const sb = userMastery[b.id] === 'nao_domino' ? 2 : 1;
-        return sb - sa;
+        const statA = a.stats[currentBanca]?.freq || 'baixa';
+        const statB = b.stats[currentBanca]?.freq || 'baixa';
+        const scoreA = (statA === 'alta' ? 3 : (statA === 'media' ? 2 : 1)) * 2 + (userMastery[a.id] === 'nao_domino' ? 2 : 1);
+        const scoreB = (statB === 'alta' ? 3 : (statB === 'media' ? 2 : 1)) * 2 + (userMastery[b.id] === 'nao_domino' ? 2 : 1);
+        return scoreB - scoreA;
       });
 
-      // Calcular métricas
       const totalDisciplinas = allTopics.filter(t => {
         if (!banca.hasRedacao && t.subject === 'redacao') return false;
         if (!banca.hasIngles && t.subject === 'ingles') return false;
@@ -1554,7 +1700,6 @@
 
       const pct = Math.round((dominaCount / totalDisciplinas) * 100) || 0;
 
-      // Atualizar dados no template PDF
       document.getElementById('pdf-banca-badge').innerText = banca.name;
       document.getElementById('pdf-data-geracao').innerText = 'Emitido em: ' + new Date().toLocaleDateString('pt-BR');
       document.getElementById('pdf-metric-progresso').innerText = pct + '%';
@@ -1571,12 +1716,18 @@
           </div>
         `;
       } else {
-        topicsContainer.innerHTML = validTopics.map((t, idx) => {
+        topicsContainer.innerHTML = validTopics.map(t => {
           const isUrgente = userMastery[t.id] === 'nao_domino';
           const subjName = subjectConfig.find(s => s.id === t.subject)?.name || t.subject;
+          const stat = t.stats[currentBanca] || { freq: 'baixa', pct: null };
+
           const statusBadge = isUrgente 
             ? '<span style="color: #e11d48; font-weight: bold; font-size: 10px;">[!] Não sei ainda</span>' 
             : '<span style="color: #d97706; font-weight: bold; font-size: 10px;">[~] Mais ou menos</span>';
+
+          const freqBadge = stat.freq === 'alta'
+            ? `<span style="background: #fef3c7; color: #92400e; font-size: 9px; font-weight: bold; padding: 1px 4px; border-radius: 3px;">Cai Muito ${stat.pct ? '· ' + stat.pct : ''}</span>`
+            : (stat.freq === 'media' ? `<span style="background: #eff6ff; color: #1d4ed8; font-size: 9px; font-weight: bold; padding: 1px 4px; border-radius: 3px;">Cai Moderadamente ${stat.pct ? '· ' + stat.pct : ''}</span>` : '');
 
           return `
             <div style="display: flex; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding: 6px 0; font-size: 11px;">
@@ -1585,7 +1736,7 @@
                 <div>
                   <div style="display: flex; align-items: center; gap: 6px;">
                     <span style="font-weight: 800; color: #5242ea; text-transform: uppercase; font-size: 9px;">${subjName}</span>
-                    ${t.isChampion ? '<span style="background: #fef3c7; color: #92400e; font-size: 9px; font-weight: bold; padding: 1px 4px; border-radius: 3px;">Mais Cobrado</span>' : ''}
+                    ${freqBadge}
                     ${statusBadge}
                   </div>
                   <div style="font-weight: 600; color: #1e293b; margin-top: 2px;">${t.name}</div>
@@ -1597,7 +1748,6 @@
         }).join('');
       }
 
-      // Preparar e acionar html2pdf
       const element = document.getElementById('pdf-render-template');
       element.style.display = 'block';
 
