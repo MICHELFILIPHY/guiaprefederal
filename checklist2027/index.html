@@ -7,6 +7,7 @@
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,6 +58,15 @@
     @media print {
       .no-print { display: none !important; }
       body { background: white !important; }
+    }
+
+    /* Estilos do Documento PDF de Exportação */
+    #pdf-render-template {
+      display: none;
+      font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+      color: #1e293b;
+      background: #ffffff;
+      padding: 24px;
     }
   </style>
 </head>
@@ -135,14 +145,14 @@
           <div class="text-[11px] text-slate-300" id="hero-banca-materias-info">Português, Matemática, Ciências, Humanas, Redação e Inglês</div>
         </div>
         <div class="bg-white/5 rounded-xl p-3 border border-white/5">
-          <div class="text-[10px] text-slate-400 font-semibold uppercase" id="banca-summary-title1">Destaque Principal</div>
+          <div class="text-[10px] text-slate-400 font-semibold uppercase" id="banca-summary-title1">Destaque Principal (Peso 2)</div>
           <div class="text-sm font-bold text-white mt-0.5" id="banca-summary-val1">Português + Matemática</div>
-          <div class="text-[11px] text-slate-300" id="banca-summary-sub1">Mais de 52% dos pontos da prova objetiva</div>
+          <div class="text-[11px] text-slate-300" id="banca-summary-sub1">Quase 69% dos pontos da prova objetiva (40 de 58 pontos)</div>
         </div>
         <div class="bg-white/5 rounded-xl p-3 border border-white/5">
           <div class="text-[10px] text-slate-400 font-semibold uppercase" id="banca-summary-title2">Formato da Prova</div>
-          <div class="text-sm font-bold text-white mt-0.5" id="banca-summary-val2">38 Questões (A a D) + Redação</div>
-          <div class="text-[11px] text-slate-300" id="banca-summary-sub2">Modelo atual mantido com estabilidade</div>
+          <div class="text-sm font-bold text-white mt-0.5" id="banca-summary-val2">38 Questões (58 Pontos) + Redação</div>
+          <div class="text-[11px] text-slate-300" id="banca-summary-sub2">Port e Mat valem 2 pts cada · Ciênc, Hum e Ing valem 1 pt</div>
         </div>
       </div>
 
@@ -251,15 +261,21 @@
       </div>
 
       <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 space-y-3">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
           <div>
             <h3 class="font-bold text-slate-900 text-sm">Checklist de Revisão</h3>
             <p class="text-[11px] text-slate-500">Marque a caixa ao lado conforme for estudando para riscar da lista.</p>
           </div>
-          <button onclick="window.print()" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-1.5">
-            <i class="fas fa-print"></i>
-            <span>Imprimir</span>
-          </button>
+          <div class="flex items-center gap-2">
+            <button onclick="gerarChecklistPDF()" id="btn-exportar-pdf" class="px-3 py-1.5 rounded-lg bg-gpf-blue text-white text-xs font-semibold hover:bg-gpf-darkBlue transition-all flex items-center gap-1.5 shadow-sm">
+              <i class="fas fa-file-pdf"></i>
+              <span>Baixar Checklist em PDF</span>
+            </button>
+            <button onclick="window.print()" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-1.5">
+              <i class="fas fa-print"></i>
+              <span>Imprimir</span>
+            </button>
+          </div>
         </div>
 
         <div id="plan-list-container" class="space-y-2 pb-6">
@@ -452,7 +468,7 @@
             </tr>
             <tr>
               <td class="py-2.5 px-2 font-bold text-slate-900">Tamanho da Prova Recente</td>
-              <td class="py-2.5 px-2 bg-indigo-50/20">38 Questões (A a D)</td>
+              <td class="py-2.5 px-2 bg-indigo-50/20">38 Questões · 58 Pontos (Port e Mat têm Peso 2)</td>
               <td class="py-2.5 px-2 bg-blue-50/20">50 Questões (A a D)</td>
               <td class="py-2.5 px-2 bg-amber-50/20">50 Questões (A a D)</td>
               <td class="py-2.5 px-2 bg-emerald-50/20">30 Questões (A a E)</td>
@@ -465,6 +481,52 @@
     </div>
 
   </main>
+
+  <!-- CONTAINER DE RENDERIZAÇÃO DO PDF (BONITO, LIMPO E FORMAL) -->
+  <div id="pdf-render-template">
+    <div style="border-bottom: 2px solid #5242ea; padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-end;">
+      <div>
+        <div style="font-size: 20px; font-weight: 800; color: #3007a0;">Guia Pré-Federal</div>
+        <div style="font-size: 11px; color: #64748b; font-weight: 600;">Plano de Estudos & Checklist de Revisão Tático</div>
+      </div>
+      <div style="text-align: right;">
+        <div id="pdf-banca-badge" style="font-size: 13px; font-weight: 800; color: #5242ea;">COLUNI · UFV</div>
+        <div id="pdf-data-geracao" style="font-size: 10px; color: #94a3b8;">Gerado em 2026</div>
+      </div>
+    </div>
+
+    <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 16px; display: flex; justify-content: space-around; text-align: center;">
+      <div>
+        <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: bold;">Progresso do Aluno</div>
+        <div id="pdf-metric-progresso" style="font-size: 16px; font-weight: 800; color: #5242ea;">0%</div>
+      </div>
+      <div>
+        <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: bold;">Total a Revisar</div>
+        <div id="pdf-metric-total" style="font-size: 16px; font-weight: 800; color: #0f172a;">0</div>
+      </div>
+      <div>
+        <div style="font-size: 10px; color: #e11d48; text-transform: uppercase; font-weight: bold;">Não Sei Ainda</div>
+        <div id="pdf-metric-urgente" style="font-size: 16px; font-weight: 800; color: #e11d48;">0</div>
+      </div>
+      <div>
+        <div style="font-size: 10px; color: #d97706; text-transform: uppercase; font-weight: bold;">Mais ou Menos</div>
+        <div id="pdf-metric-parcial" style="font-size: 16px; font-weight: 800; color: #d97706;">0</div>
+      </div>
+    </div>
+
+    <div style="font-size: 12px; font-weight: bold; color: #0f172a; margin-bottom: 8px;">
+      Tópicos Selecionados para Revisão (Ordenados por Incidência na Prova)
+    </div>
+
+    <div id="pdf-topics-list" style="margin-bottom: 20px;">
+      <!-- Itens do PDF injetados via JS -->
+    </div>
+
+    <div style="border-top: 1px solid #e2e8f0; padding-top: 8px; font-size: 9px; color: #94a3b8; display: flex; justify-content: space-between;">
+      <span>Guia Pré-Federal · guiaprefederal.com.br</span>
+      <span>Base Estatística Auditada dos Vestibulinhos</span>
+    </div>
+  </div>
 
   <footer class="text-center py-6 border-t border-slate-200 text-xs text-slate-500 bg-white no-print">
     <p>Guia Pré-Federal · Ferramenta de Diagnóstico e Plano de Estudos</p>
@@ -479,15 +541,24 @@
         hasRedacao: true,
         hasIngles: true,
         materiaDesc: 'Português, Matemática, Ciências, Humanas, Redação e Inglês',
-        stat1: { title: 'Destaque Principal', val: 'Português + Matemática', sub: '52,6% da prova objetiva (20 de 38 questões)' },
-        stat2: { title: 'Formato da Prova', val: '38 Questões (A a D) + Redação', sub: '10 Port · 10 Mat · 8 Ciênc · 4 Geo · 4 Hist · 2 Ing' },
+        stat1: { 
+          title: 'Destaque Principal (Peso 2)', 
+          val: 'Português + Matemática', 
+          sub: '68,97% dos pontos da prova objetiva (40 de 58 pontos)' 
+        },
+        stat2: { 
+          title: 'Formato da Prova', 
+          val: '38 Questões (58 Pontos) + Redação', 
+          sub: 'Port (20 pts) · Mat (20 pts) · Ciênc (8 pts) · Geo (4 pts) · Hist (4 pts) · Ing (2 pts)' 
+        },
+        // Pontuação ponderada da prova objetiva: 20 + 20 + 8 + 4 + 4 + 2 = 58 pontos totais
         weights: {
-          portugues: 26.3,
-          matematica: 26.3,
-          ciencias: 21.1,
-          geografia: 10.5,
-          historia: 10.5,
-          ingles: 5.3
+          portugues: 34.5,
+          matematica: 34.5,
+          ciencias: 13.8,
+          geografia: 6.9,
+          historia: 6.9,
+          ingles: 3.4
         },
         cognitive: { analise: 53.5, aplicacao: 19.5, compreensao: 13.6, interpretacao: 12.9, memorizacao: 0.6 },
         rankings: {
@@ -1442,6 +1513,115 @@
           }
         });
       }
+    }
+
+    /* GERAÇÃO DE PDF BONITO E FORMATADO COM HTML2PDF */
+    function gerarChecklistPDF() {
+      const banca = bancasData[currentBanca];
+      const validTopics = allTopics.filter(t => {
+        if (!banca.hasRedacao && t.subject === 'redacao') return false;
+        if (!banca.hasIngles && t.subject === 'ingles') return false;
+        const st = userMastery[t.id];
+        return st === 'nao_domino' || st === 'parcial';
+      });
+
+      // Ordenar por Campeão de cobrança e por urgência
+      validTopics.sort((a, b) => {
+        if (a.isChampion !== b.isChampion) return b.isChampion ? -1 : 1;
+        const sa = userMastery[a.id] === 'nao_domino' ? 2 : 1;
+        const sb = userMastery[b.id] === 'nao_domino' ? 2 : 1;
+        return sb - sa;
+      });
+
+      // Calcular métricas
+      const totalDisciplinas = allTopics.filter(t => {
+        if (!banca.hasRedacao && t.subject === 'redacao') return false;
+        if (!banca.hasIngles && t.subject === 'ingles') return false;
+        return true;
+      }).length;
+
+      let dominaCount = 0;
+      let parcialCount = 0;
+      let urgenteCount = 0;
+
+      allTopics.forEach(t => {
+        if (!banca.hasRedacao && t.subject === 'redacao') return;
+        if (!banca.hasIngles && t.subject === 'ingles') return;
+        if (userMastery[t.id] === 'domino') dominaCount++;
+        if (userMastery[t.id] === 'parcial') parcialCount++;
+        if (userMastery[t.id] === 'nao_domino') urgenteCount++;
+      });
+
+      const pct = Math.round((dominaCount / totalDisciplinas) * 100) || 0;
+
+      // Atualizar dados no template PDF
+      document.getElementById('pdf-banca-badge').innerText = banca.name;
+      document.getElementById('pdf-data-geracao').innerText = 'Emitido em: ' + new Date().toLocaleDateString('pt-BR');
+      document.getElementById('pdf-metric-progresso').innerText = pct + '%';
+      document.getElementById('pdf-metric-total').innerText = validTopics.length;
+      document.getElementById('pdf-metric-urgente').innerText = urgenteCount;
+      document.getElementById('pdf-metric-parcial').innerText = parcialCount;
+
+      const topicsContainer = document.getElementById('pdf-topics-list');
+      
+      if (validTopics.length === 0) {
+        topicsContainer.innerHTML = `
+          <div style="padding: 24px; text-align: center; color: #10b981; font-weight: bold; border: 1px dashed #10b981; border-radius: 8px;">
+            Parabéns! Todos os conteúdos desta banca estão assinalados como "Mando bem" no seu check-up.
+          </div>
+        `;
+      } else {
+        topicsContainer.innerHTML = validTopics.map((t, idx) => {
+          const isUrgente = userMastery[t.id] === 'nao_domino';
+          const subjName = subjectConfig.find(s => s.id === t.subject)?.name || t.subject;
+          const statusBadge = isUrgente 
+            ? '<span style="color: #e11d48; font-weight: bold; font-size: 10px;">[!] Não sei ainda</span>' 
+            : '<span style="color: #d97706; font-weight: bold; font-size: 10px;">[~] Mais ou menos</span>';
+
+          return `
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding: 6px 0; font-size: 11px;">
+              <div style="display: flex; align-items: flex-start; gap: 8px;">
+                <span style="font-family: monospace; font-size: 12px; color: #64748b;">[ &nbsp; ]</span>
+                <div>
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="font-weight: 800; color: #5242ea; text-transform: uppercase; font-size: 9px;">${subjName}</span>
+                    ${t.isChampion ? '<span style="background: #fef3c7; color: #92400e; font-size: 9px; font-weight: bold; padding: 1px 4px; border-radius: 3px;">Mais Cobrado</span>' : ''}
+                    ${statusBadge}
+                  </div>
+                  <div style="font-weight: 600; color: #1e293b; margin-top: 2px;">${t.name}</div>
+                </div>
+              </div>
+              <div style="font-size: 10px; color: #94a3b8; font-weight: 600; white-space: nowrap; margin-left: 12px;">Prof. ${t.teacher}</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Preparar e acionar html2pdf
+      const element = document.getElementById('pdf-render-template');
+      element.style.display = 'block';
+
+      const opt = {
+        margin: [10, 10, 10, 10],
+        filename: `Checklist-Revisao-${banca.id.toUpperCase()}-GuiaPreFederal.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      const btn = document.getElementById('btn-exportar-pdf');
+      const originalText = btn ? btn.innerHTML : '';
+      if (btn) btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando PDF...';
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        element.style.display = 'none';
+        if (btn) btn.innerHTML = originalText;
+      }).catch(err => {
+        console.error('Erro ao gerar PDF:', err);
+        element.style.display = 'none';
+        if (btn) btn.innerHTML = originalText;
+        window.print();
+      });
     }
 
     window.onload = function() {
