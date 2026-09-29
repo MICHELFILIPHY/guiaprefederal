@@ -142,6 +142,1622 @@
         <nav class="flex items-center gap-1 sm:gap-2">
           <button onclick="switchTab('diagnostico')" id="nav-btn-diagnostico" class="px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-gpf-blue text-white shadow-md shadow-gpf-blue/20 flex items-center gap-1.5">
             <i class="fas fa-bullseye"></i>
+            <span>1. Meu Check-up</span>
+          </button>
+          
+          <button onclick="switchTab('revisao')" id="nav-btn-revisao" class="px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:text-gpf-blue hover:bg-slate-100 flex items-center gap-1.5 relative">
+            <i class="fas fa-list-check"></i>
+            <span>2. O que Devo Revisar</span>
+            <span id="revisao-badge-count" class="w-5 h-5 rounded-full bg-gpf-orange text-white text-[10px] font-bold flex items-center justify-center">0</span>
+          </button>
+
+          <button onclick="switchTab('graficos')" id="nav-btn-graficos" class="px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:text-gpf-blue hover:bg-slate-100 flex items-center gap-1.5">
+            <i class="fas fa-fire text-amber-500"></i>
+            <span>O Que Mais Cai</span>
+          </button>
+
+          <button onclick="switchTab('comparativo')" id="nav-btn-comparativo" class="px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:text-gpf-blue hover:bg-slate-100 flex items-center gap-1.5">
+            <i class="fas fa-scale-balanced"></i>
+            <span class="hidden sm:inline">Comparar Provas</span>
+          </button>
+
+          <button onclick="window.print()" class="no-print p-2 rounded-xl text-slate-400 hover:text-slate-800 hover:bg-slate-100" title="Imprimir Plano">
+            <i class="fas fa-print"></i>
+          </button>
+        </nav>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- PASSO 1: ESCOLHA DA BANCA / PROVA ALVO (LIMPO E EM DESTAQUE) -->
+  <section class="bg-gradient-to-r from-gpf-darkBlue via-slate-900 to-indigo-950 text-white py-8 border-b border-slate-700/60 no-print" id="secao-escolha-prova">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-6">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-gpf-lime text-gpf-darkBlue mb-3">
+          <i class="fas fa-flag-checkered"></i> Passo 1 de 2
+        </span>
+        <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Qual Vestibulinho é o Seu Foco Principal?</h1>
+        <p class="text-xs sm:text-sm text-slate-300 mt-2">
+          Clique no vestibulinho que você vai prestar. O checklist vai carregar exatamente as matérias que caem nessa escola!
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3" id="banca-button-group">
+        <button onclick="selectBancaWithScroll('coluni')" id="target-btn-coluni" class="px-4 py-3 rounded-2xl text-xs sm:text-sm font-black transition-all bg-gpf-blue text-white shadow-lg shadow-gpf-blue/40 border-2 border-gpf-lime flex items-center gap-2">
+          <i class="fas fa-graduation-cap text-gpf-lime"></i>
+          <span>COLUNI · UFV</span>
+        </button>
+        <button onclick="selectBancaWithScroll('cefet')" id="target-btn-cefet" class="px-4 py-3 rounded-2xl text-xs sm:text-sm font-black transition-all bg-white/10 hover:bg-white/20 text-slate-200 border border-white/10 flex items-center gap-2">
+          <i class="fas fa-building-columns"></i>
+          <span>CEFET-MG</span>
+        </button>
+        <button onclick="selectBancaWithScroll('ifmg')" id="target-btn-ifmg" class="px-4 py-3 rounded-2xl text-xs sm:text-sm font-black transition-all bg-white/10 hover:bg-white/20 text-slate-200 border border-white/10 flex items-center gap-2">
+          <i class="fas fa-school"></i>
+          <span>IFMG</span>
+        </button>
+        <button onclick="selectBancaWithScroll('ifnmg')" id="target-btn-ifnmg" class="px-4 py-3 rounded-2xl text-xs sm:text-sm font-black transition-all bg-white/10 hover:bg-white/20 text-slate-200 border border-white/10 flex items-center gap-2">
+          <i class="fas fa-compass"></i>
+          <span>IFNMG</span>
+        </button>
+        <button onclick="selectBancaWithScroll('coltec')" id="target-btn-coltec" class="px-4 py-3 rounded-2xl text-xs sm:text-sm font-black transition-all bg-white/10 hover:bg-white/20 text-slate-200 border border-white/10 flex items-center gap-2">
+          <i class="fas fa-microscope"></i>
+          <span>COLTEC · UFMG</span>
+        </button>
+      </div>
+
+      <!-- Resumo Rápido da Banca Selecionada -->
+      <div class="mt-6 pt-5 border-t border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center sm:text-left">
+        <div class="bg-white/5 rounded-2xl p-3 border border-white/5">
+          <div class="text-[11px] text-slate-400 font-bold uppercase">Escola Selecionada</div>
+          <div class="text-sm sm:text-base font-black text-gpf-lime mt-0.5" id="hero-banca-nome">COLUNI · UFV</div>
+          <div class="text-[11px] text-slate-300" id="hero-banca-materias-info">Contém Português, Matemática, Ciências, Humanas, Redação e Inglês</div>
+        </div>
+        <div class="bg-white/5 rounded-2xl p-3 border border-white/5">
+          <div class="text-[11px] text-slate-400 font-bold uppercase" id="banca-summary-title1">O que mais cai</div>
+          <div class="text-sm sm:text-base font-black text-white mt-0.5" id="banca-summary-val1">Português · Matemática · Ciências</div>
+          <div class="text-[11px] text-slate-300" id="banca-summary-sub1">Mais de 70% dos pontos da prova</div>
+        </div>
+        <div class="bg-white/5 rounded-2xl p-3 border border-white/5">
+          <div class="text-[11px] text-slate-400 font-bold uppercase" id="banca-summary-title2">Formato da Prova</div>
+          <div class="text-sm sm:text-base font-black text-white mt-0.5" id="banca-summary-val2">38 Questões (A-D) + Redação</div>
+          <div class="text-[11px] text-slate-300" id="banca-summary-sub2">Interpretação e raciocínio prático</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BARRA DE PROGRESSO DO ALUNO (ESTILO GAMIFICADO) -->
+  <section class="bg-white border-b border-slate-200 py-3.5 no-print sticky top-16 sm:top-20 z-30 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-xl bg-indigo-50 text-gpf-blue flex items-center justify-center font-bold text-sm">
+          <i class="fas fa-shield-halved"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black text-slate-800">Seu Progresso:</span>
+            <span id="metric-gamification-rank" class="text-[10px] font-black px-2 py-0.5 rounded bg-slate-100 text-slate-700">Recruta</span>
+            <span id="metric-percent-mastered" class="text-xs font-black font-mono text-gpf-blue">0%</span>
+          </div>
+          <div class="w-48 sm:w-64 bg-slate-100 rounded-full h-2 mt-1 overflow-hidden">
+            <div id="metric-bar-mastered" class="bg-emerald-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 text-xs">
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Mando Muito: <strong id="metric-count-domina">0</strong></span>
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> Mais ou Menos: <strong id="metric-count-parcial">0</strong></span>
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Ainda Não Sei: <strong id="metric-count-urgente">0</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+    <!-- ==================================================== -->
+    <!-- ABA 1: MEU CHECK-UP (PASSO 2)                       -->
+    <!-- ==================================================== -->
+    <div id="tab-diagnostico" class="space-y-6">
+      
+      <!-- Caixa de Instrução Descontraída -->
+      <div id="card-instrucao-checkup" class="bg-gradient-to-r from-indigo-50 to-emerald-50 border border-indigo-100 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-gpf-blue text-white flex items-center justify-center text-xl shrink-0 shadow-md shadow-gpf-blue/20">
+            <i class="fas fa-hand-pointer"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-black uppercase text-gpf-blue">Passo 2 de 2</span>
+              <span class="text-xs font-bold text-slate-500">·</span>
+              <span class="text-xs font-extrabold text-slate-600" id="instrucao-banca-ativa">Foco: COLUNI</span>
+            </div>
+            <h2 class="text-base sm:text-lg font-black text-slate-900 mt-0.5">Marque como você está em cada matéria:</h2>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+              Basta clicar em um dos 3 botões em cada assunto: 
+              <span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-xs">Mando Muito!</span>, 
+              <span class="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-xs">Mais ou Menos</span> ou 
+              <span class="inline-block px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-bold text-xs">Ainda Não Sei</span>. 
+              Tudo o que você tiver dúvida vai direto para o seu <strong class="text-gpf-blue">Checklist de Revisão</strong>!
+            </p>
+          </div>
+        </div>
+        <button onclick="switchTab('revisao')" class="px-5 py-3 rounded-2xl bg-gpf-blue text-white font-black text-xs sm:text-sm whitespace-nowrap hover:bg-gpf-darkBlue transition-all shadow-md shadow-gpf-blue/20 shrink-0 flex items-center gap-2">
+          <span>Ver O que Revisar</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+
+      <!-- Barra de Filtros e Busca Rápida -->
+      <div class="bg-white rounded-3xl p-4 sm:p-6 shadow-sm border border-slate-200 space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          
+          <!-- Campo de Busca -->
+          <div class="relative flex-1">
+            <i class="fas fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+            <input type="text" id="input-search" oninput="applyFilters()" placeholder="Procurar um assunto (ex: crônica, geometria, óptica...)" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-gpf-blue/20 focus:border-gpf-blue transition-all">
+          </div>
+
+          <!-- Filtro Rápido por Status -->
+          <div class="flex flex-wrap items-center gap-1.5">
+            <button onclick="setMasteryFilter('all')" id="filter-mas-all" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white transition-all">
+              Todos
+            </button>
+            <button onclick="setMasteryFilter('nao_domino')" id="filter-mas-nao_domino" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-rose-700 hover:bg-rose-50 transition-all flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span> Ainda Não Sei
+            </button>
+            <button onclick="setMasteryFilter('parcial')" id="filter-mas-parcial" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-amber-700 hover:bg-amber-50 transition-all flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-amber-400"></span> Mais ou Menos
+            </button>
+            <button onclick="setMasteryFilter('domino')" id="filter-mas-domino" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-emerald-700 hover:bg-emerald-50 transition-all flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Mando Muito!
+            </button>
+            <button onclick="setMasteryFilter('campeoes')" id="filter-mas-campeoes" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-50 text-amber-800 hover:bg-amber-100 transition-all flex items-center gap-1 border border-amber-200">
+              <i class="fas fa-fire text-amber-500"></i> Só o que mais cai
+            </button>
+          </div>
+        </div>
+
+        <!-- Seletor de Matérias (Pills Deslizantes) - ADAPTÁVEL À BANCA -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 pt-1 custom-scroll border-t border-slate-100" id="subject-filter-container">
+          <!-- Injetado via JS -->
+        </div>
+      </div>
+
+      <!-- Lista de Tópicos do Cronograma -->
+      <div id="diagnostico-topics-container" class="space-y-3 pb-8">
+        <!-- Injetado dinamicamente -->
+      </div>
+    </div>
+
+    <!-- ==================================================== -->
+    <!-- ABA 2: MEU CHECKLIST DE REVISÃO (SIMPLES E DIRETO)  -->
+    <!-- ==================================================== -->
+    <div id="tab-revisao" class="space-y-6 hidden">
+      
+      <div class="bg-gradient-to-r from-gpf-darkBlue via-indigo-900 to-slate-900 rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden shadow-lg">
+        <div class="max-w-3xl relative z-10">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-gpf-lime text-gpf-darkBlue mb-3">
+            <i class="fas fa-clipboard-check"></i> Seu Plano Sem Mistério
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black tracking-tight">O Que Você Precisa Revisar</h2>
+          <p class="text-xs sm:text-sm text-slate-200 mt-2 leading-relaxed">
+            Aqui estão reunidos todos os tópicos que você marcou como <span class="text-rose-300 font-bold">"Ainda Não Sei"</span> ou <span class="text-amber-300 font-bold">"Mais ou Menos"</span> no vestibulinho do <strong id="revisao-banca-name" class="text-gpf-lime font-bold">COLUNI</strong>. Conforme for estudando e tirando dúvidas, basta marcar o quadradinho para riscar da lista!
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6 relative z-10">
+          <div class="bg-white/10 rounded-2xl p-3.5 backdrop-blur-sm border border-white/10">
+            <div class="text-[11px] text-slate-300">Tópicos para Revisar</div>
+            <div class="text-2xl font-black text-white mt-0.5" id="plan-metric-total">0</div>
+          </div>
+          <div class="bg-white/10 rounded-2xl p-3.5 backdrop-blur-sm border border-white/10">
+            <div class="text-[11px] text-rose-300">Ainda Não Sei</div>
+            <div class="text-2xl font-black text-rose-300 mt-0.5" id="plan-metric-urgente">0</div>
+          </div>
+          <div class="bg-white/10 rounded-2xl p-3.5 backdrop-blur-sm border border-white/10">
+            <div class="text-[11px] text-amber-300">Dúvidas Parciais</div>
+            <div class="text-2xl font-black text-amber-300 mt-0.5" id="plan-metric-parcial">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila de Revisão Simples com Checkbox -->
+      <div class="bg-white rounded-3xl p-5 sm:p-7 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+          <div>
+            <h3 class="font-bold text-slate-900 text-base">Checklist de Revisão</h3>
+            <p class="text-xs text-slate-500">Ordenado por ordem de importância na prova do seu vestibulinho.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="exportReviewPlan()" class="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 transition-all">
+              <i class="fas fa-download"></i> Baixar Lista
+            </button>
+            <button onclick="window.print()" class="px-3.5 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 flex items-center gap-1.5 transition-all">
+              <i class="fas fa-print"></i> Imprimir Checklist
+            </button>
+          </div>
+        </div>
+
+        <div id="plan-list-container" class="space-y-3 pb-8">
+          <!-- Injetado dinamicamente -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================================================== -->
+    <!-- ABA 3: RAIO-X: O QUE MAIS CAI NA PROVA               -->
+    <!-- ==================================================== -->
+    <div id="tab-graficos" class="space-y-6 hidden">
+      
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+          <div>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-indigo-50 text-gpf-blue mb-2">
+              <i class="fas fa-chart-pie"></i> Raio-X Visual do Vestibulinho
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-black text-slate-900" id="chart-main-title">Raio-X: COLUNI · UFV</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1" id="chart-main-subtitle">Veja onde a prova concentra mais pontos e como ela cobra.</p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-slate-400 uppercase">Mudar Escola:</span>
+            <select id="select-chart-banca" onchange="setTargetBanca(this.value)" class="text-xs font-bold rounded-xl border border-slate-200 px-3.5 py-2.5 bg-slate-50 text-slate-800 font-sans focus:outline-none focus:ring-2 focus:ring-gpf-blue">
+              <option value="coluni">COLUNI · UFV</option>
+              <option value="cefet">CEFET-MG</option>
+              <option value="ifmg">IFMG</option>
+              <option value="ifnmg">IFNMG</option>
+              <option value="coltec">COLTEC · UFMG</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Gráficos de Peso e Como a Prova Cobra -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          
+          <!-- Gráfico: Peso por Matéria -->
+          <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-black text-sm text-slate-900 flex items-center gap-2">
+                <i class="fas fa-chart-pie text-gpf-blue"></i> Divisão dos Pontos por Matéria
+              </h4>
+              <span class="text-[11px] text-slate-400 font-mono">% da prova</span>
+            </div>
+            <div class="relative h-64 sm:h-72 w-full flex items-center justify-center">
+              <canvas id="chart-weight-canvas"></canvas>
+            </div>
+            <p class="mt-3 text-xs text-slate-500 text-center font-medium" id="chart-weight-legend-text">
+              Português, Matemática e Ciências formam o coração de pontos do vestibular!
+            </p>
+          </div>
+
+          <!-- Gráfico: Como a Prova Cobra -->
+          <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-black text-sm text-slate-900 flex items-center gap-2">
+                <i class="fas fa-brain text-gpf-teal"></i> O Tipo de Pergunta da Prova
+              </h4>
+              <span class="text-[11px] text-slate-400 font-mono">Taxonomia</span>
+            </div>
+            <div class="relative h-64 sm:h-72 w-full flex items-center justify-center">
+              <canvas id="chart-cognitive-canvas"></canvas>
+            </div>
+            <p class="mt-3 text-xs text-slate-600 text-center font-bold" id="chart-cognitive-desc">
+              🚨 Decoreba quase NÃO existe. A prova cobra raciocinar e analisar textos e situações!
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Ranking por Matéria Selecionada -->
+        <div class="mt-10 pt-8 border-t border-slate-200">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+            <div>
+              <span class="text-[11px] font-extrabold text-gpf-blue uppercase tracking-wider">Mergulho nos Conteúdos</span>
+              <h3 class="text-xl font-black text-slate-900">O Que Mais Cai em Cada Matéria</h3>
+              <p class="text-xs text-slate-500">Escolha uma matéria para ver os conteúdos mais cobrados e dicas de ouro.</p>
+            </div>
+
+            <!-- Seletor de Disciplina para o Raio-X -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 custom-scroll max-w-full" id="stat-subject-pills">
+              <!-- Injetado via JS -->
+            </div>
+          </div>
+
+          <!-- Card do Ranking Detalhado da Matéria Selecionada -->
+          <div id="stat-subject-details-card" class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+            <!-- Injetado dinamicamente -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ==================================================== -->
+    <!-- ABA 4: COMPARATIVO ENTRE AS PROVAS                   -->
+    <!-- ==================================================== -->
+    <div id="tab-comparativo" class="space-y-6 hidden pb-12">
+      
+      <div class="bg-gradient-to-br from-slate-900 via-gpf-darkBlue to-indigo-950 text-white rounded-3xl p-6 sm:p-8">
+        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-black bg-gpf-lime text-gpf-darkBlue mb-3">
+          <i class="fas fa-scale-balanced"></i> Mapa Comparativo
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black tracking-tight">O Que Muda Entre os 5 Grandes Vestibulinhos?</h2>
+        <p class="text-slate-300 text-xs sm:text-sm mt-2 max-w-3xl leading-relaxed">
+          Cada instituição tem suas particularidades: conteúdos que valem muito em uma prova podem nem sequer cair na outra! Veja as principais diferenças:
+        </p>
+
+        <!-- Grade Resumida das 5 Bancas -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mt-6">
+          
+          <div class="bg-white/10 rounded-2xl p-4 border border-white/10 backdrop-blur-sm">
+            <span class="font-black text-gpf-lime text-xs block">COLUNI · UFV</span>
+            <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+              <li>✍️ <strong>Redação e Inglês:</strong> Presentes com peso decisivo!</li>
+              <li>📖 <strong>Literatura:</strong> 41% de Português. Livro obrigatório.</li>
+              <li>🌱 <strong>Ciências:</strong> Biologia é 50%. Zero Astronomia.</li>
+              <li>⏳ <strong>História:</strong> 100% Século XX e Cidadania.</li>
+            </ul>
+          </div>
+
+          <div class="bg-white/10 rounded-2xl p-4 border border-white/10 backdrop-blur-sm">
+            <span class="font-black text-blue-300 text-xs block">CEFET-MG</span>
+            <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+              <li>🚫 <strong>Sem Redação e Sem Inglês.</strong></li>
+              <li>👑 <strong>Port + Mat:</strong> Quase 60% de toda a prova.</li>
+              <li>📐 <strong>Geometria:</strong> Rainha com 28% da Matemática.</li>
+              <li>🔬 <strong>Ciências:</strong> Terços iguais (Bio, Física e Química).</li>
+            </ul>
+          </div>
+
+          <div class="bg-white/10 rounded-2xl p-4 border border-white/10 backdrop-blur-sm">
+            <span class="font-black text-amber-300 text-xs block">IFMG (Técnico)</span>
+            <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+              <li>🚫 <strong>Sem Redação e Sem Inglês</strong> (Inglês extinto desde 2018).</li>
+              <li>🔍 <strong>Português:</strong> Interpretação pura. Sem livro fixo.</li>
+              <li>⚡ <strong>Física:</strong> Maior fatia das Ciências (38%).</li>
+              <li>🌾 <strong>Geografia:</strong> Meio ambiente e questão agrária.</li>
+            </ul>
+          </div>
+
+          <div class="bg-white/10 rounded-2xl p-4 border border-white/10 backdrop-blur-sm border-emerald-400/40">
+            <span class="font-black text-emerald-300 text-xs block">IFNMG</span>
+            <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+              <li>🚫 <strong>Sem Redação e Sem Inglês.</strong></li>
+              <li>⚖️ <strong>Tripé Fixo:</strong> 8 Port, 8 Mat, 8 Ciências, 6 Humanas.</li>
+              <li>✍️ <strong>Português:</strong> Gramática aplicada + Interpretação.</li>
+              <li>⚠️ <strong>Literatura:</strong> Quase zero. Foco em gramática.</li>
+            </ul>
+          </div>
+
+          <div class="bg-white/10 rounded-2xl p-4 border border-white/10 backdrop-blur-sm">
+            <span class="font-black text-purple-300 text-xs block">COLTEC · UFMG</span>
+            <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+              <li>🚫 <strong>Sem Redação e Sem Inglês.</strong></li>
+              <li>🔥 <strong>Literatura:</strong> 57% de Português! Livro obrigatório.</li>
+              <li>🧪 <strong>Tabela Periódica:</strong> Impressa na prova para consulta.</li>
+              <li>🔬 <strong>Ciências:</strong> Terços rigorosamente iguais.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Tabela Comparativa -->
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm overflow-x-auto">
+        <h3 class="text-base font-bold text-slate-900 mb-4">Tabela Comparativa de Conteúdo</h3>
+        <table class="w-full text-left text-xs">
+          <thead>
+            <tr class="border-b border-slate-200 text-slate-400 uppercase text-[10px] font-bold tracking-wider">
+              <th class="py-3 px-3">O que você precisa saber</th>
+              <th class="py-3 px-3 text-gpf-blue bg-indigo-50/50">COLUNI (UFV)</th>
+              <th class="py-3 px-3 text-blue-700 bg-blue-50/50">CEFET-MG</th>
+              <th class="py-3 px-3 text-amber-700 bg-amber-50/50">IFMG</th>
+              <th class="py-3 px-3 text-emerald-700 bg-emerald-50/50">IFNMG</th>
+              <th class="py-3 px-3 text-purple-700 bg-purple-50/50">COLTEC (UFMG)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+            <tr>
+              <td class="py-3.5 px-3 font-bold text-slate-900">Redação</td>
+              <td class="py-3.5 px-3 bg-indigo-50/20 font-bold text-emerald-600">Sim (Proposta própria)</td>
+              <td class="py-3.5 px-3 bg-blue-50/20 text-slate-400">Não tem redação</td>
+              <td class="py-3.5 px-3 bg-amber-50/20 text-slate-400">Não tem redação</td>
+              <td class="py-3.5 px-3 bg-emerald-50/20 text-slate-400">Não tem redação</td>
+              <td class="py-3.5 px-3 bg-purple-50/20 text-slate-400">Não tem redação</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-3 font-bold text-slate-900">Língua Inglesa</td>
+              <td class="py-3.5 px-3 bg-indigo-50/20 font-bold text-emerald-600">Sim (2 questões fixas)</td>
+              <td class="py-3.5 px-3 bg-blue-50/20 text-slate-400">Não cobra Inglês</td>
+              <td class="py-3.5 px-3 bg-amber-50/20 text-rose-500 font-bold">Extinto em 2018</td>
+              <td class="py-3.5 px-3 bg-emerald-50/20 text-slate-400">Não cobra Inglês</td>
+              <td class="py-3.5 px-3 bg-purple-50/20 text-slate-400">Não cobra Inglês</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-3 font-bold text-slate-900">Livro de Literatura</td>
+              <td class="py-3.5 px-3 bg-indigo-50/20 font-bold text-gpf-blue">41% de Port. Ler o livro é vital.</td>
+              <td class="py-3.5 px-3 bg-blue-50/20 font-bold text-blue-700">35% de Port. Cobra livro fixo.</td>
+              <td class="py-3.5 px-3 bg-amber-50/20">Sem obra fixa. Crônicas e tirinhas.</td>
+              <td class="py-3.5 px-3 bg-emerald-50/20 text-rose-600 font-bold">Quase zero. Foco em gramática.</td>
+              <td class="py-3.5 px-3 bg-purple-50/20 font-black text-purple-900">57% de Port! O maior alvo.</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-3 font-bold text-slate-900">Divisão de Ciências</td>
+              <td class="py-3.5 px-3 bg-indigo-50/20">Biologia leva 50%. Física (28%) e Química (22%).</td>
+              <td class="py-3.5 px-3 bg-blue-50/20">Terços iguais (Física, Química, Bio).</td>
+              <td class="py-3.5 px-3 bg-amber-50/20">Física lidera (38%), Bio (34%), Quí (28%).</td>
+              <td class="py-3.5 px-3 bg-emerald-50/20 font-bold text-emerald-800">Biologia leva 50%.</td>
+              <td class="py-3.5 px-3 bg-purple-50/20">Divisão milimétrica: 1/3 para cada.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    /* BANCO DE DADOS AUDITADO DAS 5 BANCAS */
+    const bancasData = {
+      coluni: {
+        id: 'coluni',
+        name: 'COLUNI · UFV',
+        hasRedacao: true,
+        hasIngles: true,
+        materiaDesc: 'Contém Português, Matemática, Ciências, Humanas, Redação e Inglês',
+        stat1: { title: 'O que mais cai', val: 'Port · Mat · Ciências', sub: '72% dos pontos da prova', icon: 'fa-bullseye' },
+        stat2: { title: 'Formato da Prova', val: '38 Questões (A-D) + Redação', sub: '10 Port · 10 Mat · 8 Ciênc · 4 Geo · 4 Hist · 2 Ing', icon: 'fa-file-pen' },
+        weights: {
+          portugues: 23.9,
+          matematica: 23.9,
+          ciencias: 24.6,
+          geografia: 12.3,
+          historia: 12.3,
+          ingles: 3.0
+        },
+        sciences: { bio: 50.0, fis: 28.4, qui: 21.6 },
+        cognitive: { analise: 53.5, aplicacao: 19.5, compreensao: 13.6, interpretacao: 12.9, memorizacao: 0.6 },
+        rankings: {
+          portugues: [
+            { topic: 'Literatura e texto literário (Obra do ano)', pct: '40.8%', tip: 'São 2 quintos de todo o Português! Ler a obra obrigatória do edital garante pontos preciosos.' },
+            { topic: 'Morfossintaxe e classes de palavras', pct: '13.8%', tip: 'A gramática é sempre cobrada a serviço do sentido da frase, nunca decoreba seca.' },
+            { topic: 'Semântica (efeitos de sentido e modalizadores)', pct: '13.1%', tip: 'O sentido de advérbios, ironia e escolhas de palavras do autor.' },
+            { topic: 'Interpretação e compreensão de texto', pct: '10.8%', tip: 'Ideia central, intenção do autor e leitura das entrelinhas.' },
+            { topic: 'Coesão e coerência textual', pct: '7.7%', tip: 'Conectivos, pronomes que retomam ideias e elos do texto.' },
+            { topic: 'Gêneros textuais e multimodalidade', pct: '6.2%', tip: 'Charges, tirinhas e anúncios relacionando imagem e texto.' }
+          ],
+          matematica: [
+            { topic: 'Álgebra (equações, sistemas, polinômios)', pct: '21.5%', tip: 'Montar a equação a partir do probleminha e achar o valor das incógnitas.' },
+            { topic: 'Geometria plana (áreas, triângulos e ângulos)', pct: '20.8%', tip: 'Cálculo de áreas por decomposição de figuras e Teorema de Pitágoras.' },
+            { topic: 'Números, conjuntos e aritmética', pct: '20.0%', tip: 'Operações com frações, dízimas, divisibilidade e conjuntos numéricos.' },
+            { topic: 'Porcentagem e matemática financeira', pct: '11.5%', tip: 'Aumentos e descontos sucessivos em problemas do dia a dia.' },
+            { topic: 'Funções (afim e quadrática)', pct: '10.0%', tip: 'Interpretar gráficos, achar raízes e calcular o ponto de máximo ou mínimo.' }
+          ],
+          biologia: [
+            { topic: 'Fisiologia humana e animal (Sistemas)', pct: '19.4%', tip: 'Sistemas digestório, circulatório e respiratório aplicados ao corpo.' },
+            { topic: 'Zoologia e reino animal', pct: '13.4%', tip: 'Características de invertebrados e vertebrados em processos biológicos.' },
+            { topic: 'Botânica e fisiologia vegetal', pct: '11.9%', tip: 'Fotossíntese, transporte de seiva e adaptações de plantas ao ambiente.' },
+            { topic: 'Saúde, doenças e saneamento básico', pct: '10.4%', tip: 'Vacinas, dengue, parasitoses e prevenção higiênica.' },
+            { topic: 'Genética e divisão celular', pct: '10.4%', tip: 'Primeira Lei de Mendel, tipos sanguíneos ABO e heredogramas.' },
+            { topic: 'Ecologia e Citologia celular', pct: '17.9%', tip: 'Cadeias ecológicas, impactos ambientais e organelas celulares.' }
+          ],
+          fisica: [
+            { topic: 'Óptica geométrica (luz, espelhos e lentes)', pct: '23.7%', tip: 'O assunto #1 da Física no COLUNI! Formação de imagens e refração.' },
+            { topic: 'Eletricidade (circuitos e potência em kWh)', pct: '21.1%', tip: 'Calcular a conta de luz e entender aparelhos ligados em série/paralelo.' },
+            { topic: 'Termologia (calor, temperatura e dilatação)', pct: '21.1%', tip: 'Diferença entre calor e temperatura, condução, convecção e radiação.' },
+            { topic: 'Dinâmica e energia mecânica', pct: '18.4%', tip: 'Leis de Newton, peso vs massa e conservação de energia mecânica.' }
+          ],
+          quimica: [
+            { topic: 'Tabela periódica, átomos e modelos', pct: '37.9%', tip: 'Contar prótons, nêutrons e elétrons e localizar elementos por famílias.' },
+            { topic: 'Matéria, misturas e processos de separação', pct: '34.5%', tip: 'Destilação, filtração, decantação e tratamento de água.' },
+            { topic: 'Reações químicas e Leis ponderais', pct: '17.2%', tip: 'Conservação das massas (Lavoisier) e proporções em reações.' }
+          ],
+          historia: [
+            { topic: 'Escravidão, resistência negra e indígenas', pct: '17.9%', tip: 'Eixo de cidadania permanente a partir de fotos, canções e documentos.' },
+            { topic: 'Entreguerras, regimes totalitários e 2ª Guerra', pct: '17.9%', tip: 'Nazifascismo, propaganda política e holocausto.' },
+            { topic: 'Ditadura Militar no Brasil e redemocratização', pct: '16.4%', tip: 'Atos Institucionais (AI-5), Diretas Já e Constituição de 1988.' },
+            { topic: 'Era Vargas e Primeira República', pct: '20.9%', tip: 'Revolução de 30, CLT, coronelismo e revoltas populares.' }
+          ],
+          geografia: [
+            { topic: 'Geografia urbana e industrialização do Brasil', pct: '14.9%', tip: 'Crescimento das cidades, favelização e fases das indústrias brasileiras.' },
+            { topic: 'Geografia da população (demografia e pirâmides)', pct: '11.9%', tip: 'Leitura de pirâmides etárias, bônus demográfico e migrações.' },
+            { topic: 'Cartografia, fusos horários e escalas', pct: '11.9%', tip: 'Contas práticas de fuso horário e conversão de centímetros no mapa.' },
+            { topic: 'Geografia econômica e globalização', pct: '10.4%', tip: 'Blocos econômicos, divisão internacional do trabalho e internet.' }
+          ],
+          ingles: [
+            { topic: 'Estratégias de leitura (Skimming e Scanning)', pct: '45.0%', tip: 'Sempre presente! Localizar informações rápidas no texto sem traduzir palavra por palavra.' },
+            { topic: 'Interpretação de tirinhas, imagens e anúncios', pct: '35.0%', tip: 'Linguagem verbal e não verbal associadas no cotidiano.' },
+            { topic: 'Gramática contextual e conectivos', pct: '20.0%', tip: 'Simple Present, Past e conectores de causa, oposição e adição.' }
+          ],
+          redacao: [
+            { topic: 'Tipologia narrativa e gênero crônica', pct: '40.0%', tip: 'Clássico absoluto do COLUNI! Narrar episódios do cotidiano com sensibilidade e reflexão.' },
+            { topic: 'Carta pessoal, carta aberta e de leitor', pct: '30.0%', tip: 'Estrutura com interlocutor claro, vocativo e adequação de linguagem.' },
+            { topic: 'Texto de opinião e dissertação', pct: '30.0%', tip: 'Defesa de ponto de vista com argumentos pertinentes.' }
+          ]
+        }
+      },
+      cefet: {
+        id: 'cefet',
+        name: 'CEFET-MG',
+        hasRedacao: false,
+        hasIngles: false,
+        materiaDesc: 'Contém Português, Matemática, Ciências, História e Geografia (Sem Redação e Sem Inglês)',
+        stat1: { title: 'O que mais cai', val: 'Português + Matemática', sub: 'Quase 60% de toda a prova', icon: 'fa-crown' },
+        stat2: { title: 'Formato da Prova', val: '50 Questões (A-D)', sub: '15 Port · 15 Mat · 8 Ciênc · 6 Geo · 6 Hist', icon: 'fa-bolt' },
+        weights: { portugues: 30.0, matematica: 30.0, ciencias: 16.0, geografia: 12.0, historia: 12.0 },
+        sciences: { bio: 33.3, fis: 33.3, qui: 33.3 },
+        cognitive: { analise: 43.4, aplicacao: 24.1, compreensao: 18.5, interpretacao: 13.4, memorizacao: 0.5 },
+        rankings: {
+          portugues: [
+            { topic: 'Literatura (Obra Obrigatória do Ano)', pct: '35.2%', tip: 'Quem não lê o livro obrigatório abre mão de mais de 1 terço da prova de Português!' },
+            { topic: 'Semântica e efeitos de sentido', pct: '11.4%', tip: 'Palavras no contexto, ironia e modalização.' },
+            { topic: 'Gêneros textuais e multimodalidade', pct: '10.2%', tip: 'Memes, charges, propagandas e tirinhas do cotidiano.' }
+          ],
+          matematica: [
+            { topic: 'Geometria plana (Áreas e Ângulos)', pct: '28.4%', tip: 'A rainha absoluta do CEFET! Cálculo de áreas por recorte de figuras e Pitágoras.' },
+            { topic: 'Números, conjuntos e aritmética', pct: '14.2%', tip: 'Frações, dízimas, teoria dos números e conjuntos.' },
+            { topic: 'Funções (afim e quadrática)', pct: '13.6%', tip: 'Interpretação de gráficos e cálculo de máximos e mínimos.' }
+          ],
+          biologia: [
+            { topic: 'Fisiologia animal e humana', pct: '34.8%', tip: 'Sistemas do corpo humano ligados a hábitos de vida e saúde.' },
+            { topic: 'Ecologia e meio ambiente', pct: '23.9%', tip: 'Espécies invasoras, cadeias tróficas e poluição das águas.' }
+          ],
+          fisica: [
+            { topic: 'Dinâmica e conservação da energia', pct: '20.8%', tip: 'Forças de atrito, Leis de Newton e energia cinética/potencial.' },
+            { topic: 'Termologia (calor e dilatação)', pct: '18.8%', tip: 'Calor sensível e propagação do calor em garrafas térmicas.' }
+          ],
+          quimica: [
+            { topic: 'Matéria, misturas e processos de separação', pct: '27.7%', tip: 'Saber qual método separa cada mistura do dia a dia.' },
+            { topic: 'Tabela periódica, átomo e modelos', pct: '25.5%', tip: 'Classificação de elementos e modelos atômicos.' }
+          ],
+          historia: [
+            { topic: 'Brasil República (1889–1930)', pct: '21.8%', tip: 'Canudos, Chibata, coronelismo e café com leite.' },
+            { topic: 'Guerra Fria e conflitos contemporâneos', pct: '16.4%', tip: 'Corrida espacial e conflitos mundiais modernos.' }
+          ],
+          geografia: [
+            { topic: 'Cartografia, fusos e escalas', pct: '20.0%', tip: 'Contas de fuso com horário de verão e tempo de voo.' },
+            { topic: 'Geografia econômica e globalização', pct: '20.0%', tip: 'Blocos econômicos e nova divisão industrial.' }
+          ]
+        }
+      },
+      ifmg: {
+        id: 'ifmg',
+        name: 'IFMG (Técnico Integrado)',
+        hasRedacao: false,
+        hasIngles: false,
+        materiaDesc: 'Contém Português, Matemática, Ciências e Humanas (Sem Redação e Sem Inglês)',
+        stat1: { title: 'O que mais cai', val: 'Interpretação + Geometria', sub: 'Base essencial de aprovação', icon: 'fa-landmark' },
+        stat2: { title: 'Formato da Prova', val: '50 Questões (A-D)', sub: '15 Port · 15 Mat · 10 Ciências · 10 Humanas', icon: 'fa-chart-simple' },
+        weights: { portugues: 30.0, matematica: 30.0, ciencias: 20.0, geografia: 10.0, historia: 10.0 },
+        sciences: { bio: 34.1, fis: 37.9, qui: 28.0 },
+        cognitive: { analise: 39.3, aplicacao: 24.6, interpretacao: 22.3, compreensao: 13.6, memorizacao: 0.2 },
+        rankings: {
+          portugues: [
+            { topic: 'Interpretação e compreensão de texto', pct: '28.0%', tip: 'O campeão absoluto! O IFMG prioriza entender a mensagem do texto mais que qualquer regra.' },
+            { topic: 'Gêneros textuais e multimodalidade', pct: '12.4%', tip: 'Tirinhas, quadrinhos e cartazes.' }
+          ],
+          matematica: [
+            { topic: 'Geometria plana (Áreas e Pitágoras)', pct: '24.1%', tip: 'Áreas de terrenos e figuras compostas com conversão por escala.' },
+            { topic: 'Álgebra e sistemas de equações', pct: '15.2%', tip: 'Situações-problema montadas em equações.' }
+          ],
+          biologia: [
+            { topic: 'Fisiologia humana e sistemas', pct: '22.2%', tip: 'Nutrição, digestão e respiração.' },
+            { topic: 'Ecologia e cadeias tróficas', pct: '20.0%', tip: 'Produtores, consumidores e equilíbrio ambiental.' }
+          ],
+          fisica: [
+            { topic: 'Termologia (calor e temperatura)', pct: '28.0%', tip: 'A maior fatia da Física no IFMG! Trocas de calor e dilatação.' },
+            { topic: 'Dinâmica e energia mecânica', pct: '26.0%', tip: 'Força peso, atrito e cálculo do trabalho mecânico.' }
+          ],
+          quimica: [
+            { topic: 'Matéria, misturas e separação', pct: '29.7%', tip: 'Fluxogramas de separação de misturas industriais.' },
+            { topic: 'Funções inorgânicas (ácidos e bases)', pct: '21.6%', tip: 'Identificar pH e funções pelo cotidiano.' }
+          ],
+          historia: [
+            { topic: 'Idade Moderna (Renascimento e Iluminismo)', pct: '19.7%', tip: 'O maior bloco de História do IFMG! Grandes navegações e revoluções burguesas.' },
+            { topic: 'História do Brasil', pct: '35.2%', tip: 'Colônia, Império, Vargas e Ditadura equilibrados.' }
+          ],
+          geografia: [
+            { topic: 'Questão ambiental e agrária no Brasil', pct: '21.7%', tip: 'Desmatamento, queimadas, biomas ameaçados e agronegócio.' },
+            { topic: 'Climatologia e biomas', pct: '15.0%', tip: 'Cerrado, Caatinga e Amazônia.' }
+          ]
+        }
+      },
+      ifnmg: {
+        id: 'ifnmg',
+        name: 'IFNMG (Técnico Integrado)',
+        hasRedacao: false,
+        hasIngles: false,
+        materiaDesc: 'Contém Português, Matemática, Ciências e Humanas (Sem Redação e Sem Inglês)',
+        stat1: { title: 'O que mais cai', val: 'Gramática + Geometria + Bio', sub: 'Tripé com mesmo peso', icon: 'fa-scale-balanced' },
+        stat2: { title: 'Formato da Prova', val: '30 Questões (A-E)', sub: '8 Port · 8 Mat · 8 Ciênc · 6 Humanas (5 alternativas)', icon: 'fa-cubes' },
+        weights: { portugues: 26.7, matematica: 26.7, ciencias: 26.7, geografia: 10.0, historia: 10.0 },
+        sciences: { bio: 50.0, fis: 27.5, qui: 22.5 },
+        cognitive: { analise: 45.7, aplicacao: 26.0, interpretacao: 14.3, compreensao: 13.3, memorizacao: 0.7 },
+        rankings: {
+          portugues: [
+            { topic: 'Morfossintaxe e gramática aplicada', pct: '27.5%', tip: 'O TOP 1 do IFNMG! Classes de palavras e termos da oração a serviço do sentido.' },
+            { topic: 'Interpretação e compreensão de texto', pct: '22.5%', tip: 'Textos sobre temas sociais e regionais.' }
+          ],
+          matematica: [
+            { topic: 'Geometria plana (Áreas e Perímetros)', pct: '20.0%', tip: 'Cálculo de áreas de terrenos e figuras planas.' },
+            { topic: 'Proporcionalidade e regra de três', pct: '16.3%', tip: 'Regras de três simples e inversa aplicadas a problemas práticos.' }
+          ],
+          biologia: [
+            { topic: 'Ecologia e meio ambiente', pct: '27.5%', tip: 'Poluição, desmatamento no Norte de MG e cadeias alimentares.' },
+            { topic: 'Citologia e histologia humana', pct: '25.0%', tip: 'Células, organelas e tecidos biológicos.' }
+          ],
+          fisica: [
+            { topic: 'Dinâmica e energia (Metade da Física!)', pct: '50.0%', tip: 'Força, peso, massa e energia mecânica no dia a dia.' }
+          ],
+          quimica: [
+            { topic: 'Tabela periódica, átomo e partículas', pct: '29.4%', tip: 'Estrutura atômica e localização na tabela.' }
+          ],
+          historia: [
+            { topic: 'Escravidão, África e cultura afro-brasileira', pct: '17.9%', tip: 'Resistência escrava e identidade negra.' },
+            { topic: 'Idade Moderna e revoluções', pct: '17.9%', tip: 'Formação dos estados nacionais e iluminismo.' }
+          ],
+          geografia: [
+            { topic: 'Geografia econômica e globalização', pct: '25.8%', tip: 'O maior tema de Geografia no IFNMG!' }
+          ]
+        }
+      },
+      coltec: {
+        id: 'coltec',
+        name: 'COLTEC · UFMG',
+        hasRedacao: false,
+        hasIngles: false,
+        materiaDesc: 'Contém Português, Matemática, Ciências, História e Geografia (Sem Redação e Sem Inglês)',
+        stat1: { title: 'O que mais cai', val: 'Literatura + Ciências', sub: '30% da prova são Ciências', icon: 'fa-microscope' },
+        stat2: { title: 'Formato da Prova', val: '60 Questões (A-D)', sub: '15 Port · 15 Mat · 18 Ciênc · 6 Geo · 6 Hist', icon: 'fa-gem' },
+        weights: { portugues: 25.0, matematica: 25.0, ciencias: 30.0, geografia: 10.0, historia: 10.0 },
+        sciences: { bio: 33.3, fis: 33.3, qui: 33.3 },
+        cognitive: { analise: 47.4, aplicacao: 21.8, compreensao: 16.8, interpretacao: 13.9, memorizacao: 0 },
+        rankings: {
+          portugues: [
+            { topic: 'Literatura e Obra Obrigatória do Ano', pct: '56.8%', tip: 'O maior peso de literatura de Minas Gerais! Mais da metade de Português é o livro do edital.' }
+          ],
+          matematica: [
+            { topic: 'Geometria plana e Álgebra (Empatadas!)', pct: '48.4%', tip: 'Metade de toda a Matemática do COLTEC! Pitágoras, áreas compostas e equações.' }
+          ],
+          biologia: [
+            { topic: 'Microbiologia, saúde e vacinas', pct: '23.7%', tip: 'Dengue, vírus, bactérias e medidas preventivas em notícias reais.' },
+            { topic: 'Fisiologia humana e animal', pct: '23.7%', tip: 'Hormônios, digestão e funções dos órgãos.' }
+          ],
+          fisica: [
+            { topic: 'Dinâmica, energia e máquinas simples', pct: '31.6%', tip: 'Inércia, alavancas, carrinhos de mão e conservação de energia.' },
+            { topic: 'Eletricidade (circuitos e potência)', pct: '28.9%', tip: 'Comparar lâmpadas, chuveiros e cálculo de consumo elétrico.' }
+          ],
+          quimica: [
+            { topic: 'Matéria, misturas e processos de separação', pct: '34.2%', tip: 'Destilação fracionada, decantação e tratamento de água.' },
+            { topic: 'Estados físicos e mudanças de fase', pct: '28.9%', tip: 'Curvas de aquecimento e transformações de estado.' }
+          ],
+          historia: [
+            { topic: 'Mundo contemporâneo (Século XX e XXI)', pct: '23.7%', tip: 'Guerra Fria, nazifascismo e conflitos internacionais.' }
+          ],
+          geografia: [
+            { topic: 'Geografia econômica e globalização', pct: '28.9%', tip: 'O maior tema de Geografia! Revoluções industriais e blocos econômicos.' }
+          ]
+        }
+      }
+    };
+
+    /* CONTEÚDO PROGRAMÁTICO COMPLETO DO GUIA PRÉ-FEDERAL */
+    const cronogramaTopics = [
+      // Português (Profª. Rainhany)
+      { id: 'p1', sub: 'portugues', teacher: 'Rainhany', title: 'Conceito de texto', inc: { coluni: 3, cefet: 3, ifmg: 5, ifnmg: 4, coltec: 3 }, tip: 'Noções fundamentais e leitura crítica.' },
+      { id: 'p2', sub: 'portugues', teacher: 'Rainhany', title: 'Linguagem verbal e não verbal', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 3 }, tip: 'Cai muito em tirinhas, charges e infográficos em todas as bancas.' },
+      { id: 'p3', sub: 'portugues', teacher: 'Rainhany', title: 'Gêneros textuais e tipos textuais', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 3 }, tip: 'Saber a diferença entre narrar, descrever, relatar e argumentar.' },
+      { id: 'p4', sub: 'portugues', teacher: 'Rainhany', title: 'Coerência e coesão (sequencial e referencial)', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Uso de pronomes que retomam partes do texto e conectivos de transição.' },
+      { id: 'p5', sub: 'portugues', teacher: 'Rainhany', title: 'Linguagem formal, informal e variedades linguísticas', inc: { coluni: 3, cefet: 3, ifmg: 4, ifnmg: 3, coltec: 3 }, tip: 'Marcas de oralidade e respeito às diferentes formas de falar.' },
+      { id: 'p6', sub: 'portugues', teacher: 'Rainhany', title: 'Relações lógico-discursivas (conjunções, conectivos)', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Sentido das conjunções: causa, consequência, oposição e conclusão.' },
+      { id: 'p7', sub: 'portugues', teacher: 'Rainhany', title: 'Acentuação gráfica, ortografia e pontuação', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'A pontuação cobrada pelo efeito de sentido que traz ao texto.' },
+      { id: 'p8', sub: 'portugues', teacher: 'Rainhany', title: 'Concordância e regência verbal e nominal', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 4, coltec: 3 }, tip: 'Norma culta aplicada à estrutura das frases.' },
+      { id: 'p9', sub: 'portugues', teacher: 'Rainhany', title: 'Texto narrativo, dramático, poético e elementos da narrativa', inc: { coluni: 4, cefet: 4, ifmg: 3, ifnmg: 3, coltec: 4 }, tip: 'Foco narrativo (1ª ou 3ª pessoa), tempo, espaço e personagens.' },
+      { id: 'p10', sub: 'portugues', teacher: 'Rainhany', title: 'Interdisciplinaridade e interdiscursividade', inc: { coluni: 4, cefet: 4, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Diálogo entre textos e fontes diferentes.' },
+      { id: 'p11', sub: 'portugues', teacher: 'Rainhany', title: 'Informações implícitas e explícitas (ironia e entrelinhas)', inc: { coluni: 5, cefet: 4, ifmg: 5, ifnmg: 4, coltec: 4 }, tip: 'O que o autor quis dizer sem declarar de forma direta.' },
+      { id: 'p12', sub: 'portugues', teacher: 'Rainhany', title: 'Contexto sócio-histórico e cultural de produção', inc: { coluni: 4, cefet: 4, ifmg: 3, ifnmg: 3, coltec: 4 }, tip: 'A época em que a história se passa e sua crítica social.' },
+      { id: 'p13', sub: 'portugues', teacher: 'Rainhany', title: 'Morfossintaxe da oração e termos da oração', inc: { coluni: 4, cefet: 3, ifmg: 3, ifnmg: 5, coltec: 3 }, tip: 'No IFNMG é o campeão absoluto de Português.' },
+      { id: 'p14', sub: 'portugues', teacher: 'Rainhany', title: 'Mecanismos de articulação frasal (coordenação e subordinação)', inc: { coluni: 4, cefet: 3, ifmg: 3, ifnmg: 4, coltec: 4 }, tip: 'Orações coordenadas e subordinadas a serviço do sentido.' },
+      { id: 'p15', sub: 'portugues', teacher: 'Rainhany', title: 'Recursos literários e figuras de estilo (metáfora, ironia...)', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 3, coltec: 4 }, tip: 'Metáforas, antíteses, hipérboles e ambiguidade no texto poético.' },
+      { id: 'p16', sub: 'portugues', teacher: 'Rainhany', title: 'Obras Literárias do Edital (Livro Obrigatório do Ano)', inc: { coluni: 5, cefet: 5, ifmg: 2, ifnmg: 1, coltec: 5 }, tip: 'COLTEC (57%), COLUNI (41%) e CEFET (35%) cobram a obra do edital!' },
+
+      // Matemática (Prof. Vinícius)
+      { id: 'mv1', sub: 'matematica-v', teacher: 'Vinícius', title: 'Razão, proporção e regra de três simples', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Escalas de mapas, plantas baixas e grandezas proporcionais.' },
+      { id: 'mv2', sub: 'matematica-v', teacher: 'Vinícius', title: 'Regra de três composta', inc: { coluni: 3, cefet: 3, ifmg: 4, ifnmg: 3, coltec: 3 }, tip: 'Atenção para grandezas inversas.' },
+      { id: 'mv3', sub: 'matematica-v', teacher: 'Vinícius', title: 'Porcentagem (aumentos e descontos sucessivos)', inc: { coluni: 4, cefet: 3, ifmg: 4, ifnmg: 4, coltec: 3 }, tip: 'Aumento seguido de desconto nunca volta ao valor inicial.' },
+      { id: 'mv4', sub: 'matematica-v', teacher: 'Vinícius', title: 'Fundamentos de geometria plana e ângulos', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Soma dos ângulos internos e relações angulares.' },
+      { id: 'mv5', sub: 'matematica-v', teacher: 'Vinícius', title: 'Retas paralelas cortadas por transversal', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Ângulos alternos internos e correspondentes.' },
+      { id: 'mv6', sub: 'matematica-v', teacher: 'Vinícius', title: 'Triângulos e características (isósceles e equilátero)', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Condição de existência de triângulos e cálculo de alturas.' },
+      { id: 'mv7', sub: 'matematica-v', teacher: 'Vinícius', title: 'Teorema de Tales', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Feixes de paralelas cortando terrenos e prédios.' },
+      { id: 'mv8', sub: 'matematica-v', teacher: 'Vinícius', title: 'Semelhança de triângulos', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Cálculo de sombras, postes e proporções métricas.' },
+      { id: 'mv9', sub: 'matematica-v', teacher: 'Vinícius', title: 'Teorema de Pitágoras e relações métricas', inc: { coluni: 5, cefet: 5, ifmg: 4, ifnmg: 4, coltec: 5 }, tip: 'Triângulo 3-4-5, diagonais de retângulos e quadrados.' },
+      { id: 'mv10', sub: 'matematica-v', teacher: 'Vinícius', title: 'Trigonometria no triângulo retângulo (seno, cosseno)', inc: { coluni: 2, cefet: 2, ifmg: 2, ifnmg: 2, coltec: 2 }, tip: 'Apenas relações fundamentais no triângulo retângulo.' },
+      { id: 'mv11', sub: 'matematica-v', teacher: 'Vinícius', title: 'Áreas de figuras planas (triângulos, retângulos, trapézios)', inc: { coluni: 5, cefet: 5, ifmg: 5, ifnmg: 5, coltec: 5 }, tip: 'O maior campeão de toda a Matemática nos vestibulinhos!' },
+      { id: 'mv12', sub: 'matematica-v', teacher: 'Vinícius', title: 'Características dos quadriláteros notáveis', inc: { coluni: 3, cefet: 4, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Propriedades dos paralelogramos, losangos e trapézios.' },
+      { id: 'mv13', sub: 'matematica-v', teacher: 'Vinícius', title: 'Circunferência: partes, cordas e setores', inc: { coluni: 4, cefet: 4, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Comprimento da roda (2πr) e áreas de setores circulares.' },
+      { id: 'mv14', sub: 'matematica-v', teacher: 'Vinícius', title: 'Inscrição e circunscrição de polígonos', inc: { coluni: 3, cefet: 3, ifmg: 2, ifnmg: 2, coltec: 2 }, tip: 'Polígonos dentro e fora da circunferência.' },
+      { id: 'mv15', sub: 'matematica-v', teacher: 'Vinícius', title: 'Juros simples', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 4, coltec: 2 }, tip: 'Fórmula básica J = C.i.t aplicada ao comércio.' },
+
+      // Matemática (Prof. Bruno)
+      { id: 'mb1', sub: 'matematica-b', teacher: 'Bruno', title: 'Noções de conjuntos e diagramas de Venn', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 3, coltec: 4 }, tip: 'Pesquisas de opinião e contagem de interseções.' },
+      { id: 'mb2', sub: 'matematica-b', teacher: 'Bruno', title: 'Conjuntos numéricos (naturais, inteiros, dízimas)', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 3, coltec: 4 }, tip: 'Operações com frações e fração geratriz.' },
+      { id: 'mb3', sub: 'matematica-b', teacher: 'Bruno', title: 'Intervalos reais', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 2, coltec: 3 }, tip: 'Representação gráfica na reta real.' },
+      { id: 'mb4', sub: 'matematica-b', teacher: 'Bruno', title: 'Potenciação, radiciação e racionalização', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 3, coltec: 4 }, tip: 'Expoentes fracionários e racionalização de denominadores.' },
+      { id: 'mb5', sub: 'matematica-b', teacher: 'Bruno', title: 'Expressões algébricas e valor numérico', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Substituição de incógnitas e operações com polinômios.' },
+      { id: 'mb6', sub: 'matematica-b', teacher: 'Bruno', title: 'Produtos notáveis e fatoração', inc: { coluni: 5, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 5 }, tip: 'Fatorar para cortar termos e simplificar frações algébricas.' },
+      { id: 'mb7', sub: 'matematica-b', teacher: 'Bruno', title: 'Simplificação de frações algébricas', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 3, coltec: 4 }, tip: 'Colocar fator comum em evidência.' },
+      { id: 'mb8', sub: 'matematica-b', teacher: 'Bruno', title: 'Equações do 1º grau e sistemas de equações', inc: { coluni: 5, cefet: 5, ifmg: 5, ifnmg: 4, coltec: 5 }, tip: 'Problemas contextualizados da vida real que viram equações.' },
+      { id: 'mb9', sub: 'matematica-b', teacher: 'Bruno', title: 'Equações do 2º grau (Bhaskara e Girard)', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 3, coltec: 4 }, tip: 'Soma e produto de raízes para achar a solução rápido.' },
+      { id: 'mb10', sub: 'matematica-b', teacher: 'Bruno', title: 'Estudo de funções: domínio, contradomínio e imagem', inc: { coluni: 3, cefet: 4, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Interpretar coordenadas e pares ordenados (x, y).' },
+      { id: 'mb11', sub: 'matematica-b', teacher: 'Bruno', title: 'Função afim (1º grau) e gráficos', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Tarifas com parte fixa + parte variável (Uber, água, luz).' },
+      { id: 'mb12', sub: 'matematica-b', teacher: 'Bruno', title: 'Função quadrática (2º grau) e vértice (máx/mín)', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 3, coltec: 4 }, tip: 'Calcular a altura máxima de um lançamento ou o lucro máximo.' },
+      { id: 'mb13', sub: 'matematica-b', teacher: 'Bruno', title: 'Probabilidade e análise combinatória', inc: { coluni: 2, cefet: 2, ifmg: 3, ifnmg: 2, coltec: 2 }, tip: 'Noções básicas de probabilidade de eventos simples.' },
+
+      // Biologia (Prof. Michel)
+      { id: 'bio1', sub: 'biologia', teacher: 'Michel', title: 'Origem da vida e evolução (Darwin e Lamarck)', inc: { coluni: 4, cefet: 3, ifmg: 3, ifnmg: 2, coltec: 3 }, tip: 'Seleção natural (Darwin) x Uso e Desuso (Lamarck).' },
+      { id: 'bio2', sub: 'biologia', teacher: 'Michel', title: 'Citologia e universo celular (organelas e membranas)', inc: { coluni: 4, cefet: 3, ifmg: 4, ifnmg: 5, coltec: 3 }, tip: 'Funções de mitocôndrias, cloroplastos e ribossomos.' },
+      { id: 'bio3', sub: 'biologia', teacher: 'Michel', title: 'Os vírus e características', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 4 }, tip: 'Estrutura sem célula e ação de vacinas.' },
+      { id: 'bio4', sub: 'biologia', teacher: 'Michel', title: 'Reino Monera, Protista e Fungi', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 4 }, tip: 'Bactérias, protozoários e fungos decompositores.' },
+      { id: 'bio5', sub: 'biologia', teacher: 'Michel', title: 'Reino Animalia: invertebrados e cordados', inc: { coluni: 4, cefet: 2, ifmg: 2, ifnmg: 2, coltec: 2 }, tip: 'Características gerais e adaptações dos animais.' },
+      { id: 'bio6', sub: 'biologia', teacher: 'Michel', title: 'Ciclo de vida e reprodução dos seres vivos', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Vantagem da reprodução sexuada para a variabilidade.' },
+      { id: 'bio7', sub: 'biologia', teacher: 'Michel', title: 'Reino Plantae e fisiologia vegetal', inc: { coluni: 4, cefet: 4, ifmg: 3, ifnmg: 3, coltec: 4 }, tip: 'Fotossíntese, transpiração e vasos condutores de seiva.' },
+      { id: 'bio8', sub: 'biologia', teacher: 'Michel', title: 'Histologia humana (tecidos do corpo humano)', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 4, coltec: 2 }, tip: 'Tecido epitelial, conjuntivo, muscular e nervoso.' },
+      { id: 'bio9', sub: 'biologia', teacher: 'Michel', title: 'Fisiologia humana e sistemas do corpo', inc: { coluni: 5, cefet: 5, ifmg: 5, ifnmg: 3, coltec: 4 }, tip: 'Digestão, respiração, circulação e excreção aplicados à saúde.' },
+      { id: 'bio10', sub: 'biologia', teacher: 'Michel', title: 'Parasitologia, doenças e saneamento básico', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 3, coltec: 5 }, tip: 'Transmissão e prevenção de Dengue, Chagas e verminoses.' },
+      { id: 'bio11', sub: 'biologia', teacher: 'Michel', title: 'Genética, divisão celular e 1ª Lei de Mendel', inc: { coluni: 4, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Cruzamentos genéticos (Aa x Aa) e leitura de heredogramas.' },
+      { id: 'bio12', sub: 'biologia', teacher: 'Michel', title: 'Tipos sanguíneos (Sistema ABO e fator Rh)', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Doações de sangue seguras (Doador Universal O-).' },
+      { id: 'bio13', sub: 'biologia', teacher: 'Michel', title: 'Biotecnologia (transgênicos e clonagem)', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'OGMs e aplicações na agricultura e medicina.' },
+      { id: 'bio14', sub: 'biologia', teacher: 'Michel', title: 'Ecologia (cadeias, relações e impactos ambientais)', inc: { coluni: 5, cefet: 5, ifmg: 5, ifnmg: 5, coltec: 5 }, tip: 'Campeão em todas as bancas! Cadeias tróficas e poluição.' },
+
+      // Química (Prof. Dudu)
+      { id: 'q1', sub: 'quimica', teacher: 'Dudu', title: 'Estudo da matéria e estados físicos (curvas de aquecimento)', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 3, coltec: 5 }, tip: 'Fusão, ebulição e leitura de gráficos de mudança de fase.' },
+      { id: 'q2', sub: 'quimica', teacher: 'Dudu', title: 'Substâncias simples, compostas e misturas', inc: { coluni: 5, cefet: 5, ifmg: 5, ifnmg: 4, coltec: 5 }, tip: 'Classificar sistemas homogêneos e heterogêneos.' },
+      { id: 'q3', sub: 'quimica', teacher: 'Dudu', title: 'Métodos de separação de misturas', inc: { coluni: 5, cefet: 5, ifmg: 5, ifnmg: 4, coltec: 5 }, tip: 'Destilação, decantação, filtração e tratamento de água.' },
+      { id: 'q4', sub: 'quimica', teacher: 'Dudu', title: 'Modelos atômicos e constituição atômica', inc: { coluni: 5, cefet: 5, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Dalton, Thomson, Rutherford e partículas atômicas.' },
+      { id: 'q5', sub: 'quimica', teacher: 'Dudu', title: 'Distribuição eletrônica e Tabela Periódica', inc: { coluni: 5, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Períodos e famílias químicas da tabela periódica.' },
+      { id: 'q6', sub: 'quimica', teacher: 'Dudu', title: 'Ligações químicas (iônica, covalente, metálica)', inc: { coluni: 2, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 2 }, tip: 'Propriedades dos compostos e condução de corrente elétrica.' },
+      { id: 'q7', sub: 'quimica', teacher: 'Dudu', title: 'Classificação das reações e Leis Ponderais', inc: { coluni: 4, cefet: 4, ifmg: 3, ifnmg: 3, coltec: 4 }, tip: 'Conservação das massas de Lavoisier e proporções de Proust.' },
+      { id: 'q8', sub: 'quimica', teacher: 'Dudu', title: 'Funções inorgânicas (ácidos, bases, sais, óxidos) e pH', inc: { coluni: 3, cefet: 3, ifmg: 4, ifnmg: 4, coltec: 2 }, tip: 'Escala de pH e identificação de compostos do cotidiano.' },
+
+      // Física (Prof. Expedito)
+      { id: 'f1', sub: 'fisica', teacher: 'Expedito', title: 'Grandezas, conversões e notação científica', inc: { coluni: 3, cefet: 4, ifmg: 4, ifnmg: 3, coltec: 4 }, tip: 'Conversão de km/h para m/s dividindo por 3,6.' },
+      { id: 'f2', sub: 'fisica', teacher: 'Expedito', title: 'Cinemática: velocidade média e aceleração', inc: { coluni: 3, cefet: 4, ifmg: 4, ifnmg: 3, coltec: 3 }, tip: 'Tempo de viagem, aceleração e gráficos de movimento.' },
+      { id: 'f3', sub: 'fisica', teacher: 'Expedito', title: 'Queda livre e lançamento vertical', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 2, coltec: 3 }, tip: 'Aceleração da gravidade puxando para baixo (g = 10 m/s²).' },
+      { id: 'f4', sub: 'fisica', teacher: 'Expedito', title: 'Leis de Newton e forças (peso, atrito, normal)', inc: { coluni: 4, cefet: 5, ifmg: 5, ifnmg: 5, coltec: 5 }, tip: 'Inércia, F = m.a e ação e reação.' },
+      { id: 'f5', sub: 'fisica', teacher: 'Expedito', title: 'Energia mecânica, conservação e trabalho', inc: { coluni: 4, cefet: 5, ifmg: 5, ifnmg: 5, coltec: 5 }, tip: 'Montanha-russa: energia cinética e potencial gravitacional.' },
+      { id: 'f6', sub: 'fisica', teacher: 'Expedito', title: 'Hidrostática (pressão, densidade e empuxo)', inc: { coluni: 2, cefet: 3, ifmg: 2, ifnmg: 2, coltec: 2 }, tip: 'Pressão em líquidos e empuxo de corpos flutuantes.' },
+      { id: 'f7', sub: 'fisica', teacher: 'Expedito', title: 'Termometria, calorimetria e dilatação', inc: { coluni: 5, cefet: 5, ifmg: 5, ifnmg: 4, coltec: 4 }, tip: 'Condução, convecção e radiação térmica no dia a dia.' },
+      { id: 'f8', sub: 'fisica', teacher: 'Expedito', title: 'Termodinâmica básica', inc: { coluni: 2, cefet: 2, ifmg: 2, ifnmg: 2, coltec: 2 }, tip: 'Conceito de calor e equilíbrio térmico.' },
+      { id: 'f9', sub: 'fisica', teacher: 'Expedito', title: 'Óptica geométrica, espelhos e lentes', inc: { coluni: 5, cefet: 3, ifmg: 2, ifnmg: 2, coltec: 3 }, tip: 'Top #1 de Física no COLUNI! Espelhos planos e esféricos.' },
+      { id: 'f10', sub: 'fisica', teacher: 'Expedito', title: 'Ondulatória e acústica (som)', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 2, coltec: 2 }, tip: 'Timbre, altura (grave/agudo) e intensidade (volume).' },
+      { id: 'f11', sub: 'fisica', teacher: 'Expedito', title: 'Eletrostática (eletrização, atrito e contato)', inc: { coluni: 4, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Atração e repulsão de cargas elétricas.' },
+      { id: 'f12', sub: 'fisica', teacher: 'Expedito', title: 'Eletrodinâmica (circuitos, lâmpadas e conta de luz)', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 5 }, tip: 'Cálculo de consumo em kWh e aparelhos em paralelo.' },
+      { id: 'f13', sub: 'fisica', teacher: 'Expedito', title: 'Magnetismo e eletromagnetismo', inc: { coluni: 2, cefet: 2, ifmg: 2, ifnmg: 2, coltec: 2 }, tip: 'Polos magnéticos e bússolas.' },
+
+      // História (Profª. Renata)
+      { id: 'h1', sub: 'historia', teacher: 'Renata', title: 'Imperialismo e neocolonialismo (África e Ásia)', inc: { coluni: 4, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Partilha da África e teorias racistas do século XIX.' },
+      { id: 'h2', sub: 'historia', teacher: 'Renata', title: 'Primeira Guerra Mundial', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Guerra de trincheiras e Tratado de Versalhes.' },
+      { id: 'h3', sub: 'historia', teacher: 'Renata', title: 'Crise de 1929 e Regimes Totalitários (Nazifascismo)', inc: { coluni: 5, cefet: 4, ifmg: 3, ifnmg: 3, coltec: 4 }, tip: 'Quebra da bolsa de NY e propaganda dos regimes totalitários.' },
+      { id: 'h4', sub: 'historia', teacher: 'Renata', title: 'Segunda Guerra Mundial e Holocausto', inc: { coluni: 5, cefet: 4, ifmg: 3, ifnmg: 3, coltec: 4 }, tip: 'Consequências humanitárias e criação da ONU.' },
+      { id: 'h5', sub: 'historia', teacher: 'Renata', title: 'Primeira República no Brasil (República Velha)', inc: { coluni: 4, cefet: 5, ifmg: 4, ifnmg: 3, coltec: 4 }, tip: 'Canudos, Chibata, voto de cabresto e coronelismo.' },
+      { id: 'h6', sub: 'historia', teacher: 'Renata', title: 'Revolução de 1930 e Era Vargas', inc: { coluni: 4, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Leis trabalhistas (CLT), industrialização e Estado Novo.' },
+      { id: 'h7', sub: 'historia', teacher: 'Renata', title: 'Período Democrático Populista (JK, Jânio e Jango)', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Construção de Brasília e política do Plano de Metas.' },
+      { id: 'h8', sub: 'historia', teacher: 'Renata', title: 'Ditadura Militar no Brasil e Redemocratização', inc: { coluni: 5, cefet: 4, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'AI-5, censura, Diretas Já e Constituição Cidadã de 1988.' },
+      { id: 'h9', sub: 'historia', teacher: 'Renata', title: 'Nova República e Brasil Contemporâneo', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Plano Real e desafios da cidadania atual.' },
+      { id: 'h10', sub: 'historia', teacher: 'Renata', title: 'Guerra Fria e Mundo Contemporâneo', inc: { coluni: 5, cefet: 5, ifmg: 4, ifnmg: 4, coltec: 5 }, tip: 'Bipolaridade EUA x URSS e corrida espacial/armamentista.' },
+      { id: 'h11', sub: 'historia', teacher: 'Renata', title: 'Descolonização Afro-Asiática e Ditaduras no Cone Sul', inc: { coluni: 4, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Independências na África e regimes militares vizinhos.' },
+      { id: 'h12', sub: 'historia', teacher: 'Renata', title: 'Escravidão, Resistência Negra e Povos Indígenas', inc: { coluni: 5, cefet: 3, ifmg: 4, ifnmg: 5, coltec: 3 }, tip: 'Cidadania, quilombos e direitos originários no Brasil.' },
+      { id: 'h13', sub: 'historia', teacher: 'Renata', title: 'História Antiga, Medieval e Moderna', inc: { coluni: 1, cefet: 1, ifmg: 5, ifnmg: 4, coltec: 4 }, tip: 'No IFMG a Idade Moderna é forte; no COLUNI e CEFET quase não cai.' },
+
+      // Geografia (Prof. Nael)
+      { id: 'g1', sub: 'geografia', teacher: 'Nael', title: 'Conceitos fundamentais (espaço, paisagem, território)', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Categorias geográficas fundamentais.' },
+      { id: 'g2', sub: 'geografia', teacher: 'Nael', title: 'Cartografia: escala, fusos horários e coordenadas', inc: { coluni: 5, cefet: 5, ifmg: 4, ifnmg: 4, coltec: 4 }, tip: 'Cálculo prático de fusos e conversão de escala métrica.' },
+      { id: 'g3', sub: 'geografia', teacher: 'Nael', title: 'Geomorfologia (relevo, placas tectônicas e solos)', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Agentes internos e externos de transformação do relevo.' },
+      { id: 'g4', sub: 'geografia', teacher: 'Nael', title: 'Climatologia, biomas e domínios naturais', inc: { coluni: 4, cefet: 5, ifmg: 4, ifnmg: 3, coltec: 4 }, tip: 'Interpretação de climogramas e vegetações típicas brasileiras.' },
+      { id: 'g5', sub: 'geografia', teacher: 'Nael', title: 'Hidrografia brasileira e bacias hidrográficas', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Bacia do São Francisco e uso hidrelétrico das águas.' },
+      { id: 'g6', sub: 'geografia', teacher: 'Nael', title: 'Matriz energética e fontes renováveis', inc: { coluni: 3, cefet: 3, ifmg: 3, ifnmg: 3, coltec: 3 }, tip: 'Energia solar, eólica e impactos socioambientais.' },
+      { id: 'g7', sub: 'geografia', teacher: 'Nael', title: 'População brasileira: pirâmides etárias e migração', inc: { coluni: 5, cefet: 4, ifmg: 4, ifnmg: 3, coltec: 3 }, tip: 'Transição demográfica e envelhecimento da população brasileira.' },
+      { id: 'g8', sub: 'geografia', teacher: 'Nael', title: 'Geografia agrária e agropecuária no Brasil', inc: { coluni: 4, cefet: 3, ifmg: 5, ifnmg: 3, coltec: 4 }, tip: 'Agronegócio vs agricultura familiar e conflitos fundiários.' },
+      { id: 'g9', sub: 'geografia', teacher: 'Nael', title: 'Urbanização e Industrialização do Brasil', inc: { coluni: 5, cefet: 4, ifmg: 3, ifnmg: 3, coltec: 4 }, tip: 'Crescimento urbano acelerado, favelização e desconcentração industrial.' },
+      { id: 'g10', sub: 'geografia', teacher: 'Nael', title: 'Globalização e geopolítica mundial contemporânea', inc: { coluni: 4, cefet: 5, ifmg: 4, ifnmg: 5, coltec: 5 }, tip: 'Blocos econômicos, divisão internacional do trabalho e internet.' },
+      { id: 'g11', sub: 'geografia', teacher: 'Nael', title: 'Geografia Regional dos Continentes', inc: { coluni: 3, cefet: 2, ifmg: 2, ifnmg: 3, coltec: 3 }, tip: 'Características geoeconômicas dos continentes.' },
+      { id: 'g12', sub: 'geografia', teacher: 'Nael', title: 'Geografia de Minas Gerais (Mineração e relevo)', inc: { coluni: 4, cefet: 3, ifmg: 3, ifnmg: 4, coltec: 3 }, tip: 'Quadrilátero Ferrífero e relevo de Mares de Morros.' },
+
+      // Redação (Profª. Ailly) - EXCLUSIVO COLUNI
+      { id: 'r1', sub: 'redacao', teacher: 'Ailly', title: 'Apresentação e Critérios de Correção da Redação Coluni', inc: { coluni: 5, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Não fugir do tema, manter letra legível e respeitar as linhas.' },
+      { id: 'r2', sub: 'redacao', teacher: 'Ailly', title: 'Tipologia Narrativa e Gênero Crônica', inc: { coluni: 5, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'O gênero mais cobrado do COLUNI! Situações do dia a dia.' },
+      { id: 'r3', sub: 'redacao', teacher: 'Ailly', title: 'Autobiografia, Relatos Pessoais e Página de Diário', inc: { coluni: 4, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Escrita reflexiva em 1ª pessoa (eu) com marcas de sentimentos.' },
+      { id: 'r4', sub: 'redacao', teacher: 'Ailly', title: 'Cartas (Carta Pessoal, Carta Aberta e Carta de Leitor)', inc: { coluni: 5, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Lembrar de vocativo, desenvolvimento claro e despedida formal.' },
+      { id: 'r5', sub: 'redacao', teacher: 'Ailly', title: 'Tipologia Expositiva: Prefácio, Entrevista e Síntese (Resumo)', inc: { coluni: 4, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Apresentar dados e ideias com clareza e fidelidade ao original.' },
+      { id: 'r6', sub: 'redacao', teacher: 'Ailly', title: 'Tipologia Injuntiva: Manual de Instruções e Tutorial', inc: { coluni: 3, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Uso de verbos no imperativo e etapas sequenciais claras.' },
+      { id: 'r7', sub: 'redacao', teacher: 'Ailly', title: 'Tipologia Argumentativa: Texto Opinativo e Manifesto', inc: { coluni: 5, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Defesa de ponto de vista com argumentos consistentes.' },
+
+      // Inglês (Profª. Tainá) - EXCLUSIVO COLUNI
+      { id: 'i1', sub: 'ingles', teacher: 'Tainá', title: 'Estratégias de Leitura: Skimming (Títulos, Imagens e Gráficos)', inc: { coluni: 5, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Cai sempre! Olhar rápido para identificar o assunto geral em segundos.' },
+      { id: 'i2', sub: 'ingles', teacher: 'Tainá', title: 'Estratégias de Leitura: Scanning (Palavras-chave e busca rápida)', inc: { coluni: 5, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Localizar datas, nomes e números para responder a questão em 1 minuto.' },
+      { id: 'i3', sub: 'ingles', teacher: 'Tainá', title: 'Gêneros textuais em Inglês: Tirinhas, Notícias, Charges e Infográficos', inc: { coluni: 5, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Humor, crítica social e associação entre imagem e texto em inglês.' },
+      { id: 'i4', sub: 'ingles', teacher: 'Tainá', title: 'Comparatives and Superlatives na construção de sentido', inc: { coluni: 4, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Mais alto que (higher than), o maior (the biggest).' },
+      { id: 'i5', sub: 'ingles', teacher: 'Tainá', title: 'Tempos Verbais: Simple Present, Present Continuous, Simple Past e Past Continuous', inc: { coluni: 4, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Reconhecer ações habituais, em progresso e finalizadas na narrativa.' },
+      { id: 'i6', sub: 'ingles', teacher: 'Tainá', title: 'Verbo Modal can (Habilidades e Permissões) e Imperativo', inc: { coluni: 4, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Sentido de capacidade ou comandos em instruções.' },
+      { id: 'i7', sub: 'ingles', teacher: 'Tainá', title: 'Quantificadores (some, any, many, much) e Pronomes (sujeito e relativos)', inc: { coluni: 4, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'Uso de who, which, that e quantificação de termos contáveis/incontáveis.' },
+      { id: 'i8', sub: 'ingles', teacher: 'Tainá', title: 'Conectivos Textuais de Introdução, Oposição e Conclusão', inc: { coluni: 5, cefet: 0, ifmg: 0, ifnmg: 0, coltec: 0 }, tip: 'But, however, although, therefore: o segredo para entender a ligação das ideias.' }
+    ];
+
+    const allSubjects = [
+      { id: 'all', name: 'Todas as Matérias' },
+      { id: 'portugues', name: 'Português', teacher: 'Rainhany' },
+      { id: 'matematica-v', name: 'Matemática (Geometria)', teacher: 'Vinícius' },
+      { id: 'matematica-b', name: 'Matemática (Álgebra)', teacher: 'Bruno' },
+      { id: 'biologia', name: 'Biologia', teacher: 'Michel' },
+      { id: 'quimica', name: 'Química', teacher: 'Dudu' },
+      { id: 'fisica', name: 'Física', teacher: 'Expedito' },
+      { id: 'historia', name: 'História', teacher: 'Renata' },
+      { id: 'geografia', name: 'Geografia', teacher: 'Nael' },
+      { id: 'redacao', name: 'Redação', teacher: 'Ailly', onlyColuni: true },
+      { id: 'ingles', name: 'Inglês', teacher: 'Tainá', onlyColuni: true }
+    ];
+
+    let currentBanca = 'coluni';
+    let currentTab = 'diagnostico';
+    let selectedSubject = 'all';
+    let selectedMasteryFilter = 'all';
+    let searchQuery = '';
+    let selectedStatSubject = 'portugues';
+
+    let studentMastery = {};
+    let planCompleted = {};
+
+    let weightChart = null;
+    let cognitiveChart = null;
+
+    window.onload = function() {
+      loadSavedState();
+      updateBancaHeaderUI();
+      renderSubjectFilters();
+      renderDiagnosticoList();
+      updateMetrics();
+      renderReviewPlan();
+      initCharts();
+      renderStatSubjectPills();
+      renderStatSubjectDetails();
+    };
+
+    function loadSavedState() {
+      // Inicia por padrão com marcações limpas ou parciais para encorajar o preenchimento
+      cronogramaTopics.forEach((t, i) => {
+        if (!studentMastery[t.id]) {
+          studentMastery[t.id] = (i % 5 === 0) ? 'domino' : (i % 3 === 0) ? 'parcial' : 'nao_domino';
+        }
+      });
+    }
+
+    function switchTab(tabId) {
+      currentTab = tabId;
+      ['diagnostico', 'revisao', 'graficos', 'comparativo'].forEach(id => {
+        const tabEl = document.getElementById(`tab-${id}`);
+        const btnEl = document.getElementById(`nav-btn-${id}`);
+        if (id === tabId) {
+          tabEl.classList.remove('hidden');
+          btnEl.className = 'px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-gpf-blue text-white shadow-md shadow-gpf-blue/20 flex items-center gap-1.5';
+        } else {
+          tabEl.classList.add('hidden');
+          btnEl.className = 'px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:text-gpf-blue hover:bg-slate-100 flex items-center gap-1.5 relative';
+        }
+      });
+
+      if (tabId === 'revisao') {
+        renderReviewPlan();
+      } else if (tabId === 'graficos') {
+        setTimeout(() => updateChartsForBanca(currentBanca), 50);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Clique com rolagem suave no Passo 1
+    function selectBancaWithScroll(bancaId) {
+      setTargetBanca(bancaId);
+      const cardCheckup = document.getElementById('card-instrucao-checkup');
+      if (cardCheckup) {
+        cardCheckup.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function setTargetBanca(bancaId) {
+      currentBanca = bancaId;
+      const b = bancasData[bancaId];
+
+      ['coluni', 'cefet', 'ifmg', 'ifnmg', 'coltec'].forEach(id => {
+        const btn = document.getElementById(`target-btn-${id}`);
+        if (id === bancaId) {
+          btn.className = 'px-4 py-3 rounded-2xl text-xs sm:text-sm font-black transition-all bg-gpf-blue text-white shadow-lg shadow-gpf-blue/40 border-2 border-gpf-lime flex items-center gap-2';
+        } else {
+          btn.className = 'px-4 py-3 rounded-2xl text-xs sm:text-sm font-black transition-all bg-white/10 hover:bg-white/20 text-slate-200 border border-white/10 flex items-center gap-2';
+        }
+      });
+
+      const chartSelect = document.getElementById('select-chart-banca');
+      if (chartSelect) chartSelect.value = bancaId;
+
+      // Se a matéria atualmente selecionada for Redação ou Inglês e a nova banca não as tiver, volta para 'all'
+      if (!b.hasRedacao && (selectedSubject === 'redacao' || selectedSubject === 'ingles')) {
+        selectedSubject = 'all';
+      }
+      if (!b.hasRedacao && (selectedStatSubject === 'redacao' || selectedStatSubject === 'ingles')) {
+        selectedStatSubject = 'portugues';
+      }
+
+      updateBancaHeaderUI();
+      renderSubjectFilters();
+      renderDiagnosticoList();
+      renderReviewPlan();
+      updateMetrics();
+      updateChartsForBanca(bancaId);
+      renderStatSubjectPills();
+      renderStatSubjectDetails();
+      showToast(`Escola alterada para ${b.name}`);
+    }
+
+    function updateBancaHeaderUI() {
+      const b = bancasData[currentBanca];
+      document.getElementById('hero-banca-nome').innerText = b.name;
+      document.getElementById('hero-banca-materias-info').innerText = b.materiaDesc;
+
+      document.getElementById('banca-summary-title1').innerText = b.stat1.title;
+      document.getElementById('banca-summary-val1').innerText = b.stat1.val;
+      document.getElementById('banca-summary-sub1').innerText = b.stat1.sub;
+
+      document.getElementById('banca-summary-title2').innerText = b.stat2.title;
+      document.getElementById('banca-summary-val2').innerText = b.stat2.val;
+      document.getElementById('banca-summary-sub2').innerText = b.stat2.sub;
+
+      document.getElementById('instrucao-banca-ativa').innerText = `Foco: ${b.name}`;
+      document.getElementById('revisao-banca-name').innerText = b.name;
+    }
+
+    function getActiveSubjects() {
+      const b = bancasData[currentBanca];
+      return allSubjects.filter(sub => {
+        if (sub.onlyColuni && !b.hasRedacao) return false;
+        return true;
+      });
+    }
+
+    function renderSubjectFilters() {
+      const container = document.getElementById('subject-filter-container');
+      const activeSubs = getActiveSubjects();
+      let html = '';
+      activeSubs.forEach(meta => {
+        const isSel = selectedSubject === meta.id;
+        html += `
+          <button onclick="filterBySubject('${meta.id}')" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${isSel ? 'bg-gpf-blue text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+            ${meta.name}
+          </button>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function filterBySubject(subId) {
+      selectedSubject = subId;
+      renderSubjectFilters();
+      renderDiagnosticoList();
+    }
+
+    function setMasteryFilter(type) {
+      selectedMasteryFilter = type;
+      ['all', 'nao_domino', 'parcial', 'domino', 'campeoes'].forEach(t => {
+        const btn = document.getElementById(`filter-mas-${t}`);
+        if (t === type) {
+          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white shadow-sm transition-all';
+        } else {
+          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all';
+        }
+      });
+      renderDiagnosticoList();
+    }
+
+    function applyFilters() {
+      searchQuery = document.getElementById('input-search').value.toLowerCase().trim();
+      renderDiagnosticoList();
+    }
+
+    function getActiveTopicsForBanca() {
+      const b = bancasData[currentBanca];
+      return cronogramaTopics.filter(t => {
+        // Se a banca não tem Redação nem Inglês, filtra fora
+        if ((t.sub === 'redacao' || t.sub === 'ingles') && !b.hasRedacao) {
+          return false;
+        }
+        return true;
+      });
+    }
+
+    function renderDiagnosticoList() {
+      const container = document.getElementById('diagnostico-topics-container');
+      const activeTopics = getActiveTopicsForBanca();
+
+      let list = activeTopics.map(t => {
+        const meta = allSubjects.find(m => m.id === t.sub) || { name: t.sub };
+        return {
+          ...t,
+          subjectTitle: meta.name,
+          activeIncidence: t.inc[currentBanca] || 3,
+          mastery: studentMastery[t.id] || 'nao_domino'
+        };
+      });
+
+      if (selectedSubject !== 'all') {
+        list = list.filter(t => t.sub === selectedSubject);
+      }
+
+      if (searchQuery) {
+        list = list.filter(t => 
+          t.title.toLowerCase().includes(searchQuery) ||
+          t.subjectTitle.toLowerCase().includes(searchQuery) ||
+          t.teacher.toLowerCase().includes(searchQuery) ||
+          t.tip.toLowerCase().includes(searchQuery)
+        );
+      }
+
+      if (selectedMasteryFilter === 'nao_domino') {
+        list = list.filter(t => t.mastery === 'nao_domino');
+      } else if (selectedMasteryFilter === 'parcial') {
+        list = list.filter(t => t.mastery === 'parcial');
+      } else if (selectedMasteryFilter === 'domino') {
+        list = list.filter(t => t.mastery === 'domino');
+      } else if (selectedMasteryFilter === 'campeoes') {
+        list = list.filter(t => t.activeIncidence >= 4);
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white rounded-3xl p-10 text-center border border-slate-200">
+            <i class="fas fa-clipboard-question text-slate-300 text-4xl mb-3"></i>
+            <h4 class="text-sm font-bold text-slate-800">Nenhum assunto encontrado para este filtro</h4>
+            <p class="text-xs text-slate-500 mt-1">Tente pesquisar com outro termo ou selecione 'Todos'.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      list.forEach(t => {
+        const isMastered = t.mastery === 'domino';
+        const isParcial = t.mastery === 'parcial';
+        const isNaoDomino = t.mastery === 'nao_domino';
+
+        let incBadge = '';
+        if (t.activeIncidence === 5) {
+          incBadge = `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-100 text-rose-800 border border-rose-200"><i class="fas fa-fire text-rose-500"></i> Cai Muito / Chefão</span>`;
+        } else if (t.activeIncidence === 4) {
+          incBadge = `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-200">Cobrança Frequente</span>`;
+        } else if (t.activeIncidence <= 1) {
+          incBadge = `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-500 border border-slate-200">Pouco Cobrado Nesta Prova</span>`;
+        } else {
+          incBadge = `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-600">Cobrança Média</span>`;
+        }
+
+        html += `
+          <div class="bg-white rounded-3xl p-4 sm:p-5 border transition-all duration-150 ${isMastered ? 'border-emerald-200 bg-emerald-50/20' : isParcial ? 'border-amber-200 bg-amber-50/15' : 'border-slate-200 shadow-sm'} flex flex-col md:flex-row md:items-center justify-between gap-4">
+            
+            <div class="space-y-1 flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[11px] font-black text-gpf-blue font-mono uppercase tracking-wide">${t.subjectTitle} · Prof. ${t.teacher}</span>
+                ${incBadge}
+              </div>
+              
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 ${isMastered ? 'text-slate-700' : ''}">
+                ${t.title}
+              </h3>
+              
+              <p class="text-xs text-slate-500 flex items-start gap-1.5">
+                <span class="font-bold text-slate-700 shrink-0"><i class="fas fa-lightbulb text-amber-500 mr-1"></i>Dica:</span>
+                <span>${t.tip}</span>
+              </p>
+            </div>
+
+            <!-- Botões 100% Clicáveis e Adaptados para 14 anos -->
+            <div class="flex items-center gap-2 shrink-0 self-start md:self-center">
+              
+              <button onclick="setTopicMastery('${t.id}', 'nao_domino')" class="px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${isNaoDomino ? 'bg-rose-500 text-white shadow-md shadow-rose-500/25 ring-2 ring-rose-200 font-extrabold' : 'bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600'}">
+                <i class="fas fa-circle-xmark"></i>
+                <span>Ainda Não Sei</span>
+              </button>
+
+              <button onclick="setTopicMastery('${t.id}', 'parcial')" class="px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${isParcial ? 'bg-amber-400 text-amber-950 shadow-md shadow-amber-400/25 ring-2 ring-amber-200 font-extrabold' : 'bg-slate-100 hover:bg-amber-50 text-slate-600 hover:text-amber-700'}">
+                <i class="fas fa-triangle-exclamation"></i>
+                <span>Mais ou Menos</span>
+              </button>
+
+              <button onclick="setTopicMastery('${t.id}', 'domino')" class="px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${isMastered ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/25 ring-2 ring-emerald-200 font-extrabold' : 'bg-slate-100 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700'}">
+                <i class="fas fa-circle-check"></i>
+                <span>Mando Muito!</span>
+              </button>
+
+            </div>
+
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function setTopicMastery(topicId, mastery) {
+      studentMastery[topicId] = mastery;
+      renderDiagnosticoList();
+      updateMetrics();
+      showToast('Marcado! Seu checklist foi atualizado.');
+    }
+
+    function updateMetrics() {
+      const activeTopics = getActiveTopicsForBanca();
+      let dominaCount = 0;
+      let parcialCount = 0;
+      let urgenteCount = 0;
+      const total = activeTopics.length || 1;
+
+      activeTopics.forEach(t => {
+        const m = studentMastery[t.id] || 'nao_domino';
+        if (m === 'domino') dominaCount++;
+        else if (m === 'parcial') parcialCount++;
+        else urgenteCount++;
+      });
+
+      const percent = Math.round((dominaCount / total) * 100);
+      document.getElementById('metric-percent-mastered').innerText = `${percent}%`;
+      document.getElementById('metric-bar-mastered').style.width = `${percent}%`;
+      document.getElementById('metric-count-domina').innerText = dominaCount;
+      document.getElementById('metric-count-parcial').innerText = parcialCount;
+      document.getElementById('metric-count-urgente').innerText = urgenteCount;
+
+      const rankEl = document.getElementById('metric-gamification-rank');
+      if (percent < 25) {
+        rankEl.innerText = 'Recruta do 9º Ano';
+        rankEl.className = 'text-[10px] font-black px-2 py-0.5 rounded bg-slate-100 text-slate-700';
+      } else if (percent < 50) {
+        rankEl.innerText = 'Explorador';
+        rankEl.className = 'text-[10px] font-black px-2 py-0.5 rounded bg-amber-100 text-amber-800';
+      } else if (percent < 80) {
+        rankEl.innerText = 'Guerreiro da Revisão';
+        rankEl.className = 'text-[10px] font-black px-2 py-0.5 rounded bg-indigo-100 text-gpf-blue';
+      } else {
+        rankEl.innerText = 'Quase Federal 🚀';
+        rankEl.className = 'text-[10px] font-black px-2 py-0.5 rounded bg-emerald-100 text-emerald-800';
+      }
+
+      const needsReviewCount = urgenteCount + parcialCount;
+      document.getElementById('revisao-badge-count').innerText = needsReviewCount;
+    }
+
+    // CHECKLIST DE REVISÃO SIMPLIFICADO E DIRETO
+    function renderReviewPlan() {
+      const container = document.getElementById('plan-list-container');
+      const activeTopics = getActiveTopicsForBanca();
+      let queue = [];
+
+      activeTopics.forEach(t => {
+        const mastery = studentMastery[t.id] || 'nao_domino';
+        if (mastery !== 'domino') {
+          const bancaIncidence = t.inc[currentBanca] || 3;
+          const meta = allSubjects.find(m => m.id === t.sub) || { name: t.sub };
+
+          queue.push({
+            ...t,
+            subjectTitle: meta.name,
+            mastery,
+            bancaIncidence,
+            isDone: !!planCompleted[t.id]
+          });
+        }
+      });
+
+      // Ordena: primeiro os que Mais Caem na Prova (5 -> 1), depois os Não Sabidos
+      queue.sort((a, b) => {
+        if (b.bancaIncidence !== a.bancaIncidence) {
+          return b.bancaIncidence - a.bancaIncidence;
+        }
+        return (a.mastery === 'nao_domino' ? -1 : 1);
+      });
+
+      const urgenteCount = queue.filter(q => q.mastery === 'nao_domino').length;
+      const parcialCount = queue.filter(q => q.mastery === 'parcial').length;
+
+      document.getElementById('plan-metric-total').innerText = queue.length;
+      document.getElementById('plan-metric-urgente').innerText = urgenteCount;
+      document.getElementById('plan-metric-parcial').innerText = parcialCount;
+
+      if (queue.length === 0) {
+        container.innerHTML = `
+          <div class="bg-emerald-50 rounded-3xl p-10 text-center border border-emerald-200">
+            <i class="fas fa-trophy text-emerald-500 text-5xl mb-3"></i>
+            <h4 class="text-base font-black text-emerald-900">Parabéns! Sua lista de revisão está zerada!</h4>
+            <p class="text-xs text-emerald-700 mt-1">Você marcou que domina todos os assuntos desta prova. Se pintar alguma dúvida nos simulados, marque como 'Mais ou Menos'.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      queue.forEach((item, index) => {
+        const isUrgent = item.bancaIncidence >= 4 && item.mastery === 'nao_domino';
+
+        html += `
+          <div class="p-4 rounded-2xl border transition-all ${item.isDone ? 'bg-slate-50 border-slate-200 opacity-60' : isUrgent ? 'bg-rose-50/30 border-rose-200' : 'bg-white border-slate-200 shadow-xs'} flex items-start justify-between gap-3">
+            
+            <div class="flex items-start gap-3 flex-1">
+              <input type="checkbox" onchange="togglePlanDone('${item.id}')" ${item.isDone ? 'checked' : ''} class="w-5 h-5 mt-1 rounded text-gpf-blue focus:ring-gpf-blue cursor-pointer">
+
+              <div class="space-y-0.5">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-[11px] font-black text-gpf-blue uppercase">${item.subjectTitle}</span>
+                  ${item.mastery === 'nao_domino' ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800">Ainda Não Sei</span>' : '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">Mais ou Menos</span>'}
+                  ${item.bancaIncidence >= 4 ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-50 text-rose-700 border border-rose-200"><i class="fas fa-fire text-rose-500"></i> Cai Bastante!</span>' : ''}
+                </div>
+
+                <h4 class="text-sm font-bold text-slate-900 ${item.isDone ? 'line-through text-slate-400' : ''}">
+                  ${item.title}
+                </h4>
+
+                <p class="text-xs text-slate-500">
+                  <i class="fas fa-lightbulb text-amber-500 mr-1"></i>${item.tip}
+                </p>
+              </div>
+            </div>
+
+            <div class="shrink-0 self-center">
+              <button onclick="togglePlanDone('${item.id}')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${item.isDone ? 'bg-emerald-600 text-white' : 'border border-slate-200 text-slate-600 hover:border-emerald-500 hover:text-emerald-600'}">
+                <i class="fas ${item.isDone ? 'fa-check-double' : 'fa-check'}"></i>
+                <span class="hidden sm:inline">${item.isDone ? 'Revisado' : 'Marcar'}</span>
+              </button>
+            </div>
+
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function togglePlanDone(topicId) {
+      planCompleted[topicId] = !planCompleted[topicId];
+      renderReviewPlan();
+      showToast(planCompleted[topicId] ? 'Assunto marcado como revisado!' : 'Assunto reaberto para estudo.');
+    }
+
+    function exportReviewPlan() {
+      const activeTopics = getActiveTopicsForBanca();
+      const list = activeTopics
+        .filter(t => (studentMastery[t.id] || 'nao_domino') !== 'domino')
+        .map((t, idx) => `[ ] ${idx + 1}. (${t.sub.toUpperCase()}) ${t.title} - ${studentMastery[t.id] === 'nao_domino' ? 'Ainda Não Sei' : 'Dúvida Parcial'}`)
+        .join('\n');
+
+      const blob = new Blob([`CHECKLIST DE REVISÃO - GUIA PRÉ-FEDERAL\nVestibulinho Alvo: ${bancasData[currentBanca].name}\nData: ${new Date().toLocaleDateString('pt-BR')}\n\n${list}`], { type: 'text/plain;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `Checklist_Revisao_${currentBanca}.txt`;
+      link.click();
+    }
+
+    function initCharts() {
+      const ctxWeight = document.getElementById('chart-weight-canvas').getContext('2d');
+      weightChart = new Chart(ctxWeight, {
+        type: 'doughnut',
+        data: {
+          labels: ['Português', 'Matemática', 'Ciências', 'Geografia', 'História', 'Inglês'],
+          datasets: [{
+            data: [23.9, 23.9, 24.6, 12.3, 12.3, 3.0],
+            backgroundColor: ['#5242ea', '#3007a0', '#7bcd47', '#00abb1', '#dd5737', '#6408b0'],
+            borderWidth: 2,
+            borderColor: '#ffffff'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, font: { family: 'Plus Jakarta Sans', size: 11, weight: 'bold' } } }
+          }
+        }
+      });
+
+      const ctxCognitive = document.getElementById('chart-cognitive-canvas').getContext('2d');
+      cognitiveChart = new Chart(ctxCognitive, {
+        type: 'bar',
+        data: {
+          labels: ['Análise', 'Aplicação', 'Compreensão', 'Interpretação', 'Memorização'],
+          datasets: [{
+            label: '% da Prova',
+            data: [53.5, 19.5, 13.6, 12.9, 0.6],
+            backgroundColor: ['#5242ea', '#00abb1', '#7bcd47', '#6408b0', '#94a3b8'],
+            borderRadius: 8
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { x: { max: 70, ticks: { callback: v => v + '%' } } }
+        }
+      });
+
+      updateChartsForBanca('coluni');
+    }
+
+    function updateChartsForBanca(bancaId) {
+      const b = bancasData[bancaId];
+      if (!b) return;
+
+      document.getElementById('chart-main-title').innerText = `Raio-X: ${b.name}`;
+      document.getElementById('chart-main-subtitle').innerText = `Entenda a distribuição de pontos e como as matérias são cobradas no exame.`;
+
+      if (weightChart) {
+        if (b.hasIngles) {
+          weightChart.data.labels = ['Português', 'Matemática', 'Ciências', 'Geografia', 'História', 'Inglês'];
+          weightChart.data.datasets[0].data = [
+            b.weights.portugues,
+            b.weights.matematica,
+            b.weights.ciencias,
+            b.weights.geografia,
+            b.weights.historia,
+            b.weights.ingles
+          ];
+          weightChart.data.datasets[0].backgroundColor = ['#5242ea', '#3007a0', '#7bcd47', '#00abb1', '#dd5737', '#6408b0'];
+        } else {
+          weightChart.data.labels = ['Português', 'Matemática', 'Ciências', 'Geografia', 'História'];
+          weightChart.data.datasets[0].data = [
+            b.weights.portugues,
+            b.weights.matematica,
+            b.weights.ciencias,
+            b.weights.geografia,
+            b.weights.historia
+          ];
+          weightChart.data.datasets[0].backgroundColor = ['#5242ea', '#3007a0', '#7bcd47', '#00abb1', '#dd5737'];
+        }
+        weightChart.update();
+      }
+
+      if (cognitiveChart) {
+        cognitiveChart.data.datasets[0].data = [
+          b.cognitive.analise,
+          b.cognitive.aplicacao,
+          b.cognitive.compreensao,
+          b.cognitive.interpretacao,
+          b.cognitive.memorizacao
+        ];
+        cognitiveChart.update();
+      }
+    }
+
+    const statSubjectKeys = [
+      { key: 'portugues', label: 'Português', icon: 'fa-book' },
+      { key: 'matematica', label: 'Matemática', icon: 'fa-calculator' },
+      { key: 'biologia', label: 'Biologia', icon: 'fa-dna' },
+      { key: 'fisica', label: 'Física', icon: 'fa-atom' },
+      { key: 'quimica', label: 'Química', icon: 'fa-flask' },
+      { key: 'historia', label: 'História', icon: 'fa-landmark' },
+      { key: 'geografia', label: 'Geografia', icon: 'fa-earth-americas' },
+      { key: 'redacao', label: 'Redação', icon: 'fa-feather-pointed', onlyColuni: true },
+      { key: 'ingles', label: 'Inglês', icon: 'fa-language', onlyColuni: true }
+    ];
+
+    function renderStatSubjectPills() {
+      const container = document.getElementById('stat-subject-pills');
+      const b = bancasData[currentBanca];
+      let html = '';
+      statSubjectKeys.forEach(s => {
+        if (s.onlyColuni && !b.hasRedacao) return;
+        const isSel = selectedStatSubject === s.key;
+        html += `
+          <button onclick="selectStatSubject('${s.key}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer ${isSel ? 'bg-gpf-blue text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+            <i class="fas ${s.icon}"></i>
+            <span>${s.label}</span>
+          </button>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function selectStatSubject(key) {
+      selectedStatSubject = key;
+      renderStatSubjectPills();
+      renderStatSubjectDetails();
+    }
+
+    function renderStatSubjectDetails() {
+      const container = document.getElementById('stat-subject-details-card');
+      const b = bancasData[currentBanca];
+      const subjectInfo = statSubjectKeys.find(s => s.key === selectedStatSubject);
+      const rankingList = b.rankings[selectedStatSubject] || [];
+
+      if (rankingList.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-8">
+            <p class="text-sm font-bold text-slate-700">Esta matéria não é cobrada na prova do ${b.name}.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let rowsHtml = '';
+      rankingList.forEach((item, idx) => {
+        const isLeader = idx === 0;
+        rowsHtml += `
+          <div class="p-3.5 rounded-2xl border transition-all ${isLeader ? 'bg-indigo-50/40 border-indigo-200' : 'bg-slate-50/50 border-slate-100'} flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-lg ${isLeader ? 'bg-gpf-blue text-white' : 'bg-slate-200 text-slate-700'} text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">
+                ${idx + 1}
+              </span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900">${item.topic}</h4>
+                  ${isLeader ? '<span class="text-[10px] font-black px-2 py-0.2 rounded-full bg-rose-500 text-white">#1 Campeão</span>' : ''}
+                </div>
+                <p class="text-xs text-slate-500 mt-0.5"><strong class="text-slate-700">Como cai:</strong> ${item.tip}</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-2 shrink-0 self-end md:self-center font-mono text-xs">
+              <span class="px-2.5 py-1 rounded-xl bg-gpf-lime text-gpf-darkBlue font-black">
+                ${item.pct}
+              </span>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h4 class="font-black text-slate-900 text-base flex items-center gap-2">
+                <i class="fas ${subjectInfo.icon} text-gpf-blue"></i> Destaques de ${subjectInfo.label} no ${b.name}
+              </h4>
+              <p class="text-xs text-slate-500">Ordem dos assuntos mais cobrados de acordo com a prova.</p>
+            </div>
+          </div>
+          <div class="space-y-2.5">
+            ${rowsHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleFab() {
+      const fab = document.getElementById('fab-container');
+      fab.classList.toggle('active');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      text.innerText = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2000);
+    }
+  </script>
+</body>
+</html>              green: '#7bcd47',
+              darkGreen: '#005b38',
+              orange: '#dd5737',
+              gray: '#f7f7f7',
+              dark: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-blue: #5242ea;
+      --primary-lime: #c7ef59;
+      --dark-blue: #3007a0;
+      --teal: #00abb1;
+      --purple: #6408b0;
+      --orange-red: #dd5737;
+    }
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+    .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    .custom-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    
+    /* Floating Action Button (FAB) */
+    .fab-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: flex-end;
+    }
+    .fab-main {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background-color: var(--primary-blue);
+      color: white;
+      box-shadow: 0 10px 25px -5px rgba(82, 66, 234, 0.5);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+    }
+    .fab-main:hover {
+      transform: scale(1.08);
+      background-color: var(--dark-blue);
+    }
+    .fab-options {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.3s ease;
+      margin-bottom: 12px;
+    }
+    .fab-container.active .fab-options {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fab-container.active .fab-main {
+      background-color: var(--orange-red);
+      transform: rotate(90deg);
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-gpf-lime selection:text-gpf-darkBlue">
+
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 backdrop-blur-md bg-white/95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Logo & Identidade -->
+        <a href="https://guiaprefederal.com.br" target="_blank" class="flex items-center gap-3">
+          <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-gpf-blue to-gpf-darkBlue flex items-center justify-center text-white font-extrabold text-xl shadow-md shadow-gpf-blue/25">
+            G
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-base sm:text-lg font-black tracking-tight text-gpf-darkBlue">Guia Pré-Federal</span>
+              <span class="text-[10px] uppercase font-black px-2 py-0.5 rounded-full bg-gpf-lime text-gpf-darkBlue">9º Ano Estratégico</span>
+            </div>
+            <p class="text-[11px] text-slate-500 hidden sm:block">2.444 questões reais analisadas para você passar no seu vestibulinho dos sonhos</p>
+          </div>
+        </a>
+
+        <!-- Abas Principais de Navegação com Linguagem Amigável -->
+        <nav class="flex items-center gap-1 sm:gap-2">
+          <button onclick="switchTab('diagnostico')" id="nav-btn-diagnostico" class="px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-gpf-blue text-white shadow-md shadow-gpf-blue/20 flex items-center gap-1.5">
+            <i class="fas fa-bullseye"></i>
             <span>Meu Check-up</span>
           </button>
           
