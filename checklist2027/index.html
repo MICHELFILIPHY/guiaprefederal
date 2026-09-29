@@ -189,9 +189,15 @@
             Cada tópico abaixo segue exatamente o cronograma de aulas do curso. Marque seu domínio para cruzar com a frequência real da banca.
           </p>
         </div>
-        <button onclick="switchTab('revisao')" class="px-3.5 py-2 rounded-xl bg-gpf-blue text-white text-xs font-semibold hover:bg-gpf-darkBlue transition-all shrink-0">
-          Ver o que revisar
-        </button>
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="gerarChecklistPDF('checkup')" id="btn-exportar-pdf-checkup" class="px-3.5 py-2 rounded-xl bg-white border border-slate-300 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-all flex items-center gap-1.5 shadow-sm">
+            <i class="fas fa-file-pdf text-gpf-blue"></i>
+            <span>Baixar Check-up (PDF)</span>
+          </button>
+          <button onclick="switchTab('revisao')" class="px-3.5 py-2 rounded-xl bg-gpf-blue text-white text-xs font-semibold hover:bg-gpf-darkBlue transition-all">
+            Ver o que revisar
+          </button>
+        </div>
       </div>
 
       <div class="bg-white rounded-2xl p-3.5 border border-slate-200 space-y-2.5">
@@ -269,9 +275,9 @@
             <p class="text-[11px] text-slate-500">Marque a caixa ao lado conforme for estudando para riscar da lista.</p>
           </div>
           <div class="flex items-center gap-2">
-            <button onclick="gerarChecklistPDF()" id="btn-exportar-pdf" class="px-3 py-1.5 rounded-lg bg-gpf-blue text-white text-xs font-semibold hover:bg-gpf-darkBlue transition-all flex items-center gap-1.5 shadow-sm">
+            <button onclick="gerarChecklistPDF('revisao')" id="btn-exportar-pdf" class="px-3 py-1.5 rounded-lg bg-gpf-blue text-white text-xs font-semibold hover:bg-gpf-darkBlue transition-all flex items-center gap-1.5 shadow-sm">
               <i class="fas fa-file-pdf"></i>
-              <span>Baixar Checklist em PDF</span>
+              <span>Baixar Fila de Revisão em PDF</span>
             </button>
             <button onclick="window.print()" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-1.5">
               <i class="fas fa-print"></i>
@@ -397,42 +403,47 @@
     <div style="border-bottom: 2px solid #5242ea; padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-end;">
       <div>
         <div style="font-size: 20px; font-weight: 800; color: #3007a0;">Guia Pré-Federal</div>
-        <div style="font-size: 11px; color: #64748b; font-weight: 600;">Plano de Estudos & Checklist de Revisão Tático</div>
+        <div id="pdf-tipo-documento" style="font-size: 11px; color: #64748b; font-weight: 600;">Checklist de Estudos & Diagnóstico de Conteúdos</div>
       </div>
       <div style="text-align: right;">
         <div id="pdf-banca-badge" style="font-size: 13px; font-weight: 800; color: #5242ea;">COLUNI · UFV</div>
-        <div id="pdf-data-geracao" style="font-size: 10px; color: #94a3b8;">Gerado em 2026</div>
+        <div id="pdf-filtro-materia" style="font-size: 10px; color: #64748b; font-weight: 600;">Todas as Matérias</div>
+        <div id="pdf-data-geracao" style="font-size: 9px; color: #94a3b8;">Gerado em 2026</div>
       </div>
     </div>
 
     <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 16px; display: flex; justify-content: space-around; text-align: center;">
       <div>
-        <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: bold;">Progresso do Aluno</div>
+        <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: bold;">Progresso Geral</div>
         <div id="pdf-metric-progresso" style="font-size: 16px; font-weight: 800; color: #5242ea;">0%</div>
       </div>
       <div>
-        <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: bold;">Total a Revisar</div>
-        <div id="pdf-metric-total" style="font-size: 16px; font-weight: 800; color: #0f172a;">0</div>
+        <div style="font-size: 10px; color: #059669; text-transform: uppercase; font-weight: bold;">Mando Bem</div>
+        <div id="pdf-metric-domina" style="font-size: 16px; font-weight: 800; color: #059669;">0</div>
+      </div>
+      <div>
+        <div style="font-size: 10px; color: #d97706; text-transform: uppercase; font-weight: bold;">Mais ou Menos</div>
+        <div id="pdf-metric-parcial" style="font-size: 16px; font-weight: 800; color: #d97706;">0</div>
       </div>
       <div>
         <div style="font-size: 10px; color: #e11d48; text-transform: uppercase; font-weight: bold;">Não Sei Ainda</div>
         <div id="pdf-metric-urgente" style="font-size: 16px; font-weight: 800; color: #e11d48;">0</div>
       </div>
       <div>
-        <div style="font-size: 10px; color: #d97706; text-transform: uppercase; font-weight: bold;">Mais ou Menos</div>
-        <div id="pdf-metric-parcial" style="font-size: 16px; font-weight: 800; color: #d97706;">0</div>
+        <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: bold;">Listados no PDF</div>
+        <div id="pdf-metric-total" style="font-size: 16px; font-weight: 800; color: #0f172a;">0</div>
       </div>
     </div>
 
-    <div style="font-size: 12px; font-weight: bold; color: #0f172a; margin-bottom: 8px;">
-      Tópicos Selecionados para Revisão (Ordenados por Incidência na Prova)
+    <div id="pdf-subtitulo-lista" style="font-size: 12px; font-weight: bold; color: #0f172a; margin-bottom: 10px;">
+      Conteúdos Selecionados
     </div>
 
     <div id="pdf-topics-list" style="margin-bottom: 20px;"></div>
 
     <div style="border-top: 1px solid #e2e8f0; padding-top: 8px; font-size: 9px; color: #94a3b8; display: flex; justify-content: space-between;">
       <span>Guia Pré-Federal · guiaprefederal.com.br</span>
-      <span>Base Estatística Auditada dos Vestibulinhos</span>
+      <span>Base Estatística Oficial Cruzada dos Vestibulinhos</span>
     </div>
   </div>
 
@@ -1759,115 +1770,216 @@
       `;
     }
 
-    function gerarChecklistPDF() {
+    function gerarChecklistPDF(modo = 'auto') {
       const banca = bancasData[currentBanca];
-      const validTopics = allTopics.filter(t => {
-        if (!banca.hasRedacao && t.subject === 'redacao') return false;
-        if (!banca.hasIngles && t.subject === 'ingles') return false;
-        const st = userMastery[t.id];
-        return st === 'nao_domino' || st === 'parcial';
-      });
 
-      validTopics.sort((a, b) => {
-        const statA = a.stats[currentBanca]?.freq || 'baixa';
-        const statB = b.stats[currentBanca]?.freq || 'baixa';
-        const scoreA = (statA === 'alta' ? 3 : (statA === 'media' ? 2 : 1)) * 2 + (userMastery[a.id] === 'nao_domino' ? 2 : 1);
-        const scoreB = (statB === 'alta' ? 3 : (statB === 'media' ? 2 : 1)) * 2 + (userMastery[b.id] === 'nao_domino' ? 2 : 1);
-        return scoreB - scoreA;
-      });
+      // Determina se o modo é o checklist do checkup ou a fila de revisão
+      if (modo === 'auto') {
+        const tabRevisao = document.getElementById('tab-revisao');
+        modo = (tabRevisao && !tabRevisao.classList.contains('hidden')) ? 'revisao' : 'checkup';
+      }
 
-      const totalDisciplinas = allTopics.filter(t => {
-        if (!banca.hasRedacao && t.subject === 'redacao') return false;
-        if (!banca.hasIngles && t.subject === 'ingles') return false;
-        return true;
-      }).length;
+      const activeSubjectName = currentSubjectFilter === 'all' 
+        ? 'Todas as Matérias' 
+        : (subjectConfig.find(s => s.id === currentSubjectFilter)?.name || currentSubjectFilter);
 
+      let exportedTopics = [];
+
+      if (modo === 'revisao') {
+        // Fila de revisão: tópicos com dúvida
+        exportedTopics = allTopics.filter(t => {
+          if (!banca.hasRedacao && t.subject === 'redacao') return false;
+          if (!banca.hasIngles && t.subject === 'ingles') return false;
+          if (currentSubjectFilter !== 'all' && t.subject !== currentSubjectFilter) return false;
+          const st = userMastery[t.id];
+          return st === 'nao_domino' || st === 'parcial';
+        });
+
+        exportedTopics.sort((a, b) => {
+          const statA = a.stats[currentBanca]?.freq || 'baixa';
+          const statB = b.stats[currentBanca]?.freq || 'baixa';
+          const scoreA = (statA === 'alta' ? 3 : (statA === 'media' ? 2 : 1)) * 2 + (userMastery[a.id] === 'nao_domino' ? 2 : 1);
+          const scoreB = (statB === 'alta' ? 3 : (statB === 'media' ? 2 : 1)) * 2 + (userMastery[b.id] === 'nao_domino' ? 2 : 1);
+          return scoreB - scoreA;
+        });
+
+        document.getElementById('pdf-tipo-documento').innerText = 'Fila Prioritária de Revisão';
+        document.getElementById('pdf-subtitulo-lista').innerText = `Tópicos a Revisar em ${activeSubjectName} (Ordenados por Urgência na Prova)`;
+      } else {
+        // Modo Check-up: exporta as matérias selecionadas e o status marcado pelo aluno
+        exportedTopics = allTopics.filter(t => {
+          if (!banca.hasRedacao && t.subject === 'redacao') return false;
+          if (!banca.hasIngles && t.subject === 'ingles') return false;
+          if (currentSubjectFilter !== 'all' && t.subject !== currentSubjectFilter) return false;
+
+          const st = userMastery[t.id];
+          const stat = t.stats[currentBanca] || { freq: 'baixa', pct: null };
+
+          if (currentMasteryFilter === 'urgente_maxima') {
+            if (st !== 'nao_domino' || stat.freq !== 'alta') return false;
+          } else if (currentMasteryFilter === 'atencao') {
+            if (st !== 'parcial' || stat.freq !== 'alta') return false;
+          } else if (currentMasteryFilter === 'nao_domino') {
+            if (st !== 'nao_domino') return false;
+          } else if (currentMasteryFilter === 'parcial') {
+            if (st !== 'parcial') return false;
+          } else if (currentMasteryFilter === 'domino') {
+            if (st !== 'domino') return false;
+          }
+          return true;
+        });
+
+        document.getElementById('pdf-tipo-documento').innerText = 'Checklist Geral de Estudos & Domínio';
+        document.getElementById('pdf-subtitulo-lista').innerText = `Conteúdos do Programa: ${activeSubjectName} (Status e Frequência)`;
+      }
+
+      // Métricas gerais
       let dominaCount = 0;
       let parcialCount = 0;
       let urgenteCount = 0;
+      let totalValid = 0;
 
       allTopics.forEach(t => {
         if (!banca.hasRedacao && t.subject === 'redacao') return;
         if (!banca.hasIngles && t.subject === 'ingles') return;
+        totalValid++;
         if (userMastery[t.id] === 'domino') dominaCount++;
-        if (userMastery[t.id] === 'parcial') parcialCount++;
-        if (userMastery[t.id] === 'nao_domino') urgenteCount++;
+        else if (userMastery[t.id] === 'parcial') parcialCount++;
+        else if (userMastery[t.id] === 'nao_domino') urgenteCount++;
       });
 
-      const pct = Math.round((dominaCount / totalDisciplinas) * 100) || 0;
+      const pct = totalValid > 0 ? Math.round((dominaCount / totalValid) * 100) : 0;
 
       document.getElementById('pdf-banca-badge').innerText = banca.name;
+      document.getElementById('pdf-filtro-materia').innerText = `Matéria: ${activeSubjectName}`;
       document.getElementById('pdf-data-geracao').innerText = 'Emitido em: ' + new Date().toLocaleDateString('pt-BR');
       document.getElementById('pdf-metric-progresso').innerText = pct + '%';
-      document.getElementById('pdf-metric-total').innerText = validTopics.length;
-      document.getElementById('pdf-metric-urgente').innerText = urgenteCount;
+      document.getElementById('pdf-metric-domina').innerText = dominaCount;
       document.getElementById('pdf-metric-parcial').innerText = parcialCount;
+      document.getElementById('pdf-metric-urgente').innerText = urgenteCount;
+      document.getElementById('pdf-metric-total').innerText = exportedTopics.length;
 
       const topicsContainer = document.getElementById('pdf-topics-list');
       
-      if (validTopics.length === 0) {
+      if (exportedTopics.length === 0) {
         topicsContainer.innerHTML = `
-          <div style="padding: 24px; text-align: center; color: #10b981; font-weight: bold; border: 1px dashed #10b981; border-radius: 8px;">
-            Parabéns! Todos os conteúdos desta banca estão assinalados como "Mando bem" no seu check-up.
+          <div style="padding: 24px; text-align: center; color: #64748b; font-weight: bold; border: 1px dashed #cbd5e1; border-radius: 8px;">
+            Nenhum conteúdo localizado com os filtros ativos (${activeSubjectName}). Ajuste a seleção ou marque seus temas no check-up antes de exportar.
           </div>
         `;
       } else {
-        topicsContainer.innerHTML = validTopics.map(t => {
-          const isUrgente = userMastery[t.id] === 'nao_domino';
-          const subjName = subjectConfig.find(s => s.id === t.subject)?.name || t.subject;
-          const stat = t.stats[currentBanca] || { freq: 'baixa', pct: null };
+        // Agrupa por matéria para visualização limpa
+        const grouped = {};
+        exportedTopics.forEach(t => {
+          if (!grouped[t.subject]) grouped[t.subject] = [];
+          grouped[t.subject].push(t);
+        });
 
-          const statusBadge = isUrgente 
-            ? '<span style="color: #e11d48; font-weight: bold; font-size: 10px;">[!] Não sei ainda</span>' 
-            : '<span style="color: #d97706; font-weight: bold; font-size: 10px;">[~] Mais ou menos</span>';
+        let htmlContent = '';
 
-          const freqBadge = stat.freq === 'alta'
-            ? `<span style="background: #fef3c7; color: #92400e; font-size: 9px; font-weight: bold; padding: 1px 4px; border-radius: 3px;">Cai Muito ${stat.pct ? '· ' + stat.pct : ''}</span>`
-            : (stat.freq === 'media' ? `<span style="background: #eff6ff; color: #1d4ed8; font-size: 9px; font-weight: bold; padding: 1px 4px; border-radius: 3px;">Cai Moderadamente ${stat.pct ? '· ' + stat.pct : ''}</span>` : '');
+        for (const subjKey in grouped) {
+          const subjName = subjectConfig.find(s => s.id === subjKey)?.name || subjKey;
+          const items = grouped[subjKey];
+          const teacher = items[0]?.teacher ? ` · Prof. ${items[0].teacher}` : '';
 
-          return `
-            <div style="display: flex; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding: 6px 0; font-size: 11px;">
-              <div style="display: flex; align-items: flex-start; gap: 8px;">
-                <span style="font-family: monospace; font-size: 12px; color: #64748b;">[ &nbsp; ]</span>
-                <div>
-                  <div style="display: flex; align-items: center; gap: 6px;">
-                    <span style="font-weight: 800; color: #5242ea; text-transform: uppercase; font-size: 9px;">${subjName}</span>
-                    ${freqBadge}
-                    ${statusBadge}
+          htmlContent += `
+            <div style="margin-bottom: 14px; page-break-inside: avoid; break-inside: avoid;">
+              <div style="background: #f1f5f9; padding: 4px 8px; border-left: 4px solid #5242ea; font-size: 11px; font-weight: bold; color: #1e293b; margin-bottom: 4px; display: flex; justify-content: space-between;">
+                <span>${subjName.toUpperCase()}${teacher}</span>
+                <span style="font-size: 9px; color: #64748b; font-weight: normal;">${items.length} conteúdo(s)</span>
+              </div>
+          `;
+
+          items.forEach((t, i) => {
+            const mastery = userMastery[t.id];
+            const isDone = !!revisaoDone[t.id];
+            const stat = t.stats[currentBanca] || { freq: 'baixa', pct: null };
+
+            let statusBadge = '<span style="color: #94a3b8; font-size: 9px;">[ ] A estudar</span>';
+            let checkMark = '[ &nbsp; ]';
+
+            if (mastery === 'domino') {
+              statusBadge = '<span style="color: #059669; font-weight: bold; font-size: 9px;">[✓] Mando bem</span>';
+              checkMark = '[✓]';
+            } else if (mastery === 'parcial') {
+              statusBadge = '<span style="color: #d97706; font-weight: bold; font-size: 9px;">[~] Mais ou menos</span>';
+              checkMark = isDone ? '[✓]' : '[ &nbsp; ]';
+            } else if (mastery === 'nao_domino') {
+              statusBadge = '<span style="color: #e11d48; font-weight: bold; font-size: 9px;">[!] Não sei ainda</span>';
+              checkMark = isDone ? '[✓]' : '[ &nbsp; ]';
+            }
+
+            let freqBadge = '';
+            if (stat.freq === 'alta') {
+              freqBadge = `<span style="background: #fef3c7; color: #92400e; font-size: 8.5px; font-weight: bold; padding: 1px 4px; border-radius: 3px;">Cai Muito ${stat.pct ? '· ' + stat.pct : ''}</span>`;
+            } else if (stat.freq === 'media') {
+              freqBadge = `<span style="background: #eff6ff; color: #1d4ed8; font-size: 8.5px; font-weight: bold; padding: 1px 4px; border-radius: 3px;">Cai Moderadamente ${stat.pct ? '· ' + stat.pct : ''}</span>`;
+            } else if (stat.freq === 'nula') {
+              freqBadge = `<span style="background: #fff1f2; color: #be123c; font-size: 8px; padding: 1px 3px; border-radius: 3px;">Não cobrado</span>`;
+            }
+
+            htmlContent += `
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid #f8fafc; padding: 4px 6px; font-size: 10px;">
+                <div style="display: flex; align-items: flex-start; gap: 6px; flex: 1;">
+                  <span style="font-family: monospace; font-size: 11px; color: #64748b;">${checkMark}</span>
+                  <div>
+                    <span style="font-weight: 600; color: #1e293b; ${isDone ? 'text-decoration: line-through; color: #94a3b8;' : ''}">${t.name}</span>
                   </div>
-                  <div style="font-weight: 600; color: #1e293b; margin-top: 2px;">${t.name}</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; margin-left: 10px; shrink: 0;">
+                  ${freqBadge}
+                  ${statusBadge}
                 </div>
               </div>
-              <div style="font-size: 10px; color: #94a3b8; font-weight: 600; white-space: nowrap; margin-left: 12px;">Prof. ${t.teacher}</div>
-            </div>
-          `;
-        }).join('');
+            `;
+          });
+
+          htmlContent += `</div>`;
+        }
+
+        topicsContainer.innerHTML = htmlContent;
       }
 
+      // Preparação e exportação via html2pdf com correção de scroll
       const element = document.getElementById('pdf-render-template');
+      window.scrollTo(0, 0); // Garante que o scrollY não gere página em branco
       element.style.display = 'block';
 
       const opt = {
         margin: [10, 10, 10, 10],
-        filename: `Checklist-Revisao-${banca.id.toUpperCase()}-GuiaPreFederal.pdf`,
+        filename: `Checklist-${banca.id.toUpperCase()}-${activeSubjectName.replace(/\s+/g, '_')}-GuiaPreFederal.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, logging: false },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        html2canvas: { 
+          scale: 2, 
+          useCORS: true, 
+          logging: false,
+          scrollY: 0
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
       };
 
-      const btn = document.getElementById('btn-exportar-pdf');
-      const originalText = btn ? btn.innerHTML : '';
-      if (btn) btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando PDF...';
+      const btn1 = document.getElementById('btn-exportar-pdf');
+      const btn2 = document.getElementById('btn-exportar-pdf-checkup');
+      const origText1 = btn1 ? btn1.innerHTML : '';
+      const origText2 = btn2 ? btn2.innerHTML : '';
 
-      html2pdf().set(opt).from(element).save().then(() => {
-        element.style.display = 'none';
-        if (btn) btn.innerHTML = originalText;
-      }).catch(err => {
-        console.error('Erro ao gerar PDF:', err);
-        element.style.display = 'none';
-        if (btn) btn.innerHTML = originalText;
-        window.print();
-      });
+      if (btn1) btn1.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando PDF...';
+      if (btn2) btn2.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando PDF...';
+
+      setTimeout(() => {
+        html2pdf().set(opt).from(element).save().then(() => {
+          element.style.display = 'none';
+          if (btn1) btn1.innerHTML = origText1;
+          if (btn2) btn2.innerHTML = origText2;
+        }).catch(err => {
+          console.error('Erro ao gerar PDF:', err);
+          element.style.display = 'none';
+          if (btn1) btn1.innerHTML = origText1;
+          if (btn2) btn2.innerHTML = origText2;
+          window.print();
+        });
+      }, 150);
     }
 
     window.onload = function() {
