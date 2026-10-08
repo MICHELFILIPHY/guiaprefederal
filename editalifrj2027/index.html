@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Edital IFRJ 2027 - Cursos Técnicos Integrados | Guia Pré-Federal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --brand-ifrj-green: #008542;
+            --brand-ifrj-dark: #005a2b;
+            --brand-ifrj-navy: #0b2545;
+            --brand-ifrj-teal: #00a896;
+            --brand-coral: #dd5737;
+            --brand-lime: #c7ef59;
+            --brand-slate-light: #f8fafc;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        /* Gradiente temático do IFRJ */
+        .ifrj-gradient {
+            background: linear-gradient(135deg, #0b2545 0%, #005a2b 45%, #008542 100%);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #008542;
+            border-radius: 9999px;
+        }
+        .tab-btn.active {
+            background-color: #005a2b;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 90, 43, 0.35);
+            border-color: #005a2b;
+        }
+        .fab-container {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+        }
+        .fab-main {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background-color: #008542;
+            color: white;
+            border: 2px solid white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fab-container.active .fab-main {
+            background-color: #dd5737;
+            transform: rotate(135deg);
+        }
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+            transform: translateY(15px);
+            margin-bottom: 12px;
+        }
+        .fab-container.active .fab-options {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        .fab-label {
+            background-color: white;
+            color: #0f172a;
+            padding: 6px 14px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-right: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .fab-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="antialiased text-slate-800">
+
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm py-3.5 sticky top-0 z-50 border-b border-slate-100">
+        <div class="container mx-auto px-4 max-w-6xl flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
+                <!-- Logo com fundo Laranja Coral oficial Guia Pré-Federal -->
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md transition group-hover:scale-105" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia - Pré Federal" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-black tracking-tight text-[#008542] leading-none">Guia - Pré Federal</span>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Edital IFRJ 2027 • Edital nº 72/2026</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:block">
+                <ul class="flex space-x-5 text-xs font-bold uppercase tracking-wider text-slate-600">
+                    <li><a href="#datas-destaque" class="hover:text-[#008542] transition py-1 border-b-2 border-transparent hover:border-[#008542]"><i class="fas fa-calendar-alt text-amber-500 mr-1"></i>Datas</a></li>
+                    <li><a href="#como-funciona" class="hover:text-[#008542] transition py-1 border-b-2 border-transparent hover:border-[#008542]">Como Funciona</a></li>
+                    <li><a href="#prova" class="hover:text-[#008542] transition py-1 border-b-2 border-transparent hover:border-[#008542]"><i class="fas fa-file-alt text-[#008542] mr-1"></i>A Prova (30 Questões)</a></li>
+                    <li><a href="#isencao" class="hover:text-[#008542] transition py-1 border-b-2 border-transparent hover:border-[#008542]"><i class="fas fa-hand-holding-usd text-amber-600 mr-1"></i>Isenção</a></li>
+                    <li><a href="#cotas" class="hover:text-[#008542] transition py-1 border-b-2 border-transparent hover:border-[#008542]">Cotas</a></li>
+                    <li><a href="#quadro-vagas" class="hover:text-[#008542] transition py-1 border-b-2 border-transparent hover:border-[#008542]"><i class="fas fa-university text-[#008542] mr-1"></i>11 Campi & 1.814 Vagas</a></li>
+                    <li><a href="#conteudo" class="hover:text-[#008542] transition py-1 border-b-2 border-transparent hover:border-[#008542]">O que Estudar</a></li>
+                </ul>
+            </nav>
+
+            <!-- CTA Header Buttons -->
+            <div class="hidden sm:flex items-center space-x-2">
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] hover:bg-opacity-90 text-slate-900 font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fas fa-rocket mr-1.5 text-emerald-800"></i> Curso Intensivo
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-3.5 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm inline-flex items-center">
+                    <i class="fab fa-whatsapp mr-1 text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden text-slate-800 text-xl focus:outline-none p-1">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 py-3 px-4 shadow-lg">
+            <ul class="flex flex-col space-y-2.5 text-xs font-bold uppercase tracking-wider text-slate-700">
+                <li><a href="#datas-destaque" class="mobile-link block py-2 px-3 rounded-lg bg-amber-50 text-amber-900 font-black"><i class="fas fa-calendar-alt text-amber-600 mr-2"></i>Datas Importantes</a></li>
+                <li><a href="#como-funciona" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Como Funciona o Processo</a></li>
+                <li><a href="#prova" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100"><i class="fas fa-file-alt text-[#008542] mr-2"></i>A Prova (30 Questões • Instituto ACCESS)</a></li>
+                <li><a href="#isencao" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100"><i class="fas fa-hand-holding-usd text-amber-600 mr-2"></i>Isenção da Taxa de Inscrição</a></li>
+                <li><a href="#cotas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Cotas & Averiguação Presencial</a></li>
+                <li><a href="#quadro-vagas" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100"><i class="fas fa-university text-[#008542] mr-2"></i>11 Campi & 1.814 Vagas</a></li>
+                <li><a href="#conteudo" class="mobile-link block py-2 px-3 rounded-lg hover:bg-slate-100">Conteúdo Programático Completo</a></li>
+                <li class="pt-2 flex flex-col space-y-2">
+                    <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="w-full bg-[#c7ef59] text-slate-900 font-black py-2.5 rounded-xl text-xs uppercase tracking-wider text-center block shadow-md">
+                        <i class="fas fa-rocket mr-1.5 text-emerald-800"></i> Conhecer o Intensivo 2026
+                    </a>
+                    <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="w-full bg-emerald-500 text-white font-black py-2.5 rounded-xl text-xs uppercase tracking-wider text-center block shadow-md">
+                        <i class="fab fa-whatsapp mr-1.5"></i> Falar no WhatsApp
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="ifrj-gradient text-white py-12 md:py-16 relative overflow-hidden">
+        <div class="container mx-auto px-4 max-w-6xl relative z-10 text-center">
+            
+            <!-- Logo no Hero com fundo Laranja Coral -->
+            <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-5 rounded-full flex items-center justify-center p-3 shadow-2xl border-4 border-white/40" style="background-color: #dd5737;">
+                <img src="./logo1.png" onerror="this.onerror=null; this.src='https://placehold.co/120x120/dd5737/ffffff?text=GPF';" alt="Guia - Pré Federal" class="w-full h-full object-contain">
+            </div>
+
+            <div class="inline-flex items-center space-x-2 bg-white/10 px-4 py-1.5 rounded-full backdrop-blur-md mb-4 border border-white/20">
+                <i class="fas fa-graduation-cap text-[#c7ef59]"></i>
+                <span class="text-xs font-black uppercase tracking-wider text-slate-100">Instituto Federal do Rio de Janeiro • Edital nº 72/2026</span>
+            </div>
+            
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4 leading-tight">
+                Guia Completo do Processo Seletivo <span class="text-[#c7ef59]">IFRJ 2027</span>
+            </h1>
+            
+            <p class="text-slate-100 text-sm md:text-base max-w-3xl mx-auto mb-6 font-medium leading-relaxed">
+                Instituto Federal de Educação, Ciência e Tecnologia do Rio de Janeiro: <strong>1.814 vagas 100% gratuitas</strong> em Cursos Técnicos Integrados ao Ensino Médio em 11 campi no Estado do Rio. Seleção organizada pelo conceituado <strong>Instituto ACCESS</strong> com prova objetiva de <strong>30 questões (Língua Portuguesa e Matemática)</strong>, sem redação e com turmas anuais e semestrais!
+            </p>
+
+            <!-- Destaques Únicos do IFRJ -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <div class="inline-block bg-[#0b2545] text-white font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider shadow-lg border border-teal-400/40">
+                    <i class="fas fa-landmark text-amber-300 mr-1.5"></i> 1.814 VAGAS EM 11 CAMPI FLUMINENSES
+                </div>
+                <div class="inline-block bg-[#005a2b] text-white font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider shadow-lg border border-emerald-400/40">
+                    <i class="fas fa-check-circle text-lime-300 mr-1.5"></i> PROVA OBJETIVA: 15 PORTUGUÊS + 15 MATEMÁTICA (120 PTS) • SEM REDAÇÃO
+                </div>
+                <div class="inline-block bg-[#008542] text-white font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider shadow-lg border border-lime-400/40">
+                    <i class="fas fa-calendar-day text-amber-300 mr-1.5"></i> PROVA NO DOMINGO, 06/12/2026 (09H ÀS 12H)
+                </div>
+            </div>
+
+            <!-- CTAS PRINCIPAIS DO CURSO E LINK OFICIAL DE INSCRIÇÃO -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="https://www.access.org.br" target="_blank" class="bg-white text-slate-900 hover:bg-slate-100 font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105 border-2 border-white">
+                    <i class="fas fa-external-link-alt mr-2 text-[#008542]"></i> Inscrição no Instituto ACCESS
+                </a>
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fas fa-rocket mr-2 text-emerald-950"></i> Cursinho Intensivo Guia Pré-Federal
+                </a>
+                <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-3.5 rounded-xl transition shadow-xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fab fa-whatsapp mr-2 text-lg"></i> Falar no WhatsApp
+                </a>
+            </div>
+
+            <!-- Botões de Atalho Interno -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6 pt-4 border-t border-white/10">
+                <a href="#datas-destaque" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-calendar-alt mr-1.5 text-amber-400"></i> Prazos Oficiais
+                </a>
+                <a href="#como-funciona" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-info-circle mr-1.5 text-lime-300"></i> Regras & Idade
+                </a>
+                <a href="#prova" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-file-alt mr-1.5 text-teal-300"></i> A Prova (120 Pts)
+                </a>
+                <a href="#isencao" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-hand-holding-usd mr-1.5 text-amber-300"></i> Isenção da Taxa
+                </a>
+                <a href="#quadro-vagas" class="bg-white/10 hover:bg-white/20 text-slate-100 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider inline-flex items-center backdrop-blur-md">
+                    <i class="fas fa-university mr-1.5 text-emerald-300"></i> 11 Campi & Vagas
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIMEIRA SEÇÃO: DATAS IMPORTANTES (Tabela I - Cronograma Oficial) -->
+    <section id="datas-destaque" class="py-10 bg-amber-50/80 border-b border-amber-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-amber-300 shadow-md">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 pb-4 border-b border-slate-200 gap-4">
+                    <div>
+                        <span class="bg-amber-100 text-amber-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-1.5 inline-block border border-amber-300">
+                            <i class="fas fa-bell mr-1 text-amber-700"></i> Cronograma Oficial do Edital IFRJ nº 72/2026 • Ingresso 2027
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-black text-slate-900">Datas Importantes do Processo Seletivo IFRJ 2027</h2>
+                    </div>
+                    <div>
+                        <a href="https://www.access.org.br" target="_blank" class="text-xs font-bold text-white bg-[#008542] hover:bg-[#005a2b] px-4 py-2 rounded-xl transition inline-flex items-center shadow-sm">
+                            <i class="fas fa-user-plus mr-1.5"></i> Painel Instituto ACCESS
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tabela Responsiva do Cronograma Oficial Completo -->
+                <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                    <table class="w-full text-left border-collapse text-xs md:text-sm">
+                        <thead>
+                            <tr class="bg-[#0b2545] text-white font-bold uppercase text-[11px] tracking-wider">
+                                <th class="py-3.5 px-4 md:px-6"><i class="fas fa-calendar-day mr-2 text-lime-400"></i>Etapa / Evento do Edital</th>
+                                <th class="py-3.5 px-4 md:px-6"><i class="fas fa-clock mr-2 text-lime-400"></i>Período / Data Oficial</th>
+                                <th class="py-3.5 px-4 md:px-6 hidden sm:table-cell"><i class="fas fa-info-circle mr-2 text-lime-400"></i>Observação Importante</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Publicação Oficial do Edital nº 72/2026</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-[#008542]">02/10/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Publicado no site do Instituto ACCESS (access.org.br)</td>
+                            </tr>
+                            <tr class="bg-amber-50/80 hover:bg-amber-100/60 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-file-signature text-amber-600 mr-1.5"></i>Período para Pedidos de Isenção da Taxa de Inscrição</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-amber-800">11/10/2026 a 25/10/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-600">Para estudantes de escola pública (Anexo IV) ou inscritos no CadÚnico</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Resultado dos Pedidos de Isenção da Taxa</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">Preliminar: 03/11 | Recursos: 04 e 05/11 | Final: 11/11/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Divulgado após as 18h na Área do Candidato</td>
+                            </tr>
+                            <tr class="bg-emerald-50/80 hover:bg-emerald-100/60 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900"><i class="fas fa-user-plus text-emerald-600 mr-1.5"></i>Período de Inscrições Online</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-emerald-800">11/10/2026 a 16/11/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-600">Exclusivamente via internet pelo portal www.access.org.br com CPF do aluno</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Último Dia para Pagamento da Taxa (R$ 70,00)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-rose-700">17/11/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Boleto bancário em qualquer agência, lotérica ou correspondente</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Confirmação de Inscrição & Atendimento Especializado</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">Preliminar: 23/11 | Recursos: 24 e 25/11 | Final: 27/11/2026</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Único momento para retificar dados cadastrais (nome, curso, cota)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Cartão de Confirmação de Inscrição (CCI / Local de Prova)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-purple-700">30/11/2026 (a partir das 18h)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Consulta obrigatória no portal com prédio, sala e orientações</td>
+                            </tr>
+                            <tr class="bg-emerald-100/80 hover:bg-emerald-200/60 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-emerald-950"><i class="fas fa-edit text-emerald-700 mr-1.5"></i>Aplicação da Prova Objetiva Presencial</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-emerald-900">06/12/2026 (Domingo) • 09h00 às 12h00</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-emerald-950 font-bold">Portões abrem às 08h00 e FECHAM impreterivelmente às 08h45!</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Gabarito Preliminar e Caderno de Questões</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">07/12/2026 (Recursos: 08 e 09/12 | Definitivo: 14/12/2026)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Interposição de recurso pelo portal do Instituto ACCESS</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Notas Preliminares da Prova Objetiva</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">15/12/2026 (Recursos: 16 e 17/12/2026)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Com imagem do cartão de respostas disponibilizada</td>
+                            </tr>
+                            <tr class="bg-blue-100/80 hover:bg-blue-200/60 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-blue-950"><i class="fas fa-trophy text-blue-700 mr-1.5"></i>Classificação Final da Prova Objetiva</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-blue-900">22/12/2026</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-blue-950 font-bold">Publicação da escala de averiguação das vagas reservadas</td>
+                            </tr>
+                            <tr class="bg-emerald-50 hover:bg-emerald-100 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-emerald-900"><i class="fas fa-user-check text-emerald-600 mr-1.5"></i>Averiguação Presencial das Vagas Reservadas (Cotas)</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-emerald-800">04/01/2027 a 08/01/2027</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-emerald-900 font-medium">Entrega presencial: renda, autodeclaração, escola pública e biopsicossocial PcD</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">Resultado da Averiguação de Cotas</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">Preliminar: 14/01 | Recursos: 15 e 16/01 | Final: 21/01/2027</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Recurso com envio para a secretaria do campus correspondente</td>
+                            </tr>
+                            <tr class="bg-blue-50 hover:bg-blue-100 transition">
+                                <td class="py-3.5 px-4 md:px-6 font-black text-blue-950"><i class="fas fa-graduation-cap text-blue-700 mr-1.5"></i>Matrícula dos Candidatos Classificados</td>
+                                <td class="py-3.5 px-4 md:px-6 font-extrabold text-blue-900">25/01/2027 a 29/01/2027</td>
+                                <td class="py-3.5 px-4 md:px-6 hidden sm:table-cell text-blue-950 font-bold">Na Secretaria de Ensino Técnico do respectivo campus</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3 px-4 md:px-6 font-black text-slate-900">1ª Reclassificação (Convocação para Vagas Remanescentes)</td>
+                                <td class="py-3 px-4 md:px-6 font-bold text-slate-800">04/02/2027 (Entrega de documentos: 11, 12, 15 e 16/02/2027)</td>
+                                <td class="py-3 px-4 md:px-6 hidden sm:table-cell text-slate-500">Chamadas consecutivas até preenchimento de todas as vagas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO COMO FUNCIONA O PROCESSO SELETIVO -->
+    <section id="como-funciona" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-emerald-50 text-[#008542] text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Regras do Edital nº 72/2026
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Como Funciona a Seleção do IFRJ?</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    O Instituto Federal do Rio de Janeiro oferece formação profissional técnica integrada de excelência com diploma único em 11 cidades fluminenses.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Formação Integrada -->
+                <div class="bg-slate-50 p-6 rounded-2xl border-2 border-[#008542]/30 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-[#008542] text-white flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <span class="bg-emerald-100 text-emerald-900 font-extrabold text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-2 inline-block">Diploma Único</span>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">1. Ensino Médio Integrado</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        O estudante conclui a formação geral do Ensino Médio junto com a habilitação técnica em uma única matrícula no IFRJ, com duração variando de 3 anos (6 semestres ou 3 anos letivos) até 4 anos (8 semestres).
+                    </p>
+                </div>
+
+                <!-- Card 2: Limite de Idade -->
+                <div class="bg-slate-50 p-6 rounded-2xl border-2 border-rose-500/30 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-600 text-white flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fas fa-id-badge"></i>
+                    </div>
+                    <span class="bg-rose-100 text-rose-900 font-extrabold text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-2 inline-block">Requisito do Edital</span>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">2. Limite de Idade: Até 17 Anos</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        Em conformidade com o <strong>item 2.2 do Edital</strong>, somente poderá concorrer quem tiver concluído o Ensino Fundamental e tiver, no <strong>máximo, 17 anos até a data da matrícula</strong> (janeiro de 2027).
+                    </p>
+                </div>
+
+                <!-- Card 3: 1 Única Opção por Candidato -->
+                <div class="bg-slate-50 p-6 rounded-2xl border-2 border-[#0b2545]/30 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-2xl bg-[#0b2545] text-white flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fas fa-check-square"></i>
+                    </div>
+                    <span class="bg-blue-100 text-blue-900 font-extrabold text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-2 inline-block">Inscrição Única</span>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">3. Uma Opção de Curso e Campus</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        No IFRJ, cada candidato só pode efetuar <strong>uma única inscrição</strong>, escolhendo exclusivamente 1 campus, 1 curso e 1 grupo de concorrência. Não há escolha de 2ª ou 3ª opção.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Alerta do Edital sobre Turnos e Estágio -->
+            <div class="mt-8 bg-emerald-50 border-l-4 border-[#008542] p-5 rounded-r-2xl">
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-lightbulb text-[#008542] text-2xl flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <h4 class="font-black text-emerald-950 uppercase text-xs mb-1">Atenção aos Detalhes da Matriz Curricular do IFRJ:</h4>
+                        <ul class="list-disc list-inside text-xs text-emerald-900 font-medium space-y-1">
+                            <li><strong>Turnos:</strong> Todos os cursos são diurnos (aulas distribuídas nos turnos matutino e/ou vespertino, parcial ou total, incluindo sábados).</li>
+                            <li><strong>Último Período (8º Semestre):</strong> Nos cursos com 8 períodos (Biotecnologia, Farmácia, Química etc.), o 8º período é ofertado no horário noturno para viabilizar o estágio supervisionado obrigatório.</li>
+                            <li><strong>Ingresso 1º vs 2º Semestre:</strong> Parte dos cursos semestrais possui turmas com início em fevereiro e outra turma com início em agosto de 2027, selecionadas pela mesma prova!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO A PROVA OBJETIVA DO IFRJ 2027 -->
+    <section id="prova" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Etapa Única Presencial • 3 Horas de Duração (09h00 às 12h00)
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">A Prova Objetiva do IFRJ 2027</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Aplicada no dia <strong>06/12/2026</strong> pela banca <strong>Instituto ACCESS</strong>. Composta por <strong>30 questões de múltipla escolha com 4 alternativas (A, B, C, D)</strong>.
+                </p>
+            </div>
+
+            <!-- Tabela de Estrutura da Prova Objetiva -->
+            <div class="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm mb-8">
+                <div class="bg-[#0b2545] text-white font-bold px-6 py-3 text-xs uppercase tracking-wider flex justify-between items-center">
+                    <span>Estrutura da Prova Objetiva (30 Questões • Total Máximo: 120 Pontos)</span>
+                    <span class="bg-emerald-800 text-lime-300 text-[10px] px-2.5 py-0.5 rounded-full font-extrabold">Data: 06/12/2026</span>
+                </div>
+                <table class="w-full text-left border-collapse text-xs md:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 font-bold uppercase text-[11px] tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-4 md:px-6">Componente Curricular</th>
+                            <th class="py-3 px-4 md:px-6">Nº de Questões</th>
+                            <th class="py-3 px-4 md:px-6">Valor por Questão</th>
+                            <th class="py-3 px-4 md:px-6">Pontuação Máxima</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <tr class="hover:bg-slate-50 transition bg-emerald-50/30">
+                            <td class="py-3.5 px-4 md:px-6 font-black text-slate-900">
+                                <i class="fas fa-book text-[#008542] mr-2"></i>Língua Portuguesa
+                                <span class="block text-[10px] text-emerald-800 font-bold">Leitura, tipologia textual, morfologia, sintaxe, pontuação e semântica</span>
+                            </td>
+                            <td class="py-3.5 px-4 md:px-6 font-bold text-slate-800">15 questões</td>
+                            <td class="py-3.5 px-4 md:px-6 font-bold text-slate-600">4,0 pontos</td>
+                            <td class="py-3.5 px-4 md:px-6 font-black text-[#008542]">60,0 pontos</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition bg-emerald-50/30">
+                            <td class="py-3.5 px-4 md:px-6 font-black text-slate-900">
+                                <i class="fas fa-calculator text-[#008542] mr-2"></i>Matemática
+                                <span class="block text-[10px] text-emerald-800 font-bold">Aritmética, conjuntos, álgebra, frações, equações de 1º grau, proporcionalidade e geometria</span>
+                            </td>
+                            <td class="py-3.5 px-4 md:px-6 font-bold text-slate-800">15 questões</td>
+                            <td class="py-3.5 px-4 md:px-6 font-bold text-slate-600">4,0 pontos</td>
+                            <td class="py-3.5 px-4 md:px-6 font-black text-[#008542]">60,0 pontos</td>
+                        </tr>
+                        <tr class="bg-[#008542] text-white font-black">
+                            <td class="py-3.5 px-4 md:px-6 uppercase" colspan="2">TOTAL GERAL DA PROVA OBJETIVA</td>
+                            <td class="py-3.5 px-4 md:px-6 text-lime-300">30 Questões (A, B, C, D)</td>
+                            <td class="py-3.5 px-4 md:px-6 text-lime-300 text-sm">120,0 PONTOS TOTAIS</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- REGRA DE CORTE (32 PONTOS) E CRITÉRIOS DE DESEMPATE -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                
+                <!-- Card Nota de Corte Mínima -->
+                <div class="bg-rose-50 border-l-4 border-rose-600 p-5 rounded-r-2xl">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-ban text-rose-600 text-2xl flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-black text-rose-950 uppercase text-xs mb-1">Critério de Aprovação & Eliminação (Item 8.2 e 10.2.1):</h4>
+                            <p class="text-xs text-rose-900 font-medium leading-relaxed">
+                                Será considerado <strong>aprovado</strong> quem atingir, no mínimo, <strong>32 pontos (8 questões acertadas no total)</strong> e <strong>NÃO obtiver pontuação igual a zero em nenhuma das disciplinas</strong> (é obrigatório acertar ao menos 1 questão de Português e 1 de Matemática). Não há prova de redação!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Critérios de Desempate -->
+                <div class="bg-amber-50 border-l-4 border-amber-600 p-5 rounded-r-2xl">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-sort-amount-down text-amber-600 text-2xl flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-black text-amber-950 uppercase text-xs mb-1">Critérios de Desempate (Item 10.1.4):</h4>
+                            <p class="text-xs text-amber-900 font-medium leading-relaxed">
+                                Em caso de empate na classificação final, a preferência será dada a:
+                                <br>1º) Maior número de pontos obtidos em <strong>Língua Portuguesa</strong>;
+                                <br>2º) Maior número de pontos obtidos em <strong>Matemática</strong>;
+                                <br>3º) Candidato com <strong>maior idade</strong> (verificando-se data e, se necessário, hora exata do nascimento na certidão).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Orientações do Dia do Exame -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-clock text-[#008542] mr-1"></i>Portões e Horários</h4>
+                    <p class="text-slate-600 font-medium">Os portões abrem às 08h00 e <strong>fecham pontualmente às 08h45</strong>. A prova ocorre das 09h00 às 12h00. Chegue com 1 hora de antecedência!</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-id-card text-[#008542] mr-1"></i>O que Levar</h4>
+                    <p class="text-slate-600 font-medium">Documento oficial com foto original (RG, CIN, CTPS, CNH ou Passaporte físico) e caneta esferográfica de material transparente com tinta preta ou azul.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-black text-slate-900 mb-1 uppercase"><i class="fas fa-door-open text-[#008542] mr-1"></i>Permanência e Caderno</h4>
+                    <p class="text-slate-600 font-medium">Permanência mínima obrigatória em sala de <strong>1 hora</strong>. Atenção: no IFRJ, o candidato <strong>NÃO pode levar o Caderno de Questões para casa</strong> (Item 8.20.c)!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO ISENÇÃO DA TAXA DE INSCRIÇÃO -->
+    <section id="isencao" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-10">
+                <span class="bg-amber-100 text-amber-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-amber-200 inline-block">
+                    Taxa do Boleto: R$ 70,00 • Pedidos de 11 a 25/10/2026
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Isenção da Taxa de Inscrição no IFRJ</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    A gratuidade da taxa de R$ 70,00 poderá ser solicitada por estudantes que atendam a uma das duas modalidades oficiais.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Modalidade 1: Escola Pública -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-[#008542] text-white flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <span class="bg-emerald-100 text-emerald-900 text-[10px] font-black px-2.5 py-1 rounded-full uppercase mb-2 inline-block">Modalidade 1</span>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Estudante da Rede Pública</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium mb-3">
+                        Ter cursado o Ensino Fundamental em instituição pública brasileira (federal, estadual ou municipal).
+                    </p>
+                    <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-xs text-slate-700">
+                        <strong class="text-slate-900 block mb-1">Documentos Obrigatórios:</strong>
+                        Documento oficial com foto, CPF e <strong>Declaração da Escola em papel timbrado com CNPJ</strong> contendo as séries cursadas na rede pública (conforme o <strong>modelo do Anexo IV</strong> do edital).
+                    </div>
+                </div>
+
+                <!-- Modalidade 2: CadÚnico -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-600 text-white flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <span class="bg-amber-100 text-amber-900 text-[10px] font-black px-2.5 py-1 rounded-full uppercase mb-2 inline-block">Modalidade 2</span>
+                    <h3 class="text-lg font-black text-slate-900 mb-2">Inscrito no CadÚnico</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium mb-3">
+                        Pertença a família de baixa renda inscrita no Cadastro Único para Programas Sociais do Governo Federal.
+                    </p>
+                    <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-xs text-slate-700">
+                        <strong class="text-slate-900 block mb-1">Documentos Obrigatórios:</strong>
+                        Documento oficial com foto, CPF do aluno e indicação do <strong>Número de Identificação Social (NIS)</strong> válido atribuído ao candidato no CadÚnico.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO SISTEMA DE COTAS & AVERIGUAÇÃO -->
+    <section id="cotas" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Lei Federal nº 12.711/2012 e Lei nº 14.723/2023
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Reserva de Vagas e Cotas no IFRJ</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    50% de todas as vagas são reservadas para quem cursou <strong>integralmente o Ensino Fundamental (1º ao 9º ano) em escolas públicas brasileiras</strong>.
+                </p>
+            </div>
+
+            <!-- Alerta do Edital sobre Escola Pública -->
+            <div class="mb-8 bg-rose-50 border-l-4 border-rose-600 p-5 rounded-r-2xl">
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-exclamation-circle text-rose-600 text-2xl flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <h4 class="font-black text-rose-900 uppercase text-xs">Atenção aos Requisitos de Escola Pública:</h4>
+                        <p class="text-xs text-rose-800 font-semibold mt-0.5 leading-relaxed">
+                            Ter estudado em escola privada em qualquer momento do Ensino Fundamental, mesmo como bolsista integral (100%) ou em instituição filantrópica, <strong>NÃO dá direito às cotas</strong>. Nesses casos, o candidato deve concorrer pela Ampla Concorrência (AC).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela de Modalidades de Cotas -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+                <div class="p-4 bg-[#0b2545] text-white font-bold text-xs uppercase tracking-wider">
+                    As Categorias de Concorrência no IFRJ (Grupos LB e LI)
+                </div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium text-slate-700">
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                        <strong class="text-[#008542] font-black block mb-1">Ampla Concorrência (AC)</strong>
+                        Aberto a todos os candidatos, inclusive quem cursou escola privada. Todos os cotistas também concorrem automaticamente na AC!
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">Cota LB_PPI (&le; 1 SM + PPI + Escola Pública)</strong>
+                        Escola pública + Renda bruta familiar &le; 1,0 Salário Mínimo per capita + autodeclarados Pretos, Pardos ou Indígenas.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">Cota LB_EP (&le; 1 SM + Escola Pública Ampla)</strong>
+                        Escola pública + Renda bruta familiar &le; 1,0 Salário Mínimo per capita (demais candidatos de escola pública).
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                        <strong class="text-emerald-950 font-black block mb-1">Cota LB_Q e LB_PCD (&le; 1 SM + Quilombola / PCD)</strong>
+                        Escola pública + Renda bruta familiar &le; 1,0 Salário Mínimo per capita + Quilombolas ou Pessoas com Deficiência.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-teal-50 border border-teal-200">
+                        <strong class="text-teal-950 font-black block mb-1">Cota LI_PPI (Qualquer Renda + PPI + Escola Pública)</strong>
+                        Escola pública + Independente de Renda familiar + autodeclarados Pretos, Pardos ou Indígenas.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-teal-50 border border-teal-200">
+                        <strong class="text-teal-950 font-black block mb-1">Cota LI_EP (Qualquer Renda + Escola Pública Ampla)</strong>
+                        Escola pública + Independente de Renda familiar (demais candidatos de escola pública).
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-teal-50 border border-teal-200">
+                        <strong class="text-teal-950 font-black block mb-1">Cota LI_Q e LI_PCD (Qualquer Renda + Quilombola / PCD)</strong>
+                        Escola pública + Independente de Renda familiar + Quilombolas ou Pessoas com Deficiência.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-sky-50 border border-sky-200">
+                        <strong class="text-sky-950 font-black block mb-1">Classificação Primária na Ampla Concorrência</strong>
+                        Conforme a Lei nº 14.723/2023, todos os cotistas concorrem primeiramente na AC. Se a nota for suficiente para aprovação na AC, o aluno é convocado por ela, liberando a vaga da cota para o próximo cotista.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Averiguação Presencial -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 text-xs font-medium text-slate-700">
+                <h4 class="font-black text-slate-900 uppercase mb-2 flex items-center">
+                    <i class="fas fa-id-card-alt text-[#008542] mr-2"></i> Averiguação Presencial das Cotas (04 a 08/01/2027)
+                </h4>
+                <p class="leading-relaxed text-slate-600 mb-2">
+                    Os candidatos classificados nas vagas reservadas devem entregar presencialmente no campus a documentação de comprovação:
+                </p>
+                <ul class="list-disc list-inside space-y-1 text-slate-600">
+                    <li><strong>Comprovação de Renda (Grupos LB):</strong> Documentos comprobatórios da renda bruta familiar de julho, agosto e setembro de 2026 (Anexo VI).</li>
+                    <li><strong>Heteroidentificação Étnico-Racial:</strong> Autodeclaração assinada (Anexo VII) com aferição exclusivamente pelo fenótipo pela comissão.</li>
+                    <li><strong>Avaliação Biopsicossocial (PcD):</strong> Realizada presencialmente pela comissão com base no laudo médico emitido nos últimos 12 meses.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO QUADRO DE VAGAS OFERTADAS (11 CAMPI FLUMINENSES • 1.814 VAGAS) -->
+    <section id="quadro-vagas" class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-10">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Anexo I • 1.814 Vagas em 11 Campi do Estado do Rio de Janeiro
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">Cidades, Cursos & Vagas por Cota no IFRJ</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    Consulte as oportunidades em cada campus fluminense com filtros dinâmicos por campus e modalidade de ingresso.
+                </p>
+            </div>
+
+            <!-- Painel de Filtros e Busca -->
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 mb-8 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                    
+                    <!-- Dropdown de Seleção de Cidade / Campus -->
+                    <div class="md:col-span-6">
+                        <label class="block text-xs font-black uppercase text-slate-700 mb-1.5">
+                            <i class="fas fa-map-marker-alt text-[#008542] mr-1"></i> Selecionar Campus do IFRJ:
+                        </label>
+                        <select id="campus-select" onchange="applyVagasFilter()" class="w-full bg-white border border-slate-300 text-slate-900 text-xs rounded-xl p-3 font-bold focus:ring-2 focus:ring-[#008542] focus:outline-none shadow-sm">
+                            <option value="ALL">Mostrar Todos os 11 Campi do IFRJ (1.814 Vagas)</option>
+                            <option value="Arraial do Cabo">Arraial do Cabo (120 Vagas)</option>
+                            <option value="Duque de Caxias">Duque de Caxias (180 Vagas)</option>
+                            <option value="Engenheiro Paulo de Frontin">Engenheiro Paulo de Frontin (64 Vagas)</option>
+                            <option value="Nilópolis">Nilópolis (252 Vagas)</option>
+                            <option value="Niterói">Niterói (128 Vagas)</option>
+                            <option value="Paracambi">Paracambi (144 Vagas)</option>
+                            <option value="Pinheiral">Pinheiral (180 Vagas)</option>
+                            <option value="Resende">Resende (50 Vagas)</option>
+                            <option value="Rio de Janeiro">Rio de Janeiro - Maracanã (360 Vagas)</option>
+                            <option value="São Gonçalo">São Gonçalo (216 Vagas)</option>
+                            <option value="Volta Redonda">Volta Redonda (116 Vagas)</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo de Busca em Tempo Real -->
+                    <div class="md:col-span-6">
+                        <label class="block text-xs font-black uppercase text-slate-700 mb-1.5">
+                            <i class="fas fa-search text-[#008542] mr-1"></i> Pesquisar por Curso ou Palavra-Chave:
+                        </label>
+                        <input type="text" id="vagas-search-input" onkeyup="applyVagasFilter()" placeholder="Ex: Química, Informática, Meio Ambiente, Farmácia, Biotecnologia, Automação..." class="w-full bg-white border border-slate-300 text-slate-900 text-xs rounded-xl p-3 font-bold focus:ring-2 focus:ring-[#008542] focus:outline-none shadow-sm">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legenda das Siglas de Cotas -->
+            <div class="mb-6 bg-emerald-50/70 p-4 rounded-xl border border-emerald-200 text-[11px] text-slate-700 font-medium">
+                <strong class="text-emerald-950 font-black block mb-1">Entenda as Colunas de Vagas do Anexo I do IFRJ:</strong>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+                    <div><span class="font-bold text-emerald-900">AC:</span> Ampla Concorrência</div>
+                    <div><span class="font-bold text-emerald-900">LB_PPI:</span> Renda &le; 1 SM + PPI</div>
+                    <div><span class="font-bold text-emerald-900">LB_Q:</span> Renda &le; 1 SM + Quilombola</div>
+                    <div><span class="font-bold text-emerald-900">LB_PCD:</span> Renda &le; 1 SM + PCD</div>
+                    <div><span class="font-bold text-emerald-900">LB_EP:</span> Renda &le; 1 SM + Esc. Pública</div>
+                    <div><span class="font-bold text-teal-900">LI_PPI:</span> Qualq. Renda + PPI</div>
+                    <div><span class="font-bold text-teal-900">LI_Q:</span> Qualq. Renda + Quilombola</div>
+                    <div><span class="font-bold text-teal-900">LI_PCD:</span> Qualq. Renda + PCD</div>
+                    <div><span class="font-bold text-teal-900">LI_EP:</span> Qualq. Renda + Esc. Pública</div>
+                    <div><span class="font-bold text-slate-900">TOTAL:</span> Total de Vagas</div>
+                </div>
+            </div>
+
+            <!-- Tabela Interativa de Vagas do IFRJ -->
+            <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm bg-white">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-[#0b2545] text-white font-bold uppercase text-[10px] tracking-wider text-center">
+                            <th class="py-3 px-3 text-left w-1/4">Campus & Curso Técnico</th>
+                            <th class="py-3 px-2">Entrada</th>
+                            <th class="py-3 px-2 bg-emerald-900">AC</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB PPI">LB_PPI</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB Q">LB_Q</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB PCD">LB_PCD</th>
+                            <th class="py-3 px-2 bg-emerald-800" title="LB EP">LB_EP</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI PPI">LI_PPI</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI Q">LI_Q</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI PCD">LI_PCD</th>
+                            <th class="py-3 px-2 bg-teal-800" title="LI EP">LI_EP</th>
+                            <th class="py-3 px-2 bg-slate-900 text-lime-400 font-black">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vagas-table-body" class="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <!-- Injetado dinamicamente via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="vagas-no-results" class="hidden text-center py-12 bg-white rounded-2xl border border-slate-200 my-4">
+                <i class="fas fa-search-minus text-3xl text-slate-400 mb-2"></i>
+                <h4 class="font-bold text-slate-800 text-sm">Nenhum curso ou vaga foi encontrado</h4>
+                <p class="text-xs text-slate-500">Tente ajustar o termo digitado ou limpar a seleção do campus.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO CONTEÚDO PROGRAMÁTICO OFICIAL (ANEXO II) -->
+    <section id="conteudo" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-10">
+                <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 border border-emerald-200 inline-block">
+                    Conteúdo Programático Oficial • Anexo II do Edital nº 72/2026
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 section-title mx-auto">O que Estudar para a Prova do IFRJ 2027?</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto -mt-2">
+                    A prova é composta <strong>exclusivamente por Língua Portuguesa e Matemática (15 questões cada)</strong>. Confira o detalhamento verticalizado do programa oficial.
+                </p>
+            </div>
+
+            <!-- Navegação por Abas -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8" id="subject-tabs">
+                <button onclick="switchTab('portugues')" class="tab-btn active font-black text-xs px-5 py-3 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-book mr-1.5"></i>Língua Portuguesa (15q • 60 Pts)</button>
+                <button onclick="switchTab('matematica')" class="tab-btn font-black text-xs px-5 py-3 rounded-xl border border-slate-200 bg-white text-slate-700 transition"><i class="fas fa-calculator mr-1.5"></i>Matemática (15q • 60 Pts)</button>
+            </div>
+
+            <!-- Conteúdo das Abas -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm text-xs leading-relaxed text-slate-700">
+                
+                <!-- Português -->
+                <div id="tab-portugues" class="tab-content space-y-4">
+                    <h3 class="text-lg font-black text-[#008542] pb-2 border-b border-slate-100 flex items-center justify-between">
+                        <span><i class="fas fa-book text-[#008542] mr-2"></i>Língua Portuguesa (15 Questões • Valor: 60,0 Pontos)</span>
+                        <span class="bg-emerald-100 text-emerald-900 text-[10px] px-2.5 py-1 rounded-full font-extrabold">Sem Redação</span>
+                    </h3>
+                    <ul class="space-y-2 list-disc list-inside font-medium text-slate-600">
+                        <li><strong>1. Leitura e Textualidade:</strong> Texto verbal e não verbal; texto em prosa e texto em verso; modos de organização do discurso (narração, descrição, dissertação expositiva, dissertação argumentativa e injunção); mecanismos de coesão textual; fatores de coerência textual; pontuação e emprego de discurso direto e indireto.</li>
+                        <li><strong>2. Morfologia:</strong> Classes gramaticais das palavras e seus efeitos de sentido no texto; estrutura das palavras; processos de formação de palavras (derivação prefixal, sufixal, parassintética, regressiva, imprópria e composição por justaposição e aglutinação).</li>
+                        <li><strong>3. Sintaxe:</strong> Frase, oração e período; formas e tipos de frases; valor sintático-semântico das conjunções coordenativas e subordinativas; concordância verbal e nominal padrão; regência verbal e nominal padrão.</li>
+                        <li><strong>4. Semântica:</strong> Denotação (sentido literal) e conotação (sentido figurado); significação das palavras: sinônimos, antônimos, homônimos, hipônimos e hiperônimos; figuras de linguagem (metáfora, metonímia, antítese, ironia, paradoxo, hipérbole, personificação etc.); ambiguidade e polissemia; inferência de informações implícitas.</li>
+                    </ul>
+                </div>
+
+                <!-- Matemática -->
+                <div id="tab-matematica" class="tab-content hidden space-y-4">
+                    <h3 class="text-lg font-black text-[#008542] pb-2 border-b border-slate-100 flex items-center justify-between">
+                        <span><i class="fas fa-calculator text-[#008542] mr-2"></i>Matemática (15 Questões • Valor: 60,0 Pontos)</span>
+                        <span class="bg-blue-100 text-blue-900 text-[10px] px-2.5 py-1 rounded-full font-extrabold">Aritmética, Álgebra e Geometria</span>
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <strong class="text-[#008542] font-black block mb-1 text-xs">1. ARITMÉTICA:</strong>
+                            <ul class="space-y-1 list-disc list-inside text-slate-600">
+                                <li>Conjunto dos Naturais (N), Inteiros (Z) e Racionais (Q).</li>
+                                <li>Sistema de numeração e contagem em diferentes bases.</li>
+                                <li>Divisibilidade, números primos, algoritmo de Euclides/Arquimedes, MMC e MDC.</li>
+                                <li>Módulo de um inteiro e operações.</li>
+                                <li>Frações equivalentes, operações e problemas.</li>
+                                <li>Razão, proporção, grandezas diretas/inversas.</li>
+                                <li>Regra de três simples, porcentagem e juros simples.</li>
+                                <li>Potenciação, propriedades operatórias e números irracionais.</li>
+                                <li>Medidas e conversões de comprimento, área e volume.</li>
+                            </ul>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <strong class="text-[#008542] font-black block mb-1 text-xs">2. ÁLGEBRA & CONJUNTOS:</strong>
+                            <ul class="space-y-1 list-disc list-inside text-slate-600">
+                                <li>Expressões algébricas e valor numérico.</li>
+                                <li>Produtos notáveis clássicos.</li>
+                                <li>Casos clássicos de fatoração algébrica.</li>
+                                <li>Equações e inequações de 1º grau.</li>
+                                <li>Equações irracionais.</li>
+                                <li>Sistemas de equações de 1º grau a duas variáveis e representação gráfica no plano.</li>
+                                <li>Álgebra dos conjuntos: união, interseção, complementar, conjunto das partes e produto cartesiano.</li>
+                                <li>Reta graduada, gráficos de barra e de setores.</li>
+                                <li>Problemas de raciocínio lógico.</li>
+                            </ul>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <strong class="text-[#008542] font-black block mb-1 text-xs">3. GEOMETRIA:</strong>
+                            <ul class="space-y-1 list-disc list-inside text-slate-600">
+                                <li>Conceitos primitivos: ponto, reta e plano.</li>
+                                <li>Axiomas e figuras planas e espaciais.</li>
+                                <li>Classificação das figuras quanto à convexidade.</li>
+                                <li>Teorema de Tales nas paralelas (proporcionalidade).</li>
+                                <li>Divisão de um segmento em uma razão dada.</li>
+                                <li>Cálculo de áreas dos principais polígonos planos e regulares.</li>
+                                <li>Círculo e circunferência: comprimento, número π, área do círculo e de suas partes (setor, coroa).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BANNER DE CTA PARA MATRÍCULA NO CURSINHO E INSCRIÇÃO OFICIAL -->
+    <section class="py-12 bg-gradient-to-r from-[#0b2545] via-[#005a2b] to-[#008542] text-white">
+        <div class="container mx-auto px-4 max-w-5xl text-center">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center p-2.5 mx-auto mb-4 shadow-xl border-2 border-white/30" style="background-color: #dd5737;">
+                <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+            </div>
+            
+            <span class="bg-[#c7ef59] text-slate-900 font-black text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">
+                Sua Vaga no IFRJ Começa Aqui
+            </span>
+            
+            <h2 class="text-2xl md:text-4xl font-black mb-3 leading-tight">
+                Quer Passar no Processo Seletivo <span class="text-[#c7ef59]">IFRJ 2027</span>?
+            </h2>
+            
+            <p class="text-slate-100 text-xs md:text-sm max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
+                Estude com o preparatório líder em aprovação nas Escolas e Institutos Federais. Treinamento direcionado para o formato de 30 questões do Instituto ACCESS, simulados comentados, foco total em Português e Matemática e suporte via WhatsApp.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://www.access.org.br" target="_blank" class="bg-white text-slate-900 hover:bg-slate-100 font-black px-8 py-3.5 rounded-xl transition shadow-2xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105 border-2 border-white">
+                    <i class="fas fa-external-link-alt mr-2 text-[#008542]"></i> Inscrição Oficial no Instituto ACCESS
+                </a>
+                <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="bg-[#c7ef59] text-slate-900 hover:bg-opacity-90 font-black px-8 py-3.5 rounded-xl transition shadow-2xl text-xs md:text-sm uppercase tracking-wider inline-flex items-center transform hover:scale-105">
+                    <i class="fas fa-rocket mr-2 text-emerald-950"></i> Matricular no Curso Intensivo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800 text-xs">
+        <div class="container mx-auto px-4 max-w-6xl text-center">
+            <div class="flex justify-center items-center space-x-3 mb-6">
+                <!-- Logo no footer com fundo Laranja Coral -->
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md" style="background-color: #dd5737;">
+                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+                </div>
+                <span class="text-lg font-black tracking-tight text-white">Guia - Pré Federal</span>
+            </div>
+            <p class="text-slate-400 font-medium mb-4 max-w-xl mx-auto">
+                Preparatório especializado no ingresso aos Cursos Técnicos Integrados das Escolas Técnicas e Institutos Federais.
+            </p>
+            <p class="text-slate-500">&copy; 2026 Guia Pré-Federal. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Botão Flutuante de Ação (FAB) -->
+    <div class="fab-container">
+        <div class="fab-options">
+            <a href="https://www.access.org.br" target="_blank" class="fab-option">
+                <span class="fab-label">Inscrição IFRJ (ACCESS)</span>
+                <div class="fab-icon" style="background-color: #008542;">
+                    <i class="fas fa-external-link-alt"></i>
+                </div>
+            </a>
+            <a href="https://guiaprefederal.com.br/intensivo2026/" target="_blank" class="fab-option">
+                <span class="fab-label">Nosso Intensivo 2026</span>
+                <div class="fab-icon" style="background-color: #059669;">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </a>
+            <a href="https://wa.me/message/CNC5OQFPKLE7K1" target="_blank" class="fab-option">
+                <span class="fab-label">Falar no WhatsApp</span>
+                <div class="fab-icon" style="background-color: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </a>
+        </div>
+        <button class="fab-main" id="fab-main-btn" title="Menu de Ajuda e Links">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <!-- Script com Dados Oficiais do Quadro de Vagas do IFRJ (Edital nº 72/2026 - 1.814 Vagas) -->
+    <script>
+        const ifrjCoursesData = [
+            // Arraial do Cabo (120 vagas)
+            { campus: "Arraial do Cabo", curso: "Técnico em Informática", entrada: "1º e 2º Semestres (30+30)", ac: 30, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_ppi: 8, li_q: 2, li_pcd: 2, li_ep: 2, total: 60 },
+            { campus: "Arraial do Cabo", curso: "Técnico em Meio Ambiente", entrada: "1º e 2º Semestres (30+30)", ac: 30, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_ppi: 8, li_q: 2, li_pcd: 2, li_ep: 2, total: 60 },
+
+            // Duque de Caxias (180 vagas)
+            { campus: "Duque de Caxias", curso: "Técnico em Química", entrada: "1º e 2º Semestres (30+30)", ac: 30, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_ppi: 8, li_q: 2, li_pcd: 2, li_ep: 2, total: 60 },
+            { campus: "Duque de Caxias", curso: "Técnico em Petróleo e Gás", entrada: "1º e 2º Semestres (30+30)", ac: 30, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_ppi: 8, li_q: 2, li_pcd: 2, li_ep: 2, total: 60 },
+            { campus: "Duque de Caxias", curso: "Técnico em Plásticos", entrada: "1º e 2º Semestres (30+30)", ac: 30, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_ppi: 8, li_q: 2, li_pcd: 2, li_ep: 2, total: 60 },
+
+            // Engenheiro Paulo de Frontin (64 vagas)
+            { campus: "Engenheiro Paulo de Frontin", curso: "Técnico em Informática para Internet", entrada: "Anual (Apenas 1º Semestre)", ac: 32, lb_ppi: 9, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_ppi: 9, li_q: 2, li_pcd: 2, li_ep: 3, total: 64 },
+
+            // Nilópolis (252 vagas)
+            { campus: "Nilópolis", curso: "Técnico em Controle Ambiental", entrada: "1º e 2º Semestres (60+60)", ac: 60, lb_ppi: 18, lb_q: 4, lb_pcd: 4, lb_ep: 4, li_ppi: 18, li_q: 4, li_pcd: 4, li_ep: 4, total: 120 },
+            { campus: "Nilópolis", curso: "Técnico em Química", entrada: "1º e 2º Semestres (30+30)", ac: 30, lb_ppi: 9, lb_q: 1, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 1, li_pcd: 2, li_ep: 3, total: 60 },
+            { campus: "Nilópolis", curso: "Técnico em Saneamento", entrada: "1º e 2º Semestres (36+36)", ac: 36, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 2, li_pcd: 2, li_ep: 4, total: 72 },
+
+            // Niterói (128 vagas)
+            { campus: "Niterói", curso: "Técnico em Administração", entrada: "1º e 2º Semestres (32+32)", ac: 32, lb_ppi: 9, lb_q: 2, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 2, li_pcd: 2, li_ep: 3, total: 64 },
+            { campus: "Niterói", curso: "Técnico em Informática", entrada: "1º e 2º Semestres (32+32)", ac: 32, lb_ppi: 9, lb_q: 2, lb_pcd: 2, lb_ep: 3, li_ppi: 9, li_q: 2, li_pcd: 2, li_ep: 3, total: 64 },
+
+            // Paracambi (144 vagas)
+            { campus: "Paracambi", curso: "Técnico em Eletrotécnica", entrada: "1º e 2º Semestres (36+36)", ac: 36, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 2, li_pcd: 2, li_ep: 4, total: 72 },
+            { campus: "Paracambi", curso: "Técnico em Mecânica", entrada: "1º e 2º Semestres (36+36)", ac: 36, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 2, li_pcd: 2, li_ep: 4, total: 72 },
+
+            // Pinheiral (180 vagas)
+            { campus: "Pinheiral", curso: "Técnico em Agroindústria", entrada: "Anual (Apenas 1º Semestre)", ac: 15, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 4, li_q: 1, li_pcd: 1, li_ep: 1, total: 30 },
+            { campus: "Pinheiral", curso: "Técnico em Agropecuária", entrada: "Anual (Apenas 1º Semestre)", ac: 30, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_ppi: 8, li_q: 2, li_pcd: 2, li_ep: 2, total: 60 },
+            { campus: "Pinheiral", curso: "Técnico em Informática", entrada: "Anual (Apenas 1º Semestre)", ac: 15, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 4, li_q: 1, li_pcd: 1, li_ep: 1, total: 30 },
+            { campus: "Pinheiral", curso: "Técnico em Meio Ambiente", entrada: "Anual (Apenas 1º Semestre)", ac: 30, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_ppi: 8, li_q: 2, li_pcd: 2, li_ep: 2, total: 60 },
+
+            // Resende (50 vagas)
+            { campus: "Resende", curso: "Técnico em Guia de Turismo", entrada: "Anual (Apenas 1º Semestre)", ac: 25, lb_ppi: 7, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_ppi: 6, li_q: 2, li_pcd: 2, li_ep: 2, total: 50 },
+
+            // Rio de Janeiro - Maracanã (360 vagas)
+            { campus: "Rio de Janeiro", curso: "Técnico em Alimentos", entrada: "1º e 2º Semestres (36+36)", ac: 36, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 2, li_pcd: 2, li_ep: 4, total: 72 },
+            { campus: "Rio de Janeiro", curso: "Técnico em Biotecnologia", entrada: "1º e 2º Semestres (36+36)", ac: 36, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 2, li_pcd: 2, li_ep: 4, total: 72 },
+            { campus: "Rio de Janeiro", curso: "Técnico em Farmácia", entrada: "1º e 2º Semestres (36+36)", ac: 36, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 2, li_pcd: 2, li_ep: 4, total: 72 },
+            { campus: "Rio de Janeiro", curso: "Técnico em Meio Ambiente", entrada: "1º e 2º Semestres (36+36)", ac: 36, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 2, li_pcd: 2, li_ep: 4, total: 72 },
+            { campus: "Rio de Janeiro", curso: "Técnico em Química", entrada: "1º e 2º Semestres (36+36)", ac: 36, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 4, li_ppi: 10, li_q: 2, li_pcd: 2, li_ep: 4, total: 72 },
+
+            // São Gonçalo (216 vagas)
+            { campus: "São Gonçalo", curso: "Técnico em Administração", entrada: "Anual (Apenas 1º Semestre)", ac: 18, lb_ppi: 6, lb_q: 1, lb_pcd: 1, lb_ep: 1, li_ppi: 6, li_q: 0, li_pcd: 1, li_ep: 2, total: 36 },
+            { campus: "São Gonçalo", curso: "Técnico em Química", entrada: "Anual (Apenas 1º Semestre)", ac: 72, lb_ppi: 21, lb_q: 2, lb_pcd: 4, lb_ep: 8, li_ppi: 21, li_q: 2, li_pcd: 4, li_ep: 10, total: 144 },
+            { campus: "São Gonçalo", curso: "Técnico em Segurança do Trabalho", entrada: "Anual (Apenas 1º Semestre)", ac: 18, lb_ppi: 5, lb_q: 1, lb_pcd: 1, lb_ep: 2, li_ppi: 5, li_q: 1, li_pcd: 1, li_ep: 2, total: 36 },
+
+            // Volta Redonda (116 vagas)
+            { campus: "Volta Redonda", curso: "Técnico em Automação Industrial", entrada: "1º e 2º Semestres (28+28)", ac: 28, lb_ppi: 8, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_ppi: 8, li_q: 2, li_pcd: 2, li_ep: 2, total: 56 },
+            { campus: "Volta Redonda", curso: "Técnico em Eletrotécnica", entrada: "1º e 2º Semestres (30+30)", ac: 30, lb_ppi: 10, lb_q: 2, lb_pcd: 2, lb_ep: 2, li_ppi: 8, li_q: 2, li_pcd: 2, li_ep: 2, total: 60 }
+        ];
+
+        function applyVagasFilter() {
+            const selectedCampus = document.getElementById('campus-select').value;
+            const searchVal = document.getElementById('vagas-search-input').value.toLowerCase().trim();
+            const tbody = document.getElementById('vagas-table-body');
+            const noResults = document.getElementById('vagas-no-results');
+
+            tbody.innerHTML = '';
+            let count = 0;
+
+            ifrjCoursesData.forEach(item => {
+                const matchesCampus = (selectedCampus === 'ALL' || item.campus === selectedCampus);
+                const matchesSearch = (searchVal === '' || item.curso.toLowerCase().includes(searchVal) || item.campus.toLowerCase().includes(searchVal) || item.entrada.toLowerCase().includes(searchVal));
+
+                if (matchesCampus && matchesSearch) {
+                    count++;
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-emerald-50/50 transition border-b border-slate-100 text-center";
+                    
+                    tr.innerHTML = `
+                        <td class="py-3 px-3 text-left">
+                            <strong class="text-slate-900 block text-xs md:text-sm">${item.curso}</strong>
+                            <span class="text-[10px] text-[#008542] font-bold"><i class="fas fa-university mr-1"></i>Campus ${item.campus}</span>
+                        </td>
+                        <td class="py-3 px-2 font-semibold text-slate-500 text-[11px]">${item.entrada}</td>
+                        <td class="py-3 px-2 font-black text-[#008542] bg-emerald-50/60">${item.ac}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_ppi}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_q}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_pcd}</td>
+                        <td class="py-3 px-2 text-slate-800">${item.lb_ep}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_ppi}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_q}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_pcd}</td>
+                        <td class="py-3 px-2 text-teal-950 font-semibold bg-teal-50/30">${item.li_ep}</td>
+                        <td class="py-3 px-2 font-black text-emerald-800 bg-emerald-100 text-sm">${item.total}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            });
+
+            if (count === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Floating Action Button Toggle
+        const fabContainer = document.querySelector('.fab-container');
+        const fabBtn = document.getElementById('fab-main-btn');
+        fabBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            fabContainer.classList.toggle('active');
+        });
+        document.addEventListener('click', () => fabContainer.classList.remove('active'));
+
+        // Subject Tabs Switching Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('#subject-tabs .tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+        }
+
+        // Initialize table on load
+        document.addEventListener('DOMContentLoaded', () => {
+            applyVagasFilter();
+        });
+    </script>
+</body>
+</html>
