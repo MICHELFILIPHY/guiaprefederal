@@ -1,767 +1,516 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="h-full">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Executivo de Geomarketing & Multiconcorrência dos Alunos | Guia Pré-Federal</title>
+    <title>Painel Interno de Inteligência Geográfica e Mídia | Guia Pré-Federal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter & JetBrains Mono -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f1f5f9;
-            color: #0f172a;
+        :root {
+            --brand-navy: #0f172a;
+            --brand-indigo: #4338ca;
+            --brand-emerald: #059669;
+            --brand-amber: #d97706;
+            --brand-rose: #e11d48;
+            --brand-coral: #dd5737;
         }
-        .mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; color: #0f172a; }
         #map {
-            height: 640px;
+            height: 600px;
             width: 100%;
             border-radius: 1.25rem;
-            z-index: 1;
-            background-color: #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
             cursor: grab;
         }
-        #map:active {
-            cursor: grabbing;
-        }
+        #map:active { cursor: grabbing; }
         .leaflet-popup-content-wrapper {
-            background-color: #ffffff;
-            color: #0f172a;
             border-radius: 1rem;
-            border: 1px solid #cbd5e1;
-            box-shadow: 0 20px 35px -5px rgba(15, 23, 42, 0.2);
-            font-family: 'Inter', sans-serif;
             padding: 0.25rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15);
+            font-family: 'Inter', sans-serif;
         }
-        .leaflet-popup-tip {
+        .leaflet-popup-content {
+            margin: 12px 14px;
+            line-height: 1.4;
+        }
+        .stat-card {
             background-color: #ffffff;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 9999px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-        .slider-accent {
-            accent-color: #4338ca;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
     </style>
 </head>
-<body class="min-h-full flex flex-col justify-between antialiased text-slate-800 bg-slate-100">
+<body class="antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- Top Executive Header Bar (Clean Light Mode) -->
-    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 py-3.5 px-4 sm:px-8 shadow-sm">
-        <div class="max-w-[1700px] mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            
-            <div class="flex items-center space-x-3.5">
-                <div class="w-11 h-11 rounded-2xl flex items-center justify-center p-2 shadow-sm border border-slate-200" style="background-color: #dd5737;">
+    <!-- Top Navigation Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 max-w-7xl py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow" style="background-color: #dd5737;">
                     <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
                 </div>
                 <div>
                     <div class="flex items-center space-x-2">
-                        <span class="text-base font-black tracking-tight text-slate-900 uppercase">Guia Pré-Federal</span>
-                        <span class="bg-indigo-100 text-indigo-800 text-[10px] font-black uppercase px-2 py-0.5 rounded-full border border-indigo-200">Inteligência de Tráfego</span>
+                        <span class="text-base font-black text-slate-900 tracking-tight">Guia - Pré Federal</span>
+                        <span class="bg-indigo-50 text-indigo-700 text-[10px] font-black px-2 py-0.5 rounded-full border border-indigo-200 uppercase">Uso Interno</span>
                     </div>
-                    <p class="text-xs text-slate-500 font-medium">Modelo Gravitacional de Multiconcorrência: Decaimento de Distância e Inscrições Cruzadas</p>
+                    <span class="text-[11px] font-bold text-slate-500 block">Inteligência Geográfica, Polos Federais & Segmentação de Mídia</span>
                 </div>
             </div>
 
-            <!-- Global KPI Badges -->
-            <div class="flex flex-wrap items-center gap-2.5 text-xs">
-                <div class="bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-1.5 flex items-center space-x-2 shadow-sm">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span class="text-slate-500 font-bold uppercase text-[10px]">Alunos Auditados:</span>
-                    <span class="font-black text-emerald-700 mono text-sm" id="header-students-count">448</span>
-                </div>
-                <div class="bg-indigo-50 border border-indigo-200 rounded-xl px-3.5 py-1.5 flex items-center space-x-2 shadow-sm">
-                    <i class="fas fa-layer-group text-indigo-600 text-xs"></i>
-                    <span class="text-indigo-900 font-bold uppercase text-[10px]">Inscrições Potenciais:</span>
-                    <span class="font-black text-indigo-700 mono text-sm" id="header-potential-count">1.135</span>
-                </div>
-                <div class="bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-1.5 flex items-center space-x-2 shadow-sm">
-                    <i class="fas fa-calculator text-amber-600 text-xs"></i>
-                    <span class="text-slate-500 font-bold uppercase text-[10px]">Média Provas/Aluno:</span>
-                    <span class="font-black text-amber-700 mono text-sm" id="header-avg-count">2,53</span>
-                </div>
-                <div class="bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-1.5 flex items-center space-x-2 shadow-sm">
-                    <i class="fas fa-university text-sky-600 text-xs"></i>
-                    <span class="text-slate-500 font-bold uppercase text-[10px]">Campi Ativos:</span>
-                    <span class="font-black text-sky-700 mono text-sm" id="header-schools-count">22</span>
-                </div>
+            <div class="flex items-center space-x-2 text-xs font-bold">
+                <a href="comparativo_vestibulinhos.html" class="bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-xl transition inline-flex items-center">
+                    <i class="fas fa-table mr-1.5 text-indigo-600"></i> Comparativo
+                </a>
+                <a href="index.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-xl transition inline-flex items-center shadow-sm">
+                    <i class="fas fa-home mr-1.5"></i> Site Oficial
+                </a>
             </div>
         </div>
     </header>
 
-    <main class="flex-grow max-w-[1700px] w-full mx-auto px-4 sm:px-8 py-6 space-y-6">
+    <!-- Main Container -->
+    <main class="container mx-auto px-4 max-w-7xl py-6 flex-grow space-y-6">
 
-        <!-- Macro Corredores de Multiconcorrência -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
-            <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:shadow transition">
-                <span class="text-[10px] font-black uppercase tracking-wider text-rose-600 flex items-center"><i class="fas fa-route mr-1.5"></i>Corredor Mata Sul</span>
-                <div class="text-2xl font-black text-slate-900 mt-1 mono">75 <span class="text-xs font-semibold text-rose-600 font-sans">alunos</span></div>
-                <div class="text-[11px] font-black text-rose-700 mono mt-0.5">~178 inscrições estimadas</div>
-                <p class="text-[10px] text-slate-500 mt-1 leading-tight">JF, Leopoldina, Laranjal e Cataguases disputam CEFET-MG Leop. + IF Sudeste JF e Muriaé.</p>
+        <!-- Top KPIs -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="stat-card p-4 rounded-2xl">
+                <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Base Auditada</span>
+                <div class="flex items-baseline space-x-1.5 mt-1">
+                    <span class="text-2xl md:text-3xl font-black text-indigo-900" id="kpi-total-students">448</span>
+                    <span class="text-xs font-bold text-slate-500">alunos reais</span>
+                </div>
+                <span class="text-[11px] text-slate-500 mt-1 block">139 cidades de origem</span>
             </div>
 
-            <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:shadow transition">
-                <span class="text-[10px] font-black uppercase tracking-wider text-indigo-600 flex items-center"><i class="fas fa-train mr-1.5"></i>Metropolitano RMBH</span>
-                <div class="text-2xl font-black text-slate-900 mt-1 mono">65 <span class="text-xs font-semibold text-indigo-600 font-sans">alunos</span></div>
-                <div class="text-[11px] font-black text-indigo-700 mono mt-0.5">~175 inscrições estimadas</div>
-                <p class="text-[10px] text-slate-500 mt-1 leading-tight">BH, Contagem, Betim e Neves tentam simultaneamente COLTEC, CEFET-MG BH e IFMG.</p>
+            <div class="stat-card p-4 rounded-2xl">
+                <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Inscrições Potenciais</span>
+                <div class="flex items-baseline space-x-1.5 mt-1">
+                    <span class="text-2xl md:text-3xl font-black text-emerald-700" id="kpi-potential-apps">~1.120</span>
+                    <span class="text-xs font-bold text-slate-500">provas disputadas</span>
+                </div>
+                <span class="text-[11px] text-slate-500 mt-1 block">Média de 2,5 provas por aluno</span>
             </div>
 
-            <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:shadow transition">
-                <span class="text-[10px] font-black uppercase tracking-wider text-amber-600 flex items-center"><i class="fas fa-graduation-cap mr-1.5"></i>Bacia CAp-COLUNI</span>
-                <div class="text-2xl font-black text-slate-900 mt-1 mono">52 <span class="text-xs font-semibold text-amber-600 font-sans">alunos</span></div>
-                <div class="text-[11px] font-black text-amber-700 mono mt-0.5">~126 inscrições estimadas</div>
-                <p class="text-[10px] text-slate-500 mt-1 leading-tight">Viçosa, Jequeri, Firmino e Oratórios tentam COLUNI no sábado e IF Sudeste/IFMG.</p>
+            <div class="stat-card p-4 rounded-2xl">
+                <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Rede Federal Mapeada</span>
+                <div class="flex items-baseline space-x-1.5 mt-1">
+                    <span class="text-2xl md:text-3xl font-black text-slate-900" id="kpi-total-campi">180+</span>
+                    <span class="text-xs font-bold text-slate-500">campi físicos</span>
+                </div>
+                <span class="text-[11px] text-slate-500 mt-1 block">MG, RJ, SP, ES, BA e RS</span>
             </div>
 
-            <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:shadow transition">
-                <span class="text-[10px] font-black uppercase tracking-wider text-emerald-600 flex items-center"><i class="fas fa-gem mr-1.5"></i>Estrada Real / Inconfidentes</span>
-                <div class="text-2xl font-black text-slate-900 mt-1 mono">37 <span class="text-xs font-semibold text-emerald-600 font-sans">alunos</span></div>
-                <div class="text-[11px] font-black text-emerald-700 mono mt-0.5">~89 inscrições estimadas</div>
-                <p class="text-[10px] text-slate-500 mt-1 leading-tight">Congonhas, Lafaiete e Ouro Branco miram IFMG Congonhas, CEFET BH e IFMG Ouro Preto.</p>
-            </div>
-
-            <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:shadow transition">
-                <span class="text-[10px] font-black uppercase tracking-wider text-sky-600 flex items-center"><i class="fas fa-water mr-1.5"></i>Grande Rio & Baixada</span>
-                <div class="text-2xl font-black text-slate-900 mt-1 mono">33 <span class="text-xs font-semibold text-sky-600 font-sans">alunos</span></div>
-                <div class="text-[11px] font-black text-sky-700 mono mt-0.5">~82 inscrições estimadas</div>
-                <p class="text-[10px] text-slate-500 mt-1 leading-tight">Rio, Niterói e Baixada disputam dobradinha CEFET-RJ + IFRJ e opções no CTUR.</p>
-            </div>
-
-            <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:shadow transition">
-                <span class="text-[10px] font-black uppercase tracking-wider text-[#00703c] flex items-center"><i class="fas fa-compress-arrows-alt mr-1.5"></i>Interior Expansão</span>
-                <div class="text-2xl font-black text-slate-900 mt-1 mono">186 <span class="text-xs font-semibold text-[#00703c] font-sans">alunos</span></div>
-                <div class="text-[11px] font-black text-[#00703c] mono mt-0.5">~485 inscrições estimadas</div>
-                <p class="text-[10px] text-slate-500 mt-1 leading-tight">Vale do Aço (CEFET Timóteo), Norte (IFNMG) e Triângulo Mineiro (IFTM).</p>
+            <div class="stat-card p-4 rounded-2xl">
+                <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Zona de Proximidade</span>
+                <div class="flex items-baseline space-x-1.5 mt-1">
+                    <span class="text-2xl md:text-3xl font-black text-amber-700">76,4%</span>
+                    <span class="text-xs font-bold text-slate-500">a &le; 35 km</span>
+                </div>
+                <span class="text-[11px] text-slate-500 mt-1 block">Forte atração metropolitana</span>
             </div>
         </div>
 
-        <!-- Section: Interactive Map on White Theme with Distance-Decay Simulator -->
-        <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
+        <!-- Seção do Mapa Interativo com Controles -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm space-y-4">
             
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-3 border-b border-slate-200">
+            <!-- Barra de Controles e Filtros do Mapa -->
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                 <div>
-                    <h2 class="text-lg sm:text-xl font-black text-slate-900 flex items-center">
-                        <i class="fas fa-map-marked-alt text-indigo-600 mr-2.5"></i>Simulador de Multiconcorrência por Raio e Decaimento de Distância
+                    <h2 class="text-lg md:text-xl font-black text-slate-900 flex items-center">
+                        <i class="fas fa-map-marked-alt text-indigo-600 mr-2"></i> Mapa de Distribuição & Gravidade de Polos
                     </h2>
                     <p class="text-xs text-slate-500 mt-0.5">
-                        Linhas sólidas representam transporte urbano diário ($d \le 35\text{ km}$, probabilidade $\ge 90\%$). Linhas tracejadas indicam bate-volta intermunicipal ($35\text{ a }80\text{ km}$, $\sim 65\%$). Linhas pontilhadas indicam migração para alojamento/república ($80\text{ a }150\text{ km}$).
+                        Linhas sólidas conectam cada cidade diretamente ao campus federal mais próximo geograficamente.
                     </p>
                 </div>
 
-                <!-- Radius Slider & Controls -->
-                <div class="flex flex-wrap items-center gap-3">
-                    <div class="flex items-center space-x-2 bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5">
-                        <i class="fas fa-bullseye text-indigo-600 text-xs"></i>
-                        <span class="text-xs font-bold text-slate-700">Raio de Deslocamento:</span>
-                        <input type="range" id="radiusSlider" min="25" max="160" step="5" value="75" oninput="updateMobilityRadius(this.value)" class="slider-accent w-24 sm:w-32 cursor-pointer">
-                        <span id="radiusDisplay" class="font-black text-indigo-700 mono text-xs w-12">75 km</span>
-                    </div>
-
-                    <!-- Dropdown de filtro rápido por Polo Federal de Destino -->
-                    <select id="mapPoleFilter" onchange="filterMapByCampus(this.value)" class="bg-slate-50 border border-slate-300 text-xs text-slate-800 font-bold rounded-xl px-3 py-2 focus:ring-2 focus:ring-indigo-600 outline-none">
-                        <option value="ALL">🎯 Filtrar Polo: Todos os Campi</option>
-                        <option value="coltec_bh">COLTEC (UFMG - Belo Horizonte)</option>
-                        <option value="cefet_bh">CEFET-MG (Campus I e II - BH)</option>
-                        <option value="if_jf">IF Sudeste MG (Campus Juiz de Fora)</option>
-                        <option value="cefet_leopoldina">CEFET-MG (Campus Leopoldina)</option>
-                        <option value="coluni_vicosa">CAp-COLUNI (UFV - Viçosa)</option>
-                        <option value="ifmg_congonhas">IFMG (Campus Congonhas)</option>
-                        <option value="cedaf_florestal">CEDAF / UFV (Florestal)</option>
-                        <option value="cefet_timoteo">CEFET-MG (Timóteo / Vale do Aço)</option>
-                        <option value="ifnmg_montesclaros">IFNMG (Montes Claros)</option>
-                        <option value="iftm_triangulo">IFTM (Uberlândia / Uberaba)</option>
-                        <option value="cefet_rj">CEFET-RJ (Campus Maracanã)</option>
-                        <option value="ifrj_metropolitano">IFRJ (Campus Nilópolis / Rio)</option>
-                        <option value="ctur_ufrrj">CTUR (UFRRJ - Seropédica)</option>
-                    </select>
-
-                    <button onclick="toggleVectors()" id="btn-toggle-vectors" class="px-3 py-2 rounded-xl text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 transition flex items-center">
-                        <i class="fas fa-project-diagram mr-1.5 text-indigo-600"></i> Vetores (<span id="txt-vectors-status">On</span>)
+                <!-- Botões e Controles Interativos -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <!-- Modo de Exibição de Linhas -->
+                    <button id="toggle-vectors-btn" onclick="toggleVectorMode()" class="text-xs font-bold px-3 py-2 rounded-xl border border-slate-300 bg-slate-50 text-slate-700 hover:bg-slate-100 transition inline-flex items-center">
+                        <i class="fas fa-route mr-1.5 text-indigo-600"></i>
+                        <span id="vector-mode-label">Modo: Apenas Campus Mais Próximo (1:1)</span>
                     </button>
-                    <!-- Novo Modo de visualização: Apenas mais próximo vs Rede -->
-                    <button onclick="toggleNearestOnly()" id="btn-toggle-nearest" class="px-3 py-2 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100 transition flex items-center" title="Alternar entre ver apenas o campus mais próximo ou toda a cesta de opções">
-                        <i class="fas fa-bullseye mr-1.5 text-emerald-600"></i> <span id="txt-nearest-mode">Modo: Apenas Mais Próximo</span>
-                    </button>
-                    <button onclick="toggleBuffers()" id="btn-toggle-buffers" class="px-3 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-300 hover:bg-slate-200 transition flex items-center">
-                        <i class="fas fa-circle-notch mr-1.5 text-amber-600"></i> Raio 35km (<span id="txt-buffers-status">On</span>)
-                    </button>
-                    <button onclick="resetMapView()" class="px-3 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm transition flex items-center" title="Centralizar visualização inicial">
-                        <i class="fas fa-expand-arrows-alt mr-1.5"></i> Resetar Visão
-                    </button>
-                </div>
-            </div>
 
-            <!-- Leaflet Map Container -->
-            <div class="relative">
-                <div id="map"></div>
-                <div class="absolute bottom-4 right-4 z-[500] bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-300 shadow text-[11px] font-bold text-slate-700 pointer-events-none flex items-center space-x-2">
-                    <i class="fas fa-mouse text-indigo-600"></i>
-                    <span>Role a rodinha para dar Zoom • Arraste para mover</span>
-                </div>
-            </div>
-
-            <!-- Map Legend (Clean Light Mode) -->
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 pt-2 text-xs">
-                <div class="flex items-center space-x-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                    <span class="w-4 h-4 rounded-full bg-rose-500 border-2 border-white shadow flex-shrink-0"></span>
-                    <span class="text-slate-700 text-[11px]"><strong>Cidades P1:</strong> 10 a 29 alunos (epicentro)</span>
-                </div>
-                <div class="flex items-center space-x-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                    <span class="w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow flex-shrink-0"></span>
-                    <span class="text-slate-700 text-[11px]"><strong>Cidades P2:</strong> 4 a 9 alunos (em tração)</span>
-                </div>
-                <div class="flex items-center space-x-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                    <span class="w-5 h-5 rounded-full bg-[#0f172a] border-2 border-amber-400 shadow flex-shrink-0 flex items-center justify-center text-[9px] text-amber-300 font-bold"><i class="fas fa-university"></i></span>
-                    <span class="text-slate-700 text-[11px]"><strong>Campus Federal:</strong> Polo com prova</span>
-                </div>
-                <div class="flex items-center space-x-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                    <span class="w-6 h-1.5 bg-emerald-600 rounded"></span>
-                    <span class="text-slate-700 text-[11px]"><strong>Alta Certeza ($\ge 85\%$):</strong> Raio local $\le 35\text{ km}$</span>
-                </div>
-                <div class="flex items-center space-x-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                    <span class="w-6 h-1 bg-amber-500 border-t border-b border-dashed border-amber-600"></span>
-                    <span class="text-slate-700 text-[11px]"><strong>Bate-Volta ($40\%-75\%$):</strong> $35\text{ a }80\text{ km}$</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Analytics Charts Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            
-            <!-- Chart 1: Demanda Multiconcorrência por Polo Federal (Alunos Diretos vs. Potenciais Cruzados) -->
-            <div class="lg:col-span-7 bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="text-sm font-black uppercase text-slate-900 flex items-center">
-                            <i class="fas fa-chart-bar text-indigo-600 mr-2"></i>Inscrições Potenciais por Campus (Alunos Diretos + Cesta Cruzada)
-                        </h3>
-                        <span class="text-[10px] font-bold text-indigo-800 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-md">Atração Ponderada</span>
-                    </div>
-                    <p class="text-xs text-slate-500 mb-4">
-                        Compara a atração primária do município com a <strong>cesta de provas combinada</strong> gerada por candidatos vizinhos com viagens curtas e datas alternadas.
-                    </p>
-                </div>
-                <div class="relative h-[330px]">
-                    <canvas id="chartPolesGravity"></canvas>
-                </div>
-            </div>
-
-            <!-- Chart 2: Top Cidades com Maior Efeito Multiplicador de Provas -->
-            <div class="lg:col-span-5 bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="text-sm font-black uppercase text-slate-900 flex items-center">
-                            <i class="fas fa-layer-group text-sky-600 mr-2"></i>Top Cidades Multiprova
-                        </h3>
-                        <span class="text-[10px] font-bold text-sky-800 bg-sky-50 border border-sky-200 px-2 py-0.5 rounded-md">Volume &times; Opções</span>
-                    </div>
-                    <p class="text-xs text-slate-500 mb-4">
-                        Cidades com maior densidade de alunos multiplicada pelo número de opções federais no raio logístico.
-                    </p>
-                </div>
-                <div class="relative h-[330px]">
-                    <canvas id="chartTopCities"></canvas>
-                </div>
-            </div>
-
-            <!-- Strategic Media Allocation Baseada em Multiconcorrência -->
-            <div class="lg:col-span-12 bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
-                    <div>
-                        <h3 class="text-base font-black text-slate-900 flex items-center">
-                            <i class="fas fa-funnel-dollar text-emerald-600 mr-2"></i>Plano Tático de Aquisição de Alunos: Anúncios para Cesta de Provas
-                        </h3>
-                        <p class="text-xs text-slate-500">Como calibrar a cópia e o criativo sabendo que o aluno não prestará apenas uma instituição.</p>
-                    </div>
-                    <span class="bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-xl font-bold text-xs self-start sm:self-auto">
-                        Distribuição 40% - 35% - 25%
-                    </span>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                    <!-- Cluster 1 -->
-                    <div class="bg-rose-50/60 border border-rose-200 rounded-2xl p-4 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-black text-rose-900 uppercase text-xs">1. Cluster Zona da Mata & Viçosa</span>
-                                <span class="font-black text-white bg-rose-600 px-2 py-0.5 rounded-md text-[11px]">40% da Verba</span>
-                            </div>
-                            <p class="text-slate-700 leading-relaxed text-[11px] mb-3">
-                                <strong>Cesta de Provas:</strong> CAp-COLUNI (UFV Viçosa) no sábado 07/11 + CEFET Leopoldina (29/11) + IF Sudeste MG Juiz de Fora/Rio Pomba/Muriaé (22/11).
-                            </p>
-                            <p class="text-slate-600 text-[11px] leading-relaxed mb-3">
-                                <strong>Comportamento do Aluno:</strong> O estudante desta região estuda o ano inteiro para o COLUNI e, como o exame é em data diferente, presta o CEFET Leopoldina ou IF Sudeste como segunda opção técnica.
-                            </p>
-                        </div>
-                        <div class="mt-2 pt-3 border-t border-rose-200 text-[11px] text-rose-950 font-medium">
-                            🎯 <strong>Abordagem de Criativo:</strong> *"Prepare-se para o COLUNI e garanta aprovação no IF Sudeste e CEFET-MG com o mesmo plano de estudos."*
-                        </div>
-                    </div>
-
-                    <!-- Cluster 2 -->
-                    <div class="bg-indigo-50/60 border border-indigo-200 rounded-2xl p-4 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-black text-indigo-950 uppercase text-xs">2. Cluster RMBH & Estrada Real</span>
-                                <span class="font-black text-white bg-indigo-600 px-2 py-0.5 rounded-md text-[11px]">35% da Verba</span>
-                            </div>
-                            <p class="text-slate-700 leading-relaxed text-[11px] mb-3">
-                                <strong>Cesta de Provas:</strong> COLTEC (UFMG) em 22/11 + CEFET-MG (BH/Contagem) em 29/11 + CEDAF (Florestal) em 06/12 + IFMG Congonhas/Betim.
-                            </p>
-                            <p class="text-slate-600 text-[11px] leading-relaxed mb-3">
-                                <strong>Comportamento do Aluno:</strong> 100% dos alunos da capital e anel metropolitano prestam tanto o COLTEC quanto o CEFET-MG devido ao intervalo de uma semana entre as provas. Alunos do vetor oeste (Betim/Juatuba) incluem a CEDAF.
-                            </p>
-                        </div>
-                        <div class="mt-2 pt-3 border-t border-indigo-200 text-[11px] text-indigo-950 font-medium">
-                            🎯 <strong>Abordagem de Criativo:</strong> Foco nas obras obrigatórias (Adélia Prado no COLTEC e Machado de Assis no CEFET-MG), enfatizando a dobradinha das duas maiores federais de BH.
-                        </div>
-                    </div>
-
-                    <!-- Cluster 3 -->
-                    <div class="bg-emerald-50/60 border border-emerald-200 rounded-2xl p-4 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-black text-emerald-950 uppercase text-xs">3. Cluster Rio de Janeiro & Expansão</span>
-                                <span class="font-black text-white bg-emerald-600 px-2 py-0.5 rounded-md text-[11px]">25% da Verba</span>
-                            </div>
-                            <p class="text-slate-700 leading-relaxed text-[11px] mb-3">
-                                <strong>Cesta de Provas:</strong> CEFET-RJ (11/10 manhã) + CTUR (11/10 tarde) + Colégio Pedro II (18/10) + IFRJ (06/12).
-                            </p>
-                            <p class="text-slate-600 text-[11px] leading-relaxed mb-3">
-                                <strong>Comportamento do Aluno:</strong> No RJ, o exame do IFRJ em dezembro atrai massivamente candidatos que prestaram CEFET-RJ ou Pedro II em outubro.
-                            </p>
-                        </div>
-                        <div class="mt-2 pt-3 border-t border-emerald-200 text-[11px] text-emerald-950 font-medium">
-                            🎯 <strong>Abordagem de Criativo:</strong> O foco decisivo de conversão no Rio de Janeiro é a **Redação com peso eliminatório** e o domínio da banca SELECON e Instituto ACCESS.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Full Data Table Section (Clean Light Mode) -->
-        <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
-            
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-slate-200">
-                <div>
-                    <h3 class="text-base sm:text-lg font-black text-slate-900 flex items-center">
-                        <i class="fas fa-table-list text-indigo-600 mr-2.5"></i>Matriz de Cesta de Provas: Origem dos Alunos e Campi no Alcance Logístico
-                    </h3>
-                    <p class="text-xs text-slate-500">Relação exata das 139 cidades, quantidade de alunos, campus primário e cesta de opções alcançáveis com probabilidade ponderada.</p>
-                </div>
-
-                <div class="flex items-center space-x-2.5">
-                    <div class="relative">
-                        <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
-                        <input type="text" id="tableSearch" onkeyup="filterFullTable()" placeholder="Buscar cidade, UF ou polo..." class="bg-slate-50 border border-slate-300 text-xs text-slate-800 rounded-xl pl-8 pr-4 py-2 font-medium focus:outline-none focus:ring-2 focus:ring-indigo-600 w-56 sm:w-72">
-                    </div>
-                    <select id="stateSelectFilter" onchange="filterFullTable()" class="bg-slate-50 border border-slate-300 text-xs text-slate-800 rounded-xl px-3 py-2 font-medium focus:outline-none focus:ring-2 focus:ring-indigo-600">
-                        <option value="ALL">Todas as UFs</option>
-                        <option value="MG">Apenas MG</option>
-                        <option value="RJ">Apenas RJ</option>
-                        <option value="ES">Apenas ES</option>
-                        <option value="SP">Apenas SP</option>
+                    <!-- Filtro por Estado -->
+                    <select id="state-select" onchange="handleStateFilter()" class="text-xs font-bold px-3 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-sm">
+                        <option value="ALL">Todos os Estados</option>
+                        <option value="MG">Minas Gerais (MG)</option>
+                        <option value="RJ">Rio de Janeiro (RJ)</option>
+                        <option value="SP">São Paulo (SP)</option>
+                        <option value="ES">Espírito Santo (ES)</option>
                         <option value="OUTROS">Outros Estados</option>
                     </select>
+
+                    <!-- Resetar Zoom -->
+                    <button onclick="resetMapView()" class="text-xs font-bold px-3 py-2 rounded-xl bg-slate-800 text-white hover:bg-slate-900 transition inline-flex items-center shadow-sm" title="Centralizar Mapa">
+                        <i class="fas fa-compress-arrows-alt mr-1.5"></i> Centralizar
+                    </button>
                 </div>
             </div>
 
-            <!-- Table Container -->
-            <div class="overflow-x-auto rounded-2xl border border-slate-200 max-h-[540px] overflow-y-auto custom-scrollbar">
+            <!-- Container do Mapa Leaflet -->
+            <div class="relative">
+                <div id="map"></div>
+                
+                <!-- Legenda do Mapa em Overlay -->
+                <div class="absolute bottom-4 left-4 z-[1000] bg-white/95 backdrop-blur-md p-3 rounded-2xl border border-slate-200 shadow-md text-[11px] font-semibold text-slate-700 space-y-1.5">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded-full bg-rose-600 border-2 border-white shadow-sm inline-block"></span>
+                        <span>Cidades Polo (&ge; 10 alunos)</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-full bg-indigo-600 border border-white shadow-sm inline-block"></span>
+                        <span>Cidades Médias (3 a 9 alunos)</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-slate-400 border border-white shadow-sm inline-block"></span>
+                        <span>Cidades de Expansão (1 a 2 alunos)</span>
+                    </div>
+                    <div class="flex items-center space-x-2 pt-1 border-t border-slate-100">
+                        <span class="w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white shadow-sm inline-block"></span>
+                        <span>Campus / Polo Federal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos e Analytics de Mídia -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Gráfico 1: Atração por Rede / Polo -->
+            <div class="stat-card p-5 rounded-3xl lg:col-span-2">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">
+                            <i class="fas fa-university text-indigo-600 mr-1.5"></i> Gravidade: Alunos Conectados por Rede Federal
+                        </h3>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Calculado pelo campus de menor distância física para cada aluno.</p>
+                    </div>
+                </div>
+                <div class="h-64">
+                    <canvas id="chart-institutions"></canvas>
+                </div>
+            </div>
+
+            <!-- Gráfico 2: Alocação Recomendada de Verba de Tráfego -->
+            <div class="stat-card p-5 rounded-3xl flex flex-col justify-between">
+                <div>
+                    <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-1">
+                        <i class="fas fa-bullseye text-emerald-600 mr-1.5"></i> Sugestão de Alocação de Verba
+                    </h3>
+                    <p class="text-[11px] text-slate-500 mb-4">Divisão proporcional ao volume e conversão comprovada.</p>
+                    <div class="h-48">
+                        <canvas id="chart-budget"></canvas>
+                    </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 space-y-1 text-xs">
+                    <div class="flex justify-between font-bold"><span class="text-emerald-700">Cluster Zona da Mata</span><span>45% (Meta Ads)</span></div>
+                    <div class="flex justify-between font-bold"><span class="text-indigo-700">Cluster Grande BH / Aço</span><span>35% (Meta + Search)</span></div>
+                    <div class="flex justify-between font-bold"><span class="text-amber-700">Cluster RJ & Expansão</span><span>20% (Google Search)</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela Detalhada com Busca Instantânea -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                <div>
+                    <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">
+                        <i class="fas fa-list-ol text-indigo-600 mr-1.5"></i> Cidades, Alunos e o Campus Federal Mais Próximo
+                    </h3>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Tabela completa das 139 cidades para planejamento direto de campanhas locais.</p>
+                </div>
+                <div class="w-full md:w-72">
+                    <input type="text" id="table-search" onkeyup="filterTable()" placeholder="Buscar cidade ou campus..." class="w-full text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-sm bg-slate-50">
+                </div>
+            </div>
+
+            <!-- Tabela de Dados -->
+            <div class="overflow-x-auto rounded-2xl border border-slate-200">
                 <table class="w-full text-left border-collapse text-xs">
-                    <thead class="sticky top-0 bg-slate-100 text-slate-700 font-bold uppercase text-[10px] tracking-wider z-20 border-b border-slate-300">
-                        <tr>
-                            <th class="py-3 px-3 text-center">Pos.</th>
-                            <th class="py-3 px-4">Município do Aluno (UF)</th>
-                            <th class="py-3 px-3 text-center">Nº Alunos</th>
-                            <th class="py-3 px-4">Campus Principal (Mais Próximo)</th>
-                            <th class="py-3 px-3 text-center">Dist. Direta</th>
-                            <th class="py-3 px-4">Cesta de Opções Alcançáveis (Dentro do Raio)</th>
-                            <th class="py-3 px-3 text-center">Inscrições Projetadas</th>
-                            <th class="py-3 px-3 text-center">Localizar</th>
+                    <thead>
+                        <tr class="bg-slate-900 text-white font-bold uppercase text-[10px] tracking-wider text-center">
+                            <th class="py-3 px-4 text-left">Cidade de Origem</th>
+                            <th class="py-3 px-3">Estado</th>
+                            <th class="py-3 px-3 bg-slate-800 text-amber-300">Alunos Reais</th>
+                            <th class="py-3 px-3">% da Base</th>
+                            <th class="py-3 px-4 text-left">Campus Federal Mais Próximo</th>
+                            <th class="py-3 px-3">Distância (Linha Reta)</th>
+                            <th class="py-3 px-3">Prioridade de Mídia</th>
+                            <th class="py-3 px-3 text-right">Ação</th>
                         </tr>
                     </thead>
-                    <tbody id="fullTableBody" class="divide-y divide-slate-100 font-medium text-slate-700">
-                        <!-- Populated dynamically via JS -->
+                    <tbody id="cities-table-body" class="divide-y divide-slate-100 text-slate-700 font-medium">
+                        <!-- Gerado via JavaScript -->
                     </tbody>
                 </table>
             </div>
-            
-            <div class="flex flex-col sm:flex-row justify-between items-center text-[11px] text-slate-500 pt-2 gap-2">
-                <span>Exibindo <span id="displayedCount" class="text-slate-800 font-bold">139</span> cidades registradas na base auditada.</span>
-                <span>Modelo de atratividade: probabilidade decrescente com a distância geográfica e majorada para colégios universitários.</span>
-            </div>
         </div>
-
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-12 shadow-inner">
-        <div class="max-w-[1700px] mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <div class="flex items-center space-x-2">
-                <span class="font-black text-slate-800">Guia Pré-Federal</span>
-                <span>• Inteligência de Mercado, Gravidade de Polos & Multiconcorrência 2026/2027</span>
-            </div>
-            <p>Auditoria com modelo de decaimento logístico e atratividade acadêmica.</p>
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <div class="container mx-auto px-4">
+            <p class="font-bold text-slate-700">Guia - Pré Federal &bull; Painel de Inteligência de Mercado e Geomarketing</p>
+            <p class="mt-1">&copy; 2026 Guia Pré-Federal. Todos os direitos reservados.</p>
         </div>
     </footer>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+    <!-- Script Central de Dados e Lógica do Dashboard -->
     <script>
-        // 1. Rede Completa e Exaustiva de TODOS os Campi Federais Mapeados nos Editais (+180 Unidades Físicas)
-        const federalPoles = [
-            // COLÉGIOS UNIVERSITÁRIOS DE EXCELÊNCIA (MG / RJ)
-            { id: "coluni_vicosa", name: "CAp-COLUNI (UFV Viçosa)", lat: -20.7583, lng: -42.8797, uf: "MG", network: "COLUNI", prestige: 1.4, type: "Colégio Universitário", desc: "Referência propedêutica de MG." },
-            { id: "coltec_bh", name: "COLTEC (UFMG Pampulha)", lat: -19.8697, lng: -43.9642, uf: "MG", network: "COLTEC", prestige: 1.35, type: "Colégio Universitário", desc: "Campus Pampulha / UFMG BH." },
-            { id: "cedaf_florestal", name: "CEDAF / UFV (Florestal)", lat: -19.8885, lng: -44.4322, uf: "MG", network: "CEDAF", prestige: 1.25, type: "Colégio Universitário", desc: "Campus Universitário Florestal UFV." },
-            { id: "ctur_ufrrj", name: "CTUR (UFRRJ Seropédica)", lat: -22.7667, lng: -43.7000, uf: "RJ", network: "CTUR", prestige: 1.25, type: "Colégio Técnico Federal", desc: "Polo agroecológico e técnico da UFRRJ." },
-            { id: "cp2_rio", name: "Colégio Pedro II (Rio de Janeiro)", lat: -22.9068, lng: -43.1729, uf: "RJ", network: "Pedro II", prestige: 1.3, type: "Colégio Tradicional Federal", desc: "Campi no Rio de Janeiro." },
+        // 1. Rede Completa de Campi Físicos Mapeados
+        const federalCampi = [
+            // CEFET-MG (9 campi)
+            { id: "cefet-bh", name: "CEFET-MG (Belo Horizonte)", inst: "CEFET-MG", lat: -19.9328, lng: -43.9686, city: "Belo Horizonte", uf: "MG" },
+            { id: "cefet-contagem", name: "CEFET-MG (Contagem)", inst: "CEFET-MG", lat: -19.9386, lng: -44.0531, city: "Contagem", uf: "MG" },
+            { id: "cefet-leopoldina", name: "CEFET-MG (Leopoldina)", inst: "CEFET-MG", lat: -21.5317, lng: -42.6433, city: "Leopoldina", uf: "MG" },
+            { id: "cefet-timoteo", name: "CEFET-MG (Timóteo / Vale do Aço)", inst: "CEFET-MG", lat: -19.5828, lng: -42.6456, city: "Timóteo", uf: "MG" },
+            { id: "cefet-divinopolis", name: "CEFET-MG (Divinópolis)", inst: "CEFET-MG", lat: -20.1444, lng: -44.8911, city: "Divinópolis", uf: "MG" },
+            { id: "cefet-araxa", name: "CEFET-MG (Araxá)", inst: "CEFET-MG", lat: -19.5932, lng: -46.9408, city: "Araxá", uf: "MG" },
+            { id: "cefet-curvelo", name: "CEFET-MG (Curvelo)", inst: "CEFET-MG", lat: -18.7564, lng: -44.4308, city: "Curvelo", uf: "MG" },
+            { id: "cefet-nepomuceno", name: "CEFET-MG (Nepomuceno)", inst: "CEFET-MG", lat: -21.2333, lng: -45.2333, city: "Nepomuceno", uf: "MG" },
+            { id: "cefet-varginha", name: "CEFET-MG (Varginha)", inst: "CEFET-MG", lat: -21.5542, lng: -45.4356, city: "Varginha", uf: "MG" },
 
-            // CEFET-MG (9 Campi)
-            { id: "cefet_bh", name: "CEFET-MG (Campus I/II BH)", lat: -19.9328, lng: -43.9686, uf: "MG", network: "CEFET-MG", prestige: 1.25, type: "Centro Federal Tecnológico", desc: "Sede Av. Amazonas (BH)." },
-            { id: "cefet_contagem", name: "CEFET-MG (Contagem)", lat: -19.9386, lng: -44.0531, uf: "MG", network: "CEFET-MG", prestige: 1.15, type: "Centro Federal Tecnológico", desc: "Campus Contagem." },
-            { id: "cefet_leopoldina", name: "CEFET-MG (Leopoldina)", lat: -21.5317, lng: -42.6433, uf: "MG", network: "CEFET-MG", prestige: 1.15, type: "Centro Federal Tecnológico", desc: "Campus Leopoldina (Zona da Mata)." },
-            { id: "cefet_timoteo", name: "CEFET-MG (Timóteo)", lat: -19.5828, lng: -42.6456, uf: "MG", network: "CEFET-MG", prestige: 1.15, type: "Centro Federal Tecnológico", desc: "Vale do Aço." },
-            { id: "cefet_divinopolis", name: "CEFET-MG (Divinópolis)", lat: -20.1444, lng: -44.8911, uf: "MG", network: "CEFET-MG", prestige: 1.15, type: "Centro Federal Tecnológico", desc: "Centro-Oeste mineiro." },
-            { id: "cefet_araxa", name: "CEFET-MG (Araxá)", lat: -19.5932, lng: -46.9408, uf: "MG", network: "CEFET-MG", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Alto Paranaíba." },
-            { id: "cefet_curvelo", name: "CEFET-MG (Curvelo)", lat: -18.7564, lng: -44.4308, uf: "MG", network: "CEFET-MG", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Campus Curvelo." },
-            { id: "cefet_nepomuceno", name: "CEFET-MG (Nepomuceno)", lat: -21.2333, lng: -45.2333, uf: "MG", network: "CEFET-MG", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Campus Nepomuceno." },
-            { id: "cefet_varginha", name: "CEFET-MG (Varginha)", lat: -21.5542, lng: -45.4356, uf: "MG", network: "CEFET-MG", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Sul de Minas." },
+            // COLTEC e COLUNI e CEDAF
+            { id: "coltec-ufmg", name: "COLTEC (UFMG Pampulha)", inst: "COLTEC", lat: -19.8697, lng: -43.9642, city: "Belo Horizonte", uf: "MG" },
+            { id: "coluni-ufv", name: "CAp-COLUNI (UFV Viçosa)", inst: "COLUNI", lat: -20.7583, lng: -42.8797, city: "Viçosa", uf: "MG" },
+            { id: "cedaf-florestal", name: "CEDAF (UFV Florestal)", inst: "CEDAF", lat: -19.8894, lng: -44.4319, city: "Florestal", uf: "MG" },
 
-            // IF SUDESTE MG (10 Campi)
-            { id: "ifsudeste_jf", name: "IF Sudeste MG (Juiz de Fora)", lat: -21.7642, lng: -43.3497, uf: "MG", network: "IF Sudeste MG", prestige: 1.2, type: "Instituto Federal", desc: "Polo central Zona da Mata." },
-            { id: "ifsudeste_riopomba", name: "IF Sudeste MG (Rio Pomba)", lat: -21.2750, lng: -43.1814, uf: "MG", network: "IF Sudeste MG", prestige: 1.15, type: "Instituto Federal", desc: "Campus Rio Pomba." },
-            { id: "ifsudeste_muriae", name: "IF Sudeste MG (Muriaé)", lat: -21.1306, lng: -42.3664, uf: "MG", network: "IF Sudeste MG", prestige: 1.15, type: "Instituto Federal", desc: "Campus Muriaé." },
-            { id: "ifsudeste_barbacena", name: "IF Sudeste MG (Barbacena)", lat: -21.2258, lng: -43.7736, uf: "MG", network: "IF Sudeste MG", prestige: 1.15, type: "Instituto Federal", desc: "Campus Barbacena." },
-            { id: "ifsudeste_cataguases", name: "IF Sudeste MG (Cataguases)", lat: -21.3889, lng: -42.6967, uf: "MG", network: "IF Sudeste MG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Cataguases." },
-            { id: "ifsudeste_uba", name: "IF Sudeste MG (Ubá)", lat: -21.1203, lng: -42.9431, uf: "MG", network: "IF Sudeste MG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Ubá." },
-            { id: "ifsudeste_sjdr", name: "IF Sudeste MG (São João del-Rei)", lat: -21.1356, lng: -44.2617, uf: "MG", network: "IF Sudeste MG", prestige: 1.1, type: "Instituto Federal", desc: "Campo das Vertentes." },
-            { id: "ifsudeste_santosdumont", name: "IF Sudeste MG (Santos Dumont)", lat: -21.4564, lng: -43.5528, uf: "MG", network: "IF Sudeste MG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Santos Dumont." },
-            { id: "ifsudeste_manhuacu", name: "IF Sudeste MG (Manhuaçu)", lat: -20.2581, lng: -42.0336, uf: "MG", network: "IF Sudeste MG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Manhuaçu." },
-            { id: "ifsudeste_bomsucesso", name: "IF Sudeste MG (Bom Sucesso)", lat: -21.0328, lng: -44.7578, uf: "MG", network: "IF Sudeste MG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Bom Sucesso." },
+            // IF Sudeste MG (10 campi)
+            { id: "ifsudeste-jf", name: "IF Sudeste MG (Juiz de Fora)", inst: "IF Sudeste MG", lat: -21.7642, lng: -43.3497, city: "Juiz de Fora", uf: "MG" },
+            { id: "ifsudeste-barbacena", name: "IF Sudeste MG (Barbacena)", inst: "IF Sudeste MG", lat: -21.2258, lng: -43.7736, city: "Barbacena", uf: "MG" },
+            { id: "ifsudeste-riopomba", name: "IF Sudeste MG (Rio Pomba)", inst: "IF Sudeste MG", lat: -21.2750, lng: -43.1814, city: "Rio Pomba", uf: "MG" },
+            { id: "ifsudeste-muriae", name: "IF Sudeste MG (Muriaé)", inst: "IF Sudeste MG", lat: -21.1306, lng: -42.3664, city: "Muriaé", uf: "MG" },
+            { id: "ifsudeste-cataguases", name: "IF Sudeste MG (Cataguases)", inst: "IF Sudeste MG", lat: -21.3889, lng: -42.6967, city: "Cataguases", uf: "MG" },
+            { id: "ifsudeste-uba", name: "IF Sudeste MG (Ubá)", inst: "IF Sudeste MG", lat: -21.1203, lng: -42.9431, city: "Ubá", uf: "MG" },
+            { id: "ifsudeste-sjdr", name: "IF Sudeste MG (São João del-Rei)", inst: "IF Sudeste MG", lat: -21.1356, lng: -44.2617, city: "São João del-Rei", uf: "MG" },
+            { id: "ifsudeste-santosdumont", name: "IF Sudeste MG (Santos Dumont)", inst: "IF Sudeste MG", lat: -21.4564, lng: -43.5528, city: "Santos Dumont", uf: "MG" },
+            { id: "ifsudeste-manhuacu", name: "IF Sudeste MG (Manhuaçu)", inst: "IF Sudeste MG", lat: -20.2581, lng: -42.0336, city: "Manhuaçu", uf: "MG" },
+            { id: "ifsudeste-bomsucesso", name: "IF Sudeste MG (Bom Sucesso)", inst: "IF Sudeste MG", lat: -21.0328, lng: -44.7578, city: "Bom Sucesso", uf: "MG" },
 
-            // IFMG (17 Campi Oficiais)
-            { id: "ifmg_congonhas", name: "IFMG (Congonhas)", lat: -20.4994, lng: -43.8569, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Congonhas." },
-            { id: "ifmg_ouropreto", name: "IFMG (Ouro Preto)", lat: -20.3856, lng: -43.5036, uf: "MG", network: "IFMG", prestige: 1.15, type: "Instituto Federal", desc: "Tradicional Escola Técnica Federal." },
-            { id: "ifmg_betim", name: "IFMG (Betim)", lat: -19.9678, lng: -44.1983, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Betim." },
-            { id: "ifmg_ourobranco", name: "IFMG (Ouro Branco)", lat: -20.5233, lng: -43.6942, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Ouro Branco." },
-            { id: "ifmg_lafaiete", name: "IFMG (Conselheiro Lafaiete)", lat: -20.6619, lng: -43.7864, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Lafaiete." },
-            { id: "ifmg_pontenova", name: "IFMG (Ponte Nova)", lat: -20.4119, lng: -42.9039, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Ponte Nova." },
-            { id: "ifmg_itabirito", name: "IFMG (Itabirito)", lat: -20.2533, lng: -43.8014, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Itabirito." },
-            { id: "ifmg_ipatinga", name: "IFMG (Ipatinga)", lat: -19.4794, lng: -42.5311, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Ipatinga." },
-            { id: "ifmg_santaluzia", name: "IFMG (Santa Luzia)", lat: -19.7692, lng: -43.8514, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Santa Luzia." },
-            { id: "ifmg_sabara", name: "IFMG (Sabará)", lat: -19.8889, lng: -43.8075, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Sabará." },
-            { id: "ifmg_neves", name: "IFMG (Ribeirão das Neves)", lat: -19.7678, lng: -44.0872, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Ribeirão das Neves." },
-            { id: "ifmg_ibirite", name: "IFMG (Ibirité)", lat: -20.0219, lng: -44.0589, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Ibirité." },
-            { id: "ifmg_formiga", name: "IFMG (Formiga)", lat: -20.4636, lng: -45.4264, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Formiga." },
-            { id: "ifmg_bambui", name: "IFMG (Bambuí)", lat: -20.0228, lng: -45.9769, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Bambuí." },
-            { id: "ifmg_arcos", name: "IFMG (Arcos)", lat: -20.2892, lng: -45.5392, uf: "MG", network: "IFMG", prestige: 1.0, type: "Instituto Federal", desc: "Campus Arcos." },
-            { id: "ifmg_piumhi", name: "IFMG (Piumhi)", lat: -20.4650, lng: -45.9580, uf: "MG", network: "IFMG", prestige: 1.0, type: "Instituto Federal", desc: "Campus Piumhi." },
-            { id: "ifmg_govvaladares", name: "IFMG (Governador Valadares)", lat: -18.8511, lng: -41.9494, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus GV." },
-            { id: "ifmg_sje", name: "IFMG (São João Evangelista)", lat: -18.5494, lng: -42.7639, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus SJE." },
+            // IFMG (Campi chave)
+            { id: "ifmg-congonhas", name: "IFMG (Congonhas)", inst: "IFMG", lat: -20.4994, lng: -43.8569, city: "Congonhas", uf: "MG" },
+            { id: "ifmg-ouropreto", name: "IFMG (Ouro Preto)", inst: "IFMG", lat: -20.3856, lng: -43.5036, city: "Ouro Preto", uf: "MG" },
+            { id: "ifmg-ourobranco", name: "IFMG (Ouro Branco)", inst: "IFMG", lat: -20.5233, lng: -43.6942, city: "Ouro Branco", uf: "MG" },
+            { id: "ifmg-pontenova", name: "IFMG (Ponte Nova)", inst: "IFMG", lat: -20.4111, lng: -42.9033, city: "Ponte Nova", uf: "MG" },
+            { id: "ifmg-itabirito", name: "IFMG (Itabirito)", inst: "IFMG", lat: -20.2533, lng: -43.8011, city: "Itabirito", uf: "MG" },
+            { id: "ifmg-betim", name: "IFMG (Betim)", inst: "IFMG", lat: -19.9678, lng: -44.1983, city: "Betim", uf: "MG" },
+            { id: "ifmg-santaluzia", name: "IFMG (Santa Luzia)", inst: "IFMG", lat: -19.7692, lng: -43.8514, city: "Santa Luzia", uf: "MG" },
+            { id: "ifmg-sabara", name: "IFMG (Sabará)", inst: "IFMG", lat: -19.8883, lng: -43.8072, city: "Sabará", uf: "MG" },
+            { id: "ifmg-neves", name: "IFMG (Ribeirão das Neves)", inst: "IFMG", lat: -19.7672, lng: -44.0872, city: "Ribeirão das Neves", uf: "MG" },
+            { id: "ifmg-ibirite", name: "IFMG (Ibirité)", inst: "IFMG", lat: -20.0219, lng: -44.0589, city: "Ibirité", uf: "MG" },
+            { id: "ifmg-formiga", name: "IFMG (Formiga)", inst: "IFMG", lat: -20.4636, lng: -45.4264, city: "Formiga", uf: "MG" },
+            { id: "ifmg-arcos", name: "IFMG (Arcos)", inst: "IFMG", lat: -20.2894, lng: -45.5394, city: "Arcos", uf: "MG" },
+            { id: "ifmg-bambui", name: "IFMG (Bambuí)", inst: "IFMG", lat: -20.0228, lng: -45.9769, city: "Bambuí", uf: "MG" },
+            { id: "ifmg-piumhi", name: "IFMG (Piumhi)", inst: "IFMG", lat: -20.4650, lng: -45.9583, city: "Piumhi", uf: "MG" },
+            { id: "ifmg-govvaladares", name: "IFMG (Governador Valadares)", inst: "IFMG", lat: -18.8511, lng: -41.9494, city: "Governador Valadares", uf: "MG" },
+            { id: "ifmg-sje", name: "IFMG (São João Evangelista)", inst: "IFMG", lat: -18.5494, lng: -42.7639, city: "São João Evangelista", uf: "MG" },
 
-            // IFTM (Triângulo Mineiro - 10 Campi)
-            { id: "iftm_uberlandia", name: "IFTM (Uberlândia Sobradinho)", lat: -18.9186, lng: -48.2772, uf: "MG", network: "IFTM", prestige: 1.15, type: "Instituto Federal", desc: "Fazenda Sobradinho." },
-            { id: "iftm_udicentro", name: "IFTM (Uberlândia Centro)", lat: -18.9114, lng: -48.2619, uf: "MG", network: "IFTM", prestige: 1.15, type: "Instituto Federal", desc: "Uberlândia Centro." },
-            { id: "iftm_uberaba", name: "IFTM (Uberaba Fazenda)", lat: -19.7472, lng: -47.9392, uf: "MG", network: "IFTM", prestige: 1.15, type: "Instituto Federal", desc: "Uberaba Fazenda." },
-            { id: "iftm_upt", name: "IFTM (Uberaba Parque Tec.)", lat: -19.7153, lng: -47.9712, uf: "MG", network: "IFTM", prestige: 1.1, type: "Instituto Federal", desc: "UPT Uberaba." },
-            { id: "iftm_campinaverde", name: "IFTM (Campina Verde)", lat: -19.5358, lng: -49.4864, uf: "MG", network: "IFTM", prestige: 1.05, type: "Instituto Federal", desc: "Campus Campina Verde." },
-            { id: "iftm_ituiutaba", name: "IFTM (Ituiutaba)", lat: -18.9744, lng: -49.4631, uf: "MG", network: "IFTM", prestige: 1.1, type: "Instituto Federal", desc: "Campus Ituiutaba." },
-            { id: "iftm_paracatu", name: "IFTM (Paracatu)", lat: -17.2219, lng: -46.8753, uf: "MG", network: "IFTM", prestige: 1.1, type: "Instituto Federal", desc: "Campus Paracatu." },
-            { id: "iftm_patos", name: "IFTM (Patos de Minas)", lat: -18.5789, lng: -46.5181, uf: "MG", network: "IFTM", prestige: 1.1, type: "Instituto Federal", desc: "Campus Patos de Minas." },
-            { id: "iftm_patrocinio", name: "IFTM (Patrocínio)", lat: -18.9439, lng: -46.9928, uf: "MG", network: "IFTM", prestige: 1.05, type: "Instituto Federal", desc: "Campus Patrocínio." },
-            { id: "iftm_setelagoas", name: "IFTM (Sete Lagoas)", lat: -19.4658, lng: -44.2467, uf: "MG", network: "IFTM", prestige: 1.1, type: "Instituto Federal", desc: "Campus Sete Lagoas." },
+            // IFNMG (Norte de Minas)
+            { id: "ifnmg-montesclaros", name: "IFNMG (Montes Claros)", inst: "IFNMG", lat: -16.7350, lng: -43.8617, city: "Montes Claros", uf: "MG" },
+            { id: "ifnmg-pirapora", name: "IFNMG (Pirapora)", inst: "IFNMG", lat: -17.3575, lng: -44.9419, city: "Pirapora", uf: "MG" },
+            { id: "ifnmg-almenara", name: "IFNMG (Almenara)", inst: "IFNMG", lat: -16.1833, lng: -40.6944, city: "Almenara", uf: "MG" },
+            { id: "ifnmg-aracuai", name: "IFNMG (Araçuaí)", inst: "IFNMG", lat: -16.8528, lng: -42.0678, city: "Araçuaí", uf: "MG" },
+            { id: "ifnmg-arinos", name: "IFNMG (Arinos)", inst: "IFNMG", lat: -15.9167, lng: -46.1056, city: "Arinos", uf: "MG" },
+            { id: "ifnmg-diamantina", name: "IFNMG (Diamantina)", inst: "IFNMG", lat: -18.2439, lng: -43.6031, city: "Diamantina", uf: "MG" },
+            { id: "ifnmg-janauba", name: "IFNMG (Janaúba)", inst: "IFNMG", lat: -15.8028, lng: -43.3089, city: "Janaúba", uf: "MG" },
+            { id: "ifnmg-januaria", name: "IFNMG (Januária)", inst: "IFNMG", lat: -15.4833, lng: -44.3667, city: "Januária", uf: "MG" },
+            { id: "ifnmg-porteirinha", name: "IFNMG (Porteirinha)", inst: "IFNMG", lat: -15.7431, lng: -43.0289, city: "Porteirinha", uf: "MG" },
+            { id: "ifnmg-salinas", name: "IFNMG (Salinas)", inst: "IFNMG", lat: -16.1708, lng: -42.2989, city: "Salinas", uf: "MG" },
+            { id: "ifnmg-teofilo", name: "IFNMG (Teófilo Otoni)", inst: "IFNMG", lat: -17.8575, lng: -41.5053, city: "Teófilo Otoni", uf: "MG" },
 
-            // IFNMG (Norte de Minas - 11 Campi)
-            { id: "ifnmg_montesclaros", name: "IFNMG (Montes Claros)", lat: -16.7350, lng: -43.8617, uf: "MG", network: "IFNMG", prestige: 1.15, type: "Instituto Federal", desc: "Polo Norte de Minas." },
-            { id: "ifnmg_almenara", name: "IFNMG (Almenara)", lat: -16.1833, lng: -40.6944, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Almenara." },
-            { id: "ifnmg_aracuai", name: "IFNMG (Araçuaí)", lat: -16.8528, lng: -42.0678, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Araçuaí." },
-            { id: "ifnmg_arinos", name: "IFNMG (Arinos)", lat: -15.9167, lng: -46.1056, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Arinos." },
-            { id: "ifnmg_diamantina", name: "IFNMG (Diamantina)", lat: -18.2439, lng: -43.6031, uf: "MG", network: "IFNMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Diamantina." },
-            { id: "ifnmg_janauba", name: "IFNMG (Janaúba)", lat: -15.8028, lng: -43.3089, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Janaúba." },
-            { id: "ifnmg_januaria", name: "IFNMG (Januária)", lat: -15.4833, lng: -44.3667, uf: "MG", network: "IFNMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Januária." },
-            { id: "ifnmg_pirapora", name: "IFNMG (Pirapora)", lat: -17.3575, lng: -44.9419, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Pirapora." },
-            { id: "ifnmg_porteirinha", name: "IFNMG (Porteirinha)", lat: -15.7431, lng: -43.0289, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Porteirinha." },
-            { id: "ifnmg_salinas", name: "IFNMG (Salinas)", lat: -16.1708, lng: -42.2989, uf: "MG", network: "IFNMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Salinas." },
-            { id: "ifnmg_teofilo", name: "IFNMG (Teófilo Otoni)", lat: -17.8575, lng: -41.5053, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Teófilo Otoni." },
+            // IFTM (Triângulo Mineiro)
+            { id: "iftm-uberaba", name: "IFTM (Uberaba)", inst: "IFTM", lat: -19.7472, lng: -47.9392, city: "Uberaba", uf: "MG" },
+            { id: "iftm-uberlandia", name: "IFTM (Uberlândia)", inst: "IFTM", lat: -18.9186, lng: -48.2772, city: "Uberlândia", uf: "MG" },
+            { id: "iftm-setelagoas", name: "IFTM (Sete Lagoas)", inst: "IFTM", lat: -19.4658, lng: -44.2467, city: "Sete Lagoas", uf: "MG" },
 
-            // IFSULDEMINAS (Sul de Minas - 10 Campi)
-            { id: "ifsul_pousoalegre", name: "IFSULDEMINAS (Pouso Alegre)", lat: -22.2300, lng: -45.9331, uf: "MG", network: "IFSULDEMINAS", prestige: 1.15, type: "Instituto Federal", desc: "Polo Sul de Minas." },
-            { id: "ifsul_inconfidentes", name: "IFSULDEMINAS (Inconfidentes)", lat: -22.3183, lng: -46.3278, uf: "MG", network: "IFSULDEMINAS", prestige: 1.15, type: "Instituto Federal", desc: "Campus Inconfidentes." },
-            { id: "ifsul_machado", name: "IFSULDEMINAS (Machado)", lat: -21.6744, lng: -45.9197, uf: "MG", network: "IFSULDEMINAS", prestige: 1.15, type: "Instituto Federal", desc: "Campus Machado." },
-            { id: "ifsul_muzambinho", name: "IFSULDEMINAS (Muzambinho)", lat: -21.3708, lng: -46.5256, uf: "MG", network: "IFSULDEMINAS", prestige: 1.15, type: "Instituto Federal", desc: "Campus Muzambinho." },
-            { id: "ifsul_passos", name: "IFSULDEMINAS (Passos)", lat: -20.7208, lng: -46.6111, uf: "MG", network: "IFSULDEMINAS", prestige: 1.1, type: "Instituto Federal", desc: "Campus Passos." },
-            { id: "ifsul_pocos", name: "IFSULDEMINAS (Poços de Caldas)", lat: -21.7878, lng: -46.5614, uf: "MG", network: "IFSULDEMINAS", prestige: 1.1, type: "Instituto Federal", desc: "Campus Poços de Caldas." },
-            { id: "ifsul_carmominas", name: "IFSULDEMINAS (Carmo de Minas)", lat: -22.1228, lng: -45.1308, uf: "MG", network: "IFSULDEMINAS", prestige: 1.05, type: "Instituto Federal", desc: "Campus Carmo de Minas." },
-            { id: "ifsul_trescoracoes", name: "IFSULDEMINAS (Três Corações)", lat: -21.6936, lng: -45.2578, uf: "MG", network: "IFSULDEMINAS", prestige: 1.05, type: "Instituto Federal", desc: "Campus Três Corações." },
-            { id: "ifsul_itajuba", name: "IFSULDEMINAS (Itajubá)", lat: -22.4264, lng: -45.4531, uf: "MG", network: "IFSULDEMINAS", prestige: 1.05, type: "Instituto Federal", desc: "Campus Itajubá." },
-            { id: "ifsul_boaesperanca", name: "IFSULDEMINAS (Boa Esperança)", lat: -21.0928, lng: -45.5658, uf: "MG", network: "IFSULDEMINAS", prestige: 1.05, type: "Instituto Federal", desc: "Campus Boa Esperança." },
+            // Rio de Janeiro
+            { id: "cefetrj-maracana", name: "CEFET-RJ (Maracanã)", inst: "CEFET-RJ", lat: -22.9122, lng: -43.2247, city: "Rio de Janeiro", uf: "RJ" },
+            { id: "cefetrj-novaiguacu", name: "CEFET-RJ (Nova Iguaçu)", inst: "CEFET-RJ", lat: -22.7561, lng: -43.4608, city: "Nova Iguaçu", uf: "RJ" },
+            { id: "cefetrj-petropolis", name: "CEFET-RJ (Petrópolis)", inst: "CEFET-RJ", lat: -22.5050, lng: -43.1789, city: "Petrópolis", uf: "RJ" },
+            { id: "ctur-seropedica", name: "CTUR (UFRRJ Seropédica)", inst: "CTUR", lat: -22.7667, lng: -43.7000, city: "Seropédica", uf: "RJ" },
+            { id: "ifrj-nilopolis", name: "IFRJ (Nilópolis)", inst: "IFRJ", lat: -22.8089, lng: -43.4150, city: "Nilópolis", uf: "RJ" },
+            { id: "ifrj-caxias", name: "IFRJ (Duque de Caxias)", inst: "IFRJ", lat: -22.7856, lng: -43.3117, city: "Duque de Caxias", uf: "RJ" },
+            { id: "ifrj-niteroi", name: "IFRJ (Niterói)", inst: "IFRJ", lat: -22.8833, lng: -43.1036, city: "Niterói", uf: "RJ" },
+            { id: "ifrj-macae", name: "IFF (Macaé)", inst: "IFF", lat: -22.3769, lng: -41.7869, city: "Macaé", uf: "RJ" },
+            { id: "ifrj-voltaredonda", name: "IFRJ (Volta Redonda)", inst: "IFRJ", lat: -22.5231, lng: -44.1042, city: "Volta Redonda", uf: "RJ" },
+            { id: "iff-itaperuna", name: "IFF (Itaperuna)", inst: "IFF", lat: -21.2056, lng: -41.8906, city: "Itaperuna", uf: "RJ" },
+            { id: "iff-cabofrio", name: "IFF (Cabo Frio)", inst: "IFF", lat: -22.8894, lng: -42.0289, city: "Cabo Frio", uf: "RJ" },
 
-            // CEFET-RJ (7 Campi)
-            { id: "cefetrj_maracana", name: "CEFET-RJ (Campus Maracanã)", lat: -22.9122, lng: -43.2247, uf: "RJ", network: "CEFET-RJ", prestige: 1.3, type: "Centro Federal Tecnológico", desc: "Sede Maracanã (Rio de Janeiro)." },
-            { id: "cefetrj_mariadagraca", name: "CEFET-RJ (Maria da Graça)", lat: -22.8808, lng: -43.2750, uf: "RJ", network: "CEFET-RJ", prestige: 1.15, type: "Centro Federal Tecnológico", desc: "Zona Norte RJ." },
-            { id: "cefetrj_novaiguacu", name: "CEFET-RJ (Nova Iguaçu)", lat: -22.7561, lng: -43.4608, uf: "RJ", network: "CEFET-RJ", prestige: 1.15, type: "Centro Federal Tecnológico", desc: "Baixada Fluminense." },
-            { id: "cefetrj_itaguai", name: "CEFET-RJ (Itaguaí)", lat: -22.8608, lng: -43.7750, uf: "RJ", network: "CEFET-RJ", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Campus Itaguaí." },
-            { id: "cefetrj_novafriburgo", name: "CEFET-RJ (Nova Friburgo)", lat: -22.2819, lng: -42.5311, uf: "RJ", network: "CEFET-RJ", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Região Serrana." },
-            { id: "cefetrj_petropolis", name: "CEFET-RJ (Petrópolis)", lat: -22.5050, lng: -43.1789, uf: "RJ", network: "CEFET-RJ", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Campus Petrópolis." },
-            { id: "cefetrj_valenca", name: "CEFET-RJ (Valença)", lat: -22.2458, lng: -43.7028, uf: "RJ", network: "CEFET-RJ", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Médio Paraíba." },
-
-            // IFRJ (11 Campi)
-            { id: "ifrj_nilopolis", name: "IFRJ (Nilópolis)", lat: -22.8064, lng: -43.4144, uf: "RJ", network: "IFRJ", prestige: 1.15, type: "Instituto Federal", desc: "Campus Nilópolis." },
-            { id: "ifrj_rio", name: "IFRJ (Rio de Janeiro Maracanã)", lat: -22.9122, lng: -43.2247, uf: "RJ", network: "IFRJ", prestige: 1.2, type: "Instituto Federal", desc: "Campus Rio." },
-            { id: "ifrj_caxias", name: "IFRJ (Duque de Caxias)", lat: -22.7856, lng: -43.3117, uf: "RJ", network: "IFRJ", prestige: 1.1, type: "Instituto Federal", desc: "Campus Duque de Caxias." },
-            { id: "ifrj_niteroi", name: "IFRJ (Niterói)", lat: -22.8833, lng: -43.1036, uf: "RJ", network: "IFRJ", prestige: 1.1, type: "Instituto Federal", desc: "Campus Niterói." },
-            { id: "ifrj_saogoncalo", name: "IFRJ (São Gonçalo)", lat: -22.8269, lng: -43.0539, uf: "RJ", network: "IFRJ", prestige: 1.1, type: "Instituto Federal", desc: "Campus São Gonçalo." },
-            { id: "ifrj_paracambi", name: "IFRJ (Paracambi)", lat: -22.6083, lng: -43.7111, uf: "RJ", network: "IFRJ", prestige: 1.05, type: "Instituto Federal", desc: "Campus Paracambi." },
-            { id: "ifrj_pinheiral", name: "IFRJ (Pinheiral)", lat: -22.5186, lng: -44.0006, uf: "RJ", network: "IFRJ", prestige: 1.05, type: "Instituto Federal", desc: "Campus Pinheiral." },
-            { id: "ifrj_voltaredonda", name: "IFRJ (Volta Redonda)", lat: -22.5231, lng: -44.1042, uf: "RJ", network: "IFRJ", prestige: 1.05, type: "Instituto Federal", desc: "Campus Volta Redonda." },
-            { id: "ifrj_resende", name: "IFRJ (Resende)", lat: -22.4689, lng: -44.4467, uf: "RJ", network: "IFRJ", prestige: 1.05, type: "Instituto Federal", desc: "Campus Resende." },
-            { id: "ifrj_arraial", name: "IFRJ (Arraial do Cabo)", lat: -22.9661, lng: -42.0278, uf: "RJ", network: "IFRJ", prestige: 1.05, type: "Instituto Federal", desc: "Região dos Lagos." },
-            { id: "ifrj_frontin", name: "IFRJ (Eng. Paulo de Frontin)", lat: -22.5514, lng: -43.6811, uf: "RJ", network: "IFRJ", prestige: 1.05, type: "Instituto Federal", desc: "Campus Jogos Digitais." },
-
-            // IFF (Fluminense - 14 Unidades)
-            { id: "iff_campos_centro", name: "IFF (Campos Centro)", lat: -21.7544, lng: -41.3242, uf: "RJ", network: "IFF", prestige: 1.15, type: "Instituto Federal", desc: "Campos dos Goytacazes." },
-            { id: "iff_campos_guarus", name: "IFF (Campos Guarus)", lat: -21.7314, lng: -41.3325, uf: "RJ", network: "IFF", prestige: 1.1, type: "Instituto Federal", desc: "Campus Guarus." },
-            { id: "iff_macae", name: "IFF (Macaé)", lat: -22.3781, lng: -41.7869, uf: "RJ", network: "IFF", prestige: 1.15, type: "Instituto Federal", desc: "Campus Macaé." },
-            { id: "iff_cabofrio", name: "IFF (Cabo Frio)", lat: -22.8797, lng: -42.0197, uf: "RJ", network: "IFF", prestige: 1.1, type: "Instituto Federal", desc: "Campus Cabo Frio." },
-            { id: "iff_itaperuna", name: "IFF (Itaperuna)", lat: -21.2069, lng: -41.8889, uf: "RJ", network: "IFF", prestige: 1.1, type: "Instituto Federal", desc: "Noroeste Fluminense." },
-            { id: "iff_bomjesus", name: "IFF (Bom Jesus do Itabapoana)", lat: -21.1378, lng: -41.6789, uf: "RJ", network: "IFF", prestige: 1.05, type: "Instituto Federal", desc: "Campus Bom Jesus." },
-            { id: "iff_padua", name: "IFF (Santo Antônio de Pádua)", lat: -21.5433, lng: -42.1794, uf: "RJ", network: "IFF", prestige: 1.05, type: "Instituto Federal", desc: "Campus Pádua." },
-            { id: "iff_marica", name: "IFF (Maricá)", lat: -22.9189, lng: -42.8186, uf: "RJ", network: "IFF", prestige: 1.05, type: "Instituto Federal", desc: "Campus Maricá." },
-            { id: "iff_itaborai", name: "IFF (Itaboraí)", lat: -22.7444, lng: -42.8544, uf: "RJ", network: "IFF", prestige: 1.05, type: "Instituto Federal", desc: "Campus Itaboraí." },
-            { id: "iff_quissama", name: "IFF (Quissamã)", lat: -22.1106, lng: -41.4725, uf: "RJ", network: "IFF", prestige: 1.05, type: "Instituto Federal", desc: "Campus Quissamã." },
-            { id: "iff_sjb", name: "IFF (São João da Barra)", lat: -21.6358, lng: -41.0511, uf: "RJ", network: "IFF", prestige: 1.05, type: "Instituto Federal", desc: "Campus SJB." },
-            { id: "iff_cambuci", name: "IFF (Cambuci)", lat: -21.5722, lng: -41.9083, uf: "RJ", network: "IFF", prestige: 1.0, type: "Instituto Federal", desc: "Campus Cambuci." },
-            { id: "iff_cordeiro", name: "IFF (Cordeiro)", lat: -22.0294, lng: -42.3658, uf: "RJ", network: "IFF", prestige: 1.0, type: "Instituto Federal", desc: "Campus Cordeiro." },
-
-            // IFES (Espírito Santo - 6 Polos Principais)
-            { id: "ifes_vitoria", name: "IFES (Vitória)", lat: -20.3201, lng: -40.3377, uf: "ES", network: "IFES", prestige: 1.2, type: "Instituto Federal", desc: "Sede Jucutuquara." },
-            { id: "ifes_vilavelha", name: "IFES (Vila Velha)", lat: -20.3600, lng: -40.3000, uf: "ES", network: "IFES", prestige: 1.15, type: "Instituto Federal", desc: "Campus Vila Velha." },
-            { id: "ifes_serra", name: "IFES (Serra)", lat: -20.1929, lng: -40.2398, uf: "ES", network: "IFES", prestige: 1.15, type: "Instituto Federal", desc: "Campus Serra." },
-            { id: "ifes_cariacica", name: "IFES (Cariacica)", lat: -20.2632, lng: -40.4165, uf: "ES", network: "IFES", prestige: 1.1, type: "Instituto Federal", desc: "Campus Cariacica." },
-            { id: "ifes_cachoeiro", name: "IFES (Cachoeiro de Itapemirim)", lat: -20.8489, lng: -41.1128, uf: "ES", network: "IFES", prestige: 1.1, type: "Instituto Federal", desc: "Sul Capixaba." },
-            { id: "ifes_colatina", name: "IFES (Colatina / Itapina)", lat: -19.5400, lng: -40.6300, uf: "ES", network: "IFES", prestige: 1.1, type: "Instituto Federal", desc: "Noroeste Capixaba." },
-
-            // IFSP (São Paulo - Principais Polos Mapeados)
-            { id: "ifsp_saopaulo", name: "IFSP (São Paulo Canindé)", lat: -23.5239, lng: -46.6261, uf: "SP", network: "IFSP", prestige: 1.25, type: "Instituto Federal", desc: "Capital Paulista." },
-            { id: "ifsp_campinas", name: "IFSP (Campinas)", lat: -22.9056, lng: -47.0608, uf: "SP", network: "IFSP", prestige: 1.15, type: "Instituto Federal", desc: "RMC Campinas." },
-            { id: "ifsp_guarulhos", name: "IFSP (Guarulhos)", lat: -23.4628, lng: -46.5333, uf: "SP", network: "IFSP", prestige: 1.15, type: "Instituto Federal", desc: "Grande SP." },
-            { id: "ifsp_sjc", name: "IFSP (São José dos Campos)", lat: -23.1794, lng: -45.8869, uf: "SP", network: "IFSP", prestige: 1.15, type: "Instituto Federal", desc: "Vale do Paraíba." },
-            { id: "ifsp_sorocaba", name: "IFSP (Sorocaba)", lat: -23.5017, lng: -47.4581, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Região de Sorocaba." },
-            { id: "ifsp_araraquara", name: "IFSP (Araraquara)", lat: -21.7944, lng: -48.1758, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Centro Paulista." },
-            { id: "ifsp_bauru", name: "IFSP (Bauru)", lat: -22.3147, lng: -49.0606, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Centro-Oeste Paulista." },
-            { id: "ifsp_piracicaba", name: "IFSP (Piracicaba)", lat: -22.7253, lng: -47.6492, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Campus Piracicaba." },
-            { id: "ifsp_cubatao", name: "IFSP (Cubatão)", lat: -23.8950, lng: -46.4253, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Baixada Santista." },
-            { id: "ifsp_hortolandia", name: "IFSP (Hortolândia)", lat: -22.8583, lng: -47.2200, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Campus Hortolândia." },
-            { id: "ifsp_sjrp", name: "IFSP (São José do Rio Preto)", lat: -20.8114, lng: -49.3758, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Noroeste Paulista." },
-            { id: "ifsp_barretos", name: "IFSP (Barretos)", lat: -20.5572, lng: -48.5678, uf: "SP", network: "IFSP", prestige: 1.05, type: "Instituto Federal", desc: "Campus Barretos." },
-            { id: "ifsp_saocarlos", name: "IFSP (São Carlos)", lat: -22.0175, lng: -47.8908, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Campus São Carlos." },
-            { id: "ifsp_braganca", name: "IFSP (Bragança Paulista)", lat: -22.9525, lng: -46.5419, uf: "SP", network: "IFSP", prestige: 1.05, type: "Instituto Federal", desc: "Bragança Paulista." },
-            { id: "ifsp_itapetininga", name: "IFSP (Itapetininga)", lat: -23.5917, lng: -48.0531, uf: "SP", network: "IFSP", prestige: 1.05, type: "Instituto Federal", desc: "Campus Itapetininga." },
-            { id: "ifsp_saojoaoboavista", name: "IFSP (São João da Boa Vista)", lat: -21.9686, lng: -46.7978, uf: "SP", network: "IFSP", prestige: 1.05, type: "Instituto Federal", desc: "Divisa com MG." },
-
-            // IFBA (Bahia)
-            { id: "ifba_salvador", name: "IFBA (Salvador)", lat: -12.9822, lng: -38.4813, uf: "BA", network: "IFBA", prestige: 1.2, type: "Instituto Federal", desc: "Barbalho Salvador." },
-            { id: "ifba_feiradesantana", name: "IFBA (Feira de Santana)", lat: -12.2667, lng: -38.9667, uf: "BA", network: "IFBA", prestige: 1.15, type: "Instituto Federal", desc: "Campus Feira." },
-            { id: "ifba_camacari", name: "IFBA (Camaçari)", lat: -12.7100, lng: -38.3200, uf: "BA", network: "IFBA", prestige: 1.1, type: "Instituto Federal", desc: "Polo Industrial." },
-            { id: "ifba_conquista", name: "IFBA (Vitória da Conquista)", lat: -14.8500, lng: -40.8400, uf: "BA", network: "IFBA", prestige: 1.15, type: "Instituto Federal", desc: "Sudoeste Baiano." },
-            { id: "ifba_ilheus", name: "IFBA (Ilhéus)", lat: -14.8000, lng: -39.0500, uf: "BA", network: "IFBA", prestige: 1.1, type: "Instituto Federal", desc: "Litoral Sul Baiano." },
-            { id: "ifba_juazeiro", name: "IFBA (Juazeiro)", lat: -9.4166, lng: -40.5035, uf: "BA", network: "IFBA", prestige: 1.1, type: "Instituto Federal", desc: "Vale do São Francisco." },
-            { id: "ifba_valenca", name: "IFBA (Valença)", lat: -13.3700, lng: -39.0730, uf: "BA", network: "IFBA", prestige: 1.05, type: "Instituto Federal", desc: "Baixo Sul Baiano." },
-            { id: "ifba_barreiras", name: "IFBA (Barreiras)", lat: -12.1447, lng: -45.0031, uf: "BA", network: "IFBA", prestige: 1.05, type: "Instituto Federal", desc: "Oeste Baiano." },
-
-            // IFFar (Rio Grande do Sul)
-            { id: "iffar_santamaria", name: "IFFar (Santa Maria)", lat: -29.6842, lng: -53.8069, uf: "RS", network: "IFFar", prestige: 1.15, type: "Instituto Federal", desc: "Reitoria e Polo Central." },
-            { id: "iffar_alegrete", name: "IFFar (Alegrete)", lat: -29.7831, lng: -55.7919, uf: "RS", network: "IFFar", prestige: 1.1, type: "Instituto Federal", desc: "Campus Alegrete." },
-            { id: "iffar_panambi", name: "IFFar (Panambi)", lat: -28.2928, lng: -53.5019, uf: "RS", network: "IFFar", prestige: 1.05, type: "Instituto Federal", desc: "Campus Panambi." },
-            { id: "iffar_santoangelo", name: "IFFar (Santo Ângelo)", lat: -28.2992, lng: -54.2631, uf: "RS", network: "IFFar", prestige: 1.05, type: "Instituto Federal", desc: "Missões." },
-            { id: "iffar_santarosa", name: "IFFar (Santa Rosa)", lat: -27.8708, lng: -54.4808, uf: "RS", network: "IFFar", prestige: 1.05, type: "Instituto Federal", desc: "Noroeste Gaúcho." },
-            { id: "iffar_uruguaiana", name: "IFFar (Uruguaiana)", lat: -29.7547, lng: -57.0881, uf: "RS", network: "IFFar", prestige: 1.05, type: "Instituto Federal", desc: "Fronteira Oeste." },
-            { id: "iffar_frederico", name: "IFFar (Frederico Westphalen)", lat: -27.3592, lng: -53.3944, uf: "RS", network: "IFFar", prestige: 1.05, type: "Instituto Federal", desc: "Norte Gaúcho." }
+            // São Paulo e Espírito Santo
+            { id: "ifsp-saopaulo", name: "IFSP (São Paulo Canindé)", inst: "IFSP", lat: -23.5239, lng: -46.6261, city: "São Paulo", uf: "SP" },
+            { id: "ifes-vitoria", name: "IFES (Vitória)", inst: "IFES", lat: -20.3155, lng: -40.3128, city: "Vitória", uf: "ES" }
         ];
 
-        // 2. Base Real Auditada de 448 Alunos em 139 Cidades
-        const rawStudentCities = [
-            { city: "Belo Horizonte", uf: "MG", count: 29, lat: -19.9208, lng: -43.9378 },
-            { city: "Juiz de Fora", uf: "MG", count: 26, lat: -21.7642, lng: -43.3497 },
-            { city: "Leopoldina", uf: "MG", count: 15, lat: -21.5317, lng: -42.6433 },
-            { city: "Rio de Janeiro", uf: "RJ", count: 14, lat: -22.9068, lng: -43.1729 },
-            { city: "Contagem", uf: "MG", count: 14, lat: -19.9386, lng: -44.0531 },
-            { city: "Laranjal", uf: "MG", count: 14, lat: -21.3653, lng: -42.4789 },
-            { city: "Congonhas", uf: "MG", count: 13, lat: -20.4994, lng: -43.8569 },
-            { city: "Betim", uf: "MG", count: 12, lat: -19.9678, lng: -44.1983 },
-            { city: "Jequeri", uf: "MG", count: 9, lat: -20.4431, lng: -42.6378 },
-            { city: "Cataguases", uf: "MG", count: 9, lat: -21.3889, lng: -42.6967 },
-            { city: "Montes Claros", uf: "MG", count: 9, lat: -16.7350, lng: -43.8617 },
-            { city: "Conselheiro Lafaiete", uf: "MG", count: 8, lat: -20.6619, lng: -43.7864 },
-            { city: "João Monlevade", uf: "MG", count: 8, lat: -19.8106, lng: -43.1747 },
-            { city: "Senador Firmino", uf: "MG", count: 7, lat: -20.9125, lng: -43.0864 },
-            { city: "Ipatinga", uf: "MG", count: 6, lat: -19.4794, lng: -42.5311 },
-            { city: "Oratórios", uf: "MG", count: 6, lat: -20.4286, lng: -42.8250 },
-            { city: "Urucânia", uf: "MG", count: 6, lat: -20.3542, lng: -42.7847 },
-            { city: "Piraúba", uf: "MG", count: 6, lat: -21.2858, lng: -43.0369 },
-            { city: "Araponga", uf: "MG", count: 5, lat: -20.6611, lng: -42.5250 },
-            { city: "Muriaé", uf: "MG", count: 5, lat: -21.1306, lng: -42.3664 },
-            { city: "Ouro Branco", uf: "MG", count: 5, lat: -20.5233, lng: -43.6942 },
-            { city: "Santa Luzia", uf: "MG", count: 5, lat: -19.7692, lng: -43.8514 },
-            { city: "Visconde do Rio Branco", uf: "MG", count: 5, lat: -21.0094, lng: -42.8389 },
-            { city: "Alvinópolis", uf: "MG", count: 4, lat: -20.1069, lng: -43.0489 },
-            { city: "Barroso", uf: "MG", count: 4, lat: -21.1869, lng: -43.9758 },
-            { city: "Bom Jardim de Minas", uf: "MG", count: 4, lat: -21.9483, lng: -44.1917 },
-            { city: "Itabirito", uf: "MG", count: 4, lat: -20.2533, lng: -43.8014 },
-            { city: "Juatuba", uf: "MG", count: 4, lat: -19.9528, lng: -44.3431 },
-            { city: "Ponte Nova", uf: "MG", count: 4, lat: -20.4119, lng: -42.9039 },
-            { city: "Ubá", uf: "MG", count: 4, lat: -21.1203, lng: -42.9431 },
-            { city: "Viçosa", uf: "MG", count: 4, lat: -20.7583, lng: -42.8797 },
-            { city: "Dionísio", uf: "MG", count: 4, lat: -19.8436, lng: -42.7761 },
-            { city: "Niterói", uf: "RJ", count: 4, lat: -22.8833, lng: -43.1036 },
-            { city: "Barra Longa", uf: "MG", count: 3, lat: -20.2792, lng: -42.9519 },
-            { city: "Belford Roxo", uf: "RJ", count: 3, lat: -22.7642, lng: -43.3997 },
-            { city: "Carangola", uf: "MG", count: 3, lat: -20.7333, lng: -42.0294 },
-            { city: "Divino", uf: "MG", count: 3, lat: -20.6158, lng: -42.1467 },
-            { city: "Florestal", uf: "MG", count: 3, lat: -19.8885, lng: -44.4322 },
-            { city: "Goianá", uf: "MG", count: 3, lat: -21.5369, lng: -43.1931 },
-            { city: "Governador Valadares", uf: "MG", count: 3, lat: -18.8511, lng: -41.9494 },
-            { city: "Lamim", uf: "MG", count: 3, lat: -20.7856, lng: -43.4389 },
-            { city: "Nova Módica", uf: "MG", count: 3, lat: -18.4908, lng: -41.4939 },
-            { city: "Palma", uf: "MG", count: 3, lat: -21.3789, lng: -42.3164 },
-            { city: "Patrocínio do Muriaé", uf: "MG", count: 3, lat: -21.1350, lng: -42.2358 },
-            { city: "Ribeirão das Neves", uf: "MG", count: 3, lat: -19.7678, lng: -44.0872 },
-            { city: "São Domingos das Dores", uf: "MG", count: 3, lat: -19.5397, lng: -42.0308 },
-            { city: "São Paulo", uf: "SP", count: 3, lat: -23.5505, lng: -46.6333 },
-            { city: "Coronel Fabriciano", uf: "MG", count: 2, lat: -19.5208, lng: -42.6289 },
-            { city: "Dom Silvério", uf: "MG", count: 2, lat: -20.1694, lng: -42.9767 },
-            { city: "Fortaleza", uf: "CE", count: 2, lat: -3.7172, lng: -38.5433 },
-            { city: "Guanhães", uf: "MG", count: 2, lat: -18.7750, lng: -42.9328 },
-            { city: "Jaíba", uf: "MG", count: 2, lat: -15.3375, lng: -43.6739 },
-            { city: "Lima Duarte", uf: "MG", count: 2, lat: -21.8436, lng: -43.7933 },
-            { city: "Macapá", uf: "AP", count: 2, lat: 0.0389, lng: -51.0664 },
-            { city: "Macaé", uf: "RJ", count: 2, lat: -22.3781, lng: -41.7869 },
-            { city: "Mariana", uf: "MG", count: 2, lat: -20.3781, lng: -43.4161 },
-            { city: "Miracema", uf: "RJ", count: 2, lat: -21.4128, lng: -42.1969 },
-            { city: "Nilópolis", uf: "RJ", count: 2, lat: -22.8064, lng: -43.4144 },
-            { city: "Ouro Preto", uf: "MG", count: 2, lat: -20.3856, lng: -43.5036 },
-            { city: "Pirapora", uf: "MG", count: 2, lat: -17.3575, lng: -44.9419 },
-            { city: "Recreio", uf: "MG", count: 2, lat: -21.5267, lng: -42.4647 },
-            { city: "Rio das Ostras", uf: "RJ", count: 2, lat: -22.5264, lng: -41.9469 },
-            { city: "Rio Pomba", uf: "MG", count: 2, lat: -21.2750, lng: -43.1814 },
-            { city: "Sabará", uf: "MG", count: 2, lat: -19.8889, lng: -43.8075 },
-            { city: "Santa Bárbara", uf: "MG", count: 2, lat: -20.0417, lng: -43.4139 },
-            { city: "Santa Cruz do Escalvado", uf: "MG", count: 2, lat: -20.2369, lng: -42.8208 },
-            { city: "São Domingos do Prata", uf: "MG", count: 2, lat: -19.8661, lng: -42.9708 },
-            { city: "São José do Jacuri", uf: "MG", count: 2, lat: -18.2589, lng: -42.6881 },
-            { city: "São Pedro da Aldeia", uf: "RJ", count: 2, lat: -22.8408, lng: -42.1039 },
-            { city: "Sardoá", uf: "MG", count: 2, lat: -18.7611, lng: -42.3489 },
-            { city: "Sete Lagoas", uf: "MG", count: 2, lat: -19.4658, lng: -44.2467 },
-            { city: "Tarumirim", uf: "MG", count: 2, lat: -19.2789, lng: -42.0117 },
-            { city: "Uberaba", uf: "MG", count: 2, lat: -19.7472, lng: -47.9392 },
-            { city: "Uberlândia", uf: "MG", count: 2, lat: -18.9186, lng: -48.2772 },
-            { city: "Brusque", uf: "SC", count: 2, lat: -27.0981, lng: -48.9164 },
-            { city: "Campo Grande", uf: "MS", count: 1, lat: -20.4697, lng: -54.6201 },
-            { city: "Abre Campo", uf: "MG", count: 1, lat: -20.3014, lng: -42.4764 },
-            { city: "Acaiaca", uf: "MG", count: 1, lat: -20.3608, lng: -43.1436 },
-            { city: "Alagoa", uf: "MG", count: 1, lat: -22.1708, lng: -44.6408 },
-            { city: "Araruama", uf: "RJ", count: 1, lat: -22.8731, lng: -42.3431 },
-            { city: "Arcos", uf: "MG", count: 1, lat: -20.2892, lng: -45.5392 },
-            { city: "Argirita", uf: "MG", count: 1, lat: -21.5908, lng: -42.7939 },
-            { city: "Astolfo Dutra", uf: "MG", count: 1, lat: -21.3150, lng: -42.8653 },
-            { city: "Barão de Cocais", uf: "MG", count: 1, lat: -19.9439, lng: -43.4864 },
-            { city: "Barbacena", uf: "MG", count: 1, lat: -21.2258, lng: -43.7736 },
-            { city: "Bicas", uf: "MG", count: 1, lat: -21.7258, lng: -43.0589 },
-            { city: "Bom Jesus do Amparo", uf: "MG", count: 1, lat: -19.7039, lng: -43.4739 },
-            { city: "Buritizeiro", uf: "MG", count: 1, lat: -17.3511, lng: -44.9622 },
-            { city: "Cabo Frio", uf: "RJ", count: 1, lat: -22.8894, lng: -42.0289 },
-            { city: "Campos Altos", uf: "MG", count: 1, lat: -19.6961, lng: -46.1739 },
-            { city: "Carandaí", uf: "MG", count: 1, lat: -20.9536, lng: -43.8058 },
-            { city: "Carrancas", uf: "MG", count: 1, lat: -21.4889, lng: -44.6439 },
-            { city: "Ceilândia", uf: "DF", count: 1, lat: -15.8208, lng: -48.1106 },
-            { city: "Cipotânea", uf: "MG", count: 1, lat: -20.9039, lng: -43.3639 },
-            { city: "Cristiano Otoni", uf: "MG", count: 1, lat: -20.8319, lng: -43.8117 },
-            { city: "Divinésia", uf: "MG", count: 1, lat: -20.9519, lng: -43.0039 },
-            { city: "Dores do Turvo", uf: "MG", count: 1, lat: -20.9639, lng: -43.1611 },
-            { city: "Entre Rios de Minas", uf: "MG", count: 1, lat: -20.6694, lng: -44.1339 },
-            { city: "Ervália", uf: "MG", count: 1, lat: -20.8408, lng: -42.6539 },
-            { city: "Esmeraldas", uf: "MG", count: 1, lat: -19.7628, lng: -44.3139 },
-            { city: "Feira de Santana", uf: "BA", count: 1, lat: -12.2667, lng: -38.9667 },
-            { city: "Formiga", uf: "MG", count: 1, lat: -20.4636, lng: -45.4264 },
-            { city: "Francisco Sá", uf: "MG", count: 1, lat: -16.4758, lng: -43.4889 },
-            { city: "Frei Lagonegro", uf: "MG", count: 1, lat: -18.2589, lng: -42.8489 },
-            { city: "Jacinto", uf: "MG", count: 1, lat: -16.1419, lng: -40.2939 },
-            { city: "Japonvar", uf: "MG", count: 1, lat: -15.8608, lng: -44.3117 },
-            { city: "João Pessoa", uf: "PB", count: 1, lat: -7.1195, lng: -34.8450 },
-            { city: "Iúna", uf: "ES", count: 1, lat: -20.3458, lng: -41.5358 },
-            { city: "Itabira", uf: "MG", count: 1, lat: -19.6192, lng: -43.2269 },
-            { city: "Itaperuna", uf: "RJ", count: 1, lat: -21.2069, lng: -41.8889 },
-            { city: "Manhuaçu", uf: "MG", count: 1, lat: -20.2581, lng: -42.0336 },
-            { city: "Martinho Campos", uf: "MG", count: 1, lat: -19.3308, lng: -45.2339 },
-            { city: "Mercês", uf: "MG", count: 1, lat: -21.1889, lng: -43.3408 },
-            { city: "Miradouro", uf: "MG", count: 1, lat: -20.8719, lng: -42.3408 },
-            { city: "Miravânia", uf: "MG", count: 1, lat: -14.7358, lng: -44.5208 },
-            { city: "Morada Nova de Minas", uf: "MG", count: 1, lat: -18.6089, lng: -45.3589 },
-            { city: "Muniz Freire", uf: "ES", count: 1, lat: -20.4639, lng: -41.4139 },
-            { city: "Nova Iguaçu", uf: "RJ", count: 1, lat: -22.7561, lng: -43.4608 },
-            { city: "Palmares", uf: "PE", count: 1, lat: -8.6833, lng: -35.5833 },
-            { city: "Pedro Leopoldo", uf: "MG", count: 1, lat: -19.6181, lng: -44.0439 },
-            { city: "Petrópolis", uf: "RJ", count: 1, lat: -22.5050, lng: -43.1789 },
-            { city: "Pirapetinga", uf: "MG", count: 1, lat: -21.7139, lng: -42.3417 },
-            { city: "Porto Trombetas", uf: "PA", count: 1, lat: -1.4889, lng: -56.3889 },
-            { city: "Raul Soares", uf: "MG", count: 1, lat: -20.1039, lng: -42.4539 },
-            { city: "Rio Casca", uf: "MG", count: 1, lat: -20.2194, lng: -42.6519 },
-            { city: "Rio Doce", uf: "MG", count: 1, lat: -20.2319, lng: -42.8989 },
-            { city: "Rio Grande do Sul (Região)", uf: "RS", count: 1, lat: -29.6842, lng: -53.8069 },
-            { city: "Santo Antônio de Pádua", uf: "RJ", count: 1, lat: -21.5433, lng: -42.1794 },
-            { city: "Santana de Cataguases", uf: "MG", count: 1, lat: -21.3653, lng: -42.5489 },
-            { city: "Santana do Paraíso", uf: "MG", count: 1, lat: -19.3639, lng: -42.5608 },
-            { city: "Santa Juliana", uf: "MG", count: 1, lat: -19.3089, lng: -47.5258 },
-            { city: "Santa Rita do Ibitipoca", uf: "MG", count: 1, lat: -21.5708, lng: -43.9019 },
-            { city: "Salvador", uf: "BA", count: 1, lat: -12.9777, lng: -38.5016 },
-            { city: "São Brás do Suaçuí", uf: "MG", count: 1, lat: -20.6139, lng: -43.9539 },
-            { city: "São Geraldo", uf: "MG", count: 1, lat: -20.9239, lng: -42.8408 },
-            { city: "São Gonçalo", uf: "RJ", count: 1, lat: -22.8269, lng: -43.0539 },
-            { city: "São José do Divino", uf: "MG", count: 1, lat: -18.7889, lng: -41.4167 },
-            { city: "São Roque do Canaã", uf: "ES", count: 1, lat: -19.7369, lng: -40.6558 },
-            { city: "Senhora de Oliveira", uf: "MG", count: 1, lat: -20.7939, lng: -43.3250 },
-            { city: "Sericita", uf: "MG", count: 1, lat: -20.5058, lng: -42.4939 },
-            { city: "Sarzedo", uf: "MG", count: 1, lat: -20.0339, lng: -44.1439 },
-            { city: "Teixeiras", uf: "MG", count: 1, lat: -20.6558, lng: -42.8589 },
-            { city: "Teresópolis", uf: "RJ", count: 1, lat: -22.4122, lng: -42.9664 },
-            { city: "Tocantins", uf: "MG", count: 1, lat: -21.1739, lng: -43.0239 },
-            { city: "Vargem Alegre", uf: "MG", count: 1, lat: -19.5339, lng: -42.1708 },
-            { city: "Vitória", uf: "ES", count: 1, lat: -20.3155, lng: -40.3128 },
-            { city: "Volta Redonda", uf: "RJ", count: 1, lat: -22.5231, lng: -44.1042 }
+        // 2. Base Oficial dos 448 Alunos Auditados nas 139 Cidades
+        const verifiedCitiesData = [
+            { name: "Belo Horizonte", uf: "MG", count: 29, lat: -19.9167, lng: -43.9345 },
+            { name: "Juiz de Fora", uf: "MG", count: 26, lat: -21.7642, lng: -43.3497 },
+            { name: "Leopoldina", uf: "MG", count: 15, lat: -21.5317, lng: -42.6433 },
+            { name: "Rio de Janeiro", uf: "RJ", count: 14, lat: -22.9068, lng: -43.1729 },
+            { name: "Contagem", uf: "MG", count: 14, lat: -19.9386, lng: -44.0531 },
+            { name: "Laranjal", uf: "MG", count: 14, lat: -21.3533, lng: -42.4867 },
+            { name: "Congonhas", uf: "MG", count: 13, lat: -20.4994, lng: -43.8569 },
+            { name: "Betim", uf: "MG", count: 12, lat: -19.9678, lng: -44.1983 },
+            { name: "Jequeri", uf: "MG", count: 9, lat: -20.4439, lng: -42.6681 },
+            { name: "Cataguases", uf: "MG", count: 9, lat: -21.3889, lng: -42.6967 },
+            { name: "Montes Claros", uf: "MG", count: 9, lat: -16.7350, lng: -43.8617 },
+            { name: "Conselheiro Lafaiete", uf: "MG", count: 8, lat: -20.6611, lng: -43.7861 },
+            { name: "João Monlevade", uf: "MG", count: 8, lat: -19.8117, lng: -43.1739 },
+            { name: "Senador Firmino", uf: "MG", count: 7, lat: -20.9103, lng: -43.0886 },
+            { name: "Ipatinga", uf: "MG", count: 6, lat: -19.4794, lng: -42.5317 },
+            { name: "Oratórios", uf: "MG", count: 6, lat: -20.4358, lng: -42.8122 },
+            { name: "Urucânia", uf: "MG", count: 6, lat: -20.3547, lng: -42.7667 },
+            { name: "Piraúba", uf: "MG", count: 6, lat: -21.2858, lng: -43.0231 },
+            { name: "Araponga", uf: "MG", count: 5, lat: -20.6653, lng: -42.5258 },
+            { name: "Muriaé", uf: "MG", count: 5, lat: -21.1306, lng: -42.3664 },
+            { name: "Ouro Branco", uf: "MG", count: 5, lat: -20.5233, lng: -43.6942 },
+            { name: "Santa Luzia", uf: "MG", count: 5, lat: -19.7692, lng: -43.8514 },
+            { name: "Visconde do Rio Branco", uf: "MG", count: 5, lat: -20.9739, lng: -42.8389 },
+            { name: "Alvinópolis", uf: "MG", count: 4, lat: -20.1067, lng: -43.0489 },
+            { name: "Barroso", uf: "MG", count: 4, lat: -21.1878, lng: -43.9758 },
+            { name: "Bom Jardim de Minas", uf: "MG", count: 4, lat: -21.9442, lng: -44.1906 },
+            { name: "Itabirito", uf: "MG", count: 4, lat: -20.2533, lng: -43.8011 },
+            { name: "Juatuba", uf: "MG", count: 4, lat: -19.9519, lng: -44.3431 },
+            { name: "Ponte Nova", uf: "MG", count: 4, lat: -20.4111, lng: -42.9033 },
+            { name: "Ubá", uf: "MG", count: 4, lat: -21.1203, lng: -42.9431 },
+            { name: "Viçosa", uf: "MG", count: 4, lat: -20.7583, lng: -42.8797 },
+            { name: "Niterói", uf: "RJ", count: 4, lat: -22.8833, lng: -43.1036 },
+            { name: "Dionísio", uf: "MG", count: 4, lat: -19.8436, lng: -42.7783 },
+            { name: "Barra Longa", uf: "MG", count: 3, lat: -20.2789, lng: -42.9867 },
+            { name: "Belford Roxo", uf: "RJ", count: 3, lat: -22.7639, lng: -43.3997 },
+            { name: "Carangola", uf: "MG", count: 3, lat: -20.7331, lng: -42.0294 },
+            { name: "Divino", uf: "MG", count: 3, lat: -20.6128, lng: -42.1464 },
+            { name: "Florestal", uf: "MG", count: 3, lat: -19.8894, lng: -44.4319 },
+            { name: "Goianá", uf: "MG", count: 3, lat: -21.5283, lng: -43.1883 },
+            { name: "Governador Valadares", uf: "MG", count: 3, lat: -18.8511, lng: -41.9494 },
+            { name: "Lamim", uf: "MG", count: 3, lat: -20.7831, lng: -43.4561 },
+            { name: "Nova Módica", uf: "MG", count: 3, lat: -18.5283, lng: -41.5036 },
+            { name: "Palma", uf: "MG", count: 3, lat: -21.4283, lng: -42.3167 },
+            { name: "Patrocínio do Muriaé", uf: "MG", count: 3, lat: -21.1089, lng: -42.2283 },
+            { name: "Ribeirão das Neves", uf: "MG", count: 3, lat: -19.7672, lng: -44.0872 },
+            { name: "São Domingos das Dores", uf: "MG", count: 3, lat: -19.4667, lng: -42.0333 },
+            { name: "São Paulo", uf: "SP", count: 3, lat: -23.5505, lng: -46.6333 },
+            { name: "Coronel Fabriciano", uf: "MG", count: 2, lat: -19.5194, lng: -42.6289 },
+            { name: "Dom Silvério", uf: "MG", count: 2, lat: -20.1583, lng: -42.9667 },
+            { name: "Guanhães", uf: "MG", count: 2, lat: -18.7744, lng: -42.9317 },
+            { name: "Jaíba", uf: "MG", count: 2, lat: -15.3400, lng: -43.6731 },
+            { name: "Lima Duarte", uf: "MG", count: 2, lat: -21.8436, lng: -43.7925 },
+            { name: "Macaé", uf: "RJ", count: 2, lat: -22.3769, lng: -41.7869 },
+            { name: "Mariana", uf: "MG", count: 2, lat: -20.3778, lng: -43.4161 },
+            { name: "Miracema", uf: "RJ", count: 2, lat: -21.4136, lng: -42.1969 },
+            { name: "Nilópolis", uf: "RJ", count: 2, lat: -22.8089, lng: -43.4150 },
+            { name: "Ouro Preto", uf: "MG", count: 2, lat: -20.3856, lng: -43.5036 },
+            { name: "Pirapora", uf: "MG", count: 2, lat: -17.3575, lng: -44.9419 },
+            { name: "Recreio", uf: "MG", count: 2, lat: -21.5283, lng: -42.4667 },
+            { name: "Rio das Ostras", uf: "RJ", count: 2, lat: -22.5269, lng: -41.9450 },
+            { name: "Rio Pomba", uf: "MG", count: 2, lat: -21.2750, lng: -43.1814 },
+            { name: "Sabará", uf: "MG", count: 2, lat: -19.8883, lng: -43.8072 },
+            { name: "Santa Bárbara", uf: "MG", count: 2, lat: -20.0417, lng: -43.4139 },
+            { name: "Santa Cruz do Escalvado", uf: "MG", count: 2, lat: -20.4069, lng: -42.8228 },
+            { name: "São Domingos do Prata", uf: "MG", count: 2, lat: -19.8653, lng: -42.9667 },
+            { name: "São José do Jacuri", uf: "MG", count: 2, lat: -18.2567, lng: -42.6667 },
+            { name: "São Pedro da Aldeia", uf: "RJ", count: 2, lat: -22.8406, lng: -42.1039 },
+            { name: "Sardoá", uf: "MG", count: 2, lat: -18.7611, lng: -42.3458 },
+            { name: "Sete Lagoas", uf: "MG", count: 2, lat: -19.4658, lng: -44.2467 },
+            { name: "Tarumirim", uf: "MG", count: 2, lat: -19.2806, lng: -42.0125 },
+            { name: "Uberaba", uf: "MG", count: 2, lat: -19.7472, lng: -47.9392 },
+            { name: "Uberlândia", uf: "MG", count: 2, lat: -18.9186, lng: -48.2772 },
+            { name: "Fortaleza", uf: "CE", count: 2, lat: -3.7172, lng: -38.5434 },
+            { name: "Macapá", uf: "AP", count: 2, lat: 0.0349, lng: -51.0694 },
+            { name: "Brusque", uf: "SC", count: 2, lat: -27.0978, lng: -48.9106 },
+            { name: "Abre Campo", uf: "MG", count: 1, lat: -20.2989, lng: -42.4764 },
+            { name: "Acaiaca", uf: "MG", count: 1, lat: -20.3589, lng: -43.1436 },
+            { name: "Alagoa", uf: "MG", count: 1, lat: -22.1694, lng: -44.8861 },
+            { name: "Araruama", uf: "RJ", count: 1, lat: -22.8731, lng: -42.3431 },
+            { name: "Arcos", uf: "MG", count: 1, lat: -20.2894, lng: -45.5394 },
+            { name: "Argirita", uf: "MG", count: 1, lat: -21.5975, lng: -42.7933 },
+            { name: "Astolfo Dutra", uf: "MG", count: 1, lat: -21.3142, lng: -42.8681 },
+            { name: "Barão de Cocais", uf: "MG", count: 1, lat: -19.9442, lng: -43.4864 },
+            { name: "Barbacena", uf: "MG", count: 1, lat: -21.2258, lng: -43.7736 },
+            { name: "Bicas", uf: "MG", count: 1, lat: -21.7258, lng: -43.0583 },
+            { name: "Bom Jesus do Amparo", uf: "MG", count: 1, lat: -19.7042, lng: -43.4756 },
+            { name: "Buritizeiro", uf: "MG", count: 1, lat: -17.3511, lng: -44.9622 },
+            { name: "Cabo Frio", uf: "RJ", count: 1, lat: -22.8894, lng: -42.0289 },
+            { name: "Campos Altos", uf: "MG", count: 1, lat: -19.6967, lng: -46.1739 },
+            { name: "Carandaí", uf: "MG", count: 1, lat: -20.9542, lng: -43.8058 },
+            { name: "Carrancas", uf: "MG", count: 1, lat: -21.4883, lng: -44.6436 },
+            { name: "Ceilândia", uf: "DF", count: 1, lat: -15.8208, lng: -48.1117 },
+            { name: "Cipotânea", uf: "MG", count: 1, lat: -20.9056, lng: -43.3644 },
+            { name: "Cristiano Otoni", uf: "MG", count: 1, lat: -20.8306, lng: -43.8117 },
+            { name: "Divinésia", uf: "MG", count: 1, lat: -20.9083, lng: -43.0117 },
+            { name: "Dores do Turvo", uf: "MG", count: 1, lat: -21.0358, lng: -43.1611 },
+            { name: "Entre Rios de Minas", uf: "MG", count: 1, lat: -20.6681, lng: -44.1358 },
+            { name: "Ervália", uf: "MG", count: 1, lat: -20.8406, lng: -42.6561 },
+            { name: "Esmeraldas", uf: "MG", count: 1, lat: -19.7628, lng: -44.3139 },
+            { name: "Feira de Santana", uf: "BA", count: 1, lat: -12.2667, lng: -38.9667 },
+            { name: "Formiga", uf: "MG", count: 1, lat: -20.4636, lng: -45.4264 },
+            { name: "Francisco Sá", uf: "MG", count: 1, lat: -16.4758, lng: -43.4883 },
+            { name: "Frei Lagonegro", uf: "MG", count: 1, lat: -18.6653, lng: -42.7486 },
+            { name: "Jacinto", uf: "MG", count: 1, lat: -16.1436, lng: -40.2944 },
+            { name: "Japonvar", uf: "MG", count: 1, lat: -15.8617, lng: -44.2986 },
+            { name: "João Pessoa", uf: "PB", count: 1, lat: -7.1195, lng: -34.8450 },
+            { name: "Iúna", uf: "ES", count: 1, lat: -20.3458, lng: -41.5358 },
+            { name: "Itabira", uf: "MG", count: 1, lat: -19.6189, lng: -43.2269 },
+            { name: "Itaperuna", uf: "RJ", count: 1, lat: -21.2056, lng: -41.8906 },
+            { name: "Manhuaçu", uf: "MG", count: 1, lat: -20.2581, lng: -42.0336 },
+            { name: "Martinho Campos", uf: "MG", count: 1, lat: -19.3308, lng: -45.2344 },
+            { name: "Mercês", uf: "MG", count: 1, lat: -21.1917, lng: -43.3400 },
+            { name: "Miradouro", uf: "MG", count: 1, lat: -20.8719, lng: -42.3431 },
+            { name: "Miravânia", uf: "MG", count: 1, lat: -14.7333, lng: -44.3833 },
+            { name: "Morada Nova de Minas", uf: "MG", count: 1, lat: -18.6011, lng: -45.3564 },
+            { name: "Muniz Freire", uf: "ES", count: 1, lat: -20.4639, lng: -41.4131 },
+            { name: "Nova Iguaçu", uf: "RJ", count: 1, lat: -22.7561, lng: -43.4608 },
+            { name: "Palmares", uf: "PE", count: 1, lat: -8.6833, lng: -35.5833 },
+            { name: "Pedro Leopoldo", uf: "MG", count: 1, lat: -19.6194, lng: -44.0436 },
+            { name: "Petrópolis", uf: "RJ", count: 1, lat: -22.5050, lng: -43.1789 },
+            { name: "Pirapetinga", uf: "MG", count: 1, lat: -21.7142, lng: -42.5117 },
+            { name: "Porto Trombetas", uf: "PA", count: 1, lat: -1.4883, lng: -56.3867 },
+            { name: "Raul Soares", uf: "MG", count: 1, lat: -20.1036, lng: -42.4533 },
+            { name: "Rio Casca", uf: "MG", count: 1, lat: -20.2247, lng: -42.6517 },
+            { name: "Rio Doce", uf: "MG", count: 1, lat: -20.2394, lng: -42.8942 },
+            { name: "Santo Antônio de Pádua", uf: "RJ", count: 1, lat: -21.5400, lng: -42.1800 },
+            { name: "Santana de Cataguases", uf: "MG", count: 1, lat: -21.3283, lng: -42.6283 },
+            { name: "Santana do Paraíso", uf: "MG", count: 1, lat: -19.3639, lng: -42.5647 },
+            { name: "Santa Juliana", uf: "MG", count: 1, lat: -19.3083, lng: -47.5250 },
+            { name: "Santa Rita do Ibitipoca", uf: "MG", count: 1, lat: -21.5583, lng: -44.0583 },
+            { name: "Salvador", uf: "BA", count: 1, lat: -12.9777, lng: -38.5016 },
+            { name: "São Brás do Suaçuí", uf: "MG", count: 1, lat: -20.6189, lng: -43.9511 },
+            { name: "São Geraldo", uf: "MG", count: 1, lat: -20.9231, lng: -42.8408 },
+            { name: "São Gonçalo", uf: "RJ", count: 1, lat: -22.8267, lng: -43.0539 },
+            { name: "São José do Divino", uf: "MG", count: 1, lat: -18.8833, lng: -41.3833 },
+            { name: "São Roque do Canaã", uf: "ES", count: 1, lat: -19.7408, lng: -40.6558 },
+            { name: "Senhora de Oliveira", uf: "MG", count: 1, lat: -20.7933, lng: -43.3367 },
+            { name: "Sericita", uf: "MG", count: 1, lat: -20.5367, lng: -42.4939 },
+            { name: "Sarzedo", uf: "MG", count: 1, lat: -20.0336, lng: -44.1436 },
+            { name: "Teixeiras", uf: "MG", count: 1, lat: -20.6547, lng: -42.8572 },
+            { name: "Teresópolis", uf: "RJ", count: 1, lat: -22.4122, lng: -42.9664 },
+            { name: "Tocantins", uf: "MG", count: 1, lat: -21.1764, lng: -43.0183 },
+            { name: "Vargem Alegre", uf: "MG", count: 1, lat: -19.6583, lng: -42.1611 },
+            { name: "Vitória", uf: "ES", count: 1, lat: -20.3155, lng: -40.3128 },
+            { name: "Volta Redonda", uf: "RJ", count: 1, lat: -22.5231, lng: -44.1042 },
+            { name: "Campo Grande", uf: "MS", count: 1, lat: -20.4697, lng: -54.6201 }
         ];
 
-        const TOTAL_ALUNOS = rawStudentCities.reduce((acc, curr) => acc + curr.count, 0);
-
-        // Geodesic Distance Calculation (Haversine Formula)
-        function calculateDistance(lat1, lon1, lat2, lon2) {
-            const R = 6371; // Earth radius in km
+        // 3. Funções Utilitárias e de Distância Geodésica (Haversine)
+        function calcDistanceKm(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Raio da Terra em km
             const dLat = (lat2 - lat1) * Math.PI / 180;
             const dLon = (lon2 - lon1) * Math.PI / 180;
             const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
@@ -771,144 +520,74 @@
             return Math.round(R * c);
         }
 
-        // Modelo de Decaimento Logístico de Probabilidade (P)
-        function getProbability(dist, prestigeMultiplier = 1.0) {
-            let baseProb = 0.05;
-            if (dist <= 35) {
-                baseProb = 0.95; // Transporte diário quase garantido
-            } else if (dist <= 80) {
-                // Bate-volta intermunicipal decaindo de 80% até 45%
-                baseProb = 0.80 - ((dist - 35) / 45) * 0.35;
-            } else if (dist <= 150) {
-                // Deslocamento médio / moradia (25% a 10%)
-                baseProb = 0.30 - ((dist - 80) / 70) * 0.20;
-            } else if (dist <= 220) {
-                baseProb = 0.08;
-            }
-            
-            // Majorador de prestígio acadêmico (ex: COLUNI e COLTEC têm maior atratividade à distância)
-            const finalProb = Math.min(1.0, baseProb * prestigeMultiplier);
-            return parseFloat(finalProb.toFixed(2));
-        }
+        // Determinar o campus mais próximo e a lista de campi viáveis para cada cidade
+        function analyzeCityGravity(city) {
+            let nearest = null;
+            let minDistance = Infinity;
+            const options = [];
 
-        let currentMobilityRadius = 75; // Raio de simulação padrão em km
-        let showVectors = true;
-        let showBuffers = true;
-        let nearestOnlyMode = true; // Padrão: liga apenas ao campus mais próximo para evitar confusão visual
-        let currentCampusFilter = 'ALL';
-        let chartPolesRef = null;
-        let chartTopCitiesRef = null;
-
-        function toggleNearestOnly() {
-            nearestOnlyMode = !nearestOnlyMode;
-            const btnText = document.getElementById('txt-nearest-mode');
-            if (nearestOnlyMode) {
-                btnText.innerText = "Modo: Apenas Mais Próximo";
-            } else {
-                btnText.innerText = "Modo: Cesta Completa no Raio";
-            }
-            renderMapLayers();
-        }
-
-        function computeBaskets() {
-            let totalPotentialApplications = 0;
-
-            rawStudentCities.forEach(cityItem => {
-                // Calcular distância geográfica pura (Haversine real) para TODOS os campi físicos
-                const distances = federalPoles.map(pole => {
-                    const dist = calculateDistance(cityItem.lat, cityItem.lng, pole.lat, pole.lng);
-                    const prob = getProbability(dist, pole.prestige);
-                    return {
-                        pole: pole,
-                        dist: dist,
-                        prob: prob,
-                        // Elegível se estiver dentro do raio físico estrito
-                        isEligible: dist <= currentMobilityRadius
-                    };
-                });
-
-                // Ordenar estritamente por distância física real (menor km primeiro)
-                distances.sort((a,b) => a.dist - b.dist);
-
-                // O campus principal é 100% o de menor distância geográfica real
-                cityItem.nearestPole = distances[0].pole;
-                cityItem.nearestDist = distances[0].dist;
-
-                // Cesta de opções elegíveis dentro do raio
-                cityItem.eligibleOptions = distances.filter(d => d.isEligible && d.dist <= currentMobilityRadius);
-                if (cityItem.eligibleOptions.length === 0) {
-                    cityItem.eligibleOptions = [distances[0]]; // Garante o mais próximo
+            federalCampi.forEach(campus => {
+                const dist = calcDistanceKm(city.lat, city.lng, campus.lat, campus.lng);
+                
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    nearest = { campus: campus, distance: dist };
                 }
 
-                // Inscrições ponderadas estimadas
-                const sumProbs = cityItem.eligibleOptions.reduce((acc, curr) => acc + curr.prob, 0);
-                cityItem.projectedApplications = Math.max(cityItem.count, Math.round(cityItem.count * sumProbs));
-                totalPotentialApplications += cityItem.projectedApplications;
+                // Cálculo de probabilidade por decaimento de distância
+                let prob = 0;
+                if (dist <= 35) prob = 95;
+                else if (dist <= 65) prob = 70;
+                else if (dist <= 110) prob = 35;
+                else if (dist <= 160) prob = 15;
+                else prob = 5;
+
+                // Majorador especial para colégios propedêuticos/universitários de alta atração
+                if ((campus.inst === "COLUNI" || campus.inst === "COLTEC") && dist <= 140) {
+                    prob = Math.min(95, prob + 20);
+                }
+
+                if (prob >= 15) {
+                    options.push({ campus: campus, distance: dist, probability: prob });
+                }
             });
 
-            document.getElementById('header-students-count').innerText = TOTAL_ALUNOS;
-            document.getElementById('header-potential-count').innerText = totalPotentialApplications.toLocaleString('pt-BR');
-            document.getElementById('header-avg-count').innerText = (totalPotentialApplications / TOTAL_ALUNOS).toFixed(2);
-            document.getElementById('header-schools-count').innerText = federalPoles.length;
+            options.sort((a, b) => b.probability - a.probability);
 
-            populateCampusDropdown();
+            return {
+                nearestCampus: nearest.campus,
+                nearestDistance: nearest.distance,
+                viableOptions: options
+            };
         }
 
-        function populateCampusDropdown() {
-            const select = document.getElementById('mapPoleFilter');
-            const previousVal = select.value || 'ALL';
-            select.innerHTML = '<option value="ALL">🎯 Filtrar Polo: Todos os Campi Federais</option>';
-
-            // Agrupar por Rede de Ensino
-            const networks = {};
-            federalPoles.forEach(p => {
-                if (!networks[p.network]) networks[p.network] = [];
-                networks[p.network].push(p);
-            });
-
-            for (const [netName, poles] of Object.entries(networks)) {
-                const optgroup = document.createElement('optgroup');
-                optgroup.label = `${netName} (${poles.length} campi)`;
-                poles.sort((a,b) => a.name.localeCompare(b.name)).forEach(p => {
-                    const opt = document.createElement('option');
-                    opt.value = p.id;
-                    opt.textContent = `${p.name} (${p.uf})`;
-                    optgroup.appendChild(opt);
-                });
-                select.appendChild(optgroup);
-            }
-            select.value = previousVal;
-        }
-
+        // Variáveis Globais de Estado do Mapa
         let map;
-        let studentsLayer = L.layerGroup();
-        let schoolsLayer = L.layerGroup();
-        let vectorsLayer = L.layerGroup();
-        let buffersLayer = L.layerGroup();
+        let studentsLayerGroup;
+        let schoolsLayerGroup;
+        let vectorsLayerGroup;
+        let isSingleVectorMode = true; // Por padrão, apenas 1:1 (Mais Próximo)
+        let chartInstitutionsInstance = null;
+        let chartBudgetInstance = null;
 
-        function initDashboardMap() {
-            map = L.map('map', { 
+        // Inicialização Completa do Mapa e Aplicação
+        function initApp() {
+            // Inicializar Leaflet com controles liberados
+            map = L.map('map', {
                 scrollWheelZoom: true,
-                smoothWheelZoom: true,
-                doubleClickZoom: true,
-                dragging: true,
-                touchZoom: true
-            }).setView([-20.5, -43.2], 7);
+                touchZoom: true,
+                doubleClickZoom: true
+            }).setView([-20.5, -43.8], 7);
 
-            // OpenStreetMap Standard oficial 100% aberto e estável
+            // Basemap OpenStreetMap Oficial (Sem travas de API)
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors | Guia Pré-Federal',
-                subdomains: ['a', 'b', 'c'],
-                maxZoom: 19
+                attribution: '&copy; OpenStreetMap contributors | Guia Pré-Federal'
             }).addTo(map);
 
-            // Criar painéis customizados para organizar a sobreposição e garantir clique livre nos marcadores
-            map.createPane('buffersPane');
-            map.getPane('buffersPane').style.zIndex = 350;
-            map.getPane('buffersPane').style.pointerEvents = 'none'; // Não bloqueia clique
-
+            // Criação de Panes para organização de Z-Index
             map.createPane('vectorsPane');
             map.getPane('vectorsPane').style.zIndex = 400;
+            map.getPane('vectorsPane').style.pointerEvents = 'none'; // Cliques passam direto
 
             map.createPane('studentsPane');
             map.getPane('studentsPane').style.zIndex = 500;
@@ -916,321 +595,314 @@
             map.createPane('schoolsPane');
             map.getPane('schoolsPane').style.zIndex = 600;
 
-            studentsLayer.addTo(map);
-            schoolsLayer.addTo(map);
-            vectorsLayer.addTo(map);
-            buffersLayer.addTo(map);
+            // Layer Groups
+            vectorsLayerGroup = L.layerGroup().addTo(map);
+            studentsLayerGroup = L.layerGroup().addTo(map);
+            schoolsLayerGroup = L.layerGroup().addTo(map);
 
+            // Renderizar Dados
             renderFederalSchools();
-            renderMapLayers();
+            renderStudentsAndVectors();
+            renderTableData();
+            renderCharts();
 
-            setTimeout(() => { map.invalidateSize(); }, 200);
-            setTimeout(() => { map.invalidateSize(); }, 600);
+            // Garantir renderização imediata do container
+            setTimeout(() => { map.invalidateSize(); }, 250);
         }
 
-        function getMarkerColor(count) {
-            if (count >= 10) return '#e11d48'; // Rose P1
-            if (count >= 4) return '#d97706';  // Âmbar P2
-            return '#0284c7';                  // Azul Celeste P3
-        }
+        // Renderizar todos os Campi Federais no Mapa
+        function renderFederalSchools() {
+            schoolsLayerGroup.clearLayers();
 
-        function getMarkerRadius(count) {
-            if (count >= 25) return 22;
-            if (count >= 12) return 17;
-            if (count >= 6) return 12;
-            if (count >= 3) return 8;
-            return 6;
-        }
-
-        function renderMapLayers() {
-            studentsLayer.clearLayers();
-            vectorsLayer.clearLayers();
-            buffersLayer.clearLayers();
-
-            // 1. Renderizar Buffers de raio de gravidade (35 km de transporte urbano diário)
-            if (showBuffers) {
-                federalPoles.forEach(pole => {
-                    const circle = L.circle([pole.lat, pole.lng], {
-                        pane: 'buffersPane',
-                        radius: 35000,
-                        color: '#d97706',
-                        weight: 1.2,
-                        opacity: 0.45,
-                        fillColor: '#f59e0b',
-                        fillOpacity: 0.04,
-                        dashArray: '4, 6',
-                        interactive: false
-                    });
-                    buffersLayer.addLayer(circle);
-                });
-            }
-
-            // 2. Renderizar Cidades dos Alunos e Vetores de Conexão Graduados
-            rawStudentCities.forEach(item => {
-                // Filtrar por polo se selecionado
-                const matchesCampus = (currentCampusFilter === 'ALL') || 
-                                      item.eligibleOptions.some(opt => opt.pole.id === currentCampusFilter);
-
-                if (!matchesCampus) return;
-
-                const radius = getMarkerRadius(item.count);
-                const color = getMarkerColor(item.count);
-
-                const marker = L.circleMarker([item.lat, item.lng], {
-                    pane: 'studentsPane',
-                    radius: radius,
-                    fillColor: color,
-                    color: '#ffffff',
-                    weight: 2,
-                    opacity: 1,
-                    fillOpacity: 0.85,
-                    interactive: true
-                });
-
-                // Construção da Cesta no Popup
-                const basketRows = item.eligibleOptions.map(opt => {
-                    const probBadge = opt.prob >= 0.80 
-                        ? `<span class="bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded text-[9px] font-bold">Alta (${Math.round(opt.prob*100)}%)</span>`
-                        : (opt.prob >= 0.45 
-                            ? `<span class="bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded text-[9px] font-bold">Média (${Math.round(opt.prob*100)}%)</span>`
-                            : `<span class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-[9px] font-bold">Expansão (${Math.round(opt.prob*100)}%)</span>`);
-
-                    return `
-                        <div class="flex items-center justify-between text-[11px] py-1 border-b border-slate-100 last:border-none">
-                            <span class="text-slate-800 font-medium truncate max-w-[150px]">${opt.pole.name.split('(')[0].trim()}</span>
-                            <div class="flex items-center space-x-1.5 flex-shrink-0">
-                                <span class="mono text-[10px] text-slate-500 font-bold">${opt.dist} km</span>
-                                ${probBadge}
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-
-                const popup = `
-                    <div class="text-xs space-y-2 p-1 max-w-[290px]">
-                        <div class="flex items-center justify-between">
-                            <span class="px-2 py-0.5 rounded-full text-[9px] font-black uppercase bg-indigo-50 text-indigo-700 border border-indigo-200">Base Ativa</span>
-                            <span class="text-[10px] text-slate-500 font-mono">${((item.count/TOTAL_ALUNOS)*100).toFixed(1)}% dos alunos</span>
-                        </div>
-                        <div>
-                            <h4 class="text-base font-black text-slate-900 leading-tight">${item.city} (${item.uf})</h4>
-                            <div class="text-xs text-slate-600 mt-0.5">
-                                <strong>${item.count} aluno(s)</strong> &rarr; <span class="text-indigo-700 font-black mono text-sm">~${item.projectedApplications} inscrições</span>
-                            </div>
-                        </div>
-                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1">
-                            <span class="text-[10px] font-black uppercase tracking-wider text-slate-500 block mb-1">Cesta de Provas Alcançáveis:</span>
-                            ${basketRows}
-                        </div>
-                        <div class="text-[10px] text-slate-500 leading-tight pt-1">
-                            💡 <em>Candidatos desta cidade têm alcance e costume de prestar múltiplos exames federais no raio logístico.</em>
-                        </div>
+            federalCampi.forEach(campus => {
+                const iconHtml = `
+                    <div style="background-color: #d97706;" class="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs shadow-md border-2 border-white">
+                        <i class="fas fa-university text-[10px]"></i>
                     </div>
                 `;
 
-                marker.bindPopup(popup);
-                studentsLayer.addLayer(marker);
-
-                // Vetores Gravitacionais Conectando aos Campi Físicos Reais
-                if (showVectors) {
-                    if (nearestOnlyMode) {
-                        // MODO 1: LIGAÇÃO ESTRITA DIRETA (1 Cidade -> Campus Mais Próximo)
-                        const primary = item.nearestPole;
-                        if (currentCampusFilter === 'ALL' || primary.id === currentCampusFilter) {
-                            const polyline = L.polyline([[item.lat, item.lng], [primary.lat, primary.lng]], {
-                                pane: 'vectorsPane',
-                                color: '#059669', // Verde firme: ligação direta com campus local
-                                weight: 2.2,
-                                opacity: 0.85,
-                                interactive: true
-                            });
-                            polyline.bindTooltip(`🎯 ${item.city} &rarr; ${primary.name} (${item.nearestDist} km)`, { sticky: true });
-                            vectorsLayer.addLayer(polyline);
-                        }
-                    } else {
-                        // MODO 2: REDE COMPLETA NO RAIO
-                        item.eligibleOptions.forEach((opt, idx) => {
-                            if (currentCampusFilter !== 'ALL' && opt.pole.id !== currentCampusFilter) return;
-
-                            const isDirectNearest = (idx === 0);
-                            let strokeColor = isDirectNearest ? '#059669' : '#d97706';
-                            let weight = isDirectNearest ? 2.5 : 1.2;
-                            let opacity = isDirectNearest ? 0.85 : 0.45;
-                            let dashArray = isDirectNearest ? null : '4, 4';
-
-                            const polyline = L.polyline([[item.lat, item.lng], [opt.pole.lat, opt.pole.lng]], {
-                                pane: 'vectorsPane',
-                                color: strokeColor,
-                                weight: weight,
-                                opacity: opacity,
-                                dashArray: dashArray,
-                                interactive: true
-                            });
-
-                            polyline.bindTooltip(`${item.city} &rarr; ${opt.pole.name} (${opt.dist} km • ${Math.round(opt.prob*100)}% prob.)`, { sticky: true });
-                            vectorsLayer.addLayer(polyline);
-                        });
-                    }
-                }
-            });
-        }
-
-        function getChartPolesData() {
-            const networkStats = {};
-            federalPoles.forEach(p => {
-                if (!networkStats[p.network]) {
-                    networkStats[p.network] = { name: p.network, direct: 0, crossPotential: 0 };
-                }
-            });
-
-            rawStudentCities.forEach(cityItem => {
-                // Alunos diretos mais próximos
-                if (networkStats[cityItem.nearestPole.network]) {
-                    networkStats[cityItem.nearestPole.network].direct += cityItem.count;
-                }
-
-                // Concorrência cruzada
-                const countedNetworks = new Set();
-                cityItem.eligibleOptions.forEach(opt => {
-                    if (!countedNetworks.has(opt.pole.network)) {
-                        const potentialHere = Math.round(cityItem.count * opt.prob);
-                        if (networkStats[opt.pole.network]) {
-                            networkStats[opt.pole.network].crossPotential += potentialHere;
-                        }
-                        countedNetworks.add(opt.pole.network);
-                    }
+                const customIcon = L.divIcon({
+                    html: iconHtml,
+                    className: 'school-marker',
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 12]
                 });
+
+                const marker = L.marker([campus.lat, campus.lng], {
+                    icon: customIcon,
+                    pane: 'schoolsPane'
+                });
+
+                marker.bindPopup(`
+                    <div class="text-xs">
+                        <span class="bg-amber-100 text-amber-900 font-black px-2 py-0.5 rounded uppercase text-[9px] block mb-1">Campus Federal</span>
+                        <strong class="text-sm text-slate-900 block font-bold">${campus.name}</strong>
+                        <span class="text-slate-500 font-semibold text-[11px] block mt-0.5">${campus.city} - ${campus.uf}</span>
+                    </div>
+                `);
+
+                schoolsLayerGroup.addLayer(marker);
             });
-
-            const sorted = Object.values(networkStats)
-                .sort((a,b) => b.crossPotential - a.crossPotential)
-                .slice(0, 10);
-
-            return {
-                labels: sorted.map(s => s.name),
-                datasets: [
-                    {
-                        label: 'Procura Primária (Mais Próximo)',
-                        data: sorted.map(s => s.direct),
-                        backgroundColor: '#4338ca',
-                        borderRadius: 6
-                    },
-                    {
-                        label: 'Procura Potencial Cruzada (Cesta de Provas)',
-                        data: sorted.map(s => s.crossPotential),
-                        backgroundColor: '#10b981',
-                        borderRadius: 6
-                    }
-                ]
-            };
         }
 
-        function getChartTopCitiesData() {
-            const top = [...rawStudentCities]
-                .sort((a,b) => b.projectedApplications - a.projectedApplications)
-                .slice(0, 10);
+        // Renderizar Cidades dos Alunos e Linhas de Conexão
+        function renderStudentsAndVectors() {
+            studentsLayerGroup.clearLayers();
+            vectorsLayerGroup.clearLayers();
 
-            return {
-                labels: top.map(c => `${c.city} (${c.uf})`),
-                datasets: [{
-                    label: 'Inscrições Projetadas',
-                    data: top.map(c => c.projectedApplications),
-                    backgroundColor: top.map(c => c.count >= 10 ? '#e11d48' : (c.count >= 4 ? '#d97706' : '#0284c7')),
-                    borderRadius: 6
-                }]
-            };
+            const selectedState = document.getElementById('state-select').value;
+
+            verifiedCitiesData.forEach(city => {
+                if (selectedState !== 'ALL') {
+                    if (selectedState === 'OUTROS' && (city.uf === 'MG' || city.uf === 'RJ' || city.uf === 'SP' || city.uf === 'ES')) return;
+                    if (selectedState !== 'OUTROS' && city.uf !== selectedState) return;
+                }
+
+                const gravity = analyzeCityGravity(city);
+
+                // Dimensionamento e cor do círculo do aluno
+                let radius = 6;
+                let color = "#64748b"; // Cinza
+                let priorityLabel = "P3 (Expansão)";
+
+                if (city.count >= 10) {
+                    radius = 16;
+                    color = "#e11d48"; // Vermelho / Epicentro
+                    priorityLabel = "P1 (Hiper Quente)";
+                } else if (city.count >= 3) {
+                    radius = 11;
+                    color = "#4338ca"; // Índigo
+                    priorityLabel = "P2 (Tração Direta)";
+                }
+
+                const circle = L.circleMarker([city.lat, city.lng], {
+                    radius: radius,
+                    fillColor: color,
+                    color: "#ffffff",
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.85,
+                    pane: 'studentsPane'
+                });
+
+                // Construção do Popup Explicativo
+                let popupHtml = `
+                    <div class="text-xs">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-black text-slate-900 text-sm">${city.name} (${city.uf})</span>
+                            <span class="bg-slate-100 text-slate-800 text-[10px] font-black px-2 py-0.5 rounded">${priorityLabel}</span>
+                        </div>
+                        <p class="text-indigo-900 font-bold mb-2"><strong>${city.count}</strong> aluno(s) matriculado(s)</p>
+                        
+                        <div class="p-2 bg-slate-50 rounded-xl border border-slate-200 mb-2">
+                            <span class="text-[10px] font-black uppercase text-slate-400 block">Campus Mais Próximo:</span>
+                            <strong class="text-slate-800 text-xs block">${gravity.nearestCampus.name}</strong>
+                            <span class="text-emerald-700 font-bold text-[11px]">${gravity.nearestDistance} km de distância</span>
+                        </div>
+
+                        <span class="text-[10px] font-black uppercase text-slate-400 block mb-1">Cesta de Concorrência Estimada:</span>
+                        <ul class="space-y-1 text-[11px] text-slate-600">
+                            ${gravity.viableOptions.slice(0, 3).map(opt => `
+                                <li class="flex justify-between items-center py-0.5 border-b border-slate-100">
+                                    <span>${opt.campus.name} (${opt.distance} km)</span>
+                                    <span class="font-bold text-indigo-700">${opt.probability}%</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+
+                circle.bindPopup(popupHtml);
+                studentsLayerGroup.addLayer(circle);
+
+                // Traçado de Linhas Vetoriais
+                if (isSingleVectorMode) {
+                    // Modo 1:1 -> Apenas linha para o campus mais próximo
+                    const line = L.polyline([
+                        [city.lat, city.lng],
+                        [gravity.nearestCampus.lat, gravity.nearestCampus.lng]
+                    ], {
+                        color: "#059669", // Verde sólido
+                        weight: city.count >= 10 ? 3.5 : 2,
+                        opacity: 0.8,
+                        pane: 'vectorsPane'
+                    });
+                    vectorsLayerGroup.addLayer(line);
+                } else {
+                    // Modo Cesta Completa -> Linhas múltiplas com transparência proporcional
+                    gravity.viableOptions.forEach(opt => {
+                        const line = L.polyline([
+                            [city.lat, city.lng],
+                            [opt.campus.lat, opt.campus.lng]
+                        ], {
+                            color: opt.probability >= 80 ? "#059669" : (opt.probability >= 50 ? "#4338ca" : "#94a3b8"),
+                            weight: opt.probability >= 80 ? 2.5 : 1.5,
+                            dashArray: opt.probability < 80 ? "4, 6" : null,
+                            opacity: opt.probability >= 80 ? 0.8 : 0.4,
+                            pane: 'vectorsPane'
+                        });
+                        vectorsLayerGroup.addLayer(line);
+                    });
+                }
+            });
         }
 
-        function updateCharts() {
-            if (chartPolesRef) {
-                chartPolesRef.data = getChartPolesData();
-                chartPolesRef.update();
-            }
-            if (chartTopCitiesRef) {
-                chartTopCitiesRef.data = getChartTopCitiesData();
-                chartTopCitiesRef.update();
-            }
+        // Alternar entre modo 1:1 e Cesta Completa
+        function toggleVectorMode() {
+            isSingleVectorMode = !isSingleVectorMode;
+            const label = document.getElementById('vector-mode-label');
+            label.innerText = isSingleVectorMode ? "Modo: Apenas Campus Mais Próximo (1:1)" : "Modo: Cesta Regional Completa";
+            renderStudentsAndVectors();
         }
 
-        function renderFullTable(dataToRender = rawStudentCities) {
-            const tbody = document.getElementById('fullTableBody');
+        // Filtro por Estado
+        function handleStateFilter() {
+            renderStudentsAndVectors();
+            filterTable();
+        }
+
+        // Resetar Visão do Mapa
+        function resetMapView() {
+            map.setView([-20.5, -43.8], 7);
+        }
+
+        // Renderizar Tabela de Cidades
+        function renderTableData() {
+            const tbody = document.getElementById('cities-table-body');
             tbody.innerHTML = '';
 
-            const sorted = [...dataToRender].sort((a,b) => b.projectedApplications - a.projectedApplications);
+            verifiedCitiesData.forEach((city, index) => {
+                const gravity = analyzeCityGravity(city);
+                const percent = ((city.count / 448) * 100).toFixed(1);
 
-            sorted.forEach((item, index) => {
+                let badgeClass = "bg-slate-100 text-slate-700";
+                let priorityText = "P3 (Expansão)";
+
+                if (city.count >= 10) {
+                    badgeClass = "bg-rose-100 text-rose-900 border border-rose-300";
+                    priorityText = "P1 (Hiper Quente)";
+                } else if (city.count >= 3) {
+                    badgeClass = "bg-indigo-100 text-indigo-900 border border-indigo-300";
+                    priorityText = "P2 (Tração Direta)";
+                }
+
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50 transition border-b border-slate-200";
-
-                const distColor = item.nearestDist <= 25 ? 'text-emerald-700 font-bold' : (item.nearestDist <= 60 ? 'text-amber-700 font-semibold' : 'text-slate-500');
-
-                // Lista de opções da cesta resumida com o campus exato
-                const basketSummary = item.eligibleOptions.map(opt => {
-                    return `<span class="bg-slate-100 border border-slate-200 text-slate-800 text-[10px] font-bold px-1.5 py-0.5 rounded mr-1 inline-block mb-0.5" title="${opt.pole.name}">${opt.pole.name.split('(')[0].trim()} (${opt.dist}km)</span>`;
-                }).join('');
-
+                tr.className = "hover:bg-slate-50 transition text-center";
                 tr.innerHTML = `
-                    <td class="py-2.5 px-3 text-center text-slate-400 font-mono font-bold">${index + 1}º</td>
-                    <td class="py-2.5 px-4 font-bold text-slate-900">
-                        <span>${item.city}</span>
-                        <span class="text-slate-400 text-[10px]">(${item.uf})</span>
-                    </td>
-                    <td class="py-2.5 px-3 text-center font-mono font-black ${item.count >= 10 ? 'text-rose-700 text-sm' : (item.count >= 4 ? 'text-amber-700' : 'text-slate-700')}">${item.count}</td>
-                    <td class="py-2.5 px-4 text-slate-800 text-[11px] font-semibold">${item.nearestPole.name}</td>
-                    <td class="py-2.5 px-3 text-center font-mono ${distColor}">~${item.nearestDist} km</td>
-                    <td class="py-2.5 px-4 max-w-[280px]">${basketSummary}</td>
-                    <td class="py-2.5 px-3 text-center font-mono font-black text-indigo-700 text-sm">~${item.projectedApplications}</td>
-                    <td class="py-2.5 px-3 text-center">
-                        <button onclick="zoomToCity(${item.lat}, ${item.lng}, '${item.city}')" class="text-xs text-indigo-600 hover:text-indigo-800 font-bold p-1 hover:bg-indigo-50 rounded transition" title="Focar no mapa">
-                            <i class="fas fa-crosshairs"></i>
+                    <td class="py-2.5 px-4 text-left font-bold text-slate-900">${city.name}</td>
+                    <td class="py-2.5 px-3 font-semibold text-slate-500">${city.uf}</td>
+                    <td class="py-2.5 px-3 font-black text-indigo-900 bg-indigo-50/40">${city.count}</td>
+                    <td class="py-2.5 px-3 text-slate-500">${percent}%</td>
+                    <td class="py-2.5 px-4 text-left font-semibold text-slate-800">${gravity.nearestCampus.name}</td>
+                    <td class="py-2.5 px-3 font-bold text-emerald-700">${gravity.nearestDistance} km</td>
+                    <td class="py-2.5 px-3"><span class="${badgeClass} text-[10px] font-black px-2 py-0.5 rounded-full">${priorityText}</span></td>
+                    <td class="py-2.5 px-3 text-right">
+                        <button onclick="focusMapCity(${city.lat}, ${city.lng}, '${city.name}')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 inline-flex items-center">
+                            <i class="fas fa-crosshairs mr-1"></i> Ver
                         </button>
                     </td>
                 `;
-
                 tbody.appendChild(tr);
             });
-
-            document.getElementById('displayedCount').innerText = sorted.length;
         }
 
-        function filterFullTable() {
-            const query = document.getElementById('tableSearch').value.toLowerCase().trim();
-            const selectedUf = document.getElementById('stateSelectFilter').value;
+        // Filtrar Tabela por Texto
+        function filterTable() {
+            const searchVal = document.getElementById('table-search').value.toLowerCase().trim();
+            const selectedState = document.getElementById('state-select').value;
+            const rows = document.querySelectorAll('#cities-table-body tr');
 
-            const filtered = rawStudentCities.filter(item => {
-                const matchesQuery = (query === '' ||
-                                      item.city.toLowerCase().includes(query) ||
-                                      item.nearestPole.name.toLowerCase().includes(query) ||
-                                      item.uf.toLowerCase().includes(query));
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                const uf = row.children[1].innerText.trim();
 
-                let matchesUf = true;
-                if (selectedUf === 'MG') matchesUf = item.uf === 'MG';
-                else if (selectedUf === 'RJ') matchesUf = item.uf === 'RJ';
-                else if (selectedUf === 'ES') matchesUf = item.uf === 'ES';
-                else if (selectedUf === 'SP') matchesUf = item.uf === 'SP';
-                else if (selectedUf === 'OUTROS') matchesUf = !['MG','RJ','ES','SP'].includes(item.uf);
+                const matchesSearch = (searchVal === '' || text.includes(searchVal));
+                let matchesState = (selectedState === 'ALL');
 
-                return matchesQuery && matchesUf;
+                if (selectedState !== 'ALL') {
+                    if (selectedState === 'OUTROS') {
+                        matchesState = (uf !== 'MG' && uf !== 'RJ' && uf !== 'SP' && uf !== 'ES');
+                    } else {
+                        matchesState = (uf === selectedState);
+                    }
+                }
+
+                row.style.display = (matchesSearch && matchesState) ? '' : 'none';
             });
-
-            renderFullTable(filtered);
         }
 
-        function zoomToCity(lat, lng, name) {
-            window.scrollTo({ top: document.getElementById('map').offsetTop - 80, behavior: 'smooth' });
+        // Focar cidade no mapa ao clicar na tabela
+        function focusMapCity(lat, lng, cityName) {
             map.flyTo([lat, lng], 10, { duration: 1.2 });
+            window.scrollTo({ top: document.getElementById('map').offsetTop - 80, behavior: 'smooth' });
         }
 
-        // Inicialização
-        window.addEventListener('load', () => {
-            computeBaskets();
-            initDashboardMap();
-            initCharts();
-            renderFullTable();
-
-            window.addEventListener('resize', () => {
-                if (map) map.invalidateSize();
+        // Renderizar Gráficos Analíticos
+        function renderCharts() {
+            // Contabilizar alunos por rede federal de destino mais próximo
+            const countsByInst = {};
+            verifiedCitiesData.forEach(city => {
+                const gravity = analyzeCityGravity(city);
+                const instName = gravity.nearestCampus.inst;
+                countsByInst[instName] = (countsByInst[instName] || 0) + city.count;
             });
+
+            const sortedInsts = Object.keys(countsByInst).sort((a, b) => countsByInst[b] - countsByInst[a]);
+            const labelsInst = sortedInsts.slice(0, 8);
+            const dataInst = labelsInst.map(k => countsByInst[k]);
+
+            // Gráfico 1: Atração por Rede
+            const ctxInst = document.getElementById('chart-institutions').getContext('2d');
+            if (chartInstitutionsInstance) chartInstitutionsInstance.destroy();
+            chartInstitutionsInstance = new Chart(ctxInst, {
+                type: 'bar',
+                data: {
+                    labels: labelsInst,
+                    datasets: [{
+                        label: 'Alunos Conectados',
+                        data: dataInst,
+                        backgroundColor: '#4338ca',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+
+            // Gráfico 2: Orçamento de Mídia
+            const ctxBudget = document.getElementById('chart-budget').getContext('2d');
+            if (chartBudgetInstance) chartBudgetInstance.destroy();
+            chartBudgetInstance = new Chart(ctxBudget, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Zona da Mata (COLUNI / IF Sudeste)', 'Grande BH & Aço (COLTEC / CEFET)', 'RJ & Expansão'],
+                    datasets: [{
+                        data: [45, 35, 20],
+                        backgroundColor: ['#059669', '#4338ca', '#d97706'],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        // Executar no carregamento da janela
+        window.addEventListener('load', () => {
+            initApp();
         });
     </script>
 </body>
