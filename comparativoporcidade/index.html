@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Interno de Inteligência Geográfica e Mídia | Guia Pré-Federal</title>
+    <title>Dashboard Interno de Geomarketing e Gravidade de Polos | Guia Pré-Federal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Inter -->
@@ -12,122 +12,125 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <!-- Leaflet Heatmap Plugin CDN -->
+    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        :root {
-            --brand-navy: #0f172a;
-            --brand-indigo: #4338ca;
-            --brand-emerald: #059669;
-            --brand-amber: #d97706;
-            --brand-rose: #e11d48;
-            --brand-coral: #dd5737;
-        }
-        html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
         #map {
             height: 640px;
             width: 100%;
-            border-radius: 1.25rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            cursor: grab;
-            background-color: #e2e8f0;
+            border-radius: 1.5rem;
+            z-index: 10;
         }
-        #map:active { cursor: grabbing; }
         .leaflet-popup-content-wrapper {
             border-radius: 1rem;
             padding: 0.25rem;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             font-family: 'Inter', sans-serif;
         }
         .leaflet-popup-content {
             margin: 12px 14px;
             line-height: 1.4;
         }
-        .stat-card {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
         .toggle-btn.active {
             background-color: #4338ca;
             color: #ffffff;
             border-color: #4338ca;
+            box-shadow: 0 2px 8px rgba(67, 56, 202, 0.3);
         }
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- Top Navigation Header -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="container mx-auto px-4 max-w-7xl py-3 flex justify-between items-center">
+    <!-- Header Executivo Interno -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm py-4 sticky top-0 z-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-7xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow" style="background-color: #dd5737;">
-                    <img src="./logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/dd5737/ffffff?text=GPF';" alt="Guia Pré-Federal" class="w-full h-full object-contain">
+                <div class="w-10 h-10 rounded-2xl flex items-center justify-center p-2 shadow-md bg-indigo-600 text-white font-black">
+                    <i class="fas fa-brain text-lg"></i>
                 </div>
                 <div>
                     <div class="flex items-center space-x-2">
-                        <span class="text-base font-black text-slate-900 tracking-tight">Guia - Pré Federal</span>
-                        <span class="bg-indigo-50 text-indigo-700 text-[10px] font-black px-2 py-0.5 rounded-full border border-indigo-200 uppercase">Inteligência & Mídia</span>
+                        <span class="text-base md:text-lg font-black tracking-tight text-slate-900 leading-none">BI & Geomarketing • Guia Pré-Federal</span>
+                        <span class="bg-indigo-100 text-indigo-900 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Uso Interno</span>
                     </div>
-                    <span class="text-[11px] font-bold text-slate-500 block">Roteamento Estadual &bullet; Densidade de Calor &bullet; Matriz de Campi</span>
+                    <span class="text-xs text-slate-500 font-semibold block mt-0.5">Mapeamento Gravitacional de Matrículas e Oportunidades em Polos Federais</span>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-2 text-xs font-bold">
-                <a href="comparativo_vestibulinhos.html" class="bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-xl transition inline-flex items-center">
-                    <i class="fas fa-table mr-1.5 text-indigo-600"></i> Comparativo
-                </a>
-                <a href="index.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-xl transition inline-flex items-center shadow-sm">
-                    <i class="fas fa-home mr-1.5"></i> Site Oficial
+            <!-- Botões de Ação Superior -->
+            <div class="flex items-center space-x-2">
+                <button onclick="resetMapView()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-3 py-2 rounded-xl transition inline-flex items-center">
+                    <i class="fas fa-crosshairs mr-1.5 text-indigo-600"></i> Centralizar Visão Geral
+                </button>
+                <a href="#tabela-dados" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition shadow-sm inline-flex items-center">
+                    <i class="fas fa-table mr-1.5"></i> Tabela Detalhada
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="container mx-auto px-4 max-w-7xl py-6 flex-grow space-y-6">
+    <!-- Conteúdo Principal -->
+    <main class="container mx-auto px-4 max-w-7xl my-6 flex-grow space-y-6">
 
-        <!-- Top KPIs -->
+        <!-- Grid de Cards de Métricas Principais (KPIs) -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="stat-card p-4 rounded-2xl">
-                <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Base Auditada</span>
-                <div class="flex items-baseline space-x-1.5 mt-1">
-                    <span class="text-2xl md:text-3xl font-black text-indigo-900" id="kpi-total-students">448</span>
-                    <span class="text-xs font-bold text-slate-500">alunos reais</span>
+            <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                <div>
+                    <span class="text-[11px] font-black text-slate-400 uppercase tracking-wider block mb-1">Base Auditada</span>
+                    <h3 class="text-2xl md:text-3xl font-black text-slate-900">448 Alunos</h3>
                 </div>
-                <span class="text-[11px] text-slate-500 mt-1 block">139 cidades de origem</span>
+                <span class="text-[11px] font-bold text-emerald-600 mt-2 flex items-center">
+                    <i class="fas fa-check-circle mr-1"></i> 100% Auditados da Planilha
+                </span>
             </div>
 
-            <div class="stat-card p-4 rounded-2xl">
-                <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Inscrições Potenciais</span>
-                <div class="flex items-baseline space-x-1.5 mt-1">
-                    <span class="text-2xl md:text-3xl font-black text-emerald-700" id="kpi-potential-apps">~1.135</span>
-                    <span class="text-xs font-bold text-slate-500">provas disputadas</span>
+            <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                <div>
+                    <span class="text-[11px] font-black text-slate-400 uppercase tracking-wider block mb-1">Cidades Atendidas</span>
+                    <h3 class="text-2xl md:text-3xl font-black text-indigo-700">139 Cidades</h3>
                 </div>
-                <span class="text-[11px] text-slate-500 mt-1 block">Média de 2,5 provas por aluno</span>
+                <span class="text-[11px] font-bold text-slate-500 mt-2 flex items-center">
+                    <i class="fas fa-map-marker-alt mr-1 text-indigo-500"></i> 112 em MG &bull; 27 Interestaduais
+                </span>
             </div>
 
-            <div class="stat-card p-4 rounded-2xl">
-                <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Polos e Redes no Estado</span>
-                <div class="flex items-baseline space-x-1.5 mt-1">
-                    <span class="text-2xl md:text-3xl font-black text-slate-900" id="kpi-total-campi">180+</span>
-                    <span class="text-xs font-bold text-slate-500">campi vinculados</span>
+            <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                <div>
+                    <span class="text-[11px] font-black text-slate-400 uppercase tracking-wider block mb-1">Inscrições Potenciais</span>
+                    <h3 class="text-2xl md:text-3xl font-black text-amber-600">~1.135 Provas</h3>
                 </div>
-                <span class="text-[11px] text-slate-500 mt-1 block">Roteamento interno por UF</span>
+                <span class="text-[11px] font-bold text-slate-500 mt-2 flex items-center">
+                    <i class="fas fa-clone mr-1 text-amber-500"></i> Média 2,53 exames/aluno
+                </span>
             </div>
 
-            <div class="stat-card p-4 rounded-2xl">
-                <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Proximidade Estadual</span>
-                <div class="flex items-baseline space-x-1.5 mt-1">
-                    <span class="text-2xl md:text-3xl font-black text-amber-700">89,2%</span>
-                    <span class="text-xs font-bold text-slate-500">a &le; 45 km</span>
+            <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                <div>
+                    <span class="text-[11px] font-black text-slate-400 uppercase tracking-wider block mb-1">Rede de Destinos</span>
+                    <h3 class="text-2xl md:text-3xl font-black text-emerald-700">180+ Campi</h3>
                 </div>
-                <span class="text-[11px] text-slate-500 mt-1 block">Restauração metropolitana e regional</span>
+                <span class="text-[11px] font-bold text-slate-500 mt-2 flex items-center">
+                    <i class="fas fa-university mr-1 text-emerald-600"></i> MG, RJ, SP, ES, BA, RS
+                </span>
             </div>
         </div>
 
@@ -138,19 +141,25 @@
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                 <div>
                     <h2 class="text-lg md:text-xl font-black text-slate-900 flex items-center">
-                        <i class="fas fa-layer-group text-indigo-600 mr-2"></i> Mapa de Densidade, Calor & Roteamento por Estado
+                        <i class="fas fa-project-diagram text-indigo-600 mr-2"></i> Mapa de Entrelaçamento e Concorrência Múltipla
                     </h2>
                     <p class="text-xs text-slate-500 mt-0.5">
-                        Alunos de outros estados disputam as escolas do <strong>seu próprio estado</strong> (IFSP em SP, IFES no ES, IFBA na Bahia).
+                        Visualize as ligações diretas e as rotas de múltipla concorrência na Região Central e Zona da Mata (estritamente dentro da UF de origem).
                     </p>
                 </div>
 
                 <!-- Botões e Controles Interativos -->
                 <div class="flex flex-wrap items-center gap-2">
-                    <!-- Alternar Camada de Calor (Heatmap) -->
-                    <button id="toggle-heat-btn" onclick="toggleHeatmap()" class="toggle-btn text-xs font-bold px-3 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition inline-flex items-center">
-                        <i class="fas fa-fire mr-1.5 text-rose-500"></i>
-                        <span id="heat-label">Mapa de Calor: Ligado</span>
+                    <!-- Alternar Modo de Ligação: Apenas Mais Próximo vs Rede Completa -->
+                    <button id="toggle-network-mode-btn" onclick="toggleNetworkMode()" class="toggle-btn active text-xs font-bold px-3 py-2 rounded-xl border border-indigo-300 bg-indigo-50 text-indigo-900 hover:bg-indigo-100 transition inline-flex items-center shadow-sm">
+                        <i class="fas fa-bezier-curve mr-1.5 text-indigo-600"></i>
+                        <span id="network-mode-label">Modo: Cesta Completa (Entrelaçamento)</span>
+                    </button>
+
+                    <!-- Alternar Camada de Instituições / Campi Federais -->
+                    <button id="toggle-campi-btn" onclick="toggleCampiLayer()" class="toggle-btn active text-xs font-bold px-3 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition inline-flex items-center">
+                        <i class="fas fa-university mr-1.5 text-amber-500"></i>
+                        <span id="campi-label">Instituições: Visíveis</span>
                     </button>
 
                     <!-- Alternar Pontos das Cidades -->
@@ -190,7 +199,7 @@
                 <!-- Legenda do Mapa em Overlay -->
                 <div class="absolute bottom-4 left-4 z-[1000] bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border border-slate-200 shadow-md text-[11px] font-semibold text-slate-700 space-y-2 max-w-xs">
                     <div class="font-black text-slate-900 text-xs border-b border-slate-100 pb-1 flex items-center justify-between">
-                        <span>Legenda de Temperatura</span>
+                        <span>Legenda de Ligações</span>
                         <span class="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-500">448 alunos</span>
                     </div>
                     <div class="flex items-center space-x-2">
@@ -209,466 +218,460 @@
                         <span class="w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white shadow-sm inline-block"></span>
                         <span>Campus Federal no Estado</span>
                     </div>
-                    <div class="text-[10px] text-slate-400 pt-1 leading-snug">
-                        * O mapa de calor mostra manchas térmicas contínuas por microrregião de demanda.
+                    <div class="flex items-center space-x-2">
+                        <span class="w-5 h-0.5 bg-emerald-600 inline-block"></span>
+                        <span>Vetor Primário (Mais Próximo)</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-5 h-0.5 border-b-2 border-dashed border-indigo-400 inline-block"></span>
+                        <span>Entrelaçamento Regional Viável</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Seção de Análise e Microrregiões Quentes -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="stat-card p-5 rounded-3xl">
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xs font-black uppercase text-slate-900 tracking-wider">
-                        <i class="fas fa-fire-alt text-rose-600 mr-1.5"></i> Microrregião 1: Zona da Mata
-                    </h3>
-                    <span class="bg-rose-100 text-rose-800 text-[10px] font-black px-2 py-0.5 rounded-full">162 alunos</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed mb-3">
-                    Maior aglomeração contínua. Abrange Juiz de Fora, Leopoldina, Laranjal, Cataguases, Muriaé, Ubá e Viçosa.
-                </p>
-                <div class="text-[11px] font-bold text-indigo-700 bg-indigo-50/70 p-2.5 rounded-xl border border-indigo-100">
-                    Destinos: IF Sudeste MG, CEFET Leopoldina e COLUNI UFV.
-                </div>
-            </div>
-
-            <div class="stat-card p-5 rounded-3xl">
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xs font-black uppercase text-slate-900 tracking-wider">
-                        <i class="fas fa-bolt text-indigo-600 mr-1.5"></i> Microrregião 2: Grande BH & Aço
-                    </h3>
-                    <span class="bg-indigo-100 text-indigo-800 text-[10px] font-black px-2 py-0.5 rounded-full">124 alunos</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed mb-3">
-                    Conurbação metropolitana e rota da BR-040/BR-381. Belo Horizonte, Contagem, Betim, Congonhas, Lafaiete e Ipatinga.
-                </p>
-                <div class="text-[11px] font-bold text-indigo-700 bg-indigo-50/70 p-2.5 rounded-xl border border-indigo-100">
-                    Destinos: COLTEC (UFMG), CEFET-MG BH/Timóteo e IFMG.
-                </div>
-            </div>
-
-            <div class="stat-card p-5 rounded-3xl">
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xs font-black uppercase text-slate-900 tracking-wider">
-                        <i class="fas fa-globe text-emerald-600 mr-1.5"></i> Outros Estados (SP, RJ, ES, BA)
-                    </h3>
-                    <span class="bg-emerald-100 text-emerald-800 text-[10px] font-black px-2 py-0.5 rounded-full">46 alunos</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed mb-3">
-                    Alunos estaduais com roteamento exclusivo: Rio (CEFET-RJ/CTUR), SP (IFSP Canindé), Vitória/ES (IFES) e Salvador/BA (IFBA).
-                </p>
-                <div class="text-[11px] font-bold text-emerald-800 bg-emerald-50/70 p-2.5 rounded-xl border border-emerald-100">
-                    Concorrência 100% voltada às redes públicas da própria UF.
-                </div>
-            </div>
-        </div>
-
-        <!-- Gráficos e Analytics de Mídia com Filtros -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Seção de Gráficos Analíticos -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             
-            <!-- Gráfico 1: Atração por Rede / Polo -->
-            <div class="stat-card p-5 rounded-3xl lg:col-span-2">
-                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-4 pb-3 border-b border-slate-100">
+            <!-- Gráfico 1: Demanda Potencial por Instituição / Rede -->
+            <div class="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm space-y-3">
+                <div class="flex justify-between items-center pb-2 border-b border-slate-100">
                     <div>
-                        <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">
-                            <i class="fas fa-university text-indigo-600 mr-1.5"></i> Gravidade: Alunos Conectados por Rede Federal
-                        </h3>
-                        <p class="text-[11px] text-slate-500 mt-0.5">Calculado estritamente para campi dentro da UF de origem do aluno.</p>
+                        <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">Demanda e Gravidade por Rede Federal</h3>
+                        <p class="text-xs text-slate-500 font-medium">Estimativa de provas disputadas pelos 448 alunos (considerando concorrência múltipla regional)</p>
                     </div>
-                    <!-- Botões de Filtro do Gráfico -->
-                    <div class="flex items-center space-x-1.5">
-                        <button onclick="setChartFilter('ALL')" id="cf-all" class="text-[10px] font-bold px-2 py-1 rounded-lg bg-indigo-600 text-white">Todas as Redes</button>
-                        <button onclick="setChartFilter('MG')" id="cf-mg" class="text-[10px] font-bold px-2 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Apenas MG</button>
-                        <button onclick="setChartFilter('OUTROS')" id="cf-outros" class="text-[10px] font-bold px-2 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Demais UFs</button>
+                    <div class="flex items-center space-x-1">
+                        <button onclick="setChartFilter('ALL')" id="chart-btn-all" class="text-[10px] font-black px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100">Todas</button>
+                        <button onclick="setChartFilter('MG')" id="chart-btn-mg" class="text-[10px] font-black px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Apenas MG</button>
                     </div>
                 </div>
-                <div class="h-64">
+                <div class="h-72">
                     <canvas id="chart-institutions"></canvas>
                 </div>
             </div>
 
-            <!-- Gráfico 2: Alocação Recomendada de Verba de Tráfego -->
-            <div class="stat-card p-5 rounded-3xl flex flex-col justify-between">
-                <div>
-                    <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-1">
-                        <i class="fas fa-bullseye text-emerald-600 mr-1.5"></i> Sugestão de Alocação de Verba
-                    </h3>
-                    <p class="text-[11px] text-slate-500 mb-4">Divisão proporcional ao volume e conversão comprovada.</p>
-                    <div class="h-48">
-                        <canvas id="chart-budget"></canvas>
+            <!-- Gráfico 2: Alocação Tática Recomendada de Verba de Mídia -->
+            <div class="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm space-y-3">
+                <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                    <div>
+                        <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">Alocação de Verba de Tráfego Pago por Cluster</h3>
+                        <p class="text-xs text-slate-500 font-medium">Recomendação proporcional para campanhas no Meta Ads (Instagram/Facebook) e Google Search</p>
                     </div>
+                    <span class="text-[10px] bg-emerald-50 text-emerald-800 font-black px-2 py-0.5 rounded-lg border border-emerald-200">
+                        ROAS Otimizado
+                    </span>
                 </div>
-                <div class="mt-4 pt-3 border-t border-slate-100 space-y-1 text-xs">
-                    <div class="flex justify-between font-bold"><span class="text-emerald-700">Cluster Zona da Mata</span><span>45% (Meta Ads)</span></div>
-                    <div class="flex justify-between font-bold"><span class="text-indigo-700">Cluster Grande BH / Aço</span><span>35% (Meta + Search)</span></div>
-                    <div class="flex justify-between font-bold"><span class="text-amber-700">Cluster Outras UFs & Expansão</span><span>20% (Google Search)</span></div>
+                <div class="h-72 flex items-center justify-center">
+                    <canvas id="chart-budget"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- Tabela Detalhada com Busca Instantânea -->
-        <div class="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm space-y-4">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+        <!-- Seção da Tabela Analítica Completa -->
+        <div id="tabela-dados" class="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
                 <div>
-                    <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">
-                        <i class="fas fa-list-ol text-indigo-600 mr-1.5"></i> Cidades, Alunos e o Campus Federal no Estado
-                    </h3>
-                    <p class="text-[11px] text-slate-500 mt-0.5">Tabela completa das 139 cidades com roteamento estadual obrigatório.</p>
+                    <h3 class="text-base font-black text-slate-900">Detalhamento dos Alunos por Cidade e Campus de Destino</h3>
+                    <p class="text-xs text-slate-500 font-medium">Relação completa de todos os 448 estudantes e a rota para o campus mais próximo na mesma UF</p>
                 </div>
-                <div class="w-full md:w-72">
-                    <input type="text" id="table-search" onkeyup="filterTable()" placeholder="Buscar cidade ou campus..." class="w-full text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-sm bg-slate-50">
+                <div class="relative w-full sm:w-72">
+                    <i class="fas fa-search absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+                    <input type="text" id="table-search-input" onkeyup="filterTable()" placeholder="Buscar cidade ou campus..." class="w-full pl-9 pr-3 py-2 text-xs font-semibold rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 bg-slate-50">
                 </div>
             </div>
 
-            <!-- Tabela de Dados -->
-            <div class="overflow-x-auto rounded-2xl border border-slate-200">
-                <table class="w-full text-left border-collapse text-xs">
-                    <thead>
-                        <tr class="bg-slate-900 text-white font-bold uppercase text-[10px] tracking-wider text-center">
-                            <th class="py-3 px-4 text-left">Cidade de Origem</th>
-                            <th class="py-3 px-3">Estado</th>
-                            <th class="py-3 px-3 bg-slate-800 text-amber-300">Alunos Reais</th>
-                            <th class="py-3 px-3">% da Base</th>
-                            <th class="py-3 px-4 text-left">Campus Federal Mais Próximo (Mesma UF)</th>
-                            <th class="py-3 px-3">Distância (Linha Reta)</th>
-                            <th class="py-3 px-3">Prioridade de Mídia</th>
-                            <th class="py-3 px-3 text-right">Ação</th>
+            <div class="overflow-x-auto max-h-96 custom-scrollbar rounded-2xl border border-slate-200">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead class="bg-slate-900 text-white font-bold uppercase text-[10px] tracking-wider sticky top-0 z-20">
+                        <tr>
+                            <th class="py-3 px-4">Cidade de Origem</th>
+                            <th class="py-3 px-3 text-center">UF</th>
+                            <th class="py-3 px-3 text-center">Nº Alunos</th>
+                            <th class="py-3 px-3 text-center">% da Base</th>
+                            <th class="py-3 px-4">Campus Mais Próximo (Na Mesma UF)</th>
+                            <th class="py-3 px-3 text-center">Distância Real</th>
+                            <th class="py-3 px-4">Cesta de Provas Viáveis</th>
+                            <th class="py-3 px-3 text-center">Prioridade de Mídia</th>
                         </tr>
                     </thead>
-                    <tbody id="cities-table-body" class="divide-y divide-slate-100 text-slate-700 font-medium">
-                        <!-- Gerado via JavaScript -->
+                    <tbody id="table-body" class="divide-y divide-slate-100 font-medium text-slate-700">
+                        <!-- Gerado dinamicamente via JS -->
                     </tbody>
                 </table>
             </div>
+            <div class="flex justify-between items-center text-xs text-slate-500 pt-2 font-semibold">
+                <span id="table-count-label">Exibindo 139 cidades</span>
+                <span class="text-indigo-600"><i class="fas fa-info-circle mr-1"></i>Clique no botão do mapa para alternar entre 'Mais Próximo' e 'Cesta Completa'</span>
+            </div>
         </div>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
-        <div class="container mx-auto px-4">
-            <p class="font-bold text-slate-700">Guia - Pré Federal &bull; Painel de Inteligência de Mercado e Geomarketing</p>
-            <p class="mt-1">&copy; 2026 Guia Pré-Federal. Todos os direitos reservados.</p>
+    <!-- Rodapé -->
+    <footer class="bg-slate-900 text-white py-8 border-t border-slate-800 text-xs text-center">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <p class="font-bold text-slate-300">Guia Pré-Federal &bull; Inteligência Geográfica e Planejamento de Mídia</p>
+            <p class="text-slate-500 text-[11px] mt-1">&copy; 2026. Dashboard analítico de gravidade de polos e captação estudantil.</p>
         </div>
     </footer>
 
-    <!-- Script Central de Dados e Lógica do Dashboard -->
+    <!-- Script com Dados e Lógica Analítica Completa -->
     <script>
-        // 1. Rede Completa de Campi Físicos Mapeados com UF estrita
+        // BANCO DE DADOS DE TODOS OS CAMPI FEDERAIS (Rede Completa Oficial)
         const federalCampi = [
-            // CEFET-MG (9 campi)
-            { id: "cefet-bh", name: "CEFET-MG (Belo Horizonte)", inst: "CEFET-MG", lat: -19.9328, lng: -43.9686, city: "Belo Horizonte", uf: "MG" },
-            { id: "cefet-contagem", name: "CEFET-MG (Contagem)", inst: "CEFET-MG", lat: -19.9386, lng: -44.0531, city: "Contagem", uf: "MG" },
-            { id: "cefet-leopoldina", name: "CEFET-MG (Leopoldina)", inst: "CEFET-MG", lat: -21.5317, lng: -42.6433, city: "Leopoldina", uf: "MG" },
-            { id: "cefet-timoteo", name: "CEFET-MG (Timóteo / Vale do Aço)", inst: "CEFET-MG", lat: -19.5828, lng: -42.6456, city: "Timóteo", uf: "MG" },
-            { id: "cefet-divinopolis", name: "CEFET-MG (Divinópolis)", inst: "CEFET-MG", lat: -20.1444, lng: -44.8911, city: "Divinópolis", uf: "MG" },
-            { id: "cefet-araxa", name: "CEFET-MG (Araxá)", inst: "CEFET-MG", lat: -19.5932, lng: -46.9408, city: "Araxá", uf: "MG" },
-            { id: "cefet-curvelo", name: "CEFET-MG (Curvelo)", inst: "CEFET-MG", lat: -18.7564, lng: -44.4308, city: "Curvelo", uf: "MG" },
-            { id: "cefet-nepomuceno", name: "CEFET-MG (Nepomuceno)", inst: "CEFET-MG", lat: -21.2333, lng: -45.2333, city: "Nepomuceno", uf: "MG" },
-            { id: "cefet-varginha", name: "CEFET-MG (Varginha)", inst: "CEFET-MG", lat: -21.5542, lng: -45.4356, city: "Varginha", uf: "MG" },
+            // CEFET-MG (9 Campi)
+            { id: "cefetmg-bh", name: "CEFET-MG Campus Belo Horizonte", shortName: "CEFET-MG BH", city: "Belo Horizonte", uf: "MG", lat: -19.9328, lng: -43.9686, network: "CEFET-MG" },
+            { id: "cefetmg-contagem", name: "CEFET-MG Campus Contagem", shortName: "CEFET Contagem", city: "Contagem", uf: "MG", lat: -19.9386, lng: -44.0531, network: "CEFET-MG" },
+            { id: "cefetmg-leopoldina", name: "CEFET-MG Campus Leopoldina", shortName: "CEFET Leopoldina", city: "Leopoldina", uf: "MG", lat: -21.5317, lng: -42.6433, network: "CEFET-MG" },
+            { id: "cefetmg-timoteo", name: "CEFET-MG Campus Timóteo", shortName: "CEFET Timóteo", city: "Timóteo", uf: "MG", lat: -19.5828, lng: -42.6456, network: "CEFET-MG" },
+            { id: "cefetmg-divinopolis", name: "CEFET-MG Campus Divinópolis", shortName: "CEFET Divinópolis", city: "Divinópolis", uf: "MG", lat: -20.1444, lng: -44.8911, network: "CEFET-MG" },
+            { id: "cefetmg-araxa", name: "CEFET-MG Campus Araxá", shortName: "CEFET Araxá", city: "Araxá", uf: "MG", lat: -19.5932, lng: -46.9408, network: "CEFET-MG" },
+            { id: "cefetmg-curvelo", name: "CEFET-MG Campus Curvelo", shortName: "CEFET Curvelo", city: "Curvelo", uf: "MG", lat: -18.7564, lng: -44.4308, network: "CEFET-MG" },
+            { id: "cefetmg-nepomuceno", name: "CEFET-MG Campus Nepomuceno", shortName: "CEFET Nepomuceno", city: "Nepomuceno", uf: "MG", lat: -21.2333, lng: -45.2333, network: "CEFET-MG" },
+            { id: "cefetmg-varginha", name: "CEFET-MG Campus Varginha", shortName: "CEFET Varginha", city: "Varginha", uf: "MG", lat: -21.5542, lng: -45.4356, network: "CEFET-MG" },
 
-            // COLTEC e COLUNI e CEDAF
-            { id: "coltec-ufmg", name: "COLTEC (UFMG Pampulha)", inst: "COLTEC", lat: -19.8697, lng: -43.9642, city: "Belo Horizonte", uf: "MG" },
-            { id: "coluni-ufv", name: "CAp-COLUNI (UFV Viçosa)", inst: "COLUNI", lat: -20.7583, lng: -42.8797, city: "Viçosa", uf: "MG" },
-            { id: "cedaf-florestal", name: "CEDAF (UFV Florestal)", inst: "CEDAF", lat: -19.8894, lng: -44.4319, city: "Florestal", uf: "MG" },
+            // COLTEC (UFMG) & COLUNI (UFV) & CEDAF (Florestal)
+            { id: "coltec-bh", name: "COLTEC - Colégio Técnico UFMG", shortName: "COLTEC UFMG", city: "Belo Horizonte", uf: "MG", lat: -19.8697, lng: -43.9642, network: "COLTEC" },
+            { id: "coluni-vicosa", name: "Cap-COLUNI Universidade Federal de Viçosa", shortName: "COLUNI Viçosa", city: "Viçosa", uf: "MG", lat: -20.7583, lng: -42.8797, network: "COLUNI" },
+            { id: "cedaf-florestal", name: "CEDAF - UFV Campus Florestal", shortName: "CEDAF Florestal", city: "Florestal", uf: "MG", lat: -19.8906, lng: -44.4286, network: "CEDAF" },
 
-            // IF Sudeste MG (10 campi)
-            { id: "ifsudeste-jf", name: "IF Sudeste MG (Juiz de Fora)", inst: "IF Sudeste MG", lat: -21.7642, lng: -43.3497, city: "Juiz de Fora", uf: "MG" },
-            { id: "ifsudeste-barbacena", name: "IF Sudeste MG (Barbacena)", inst: "IF Sudeste MG", lat: -21.2258, lng: -43.7736, city: "Barbacena", uf: "MG" },
-            { id: "ifsudeste-riopomba", name: "IF Sudeste MG (Rio Pomba)", inst: "IF Sudeste MG", lat: -21.2750, lng: -43.1814, city: "Rio Pomba", uf: "MG" },
-            { id: "ifsudeste-muriae", name: "IF Sudeste MG (Muriaé)", inst: "IF Sudeste MG", lat: -21.1306, lng: -42.3664, city: "Muriaé", uf: "MG" },
-            { id: "ifsudeste-cataguases", name: "IF Sudeste MG (Cataguases)", inst: "IF Sudeste MG", lat: -21.3889, lng: -42.6967, city: "Cataguases", uf: "MG" },
-            { id: "ifsudeste-uba", name: "IF Sudeste MG (Ubá)", inst: "IF Sudeste MG", lat: -21.1203, lng: -42.9431, city: "Ubá", uf: "MG" },
-            { id: "ifsudeste-sjdr", name: "IF Sudeste MG (São João del-Rei)", inst: "IF Sudeste MG", lat: -21.1356, lng: -44.2617, city: "São João del-Rei", uf: "MG" },
-            { id: "ifsudeste-santosdumont", name: "IF Sudeste MG (Santos Dumont)", inst: "IF Sudeste MG", lat: -21.4564, lng: -43.5528, city: "Santos Dumont", uf: "MG" },
-            { id: "ifsudeste-manhuacu", name: "IF Sudeste MG (Manhuaçu)", inst: "IF Sudeste MG", lat: -20.2581, lng: -42.0336, city: "Manhuaçu", uf: "MG" },
-            { id: "ifsudeste-bomsucesso", name: "IF Sudeste MG (Bom Sucesso)", inst: "IF Sudeste MG", lat: -21.0328, lng: -44.7578, city: "Bom Sucesso", uf: "MG" },
+            // IF Sudeste MG (10 Campi)
+            { id: "ifsudeste-jf", name: "IF Sudeste MG Campus Juiz de Fora", shortName: "IF Sudeste JF", city: "Juiz de Fora", uf: "MG", lat: -21.7642, lng: -43.3497, network: "IF Sudeste MG" },
+            { id: "ifsudeste-barbacena", name: "IF Sudeste MG Campus Barbacena", shortName: "IF Barbacena", city: "Barbacena", uf: "MG", lat: -21.2258, lng: -43.7736, network: "IF Sudeste MG" },
+            { id: "ifsudeste-muriae", name: "IF Sudeste MG Campus Muriaé", shortName: "IF Muriaé", city: "Muriaé", uf: "MG", lat: -21.1306, lng: -42.3664, network: "IF Sudeste MG" },
+            { id: "ifsudeste-riopomba", name: "IF Sudeste MG Campus Rio Pomba", shortName: "IF Rio Pomba", city: "Rio Pomba", uf: "MG", lat: -21.2750, lng: -43.1814, network: "IF Sudeste MG" },
+            { id: "ifsudeste-sjdr", name: "IF Sudeste MG Campus São João del-Rei", shortName: "IF SJDR", city: "São João del-Rei", uf: "MG", lat: -21.1356, lng: -44.2617, network: "IF Sudeste MG" },
+            { id: "ifsudeste-santosdumont", name: "IF Sudeste MG Campus Santos Dumont", shortName: "IF Santos Dumont", city: "Santos Dumont", uf: "MG", lat: -21.4564, lng: -43.5528, network: "IF Sudeste MG" },
+            { id: "ifsudeste-cataguases", name: "IF Sudeste MG Campus Cataguases", shortName: "IF Cataguases", city: "Cataguases", uf: "MG", lat: -21.3889, lng: -42.6967, network: "IF Sudeste MG" },
+            { id: "ifsudeste-manhuacu", name: "IF Sudeste MG Campus Manhuaçu", shortName: "IF Manhuaçu", city: "Manhuaçu", uf: "MG", lat: -20.2581, lng: -42.0336, network: "IF Sudeste MG" },
+            { id: "ifsudeste-bomsucesso", name: "IF Sudeste MG Campus Bom Sucesso", shortName: "IF Bom Sucesso", city: "Bom Sucesso", uf: "MG", lat: -21.0328, lng: -44.7578, network: "IF Sudeste MG" },
+            { id: "ifsudeste-uba", name: "IF Sudeste MG Campus Ubá", shortName: "IF Ubá", city: "Ubá", uf: "MG", lat: -21.1203, lng: -42.9431, network: "IF Sudeste MG" },
 
-            // IFMG
-            { id: "ifmg-congonhas", name: "IFMG (Congonhas)", inst: "IFMG", lat: -20.4994, lng: -43.8569, city: "Congonhas", uf: "MG" },
-            { id: "ifmg-ouropreto", name: "IFMG (Ouro Preto)", inst: "IFMG", lat: -20.3856, lng: -43.5036, city: "Ouro Preto", uf: "MG" },
-            { id: "ifmg-ourobranco", name: "IFMG (Ouro Branco)", inst: "IFMG", lat: -20.5233, lng: -43.6942, city: "Ouro Branco", uf: "MG" },
-            { id: "ifmg-pontenova", name: "IFMG (Ponte Nova)", inst: "IFMG", lat: -20.4111, lng: -42.9033, city: "Ponte Nova", uf: "MG" },
-            { id: "ifmg-itabirito", name: "IFMG (Itabirito)", inst: "IFMG", lat: -20.2533, lng: -43.8011, city: "Itabirito", uf: "MG" },
-            { id: "ifmg-betim", name: "IFMG (Betim)", inst: "IFMG", lat: -19.9678, lng: -44.1983, city: "Betim", uf: "MG" },
-            { id: "ifmg-santaluzia", name: "IFMG (Santa Luzia)", inst: "IFMG", lat: -19.7692, lng: -43.8514, city: "Santa Luzia", uf: "MG" },
-            { id: "ifmg-sabara", name: "IFMG (Sabará)", inst: "IFMG", lat: -19.8883, lng: -43.8072, city: "Sabará", uf: "MG" },
-            { id: "ifmg-neves", name: "IFMG (Ribeirão das Neves)", inst: "IFMG", lat: -19.7672, lng: -44.0872, city: "Ribeirão das Neves", uf: "MG" },
-            { id: "ifmg-ibirite", name: "IFMG (Ibirité)", inst: "IFMG", lat: -20.0219, lng: -44.0589, city: "Ibirité", uf: "MG" },
-            { id: "ifmg-formiga", name: "IFMG (Formiga)", inst: "IFMG", lat: -20.4636, lng: -45.4264, city: "Formiga", uf: "MG" },
-            { id: "ifmg-arcos", name: "IFMG (Arcos)", inst: "IFMG", lat: -20.2894, lng: -45.5394, city: "Arcos", uf: "MG" },
-            { id: "ifmg-bambui", name: "IFMG (Bambuí)", inst: "IFMG", lat: -20.0228, lng: -45.9769, city: "Bambuí", uf: "MG" },
-            { id: "ifmg-piumhi", name: "IFMG (Piumhi)", inst: "IFMG", lat: -20.4650, lng: -45.9583, city: "Piumhi", uf: "MG" },
-            { id: "ifmg-govvaladares", name: "IFMG (Governador Valadares)", inst: "IFMG", lat: -18.8511, lng: -41.9494, city: "Governador Valadares", uf: "MG" },
-            { id: "ifmg-sje", name: "IFMG (São João Evangelista)", inst: "IFMG", lat: -18.5494, lng: -42.7639, city: "São João Evangelista", uf: "MG" },
+            // IFMG (17 Campi Mapeados)
+            { id: "ifmg-ouro-preto", name: "IFMG Campus Ouro Preto", shortName: "IFMG Ouro Preto", city: "Ouro Preto", uf: "MG", lat: -20.3856, lng: -43.5036, network: "IFMG" },
+            { id: "ifmg-congonhas", name: "IFMG Campus Congonhas", shortName: "IFMG Congonhas", city: "Congonhas", uf: "MG", lat: -20.4994, lng: -43.8569, network: "IFMG" },
+            { id: "ifmg-betim", name: "IFMG Campus Betim", shortName: "IFMG Betim", city: "Betim", uf: "MG", lat: -19.9678, lng: -44.1983, network: "IFMG" },
+            { id: "ifmg-ouro-branco", name: "IFMG Campus Ouro Branco", shortName: "IFMG Ouro Branco", city: "Ouro Branco", uf: "MG", lat: -20.5231, lng: -43.6942, network: "IFMG" },
+            { id: "ifmg-conselheiro-lafaiete", name: "IFMG Campus Conselheiro Lafaiete", shortName: "IFMG Lafaiete", city: "Conselheiro Lafaiete", uf: "MG", lat: -20.6611, lng: -43.7861, network: "IFMG" },
+            { id: "ifmg-ponte-nova", name: "IFMG Campus Ponte Nova", shortName: "IFMG Ponte Nova", city: "Ponte Nova", uf: "MG", lat: -20.4114, lng: -42.9031, network: "IFMG" },
+            { id: "ifmg-itabirito", name: "IFMG Campus Itabirito", shortName: "IFMG Itabirito", city: "Itabirito", uf: "MG", lat: -20.2533, lng: -43.8011, network: "IFMG" },
+            { id: "ifmg-ipatinga", name: "IFMG Campus Ipatinga", shortName: "IFMG Ipatinga", city: "Ipatinga", uf: "MG", lat: -19.4792, lng: -42.5311, network: "IFMG" },
+            { id: "ifmg-santa-luzia", name: "IFMG Campus Santa Luzia", shortName: "IFMG Santa Luzia", city: "Santa Luzia", uf: "MG", lat: -19.7694, lng: -43.8511, network: "IFMG" },
+            { id: "ifmg-sabara", name: "IFMG Campus Sabará", shortName: "IFMG Sabará", city: "Sabará", uf: "MG", lat: -19.8889, lng: -43.8075, network: "IFMG" },
+            { id: "ifmg-ribeirao-das-neves", name: "IFMG Campus Ribeirão das Neves", shortName: "IFMG Neves", city: "Ribeirão das Neves", uf: "MG", lat: -19.7672, lng: -44.0872, network: "IFMG" },
+            { id: "ifmg-ibirite", name: "IFMG Campus Ibirité", shortName: "IFMG Ibirité", city: "Ibirité", uf: "MG", lat: -20.0219, lng: -44.0589, network: "IFMG" },
+            { id: "ifmg-formiga", name: "IFMG Campus Formiga", shortName: "IFMG Formiga", city: "Formiga", uf: "MG", lat: -20.4636, lng: -45.4264, network: "IFMG" },
+            { id: "ifmg-bambui", name: "IFMG Campus Bambuí", shortName: "IFMG Bambuí", city: "Bambuí", uf: "MG", lat: -20.0228, lng: -45.9769, network: "IFMG" },
+            { id: "ifmg-arcos", name: "IFMG Campus Arcos", shortName: "IFMG Arcos", city: "Arcos", uf: "MG", lat: -20.2894, lng: -45.5392, network: "IFMG" },
+            { id: "ifmg-piumhi", name: "IFMG Campus Piumhi", shortName: "IFMG Piumhi", city: "Piumhi", uf: "MG", lat: -20.4658, lng: -45.9589, network: "IFMG" },
+            { id: "ifmg-gv", name: "IFMG Campus Governador Valadares", shortName: "IFMG Gov. Valadares", city: "Governador Valadares", uf: "MG", lat: -18.8511, lng: -41.9494, network: "IFMG" },
+            { id: "ifmg-sje", name: "IFMG Campus São João Evangelista", shortName: "IFMG S. J. Evangelista", city: "São João Evangelista", uf: "MG", lat: -18.5494, lng: -42.7639, network: "IFMG" },
 
             // IFNMG (Norte de Minas)
-            { id: "ifnmg-montesclaros", name: "IFNMG (Montes Claros)", inst: "IFNMG", lat: -16.7350, lng: -43.8617, city: "Montes Claros", uf: "MG" },
-            { id: "ifnmg-pirapora", name: "IFNMG (Pirapora)", inst: "IFNMG", lat: -17.3575, lng: -44.9419, city: "Pirapora", uf: "MG" },
-            { id: "ifnmg-almenara", name: "IFNMG (Almenara)", inst: "IFNMG", lat: -16.1833, lng: -40.6944, city: "Almenara", uf: "MG" },
-            { id: "ifnmg-aracuai", name: "IFNMG (Araçuaí)", inst: "IFNMG", lat: -16.8528, lng: -42.0678, city: "Araçuaí", uf: "MG" },
-            { id: "ifnmg-arinos", name: "IFNMG (Arinos)", inst: "IFNMG", lat: -15.9167, lng: -46.1056, city: "Arinos", uf: "MG" },
-            { id: "ifnmg-diamantina", name: "IFNMG (Diamantina)", inst: "IFNMG", lat: -18.2439, lng: -43.6031, city: "Diamantina", uf: "MG" },
-            { id: "ifnmg-janauba", name: "IFNMG (Janaúba)", inst: "IFNMG", lat: -15.8028, lng: -43.3089, city: "Janaúba", uf: "MG" },
-            { id: "ifnmg-januaria", name: "IFNMG (Januária)", inst: "IFNMG", lat: -15.4833, lng: -44.3667, city: "Januária", uf: "MG" },
-            { id: "ifnmg-porteirinha", name: "IFNMG (Porteirinha)", inst: "IFNMG", lat: -15.7431, lng: -43.0289, city: "Porteirinha", uf: "MG" },
-            { id: "ifnmg-salinas", name: "IFNMG (Salinas)", inst: "IFNMG", lat: -16.1708, lng: -42.2989, city: "Salinas", uf: "MG" },
-            { id: "ifnmg-teofilo", name: "IFNMG (Teófilo Otoni)", inst: "IFNMG", lat: -17.8575, lng: -41.5053, city: "Teófilo Otoni", uf: "MG" },
+            { id: "ifnmg-montes-claros", name: "IFNMG Campus Montes Claros", shortName: "IFNMG Montes Claros", city: "Montes Claros", uf: "MG", lat: -16.7350, lng: -43.8617, network: "IFNMG" },
+            { id: "ifnmg-pirapora", name: "IFNMG Campus Pirapora", shortName: "IFNMG Pirapora", city: "Pirapora", uf: "MG", lat: -17.3575, lng: -44.9419, network: "IFNMG" },
+            { id: "ifnmg-almenara", name: "IFNMG Campus Almenara", shortName: "IFNMG Almenara", city: "Almenara", uf: "MG", lat: -16.1833, lng: -40.6944, network: "IFNMG" },
+            { id: "ifnmg-aracuai", name: "IFNMG Campus Araçuaí", shortName: "IFNMG Araçuaí", city: "Araçuaí", uf: "MG", lat: -16.8528, lng: -42.0678, network: "IFNMG" },
+            { id: "ifnmg-arinos", name: "IFNMG Campus Arinos", shortName: "IFNMG Arinos", city: "Arinos", uf: "MG", lat: -15.9167, lng: -46.1056, network: "IFNMG" },
+            { id: "ifnmg-diamantina", name: "IFNMG Campus Diamantina", shortName: "IFNMG Diamantina", city: "Diamantina", uf: "MG", lat: -18.2439, lng: -43.6031, network: "IFNMG" },
+            { id: "ifnmg-janauba", name: "IFNMG Campus Janaúba", shortName: "IFNMG Janaúba", city: "Janaúba", uf: "MG", lat: -15.8028, lng: -43.3089, network: "IFNMG" },
+            { id: "ifnmg-januaria", name: "IFNMG Campus Januária", shortName: "IFNMG Januária", city: "Januária", uf: "MG", lat: -15.4833, lng: -44.3667, network: "IFNMG" },
+            { id: "ifnmg-porteirinha", name: "IFNMG Campus Porteirinha", shortName: "IFNMG Porteirinha", city: "Porteirinha", uf: "MG", lat: -15.7431, lng: -43.0289, network: "IFNMG" },
+            { id: "ifnmg-salinas", name: "IFNMG Campus Salinas", shortName: "IFNMG Salinas", city: "Salinas", uf: "MG", lat: -16.1708, lng: -42.2989, network: "IFNMG" },
+            { id: "ifnmg-teofilo-otoni", name: "IFNMG Campus Teófilo Otoni", shortName: "IFNMG Teófilo Otoni", city: "Teófilo Otoni", uf: "MG", lat: -17.8575, lng: -41.5053, network: "IFNMG" },
 
             // IFTM (Triângulo Mineiro)
-            { id: "iftm-uberaba", name: "IFTM (Uberaba)", inst: "IFTM", lat: -19.7472, lng: -47.9392, city: "Uberaba", uf: "MG" },
-            { id: "iftm-uberlandia", name: "IFTM (Uberlândia)", inst: "IFTM", lat: -18.9186, lng: -48.2772, city: "Uberlândia", uf: "MG" },
-            { id: "iftm-setelagoas", name: "IFTM (Sete Lagoas)", inst: "IFTM", lat: -19.4658, lng: -44.2467, city: "Sete Lagoas", uf: "MG" },
+            { id: "iftm-uberlandia", name: "IFTM Campus Uberlândia", shortName: "IFTM Uberlândia", city: "Uberlândia", uf: "MG", lat: -18.9186, lng: -48.2772, network: "IFTM" },
+            { id: "iftm-uberaba", name: "IFTM Campus Uberaba", shortName: "IFTM Uberaba", city: "Uberaba", uf: "MG", lat: -19.7472, lng: -47.9392, network: "IFTM" },
+            { id: "iftm-ituiutaba", name: "IFTM Campus Ituiutaba", shortName: "IFTM Ituiutaba", city: "Ituiutaba", uf: "MG", lat: -18.9744, lng: -49.4631, network: "IFTM" },
+            { id: "iftm-patos-de-minas", name: "IFTM Campus Patos de Minas", shortName: "IFTM Patos de Minas", city: "Patos de Minas", uf: "MG", lat: -18.5789, lng: -46.5181, network: "IFTM" },
+            { id: "iftm-patrocinio", name: "IFTM Campus Patrocínio", shortName: "IFTM Patrocínio", city: "Patrocínio", uf: "MG", lat: -18.9439, lng: -46.9928, network: "IFTM" },
+            { id: "iftm-paracatu", name: "IFTM Campus Paracatu", shortName: "IFTM Paracatu", city: "Paracatu", uf: "MG", lat: -17.2219, lng: -46.8753, network: "IFTM" },
+            { id: "iftm-campina-verde", name: "IFTM Campus Campina Verde", shortName: "IFTM Campina Verde", city: "Campina Verde", uf: "MG", lat: -19.5358, lng: -49.4864, network: "IFTM" },
+            { id: "iftm-sete-lagoas", name: "IFTM Campus Sete Lagoas", shortName: "IFTM Sete Lagoas", city: "Sete Lagoas", uf: "MG", lat: -19.4658, lng: -44.2467, network: "IFTM" },
 
-            // Rio de Janeiro
-            { id: "cefetrj-maracana", name: "CEFET-RJ (Maracanã)", inst: "CEFET-RJ", lat: -22.9122, lng: -43.2247, city: "Rio de Janeiro", uf: "RJ" },
-            { id: "cefetrj-novaiguacu", name: "CEFET-RJ (Nova Iguaçu)", inst: "CEFET-RJ", lat: -22.7561, lng: -43.4608, city: "Nova Iguaçu", uf: "RJ" },
-            { id: "cefetrj-petropolis", name: "CEFET-RJ (Petrópolis)", inst: "CEFET-RJ", lat: -22.5050, lng: -43.1789, city: "Petrópolis", uf: "RJ" },
-            { id: "ctur-seropedica", name: "CTUR (UFRRJ Seropédica)", inst: "CTUR", lat: -22.7667, lng: -43.7000, city: "Seropédica", uf: "RJ" },
-            { id: "ifrj-nilopolis", name: "IFRJ (Nilópolis)", inst: "IFRJ", lat: -22.8089, lng: -43.4150, city: "Nilópolis", uf: "RJ" },
-            { id: "ifrj-caxias", name: "IFRJ (Duque de Caxias)", inst: "IFRJ", lat: -22.7856, lng: -43.3117, city: "Duque de Caxias", uf: "RJ" },
-            { id: "ifrj-niteroi", name: "IFRJ (Niterói)", inst: "IFRJ", lat: -22.8833, lng: -43.1036, city: "Niterói", uf: "RJ" },
-            { id: "iff-macae", name: "IFF (Macaé)", inst: "IFF", lat: -22.3769, lng: -41.7869, city: "Macaé", uf: "RJ" },
-            { id: "ifrj-voltaredonda", name: "IFRJ (Volta Redonda)", inst: "IFRJ", lat: -22.5231, lng: -44.1042, city: "Volta Redonda", uf: "RJ" },
-            { id: "iff-itaperuna", name: "IFF (Itaperuna)", inst: "IFF", lat: -21.2056, lng: -41.8906, city: "Itaperuna", uf: "RJ" },
-            { id: "iff-cabofrio", name: "IFF (Cabo Frio)", inst: "IFF", lat: -22.8894, lng: -42.0289, city: "Cabo Frio", uf: "RJ" },
+            // IFSULDEMINAS
+            { id: "ifsul-pouso-alegre", name: "IFSULDEMINAS Campus Pouso Alegre", shortName: "IFSUL Pouso Alegre", city: "Pouso Alegre", uf: "MG", lat: -22.2300, lng: -45.9331, network: "IFSULDEMINAS" },
+            { id: "ifsul-pocos-de-caldas", name: "IFSULDEMINAS Campus Poços de Caldas", shortName: "IFSUL Poços de Caldas", city: "Poços de Caldas", uf: "MG", lat: -21.7878, lng: -46.5614, network: "IFSULDEMINAS" },
+            { id: "ifsul-passos", name: "IFSULDEMINAS Campus Passos", shortName: "IFSUL Passos", city: "Passos", uf: "MG", lat: -20.7208, lng: -46.6111, network: "IFSULDEMINAS" },
+            { id: "ifsul-inconfidentes", name: "IFSULDEMINAS Campus Inconfidentes", shortName: "IFSUL Inconfidentes", city: "Inconfidentes", uf: "MG", lat: -22.3183, lng: -46.3278, network: "IFSULDEMINAS" },
+            { id: "ifsul-machado", name: "IFSULDEMINAS Campus Machado", shortName: "IFSUL Machado", city: "Machado", uf: "MG", lat: -21.6744, lng: -45.9197, network: "IFSULDEMINAS" },
+            { id: "ifsul-muzambinho", name: "IFSULDEMINAS Campus Muzambinho", shortName: "IFSUL Muzambinho", city: "Muzambinho", uf: "MG", lat: -21.3708, lng: -46.5256, network: "IFSULDEMINAS" },
+            { id: "ifsul-tres-coracoes", name: "IFSULDEMINAS Campus Três Corações", shortName: "IFSUL Três Corações", city: "Três Corações", uf: "MG", lat: -21.6936, lng: -45.2578, network: "IFSULDEMINAS" },
+            { id: "ifsul-itajuba", name: "IFSULDEMINAS Campus Itajubá", shortName: "IFSUL Itajubá", city: "Itajubá", uf: "MG", lat: -22.4264, lng: -45.4531, network: "IFSULDEMINAS" },
+            { id: "ifsul-carmo-de-minas", name: "IFSULDEMINAS Campus Carmo de Minas", shortName: "IFSUL Carmo de Minas", city: "Carmo de Minas", uf: "MG", lat: -22.1228, lng: -45.1308, network: "IFSULDEMINAS" },
+            { id: "ifsul-boa-esperanca", name: "IFSULDEMINAS Campus Boa Esperança", shortName: "IFSUL Boa Esperança", city: "Boa Esperança", uf: "MG", lat: -21.0928, lng: -45.5658, network: "IFSULDEMINAS" },
 
-            // São Paulo
-            { id: "ifsp-saopaulo", name: "IFSP (São Paulo Canindé)", inst: "IFSP", lat: -23.5239, lng: -46.6261, city: "São Paulo", uf: "SP" },
-            { id: "ifsp-campinas", name: "IFSP (Campinas)", inst: "IFSP", lat: -22.9056, lng: -47.0608, city: "Campinas", uf: "SP" },
+            // RIO DE JANEIRO (CEFET-RJ, CTUR, IFRJ, IFF, Pedro II)
+            { id: "cefetrj-maracana", name: "CEFET-RJ Campus Maracanã", shortName: "CEFET-RJ Maracanã", city: "Rio de Janeiro", uf: "RJ", lat: -22.9122, lng: -43.2247, network: "CEFET-RJ" },
+            { id: "cefetrj-maria-da-graca", name: "CEFET-RJ Campus Maria da Graça", shortName: "CEFET-RJ M. da Graça", city: "Rio de Janeiro", uf: "RJ", lat: -22.8808, lng: -43.2750, network: "CEFET-RJ" },
+            { id: "cefetrj-nova-iguacu", name: "CEFET-RJ Campus Nova Iguaçu", shortName: "CEFET Nova Iguaçu", city: "Nova Iguaçu", uf: "RJ", lat: -22.7561, lng: -43.4608, network: "CEFET-RJ" },
+            { id: "cefetrj-itaguai", name: "CEFET-RJ Campus Itaguaí", shortName: "CEFET Itaguaí", city: "Itaguaí", uf: "RJ", lat: -22.8608, lng: -43.7750, network: "CEFET-RJ" },
+            { id: "cefetrj-petropolis", name: "CEFET-RJ Campus Petrópolis", shortName: "CEFET Petrópolis", city: "Petrópolis", uf: "RJ", lat: -22.5050, lng: -43.1789, network: "CEFET-RJ" },
+            { id: "cefetrj-nova-friburgo", name: "CEFET-RJ Campus Nova Friburgo", shortName: "CEFET Nova Friburgo", city: "Nova Friburgo", uf: "RJ", lat: -22.2819, lng: -42.5311, network: "CEFET-RJ" },
+            { id: "cefetrj-valenca", name: "CEFET-RJ Campus Valença", shortName: "CEFET Valença", city: "Valença", uf: "RJ", lat: -22.2458, lng: -43.7028, network: "CEFET-RJ" },
+            { id: "ctur-seropedica", name: "CTUR - Colégio Técnico da UFRRJ", shortName: "CTUR Seropédica", city: "Seropédica", uf: "RJ", lat: -22.7667, lng: -43.7000, network: "CTUR" },
+            { id: "pedroii-rj", name: "Colégio Pedro II", shortName: "Colégio Pedro II", city: "Rio de Janeiro", uf: "RJ", lat: -22.8986, lng: -43.2231, network: "Pedro II" },
+            
+            // IFRJ (11 Campi)
+            { id: "ifrj-rio", name: "IFRJ Campus Rio de Janeiro (Maracanã)", shortName: "IFRJ Maracanã", city: "Rio de Janeiro", uf: "RJ", lat: -22.9133, lng: -43.2206, network: "IFRJ" },
+            { id: "ifrj-nilopolis", name: "IFRJ Campus Nilópolis", shortName: "IFRJ Nilópolis", city: "Nilópolis", uf: "RJ", lat: -22.8094, lng: -43.4144, network: "IFRJ" },
+            { id: "ifrj-duque-de-caxias", name: "IFRJ Campus Duque de Caxias", shortName: "IFRJ Duque de Caxias", city: "Duque de Caxias", uf: "RJ", lat: -22.7856, lng: -43.3061, network: "IFRJ" },
+            { id: "ifrj-niteroi", name: "IFRJ Campus Niterói", shortName: "IFRJ Niterói", city: "Niterói", uf: "RJ", lat: -22.8833, lng: -43.1039, network: "IFRJ" },
+            { id: "ifrj-sao-goncalo", name: "IFRJ Campus São Gonçalo", shortName: "IFRJ São Gonçalo", city: "São Gonçalo", uf: "RJ", lat: -22.8269, lng: -43.0539, network: "IFRJ" },
+            { id: "ifrj-volta-redonda", name: "IFRJ Campus Volta Redonda", shortName: "IFRJ Volta Redonda", city: "Volta Redonda", uf: "RJ", lat: -22.5231, lng: -44.1042, network: "IFRJ" },
+            { id: "ifrj-arraial-do-cabo", name: "IFRJ Campus Arraial do Cabo", shortName: "IFRJ Arraial do Cabo", city: "Arraial do Cabo", uf: "RJ", lat: -22.9661, lng: -42.0278, network: "IFRJ" },
+            { id: "ifrj-paracambi", name: "IFRJ Campus Paracambi", shortName: "IFRJ Paracambi", city: "Paracambi", uf: "RJ", lat: -22.6089, lng: -43.7128, network: "IFRJ" },
+            { id: "ifrj-pinheiral", name: "IFRJ Campus Pinheiral", shortName: "IFRJ Pinheiral", city: "Pinheiral", uf: "RJ", lat: -22.5214, lng: -44.0008, network: "IFRJ" },
+            { id: "ifrj-resende", name: "IFRJ Campus Resende", shortName: "IFRJ Resende", city: "Resende", uf: "RJ", lat: -22.4689, lng: -44.4467, network: "IFRJ" },
+            { id: "ifrj-frontin", name: "IFRJ Campus Engenheiro Paulo de Frontin", shortName: "IFRJ Paulo de Frontin", city: "Engenheiro Paulo de Frontin", uf: "RJ", lat: -22.5511, lng: -43.6806, network: "IFRJ" },
 
-            // Espírito Santo
-            { id: "ifes-vitoria", name: "IFES (Vitória)", inst: "IFES", lat: -20.3155, lng: -40.3128, city: "Vitória", uf: "ES" },
-            { id: "ifes-vilavelha", name: "IFES (Vila Velha)", inst: "IFES", lat: -20.3297, lng: -40.2925, city: "Vila Velha", uf: "ES" },
-            { id: "ifes-colatina", name: "IFES (Colatina)", inst: "IFES", lat: -19.5392, lng: -40.6308, city: "Colatina", uf: "ES" },
-            { id: "ifes-cachoeiro", name: "IFES (Cachoeiro de Itapemirim)", inst: "IFES", lat: -20.8489, lng: -41.1128, city: "Cachoeiro de Itapemirim", uf: "ES" },
+            // IFF (Fluminense)
+            { id: "iff-campos", name: "IFF Campus Campos Centro", shortName: "IFF Campos", city: "Campos dos Goytacazes", uf: "RJ", lat: -21.7539, lng: -41.3239, network: "IFF" },
+            { id: "iff-macae", name: "IFF Campus Macaé", shortName: "IFF Macaé", city: "Macaé", uf: "RJ", lat: -22.3769, lng: -41.7869, network: "IFF" },
+            { id: "iff-cabo-frio", name: "IFF Campus Cabo Frio", shortName: "IFF Cabo Frio", city: "Cabo Frio", uf: "RJ", lat: -22.8894, lng: -42.0289, network: "IFF" },
+            { id: "iff-itaperuna", name: "IFF Campus Itaperuna", shortName: "IFF Itaperuna", city: "Itaperuna", uf: "RJ", lat: -21.2056, lng: -41.8875, network: "IFF" },
+            { id: "iff-padua", name: "IFF Campus Santo Antônio de Pádua", shortName: "IFF Pádua", city: "Santo Antônio de Pádua", uf: "RJ", lat: -21.5433, lng: -42.1794, network: "IFF" },
+            { id: "iff-bom-jesus", name: "IFF Campus Bom Jesus do Itabapoana", shortName: "IFF Bom Jesus", city: "Bom Jesus do Itabapoana", uf: "RJ", lat: -21.1378, lng: -41.6789, network: "IFF" },
 
-            // Bahia
-            { id: "ifba-salvador", name: "IFBA (Salvador Barbalho)", inst: "IFBA", lat: -12.9667, lng: -38.5036, city: "Salvador", uf: "BA" },
-            { id: "ifba-feiradesantana", name: "IFBA (Feira de Santana)", inst: "IFBA", lat: -12.2667, lng: -38.9667, city: "Feira de Santana", uf: "BA" },
+            // SÃO PAULO (IFSP - Campi Principais)
+            { id: "ifsp-saopaulo", name: "IFSP Campus São Paulo (Canindé)", shortName: "IFSP São Paulo", city: "São Paulo", uf: "SP", lat: -23.5239, lng: -46.6261, network: "IFSP" },
+            { id: "ifsp-campinas", name: "IFSP Campus Campinas", shortName: "IFSP Campinas", city: "Campinas", uf: "SP", lat: -22.9056, lng: -47.0608, network: "IFSP" },
+            { id: "ifsp-guarulhos", name: "IFSP Campus Guarulhos", shortName: "IFSP Guarulhos", city: "Guarulhos", uf: "SP", lat: -23.4628, lng: -46.5333, network: "IFSP" },
+            { id: "ifsp-sorocaba", name: "IFSP Campus Sorocaba", shortName: "IFSP Sorocaba", city: "Sorocaba", uf: "SP", lat: -23.5017, lng: -47.4581, network: "IFSP" },
+            { id: "ifsp-sjc", name: "IFSP Campus São José dos Campos", shortName: "IFSP S. J. dos Campos", city: "São José dos Campos", uf: "SP", lat: -23.1794, lng: -45.8869, network: "IFSP" },
 
-            // Rio Grande do Sul
-            { id: "iffar-santamaria", name: "IFFar (Santa Maria)", inst: "IFFar", lat: -29.6842, lng: -53.8069, city: "Santa Maria", uf: "RS" },
+            // ESPÍRITO SANTO (IFES)
+            { id: "ifes-vitoria", name: "IFES Campus Vitória", shortName: "IFES Vitória", city: "Vitória", uf: "ES", lat: -20.3155, lng: -40.3128, network: "IFES" },
+            { id: "ifes-vila-velha", name: "IFES Campus Vila Velha", shortName: "IFES Vila Velha", city: "Vila Velha", uf: "ES", lat: -20.3297, lng: -40.2925, network: "IFES" },
+            { id: "ifes-serra", name: "IFES Campus Serra", shortName: "IFES Serra", city: "Serra", uf: "ES", lat: -20.1286, lng: -40.3078, network: "IFES" },
+            { id: "ifes-cachoeiro", name: "IFES Campus Cachoeiro de Itapemirim", shortName: "IFES Cachoeiro", city: "Cachoeiro de Itapemirim", uf: "ES", lat: -20.8489, lng: -41.1128, network: "IFES" },
 
-            // Distrito Federal / Outros
-            { id: "ifb-brasilia", name: "IFB (Brasília / Ceilândia)", inst: "IFB", lat: -15.8208, lng: -48.1117, city: "Ceilândia", uf: "DF" },
-            { id: "ifce-fortaleza", name: "IFCE (Fortaleza)", inst: "IFCE", lat: -3.7172, lng: -38.5434, city: "Fortaleza", uf: "CE" },
-            { id: "ifap-macapa", name: "IFAP (Macapá)", inst: "IFAP", lat: 0.0349, lng: -51.0694, city: "Macapá", uf: "AP" },
-            { id: "ifc-brusque", name: "IFC (Brusque)", inst: "IFC", lat: -27.0978, lng: -48.9106, city: "Brusque", uf: "SC" },
-            { id: "ifpb-joaopessoa", name: "IFPB (João Pessoa)", inst: "IFPB", lat: -7.1195, lng: -34.8450, city: "João Pessoa", uf: "PB" },
-            { id: "ifpe-palmares", name: "IFPE (Palmares)", inst: "IFPE", lat: -8.6833, lng: -35.5833, city: "Palmares", uf: "PE" },
-            { id: "ifpa-trombetas", name: "IFPA (Porto Trombetas)", inst: "IFPA", lat: -1.4883, lng: -56.3867, city: "Porto Trombetas", uf: "PA" },
-            { id: "ifms-campogrande", name: "IFMS (Campo Grande)", inst: "IFMS", lat: -20.4697, lng: -54.6201, city: "Campo Grande", uf: "MS" }
+            // BAHIA (IFBA)
+            { id: "ifba-salvador", name: "IFBA Campus Salvador (Barbalho)", shortName: "IFBA Salvador", city: "Salvador", uf: "BA", lat: -12.9667, lng: -38.5036, network: "IFBA" },
+            { id: "ifba-feira", name: "IFBA Campus Feira de Santana", shortName: "IFBA Feira de Santana", city: "Feira de Santana", uf: "BA", lat: -12.2667, lng: -38.9667, network: "IFBA" },
+
+            // RIO GRANDE DO SUL (IFFar)
+            { id: "iffar-santa-maria", name: "IFFar Reitoria & Polo Santa Maria", shortName: "IFFar Santa Maria", city: "Santa Maria", uf: "RS", lat: -29.6842, lng: -53.8069, network: "IFFar" }
         ];
 
-        // 2. Base Oficial dos 448 Alunos Auditados nas 139 Cidades
+        // BANCO DE DADOS DOS 448 ALUNOS (139 Cidades com Coordenadas Exatas)
         const verifiedCitiesData = [
             { name: "Belo Horizonte", uf: "MG", count: 29, lat: -19.9167, lng: -43.9345 },
             { name: "Juiz de Fora", uf: "MG", count: 26, lat: -21.7642, lng: -43.3497 },
             { name: "Leopoldina", uf: "MG", count: 15, lat: -21.5317, lng: -42.6433 },
             { name: "Rio de Janeiro", uf: "RJ", count: 14, lat: -22.9068, lng: -43.1729 },
             { name: "Contagem", uf: "MG", count: 14, lat: -19.9386, lng: -44.0531 },
-            { name: "Laranjal", uf: "MG", count: 14, lat: -21.3533, lng: -42.4867 },
+            { name: "Laranjal", uf: "MG", count: 14, lat: -21.3658, lng: -42.4706 },
             { name: "Congonhas", uf: "MG", count: 13, lat: -20.4994, lng: -43.8569 },
             { name: "Betim", uf: "MG", count: 12, lat: -19.9678, lng: -44.1983 },
-            { name: "Jequeri", uf: "MG", count: 9, lat: -20.4439, lng: -42.6681 },
+            { name: "Jequeri", uf: "MG", count: 9, lat: -20.4419, lng: -42.6597 },
             { name: "Cataguases", uf: "MG", count: 9, lat: -21.3889, lng: -42.6967 },
             { name: "Montes Claros", uf: "MG", count: 9, lat: -16.7350, lng: -43.8617 },
             { name: "Conselheiro Lafaiete", uf: "MG", count: 8, lat: -20.6611, lng: -43.7861 },
-            { name: "João Monlevade", uf: "MG", count: 8, lat: -19.8117, lng: -43.1739 },
-            { name: "Senador Firmino", uf: "MG", count: 7, lat: -20.9103, lng: -43.0886 },
-            { name: "Ipatinga", uf: "MG", count: 6, lat: -19.4794, lng: -42.5317 },
-            { name: "Oratórios", uf: "MG", count: 6, lat: -20.4358, lng: -42.8122 },
-            { name: "Urucânia", uf: "MG", count: 6, lat: -20.3547, lng: -42.7667 },
-            { name: "Piraúba", uf: "MG", count: 6, lat: -21.2858, lng: -43.0231 },
-            { name: "Araponga", uf: "MG", count: 5, lat: -20.6653, lng: -42.5258 },
+            { name: "João Monlevade", uf: "MG", count: 8, lat: -19.8114, lng: -43.1731 },
+            { name: "Senador Firmino", uf: "MG", count: 7, lat: -20.9094, lng: -43.0883 },
+            { name: "Ipatinga", uf: "MG", count: 6, lat: -19.4792, lng: -42.5311 },
+            { name: "Oratórios", uf: "MG", count: 6, lat: -20.4319, lng: -42.8097 },
+            { name: "Urucânia", uf: "MG", count: 6, lat: -20.3547, lng: -42.7489 },
+            { name: "Piraúba", uf: "MG", count: 6, lat: -21.2828, lng: -43.0239 },
+            { name: "Araponga", uf: "MG", count: 5, lat: -20.6592, lng: -42.5297 },
             { name: "Muriaé", uf: "MG", count: 5, lat: -21.1306, lng: -42.3664 },
-            { name: "Ouro Branco", uf: "MG", count: 5, lat: -20.5233, lng: -43.6942 },
-            { name: "Santa Luzia", uf: "MG", count: 5, lat: -19.7692, lng: -43.8514 },
-            { name: "Visconde do Rio Branco", uf: "MG", count: 5, lat: -20.9739, lng: -42.8389 },
-            { name: "Alvinópolis", uf: "MG", count: 4, lat: -20.1067, lng: -43.0489 },
+            { name: "Ouro Branco", uf: "MG", count: 5, lat: -20.5231, lng: -43.6942 },
+            { name: "Santa Luzia", uf: "MG", count: 5, lat: -19.7694, lng: -43.8511 },
+            { name: "Visconde do Rio Branco", uf: "MG", count: 5, lat: -20.9731, lng: -42.8389 },
+            { name: "Alvinópolis", uf: "MG", count: 4, lat: -20.1508, lng: -43.0489 },
             { name: "Barroso", uf: "MG", count: 4, lat: -21.1878, lng: -43.9758 },
-            { name: "Bom Jardim de Minas", uf: "MG", count: 4, lat: -21.9442, lng: -44.1906 },
+            { name: "Bom Jardim de Minas", uf: "MG", count: 4, lat: -21.9472, lng: -44.1914 },
             { name: "Itabirito", uf: "MG", count: 4, lat: -20.2533, lng: -43.8011 },
-            { name: "Juatuba", uf: "MG", count: 4, lat: -19.9519, lng: -44.3431 },
-            { name: "Ponte Nova", uf: "MG", count: 4, lat: -20.4111, lng: -42.9033 },
+            { name: "Juatuba", uf: "MG", count: 4, lat: -19.9525, lng: -44.3431 },
+            { name: "Ponte Nova", uf: "MG", count: 4, lat: -20.4114, lng: -42.9031 },
             { name: "Ubá", uf: "MG", count: 4, lat: -21.1203, lng: -42.9431 },
             { name: "Viçosa", uf: "MG", count: 4, lat: -20.7583, lng: -42.8797 },
-            { name: "Niterói", uf: "RJ", count: 4, lat: -22.8833, lng: -43.1036 },
-            { name: "Dionísio", uf: "MG", count: 4, lat: -19.8436, lng: -42.7783 },
-            { name: "Barra Longa", uf: "MG", count: 3, lat: -20.2789, lng: -42.9867 },
-            { name: "Belford Roxo", uf: "RJ", count: 3, lat: -22.7639, lng: -43.3997 },
-            { name: "Carangola", uf: "MG", count: 3, lat: -20.7331, lng: -42.0294 },
+            { name: "Niterói", uf: "RJ", count: 4, lat: -22.8833, lng: -43.1039 },
+            { name: "Dionísio", uf: "MG", count: 4, lat: -19.8439, lng: -42.7761 },
+            { name: "Barra Longa", uf: "MG", count: 3, lat: -20.2794, lng: -42.9819 },
+            { name: "Belford Roxo", uf: "RJ", count: 3, lat: -22.7644, lng: -43.3997 },
+            { name: "Carangola", uf: "MG", count: 3, lat: -20.7331, lng: -42.0289 },
             { name: "Divino", uf: "MG", count: 3, lat: -20.6128, lng: -42.1464 },
-            { name: "Florestal", uf: "MG", count: 3, lat: -19.8894, lng: -44.4319 },
-            { name: "Goianá", uf: "MG", count: 3, lat: -21.5283, lng: -43.1883 },
+            { name: "Florestal", uf: "MG", count: 3, lat: -19.8906, lng: -44.4286 },
+            { name: "Goianá", uf: "MG", count: 3, lat: -21.5369, lng: -43.1958 },
             { name: "Governador Valadares", uf: "MG", count: 3, lat: -18.8511, lng: -41.9494 },
-            { name: "Lamim", uf: "MG", count: 3, lat: -20.7831, lng: -43.4561 },
-            { name: "Nova Módica", uf: "MG", count: 3, lat: -18.5283, lng: -41.5036 },
-            { name: "Palma", uf: "MG", count: 3, lat: -21.4283, lng: -42.3167 },
-            { name: "Patrocínio do Muriaé", uf: "MG", count: 3, lat: -21.1089, lng: -42.2283 },
+            { name: "Lamim", uf: "MG", count: 3, lat: -20.7819, lng: -43.4358 },
+            { name: "Nova Módica", uf: "MG", count: 3, lat: -18.6658, lng: -41.4883 },
+            { name: "Palma", uf: "MG", count: 3, lat: -21.4244, lng: -42.3164 },
+            { name: "Patrocínio do Muriaé", uf: "MG", count: 3, lat: -21.0858, lng: -42.2344 },
             { name: "Ribeirão das Neves", uf: "MG", count: 3, lat: -19.7672, lng: -44.0872 },
-            { name: "São Domingos das Dores", uf: "MG", count: 3, lat: -19.4667, lng: -42.0333 },
+            { name: "São Domingos das Dores", uf: "MG", count: 3, lat: -19.4678, lng: -42.0469 },
             { name: "São Paulo", uf: "SP", count: 3, lat: -23.5505, lng: -46.6333 },
-            { name: "Coronel Fabriciano", uf: "MG", count: 2, lat: -19.5194, lng: -42.6289 },
-            { name: "Dom Silvério", uf: "MG", count: 2, lat: -20.1583, lng: -42.9667 },
-            { name: "Guanhães", uf: "MG", count: 2, lat: -18.7744, lng: -42.9317 },
-            { name: "Jaíba", uf: "MG", count: 2, lat: -15.3400, lng: -43.6731 },
-            { name: "Lima Duarte", uf: "MG", count: 2, lat: -21.8436, lng: -43.7925 },
+            { name: "Brusque", uf: "SC", count: 2, lat: -27.0981, lng: -48.9103 },
+            { name: "Campo Grande", uf: "MS", count: 1, lat: -20.4697, lng: -54.6201 },
+            { name: "Fortaleza", uf: "CE", count: 2, lat: -3.7172, lng: -38.5433 },
+            { name: "Guanhães", uf: "MG", count: 2, lat: -18.7758, lng: -42.9331 },
+            { name: "Jaíba", uf: "MG", count: 2, lat: -15.3375, lng: -43.6769 },
+            { name: "Lima Duarte", uf: "MG", count: 2, lat: -21.8436, lng: -43.7936 },
+            { name: "Macapá", uf: "AP", count: 2, lat: 0.0356, lng: -51.0705 },
             { name: "Macaé", uf: "RJ", count: 2, lat: -22.3769, lng: -41.7869 },
-            { name: "Mariana", uf: "MG", count: 2, lat: -20.3778, lng: -43.4161 },
-            { name: "Miracema", uf: "RJ", count: 2, lat: -21.4136, lng: -42.1969 },
-            { name: "Nilópolis", uf: "RJ", count: 2, lat: -22.8089, lng: -43.4150 },
+            { name: "Mariana", uf: "MG", count: 2, lat: -20.3778, lng: -43.4164 },
+            { name: "Miracema", uf: "RJ", count: 2, lat: -21.4128, lng: -42.1969 },
+            { name: "Nilópolis", uf: "RJ", count: 2, lat: -22.8094, lng: -43.4144 },
             { name: "Ouro Preto", uf: "MG", count: 2, lat: -20.3856, lng: -43.5036 },
             { name: "Pirapora", uf: "MG", count: 2, lat: -17.3575, lng: -44.9419 },
-            { name: "Recreio", uf: "MG", count: 2, lat: -21.5283, lng: -42.4667 },
-            { name: "Rio das Ostras", uf: "RJ", count: 2, lat: -22.5269, lng: -41.9450 },
+            { name: "Recreio", uf: "MG", count: 2, lat: -21.5283, lng: -42.4647 },
+            { name: "Rio das Ostras", uf: "RJ", count: 2, lat: -22.5269, lng: -41.9442 },
             { name: "Rio Pomba", uf: "MG", count: 2, lat: -21.2750, lng: -43.1814 },
-            { name: "Sabará", uf: "MG", count: 2, lat: -19.8883, lng: -43.8072 },
-            { name: "Santa Bárbara", uf: "MG", count: 2, lat: -20.0417, lng: -43.4139 },
-            { name: "Santa Cruz do Escalvado", uf: "MG", count: 2, lat: -20.4069, lng: -42.8228 },
-            { name: "São Domingos do Prata", uf: "MG", count: 2, lat: -19.8653, lng: -42.9667 },
-            { name: "São José do Jacuri", uf: "MG", count: 2, lat: -18.2567, lng: -42.6667 },
+            { name: "Sabará", uf: "MG", count: 2, lat: -19.8889, lng: -43.8075 },
+            { name: "Santa Bárbara", uf: "MG", count: 2, lat: -20.0439, lng: -43.4150 },
+            { name: "Santa Cruz do Escalvado", uf: "MG", count: 2, lat: -20.2389, lng: -42.8206 },
+            { name: "São Domingos do Prata", uf: "MG", count: 2, lat: -19.8661, lng: -42.9667 },
+            { name: "São José do Jacuri", uf: "MG", count: 2, lat: -18.2708, lng: -42.6647 },
             { name: "São Pedro da Aldeia", uf: "RJ", count: 2, lat: -22.8406, lng: -42.1039 },
-            { name: "Sardoá", uf: "MG", count: 2, lat: -18.7611, lng: -42.3458 },
+            { name: "Sardoá", uf: "MG", count: 2, lat: -18.7619, lng: -42.3486 },
             { name: "Sete Lagoas", uf: "MG", count: 2, lat: -19.4658, lng: -44.2467 },
-            { name: "Tarumirim", uf: "MG", count: 2, lat: -19.2806, lng: -42.0125 },
+            { name: "Tarumirim", uf: "MG", count: 2, lat: -19.2819, lng: -41.9739 },
             { name: "Uberaba", uf: "MG", count: 2, lat: -19.7472, lng: -47.9392 },
             { name: "Uberlândia", uf: "MG", count: 2, lat: -18.9186, lng: -48.2772 },
-            { name: "Fortaleza", uf: "CE", count: 2, lat: -3.7172, lng: -38.5434 },
-            { name: "Macapá", uf: "AP", count: 2, lat: 0.0349, lng: -51.0694 },
-            { name: "Brusque", uf: "SC", count: 2, lat: -27.0978, lng: -48.9106 },
-            { name: "Abre Campo", uf: "MG", count: 1, lat: -20.2989, lng: -42.4764 },
-            { name: "Acaiaca", uf: "MG", count: 1, lat: -20.3589, lng: -43.1436 },
-            { name: "Alagoa", uf: "MG", count: 1, lat: -22.1694, lng: -44.8861 },
+            { name: "Coronel Fabriciano", uf: "MG", count: 2, lat: -19.5214, lng: -42.6289 },
+            { name: "Dom Silvério", uf: "MG", count: 2, lat: -20.1689, lng: -42.9731 },
+            { name: "Abre Campo", uf: "MG", count: 1, lat: -20.3006, lng: -42.4744 },
+            { name: "Acaiaca", uf: "MG", count: 1, lat: -20.3606, lng: -43.1444 },
+            { name: "Alagoa", uf: "MG", count: 1, lat: -22.1706, lng: -44.6406 },
             { name: "Araruama", uf: "RJ", count: 1, lat: -22.8731, lng: -42.3431 },
-            { name: "Arcos", uf: "MG", count: 1, lat: -20.2894, lng: -45.5394 },
-            { name: "Argirita", uf: "MG", count: 1, lat: -21.5975, lng: -42.7933 },
-            { name: "Astolfo Dutra", uf: "MG", count: 1, lat: -21.3142, lng: -42.8681 },
+            { name: "Arcos", uf: "MG", count: 1, lat: -20.2894, lng: -45.5392 },
+            { name: "Argirita", uf: "MG", count: 1, lat: -21.6022, lng: -42.8436 },
+            { name: "Astolfo Dutra", uf: "MG", count: 1, lat: -21.3142, lng: -42.8686 },
             { name: "Barão de Cocais", uf: "MG", count: 1, lat: -19.9442, lng: -43.4864 },
             { name: "Barbacena", uf: "MG", count: 1, lat: -21.2258, lng: -43.7736 },
             { name: "Bicas", uf: "MG", count: 1, lat: -21.7258, lng: -43.0583 },
-            { name: "Bom Jesus do Amparo", uf: "MG", count: 1, lat: -19.7042, lng: -43.4756 },
+            { name: "Bom Jesus do Amparo", uf: "MG", count: 1, lat: -19.7042, lng: -43.4739 },
             { name: "Buritizeiro", uf: "MG", count: 1, lat: -17.3511, lng: -44.9622 },
             { name: "Cabo Frio", uf: "RJ", count: 1, lat: -22.8894, lng: -42.0289 },
-            { name: "Campos Altos", uf: "MG", count: 1, lat: -19.6967, lng: -46.1739 },
+            { name: "Campos Altos", uf: "MG", count: 1, lat: -19.6961, lng: -46.1731 },
             { name: "Carandaí", uf: "MG", count: 1, lat: -20.9542, lng: -43.8058 },
-            { name: "Carrancas", uf: "MG", count: 1, lat: -21.4883, lng: -44.6436 },
-            { name: "Ceilândia", uf: "DF", count: 1, lat: -15.8208, lng: -48.1117 },
-            { name: "Cipotânea", uf: "MG", count: 1, lat: -20.9056, lng: -43.3644 },
-            { name: "Cristiano Otoni", uf: "MG", count: 1, lat: -20.8306, lng: -43.8117 },
-            { name: "Divinésia", uf: "MG", count: 1, lat: -20.9083, lng: -43.0117 },
-            { name: "Dores do Turvo", uf: "MG", count: 1, lat: -21.0358, lng: -43.1611 },
-            { name: "Entre Rios de Minas", uf: "MG", count: 1, lat: -20.6681, lng: -44.1358 },
-            { name: "Ervália", uf: "MG", count: 1, lat: -20.8406, lng: -42.6561 },
-            { name: "Esmeraldas", uf: "MG", count: 1, lat: -19.7628, lng: -44.3139 },
+            { name: "Carrancas", uf: "MG", count: 1, lat: -21.4883, lng: -44.6444 },
+            { name: "Ceilândia", uf: "DF", count: 1, lat: -15.8208, lng: -48.1114 },
+            { name: "Cipotânea", uf: "MG", count: 1, lat: -20.9039, lng: -43.3644 },
+            { name: "Cristiano Otoni", uf: "MG", count: 1, lat: -20.8319, lng: -43.8114 },
+            { name: "Divinésia", uf: "MG", count: 1, lat: -20.9231, lng: -43.0131 },
+            { name: "Dores do Turvo", uf: "MG", count: 1, lat: -20.9575, lng: -43.1558 },
+            { name: "Entre Rios de Minas", uf: "MG", count: 1, lat: -20.6728, lng: -44.1331 },
+            { name: "Ervália", uf: "MG", count: 1, lat: -20.8406, lng: -42.6569 },
+            { name: "Esmeraldas", uf: "MG", count: 1, lat: -19.7625, lng: -44.3139 },
             { name: "Feira de Santana", uf: "BA", count: 1, lat: -12.2667, lng: -38.9667 },
             { name: "Formiga", uf: "MG", count: 1, lat: -20.4636, lng: -45.4264 },
-            { name: "Francisco Sá", uf: "MG", count: 1, lat: -16.4758, lng: -43.4883 },
-            { name: "Frei Lagonegro", uf: "MG", count: 1, lat: -18.6653, lng: -42.7486 },
+            { name: "Francisco Sá", uf: "MG", count: 1, lat: -16.4761, lng: -43.4889 },
+            { name: "Frei Lagonegro", uf: "MG", count: 1, lat: -18.2356, lng: -42.8469 },
             { name: "Jacinto", uf: "MG", count: 1, lat: -16.1436, lng: -40.2944 },
-            { name: "Japonvar", uf: "MG", count: 1, lat: -15.8617, lng: -44.2986 },
+            { name: "Japonvar", uf: "MG", count: 1, lat: -15.8906, lng: -44.2758 },
             { name: "João Pessoa", uf: "PB", count: 1, lat: -7.1195, lng: -34.8450 },
             { name: "Iúna", uf: "ES", count: 1, lat: -20.3458, lng: -41.5358 },
-            { name: "Itabira", uf: "MG", count: 1, lat: -19.6189, lng: -43.2269 },
-            { name: "Itaperuna", uf: "RJ", count: 1, lat: -21.2056, lng: -41.8906 },
+            { name: "Itabira", uf: "MG", count: 1, lat: -19.6192, lng: -43.2269 },
+            { name: "Itaperuna", uf: "RJ", count: 1, lat: -21.2056, lng: -41.8875 },
             { name: "Manhuaçu", uf: "MG", count: 1, lat: -20.2581, lng: -42.0336 },
-            { name: "Martinho Campos", uf: "MG", count: 1, lat: -19.3308, lng: -45.2344 },
-            { name: "Mercês", uf: "MG", count: 1, lat: -21.1917, lng: -43.3400 },
-            { name: "Miradouro", uf: "MG", count: 1, lat: -20.8719, lng: -42.3431 },
-            { name: "Miravânia", uf: "MG", count: 1, lat: -14.7333, lng: -44.3833 },
-            { name: "Morada Nova de Minas", uf: "MG", count: 1, lat: -18.6011, lng: -45.3564 },
-            { name: "Muniz Freire", uf: "ES", count: 1, lat: -20.4639, lng: -41.4131 },
+            { name: "Martinho Campos", uf: "MG", count: 1, lat: -19.3314, lng: -45.2344 },
+            { name: "Mercês", uf: "MG", count: 1, lat: -21.1919, lng: -43.3392 },
+            { name: "Miradouro", uf: "MG", count: 1, lat: -20.8719, lng: -42.3486 },
+            { name: "Miravânia", uf: "MG", count: 1, lat: -14.7358, lng: -44.4369 },
+            { name: "Morada Nova de Minas", uf: "MG", count: 1, lat: -18.6089, lng: -45.3589 },
+            { name: "Muniz Freire", uf: "ES", count: 1, lat: -20.4642, lng: -41.4131 },
             { name: "Nova Iguaçu", uf: "RJ", count: 1, lat: -22.7561, lng: -43.4608 },
-            { name: "Palmares", uf: "PE", count: 1, lat: -8.6833, lng: -35.5833 },
-            { name: "Pedro Leopoldo", uf: "MG", count: 1, lat: -19.6194, lng: -44.0436 },
+            { name: "Palmares", uf: "PE", count: 1, lat: -8.6833, lng: -35.5906 },
+            { name: "Pedro Leopoldo", uf: "MG", count: 1, lat: -19.6186, lng: -44.0436 },
             { name: "Petrópolis", uf: "RJ", count: 1, lat: -22.5050, lng: -43.1789 },
-            { name: "Pirapetinga", uf: "MG", count: 1, lat: -21.7142, lng: -42.5117 },
-            { name: "Porto Trombetas", uf: "PA", count: 1, lat: -1.4883, lng: -56.3867 },
-            { name: "Raul Soares", uf: "MG", count: 1, lat: -20.1036, lng: -42.4533 },
-            { name: "Rio Casca", uf: "MG", count: 1, lat: -20.2247, lng: -42.6517 },
-            { name: "Rio Doce", uf: "MG", count: 1, lat: -20.2394, lng: -42.8942 },
-            { name: "Santo Antônio de Pádua", uf: "RJ", count: 1, lat: -21.5400, lng: -42.1800 },
-            { name: "Santana de Cataguases", uf: "MG", count: 1, lat: -21.3283, lng: -42.6283 },
-            { name: "Santana do Paraíso", uf: "MG", count: 1, lat: -19.3639, lng: -42.5647 },
-            { name: "Santa Juliana", uf: "MG", count: 1, lat: -19.3083, lng: -47.5250 },
-            { name: "Santa Rita do Ibitipoca", uf: "MG", count: 1, lat: -21.5583, lng: -44.0583 },
-            { name: "Salvador", uf: "BA", count: 1, lat: -12.9777, lng: -38.5016 },
-            { name: "São Brás do Suaçuí", uf: "MG", count: 1, lat: -20.6189, lng: -43.9511 },
-            { name: "São Geraldo", uf: "MG", count: 1, lat: -20.9231, lng: -42.8408 },
-            { name: "São Gonçalo", uf: "RJ", count: 1, lat: -22.8267, lng: -43.0539 },
-            { name: "São José do Divino", uf: "MG", count: 1, lat: -18.8833, lng: -41.3833 },
-            { name: "São Roque do Canaã", uf: "ES", count: 1, lat: -19.7408, lng: -40.6558 },
-            { name: "Senhora de Oliveira", uf: "MG", count: 1, lat: -20.7933, lng: -43.3367 },
-            { name: "Sericita", uf: "MG", count: 1, lat: -20.5367, lng: -42.4939 },
-            { name: "Sarzedo", uf: "MG", count: 2, lat: -20.0336, lng: -44.1436 },
-            { name: "Teixeiras", uf: "MG", count: 1, lat: -20.6547, lng: -42.8572 },
+            { name: "Pirapetinga", uf: "MG", count: 1, lat: -21.7139, lng: -42.5408 },
+            { name: "Porto Trombetas", uf: "PA", count: 1, lat: -1.4883, lng: -56.3889 },
+            { name: "Raul Soares", uf: "MG", count: 1, lat: -20.1008, lng: -42.4539 },
+            { name: "Rio Casca", uf: "MG", count: 1, lat: -20.2239, lng: -42.6517 },
+            { name: "Rio Doce", uf: "MG", count: 1, lat: -20.2458, lng: -42.8986 },
+            { name: "Rio Grande do Sul", uf: "RS", count: 1, lat: -29.6842, lng: -53.8069 },
+            { name: "Santo Antônio de Pádua", uf: "RJ", count: 1, lat: -21.5433, lng: -42.1794 },
+            { name: "Santana de Cataguases", uf: "MG", count: 1, lat: -21.3114, lng: -42.6231 },
+            { name: "Santana do Paraíso", uf: "MG", count: 1, lat: -19.3644, lng: -42.5647 },
+            { name: "Santa Juliana", uf: "MG", count: 1, lat: -19.3089, lng: -47.5250 },
+            { name: "Santa Rita do Ibitipoca", uf: "MG", count: 1, lat: -21.5728, lng: -44.0208 },
+            { name: "Salvador", uf: "BA", count: 1, lat: -12.9714, lng: -38.5014 },
+            { name: "São Brás do Suaçuí", uf: "MG", count: 1, lat: -20.6178, lng: -43.9519 },
+            { name: "São Geraldo", uf: "MG", count: 1, lat: -20.9239, lng: -42.8278 },
+            { name: "São Gonçalo", uf: "RJ", count: 1, lat: -22.8269, lng: -43.0539 },
+            { name: "São José do Divino", uf: "MG", count: 1, lat: -18.7844, lng: -41.3883 },
+            { name: "São Roque do Canaã", uf: "ES", count: 1, lat: -19.7389, lng: -40.6558 },
+            { name: "Senhora de Oliveira", uf: "MG", count: 1, lat: -20.7958, lng: -43.3289 },
+            { name: "Sericita", uf: "MG", count: 1, lat: -20.4858, lng: -42.4961 },
+            { name: "Sarzedo", uf: "MG", count: 1, lat: -20.0358, lng: -44.1439 },
+            { name: "Teixeiras", uf: "MG", count: 1, lat: -20.6539, lng: -42.8569 },
             { name: "Teresópolis", uf: "RJ", count: 1, lat: -22.4122, lng: -42.9664 },
-            { name: "Tocantins", uf: "MG", count: 1, lat: -21.1764, lng: -43.0183 },
-            { name: "Vargem Alegre", uf: "MG", count: 1, lat: -19.6583, lng: -42.1611 },
+            { name: "Tocantins", uf: "MG", count: 1, lat: -21.1764, lng: -43.0189 },
+            { name: "Vargem Alegre", uf: "MG", count: 1, lat: -19.4589, lng: -42.1489 },
             { name: "Vitória", uf: "ES", count: 1, lat: -20.3155, lng: -40.3128 },
-            { name: "Volta Redonda", uf: "RJ", count: 1, lat: -22.5231, lng: -44.1042 },
-            { name: "Campo Grande", uf: "MS", count: 1, lat: -20.4697, lng: -54.6201 }
+            { name: "Volta Redonda", uf: "RJ", count: 1, lat: -22.5231, lng: -44.1042 }
         ];
 
-        // 3. Funções de Distância Geodésica (Haversine)
-        function calcDistanceKm(lat1, lon1, lat2, lon2) {
+        // Cálculo de Distância Geodésica Haversine (em KM)
+        function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
             const R = 6371; // Raio da Terra em km
             const dLat = (lat2 - lat1) * Math.PI / 180;
             const dLon = (lon2 - lon1) * Math.PI / 180;
-            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                       Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                      Math.sin(dLon/2) * Math.sin(dLon/2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             return Math.round(R * c);
         }
 
-        // Determinar o campus mais próximo OBRIGATORIAMENTE DENTRO DO MESMO ESTADO DO ALUNO
+        // Modelo de Probabilidade Gravitacional com Decaimento de Distância e Filtro por UF
         function analyzeCityGravity(city) {
-            let nearest = null;
-            let minDistance = Infinity;
-            const options = [];
+            // Filtrar apenas campi da mesma UF (regra fundamental de mobilidade)
+            let candidates = federalCampi.filter(c => c.uf === city.uf);
 
-            // Filtrar apenas campi da mesma Unidade Federativa (UF)
-            let eligibleCampi = federalCampi.filter(c => c.uf === city.uf);
-
-            // Se for um estado sem campus mapeado, busca o polo nacional mais próximo
-            if (eligibleCampi.length === 0) {
-                eligibleCampi = federalCampi;
+            // Fallback caso a UF do aluno seja fora dos polos mapeados
+            if (candidates.length === 0) {
+                candidates = federalCampi;
             }
 
-            eligibleCampi.forEach(campus => {
-                const dist = calcDistanceKm(city.lat, city.lng, campus.lat, campus.lng);
+            const options = [];
+            candidates.forEach(campus => {
+                const distance = calculateHaversineDistance(city.lat, city.lng, campus.lat, campus.lng);
                 
-                if (dist < minDistance) {
-                    minDistance = dist;
-                    nearest = { campus: campus, distance: dist };
+                // Função de Probabilidade com Decaimento Geográfico
+                let baseProb = 0;
+                if (distance <= 15) {
+                    baseProb = 98; // Praticamente certeza (transporte local)
+                } else if (distance <= 35) {
+                    baseProb = 88; // Deslocamento diário confortável
+                } else if (distance <= 65) {
+                    baseProb = 65; // Bate-volta intermunicipal de van/ônibus
+                } else if (distance <= 100) {
+                    baseProb = 38; // Deslocamento especial
+                } else if (distance <= 160) {
+                    baseProb = 18; // Moradia/república
+                } else {
+                    baseProb = 4;
                 }
 
-                // Cálculo de probabilidade por decaimento de distância
-                let prob = 0;
-                if (dist <= 35) prob = 95;
-                else if (dist <= 65) prob = 70;
-                else if (dist <= 110) prob = 35;
-                else if (dist <= 160) prob = 15;
-                else prob = 5;
+                // Ajustes de atratividade para polos propedêuticos / universidades federais
+                if (campus.network === "COLUNI" && distance <= 120) baseProb = Math.min(95, baseProb + 15);
+                if (campus.network === "COLTEC" && distance <= 50) baseProb = Math.min(95, baseProb + 10);
+                if (campus.network === "CEDAF" && distance <= 60) baseProb = Math.min(90, baseProb + 10);
 
-                // Majorador para colégios propedêuticos/universitários na mesma UF
-                if ((campus.inst === "COLUNI" || campus.inst === "COLTEC") && city.uf === "MG" && dist <= 140) {
-                    prob = Math.min(95, prob + 20);
-                }
-
-                if (prob >= 15) {
-                    options.push({ campus: campus, distance: dist, probability: prob });
-                }
+                options.push({
+                    campus: campus,
+                    distance: distance,
+                    probability: baseProb
+                });
             });
 
-            options.sort((a, b) => b.probability - a.probability);
+            // Ordenar da menor distância para a maior
+            options.sort((a, b) => a.distance - b.distance);
+
+            const nearest = options[0];
+
+            // Opções viáveis para a "Cesta Completa" (até 90 km com probabilidade razoável)
+            const viable = options.filter(opt => opt.distance <= 85 || (opt.campus.network === "COLUNI" && opt.distance <= 130));
 
             return {
-                nearestCampus: nearest ? nearest.campus : federalCampi[0],
-                nearestDistance: nearest ? nearest.distance : 0,
-                viableOptions: options
+                nearestCampus: nearest.campus,
+                nearestDistance: nearest.distance,
+                viableOptions: viable.length > 0 ? viable : [nearest]
             };
         }
 
@@ -677,10 +680,10 @@
         let studentsLayerGroup;
         let schoolsLayerGroup;
         let vectorsLayerGroup;
-        let heatLayer = null;
-        let showHeatmap = true;
+        let showCampi = true;
         let showCities = true;
         let showVectors = true;
+        let networkMode = 'COMPREHENSIVE'; // 'COMPREHENSIVE' (entrelaçamento completo) ou 'NEAREST_ONLY' (apenas mais próximo)
         let chartFilterState = 'ALL';
         let chartInstitutionsInstance = null;
         let chartBudgetInstance = null;
@@ -717,7 +720,6 @@
             // Renderizar Dados
             renderFederalSchools();
             renderStudentsAndVectors();
-            renderHeatmap();
             renderTableData();
             renderCharts();
 
@@ -727,6 +729,8 @@
         // Renderizar todos os Campi Federais no Mapa
         function renderFederalSchools() {
             schoolsLayerGroup.clearLayers();
+
+            if (!showCampi) return;
 
             const selectedState = document.getElementById('state-select').value;
 
@@ -766,7 +770,7 @@
             });
         }
 
-        // Renderizar Cidades dos Alunos e Linhas de Conexão
+        // Renderizar Cidades dos Alunos e Linhas de Conexão com Entrelaçamento Regional
         function renderStudentsAndVectors() {
             studentsLayerGroup.clearLayers();
             vectorsLayerGroup.clearLayers();
@@ -823,7 +827,7 @@
 
                             <span class="text-[10px] font-black uppercase text-slate-400 block mb-1">Cesta na mesma UF:</span>
                             <ul class="space-y-1 text-[11px] text-slate-600">
-                                ${gravity.viableOptions.slice(0, 3).map(opt => `
+                                ${gravity.viableOptions.slice(0, 4).map(opt => `
                                     <li class="flex justify-between items-center py-0.5 border-b border-slate-100">
                                         <span>${opt.campus.name} (${opt.distance} km)</span>
                                         <span class="font-bold text-indigo-700">${opt.probability}%</span>
@@ -837,75 +841,78 @@
                     studentsLayerGroup.addLayer(circle);
                 }
 
-                // Traçado de Linhas Vetoriais vinculadas ao campus estadual mais próximo
-                if (showVectors && gravity.nearestCampus) {
-                    const line = L.polyline([
-                        [city.lat, city.lng],
-                        [gravity.nearestCampus.lat, gravity.nearestCampus.lng]
-                    ], {
-                        color: "#059669",
-                        weight: city.count >= 10 ? 3.5 : 2,
-                        opacity: 0.8,
-                        pane: 'vectorsPane'
-                    });
-                    vectorsLayerGroup.addLayer(line);
+                // Traçado de Linhas Vetoriais com suporte a Entrelaçamento
+                if (showVectors) {
+                    if (networkMode === 'NEAREST_ONLY') {
+                        // Linha sólida apenas para o campus mais próximo
+                        if (gravity.nearestCampus) {
+                            const line = L.polyline([
+                                [city.lat, city.lng],
+                                [gravity.nearestCampus.lat, gravity.nearestCampus.lng]
+                            ], {
+                                color: "#059669",
+                                weight: city.count >= 10 ? 3.5 : 2,
+                                opacity: 0.85,
+                                pane: 'vectorsPane'
+                            });
+                            vectorsLayerGroup.addLayer(line);
+                        }
+                    } else {
+                        // Modo Cesta Completa (Entrelaçamento regional)
+                        // Conecta a todos os campi viáveis dentro da mesma UF com opacidade graduada pela probabilidade
+                        gravity.viableOptions.forEach((opt, idx) => {
+                            const isNearest = (idx === 0);
+                            const lineColor = isNearest ? "#059669" : (opt.probability >= 50 ? "#4f46e5" : "#94a3b8");
+                            const lineWeight = isNearest ? (city.count >= 10 ? 3.5 : 2.5) : (opt.probability >= 50 ? 1.8 : 1.2);
+                            const lineOpacity = isNearest ? 0.9 : Math.max(0.3, opt.probability / 100);
+
+                            const line = L.polyline([
+                                [city.lat, city.lng],
+                                [opt.campus.lat, opt.campus.lng]
+                            ], {
+                                color: lineColor,
+                                weight: lineWeight,
+                                opacity: lineOpacity,
+                                dashArray: isNearest ? null : (opt.probability >= 50 ? '5, 5' : '2, 6'),
+                                pane: 'vectorsPane'
+                            });
+                            vectorsLayerGroup.addLayer(line);
+                        });
+                    }
                 }
             });
         }
 
-        // Renderizar Camada Térmica (Heatmap) com variação de temperatura
-        function renderHeatmap() {
-            if (heatLayer) {
-                map.removeLayer(heatLayer);
-                heatLayer = null;
+        // Alternar Modo de Rede (Apenas Mais Próximo vs Cesta Completa com Entrelaçamento)
+        function toggleNetworkMode() {
+            networkMode = (networkMode === 'COMPREHENSIVE') ? 'NEAREST_ONLY' : 'COMPREHENSIVE';
+            const btn = document.getElementById('toggle-network-mode-btn');
+            const label = document.getElementById('network-mode-label');
+
+            if (networkMode === 'COMPREHENSIVE') {
+                btn.className = "toggle-btn active text-xs font-bold px-3 py-2 rounded-xl border border-indigo-300 bg-indigo-50 text-indigo-900 hover:bg-indigo-100 transition inline-flex items-center shadow-sm";
+                label.innerText = "Modo: Cesta Completa (Entrelaçamento)";
+            } else {
+                btn.className = "toggle-btn text-xs font-bold px-3 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition inline-flex items-center shadow-sm";
+                label.innerText = "Modo: Apenas Mais Próximo (1:1)";
             }
-
-            if (!showHeatmap) return;
-
-            const selectedState = document.getElementById('state-select').value;
-            const heatData = [];
-
-            verifiedCitiesData.forEach(city => {
-                if (selectedState !== 'ALL') {
-                    if (selectedState === 'OUTROS' && (city.uf === 'MG' || city.uf === 'RJ' || city.uf === 'SP' || city.uf === 'ES' || city.uf === 'BA')) return;
-                    if (selectedState !== 'OUTROS' && city.uf !== selectedState) return;
-                }
-
-                // Intensidade calculada proporcional ao volume de alunos
-                const intensity = Math.min(1.0, Math.max(0.25, city.count / 20));
-                heatData.push([city.lat, city.lng, intensity]);
-            });
-
-            // Criar camada com gradiente térmico clássico
-            heatLayer = L.heatLayer(heatData, {
-                radius: 35,
-                blur: 25,
-                maxZoom: 11,
-                max: 1.0,
-                gradient: {
-                    0.2: '#3b82f6', // Azul (Frio / Baixa densidade)
-                    0.4: '#10b981', // Verde
-                    0.6: '#eab308', // Amarelo (Morno)
-                    0.8: '#f97316', // Laranja
-                    1.0: '#ef4444'  // Vermelho (Hiper Quente)
-                }
-            }).addTo(map);
+            renderStudentsAndVectors();
         }
 
-        // Alternar Mapa de Calor
-        function toggleHeatmap() {
-            showHeatmap = !showHeatmap;
-            const btn = document.getElementById('toggle-heat-btn');
-            const label = document.getElementById('heat-label');
-            
-            if (showHeatmap) {
+        // Alternar Camada das Instituições / Campi Federais
+        function toggleCampiLayer() {
+            showCampi = !showCampi;
+            const btn = document.getElementById('toggle-campi-btn');
+            const label = document.getElementById('campi-label');
+
+            if (showCampi) {
                 btn.classList.add('active');
-                label.innerText = "Mapa de Calor: Ligado";
+                label.innerText = "Instituições: Visíveis";
             } else {
                 btn.classList.remove('active');
-                label.innerText = "Mapa de Calor: Desligado";
+                label.innerText = "Instituições: Ocultas";
             }
-            renderHeatmap();
+            renderFederalSchools();
         }
 
         // Alternar Visibilidade das Cidades
@@ -944,7 +951,6 @@
         function handleStateFilter() {
             renderFederalSchools();
             renderStudentsAndVectors();
-            renderHeatmap();
             filterTable();
             renderCharts();
         }
@@ -954,115 +960,117 @@
             map.setView([-20.5, -43.8], 7);
         }
 
-        // Renderizar Tabela de Cidades
+        // Renderizar Tabela Analítica
         function renderTableData() {
-            const tbody = document.getElementById('cities-table-body');
+            const tbody = document.getElementById('table-body');
             tbody.innerHTML = '';
 
-            verifiedCitiesData.forEach((city, index) => {
+            const selectedState = document.getElementById('state-select').value;
+            const searchVal = document.getElementById('table-search-input').value.toLowerCase().trim();
+
+            let displayedCount = 0;
+
+            // Ordenar por número de alunos decrescente
+            const sortedCities = [...verifiedCitiesData].sort((a, b) => b.count - a.count);
+
+            sortedCities.forEach(city => {
+                if (selectedState !== 'ALL') {
+                    if (selectedState === 'OUTROS' && (city.uf === 'MG' || city.uf === 'RJ' || city.uf === 'SP' || city.uf === 'ES' || city.uf === 'BA')) return;
+                    if (selectedState !== 'OUTROS' && city.uf !== selectedState) return;
+                }
+
                 const gravity = analyzeCityGravity(city);
-                const percent = ((city.count / 448) * 100).toFixed(1);
 
-                let badgeClass = "bg-slate-100 text-slate-700";
-                let priorityText = "P3 (Expansão)";
+                const searchTarget = (city.name + " " + city.uf + " " + gravity.nearestCampus.name).toLowerCase();
+                if (searchVal !== '' && !searchTarget.includes(searchVal)) return;
 
+                displayedCount++;
+
+                const percentage = ((city.count / 448) * 100).toFixed(1);
+
+                let badgePriority = `<span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">P3 (Cauda Longa)</span>`;
                 if (city.count >= 10) {
-                    badgeClass = "bg-rose-100 text-rose-900 border border-rose-300";
-                    priorityText = "P1 (Hiper Quente)";
+                    badgePriority = `<span class="bg-rose-100 text-rose-800 text-[10px] font-black px-2 py-0.5 rounded">P1 (Meta Ads Raio)</span>`;
                 } else if (city.count >= 3) {
-                    badgeClass = "bg-indigo-100 text-indigo-900 border border-indigo-300";
-                    priorityText = "P2 (Tração Direta)";
+                    badgePriority = `<span class="bg-indigo-100 text-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded">P2 (Tração Direta)</span>`;
                 }
 
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50 transition text-center";
+                tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
                 tr.innerHTML = `
-                    <td class="py-2.5 px-4 text-left font-bold text-slate-900">${city.name}</td>
-                    <td class="py-2.5 px-3 font-semibold text-slate-500">${city.uf}</td>
-                    <td class="py-2.5 px-3 font-black text-indigo-900 bg-indigo-50/40">${city.count}</td>
-                    <td class="py-2.5 px-3 text-slate-500">${percent}%</td>
-                    <td class="py-2.5 px-4 text-left font-semibold text-slate-800">${gravity.nearestCampus.name}</td>
-                    <td class="py-2.5 px-3 font-bold text-emerald-700">${gravity.nearestDistance} km</td>
-                    <td class="py-2.5 px-3"><span class="${badgeClass} text-[10px] font-black px-2 py-0.5 rounded-full">${priorityText}</span></td>
-                    <td class="py-2.5 px-3 text-right">
-                        <button onclick="focusMapCity(${city.lat}, ${city.lng}, '${city.name}')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 inline-flex items-center">
-                            <i class="fas fa-crosshairs mr-1"></i> Ver
+                    <td class="py-2.5 px-4 font-bold text-slate-900">
+                        <button onclick="zoomToCity(${city.lat}, ${city.lng})" class="text-left hover:text-indigo-600 transition flex items-center">
+                            <i class="fas fa-search-location mr-1.5 text-slate-400"></i> ${city.name}
                         </button>
                     </td>
+                    <td class="py-2.5 px-3 text-center font-bold text-slate-600">${city.uf}</td>
+                    <td class="py-2.5 px-3 text-center font-black text-indigo-900">${city.count}</td>
+                    <td class="py-2.5 px-3 text-center text-slate-500 font-semibold">${percentage}%</td>
+                    <td class="py-2.5 px-4 text-slate-800 font-bold">${gravity.nearestCampus.name}</td>
+                    <td class="py-2.5 px-3 text-center font-black ${gravity.nearestDistance <= 30 ? 'text-emerald-700' : 'text-slate-600'}">${gravity.nearestDistance} km</td>
+                    <td class="py-2.5 px-4 text-[11px] text-slate-600">
+                        ${gravity.viableOptions.slice(0, 3).map(o => `${o.campus.shortName} (${o.probability}%)`).join(', ')}
+                    </td>
+                    <td class="py-2.5 px-3 text-center">${badgePriority}</td>
                 `;
                 tbody.appendChild(tr);
             });
+
+            document.getElementById('table-count-label').innerText = `Exibindo ${displayedCount} cidades de ${verifiedCitiesData.length}`;
         }
 
-        // Filtrar Tabela por Texto e Estado
+        // Filtro em tempo real na Tabela
         function filterTable() {
-            const searchVal = document.getElementById('table-search').value.toLowerCase().trim();
-            const selectedState = document.getElementById('state-select').value;
-            const rows = document.querySelectorAll('#cities-table-body tr');
-
-            rows.forEach(row => {
-                const text = row.innerText.toLowerCase();
-                const uf = row.children[1].innerText.trim();
-
-                const matchesSearch = (searchVal === '' || text.includes(searchVal));
-                let matchesState = (selectedState === 'ALL');
-
-                if (selectedState !== 'ALL') {
-                    if (selectedState === 'OUTROS') {
-                        matchesState = (uf !== 'MG' && uf !== 'RJ' && uf !== 'SP' && uf !== 'ES' && uf !== 'BA');
-                    } else {
-                        matchesState = (uf === selectedState);
-                    }
-                }
-
-                row.style.display = (matchesSearch && matchesState) ? '' : 'none';
-            });
+            renderTableData();
         }
 
-        // Focar cidade no mapa ao clicar na tabela
-        function focusMapCity(lat, lng, cityName) {
+        // Focar cidade no mapa com clique
+        function zoomToCity(lat, lng) {
             map.flyTo([lat, lng], 10, { duration: 1.2 });
-            window.scrollTo({ top: document.getElementById('map').offsetTop - 80, behavior: 'smooth' });
+            window.scrollTo({ top: document.getElementById('map').offsetTop - 90, behavior: 'smooth' });
         }
 
-        // Alternar Filtro do Gráfico
-        function setChartFilter(mode) {
-            chartFilterState = mode;
-            ['all', 'mg', 'outros'].forEach(m => {
-                const btn = document.getElementById('cf-' + m);
-                btn.className = "text-[10px] font-bold px-2 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200";
-            });
-            document.getElementById('cf-' + mode.toLowerCase()).className = "text-[10px] font-bold px-2 py-1 rounded-lg bg-indigo-600 text-white";
-            renderCharts();
-        }
-
-        // Renderizar Gráficos Analíticos com Filtro Rápido
+        // Renderizar Gráficos do Dashboard
         function renderCharts() {
-            const countsByInst = {};
+            renderInstitutionsChart();
+            renderBudgetChart();
+        }
 
+        // Gráfico de Barras: Demanda por Rede Federal
+        function renderInstitutionsChart() {
+            const ctx = document.getElementById('chart-institutions').getContext('2d');
+
+            const counts = {};
             verifiedCitiesData.forEach(city => {
-                if (chartFilterState === 'MG' && city.uf !== 'MG') return;
-                if (chartFilterState === 'OUTROS' && city.uf === 'MG') return;
-
                 const gravity = analyzeCityGravity(city);
-                const instName = gravity.nearestCampus.inst;
-                countsByInst[instName] = (countsByInst[instName] || 0) + city.count;
+                gravity.viableOptions.forEach(opt => {
+                    const net = opt.campus.network;
+                    // Se estiver filtrado por MG e o campus for fora, descartar
+                    if (chartFilterState === 'MG' && opt.campus.uf !== 'MG') return;
+
+                    const effectiveCount = Math.round(city.count * (opt.probability / 100));
+                    counts[net] = (counts[net] || 0) + effectiveCount;
+                });
             });
 
-            const sortedInsts = Object.keys(countsByInst).sort((a, b) => countsByInst[b] - countsByInst[a]);
-            const labelsInst = sortedInsts.slice(0, 8);
-            const dataInst = labelsInst.map(k => countsByInst[k]);
+            // Converter em array e ordenar decrescente
+            const sortedNets = Object.keys(counts).map(net => ({
+                name: net,
+                count: counts[net]
+            })).sort((a, b) => b.count - a.count).slice(0, 8);
 
-            // Gráfico 1: Atração por Rede
-            const ctxInst = document.getElementById('chart-institutions').getContext('2d');
+            const labels = sortedNets.map(item => item.name);
+            const data = sortedNets.map(item => item.count);
+
             if (chartInstitutionsInstance) chartInstitutionsInstance.destroy();
-            chartInstitutionsInstance = new Chart(ctxInst, {
+
+            chartInstitutionsInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: labelsInst.length > 0 ? labelsInst : ['Nenhuma rede'],
+                    labels: labels,
                     datasets: [{
-                        label: 'Alunos Conectados (Mesma UF)',
-                        data: dataInst.length > 0 ? dataInst : [0],
+                        label: 'Inscrições Potenciais Estimadas',
+                        data: data,
                         backgroundColor: '#4338ca',
                         borderRadius: 8
                     }]
@@ -1070,24 +1078,42 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
+                    plugins: {
+                        legend: { display: false }
+                    },
                     scales: {
-                        y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
-                        x: { grid: { display: false } }
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f1f5f9' },
+                            ticks: { font: { size: 10 } }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 10, weight: 'bold' } }
+                        }
                     }
                 }
             });
+        }
 
-            // Gráfico 2: Orçamento de Mídia
-            const ctxBudget = document.getElementById('chart-budget').getContext('2d');
+        // Gráfico Donut: Alocação de Verba de Mídia
+        function renderBudgetChart() {
+            const ctx = document.getElementById('chart-budget').getContext('2d');
+
             if (chartBudgetInstance) chartBudgetInstance.destroy();
-            chartBudgetInstance = new Chart(ctxBudget, {
+
+            chartBudgetInstance = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Zona da Mata (COLUNI / IF Sudeste)', 'Grande BH & Aço (COLTEC / CEFET)', 'Outras UFs & Expansão'],
+                    labels: [
+                        'Cluster Zona da Mata (JF, Leopoldina, Rio Pomba)',
+                        'Cluster Grande BH & Eixo Metálico (BH, Contagem, Lafaiete)',
+                        'Cluster Rio de Janeiro & Baixada Fluminense',
+                        'Cluster Expansão (Norte, Triângulo, SP, ES)'
+                    ],
                     datasets: [{
-                        data: [45, 35, 20],
-                        backgroundColor: ['#059669', '#4338ca', '#d97706'],
+                        data: [42, 33, 15, 10],
+                        backgroundColor: ['#4338ca', '#059669', '#d97706', '#94a3b8'],
                         borderWidth: 2,
                         borderColor: '#ffffff'
                     }]
@@ -1096,16 +1122,37 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
-                    }
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { size: 10, weight: 'bold' },
+                                boxWidth: 12
+                            }
+                        }
+                    },
+                    cutout: '65%'
                 }
             });
         }
 
-        // Executar no carregamento da janela
-        window.addEventListener('load', () => {
+        // Alternar Filtro do Gráfico
+        function setChartFilter(filter) {
+            chartFilterState = filter;
+            document.getElementById('chart-btn-all').className = filter === 'ALL' 
+                ? 'text-[10px] font-black px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700' 
+                : 'text-[10px] font-black px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700';
+            
+            document.getElementById('chart-btn-mg').className = filter === 'MG' 
+                ? 'text-[10px] font-black px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700' 
+                : 'text-[10px] font-black px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700';
+
+            renderInstitutionsChart();
+        }
+
+        // Inicializar aplicação ao carregar
+        window.onload = function() {
             initApp();
-        });
+        };
     </script>
 </body>
 </html>
