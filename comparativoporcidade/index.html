@@ -25,11 +25,15 @@
             font-family: 'JetBrains Mono', monospace;
         }
         #map {
-            height: 620px;
+            height: 640px;
             width: 100%;
             border-radius: 1.25rem;
-            z-index: 10;
+            z-index: 1;
             background-color: #e2e8f0;
+            cursor: grab;
+        }
+        #map:active {
+            cursor: grabbing;
         }
         .leaflet-popup-content-wrapper {
             background-color: #ffffff;
@@ -200,11 +204,20 @@
                     <button onclick="toggleBuffers()" id="btn-toggle-buffers" class="px-3 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-300 hover:bg-slate-200 transition flex items-center">
                         <i class="fas fa-circle-notch mr-1.5 text-amber-600"></i> Raio 35km (<span id="txt-buffers-status">On</span>)
                     </button>
+                    <button onclick="resetMapView()" class="px-3 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm transition flex items-center" title="Centralizar visualização inicial">
+                        <i class="fas fa-expand-arrows-alt mr-1.5"></i> Resetar Visão
+                    </button>
                 </div>
             </div>
 
             <!-- Leaflet Map Container -->
-            <div id="map"></div>
+            <div class="relative">
+                <div id="map"></div>
+                <div class="absolute bottom-4 right-4 z-[500] bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-300 shadow text-[11px] font-bold text-slate-700 pointer-events-none flex items-center space-x-2">
+                    <i class="fas fa-mouse text-indigo-600"></i>
+                    <span>Role a rodinha para dar Zoom • Arraste para mover</span>
+                </div>
+            </div>
 
             <!-- Map Legend (Clean Light Mode) -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 pt-2 text-xs">
@@ -682,7 +695,14 @@
         let buffersLayer = L.layerGroup();
 
         function initDashboardMap() {
-            map = L.map('map', { scrollWheelZoom: false }).setView([-20.5, -43.2], 7);
+            // Habilita todas as interações: scrollWheelZoom, drag, touchZoom, doubleClickZoom
+            map = L.map('map', { 
+                scrollWheelZoom: true,
+                smoothWheelZoom: true,
+                doubleClickZoom: true,
+                dragging: true,
+                touchZoom: true
+            }).setView([-20.5, -43.2], 7);
 
             // OpenStreetMap Standard oficial 100% aberto e estável
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -690,6 +710,20 @@
                 subdomains: ['a', 'b', 'c'],
                 maxZoom: 19
             }).addTo(map);
+
+            // Criar painéis customizados para organizar a sobreposição e garantir clique livre nos marcadores
+            map.createPane('buffersPane');
+            map.getPane('buffersPane').style.zIndex = 350;
+            map.getPane('buffersPane').style.pointerEvents = 'none'; // Não bloqueia clique
+
+            map.createPane('vectorsPane');
+            map.getPane('vectorsPane').style.zIndex = 400;
+
+            map.createPane('studentsPane');
+            map.getPane('studentsPane').style.zIndex = 500;
+
+            map.createPane('schoolsPane');
+            map.getPane('schoolsPane').style.zIndex = 600;
 
             studentsLayer.addTo(map);
             schoolsLayer.addTo(map);
@@ -699,9 +733,13 @@
             renderFederalSchools();
             renderMapLayers();
 
+            // Garantir renderização completa dos tiles
             setTimeout(() => {
                 map.invalidateSize();
-            }, 300);
+            }, 200);
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 600);
         }
 
         function getMarkerColor(count) {
@@ -727,13 +765,15 @@
             if (showBuffers) {
                 federalPoles.forEach(pole => {
                     const circle = L.circle([pole.lat, pole.lng], {
+                        pane: 'buffersPane',
                         radius: 35000,
                         color: '#d97706',
                         weight: 1.2,
                         opacity: 0.45,
                         fillColor: '#f59e0b',
                         fillOpacity: 0.04,
-                        dashArray: '4, 6'
+                        dashArray: '4, 6',
+                        interactive: false // Impede que o círculo capture o clique
                     });
                     buffersLayer.addLayer(circle);
                 });
@@ -751,12 +791,14 @@
                 const color = getMarkerColor(item.count);
 
                 const marker = L.circleMarker([item.lat, item.lng], {
+                    pane: 'studentsPane',
                     radius: radius,
                     fillColor: color,
                     color: '#ffffff',
                     weight: 2,
                     opacity: 1,
-                    fillOpacity: 0.85
+                    fillOpacity: 0.85,
+                    interactive: true
                 });
 
                 // Construção da Cesta no Popup
@@ -826,10 +868,12 @@
                         }
 
                         const polyline = L.polyline([[item.lat, item.lng], [opt.pole.lat, opt.pole.lng]], {
+                            pane: 'vectorsPane',
                             color: strokeColor,
                             weight: weight,
                             opacity: opacity,
-                            dashArray: dashArray
+                            dashArray: dashArray,
+                            interactive: true
                         });
 
                         polyline.bindTooltip(`${item.city} &rarr; ${opt.pole.name.split('(')[0].trim()} (${opt.dist} km • ${Math.round(opt.prob*100)}% prob.)`, { sticky: true });
@@ -846,7 +890,7 @@
                 const schoolIcon = L.divIcon({
                     className: 'custom-school-pin',
                     html: `
-                        <div style="background-color: #0f172a; width: 32px; height: 32px; border-radius: 50%; border: 3px solid #f59e0b; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.4); display: flex; align-items: center; justify-content: center; color: #f59e0b; font-size: 14px;">
+                        <div style="background-color: #0f172a; width: 32px; height: 32px; border-radius: 50%; border: 3px solid #f59e0b; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.4); display: flex; align-items: center; justify-content: center; color: #f59e0b; font-size: 14px; cursor: pointer;">
                             <i class="fas fa-university"></i>
                         </div>
                     `,
@@ -854,7 +898,12 @@
                     iconAnchor: [16, 16]
                 });
 
-                const marker = L.marker([pole.lat, pole.lng], { icon: schoolIcon });
+                const marker = L.marker([pole.lat, pole.lng], { 
+                    icon: schoolIcon,
+                    pane: 'schoolsPane',
+                    interactive: true
+                });
+
                 marker.bindPopup(`
                     <div class="text-xs p-1 max-w-[270px]">
                         <span class="bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full text-[9px] font-black uppercase inline-block mb-1 border border-amber-300">Campus Federal de Destino</span>
@@ -865,6 +914,15 @@
                 `);
                 schoolsLayer.addLayer(marker);
             });
+        }
+
+        function resetMapView() {
+            if (map) {
+                map.setView([-20.5, -43.2], 7);
+                document.getElementById('mapPoleFilter').value = 'ALL';
+                currentCampusFilter = 'ALL';
+                renderMapLayers();
+            }
         }
 
         function updateMobilityRadius(newRadius) {
@@ -1087,9 +1145,9 @@
             initCharts();
             renderFullTable();
 
-            setTimeout(() => {
+            window.addEventListener('resize', () => {
                 if (map) map.invalidateSize();
-            }, 400);
+            });
         });
     </script>
 </body>
