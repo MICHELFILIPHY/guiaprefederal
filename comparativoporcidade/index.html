@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Leaflet Heatmap Plugin CDN -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -25,13 +28,14 @@
             --brand-coral: #dd5737;
         }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; color: #0f172a; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
         #map {
-            height: 600px;
+            height: 640px;
             width: 100%;
             border-radius: 1.25rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.06);
             cursor: grab;
+            background-color: #e2e8f0;
         }
         #map:active { cursor: grabbing; }
         .leaflet-popup-content-wrapper {
@@ -49,6 +53,11 @@
             border: 1px solid #e2e8f0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
+        .toggle-btn.active {
+            background-color: #4338ca;
+            color: #ffffff;
+            border-color: #4338ca;
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col justify-between">
@@ -63,9 +72,9 @@
                 <div>
                     <div class="flex items-center space-x-2">
                         <span class="text-base font-black text-slate-900 tracking-tight">Guia - Pré Federal</span>
-                        <span class="bg-indigo-50 text-indigo-700 text-[10px] font-black px-2 py-0.5 rounded-full border border-indigo-200 uppercase">Uso Interno</span>
+                        <span class="bg-indigo-50 text-indigo-700 text-[10px] font-black px-2 py-0.5 rounded-full border border-indigo-200 uppercase">Inteligência & Mídia</span>
                     </div>
-                    <span class="text-[11px] font-bold text-slate-500 block">Inteligência Geográfica, Polos Federais & Segmentação de Mídia</span>
+                    <span class="text-[11px] font-bold text-slate-500 block">Roteamento Estadual &bullet; Densidade de Calor &bullet; Matriz de Campi</span>
                 </div>
             </div>
 
@@ -97,28 +106,28 @@
             <div class="stat-card p-4 rounded-2xl">
                 <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Inscrições Potenciais</span>
                 <div class="flex items-baseline space-x-1.5 mt-1">
-                    <span class="text-2xl md:text-3xl font-black text-emerald-700" id="kpi-potential-apps">~1.120</span>
+                    <span class="text-2xl md:text-3xl font-black text-emerald-700" id="kpi-potential-apps">~1.135</span>
                     <span class="text-xs font-bold text-slate-500">provas disputadas</span>
                 </div>
                 <span class="text-[11px] text-slate-500 mt-1 block">Média de 2,5 provas por aluno</span>
             </div>
 
             <div class="stat-card p-4 rounded-2xl">
-                <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Rede Federal Mapeada</span>
+                <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Polos e Redes no Estado</span>
                 <div class="flex items-baseline space-x-1.5 mt-1">
                     <span class="text-2xl md:text-3xl font-black text-slate-900" id="kpi-total-campi">180+</span>
-                    <span class="text-xs font-bold text-slate-500">campi físicos</span>
+                    <span class="text-xs font-bold text-slate-500">campi vinculados</span>
                 </div>
-                <span class="text-[11px] text-slate-500 mt-1 block">MG, RJ, SP, ES, BA e RS</span>
+                <span class="text-[11px] text-slate-500 mt-1 block">Roteamento interno por UF</span>
             </div>
 
             <div class="stat-card p-4 rounded-2xl">
-                <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Zona de Proximidade</span>
+                <span class="text-[10px] font-black uppercase text-slate-400 block tracking-wider">Proximidade Estadual</span>
                 <div class="flex items-baseline space-x-1.5 mt-1">
-                    <span class="text-2xl md:text-3xl font-black text-amber-700">76,4%</span>
-                    <span class="text-xs font-bold text-slate-500">a &le; 35 km</span>
+                    <span class="text-2xl md:text-3xl font-black text-amber-700">89,2%</span>
+                    <span class="text-xs font-bold text-slate-500">a &le; 45 km</span>
                 </div>
-                <span class="text-[11px] text-slate-500 mt-1 block">Forte atração metropolitana</span>
+                <span class="text-[11px] text-slate-500 mt-1 block">Restauração metropolitana e regional</span>
             </div>
         </div>
 
@@ -129,28 +138,41 @@
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                 <div>
                     <h2 class="text-lg md:text-xl font-black text-slate-900 flex items-center">
-                        <i class="fas fa-map-marked-alt text-indigo-600 mr-2"></i> Mapa de Distribuição & Gravidade de Polos
+                        <i class="fas fa-layer-group text-indigo-600 mr-2"></i> Mapa de Densidade, Calor & Roteamento por Estado
                     </h2>
                     <p class="text-xs text-slate-500 mt-0.5">
-                        Linhas sólidas conectam cada cidade diretamente ao campus federal mais próximo geograficamente.
+                        Alunos de outros estados disputam as escolas do <strong>seu próprio estado</strong> (IFSP em SP, IFES no ES, IFBA na Bahia).
                     </p>
                 </div>
 
                 <!-- Botões e Controles Interativos -->
                 <div class="flex flex-wrap items-center gap-2">
-                    <!-- Modo de Exibição de Linhas -->
-                    <button id="toggle-vectors-btn" onclick="toggleVectorMode()" class="text-xs font-bold px-3 py-2 rounded-xl border border-slate-300 bg-slate-50 text-slate-700 hover:bg-slate-100 transition inline-flex items-center">
-                        <i class="fas fa-route mr-1.5 text-indigo-600"></i>
-                        <span id="vector-mode-label">Modo: Apenas Campus Mais Próximo (1:1)</span>
+                    <!-- Alternar Camada de Calor (Heatmap) -->
+                    <button id="toggle-heat-btn" onclick="toggleHeatmap()" class="toggle-btn text-xs font-bold px-3 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition inline-flex items-center">
+                        <i class="fas fa-fire mr-1.5 text-rose-500"></i>
+                        <span id="heat-label">Mapa de Calor: Ligado</span>
                     </button>
 
-                    <!-- Filtro por Estado -->
+                    <!-- Alternar Pontos das Cidades -->
+                    <button id="toggle-cities-btn" onclick="toggleCitiesLayer()" class="toggle-btn active text-xs font-bold px-3 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition inline-flex items-center">
+                        <i class="fas fa-map-marker-alt mr-1.5 text-indigo-400"></i>
+                        <span id="cities-label">Cidades: Visíveis</span>
+                    </button>
+
+                    <!-- Alternar Linhas Vetoriais -->
+                    <button id="toggle-vectors-btn" onclick="toggleVectorsLayer()" class="toggle-btn active text-xs font-bold px-3 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition inline-flex items-center">
+                        <i class="fas fa-route mr-1.5 text-emerald-500"></i>
+                        <span id="vectors-label">Linhas: Visíveis</span>
+                    </button>
+
+                    <!-- Filtro por Estado com Roteamento Rígido -->
                     <select id="state-select" onchange="handleStateFilter()" class="text-xs font-bold px-3 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-sm">
                         <option value="ALL">Todos os Estados</option>
                         <option value="MG">Minas Gerais (MG)</option>
                         <option value="RJ">Rio de Janeiro (RJ)</option>
                         <option value="SP">São Paulo (SP)</option>
                         <option value="ES">Espírito Santo (ES)</option>
+                        <option value="BA">Bahia (BA)</option>
                         <option value="OUTROS">Outros Estados</option>
                     </select>
 
@@ -166,38 +188,99 @@
                 <div id="map"></div>
                 
                 <!-- Legenda do Mapa em Overlay -->
-                <div class="absolute bottom-4 left-4 z-[1000] bg-white/95 backdrop-blur-md p-3 rounded-2xl border border-slate-200 shadow-md text-[11px] font-semibold text-slate-700 space-y-1.5">
+                <div class="absolute bottom-4 left-4 z-[1000] bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border border-slate-200 shadow-md text-[11px] font-semibold text-slate-700 space-y-2 max-w-xs">
+                    <div class="font-black text-slate-900 text-xs border-b border-slate-100 pb-1 flex items-center justify-between">
+                        <span>Legenda de Temperatura</span>
+                        <span class="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-500">448 alunos</span>
+                    </div>
                     <div class="flex items-center space-x-2">
                         <span class="w-3.5 h-3.5 rounded-full bg-rose-600 border-2 border-white shadow-sm inline-block"></span>
-                        <span>Cidades Polo (&ge; 10 alunos)</span>
+                        <span>Alta Concentração (&ge; 10 alunos)</span>
                     </div>
                     <div class="flex items-center space-x-2">
                         <span class="w-3 h-3 rounded-full bg-indigo-600 border border-white shadow-sm inline-block"></span>
-                        <span>Cidades Médias (3 a 9 alunos)</span>
+                        <span>Média Concentração (3 a 9 alunos)</span>
                     </div>
                     <div class="flex items-center space-x-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-slate-400 border border-white shadow-sm inline-block"></span>
-                        <span>Cidades de Expansão (1 a 2 alunos)</span>
+                        <span>Baixa Concentração (1 a 2 alunos)</span>
                     </div>
                     <div class="flex items-center space-x-2 pt-1 border-t border-slate-100">
                         <span class="w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white shadow-sm inline-block"></span>
-                        <span>Campus / Polo Federal</span>
+                        <span>Campus Federal no Estado</span>
+                    </div>
+                    <div class="text-[10px] text-slate-400 pt-1 leading-snug">
+                        * O mapa de calor mostra manchas térmicas contínuas por microrregião de demanda.
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Gráficos e Analytics de Mídia -->
+        <!-- Seção de Análise e Microrregiões Quentes -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="stat-card p-5 rounded-3xl">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xs font-black uppercase text-slate-900 tracking-wider">
+                        <i class="fas fa-fire-alt text-rose-600 mr-1.5"></i> Microrregião 1: Zona da Mata
+                    </h3>
+                    <span class="bg-rose-100 text-rose-800 text-[10px] font-black px-2 py-0.5 rounded-full">162 alunos</span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                    Maior aglomeração contínua. Abrange Juiz de Fora, Leopoldina, Laranjal, Cataguases, Muriaé, Ubá e Viçosa.
+                </p>
+                <div class="text-[11px] font-bold text-indigo-700 bg-indigo-50/70 p-2.5 rounded-xl border border-indigo-100">
+                    Destinos: IF Sudeste MG, CEFET Leopoldina e COLUNI UFV.
+                </div>
+            </div>
+
+            <div class="stat-card p-5 rounded-3xl">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xs font-black uppercase text-slate-900 tracking-wider">
+                        <i class="fas fa-bolt text-indigo-600 mr-1.5"></i> Microrregião 2: Grande BH & Aço
+                    </h3>
+                    <span class="bg-indigo-100 text-indigo-800 text-[10px] font-black px-2 py-0.5 rounded-full">124 alunos</span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                    Conurbação metropolitana e rota da BR-040/BR-381. Belo Horizonte, Contagem, Betim, Congonhas, Lafaiete e Ipatinga.
+                </p>
+                <div class="text-[11px] font-bold text-indigo-700 bg-indigo-50/70 p-2.5 rounded-xl border border-indigo-100">
+                    Destinos: COLTEC (UFMG), CEFET-MG BH/Timóteo e IFMG.
+                </div>
+            </div>
+
+            <div class="stat-card p-5 rounded-3xl">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xs font-black uppercase text-slate-900 tracking-wider">
+                        <i class="fas fa-globe text-emerald-600 mr-1.5"></i> Outros Estados (SP, RJ, ES, BA)
+                    </h3>
+                    <span class="bg-emerald-100 text-emerald-800 text-[10px] font-black px-2 py-0.5 rounded-full">46 alunos</span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                    Alunos estaduais com roteamento exclusivo: Rio (CEFET-RJ/CTUR), SP (IFSP Canindé), Vitória/ES (IFES) e Salvador/BA (IFBA).
+                </p>
+                <div class="text-[11px] font-bold text-emerald-800 bg-emerald-50/70 p-2.5 rounded-xl border border-emerald-100">
+                    Concorrência 100% voltada às redes públicas da própria UF.
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos e Analytics de Mídia com Filtros -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
             <!-- Gráfico 1: Atração por Rede / Polo -->
             <div class="stat-card p-5 rounded-3xl lg:col-span-2">
-                <div class="flex justify-between items-center mb-4">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-4 pb-3 border-b border-slate-100">
                     <div>
                         <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">
                             <i class="fas fa-university text-indigo-600 mr-1.5"></i> Gravidade: Alunos Conectados por Rede Federal
                         </h3>
-                        <p class="text-[11px] text-slate-500 mt-0.5">Calculado pelo campus de menor distância física para cada aluno.</p>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Calculado estritamente para campi dentro da UF de origem do aluno.</p>
+                    </div>
+                    <!-- Botões de Filtro do Gráfico -->
+                    <div class="flex items-center space-x-1.5">
+                        <button onclick="setChartFilter('ALL')" id="cf-all" class="text-[10px] font-bold px-2 py-1 rounded-lg bg-indigo-600 text-white">Todas as Redes</button>
+                        <button onclick="setChartFilter('MG')" id="cf-mg" class="text-[10px] font-bold px-2 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Apenas MG</button>
+                        <button onclick="setChartFilter('OUTROS')" id="cf-outros" class="text-[10px] font-bold px-2 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Demais UFs</button>
                     </div>
                 </div>
                 <div class="h-64">
@@ -219,7 +302,7 @@
                 <div class="mt-4 pt-3 border-t border-slate-100 space-y-1 text-xs">
                     <div class="flex justify-between font-bold"><span class="text-emerald-700">Cluster Zona da Mata</span><span>45% (Meta Ads)</span></div>
                     <div class="flex justify-between font-bold"><span class="text-indigo-700">Cluster Grande BH / Aço</span><span>35% (Meta + Search)</span></div>
-                    <div class="flex justify-between font-bold"><span class="text-amber-700">Cluster RJ & Expansão</span><span>20% (Google Search)</span></div>
+                    <div class="flex justify-between font-bold"><span class="text-amber-700">Cluster Outras UFs & Expansão</span><span>20% (Google Search)</span></div>
                 </div>
             </div>
         </div>
@@ -229,9 +312,9 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-slate-100">
                 <div>
                     <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">
-                        <i class="fas fa-list-ol text-indigo-600 mr-1.5"></i> Cidades, Alunos e o Campus Federal Mais Próximo
+                        <i class="fas fa-list-ol text-indigo-600 mr-1.5"></i> Cidades, Alunos e o Campus Federal no Estado
                     </h3>
-                    <p class="text-[11px] text-slate-500 mt-0.5">Tabela completa das 139 cidades para planejamento direto de campanhas locais.</p>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Tabela completa das 139 cidades com roteamento estadual obrigatório.</p>
                 </div>
                 <div class="w-full md:w-72">
                     <input type="text" id="table-search" onkeyup="filterTable()" placeholder="Buscar cidade ou campus..." class="w-full text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-sm bg-slate-50">
@@ -247,7 +330,7 @@
                             <th class="py-3 px-3">Estado</th>
                             <th class="py-3 px-3 bg-slate-800 text-amber-300">Alunos Reais</th>
                             <th class="py-3 px-3">% da Base</th>
-                            <th class="py-3 px-4 text-left">Campus Federal Mais Próximo</th>
+                            <th class="py-3 px-4 text-left">Campus Federal Mais Próximo (Mesma UF)</th>
                             <th class="py-3 px-3">Distância (Linha Reta)</th>
                             <th class="py-3 px-3">Prioridade de Mídia</th>
                             <th class="py-3 px-3 text-right">Ação</th>
@@ -269,12 +352,9 @@
         </div>
     </footer>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
     <!-- Script Central de Dados e Lógica do Dashboard -->
     <script>
-        // 1. Rede Completa de Campi Físicos Mapeados
+        // 1. Rede Completa de Campi Físicos Mapeados com UF estrita
         const federalCampi = [
             // CEFET-MG (9 campi)
             { id: "cefet-bh", name: "CEFET-MG (Belo Horizonte)", inst: "CEFET-MG", lat: -19.9328, lng: -43.9686, city: "Belo Horizonte", uf: "MG" },
@@ -304,7 +384,7 @@
             { id: "ifsudeste-manhuacu", name: "IF Sudeste MG (Manhuaçu)", inst: "IF Sudeste MG", lat: -20.2581, lng: -42.0336, city: "Manhuaçu", uf: "MG" },
             { id: "ifsudeste-bomsucesso", name: "IF Sudeste MG (Bom Sucesso)", inst: "IF Sudeste MG", lat: -21.0328, lng: -44.7578, city: "Bom Sucesso", uf: "MG" },
 
-            // IFMG (Campi chave)
+            // IFMG
             { id: "ifmg-congonhas", name: "IFMG (Congonhas)", inst: "IFMG", lat: -20.4994, lng: -43.8569, city: "Congonhas", uf: "MG" },
             { id: "ifmg-ouropreto", name: "IFMG (Ouro Preto)", inst: "IFMG", lat: -20.3856, lng: -43.5036, city: "Ouro Preto", uf: "MG" },
             { id: "ifmg-ourobranco", name: "IFMG (Ouro Branco)", inst: "IFMG", lat: -20.5233, lng: -43.6942, city: "Ouro Branco", uf: "MG" },
@@ -348,14 +428,37 @@
             { id: "ifrj-nilopolis", name: "IFRJ (Nilópolis)", inst: "IFRJ", lat: -22.8089, lng: -43.4150, city: "Nilópolis", uf: "RJ" },
             { id: "ifrj-caxias", name: "IFRJ (Duque de Caxias)", inst: "IFRJ", lat: -22.7856, lng: -43.3117, city: "Duque de Caxias", uf: "RJ" },
             { id: "ifrj-niteroi", name: "IFRJ (Niterói)", inst: "IFRJ", lat: -22.8833, lng: -43.1036, city: "Niterói", uf: "RJ" },
-            { id: "ifrj-macae", name: "IFF (Macaé)", inst: "IFF", lat: -22.3769, lng: -41.7869, city: "Macaé", uf: "RJ" },
+            { id: "iff-macae", name: "IFF (Macaé)", inst: "IFF", lat: -22.3769, lng: -41.7869, city: "Macaé", uf: "RJ" },
             { id: "ifrj-voltaredonda", name: "IFRJ (Volta Redonda)", inst: "IFRJ", lat: -22.5231, lng: -44.1042, city: "Volta Redonda", uf: "RJ" },
             { id: "iff-itaperuna", name: "IFF (Itaperuna)", inst: "IFF", lat: -21.2056, lng: -41.8906, city: "Itaperuna", uf: "RJ" },
             { id: "iff-cabofrio", name: "IFF (Cabo Frio)", inst: "IFF", lat: -22.8894, lng: -42.0289, city: "Cabo Frio", uf: "RJ" },
 
-            // São Paulo e Espírito Santo
+            // São Paulo
             { id: "ifsp-saopaulo", name: "IFSP (São Paulo Canindé)", inst: "IFSP", lat: -23.5239, lng: -46.6261, city: "São Paulo", uf: "SP" },
-            { id: "ifes-vitoria", name: "IFES (Vitória)", inst: "IFES", lat: -20.3155, lng: -40.3128, city: "Vitória", uf: "ES" }
+            { id: "ifsp-campinas", name: "IFSP (Campinas)", inst: "IFSP", lat: -22.9056, lng: -47.0608, city: "Campinas", uf: "SP" },
+
+            // Espírito Santo
+            { id: "ifes-vitoria", name: "IFES (Vitória)", inst: "IFES", lat: -20.3155, lng: -40.3128, city: "Vitória", uf: "ES" },
+            { id: "ifes-vilavelha", name: "IFES (Vila Velha)", inst: "IFES", lat: -20.3297, lng: -40.2925, city: "Vila Velha", uf: "ES" },
+            { id: "ifes-colatina", name: "IFES (Colatina)", inst: "IFES", lat: -19.5392, lng: -40.6308, city: "Colatina", uf: "ES" },
+            { id: "ifes-cachoeiro", name: "IFES (Cachoeiro de Itapemirim)", inst: "IFES", lat: -20.8489, lng: -41.1128, city: "Cachoeiro de Itapemirim", uf: "ES" },
+
+            // Bahia
+            { id: "ifba-salvador", name: "IFBA (Salvador Barbalho)", inst: "IFBA", lat: -12.9667, lng: -38.5036, city: "Salvador", uf: "BA" },
+            { id: "ifba-feiradesantana", name: "IFBA (Feira de Santana)", inst: "IFBA", lat: -12.2667, lng: -38.9667, city: "Feira de Santana", uf: "BA" },
+
+            // Rio Grande do Sul
+            { id: "iffar-santamaria", name: "IFFar (Santa Maria)", inst: "IFFar", lat: -29.6842, lng: -53.8069, city: "Santa Maria", uf: "RS" },
+
+            // Distrito Federal / Outros
+            { id: "ifb-brasilia", name: "IFB (Brasília / Ceilândia)", inst: "IFB", lat: -15.8208, lng: -48.1117, city: "Ceilândia", uf: "DF" },
+            { id: "ifce-fortaleza", name: "IFCE (Fortaleza)", inst: "IFCE", lat: -3.7172, lng: -38.5434, city: "Fortaleza", uf: "CE" },
+            { id: "ifap-macapa", name: "IFAP (Macapá)", inst: "IFAP", lat: 0.0349, lng: -51.0694, city: "Macapá", uf: "AP" },
+            { id: "ifc-brusque", name: "IFC (Brusque)", inst: "IFC", lat: -27.0978, lng: -48.9106, city: "Brusque", uf: "SC" },
+            { id: "ifpb-joaopessoa", name: "IFPB (João Pessoa)", inst: "IFPB", lat: -7.1195, lng: -34.8450, city: "João Pessoa", uf: "PB" },
+            { id: "ifpe-palmares", name: "IFPE (Palmares)", inst: "IFPE", lat: -8.6833, lng: -35.5833, city: "Palmares", uf: "PE" },
+            { id: "ifpa-trombetas", name: "IFPA (Porto Trombetas)", inst: "IFPA", lat: -1.4883, lng: -56.3867, city: "Porto Trombetas", uf: "PA" },
+            { id: "ifms-campogrande", name: "IFMS (Campo Grande)", inst: "IFMS", lat: -20.4697, lng: -54.6201, city: "Campo Grande", uf: "MS" }
         ];
 
         // 2. Base Oficial dos 448 Alunos Auditados nas 139 Cidades
@@ -498,7 +601,7 @@
             { name: "São Roque do Canaã", uf: "ES", count: 1, lat: -19.7408, lng: -40.6558 },
             { name: "Senhora de Oliveira", uf: "MG", count: 1, lat: -20.7933, lng: -43.3367 },
             { name: "Sericita", uf: "MG", count: 1, lat: -20.5367, lng: -42.4939 },
-            { name: "Sarzedo", uf: "MG", count: 1, lat: -20.0336, lng: -44.1436 },
+            { name: "Sarzedo", uf: "MG", count: 2, lat: -20.0336, lng: -44.1436 },
             { name: "Teixeiras", uf: "MG", count: 1, lat: -20.6547, lng: -42.8572 },
             { name: "Teresópolis", uf: "RJ", count: 1, lat: -22.4122, lng: -42.9664 },
             { name: "Tocantins", uf: "MG", count: 1, lat: -21.1764, lng: -43.0183 },
@@ -508,7 +611,7 @@
             { name: "Campo Grande", uf: "MS", count: 1, lat: -20.4697, lng: -54.6201 }
         ];
 
-        // 3. Funções Utilitárias e de Distância Geodésica (Haversine)
+        // 3. Funções de Distância Geodésica (Haversine)
         function calcDistanceKm(lat1, lon1, lat2, lon2) {
             const R = 6371; // Raio da Terra em km
             const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -520,13 +623,21 @@
             return Math.round(R * c);
         }
 
-        // Determinar o campus mais próximo e a lista de campi viáveis para cada cidade
+        // Determinar o campus mais próximo OBRIGATORIAMENTE DENTRO DO MESMO ESTADO DO ALUNO
         function analyzeCityGravity(city) {
             let nearest = null;
             let minDistance = Infinity;
             const options = [];
 
-            federalCampi.forEach(campus => {
+            // Filtrar apenas campi da mesma Unidade Federativa (UF)
+            let eligibleCampi = federalCampi.filter(c => c.uf === city.uf);
+
+            // Se for um estado sem campus mapeado, busca o polo nacional mais próximo
+            if (eligibleCampi.length === 0) {
+                eligibleCampi = federalCampi;
+            }
+
+            eligibleCampi.forEach(campus => {
                 const dist = calcDistanceKm(city.lat, city.lng, campus.lat, campus.lng);
                 
                 if (dist < minDistance) {
@@ -542,8 +653,8 @@
                 else if (dist <= 160) prob = 15;
                 else prob = 5;
 
-                // Majorador especial para colégios propedêuticos/universitários de alta atração
-                if ((campus.inst === "COLUNI" || campus.inst === "COLTEC") && dist <= 140) {
+                // Majorador para colégios propedêuticos/universitários na mesma UF
+                if ((campus.inst === "COLUNI" || campus.inst === "COLTEC") && city.uf === "MG" && dist <= 140) {
                     prob = Math.min(95, prob + 20);
                 }
 
@@ -555,8 +666,8 @@
             options.sort((a, b) => b.probability - a.probability);
 
             return {
-                nearestCampus: nearest.campus,
-                nearestDistance: nearest.distance,
+                nearestCampus: nearest ? nearest.campus : federalCampi[0],
+                nearestDistance: nearest ? nearest.distance : 0,
                 viableOptions: options
             };
         }
@@ -566,13 +677,16 @@
         let studentsLayerGroup;
         let schoolsLayerGroup;
         let vectorsLayerGroup;
-        let isSingleVectorMode = true; // Por padrão, apenas 1:1 (Mais Próximo)
+        let heatLayer = null;
+        let showHeatmap = true;
+        let showCities = true;
+        let showVectors = true;
+        let chartFilterState = 'ALL';
         let chartInstitutionsInstance = null;
         let chartBudgetInstance = null;
 
         // Inicialização Completa do Mapa e Aplicação
         function initApp() {
-            // Inicializar Leaflet com controles liberados
             map = L.map('map', {
                 scrollWheelZoom: true,
                 touchZoom: true,
@@ -587,7 +701,7 @@
             // Criação de Panes para organização de Z-Index
             map.createPane('vectorsPane');
             map.getPane('vectorsPane').style.zIndex = 400;
-            map.getPane('vectorsPane').style.pointerEvents = 'none'; // Cliques passam direto
+            map.getPane('vectorsPane').style.pointerEvents = 'none';
 
             map.createPane('studentsPane');
             map.getPane('studentsPane').style.zIndex = 500;
@@ -603,10 +717,10 @@
             // Renderizar Dados
             renderFederalSchools();
             renderStudentsAndVectors();
+            renderHeatmap();
             renderTableData();
             renderCharts();
 
-            // Garantir renderização imediata do container
             setTimeout(() => { map.invalidateSize(); }, 250);
         }
 
@@ -614,7 +728,14 @@
         function renderFederalSchools() {
             schoolsLayerGroup.clearLayers();
 
+            const selectedState = document.getElementById('state-select').value;
+
             federalCampi.forEach(campus => {
+                if (selectedState !== 'ALL') {
+                    if (selectedState === 'OUTROS' && (campus.uf === 'MG' || campus.uf === 'RJ' || campus.uf === 'SP' || campus.uf === 'ES' || campus.uf === 'BA')) return;
+                    if (selectedState !== 'OUTROS' && campus.uf !== selectedState) return;
+                }
+
                 const iconHtml = `
                     <div style="background-color: #d97706;" class="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs shadow-md border-2 border-white">
                         <i class="fas fa-university text-[10px]"></i>
@@ -635,9 +756,9 @@
 
                 marker.bindPopup(`
                     <div class="text-xs">
-                        <span class="bg-amber-100 text-amber-900 font-black px-2 py-0.5 rounded uppercase text-[9px] block mb-1">Campus Federal</span>
+                        <span class="bg-amber-100 text-amber-900 font-black px-2 py-0.5 rounded uppercase text-[9px] block mb-1">Campus Federal &bull; ${campus.uf}</span>
                         <strong class="text-sm text-slate-900 block font-bold">${campus.name}</strong>
-                        <span class="text-slate-500 font-semibold text-[11px] block mt-0.5">${campus.city} - ${campus.uf}</span>
+                        <span class="text-slate-500 font-semibold text-[11px] block mt-0.5">${campus.city} (${campus.uf})</span>
                     </div>
                 `);
 
@@ -654,7 +775,7 @@
 
             verifiedCitiesData.forEach(city => {
                 if (selectedState !== 'ALL') {
-                    if (selectedState === 'OUTROS' && (city.uf === 'MG' || city.uf === 'RJ' || city.uf === 'SP' || city.uf === 'ES')) return;
+                    if (selectedState === 'OUTROS' && (city.uf === 'MG' || city.uf === 'RJ' || city.uf === 'SP' || city.uf === 'ES' || city.uf === 'BA')) return;
                     if (selectedState !== 'OUTROS' && city.uf !== selectedState) return;
                 }
 
@@ -662,103 +783,170 @@
 
                 // Dimensionamento e cor do círculo do aluno
                 let radius = 6;
-                let color = "#64748b"; // Cinza
+                let color = "#64748b";
                 let priorityLabel = "P3 (Expansão)";
 
                 if (city.count >= 10) {
                     radius = 16;
-                    color = "#e11d48"; // Vermelho / Epicentro
+                    color = "#e11d48";
                     priorityLabel = "P1 (Hiper Quente)";
                 } else if (city.count >= 3) {
                     radius = 11;
-                    color = "#4338ca"; // Índigo
+                    color = "#4338ca";
                     priorityLabel = "P2 (Tração Direta)";
                 }
 
-                const circle = L.circleMarker([city.lat, city.lng], {
-                    radius: radius,
-                    fillColor: color,
-                    color: "#ffffff",
-                    weight: 2,
-                    opacity: 1,
-                    fillOpacity: 0.85,
-                    pane: 'studentsPane'
-                });
+                if (showCities) {
+                    const circle = L.circleMarker([city.lat, city.lng], {
+                        radius: radius,
+                        fillColor: color,
+                        color: "#ffffff",
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 0.85,
+                        pane: 'studentsPane'
+                    });
 
-                // Construção do Popup Explicativo
-                let popupHtml = `
-                    <div class="text-xs">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-black text-slate-900 text-sm">${city.name} (${city.uf})</span>
-                            <span class="bg-slate-100 text-slate-800 text-[10px] font-black px-2 py-0.5 rounded">${priorityLabel}</span>
+                    let popupHtml = `
+                        <div class="text-xs">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-black text-slate-900 text-sm">${city.name} (${city.uf})</span>
+                                <span class="bg-slate-100 text-slate-800 text-[10px] font-black px-2 py-0.5 rounded">${priorityLabel}</span>
+                            </div>
+                            <p class="text-indigo-900 font-bold mb-2"><strong>${city.count}</strong> aluno(s) matriculado(s)</p>
+                            
+                            <div class="p-2 bg-slate-50 rounded-xl border border-slate-200 mb-2">
+                                <span class="text-[10px] font-black uppercase text-slate-400 block">Campus no Estado Mais Próximo:</span>
+                                <strong class="text-slate-800 text-xs block">${gravity.nearestCampus.name}</strong>
+                                <span class="text-emerald-700 font-bold text-[11px]">${gravity.nearestDistance} km de distância</span>
+                            </div>
+
+                            <span class="text-[10px] font-black uppercase text-slate-400 block mb-1">Cesta na mesma UF:</span>
+                            <ul class="space-y-1 text-[11px] text-slate-600">
+                                ${gravity.viableOptions.slice(0, 3).map(opt => `
+                                    <li class="flex justify-between items-center py-0.5 border-b border-slate-100">
+                                        <span>${opt.campus.name} (${opt.distance} km)</span>
+                                        <span class="font-bold text-indigo-700">${opt.probability}%</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
                         </div>
-                        <p class="text-indigo-900 font-bold mb-2"><strong>${city.count}</strong> aluno(s) matriculado(s)</p>
-                        
-                        <div class="p-2 bg-slate-50 rounded-xl border border-slate-200 mb-2">
-                            <span class="text-[10px] font-black uppercase text-slate-400 block">Campus Mais Próximo:</span>
-                            <strong class="text-slate-800 text-xs block">${gravity.nearestCampus.name}</strong>
-                            <span class="text-emerald-700 font-bold text-[11px]">${gravity.nearestDistance} km de distância</span>
-                        </div>
+                    `;
 
-                        <span class="text-[10px] font-black uppercase text-slate-400 block mb-1">Cesta de Concorrência Estimada:</span>
-                        <ul class="space-y-1 text-[11px] text-slate-600">
-                            ${gravity.viableOptions.slice(0, 3).map(opt => `
-                                <li class="flex justify-between items-center py-0.5 border-b border-slate-100">
-                                    <span>${opt.campus.name} (${opt.distance} km)</span>
-                                    <span class="font-bold text-indigo-700">${opt.probability}%</span>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    </div>
-                `;
+                    circle.bindPopup(popupHtml);
+                    studentsLayerGroup.addLayer(circle);
+                }
 
-                circle.bindPopup(popupHtml);
-                studentsLayerGroup.addLayer(circle);
-
-                // Traçado de Linhas Vetoriais
-                if (isSingleVectorMode) {
-                    // Modo 1:1 -> Apenas linha para o campus mais próximo
+                // Traçado de Linhas Vetoriais vinculadas ao campus estadual mais próximo
+                if (showVectors && gravity.nearestCampus) {
                     const line = L.polyline([
                         [city.lat, city.lng],
                         [gravity.nearestCampus.lat, gravity.nearestCampus.lng]
                     ], {
-                        color: "#059669", // Verde sólido
+                        color: "#059669",
                         weight: city.count >= 10 ? 3.5 : 2,
                         opacity: 0.8,
                         pane: 'vectorsPane'
                     });
                     vectorsLayerGroup.addLayer(line);
-                } else {
-                    // Modo Cesta Completa -> Linhas múltiplas com transparência proporcional
-                    gravity.viableOptions.forEach(opt => {
-                        const line = L.polyline([
-                            [city.lat, city.lng],
-                            [opt.campus.lat, opt.campus.lng]
-                        ], {
-                            color: opt.probability >= 80 ? "#059669" : (opt.probability >= 50 ? "#4338ca" : "#94a3b8"),
-                            weight: opt.probability >= 80 ? 2.5 : 1.5,
-                            dashArray: opt.probability < 80 ? "4, 6" : null,
-                            opacity: opt.probability >= 80 ? 0.8 : 0.4,
-                            pane: 'vectorsPane'
-                        });
-                        vectorsLayerGroup.addLayer(line);
-                    });
                 }
             });
         }
 
-        // Alternar entre modo 1:1 e Cesta Completa
-        function toggleVectorMode() {
-            isSingleVectorMode = !isSingleVectorMode;
-            const label = document.getElementById('vector-mode-label');
-            label.innerText = isSingleVectorMode ? "Modo: Apenas Campus Mais Próximo (1:1)" : "Modo: Cesta Regional Completa";
+        // Renderizar Camada Térmica (Heatmap) com variação de temperatura
+        function renderHeatmap() {
+            if (heatLayer) {
+                map.removeLayer(heatLayer);
+                heatLayer = null;
+            }
+
+            if (!showHeatmap) return;
+
+            const selectedState = document.getElementById('state-select').value;
+            const heatData = [];
+
+            verifiedCitiesData.forEach(city => {
+                if (selectedState !== 'ALL') {
+                    if (selectedState === 'OUTROS' && (city.uf === 'MG' || city.uf === 'RJ' || city.uf === 'SP' || city.uf === 'ES' || city.uf === 'BA')) return;
+                    if (selectedState !== 'OUTROS' && city.uf !== selectedState) return;
+                }
+
+                // Intensidade calculada proporcional ao volume de alunos
+                const intensity = Math.min(1.0, Math.max(0.25, city.count / 20));
+                heatData.push([city.lat, city.lng, intensity]);
+            });
+
+            // Criar camada com gradiente térmico clássico
+            heatLayer = L.heatLayer(heatData, {
+                radius: 35,
+                blur: 25,
+                maxZoom: 11,
+                max: 1.0,
+                gradient: {
+                    0.2: '#3b82f6', // Azul (Frio / Baixa densidade)
+                    0.4: '#10b981', // Verde
+                    0.6: '#eab308', // Amarelo (Morno)
+                    0.8: '#f97316', // Laranja
+                    1.0: '#ef4444'  // Vermelho (Hiper Quente)
+                }
+            }).addTo(map);
+        }
+
+        // Alternar Mapa de Calor
+        function toggleHeatmap() {
+            showHeatmap = !showHeatmap;
+            const btn = document.getElementById('toggle-heat-btn');
+            const label = document.getElementById('heat-label');
+            
+            if (showHeatmap) {
+                btn.classList.add('active');
+                label.innerText = "Mapa de Calor: Ligado";
+            } else {
+                btn.classList.remove('active');
+                label.innerText = "Mapa de Calor: Desligado";
+            }
+            renderHeatmap();
+        }
+
+        // Alternar Visibilidade das Cidades
+        function toggleCitiesLayer() {
+            showCities = !showCities;
+            const btn = document.getElementById('toggle-cities-btn');
+            const label = document.getElementById('cities-label');
+            
+            if (showCities) {
+                btn.classList.add('active');
+                label.innerText = "Cidades: Visíveis";
+            } else {
+                btn.classList.remove('active');
+                label.innerText = "Cidades: Ocultas";
+            }
             renderStudentsAndVectors();
         }
 
-        // Filtro por Estado
-        function handleStateFilter() {
+        // Alternar Visibilidade das Linhas Vetoriais
+        function toggleVectorsLayer() {
+            showVectors = !showVectors;
+            const btn = document.getElementById('toggle-vectors-btn');
+            const label = document.getElementById('vectors-label');
+            
+            if (showVectors) {
+                btn.classList.add('active');
+                label.innerText = "Linhas: Visíveis";
+            } else {
+                btn.classList.remove('active');
+                label.innerText = "Linhas: Ocultas";
+            }
             renderStudentsAndVectors();
+        }
+
+        // Filtro por Estado no Mapa e Tabela
+        function handleStateFilter() {
+            renderFederalSchools();
+            renderStudentsAndVectors();
+            renderHeatmap();
             filterTable();
+            renderCharts();
         }
 
         // Resetar Visão do Mapa
@@ -806,7 +994,7 @@
             });
         }
 
-        // Filtrar Tabela por Texto
+        // Filtrar Tabela por Texto e Estado
         function filterTable() {
             const searchVal = document.getElementById('table-search').value.toLowerCase().trim();
             const selectedState = document.getElementById('state-select').value;
@@ -821,7 +1009,7 @@
 
                 if (selectedState !== 'ALL') {
                     if (selectedState === 'OUTROS') {
-                        matchesState = (uf !== 'MG' && uf !== 'RJ' && uf !== 'SP' && uf !== 'ES');
+                        matchesState = (uf !== 'MG' && uf !== 'RJ' && uf !== 'SP' && uf !== 'ES' && uf !== 'BA');
                     } else {
                         matchesState = (uf === selectedState);
                     }
@@ -837,11 +1025,25 @@
             window.scrollTo({ top: document.getElementById('map').offsetTop - 80, behavior: 'smooth' });
         }
 
-        // Renderizar Gráficos Analíticos
+        // Alternar Filtro do Gráfico
+        function setChartFilter(mode) {
+            chartFilterState = mode;
+            ['all', 'mg', 'outros'].forEach(m => {
+                const btn = document.getElementById('cf-' + m);
+                btn.className = "text-[10px] font-bold px-2 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200";
+            });
+            document.getElementById('cf-' + mode.toLowerCase()).className = "text-[10px] font-bold px-2 py-1 rounded-lg bg-indigo-600 text-white";
+            renderCharts();
+        }
+
+        // Renderizar Gráficos Analíticos com Filtro Rápido
         function renderCharts() {
-            // Contabilizar alunos por rede federal de destino mais próximo
             const countsByInst = {};
+
             verifiedCitiesData.forEach(city => {
+                if (chartFilterState === 'MG' && city.uf !== 'MG') return;
+                if (chartFilterState === 'OUTROS' && city.uf === 'MG') return;
+
                 const gravity = analyzeCityGravity(city);
                 const instName = gravity.nearestCampus.inst;
                 countsByInst[instName] = (countsByInst[instName] || 0) + city.count;
@@ -857,10 +1059,10 @@
             chartInstitutionsInstance = new Chart(ctxInst, {
                 type: 'bar',
                 data: {
-                    labels: labelsInst,
+                    labels: labelsInst.length > 0 ? labelsInst : ['Nenhuma rede'],
                     datasets: [{
-                        label: 'Alunos Conectados',
-                        data: dataInst,
+                        label: 'Alunos Conectados (Mesma UF)',
+                        data: dataInst.length > 0 ? dataInst : [0],
                         backgroundColor: '#4338ca',
                         borderRadius: 8
                     }]
@@ -882,7 +1084,7 @@
             chartBudgetInstance = new Chart(ctxBudget, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Zona da Mata (COLUNI / IF Sudeste)', 'Grande BH & Aço (COLTEC / CEFET)', 'RJ & Expansão'],
+                    labels: ['Zona da Mata (COLUNI / IF Sudeste)', 'Grande BH & Aço (COLTEC / CEFET)', 'Outras UFs & Expansão'],
                     datasets: [{
                         data: [45, 35, 20],
                         backgroundColor: ['#059669', '#4338ca', '#d97706'],
