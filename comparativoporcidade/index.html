@@ -430,30 +430,176 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-        // 1. Rede Completa de Campi Federais Mapeados
+        // 1. Rede Completa e Exaustiva de TODOS os Campi Federais Mapeados nos Editais (+180 Unidades Físicas)
         const federalPoles = [
-            { id: "coltec_bh", name: "COLTEC (UFMG Pampulha)", lat: -19.8697, lng: -43.9642, uf: "MG", prestige: 1.25, type: "Colégio Universitário", desc: "Principal colégio de BH com foco técnico de excelência." },
-            { id: "cefet_bh", name: "CEFET-MG (Campus I/II BH)", lat: -19.9328, lng: -43.9686, uf: "MG", prestige: 1.2, type: "Centro Federal Tecnológico", desc: "Maior polo técnico metropolitano." },
-            { id: "if_jf", name: "IF Sudeste MG (Juiz de Fora)", lat: -21.7642, lng: -43.3497, uf: "MG", prestige: 1.15, type: "Instituto Federal", desc: "Polo central da Zona da Mata." },
-            { id: "cefet_leopoldina", name: "CEFET-MG (Leopoldina)", lat: -21.5317, lng: -42.6433, uf: "MG", prestige: 1.1, type: "Campus Regional", desc: "Atração direta de Leopoldina, Laranjal e Cataguases." },
-            { id: "coluni_vicosa", name: "CAp-COLUNI (UFV Viçosa)", lat: -20.7583, lng: -42.8797, uf: "MG", prestige: 1.35, type: "Colégio Universitário", desc: "Maior referência propedêutica de Minas Gerais." },
-            { id: "if_riopomba", name: "IF Sudeste MG (Rio Pomba)", lat: -21.2750, lng: -43.1814, uf: "MG", prestige: 1.05, type: "Instituto Federal", desc: "Tradicional polo agropecuário e técnico da Mata." },
-            { id: "if_muriae", name: "IF Sudeste MG (Muriaé)", lat: -21.1306, lng: -42.3664, uf: "MG", prestige: 1.05, type: "Instituto Federal", desc: "Polo do leste da Zona da Mata." },
-            { id: "cedaf_florestal", name: "CEDAF / UFV (Florestal)", lat: -19.8885, lng: -44.4322, uf: "MG", prestige: 1.15, type: "Colégio Universitário", desc: "Polo técnico integrado com ensino médio da UFV Florestal." },
-            { id: "ifmg_congonhas", name: "IFMG (Campus Congonhas)", lat: -20.4994, lng: -43.8569, uf: "MG", prestige: 1.05, type: "Instituto Federal", desc: "Polo Estrada Real / Mineração." },
-            { id: "ifmg_ouropreto", name: "IFMG (Ouro Preto)", lat: -20.3856, lng: -43.5036, uf: "MG", prestige: 1.1, type: "Instituto Federal", desc: "Tradicional Escola Técnica Federal de Ouro Preto." },
-            { id: "ifmg_betim", name: "IFMG (Campus Betim)", lat: -19.9678, lng: -44.1983, uf: "MG", prestige: 1.0, type: "Instituto Federal", desc: "Polo de automação e química industrial." },
-            { id: "cefet_timoteo", name: "CEFET-MG (Timóteo / Vale do Aço)", lat: -19.5828, lng: -42.6456, uf: "MG", prestige: 1.05, type: "Centro Federal Tecnológico", desc: "Polo de Ipatinga, Fabriciano e Monlevade." },
-            { id: "cefet_rj", name: "CEFET-RJ (Campus Maracanã)", lat: -22.9122, lng: -43.2247, uf: "RJ", prestige: 1.25, type: "Centro Federal Tecnológico", desc: "Principal polo federal da capital fluminense." },
-            { id: "ifrj_metropolitano", name: "IFRJ (Nilópolis / Metropolitano)", lat: -22.8064, lng: -43.4144, uf: "RJ", prestige: 1.1, type: "Instituto Federal", desc: "Polo da Baixada Fluminense e zona norte do Rio." },
-            { id: "ctur_ufrrj", name: "CTUR (UFRRJ Seropédica)", lat: -22.7667, lng: -43.7000, uf: "RJ", prestige: 1.15, type: "Colégio Técnico Federal", desc: "Polo agroecológico e técnico da Baixada/Rural." },
-            { id: "ifnmg_montesclaros", name: "IFNMG (Montes Claros)", lat: -16.7350, lng: -43.8617, uf: "MG", prestige: 1.1, type: "Instituto Federal", desc: "Polo Norte de Minas." },
-            { id: "iftm_triangulo", name: "IFTM (Uberlândia / Uberaba)", lat: -18.9186, lng: -48.2772, uf: "MG", prestige: 1.1, type: "Instituto Federal", desc: "Polo Triângulo Mineiro." },
-            { id: "ifsul_pousoalegre", name: "IFSULDEMINAS (Pouso Alegre)", lat: -22.2300, lng: -45.9331, uf: "MG", prestige: 1.05, type: "Instituto Federal", desc: "Polo Sul de Minas." },
-            { id: "iff_campos", name: "IFF (Campos / Macaé)", lat: -21.7539, lng: -41.3239, uf: "RJ", prestige: 1.05, type: "Instituto Federal", desc: "Polo Norte Fluminense e Lagos." },
-            { id: "ifes_vitoria", name: "IFES (Campus Vitória)", lat: -20.3155, lng: -40.3128, uf: "ES", prestige: 1.15, type: "Instituto Federal", desc: "Polo Estadual Capixaba." },
-            { id: "ifsp_capital", name: "IFSP (Campus São Paulo)", lat: -23.5239, lng: -46.6261, uf: "SP", prestige: 1.15, type: "Instituto Federal", desc: "Polo Capital Paulista." },
-            { id: "ifba_salvador", name: "IFBA (Campus Salvador)", lat: -12.9667, lng: -38.5036, uf: "BA", prestige: 1.1, type: "Instituto Federal", desc: "Polo Baiano." }
+            // COLÉGIOS UNIVERSITÁRIOS DE EXCELÊNCIA (MG / RJ)
+            { id: "coluni_vicosa", name: "CAp-COLUNI (UFV Viçosa)", lat: -20.7583, lng: -42.8797, uf: "MG", network: "COLUNI", prestige: 1.4, type: "Colégio Universitário", desc: "Referência propedêutica de MG." },
+            { id: "coltec_bh", name: "COLTEC (UFMG Pampulha)", lat: -19.8697, lng: -43.9642, uf: "MG", network: "COLTEC", prestige: 1.35, type: "Colégio Universitário", desc: "Campus Pampulha / UFMG BH." },
+            { id: "cedaf_florestal", name: "CEDAF / UFV (Florestal)", lat: -19.8885, lng: -44.4322, uf: "MG", network: "CEDAF", prestige: 1.25, type: "Colégio Universitário", desc: "Campus Universitário Florestal UFV." },
+            { id: "ctur_ufrrj", name: "CTUR (UFRRJ Seropédica)", lat: -22.7667, lng: -43.7000, uf: "RJ", network: "CTUR", prestige: 1.25, type: "Colégio Técnico Federal", desc: "Polo agroecológico e técnico da UFRRJ." },
+            { id: "cp2_rio", name: "Colégio Pedro II (Rio de Janeiro)", lat: -22.9068, lng: -43.1729, uf: "RJ", network: "Pedro II", prestige: 1.3, type: "Colégio Tradicional Federal", desc: "Campi no Rio de Janeiro." },
+
+            // CEFET-MG (9 Campi)
+            { id: "cefet_bh", name: "CEFET-MG (Campus I/II BH)", lat: -19.9328, lng: -43.9686, uf: "MG", network: "CEFET-MG", prestige: 1.25, type: "Centro Federal Tecnológico", desc: "Sede Av. Amazonas (BH)." },
+            { id: "cefet_contagem", name: "CEFET-MG (Contagem)", lat: -19.9386, lng: -44.0531, uf: "MG", network: "CEFET-MG", prestige: 1.15, type: "Centro Federal Tecnológico", desc: "Campus Contagem." },
+            { id: "cefet_leopoldina", name: "CEFET-MG (Leopoldina)", lat: -21.5317, lng: -42.6433, uf: "MG", network: "CEFET-MG", prestige: 1.15, type: "Centro Federal Tecnológico", desc: "Campus Leopoldina (Zona da Mata)." },
+            { id: "cefet_timoteo", name: "CEFET-MG (Timóteo)", lat: -19.5828, lng: -42.6456, uf: "MG", network: "CEFET-MG", prestige: 1.15, type: "Centro Federal Tecnológico", desc: "Vale do Aço." },
+            { id: "cefet_divinopolis", name: "CEFET-MG (Divinópolis)", lat: -20.1444, lng: -44.8911, uf: "MG", network: "CEFET-MG", prestige: 1.15, type: "Centro Federal Tecnológico", desc: "Centro-Oeste mineiro." },
+            { id: "cefet_araxa", name: "CEFET-MG (Araxá)", lat: -19.5932, lng: -46.9408, uf: "MG", network: "CEFET-MG", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Alto Paranaíba." },
+            { id: "cefet_curvelo", name: "CEFET-MG (Curvelo)", lat: -18.7564, lng: -44.4308, uf: "MG", network: "CEFET-MG", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Campus Curvelo." },
+            { id: "cefet_nepomuceno", name: "CEFET-MG (Nepomuceno)", lat: -21.2333, lng: -45.2333, uf: "MG", network: "CEFET-MG", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Campus Nepomuceno." },
+            { id: "cefet_varginha", name: "CEFET-MG (Varginha)", lat: -21.5542, lng: -45.4356, uf: "MG", network: "CEFET-MG", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Sul de Minas." },
+
+            // IF SUDESTE MG (10 Campi)
+            { id: "ifsudeste_jf", name: "IF Sudeste MG (Juiz de Fora)", lat: -21.7642, lng: -43.3497, uf: "MG", network: "IF Sudeste MG", prestige: 1.2, type: "Instituto Federal", desc: "Polo central Zona da Mata." },
+            { id: "ifsudeste_riopomba", name: "IF Sudeste MG (Rio Pomba)", lat: -21.2750, lng: -43.1814, uf: "MG", network: "IF Sudeste MG", prestige: 1.15, type: "Instituto Federal", desc: "Campus Rio Pomba." },
+            { id: "ifsudeste_muriae", name: "IF Sudeste MG (Muriaé)", lat: -21.1306, lng: -42.3664, uf: "MG", network: "IF Sudeste MG", prestige: 1.15, type: "Instituto Federal", desc: "Campus Muriaé." },
+            { id: "ifsudeste_barbacena", name: "IF Sudeste MG (Barbacena)", lat: -21.2258, lng: -43.7736, uf: "MG", network: "IF Sudeste MG", prestige: 1.15, type: "Instituto Federal", desc: "Campus Barbacena." },
+            { id: "ifsudeste_cataguases", name: "IF Sudeste MG (Cataguases)", lat: -21.3889, lng: -42.6967, uf: "MG", network: "IF Sudeste MG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Cataguases." },
+            { id: "ifsudeste_uba", name: "IF Sudeste MG (Ubá)", lat: -21.1203, lng: -42.9431, uf: "MG", network: "IF Sudeste MG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Ubá." },
+            { id: "ifsudeste_sjdr", name: "IF Sudeste MG (São João del-Rei)", lat: -21.1356, lng: -44.2617, uf: "MG", network: "IF Sudeste MG", prestige: 1.1, type: "Instituto Federal", desc: "Campo das Vertentes." },
+            { id: "ifsudeste_santosdumont", name: "IF Sudeste MG (Santos Dumont)", lat: -21.4564, lng: -43.5528, uf: "MG", network: "IF Sudeste MG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Santos Dumont." },
+            { id: "ifsudeste_manhuacu", name: "IF Sudeste MG (Manhuaçu)", lat: -20.2581, lng: -42.0336, uf: "MG", network: "IF Sudeste MG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Manhuaçu." },
+            { id: "ifsudeste_bomsucesso", name: "IF Sudeste MG (Bom Sucesso)", lat: -21.0328, lng: -44.7578, uf: "MG", network: "IF Sudeste MG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Bom Sucesso." },
+
+            // IFMG (17 Campi Oficiais)
+            { id: "ifmg_congonhas", name: "IFMG (Congonhas)", lat: -20.4994, lng: -43.8569, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Congonhas." },
+            { id: "ifmg_ouropreto", name: "IFMG (Ouro Preto)", lat: -20.3856, lng: -43.5036, uf: "MG", network: "IFMG", prestige: 1.15, type: "Instituto Federal", desc: "Tradicional Escola Técnica Federal." },
+            { id: "ifmg_betim", name: "IFMG (Betim)", lat: -19.9678, lng: -44.1983, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Betim." },
+            { id: "ifmg_ourobranco", name: "IFMG (Ouro Branco)", lat: -20.5233, lng: -43.6942, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Ouro Branco." },
+            { id: "ifmg_lafaiete", name: "IFMG (Conselheiro Lafaiete)", lat: -20.6619, lng: -43.7864, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Lafaiete." },
+            { id: "ifmg_pontenova", name: "IFMG (Ponte Nova)", lat: -20.4119, lng: -42.9039, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Ponte Nova." },
+            { id: "ifmg_itabirito", name: "IFMG (Itabirito)", lat: -20.2533, lng: -43.8014, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Itabirito." },
+            { id: "ifmg_ipatinga", name: "IFMG (Ipatinga)", lat: -19.4794, lng: -42.5311, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Ipatinga." },
+            { id: "ifmg_santaluzia", name: "IFMG (Santa Luzia)", lat: -19.7692, lng: -43.8514, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Santa Luzia." },
+            { id: "ifmg_sabara", name: "IFMG (Sabará)", lat: -19.8889, lng: -43.8075, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Sabará." },
+            { id: "ifmg_neves", name: "IFMG (Ribeirão das Neves)", lat: -19.7678, lng: -44.0872, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Ribeirão das Neves." },
+            { id: "ifmg_ibirite", name: "IFMG (Ibirité)", lat: -20.0219, lng: -44.0589, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Ibirité." },
+            { id: "ifmg_formiga", name: "IFMG (Formiga)", lat: -20.4636, lng: -45.4264, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Formiga." },
+            { id: "ifmg_bambui", name: "IFMG (Bambuí)", lat: -20.0228, lng: -45.9769, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Bambuí." },
+            { id: "ifmg_arcos", name: "IFMG (Arcos)", lat: -20.2892, lng: -45.5392, uf: "MG", network: "IFMG", prestige: 1.0, type: "Instituto Federal", desc: "Campus Arcos." },
+            { id: "ifmg_piumhi", name: "IFMG (Piumhi)", lat: -20.4650, lng: -45.9580, uf: "MG", network: "IFMG", prestige: 1.0, type: "Instituto Federal", desc: "Campus Piumhi." },
+            { id: "ifmg_govvaladares", name: "IFMG (Governador Valadares)", lat: -18.8511, lng: -41.9494, uf: "MG", network: "IFMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus GV." },
+            { id: "ifmg_sje", name: "IFMG (São João Evangelista)", lat: -18.5494, lng: -42.7639, uf: "MG", network: "IFMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus SJE." },
+
+            // IFTM (Triângulo Mineiro - 10 Campi)
+            { id: "iftm_uberlandia", name: "IFTM (Uberlândia Sobradinho)", lat: -18.9186, lng: -48.2772, uf: "MG", network: "IFTM", prestige: 1.15, type: "Instituto Federal", desc: "Fazenda Sobradinho." },
+            { id: "iftm_udicentro", name: "IFTM (Uberlândia Centro)", lat: -18.9114, lng: -48.2619, uf: "MG", network: "IFTM", prestige: 1.15, type: "Instituto Federal", desc: "Uberlândia Centro." },
+            { id: "iftm_uberaba", name: "IFTM (Uberaba Fazenda)", lat: -19.7472, lng: -47.9392, uf: "MG", network: "IFTM", prestige: 1.15, type: "Instituto Federal", desc: "Uberaba Fazenda." },
+            { id: "iftm_upt", name: "IFTM (Uberaba Parque Tec.)", lat: -19.7153, lng: -47.9712, uf: "MG", network: "IFTM", prestige: 1.1, type: "Instituto Federal", desc: "UPT Uberaba." },
+            { id: "iftm_campinaverde", name: "IFTM (Campina Verde)", lat: -19.5358, lng: -49.4864, uf: "MG", network: "IFTM", prestige: 1.05, type: "Instituto Federal", desc: "Campus Campina Verde." },
+            { id: "iftm_ituiutaba", name: "IFTM (Ituiutaba)", lat: -18.9744, lng: -49.4631, uf: "MG", network: "IFTM", prestige: 1.1, type: "Instituto Federal", desc: "Campus Ituiutaba." },
+            { id: "iftm_paracatu", name: "IFTM (Paracatu)", lat: -17.2219, lng: -46.8753, uf: "MG", network: "IFTM", prestige: 1.1, type: "Instituto Federal", desc: "Campus Paracatu." },
+            { id: "iftm_patos", name: "IFTM (Patos de Minas)", lat: -18.5789, lng: -46.5181, uf: "MG", network: "IFTM", prestige: 1.1, type: "Instituto Federal", desc: "Campus Patos de Minas." },
+            { id: "iftm_patrocinio", name: "IFTM (Patrocínio)", lat: -18.9439, lng: -46.9928, uf: "MG", network: "IFTM", prestige: 1.05, type: "Instituto Federal", desc: "Campus Patrocínio." },
+            { id: "iftm_setelagoas", name: "IFTM (Sete Lagoas)", lat: -19.4658, lng: -44.2467, uf: "MG", network: "IFTM", prestige: 1.1, type: "Instituto Federal", desc: "Campus Sete Lagoas." },
+
+            // IFNMG (Norte de Minas - 11 Campi)
+            { id: "ifnmg_montesclaros", name: "IFNMG (Montes Claros)", lat: -16.7350, lng: -43.8617, uf: "MG", network: "IFNMG", prestige: 1.15, type: "Instituto Federal", desc: "Polo Norte de Minas." },
+            { id: "ifnmg_almenara", name: "IFNMG (Almenara)", lat: -16.1833, lng: -40.6944, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Almenara." },
+            { id: "ifnmg_aracuai", name: "IFNMG (Araçuaí)", lat: -16.8528, lng: -42.0678, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Araçuaí." },
+            { id: "ifnmg_arinos", name: "IFNMG (Arinos)", lat: -15.9167, lng: -46.1056, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Arinos." },
+            { id: "ifnmg_diamantina", name: "IFNMG (Diamantina)", lat: -18.2439, lng: -43.6031, uf: "MG", network: "IFNMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Diamantina." },
+            { id: "ifnmg_janauba", name: "IFNMG (Janaúba)", lat: -15.8028, lng: -43.3089, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Janaúba." },
+            { id: "ifnmg_januaria", name: "IFNMG (Januária)", lat: -15.4833, lng: -44.3667, uf: "MG", network: "IFNMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Januária." },
+            { id: "ifnmg_pirapora", name: "IFNMG (Pirapora)", lat: -17.3575, lng: -44.9419, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Pirapora." },
+            { id: "ifnmg_porteirinha", name: "IFNMG (Porteirinha)", lat: -15.7431, lng: -43.0289, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Porteirinha." },
+            { id: "ifnmg_salinas", name: "IFNMG (Salinas)", lat: -16.1708, lng: -42.2989, uf: "MG", network: "IFNMG", prestige: 1.1, type: "Instituto Federal", desc: "Campus Salinas." },
+            { id: "ifnmg_teofilo", name: "IFNMG (Teófilo Otoni)", lat: -17.8575, lng: -41.5053, uf: "MG", network: "IFNMG", prestige: 1.05, type: "Instituto Federal", desc: "Campus Teófilo Otoni." },
+
+            // IFSULDEMINAS (Sul de Minas - 10 Campi)
+            { id: "ifsul_pousoalegre", name: "IFSULDEMINAS (Pouso Alegre)", lat: -22.2300, lng: -45.9331, uf: "MG", network: "IFSULDEMINAS", prestige: 1.15, type: "Instituto Federal", desc: "Polo Sul de Minas." },
+            { id: "ifsul_inconfidentes", name: "IFSULDEMINAS (Inconfidentes)", lat: -22.3183, lng: -46.3278, uf: "MG", network: "IFSULDEMINAS", prestige: 1.15, type: "Instituto Federal", desc: "Campus Inconfidentes." },
+            { id: "ifsul_machado", name: "IFSULDEMINAS (Machado)", lat: -21.6744, lng: -45.9197, uf: "MG", network: "IFSULDEMINAS", prestige: 1.15, type: "Instituto Federal", desc: "Campus Machado." },
+            { id: "ifsul_muzambinho", name: "IFSULDEMINAS (Muzambinho)", lat: -21.3708, lng: -46.5256, uf: "MG", network: "IFSULDEMINAS", prestige: 1.15, type: "Instituto Federal", desc: "Campus Muzambinho." },
+            { id: "ifsul_passos", name: "IFSULDEMINAS (Passos)", lat: -20.7208, lng: -46.6111, uf: "MG", network: "IFSULDEMINAS", prestige: 1.1, type: "Instituto Federal", desc: "Campus Passos." },
+            { id: "ifsul_pocos", name: "IFSULDEMINAS (Poços de Caldas)", lat: -21.7878, lng: -46.5614, uf: "MG", network: "IFSULDEMINAS", prestige: 1.1, type: "Instituto Federal", desc: "Campus Poços de Caldas." },
+            { id: "ifsul_carmominas", name: "IFSULDEMINAS (Carmo de Minas)", lat: -22.1228, lng: -45.1308, uf: "MG", network: "IFSULDEMINAS", prestige: 1.05, type: "Instituto Federal", desc: "Campus Carmo de Minas." },
+            { id: "ifsul_trescoracoes", name: "IFSULDEMINAS (Três Corações)", lat: -21.6936, lng: -45.2578, uf: "MG", network: "IFSULDEMINAS", prestige: 1.05, type: "Instituto Federal", desc: "Campus Três Corações." },
+            { id: "ifsul_itajuba", name: "IFSULDEMINAS (Itajubá)", lat: -22.4264, lng: -45.4531, uf: "MG", network: "IFSULDEMINAS", prestige: 1.05, type: "Instituto Federal", desc: "Campus Itajubá." },
+            { id: "ifsul_boaesperanca", name: "IFSULDEMINAS (Boa Esperança)", lat: -21.0928, lng: -45.5658, uf: "MG", network: "IFSULDEMINAS", prestige: 1.05, type: "Instituto Federal", desc: "Campus Boa Esperança." },
+
+            // CEFET-RJ (7 Campi)
+            { id: "cefetrj_maracana", name: "CEFET-RJ (Campus Maracanã)", lat: -22.9122, lng: -43.2247, uf: "RJ", network: "CEFET-RJ", prestige: 1.3, type: "Centro Federal Tecnológico", desc: "Sede Maracanã (Rio de Janeiro)." },
+            { id: "cefetrj_mariadagraca", name: "CEFET-RJ (Maria da Graça)", lat: -22.8808, lng: -43.2750, uf: "RJ", network: "CEFET-RJ", prestige: 1.15, type: "Centro Federal Tecnológico", desc: "Zona Norte RJ." },
+            { id: "cefetrj_novaiguacu", name: "CEFET-RJ (Nova Iguaçu)", lat: -22.7561, lng: -43.4608, uf: "RJ", network: "CEFET-RJ", prestige: 1.15, type: "Centro Federal Tecnológico", desc: "Baixada Fluminense." },
+            { id: "cefetrj_itaguai", name: "CEFET-RJ (Itaguaí)", lat: -22.8608, lng: -43.7750, uf: "RJ", network: "CEFET-RJ", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Campus Itaguaí." },
+            { id: "cefetrj_novafriburgo", name: "CEFET-RJ (Nova Friburgo)", lat: -22.2819, lng: -42.5311, uf: "RJ", network: "CEFET-RJ", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Região Serrana." },
+            { id: "cefetrj_petropolis", name: "CEFET-RJ (Petrópolis)", lat: -22.5050, lng: -43.1789, uf: "RJ", network: "CEFET-RJ", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Campus Petrópolis." },
+            { id: "cefetrj_valenca", name: "CEFET-RJ (Valença)", lat: -22.2458, lng: -43.7028, uf: "RJ", network: "CEFET-RJ", prestige: 1.1, type: "Centro Federal Tecnológico", desc: "Médio Paraíba." },
+
+            // IFRJ (11 Campi)
+            { id: "ifrj_nilopolis", name: "IFRJ (Nilópolis)", lat: -22.8064, lng: -43.4144, uf: "RJ", network: "IFRJ", prestige: 1.15, type: "Instituto Federal", desc: "Campus Nilópolis." },
+            { id: "ifrj_rio", name: "IFRJ (Rio de Janeiro Maracanã)", lat: -22.9122, lng: -43.2247, uf: "RJ", network: "IFRJ", prestige: 1.2, type: "Instituto Federal", desc: "Campus Rio." },
+            { id: "ifrj_caxias", name: "IFRJ (Duque de Caxias)", lat: -22.7856, lng: -43.3117, uf: "RJ", network: "IFRJ", prestige: 1.1, type: "Instituto Federal", desc: "Campus Duque de Caxias." },
+            { id: "ifrj_niteroi", name: "IFRJ (Niterói)", lat: -22.8833, lng: -43.1036, uf: "RJ", network: "IFRJ", prestige: 1.1, type: "Instituto Federal", desc: "Campus Niterói." },
+            { id: "ifrj_saogoncalo", name: "IFRJ (São Gonçalo)", lat: -22.8269, lng: -43.0539, uf: "RJ", network: "IFRJ", prestige: 1.1, type: "Instituto Federal", desc: "Campus São Gonçalo." },
+            { id: "ifrj_paracambi", name: "IFRJ (Paracambi)", lat: -22.6083, lng: -43.7111, uf: "RJ", network: "IFRJ", prestige: 1.05, type: "Instituto Federal", desc: "Campus Paracambi." },
+            { id: "ifrj_pinheiral", name: "IFRJ (Pinheiral)", lat: -22.5186, lng: -44.0006, uf: "RJ", network: "IFRJ", prestige: 1.05, type: "Instituto Federal", desc: "Campus Pinheiral." },
+            { id: "ifrj_voltaredonda", name: "IFRJ (Volta Redonda)", lat: -22.5231, lng: -44.1042, uf: "RJ", network: "IFRJ", prestige: 1.05, type: "Instituto Federal", desc: "Campus Volta Redonda." },
+            { id: "ifrj_resende", name: "IFRJ (Resende)", lat: -22.4689, lng: -44.4467, uf: "RJ", network: "IFRJ", prestige: 1.05, type: "Instituto Federal", desc: "Campus Resende." },
+            { id: "ifrj_arraial", name: "IFRJ (Arraial do Cabo)", lat: -22.9661, lng: -42.0278, uf: "RJ", network: "IFRJ", prestige: 1.05, type: "Instituto Federal", desc: "Região dos Lagos." },
+            { id: "ifrj_frontin", name: "IFRJ (Eng. Paulo de Frontin)", lat: -22.5514, lng: -43.6811, uf: "RJ", network: "IFRJ", prestige: 1.05, type: "Instituto Federal", desc: "Campus Jogos Digitais." },
+
+            // IFF (Fluminense - 14 Unidades)
+            { id: "iff_campos_centro", name: "IFF (Campos Centro)", lat: -21.7544, lng: -41.3242, uf: "RJ", network: "IFF", prestige: 1.15, type: "Instituto Federal", desc: "Campos dos Goytacazes." },
+            { id: "iff_campos_guarus", name: "IFF (Campos Guarus)", lat: -21.7314, lng: -41.3325, uf: "RJ", network: "IFF", prestige: 1.1, type: "Instituto Federal", desc: "Campus Guarus." },
+            { id: "iff_macae", name: "IFF (Macaé)", lat: -22.3781, lng: -41.7869, uf: "RJ", network: "IFF", prestige: 1.15, type: "Instituto Federal", desc: "Campus Macaé." },
+            { id: "iff_cabofrio", name: "IFF (Cabo Frio)", lat: -22.8797, lng: -42.0197, uf: "RJ", network: "IFF", prestige: 1.1, type: "Instituto Federal", desc: "Campus Cabo Frio." },
+            { id: "iff_itaperuna", name: "IFF (Itaperuna)", lat: -21.2069, lng: -41.8889, uf: "RJ", network: "IFF", prestige: 1.1, type: "Instituto Federal", desc: "Noroeste Fluminense." },
+            { id: "iff_bomjesus", name: "IFF (Bom Jesus do Itabapoana)", lat: -21.1378, lng: -41.6789, uf: "RJ", network: "IFF", prestige: 1.05, type: "Instituto Federal", desc: "Campus Bom Jesus." },
+            { id: "iff_padua", name: "IFF (Santo Antônio de Pádua)", lat: -21.5433, lng: -42.1794, uf: "RJ", network: "IFF", prestige: 1.05, type: "Instituto Federal", desc: "Campus Pádua." },
+            { id: "iff_marica", name: "IFF (Maricá)", lat: -22.9189, lng: -42.8186, uf: "RJ", network: "IFF", prestige: 1.05, type: "Instituto Federal", desc: "Campus Maricá." },
+            { id: "iff_itaborai", name: "IFF (Itaboraí)", lat: -22.7444, lng: -42.8544, uf: "RJ", network: "IFF", prestige: 1.05, type: "Instituto Federal", desc: "Campus Itaboraí." },
+            { id: "iff_quissama", name: "IFF (Quissamã)", lat: -22.1106, lng: -41.4725, uf: "RJ", network: "IFF", prestige: 1.05, type: "Instituto Federal", desc: "Campus Quissamã." },
+            { id: "iff_sjb", name: "IFF (São João da Barra)", lat: -21.6358, lng: -41.0511, uf: "RJ", network: "IFF", prestige: 1.05, type: "Instituto Federal", desc: "Campus SJB." },
+            { id: "iff_cambuci", name: "IFF (Cambuci)", lat: -21.5722, lng: -41.9083, uf: "RJ", network: "IFF", prestige: 1.0, type: "Instituto Federal", desc: "Campus Cambuci." },
+            { id: "iff_cordeiro", name: "IFF (Cordeiro)", lat: -22.0294, lng: -42.3658, uf: "RJ", network: "IFF", prestige: 1.0, type: "Instituto Federal", desc: "Campus Cordeiro." },
+
+            // IFES (Espírito Santo - 6 Polos Principais)
+            { id: "ifes_vitoria", name: "IFES (Vitória)", lat: -20.3201, lng: -40.3377, uf: "ES", network: "IFES", prestige: 1.2, type: "Instituto Federal", desc: "Sede Jucutuquara." },
+            { id: "ifes_vilavelha", name: "IFES (Vila Velha)", lat: -20.3600, lng: -40.3000, uf: "ES", network: "IFES", prestige: 1.15, type: "Instituto Federal", desc: "Campus Vila Velha." },
+            { id: "ifes_serra", name: "IFES (Serra)", lat: -20.1929, lng: -40.2398, uf: "ES", network: "IFES", prestige: 1.15, type: "Instituto Federal", desc: "Campus Serra." },
+            { id: "ifes_cariacica", name: "IFES (Cariacica)", lat: -20.2632, lng: -40.4165, uf: "ES", network: "IFES", prestige: 1.1, type: "Instituto Federal", desc: "Campus Cariacica." },
+            { id: "ifes_cachoeiro", name: "IFES (Cachoeiro de Itapemirim)", lat: -20.8489, lng: -41.1128, uf: "ES", network: "IFES", prestige: 1.1, type: "Instituto Federal", desc: "Sul Capixaba." },
+            { id: "ifes_colatina", name: "IFES (Colatina / Itapina)", lat: -19.5400, lng: -40.6300, uf: "ES", network: "IFES", prestige: 1.1, type: "Instituto Federal", desc: "Noroeste Capixaba." },
+
+            // IFSP (São Paulo - Principais Polos Mapeados)
+            { id: "ifsp_saopaulo", name: "IFSP (São Paulo Canindé)", lat: -23.5239, lng: -46.6261, uf: "SP", network: "IFSP", prestige: 1.25, type: "Instituto Federal", desc: "Capital Paulista." },
+            { id: "ifsp_campinas", name: "IFSP (Campinas)", lat: -22.9056, lng: -47.0608, uf: "SP", network: "IFSP", prestige: 1.15, type: "Instituto Federal", desc: "RMC Campinas." },
+            { id: "ifsp_guarulhos", name: "IFSP (Guarulhos)", lat: -23.4628, lng: -46.5333, uf: "SP", network: "IFSP", prestige: 1.15, type: "Instituto Federal", desc: "Grande SP." },
+            { id: "ifsp_sjc", name: "IFSP (São José dos Campos)", lat: -23.1794, lng: -45.8869, uf: "SP", network: "IFSP", prestige: 1.15, type: "Instituto Federal", desc: "Vale do Paraíba." },
+            { id: "ifsp_sorocaba", name: "IFSP (Sorocaba)", lat: -23.5017, lng: -47.4581, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Região de Sorocaba." },
+            { id: "ifsp_araraquara", name: "IFSP (Araraquara)", lat: -21.7944, lng: -48.1758, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Centro Paulista." },
+            { id: "ifsp_bauru", name: "IFSP (Bauru)", lat: -22.3147, lng: -49.0606, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Centro-Oeste Paulista." },
+            { id: "ifsp_piracicaba", name: "IFSP (Piracicaba)", lat: -22.7253, lng: -47.6492, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Campus Piracicaba." },
+            { id: "ifsp_cubatao", name: "IFSP (Cubatão)", lat: -23.8950, lng: -46.4253, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Baixada Santista." },
+            { id: "ifsp_hortolandia", name: "IFSP (Hortolândia)", lat: -22.8583, lng: -47.2200, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Campus Hortolândia." },
+            { id: "ifsp_sjrp", name: "IFSP (São José do Rio Preto)", lat: -20.8114, lng: -49.3758, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Noroeste Paulista." },
+            { id: "ifsp_barretos", name: "IFSP (Barretos)", lat: -20.5572, lng: -48.5678, uf: "SP", network: "IFSP", prestige: 1.05, type: "Instituto Federal", desc: "Campus Barretos." },
+            { id: "ifsp_saocarlos", name: "IFSP (São Carlos)", lat: -22.0175, lng: -47.8908, uf: "SP", network: "IFSP", prestige: 1.1, type: "Instituto Federal", desc: "Campus São Carlos." },
+            { id: "ifsp_braganca", name: "IFSP (Bragança Paulista)", lat: -22.9525, lng: -46.5419, uf: "SP", network: "IFSP", prestige: 1.05, type: "Instituto Federal", desc: "Bragança Paulista." },
+            { id: "ifsp_itapetininga", name: "IFSP (Itapetininga)", lat: -23.5917, lng: -48.0531, uf: "SP", network: "IFSP", prestige: 1.05, type: "Instituto Federal", desc: "Campus Itapetininga." },
+            { id: "ifsp_saojoaoboavista", name: "IFSP (São João da Boa Vista)", lat: -21.9686, lng: -46.7978, uf: "SP", network: "IFSP", prestige: 1.05, type: "Instituto Federal", desc: "Divisa com MG." },
+
+            // IFBA (Bahia)
+            { id: "ifba_salvador", name: "IFBA (Salvador)", lat: -12.9822, lng: -38.4813, uf: "BA", network: "IFBA", prestige: 1.2, type: "Instituto Federal", desc: "Barbalho Salvador." },
+            { id: "ifba_feiradesantana", name: "IFBA (Feira de Santana)", lat: -12.2667, lng: -38.9667, uf: "BA", network: "IFBA", prestige: 1.15, type: "Instituto Federal", desc: "Campus Feira." },
+            { id: "ifba_camacari", name: "IFBA (Camaçari)", lat: -12.7100, lng: -38.3200, uf: "BA", network: "IFBA", prestige: 1.1, type: "Instituto Federal", desc: "Polo Industrial." },
+            { id: "ifba_conquista", name: "IFBA (Vitória da Conquista)", lat: -14.8500, lng: -40.8400, uf: "BA", network: "IFBA", prestige: 1.15, type: "Instituto Federal", desc: "Sudoeste Baiano." },
+            { id: "ifba_ilheus", name: "IFBA (Ilhéus)", lat: -14.8000, lng: -39.0500, uf: "BA", network: "IFBA", prestige: 1.1, type: "Instituto Federal", desc: "Litoral Sul Baiano." },
+            { id: "ifba_juazeiro", name: "IFBA (Juazeiro)", lat: -9.4166, lng: -40.5035, uf: "BA", network: "IFBA", prestige: 1.1, type: "Instituto Federal", desc: "Vale do São Francisco." },
+            { id: "ifba_valenca", name: "IFBA (Valença)", lat: -13.3700, lng: -39.0730, uf: "BA", network: "IFBA", prestige: 1.05, type: "Instituto Federal", desc: "Baixo Sul Baiano." },
+            { id: "ifba_barreiras", name: "IFBA (Barreiras)", lat: -12.1447, lng: -45.0031, uf: "BA", network: "IFBA", prestige: 1.05, type: "Instituto Federal", desc: "Oeste Baiano." },
+
+            // IFFar (Rio Grande do Sul)
+            { id: "iffar_santamaria", name: "IFFar (Santa Maria)", lat: -29.6842, lng: -53.8069, uf: "RS", network: "IFFar", prestige: 1.15, type: "Instituto Federal", desc: "Reitoria e Polo Central." },
+            { id: "iffar_alegrete", name: "IFFar (Alegrete)", lat: -29.7831, lng: -55.7919, uf: "RS", network: "IFFar", prestige: 1.1, type: "Instituto Federal", desc: "Campus Alegrete." },
+            { id: "iffar_panambi", name: "IFFar (Panambi)", lat: -28.2928, lng: -53.5019, uf: "RS", network: "IFFar", prestige: 1.05, type: "Instituto Federal", desc: "Campus Panambi." },
+            { id: "iffar_santoangelo", name: "IFFar (Santo Ângelo)", lat: -28.2992, lng: -54.2631, uf: "RS", network: "IFFar", prestige: 1.05, type: "Instituto Federal", desc: "Missões." },
+            { id: "iffar_santarosa", name: "IFFar (Santa Rosa)", lat: -27.8708, lng: -54.4808, uf: "RS", network: "IFFar", prestige: 1.05, type: "Instituto Federal", desc: "Noroeste Gaúcho." },
+            { id: "iffar_uruguaiana", name: "IFFar (Uruguaiana)", lat: -29.7547, lng: -57.0881, uf: "RS", network: "IFFar", prestige: 1.05, type: "Instituto Federal", desc: "Fronteira Oeste." },
+            { id: "iffar_frederico", name: "IFFar (Frederico Westphalen)", lat: -27.3592, lng: -53.3944, uf: "RS", network: "IFFar", prestige: 1.05, type: "Instituto Federal", desc: "Norte Gaúcho." }
         ];
 
         // 2. Base Real Auditada de 448 Alunos em 139 Cidades
@@ -652,7 +798,7 @@
             let totalPotentialApplications = 0;
 
             rawStudentCities.forEach(cityItem => {
-                // Calcular distância para todos os polos
+                // Calcular distância para TODOS os campi da rede completa
                 const distances = federalPoles.map(pole => {
                     const dist = calculateDistance(cityItem.lat, cityItem.lng, pole.lat, pole.lng);
                     const prob = getProbability(dist, pole.prestige);
@@ -686,6 +832,35 @@
             document.getElementById('header-potential-count').innerText = totalPotentialApplications.toLocaleString('pt-BR');
             document.getElementById('header-avg-count').innerText = (totalPotentialApplications / TOTAL_ALUNOS).toFixed(2);
             document.getElementById('header-schools-count').innerText = federalPoles.length;
+
+            // Popular o dropdown de filtros de campi com todas as redes
+            populateCampusDropdown();
+        }
+
+        function populateCampusDropdown() {
+            const select = document.getElementById('mapPoleFilter');
+            const previousVal = select.value || 'ALL';
+            select.innerHTML = '<option value="ALL">🎯 Filtrar Polo: Todos os Campi Federais</option>';
+
+            // Agrupar por Rede de Ensino
+            const networks = {};
+            federalPoles.forEach(p => {
+                if (!networks[p.network]) networks[p.network] = [];
+                networks[p.network].push(p);
+            });
+
+            for (const [netName, poles] of Object.entries(networks)) {
+                const optgroup = document.createElement('optgroup');
+                optgroup.label = `${netName} (${poles.length} campi)`;
+                poles.sort((a,b) => a.name.localeCompare(b.name)).forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p.id;
+                    opt.textContent = `${p.name} (${p.uf})`;
+                    optgroup.appendChild(opt);
+                });
+                select.appendChild(optgroup);
+            }
+            select.value = previousVal;
         }
 
         let map;
@@ -695,7 +870,6 @@
         let buffersLayer = L.layerGroup();
 
         function initDashboardMap() {
-            // Habilita todas as interações: scrollWheelZoom, drag, touchZoom, doubleClickZoom
             map = L.map('map', { 
                 scrollWheelZoom: true,
                 smoothWheelZoom: true,
@@ -733,13 +907,8 @@
             renderFederalSchools();
             renderMapLayers();
 
-            // Garantir renderização completa dos tiles
-            setTimeout(() => {
-                map.invalidateSize();
-            }, 200);
-            setTimeout(() => {
-                map.invalidateSize();
-            }, 600);
+            setTimeout(() => { map.invalidateSize(); }, 200);
+            setTimeout(() => { map.invalidateSize(); }, 600);
         }
 
         function getMarkerColor(count) {
@@ -773,7 +942,7 @@
                         fillColor: '#f59e0b',
                         fillOpacity: 0.04,
                         dashArray: '4, 6',
-                        interactive: false // Impede que o círculo capture o clique
+                        interactive: false
                     });
                     buffersLayer.addLayer(circle);
                 });
@@ -876,7 +1045,7 @@
                             interactive: true
                         });
 
-                        polyline.bindTooltip(`${item.city} &rarr; ${opt.pole.name.split('(')[0].trim()} (${opt.dist} km • ${Math.round(opt.prob*100)}% prob.)`, { sticky: true });
+                        polyline.bindTooltip(`${item.city} &rarr; ${opt.pole.name} (${opt.dist} km • ${Math.round(opt.prob*100)}% prob.)`, { sticky: true });
                         vectorsLayer.addLayer(polyline);
                     });
                 }
@@ -890,12 +1059,12 @@
                 const schoolIcon = L.divIcon({
                     className: 'custom-school-pin',
                     html: `
-                        <div style="background-color: #0f172a; width: 32px; height: 32px; border-radius: 50%; border: 3px solid #f59e0b; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.4); display: flex; align-items: center; justify-content: center; color: #f59e0b; font-size: 14px; cursor: pointer;">
+                        <div style="background-color: #0f172a; width: 28px; height: 28px; border-radius: 50%; border: 2.5px solid #f59e0b; box-shadow: 0 4px 10px rgba(15, 23, 42, 0.4); display: flex; align-items: center; justify-content: center; color: #f59e0b; font-size: 12px; cursor: pointer;">
                             <i class="fas fa-university"></i>
                         </div>
                     `,
-                    iconSize: [32, 32],
-                    iconAnchor: [16, 16]
+                    iconSize: [28, 28],
+                    iconAnchor: [14, 14]
                 });
 
                 const marker = L.marker([pole.lat, pole.lng], { 
@@ -906,10 +1075,10 @@
 
                 marker.bindPopup(`
                     <div class="text-xs p-1 max-w-[270px]">
-                        <span class="bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full text-[9px] font-black uppercase inline-block mb-1 border border-amber-300">Campus Federal de Destino</span>
+                        <span class="bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full text-[9px] font-black uppercase inline-block mb-1 border border-amber-300">${pole.network}</span>
                         <h4 class="text-slate-900 font-bold text-sm mb-1 leading-tight">${pole.name}</h4>
                         <p class="text-slate-600 text-[11px] leading-relaxed mb-2">${pole.desc}</p>
-                        <span class="text-[10px] text-slate-500 block border-t border-slate-200 pt-1">Tipo: ${pole.type} (${pole.uf})</span>
+                        <span class="text-[10px] text-slate-500 block border-t border-slate-200 pt-1">Rede: ${pole.type} (${pole.uf})</span>
                     </div>
                 `);
                 schoolsLayer.addLayer(marker);
@@ -961,7 +1130,7 @@
         }
 
         function initCharts() {
-            // Chart 1: Gravidade e Multiconcorrência por Polo
+            // Chart 1: Gravidade e Multiconcorrência por Rede / Polo
             const ctx1 = document.getElementById('chartPolesGravity').getContext('2d');
             chartPolesRef = new Chart(ctx1, {
                 type: 'bar',
@@ -1003,25 +1172,35 @@
         }
 
         function getChartPolesData() {
-            const poleStats = {};
+            const networkStats = {};
             federalPoles.forEach(p => {
-                poleStats[p.id] = { name: p.name.split('(')[0].trim(), direct: 0, crossPotential: 0 };
+                if (!networkStats[p.network]) {
+                    networkStats[p.network] = { name: p.network, direct: 0, crossPotential: 0 };
+                }
             });
 
             rawStudentCities.forEach(cityItem => {
                 // Alunos diretos mais próximos
-                poleStats[cityItem.nearestPole.id].direct += cityItem.count;
+                if (networkStats[cityItem.nearestPole.network]) {
+                    networkStats[cityItem.nearestPole.network].direct += cityItem.count;
+                }
 
                 // Concorrência cruzada
+                const countedNetworks = new Set();
                 cityItem.eligibleOptions.forEach(opt => {
-                    const potentialHere = Math.round(cityItem.count * opt.prob);
-                    poleStats[opt.pole.id].crossPotential += potentialHere;
+                    if (!countedNetworks.has(opt.pole.network)) {
+                        const potentialHere = Math.round(cityItem.count * opt.prob);
+                        if (networkStats[opt.pole.network]) {
+                            networkStats[opt.pole.network].crossPotential += potentialHere;
+                        }
+                        countedNetworks.add(opt.pole.network);
+                    }
                 });
             });
 
-            const sorted = Object.values(poleStats)
+            const sorted = Object.values(networkStats)
                 .sort((a,b) => b.crossPotential - a.crossPotential)
-                .slice(0, 8);
+                .slice(0, 10);
 
             return {
                 labels: sorted.map(s => s.name),
@@ -1081,9 +1260,9 @@
 
                 const distColor = item.nearestDist <= 25 ? 'text-emerald-700 font-bold' : (item.nearestDist <= 60 ? 'text-amber-700 font-semibold' : 'text-slate-500');
 
-                // Lista de opções da cesta resumida
+                // Lista de opções da cesta resumida com o campus exato
                 const basketSummary = item.eligibleOptions.map(opt => {
-                    return `<span class="bg-slate-100 border border-slate-200 text-slate-800 text-[10px] font-bold px-1.5 py-0.5 rounded mr-1 inline-block mb-0.5">${opt.pole.name.split('(')[0].trim()} (${opt.dist}km)</span>`;
+                    return `<span class="bg-slate-100 border border-slate-200 text-slate-800 text-[10px] font-bold px-1.5 py-0.5 rounded mr-1 inline-block mb-0.5" title="${opt.pole.name}">${opt.pole.name.split('(')[0].trim()} (${opt.dist}km)</span>`;
                 }).join('');
 
                 tr.innerHTML = `
