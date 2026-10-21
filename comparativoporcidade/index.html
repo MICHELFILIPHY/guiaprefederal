@@ -201,6 +201,10 @@
                     <button onclick="toggleVectors()" id="btn-toggle-vectors" class="px-3 py-2 rounded-xl text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 transition flex items-center">
                         <i class="fas fa-project-diagram mr-1.5 text-indigo-600"></i> Vetores (<span id="txt-vectors-status">On</span>)
                     </button>
+                    <!-- Novo Modo de visualização: Apenas mais próximo vs Rede -->
+                    <button onclick="toggleNearestOnly()" id="btn-toggle-nearest" class="px-3 py-2 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100 transition flex items-center" title="Alternar entre ver apenas o campus mais próximo ou toda a cesta de opções">
+                        <i class="fas fa-bullseye mr-1.5 text-emerald-600"></i> <span id="txt-nearest-mode">Modo: Apenas Mais Próximo</span>
+                    </button>
                     <button onclick="toggleBuffers()" id="btn-toggle-buffers" class="px-3 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-300 hover:bg-slate-200 transition flex items-center">
                         <i class="fas fa-circle-notch mr-1.5 text-amber-600"></i> Raio 35km (<span id="txt-buffers-status">On</span>)
                     </button>
@@ -790,15 +794,27 @@
         let currentMobilityRadius = 75; // Raio de simulação padrão em km
         let showVectors = true;
         let showBuffers = true;
+        let nearestOnlyMode = true; // Padrão: liga apenas ao campus mais próximo para evitar confusão visual
         let currentCampusFilter = 'ALL';
         let chartPolesRef = null;
         let chartTopCitiesRef = null;
+
+        function toggleNearestOnly() {
+            nearestOnlyMode = !nearestOnlyMode;
+            const btnText = document.getElementById('txt-nearest-mode');
+            if (nearestOnlyMode) {
+                btnText.innerText = "Modo: Apenas Mais Próximo";
+            } else {
+                btnText.innerText = "Modo: Cesta Completa no Raio";
+            }
+            renderMapLayers();
+        }
 
         function computeBaskets() {
             let totalPotentialApplications = 0;
 
             rawStudentCities.forEach(cityItem => {
-                // Calcular distância para TODOS os campi da rede completa
+                // Calcular distância geográfica pura (Haversine real) para TODOS os campi físicos
                 const distances = federalPoles.map(pole => {
                     const dist = calculateDistance(cityItem.lat, cityItem.lng, pole.lat, pole.lng);
                     const prob = getProbability(dist, pole.prestige);
@@ -806,23 +822,25 @@
                         pole: pole,
                         dist: dist,
                         prob: prob,
-                        isEligible: dist <= currentMobilityRadius || (pole.prestige >= 1.25 && dist <= currentMobilityRadius * 1.35)
+                        // Elegível se estiver dentro do raio físico estrito
+                        isEligible: dist <= currentMobilityRadius
                     };
                 });
 
-                // Ordenar por distância
+                // Ordenar estritamente por distância física real (menor km primeiro)
                 distances.sort((a,b) => a.dist - b.dist);
 
+                // O campus principal é 100% o de menor distância geográfica real
                 cityItem.nearestPole = distances[0].pole;
                 cityItem.nearestDist = distances[0].dist;
 
                 // Cesta de opções elegíveis dentro do raio
-                cityItem.eligibleOptions = distances.filter(d => d.isEligible && d.prob >= 0.15);
+                cityItem.eligibleOptions = distances.filter(d => d.isEligible && d.dist <= currentMobilityRadius);
                 if (cityItem.eligibleOptions.length === 0) {
-                    cityItem.eligibleOptions = [distances[0]]; // Garante pelo menos a mais próxima
+                    cityItem.eligibleOptions = [distances[0]]; // Garante o mais próximo
                 }
 
-                // Inscrições ponderadas estimadas geradas por essa cidade
+                // Inscrições ponderadas estimadas
                 const sumProbs = cityItem.eligibleOptions.reduce((acc, curr) => acc + curr.prob, 0);
                 cityItem.projectedApplications = Math.max(cityItem.count, Math.round(cityItem.count * sumProbs));
                 totalPotentialApplications += cityItem.projectedApplications;
@@ -833,7 +851,6 @@
             document.getElementById('header-avg-count').innerText = (totalPotentialApplications / TOTAL_ALUNOS).toFixed(2);
             document.getElementById('header-schools-count').innerText = federalPoles.length;
 
-            // Popular o dropdown de filtros de campi com todas as redes
             populateCampusDropdown();
         }
 
@@ -1014,158 +1031,45 @@
                 marker.bindPopup(popup);
                 studentsLayer.addLayer(marker);
 
-                // Vetores Gravitacionais Conectando aos Campi Elegíveis
+                // Vetores Gravitacionais Conectando aos Campi Físicos Reais
                 if (showVectors) {
-                    item.eligibleOptions.forEach(opt => {
-                        if (currentCampusFilter !== 'ALL' && opt.pole.id !== currentCampusFilter) return;
-
-                        let strokeColor = '#0284c7';
-                        let weight = 1.2;
-                        let opacity = 0.4;
-                        let dashArray = '3, 4';
-
-                        if (opt.prob >= 0.80) {
-                            strokeColor = '#059669'; // Alta probabilidade: verde contínuo
-                            weight = 2.4;
-                            opacity = 0.75;
-                            dashArray = null;
-                        } else if (opt.prob >= 0.45) {
-                            strokeColor = '#d97706'; // Média probabilidade: âmbar tracejado
-                            weight = 1.6;
-                            opacity = 0.55;
-                            dashArray = '5, 5';
+                    if (nearestOnlyMode) {
+                        // MODO 1: LIGAÇÃO ESTRITA DIRETA (1 Cidade -> Campus Mais Próximo)
+                        const primary = item.nearestPole;
+                        if (currentCampusFilter === 'ALL' || primary.id === currentCampusFilter) {
+                            const polyline = L.polyline([[item.lat, item.lng], [primary.lat, primary.lng]], {
+                                pane: 'vectorsPane',
+                                color: '#059669', // Verde firme: ligação direta com campus local
+                                weight: 2.2,
+                                opacity: 0.85,
+                                interactive: true
+                            });
+                            polyline.bindTooltip(`🎯 ${item.city} &rarr; ${primary.name} (${item.nearestDist} km)`, { sticky: true });
+                            vectorsLayer.addLayer(polyline);
                         }
+                    } else {
+                        // MODO 2: REDE COMPLETA NO RAIO
+                        item.eligibleOptions.forEach((opt, idx) => {
+                            if (currentCampusFilter !== 'ALL' && opt.pole.id !== currentCampusFilter) return;
 
-                        const polyline = L.polyline([[item.lat, item.lng], [opt.pole.lat, opt.pole.lng]], {
-                            pane: 'vectorsPane',
-                            color: strokeColor,
-                            weight: weight,
-                            opacity: opacity,
-                            dashArray: dashArray,
-                            interactive: true
+                            const isDirectNearest = (idx === 0);
+                            let strokeColor = isDirectNearest ? '#059669' : '#d97706';
+                            let weight = isDirectNearest ? 2.5 : 1.2;
+                            let opacity = isDirectNearest ? 0.85 : 0.45;
+                            let dashArray = isDirectNearest ? null : '4, 4';
+
+                            const polyline = L.polyline([[item.lat, item.lng], [opt.pole.lat, opt.pole.lng]], {
+                                pane: 'vectorsPane',
+                                color: strokeColor,
+                                weight: weight,
+                                opacity: opacity,
+                                dashArray: dashArray,
+                                interactive: true
+                            });
+
+                            polyline.bindTooltip(`${item.city} &rarr; ${opt.pole.name} (${opt.dist} km • ${Math.round(opt.prob*100)}% prob.)`, { sticky: true });
+                            vectorsLayer.addLayer(polyline);
                         });
-
-                        polyline.bindTooltip(`${item.city} &rarr; ${opt.pole.name} (${opt.dist} km • ${Math.round(opt.prob*100)}% prob.)`, { sticky: true });
-                        vectorsLayer.addLayer(polyline);
-                    });
-                }
-            });
-        }
-
-        function renderFederalSchools() {
-            schoolsLayer.clearLayers();
-
-            federalPoles.forEach(pole => {
-                const schoolIcon = L.divIcon({
-                    className: 'custom-school-pin',
-                    html: `
-                        <div style="background-color: #0f172a; width: 28px; height: 28px; border-radius: 50%; border: 2.5px solid #f59e0b; box-shadow: 0 4px 10px rgba(15, 23, 42, 0.4); display: flex; align-items: center; justify-content: center; color: #f59e0b; font-size: 12px; cursor: pointer;">
-                            <i class="fas fa-university"></i>
-                        </div>
-                    `,
-                    iconSize: [28, 28],
-                    iconAnchor: [14, 14]
-                });
-
-                const marker = L.marker([pole.lat, pole.lng], { 
-                    icon: schoolIcon,
-                    pane: 'schoolsPane',
-                    interactive: true
-                });
-
-                marker.bindPopup(`
-                    <div class="text-xs p-1 max-w-[270px]">
-                        <span class="bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full text-[9px] font-black uppercase inline-block mb-1 border border-amber-300">${pole.network}</span>
-                        <h4 class="text-slate-900 font-bold text-sm mb-1 leading-tight">${pole.name}</h4>
-                        <p class="text-slate-600 text-[11px] leading-relaxed mb-2">${pole.desc}</p>
-                        <span class="text-[10px] text-slate-500 block border-t border-slate-200 pt-1">Rede: ${pole.type} (${pole.uf})</span>
-                    </div>
-                `);
-                schoolsLayer.addLayer(marker);
-            });
-        }
-
-        function resetMapView() {
-            if (map) {
-                map.setView([-20.5, -43.2], 7);
-                document.getElementById('mapPoleFilter').value = 'ALL';
-                currentCampusFilter = 'ALL';
-                renderMapLayers();
-            }
-        }
-
-        function updateMobilityRadius(newRadius) {
-            currentMobilityRadius = parseInt(newRadius, 10);
-            document.getElementById('radiusDisplay').innerText = `${currentMobilityRadius} km`;
-            computeBaskets();
-            renderMapLayers();
-            updateCharts();
-            renderFullTable();
-        }
-
-        function filterMapByCampus(campusId) {
-            currentCampusFilter = campusId;
-            renderMapLayers();
-
-            if (campusId !== 'ALL') {
-                const pole = federalPoles.find(p => p.id === campusId);
-                if (pole) {
-                    map.flyTo([pole.lat, pole.lng], 9, { duration: 1.2 });
-                }
-            } else {
-                map.flyTo([-20.5, -43.2], 7, { duration: 1.2 });
-            }
-        }
-
-        function toggleVectors() {
-            showVectors = !showVectors;
-            document.getElementById('txt-vectors-status').innerText = showVectors ? 'On' : 'Off';
-            renderMapLayers();
-        }
-
-        function toggleBuffers() {
-            showBuffers = !showBuffers;
-            document.getElementById('txt-buffers-status').innerText = showBuffers ? 'On' : 'Off';
-            renderMapLayers();
-        }
-
-        function initCharts() {
-            // Chart 1: Gravidade e Multiconcorrência por Rede / Polo
-            const ctx1 = document.getElementById('chartPolesGravity').getContext('2d');
-            chartPolesRef = new Chart(ctx1, {
-                type: 'bar',
-                data: getChartPolesData(),
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'top', labels: { boxWidth: 12, font: { weight: 'bold' } } },
-                        tooltip: {
-                            callbacks: {
-                                label: (ctx) => ` ${ctx.dataset.label}: ${ctx.raw} inscrições`
-                            }
-                        }
-                    },
-                    scales: {
-                        x: { grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } },
-                        y: { grid: { display: false }, ticks: { color: '#0f172a', font: { weight: 'bold' } } }
-                    }
-                }
-            });
-
-            // Chart 2: Top Cidades Multiprova
-            const ctx2 = document.getElementById('chartTopCities').getContext('2d');
-            chartTopCitiesRef = new Chart(ctx2, {
-                type: 'bar',
-                data: getChartTopCitiesData(),
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { grid: { display: false }, ticks: { color: '#64748b', maxRotation: 45, minRotation: 45 } },
-                        y: { grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } }
                     }
                 }
             });
