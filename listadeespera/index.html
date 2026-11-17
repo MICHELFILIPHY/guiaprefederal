@@ -33,7 +33,7 @@ fbq('track', 'PageView');
 
 <script>document.documentElement.classList.add('js');</script>
 
-<link rel="preload" as="image" href="poster.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="/listadeespera/poster.jpg" fetchpriority="high">
 <style>
 
 :root {
@@ -389,12 +389,12 @@ h1,h2,h3{font-family:var(--fonte);color:var(--texto);line-height:var(--altura-li
       <div class="player" id="player" data-state="idle">
         <div class="player-stage" id="stage">
           <video id="vsl" class="player-video"
-                 poster="poster.jpg"
+                 src="/listadeespera/video-web.mp4"
+                 poster="/listadeespera/poster.jpg"
                  preload="metadata" playsinline webkit-playsinline controls
                  controlslist="nodownload noremoteplayback noplaybackrate"
                  disablepictureinpicture disableremoteplayback x-webkit-airplay="deny"
                  aria-label="Vídeo do Guia Pré-Federal sobre a lista de espera do curso 2027">
-            <source src="video-web.mp4" type="video/mp4">
             Seu navegador não consegue tocar este vídeo. Atualize o navegador para assistir.
           </video>
 
@@ -848,6 +848,18 @@ const WHATS_TEXT = "Oi! Quero entrar na lista de espera do Guia Pré-Federal par
     var lastWall = 0;         // relógio da última amostra do timeupdate (ms)
     var uiReady = false;
     var nudgeTimer = null;
+    var triedFallbackSrc = false;
+
+    function tryFallbackSource() {
+      if (triedFallbackSrc) return false;
+      triedFallbackSrc = true;
+      var currentSrc = video.getAttribute("src") || "";
+      var nextSrc = currentSrc.indexOf("/listadeespera/") === 0 ? "video-web.mp4" : "/listadeespera/video-web.mp4";
+      video.setAttribute("src", nextSrc);
+      video.setAttribute("poster", nextSrc.replace("video-web.mp4", "poster.jpg"));
+      try { video.load(); } catch (e) { }
+      return true;
+    }
 
     
     function reveal(el, instant) {
@@ -964,6 +976,7 @@ const WHATS_TEXT = "Oi! Quero entrar na lista de espera do Guia Pré-Federal par
 
     function onError() {
       if (released) return;
+      if (tryFallbackSource()) return;
       stage.classList.remove("is-loading");
       if (gateText) gateText.textContent = gateText.getAttribute("data-error") || gateText.textContent;
       if (fallbackBtn) fallbackBtn.hidden = false;
@@ -984,12 +997,34 @@ const WHATS_TEXT = "Oi! Quero entrar na lista de espera do Guia Pré-Federal par
 
     function playSafe() {
       var p;
-      try { p = video.play(); } catch (e) { return; }
+      try {
+        if (video.networkState === 3 && tryFallbackSource()) {
+          // Fonte alternativa carregada se a primeira falhou
+        }
+        p = video.play();
+      } catch (e) {
+        stage.classList.remove("is-loading");
+        return;
+      }
       if (p && p.catch) {
         p.catch(function (err) {
           if (err && err.name === "NotAllowedError") {
             video.muted = true;
-            try { var p2 = video.play(); if (p2 && p2.catch) p2.catch(function () {}); } catch (e2) {  }
+            try {
+              var p2 = video.play();
+              if (p2 && p2.catch) p2.catch(function () { stage.classList.remove("is-loading"); });
+            } catch (e2) {
+              stage.classList.remove("is-loading");
+            }
+          } else if (tryFallbackSource()) {
+            try {
+              var p3 = video.play();
+              if (p3 && p3.catch) p3.catch(function () { onError(); });
+            } catch (e3) {
+              onError();
+            }
+          } else {
+            onError();
           }
         });
       }
