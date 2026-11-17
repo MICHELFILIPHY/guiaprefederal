@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%237bcd47'/%3E%3C/svg%3E">
 
 <script>
-var GUIA_PIXEL_ID = '';
+var GUIA_PIXEL_ID = '1751512082238465';
 if (GUIA_PIXEL_ID) {
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -26,6 +26,7 @@ fbq('init', GUIA_PIXEL_ID);
 fbq('track', 'PageView');
 }
 </script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1751512082238465&ev=PageView&noscript=1"/></noscript>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -395,6 +396,8 @@ h1,h2,h3{font-family:var(--fonte);color:var(--texto);line-height:var(--altura-li
                  controlslist="nodownload noremoteplayback noplaybackrate"
                  disablepictureinpicture disableremoteplayback x-webkit-airplay="deny"
                  aria-label="Vídeo do Guia Pré-Federal sobre a lista de espera do curso 2027">
+            <source src="/listadeespera/video-web.mp4" type="video/mp4">
+            <source src="video-web.mp4" type="video/mp4">
             Seu navegador não consegue tocar este vídeo. Atualize o navegador para assistir.
           </video>
 
@@ -850,17 +853,6 @@ const WHATS_TEXT = "Oi! Quero entrar na lista de espera do Guia Pré-Federal par
     var nudgeTimer = null;
     var triedFallbackSrc = false;
 
-    function tryFallbackSource() {
-      if (triedFallbackSrc) return false;
-      triedFallbackSrc = true;
-      var currentSrc = video.getAttribute("src") || "";
-      var nextSrc = currentSrc.indexOf("/listadeespera/") === 0 ? "video-web.mp4" : "/listadeespera/video-web.mp4";
-      video.setAttribute("src", nextSrc);
-      video.setAttribute("poster", nextSrc.replace("video-web.mp4", "poster.jpg"));
-      try { video.load(); } catch (e) { }
-      return true;
-    }
-
     
     function reveal(el, instant) {
       if (!el) return;
@@ -975,8 +967,14 @@ const WHATS_TEXT = "Oi! Quero entrar na lista de espera do Guia Pré-Federal par
     }
 
     function onError() {
+      if (!triedFallbackSrc) {
+        triedFallbackSrc = true;
+        video.src = "video-web.mp4";
+        video.poster = "poster.jpg";
+        video.load();
+        return;
+      }
       if (released) return;
-      if (tryFallbackSource()) return;
       stage.classList.remove("is-loading");
       if (gateText) gateText.textContent = gateText.getAttribute("data-error") || gateText.textContent;
       if (fallbackBtn) fallbackBtn.hidden = false;
@@ -997,32 +995,17 @@ const WHATS_TEXT = "Oi! Quero entrar na lista de espera do Guia Pré-Federal par
 
     function playSafe() {
       var p;
-      try {
-        if (video.networkState === 3 && tryFallbackSource()) {
-          // Fonte alternativa carregada se a primeira falhou
-        }
-        p = video.play();
-      } catch (e) {
-        stage.classList.remove("is-loading");
-        return;
-      }
+      try { p = video.play(); } catch (e) { return; }
       if (p && p.catch) {
         p.catch(function (err) {
           if (err && err.name === "NotAllowedError") {
             video.muted = true;
-            try {
-              var p2 = video.play();
-              if (p2 && p2.catch) p2.catch(function () { stage.classList.remove("is-loading"); });
-            } catch (e2) {
-              stage.classList.remove("is-loading");
-            }
-          } else if (tryFallbackSource()) {
-            try {
-              var p3 = video.play();
-              if (p3 && p3.catch) p3.catch(function () { onError(); });
-            } catch (e3) {
-              onError();
-            }
+            try { var p2 = video.play(); if (p2 && p2.catch) p2.catch(function () {}); } catch (e2) {  }
+          } else if (!triedFallbackSrc) {
+            triedFallbackSrc = true;
+            video.src = "video-web.mp4";
+            video.load();
+            try { var p3 = video.play(); if (p3 && p3.catch) p3.catch(onError); } catch (e3) { onError(); }
           } else {
             onError();
           }
